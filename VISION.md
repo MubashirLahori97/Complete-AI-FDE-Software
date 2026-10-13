@@ -55,9 +55,9 @@ Your commit history is the public record of the transformation. That's not a met
 
 ## The future
 
-This repo is the beginning, not the end. The next 90 days after it: go deep in one area, build one serious thing, start charging — freelance, employment, or your own product.
+Day 30 is the first finish line, not the last. The [roadmap](ROADMAP.md) continues to day 90 — three phases that turn a 30-day builder into a complete, hire-ready software engineer: engineering depth, real products with real users, interviews, clients, getting hired. Same iron rules, hotter pace.
 
-And if you finish all 30 days — tell the world. Your story is someone else's permission to start.
+And if you finish all 90 days — tell the world. Your story is someone else's permission to start.
 
 ---
 

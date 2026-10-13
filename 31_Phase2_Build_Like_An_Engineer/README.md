@@ -14,7 +14,7 @@ Nothing here is new territory — it's everything from Part 1, leveled up.
 
 ## ⚙️ Shifting gears
 
-Days 1–30 ran on 60–90 minutes a day. This phase needs 3–4 hours. That's not "harder" — it's *deeper*. You're not learning more things; you're understanding the things you already built. Give it the hours and week 3 will feel like a superpower, not a slog.
+Days 1–30 ran on 60–90 minutes a day. This phase needs 3–4 hours. That's not "harder" — it's *deeper*. You're not learning more things; you're understanding the things you already built. Ramp it: aim for 2–3 hours in week 5, build to full pace by week 7. The plan works if you're honest about the hours — it breaks if you pretend 60 minutes is enough. Give it the hours and week 3 will feel like a superpower, not a slog.
 
 ---
 

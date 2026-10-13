@@ -58,9 +58,9 @@
   <!-- center content -->
   <g text-anchor="middle">
     <rect x="617" y="78" width="166" height="34" rx="17" fill="none" stroke="#58a6ff" stroke-width="1.5" opacity="0.9"/>
-    <text x="700" y="101" fill="#58a6ff" font-size="15" font-weight="600" letter-spacing="3">30-DAY CHALLENGE</text>
+    <text x="700" y="101" fill="#58a6ff" font-size="15" font-weight="600" letter-spacing="3">90-DAY JOURNEY</text>
 
-    <text x="700" y="178" fill="#f0f6fc" font-size="62" font-weight="800" letter-spacing="-1">Zero to AI Software Engineer</text>
+    <text x="700" y="178" fill="#f0f6fc" font-size="62" font-weight="800" letter-spacing="-1">Zero to Feature-Ready Software Engineer</text>
     <text x="700" y="222" fill="#8b949e" font-size="21">AI writes the code. <tspan fill="#f0f6fc" font-weight="600">You</tspan> do everything that matters around it.</text>
 
     <g font-size="15" font-weight="600">
@@ -72,6 +72,6 @@
       <text x="862" y="276" fill="#d29922">Business</text>
     </g>
 
-    <text x="700" y="340" fill="#8b949e" font-size="16" font-style="italic">a normal person · zero knowledge · 30 days · walk in, fix it, get paid</text>
+    <text x="700" y="340" fill="#8b949e" font-size="16" font-style="italic">a normal person · zero knowledge · 90 days · from earning to undeniable</text>
   </g>
 </svg>
