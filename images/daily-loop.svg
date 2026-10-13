@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#58a6ff"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="380" rx="20" fill="url(#bg)"/>
+  <text x="600" y="44" text-anchor="middle" fill="#f0f6fc" font-size="24" font-weight="700">The Daily Loop — every single day</text>
+
+  <!-- nodes -->
+  <g font-size="15">
+    <!-- Learn -->
+    <circle cx="110" cy="170" r="62" fill="#1c2b4a" stroke="#58a6ff" stroke-width="3"/>
+    <text x="110" y="164" text-anchor="middle" fill="#58a6ff" font-size="26">📖</text>
+    <text x="110" y="196" text-anchor="middle" fill="#f0f6fc" font-weight="700">LEARN</text>
+    <text x="110" y="262" text-anchor="middle" fill="#8b949e" font-size="13">one concept,</text>
+    <text x="110" y="280" text-anchor="middle" fill="#8b949e" font-size="13">owned 100%</text>
+
+    <!-- Specify -->
+    <circle cx="350" cy="170" r="62" fill="#1c2b4a" stroke="#58a6ff" stroke-width="3"/>
+    <text x="350" y="164" text-anchor="middle" fill="#58a6ff" font-size="26">🎯</text>
+    <text x="350" y="196" text-anchor="middle" fill="#f0f6fc" font-weight="700">SPECIFY</text>
+    <text x="350" y="262" text-anchor="middle" fill="#8b949e" font-size="13">you write the spec,</text>
+    <text x="350" y="280" text-anchor="middle" fill="#8b949e" font-size="13">AI drafts the code</text>
+
+    <!-- Evaluate -->
+    <circle cx="590" cy="170" r="62" fill="#14301f" stroke="#3fb950" stroke-width="3"/>
+    <text x="590" y="164" text-anchor="middle" fill="#3fb950" font-size="26">🔍</text>
+    <text x="590" y="196" text-anchor="middle" fill="#f0f6fc" font-weight="700">EVALUATE</text>
+    <text x="590" y="262" text-anchor="middle" fill="#8b949e" font-size="13">test it, break it,</text>
+    <text x="590" y="280" text-anchor="middle" fill="#8b949e" font-size="13">defend every line</text>
+
+    <!-- Business -->
+    <circle cx="830" cy="170" r="62" fill="#3a2b12" stroke="#d29922" stroke-width="3"/>
+    <text x="830" y="164" text-anchor="middle" fill="#d29922" font-size="26">💼</text>
+    <text x="830" y="196" text-anchor="middle" fill="#f0f6fc" font-weight="700">BUSINESS</text>
+    <text x="830" y="262" text-anchor="middle" fill="#8b949e" font-size="13">who pays? what costs?</text>
+    <text x="830" y="280" text-anchor="middle" fill="#8b949e" font-size="13">what breaks?</text>
+
+    <!-- Commit -->
+    <circle cx="1070" cy="170" r="62" fill="#2b1c4a" stroke="#bc8cff" stroke-width="3"/>
+    <text x="1070" y="164" text-anchor="middle" fill="#bc8cff" font-size="26">✅</text>
+    <text x="1070" y="196" text-anchor="middle" fill="#f0f6fc" font-weight="700">COMMIT</text>
+    <text x="1070" y="262" text-anchor="middle" fill="#8b949e" font-size="13">push + tick the box,</text>
+    <text x="1070" y="280" text-anchor="middle" fill="#8b949e" font-size="13">don't break the chain</text>
+  </g>
+
+  <!-- arrows between -->
+  <g stroke="#58a6ff" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <line x1="176" y1="170" x2="282" y2="170"/>
+    <line x1="416" y1="170" x2="522" y2="170"/>
+    <line x1="656" y1="170" x2="762" y2="170"/>
+    <line x1="896" y1="170" x2="1002" y2="170"/>
+  </g>
+
+  <!-- return arrow -->
+  <path d="M 1070 232 C 1070 320, 110 320, 110 236" stroke="#bc8cff" stroke-width="2.5" fill="none" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+  <text x="600" y="348" text-anchor="middle" fill="#bc8cff" font-size="14" font-style="italic">repeat daily — 30 ticks is a new person</text>
+
+  <text x="600" y="80" text-anchor="middle" fill="#8b949e" font-size="14">AI writes the draft. <tspan fill="#f0f6fc" font-weight="600">You</tspan> specify, evaluate, and stand behind it.</text>
+</svg>

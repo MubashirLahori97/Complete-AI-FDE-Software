@@ -2,6 +2,8 @@
 
 ![30 days](https://img.shields.io/badge/30-days-blue) ![price](https://img.shields.io/badge/price-free-brightgreen) ![license](https://img.shields.io/badge/license-MIT-yellow) ![level](https://img.shields.io/badge/level-absolute%20beginner-orange)
 
+![From zero to AI software engineer in 30 days](images/hero-banner.svg)
+
 **AI writes the code now. This repo teaches what AI can't do for you: concepts, engineering judgment, and business.**
 
 **The promise:** a normal person starting from zero — 30 days later — walks into a business, finds a real problem, fixes it with AI software, and gets paid for it. Learning never stops, but earning starts on day 30.
@@ -27,16 +29,7 @@ This isn't a course. It's a **30-day transformation with a public record** — y
 
 ## Your journey
 
-```mermaid
-flowchart LR
-    A["Day 1<br/>Zero"] --> B["Week 1<br/>Think like<br/>a programmer"]
-    B --> C["Week 2<br/>Think like<br/>an engineer"]
-    C --> D["Week 3<br/>AI engineering<br/>core"]
-    D --> E["Week 4<br/>Ship like<br/>an FDE"]
-    E --> F["Day 30<br/>Get paid"]
-    style F fill:#22c55e,color:#fff
-    style A fill:#64748b,color:#fff
-```
+![Your 30-day journey: from zero to getting paid](images/journey.svg)
 
 ## How it works
 
@@ -47,6 +40,8 @@ flowchart LR
 3. **Evaluate like an engineer** — read the AI's code, test it, break it, fix it. *Never ship output you can't explain or defend.*
 4. **Business lens** — who pays for this? What does it cost? What breaks in production?
 5. **Commit & tick the box** — push your work, then tick the day below. Watch the list fill. Don't break the chain.
+
+![The daily loop: learn, specify, evaluate, business lens, commit](images/daily-loop.svg)
 
 ### The 3 rules
 

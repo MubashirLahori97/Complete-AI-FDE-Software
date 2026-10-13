@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="440" viewBox="0 0 1400 440" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="hbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0e14"/>
+      <stop offset="0.55" stop-color="#0d1626"/>
+      <stop offset="1" stop-color="#0a1410"/>
+    </linearGradient>
+    <radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#58a6ff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#58a6ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowG" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#3fb950" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#3fb950" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="440" fill="url(#hbg)"/>
+  <ellipse cx="280" cy="120" rx="420" ry="260" fill="url(#glowB)"/>
+  <ellipse cx="1150" cy="330" rx="420" ry="260" fill="url(#glowG)"/>
+
+  <!-- faint code rain -->
+  <g fill="#58a6ff" opacity="0.10" font-family="monospace" font-size="15">
+    <text x="60" y="60">def learn():</text>
+    <text x="60" y="84">    while True:</text>
+    <text x="60" y="108">        build()</text>
+    <text x="1180" y="60">{"type": "fde"}</text>
+    <text x="1180" y="84">tokens = money</text>
+    <text x="1180" y="108">ship_it()</text>
+    <text x="60" y="400">if concept != 100%: redo()</text>
+    <text x="1150" y="400">evaluated ✓ deployed ✓</text>
+  </g>
+
+  <!-- network nodes -->
+  <g stroke="#58a6ff" stroke-width="1.5" opacity="0.55">
+    <line x1="180" y1="180" x2="300" y2="120"/>
+    <line x1="300" y1="120" x2="420" y2="190"/>
+    <line x1="180" y1="180" x2="260" y2="300"/>
+    <line x1="260" y1="300" x2="420" y2="190"/>
+    <line x1="980" y1="150" x2="1120" y2="220"/>
+    <line x1="1120" y1="220" x2="1240" y2="140"/>
+    <line x1="980" y1="150" x2="1060" y2="300"/>
+    <line x1="1060" y1="300" x2="1240" y2="140"/>
+    <line x1="1120" y1="220" x2="1060" y2="300"/>
+  </g>
+  <g fill="#58a6ff" filter="url(#soft)" opacity="0.9">
+    <circle cx="180" cy="180" r="7"/><circle cx="300" cy="120" r="7"/>
+    <circle cx="420" cy="190" r="7"/><circle cx="260" cy="300" r="7"/>
+  </g>
+  <g fill="#3fb950" filter="url(#soft)" opacity="0.9">
+    <circle cx="980" cy="150" r="7"/><circle cx="1120" cy="220" r="7"/>
+    <circle cx="1240" cy="140" r="7"/><circle cx="1060" cy="300" r="7"/>
+  </g>
+
+  <!-- center content -->
+  <g text-anchor="middle">
+    <rect x="617" y="78" width="166" height="34" rx="17" fill="none" stroke="#58a6ff" stroke-width="1.5" opacity="0.9"/>
+    <text x="700" y="101" fill="#58a6ff" font-size="15" font-weight="600" letter-spacing="3">30-DAY CHALLENGE</text>
+
+    <text x="700" y="178" fill="#f0f6fc" font-size="62" font-weight="800" letter-spacing="-1">Zero to AI Software Engineer</text>
+    <text x="700" y="222" fill="#8b949e" font-size="21">AI writes the code. <tspan fill="#f0f6fc" font-weight="600">You</tspan> do everything that matters around it.</text>
+
+    <g font-size="15" font-weight="600">
+      <rect x="470" y="252" width="150" height="38" rx="19" fill="#1c2b4a" stroke="#58a6ff" stroke-width="1.5"/>
+      <text x="545" y="276" fill="#58a6ff">Concepts 100%</text>
+      <rect x="632" y="252" width="150" height="38" rx="19" fill="#14301f" stroke="#3fb950" stroke-width="1.5"/>
+      <text x="707" y="276" fill="#3fb950">Engineering</text>
+      <rect x="794" y="252" width="136" height="38" rx="19" fill="#3a2b12" stroke="#d29922" stroke-width="1.5"/>
+      <text x="862" y="276" fill="#d29922">Business</text>
+    </g>
+
+    <text x="700" y="340" fill="#8b949e" font-size="16" font-style="italic">a normal person · zero knowledge · 30 days · walk in, fix it, get paid</text>
+  </g>
+</svg>
