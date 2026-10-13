@@ -1,5 +1,7 @@
 # 📘 Day 4 — Abstraction: The Most Important Idea in Software
 
+![Day 4 visual](../images/days/day-04.svg)
+
 **Concept:** A function hides *how* and exposes *what*. You don't need to know how `print()` works inside — you just use it. Abstraction is how humans manage complexity: the single most valuable concept in this entire repo.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

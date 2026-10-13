@@ -1,5 +1,7 @@
 # 📘 Day 2 — Data: Types, Variables, Representation
 
+![Day 2 visual](../images/days/day-02.svg)
+
 **Concept:** Everything in software is *data* with a *type* — and the type decides what operations mean. `"2" + "2"` gives `"22"`, but `2 + 2` gives `4`. Same symbols, different types, different universe. This single idea explains half of all beginner bugs ever.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

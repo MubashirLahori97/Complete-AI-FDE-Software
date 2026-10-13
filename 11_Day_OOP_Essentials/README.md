@@ -1,5 +1,7 @@
 # 📘 Day 11 — Modeling Reality: Objects (Just Enough)
 
+![Day 11 visual](../images/days/day-11.svg)
+
 **Concept:** A class models a thing with **state** (data it holds) + **behavior** (things it can do). The real skill isn't syntax — it's **judgment**: when does a class earn its existence, and when is a plain function or dict better? Most OOP tutorials teach too much; you need just enough, plus the judgment.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

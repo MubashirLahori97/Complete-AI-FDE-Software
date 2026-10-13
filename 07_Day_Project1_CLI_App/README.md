@@ -1,5 +1,7 @@
 # 📘 Day 7 — 🛠 Project 1: Scoping & Shipping a Complete Tool
 
+![Day 7 visual](../images/days/day-07.svg)
+
 **Concept:** **Scoping** — deciding what's in and what's out. A finished small thing beats an unfinished big thing, always. Shipping — putting a *complete, usable* thing in front of a human — is the skill this whole repo is building toward.
 
 **Time:** ~90 minutes. **Rule:** done = a stranger can run it from your README alone.

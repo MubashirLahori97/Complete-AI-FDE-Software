@@ -1,5 +1,7 @@
 # 📘 Day 9 — How the Internet Works: Programs Talking to Programs
 
+![Day 9 visual](../images/days/day-09.svg)
+
 **Concept:** The internet is **programs talking to programs**. HTTP is the language they speak. An API is a **contract**: "ask me this way, I'll answer that way." JSON is the **packaging** data travels in. Learn this once and every "integration" you'll ever do is the same shape.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

@@ -1,5 +1,7 @@
 # 📘 Day 6 — State, Persistence & Failure
 
+![Day 6 visual](../images/days/day-06.svg)
+
 **Concept:** Programs have **amnesia** — when they stop, everything in memory vanishes. *Persistence* (saving to files) is how software remembers. And *everything fails*: files vanish, users type nonsense, networks drop. Engineering isn't writing the happy path — it's expecting failure and handling it gracefully.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

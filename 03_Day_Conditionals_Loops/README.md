@@ -1,5 +1,7 @@
 # 📘 Day 3 — Decisions & Repetition
 
+![Day 3 visual](../images/days/day-03.svg)
+
 **Concept:** `if` = decisions. Loops = repetition. Every app on earth — Instagram, banking, AI chatbots — is these two ideas composed at scale. Learn them deeply once, recognize them everywhere forever.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

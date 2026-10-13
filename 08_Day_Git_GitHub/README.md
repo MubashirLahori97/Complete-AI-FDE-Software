@@ -1,5 +1,7 @@
 # 📘 Day 8 — Version Control: Time Travel for Software
 
+![Day 8 visual](../images/days/day-08.svg)
+
 **Concept:** Git is a **timeline of every decision** you ever made in a project. A commit is a saved snapshot with a message explaining *why*. A branch is a **parallel universe** where you can experiment without breaking the real world. This is how professionals — and teams — stay sane.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

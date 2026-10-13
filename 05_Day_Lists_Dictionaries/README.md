@@ -1,5 +1,7 @@
 # 📘 Day 5 — Collections & Structured Data
 
+![Day 5 visual](../images/days/day-05.svg)
+
 **Concept:** Lists = **ordered** collections. Dicts = **labeled** collections. Choosing the right shape for your data — *data modeling* — is a design decision, not syntax. Get the model right and the code writes itself; get it wrong and everything fights you.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

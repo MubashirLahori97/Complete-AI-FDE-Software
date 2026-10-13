@@ -1,5 +1,7 @@
 # 📘 Day 1 — Your Toolchain + What a Program IS
 
+![Day 1 visual](../images/days/day-01.svg)
+
 **Concept:** A program is *instructions + data*. The toolchain (editor, interpreter, terminal, AI assistant) is just how instructions reach the machine. In the AI era, you don't type every instruction — you *specify* them and *evaluate* what the AI produces.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

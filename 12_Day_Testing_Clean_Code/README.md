@@ -1,5 +1,7 @@
 # 📘 Day 12 — Trust: Testing & Reading Code Like an Engineer
 
+![Day 12 visual](../images/days/day-12.svg)
+
 **Concept:** A test is **executable proof** that code does what you claim. In the AI era this matters *more*, not less: AI writes fast, sounds confident, and is sometimes wrong. Your job as the senior: **prove it works, don't trust it works.** "How do you know?" is the most important question in engineering.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

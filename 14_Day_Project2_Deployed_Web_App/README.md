@@ -1,5 +1,7 @@
 # 📘 Day 14 — 🛠 Project 2: Deployment — Your First Live URL
 
+![Day 14 visual](../images/days/day-14.svg)
+
 **Concept:** **Deployment** is moving software from your laptop to a computer that serves strangers, 24/7. It's where "my project" becomes "a product." Everything changes at this boundary: secrets can't live in code, paths differ, versions must be pinned, and *you* can't be there to restart it. Deployment is the professional threshold — cross it today.
 
 **Time:** ~90 minutes. **Rule:** done = the URL works on your phone, on mobile data, logged out.

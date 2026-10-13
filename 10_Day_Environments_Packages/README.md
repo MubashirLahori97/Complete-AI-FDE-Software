@@ -1,5 +1,7 @@
 # 📘 Day 10 — Reproducibility: "Works on My Machine" Is a Bug
 
+![Day 10 visual](../images/days/day-10.svg)
+
 **Concept:** Software must run **elsewhere** — on a client's laptop, a server, a colleague's machine. A *virtual environment* is an isolated box of Python + packages for one project. `requirements.txt` is the **recipe** to rebuild that box anywhere. Without these, your software is a rumor; with them, it's real.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.

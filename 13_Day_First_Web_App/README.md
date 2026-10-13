@@ -1,5 +1,7 @@
 # 📘 Day 13 — Interfaces: Turning Logic Into Something Humans Use
 
+![Day 13 visual](../images/days/day-13.svg)
+
 **Concept:** Logic without an interface is **invisible**. A UI is just a translation layer: human intent in (clicks, typing), function calls out. Buttons call functions. Forms collect arguments. Charts display return values. Once you see this, every app demystifies: it's your day-4 functions wearing clothes.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
