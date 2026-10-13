@@ -90,6 +90,26 @@ Specify a **grade calculator**: takes 5 subject marks (0–100), prints average 
 
 ---
 
+## 🧠 Quick check — do you own today?
+
+<details>
+<summary><b>Q1.</b> What does <code>"2" + "2"</code> give, and why?</summary>
+
+`"22"` — both are text, so `+` joins them instead of adding. Types decide what operations mean.
+</details>
+
+<details>
+<summary><b>Q2.</b> <code>input()</code> always returns what type — and why does it matter?</summary>
+
+Text (`str`), always — even if the user typed digits. Forgetting this is the #1 beginner bug: you must convert before doing math.
+</details>
+
+<details>
+<summary><b>Q3.</b> A shop's program charged a customer wrong. The code said <code>total = price + fee</code>. What do you check first?</summary>
+
+The types of `price` and `fee`. If either is text, `+` concatenates instead of adding — wrong types = wrong money.
+</details>
+
 ## ✅ Done when
 
 - [ ] You can explain why `"2" + "2"` ≠ `2 + 2` without notes

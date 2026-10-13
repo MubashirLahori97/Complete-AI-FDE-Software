@@ -92,6 +92,26 @@ Ask the AI to write the *worst* reasonable version of the greeting program (bad 
 
 ---
 
+## 🧠 Quick check — do you own today?
+
+<details>
+<summary><b>Q1.</b> What is a program, in one sentence?</summary>
+
+Instructions + data. Everything else is detail.
+</details>
+
+<details>
+<summary><b>Q2.</b> The AI wrote code for you. What's your job now?</summary>
+
+Specify precisely before it writes, evaluate ruthlessly after. Never ship output you can't explain or defend.
+</details>
+
+<details>
+<summary><b>Q3.</b> Why is "it works on my machine" not good enough?</summary>
+
+Because software has to run *elsewhere* — for strangers, without you there. (You'll prove this on day 10 and day 14.)
+</details>
+
 ## ✅ Done when
 
 - [ ] You can explain "program = instructions + data" in plain words

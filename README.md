@@ -1,140 +1,164 @@
 # 🚀 30 Days: Zero to AI Software Engineer
 
+![30 days](https://img.shields.io/badge/30-days-blue) ![price](https://img.shields.io/badge/price-free-brightgreen) ![license](https://img.shields.io/badge/license-MIT-yellow) ![level](https://img.shields.io/badge/level-absolute%20beginner-orange)
+
 **AI writes the code now. This repo teaches what AI can't do for you: concepts, engineering judgment, and business.**
 
-**The promise:** a normal person starting from zero — 30 days later — can walk into a business, find a real problem, fix it with AI software, and get paid for it. Learning never stops, but earning starts on day 30.
+**The promise:** a normal person starting from zero — 30 days later — walks into a business, finds a real problem, fixes it with AI software, and gets paid for it. Learning never stops, but earning starts on day 30.
 
-Walk into any software house today and you'll see it: 99% of developers let AI write their code. Typing code — the thing every tutorial teaches — is the part that's been automated. So this repo doesn't teach you to be a typing machine. It teaches you the three things that actually matter now:
-
-1. **Concepts — 100%.** How software *actually* works. Not syntax you can Google, but the ideas underneath: data, control flow, abstraction, state, APIs, how the internet works, how AI models work. If your concepts are solid, any AI output makes sense to you — and when it breaks, you know why.
-2. **Software engineering.** The discipline around the code: specifying what to build, evaluating what the AI produced, testing it, debugging it, deploying it, keeping it running. *AI writes; you engineer.*
-3. **Business.** Software that nobody pays for is a hobby. You'll learn to find real problems, scope solutions, talk to clients, demo your work, and turn skill into income — the Forward Deployed Engineer path.
+> 📖 **New here? Read [THE VISION](VISION.md) first.** Two minutes. It's the reason this repo exists — and the reason you'll finish it.
 
 ---
 
-## Who this is for
+## The transformation
 
-- You've never built software (or tried and quit).
-- You want to become an **AI software engineer** — someone who ships real AI-powered software in the era where AI writes the code.
-- You want the **Forward Deployed Engineer** path: taking AI into the real world, deploying with clients, solving problems on the ground.
+| Day 1 | Day 30 |
+|---|---|
+| "I've never written code." | "I ship AI software." |
+| Watches tutorials, learns fragments | Owns concepts 100%, explains them in plain words |
+| Afraid of errors | Reads tracebacks like a map |
+| "AI is magic" | Directs AI, evaluates its output, stands behind it |
+| No proof of skill | 3 deployed projects + 1 capstone, live URLs |
+| Can't charge for anything | Can walk into a business, scope a problem, fix it, name a price |
 
-## Who this is NOT for
-
-- Anyone wanting a "learn Python syntax in 30 days" course. Syntax is in here, but it's the vehicle, not the destination.
-- Anyone who wants to watch videos. You will **think, specify, evaluate, and ship** every day.
-
-## What "AI Forward Deployed Engineer" means here
-
-A Forward Deployed Engineer is the person who shows up where the problem lives. They don't just generate code — they understand a client's problem, design the right system, direct AI to build it, verify it actually works, deploy it, and stand behind it. That's the bar: **judgment + engineering + business.**
+This isn't a course. It's a **30-day transformation with a public record** — your commit history is the proof.
 
 ---
+
+## Your journey
+
+```mermaid
+flowchart LR
+    A["Day 1<br/>Zero"] --> B["Week 1<br/>Think like<br/>a programmer"]
+    B --> C["Week 2<br/>Think like<br/>an engineer"]
+    C --> D["Week 3<br/>AI engineering<br/>core"]
+    D --> E["Week 4<br/>Ship like<br/>an FDE"]
+    E --> F["Day 30<br/>Get paid"]
+    style F fill:#22c55e,color:#fff
+    style A fill:#64748b,color:#fff
+```
 
 ## How it works
 
 **⏱ 60–90 minutes a day. 1 day = 1 concept + 1 build + 1 business lens.**
 
-Every day follows the same loop:
-
-1. **Learn the concept** — one focused idea, explained until it's obvious. Short lesson in the day folder + one curated link. Not ten links. One.
-2. **Specify it to AI** — you write the specification; the AI writes the first draft of the code. Writing good specs is now a core engineering skill — vague specs produce garbage, precise specs produce software.
-3. **Evaluate like an engineer** — read the AI's code, test it, try to break it, fix what breaks. *You must understand and be able to defend everything you ship.* Ask the AI to quiz you on the concept until you can teach it back.
-4. **See the business lens** — every day ends with: who pays for this? What does it cost to run? What breaks in production?
-5. **Commit** — push your day's work to GitHub. Your commit history is your proof of work.
+1. **Learn the concept** — one idea, owned 100%. Short lesson + one curated link. Not ten links. One.
+2. **Specify it to AI** — you write the specification; AI writes the first draft. Precise specs are now a core engineering skill.
+3. **Evaluate like an engineer** — read the AI's code, test it, break it, fix it. *Never ship output you can't explain or defend.*
+4. **Business lens** — who pays for this? What does it cost? What breaks in production?
+5. **Commit & tick the box** — push your work, then tick the day below. Watch the list fill. Don't break the chain.
 
 ### The 3 rules
 
-1. **Concepts 100%, or it doesn't count.** If you can't explain the idea in plain words, you didn't learn the day — re-do it.
-2. **Never ship AI output you can't evaluate.** The AI is your junior developer: fast, confident, and sometimes wrong. You are the senior.
+1. **Concepts 100%, or it doesn't count.** If you can't explain it in plain words, redo the day.
+2. **The AI is your junior developer** — fast, confident, sometimes wrong. You are the senior.
 3. **A day isn't done until something runs.** Reading doesn't count. Running, tested, committed code counts.
 
 ---
 
-## The 30 days
+## 🗺️ The 30 days — your progress tracker
 
-| Day | Concept | You build / prove |
-|-----|---------|-------------------|
-| [01](01_Day_Setup_Learn_With_AI/) | How software actually works + your toolchain | Dev environment + first program, specified by you |
-| [02](02_Day_Python_Variables_Types/) | Data: types, variables, representation | A converter — and you explain every type in it |
-| [03](03_Day_Conditionals_Loops/) | Decisions & repetition: the logic of all software | A game — you specify the rules, AI drafts, you verify |
-| [04](04_Day_Functions/) | Abstraction: the most important idea in software | A toolkit — you judge what's worth abstracting |
-| [05](05_Day_Lists_Dictionaries/) | Collections & structured data | A contact book — you design the data model |
-| [06](06_Day_Files_Errors_Debugging/) | State, persistence & failure: reading tracebacks | Crash-proofing — you break it, then fix it |
-| [07](07_Day_Project1_CLI_App/) | 🛠 Project 1: scoping & shipping a complete tool | A CLI app + README + your first "client" (a friend) |
-| [08](08_Day_Git_GitHub/) | Version control: time travel for software | A professional repo history |
-| [09](09_Day_HTTP_APIs_JSON/) | How the internet works: requests, APIs, JSON | An app that talks to real APIs — you explain the round trip |
-| [10](10_Day_Environments_Packages/) | Reproducibility: "works on my machine" is a bug | A project anyone can set up from your instructions |
-| [11](11_Day_OOP_Essentials/) | Modeling reality: objects, when they help, when they don't | A refactor — you defend every class |
-| [12](12_Day_Testing_Clean_Code/) | Trust: testing & reading code like an engineer | Tests for AI-written code — you find the AI's mistakes |
-| [13](13_Day_First_Web_App/) | Interfaces: turning logic into something humans use | A web UI on your logic |
-| [14](14_Day_Project2_Deployed_Web_App/) | 🛠 Project 2: deployment — your first live URL | A **live product** + watching a real user use it |
-| [15](15_Day_LLMs_How_They_Work/) | How LLMs actually work: tokens, context, cost | Your first API call — and its price tag |
-| [16](16_Day_Prompt_Engineering/) | Specification: prompts as engineering, not wishes | A classifier prompt that's right 10/10 times |
-| [17](17_Day_Structured_Outputs_Tools/) | Connecting models to code: tools & contracts | An AI that calls your functions — you draw the loop |
-| [18](18_Day_Embeddings_Semantic_Search/) | Meaning as math: embeddings & similarity | Semantic search — you explain *why* it works |
-| [19](19_Day_RAG/) | RAG: grounding AI in real documents | A Q&A bot with cited sources |
-| [20](20_Day_Agents/) | Agents: goals, tools & the perceive–act loop | A research agent — you narrate its decisions |
-| [21](21_Day_Project3_RAG_Chatbot/) | 🛠 Project 3: a live AI product | A **deployed AI app** strangers can use |
-| [22](22_Day_Evals/) | Proof: evaluating AI systems | A test suite with a score: "my bot scores X/40" |
-| [23](23_Day_Guardrails_Cost/) | Production reality: safety, attacks & unit economics | A hardened app — you attack it yourself |
-| [24](24_Day_FastAPI_Databases/) | Backends: APIs & persistence | A real API with a database |
-| [25](25_Day_Observability_Debugging/) | Operations: logging, tracing & runbooks | Answering "what happened at 3pm?" from logs |
-| [26](26_Day_Client_Discovery_FDE/) | 💼 Discovery: turning human problems into specs | A real client interview + one-page brief |
-| [27](27_Day_Portfolio_Getting_Hired/) | 💼 Packaging: portfolio & getting paid | A GitHub profile + demo that sells |
-| [28](28_Day_Capstone_Part1/) | 🏁 Capstone: build a client-grade AI system | Full system: RAG + API + guardrails + evals |
-| [29](29_Day_Capstone_Part2/) | 🏁 Capstone: deploy it live | A live product + launch post |
-| [30](30_Day_Ship_It/) | 💼 Ship it: demo, retrospective, next 90 days | Proof of transformation, in public |
+Fork this repo, then tick each day as you conquer it.
 
-📖 **[Full day-by-day curriculum →](CURRICULUM.md)**
+**Week 1 — Think like a programmer** *("the concepts underneath every program ever written")*
+- [ ] [Day 01](01_Day_Setup_Learn_With_AI/) — Your toolchain + what a program IS
+- [ ] [Day 02](02_Day_Python_Variables_Types/) — Data: types, variables, representation
+- [ ] [Day 03](03_Day_Conditionals_Loops/) — Decisions & repetition
+- [ ] [Day 04](04_Day_Functions/) — Abstraction: the most important idea in software
+- [ ] [Day 05](05_Day_Lists_Dictionaries/) — Collections & structured data
+- [ ] [Day 06](06_Day_Files_Errors_Debugging/) — State, persistence & failure
+- [ ] [Day 07](07_Day_Project1_CLI_App/) — 🛠 Project 1: scoping & shipping a complete tool
+
+**Week 2 — Think like a software engineer** *("AI writes drafts. Engineers make them trustworthy.")*
+- [ ] [Day 08](08_Day_Git_GitHub/) — Version control: time travel for software
+- [ ] [Day 09](09_Day_HTTP_APIs_JSON/) — How the internet works: programs talking to programs
+- [ ] [Day 10](10_Day_Environments_Packages/) — Reproducibility: "works on my machine" is a bug
+- [ ] [Day 11](11_Day_OOP_Essentials/) — Modeling reality: objects (just enough)
+- [ ] [Day 12](12_Day_Testing_Clean_Code/) — Trust: testing & reading code like an engineer
+- [ ] [Day 13](13_Day_First_Web_App/) — Interfaces: logic humans can use
+- [ ] [Day 14](14_Day_Project2_Deployed_Web_App/) — 🛠 Project 2: your first live URL
+
+**Week 3 — AI engineering core** *("how the magic actually works")*
+- [ ] [Day 15](15_Day_LLMs_How_They_Work/) — How LLMs actually work: tokens, context, cost
+- [ ] [Day 16](16_Day_Prompt_Engineering/) — Specification: prompts as engineering
+- [ ] [Day 17](17_Day_Structured_Outputs_Tools/) — Connecting models to code: tools
+- [ ] [Day 18](18_Day_Embeddings_Semantic_Search/) — Meaning as math: embeddings
+- [ ] [Day 19](19_Day_RAG/) — RAG: grounding AI in real documents
+- [ ] [Day 20](20_Day_Agents/) — Agents: goals, tools & the perceive–act loop
+- [ ] [Day 21](21_Day_Project3_RAG_Chatbot/) — 🛠 Project 3: a live AI product
+
+**Week 4 — Ship like a Forward Deployed Engineer** *("where engineering meets business")*
+- [ ] [Day 22](22_Day_Evals/) — Proof: evaluating AI systems
+- [ ] [Day 23](23_Day_Guardrails_Cost/) — Production reality: safety, attacks & cost
+- [ ] [Day 24](24_Day_FastAPI_Databases/) — Backends: APIs & persistence
+- [ ] [Day 25](25_Day_Observability_Debugging/) — Operations: logging, tracing & runbooks
+- [ ] [Day 26](26_Day_Client_Discovery_FDE/) — 💼 Discovery: turning human problems into specs
+- [ ] [Day 27](27_Day_Portfolio_Getting_Hired/) — 💼 Packaging: portfolio & getting paid
+- [ ] [Day 28](28_Day_Capstone_Part1/) — 🏁 Capstone: build a client-grade AI system
+- [ ] [Day 29](29_Day_Capstone_Part2/) — 🏁 Capstone: deploy it live
+- [ ] [Day 30](30_Day_Ship_It/) — 💼 Ship it: demo, retrospective, next 90 days
+
+📖 **[Full day-by-day curriculum with objectives, builds and exercises →](CURRICULUM.md)**
+
+---
+
+## 🧠 Try it right now — no setup needed
+
+<details>
+<summary><b>Quick check: do you think like an engineer yet?</b> (click to open)</summary>
+
+<br>
+
+**Q1.** A program prints `22` when you expected `4`. What's the *first* question you ask?
+
+<details>
+<summary>Reveal answer</summary>
+
+"What type is this data, really?" — it's almost certainly `"2" + "2"` (text) instead of `2 + 2` (numbers). That's Day 2, and it explains half of all beginner bugs.
+</details>
+
+<br>
+
+**Q2.** Your AI assistant wrote 50 lines that work. What's your job now?
+
+<details>
+<summary>Reveal answer</summary>
+
+Evaluate: read it, test the edges, try to break it, and make sure you can explain every part. AI writes the draft — you stand behind it. That's the whole repo in one sentence.
+</details>
+
+<br>
+
+**Q3.** A shop owner says "I need software." What's your first move?
+
+<details>
+<summary>Reveal answer</summary>
+
+Not code — questions. What problem? Who has it? What does it cost them today? That's discovery (Day 26), and it's the most valuable skill here.
+</details>
+
+</details>
 
 ---
 
-## Day 30: the outcome
+## What "AI Forward Deployed Engineer" means
 
-Starting from zero, 30 days from now you can:
-
-- ✅ **Walk into a business and find the problem** — ask the right questions, tell a real pain from a whim
-- ✅ **Scope it** — turn "everything is manual" into a one-page buildable, priced brief
-- ✅ **Build the fix with AI** — direct AI to build it, evaluate every part, own the concepts underneath
-- ✅ **Prove it works** — tests and evals, not promises
-- ✅ **Deploy it live** — a real URL, running for real users
-- ✅ **Demo it and charge for it** — explain the value in plain words and name a price
-
-Plus: 3 deployed projects + 1 capstone with live URLs, and a GitHub profile that proves you ship.
-
-**Honest note:** 30 days won't make you a senior engineer, and learning never stops. But it makes you *useful* — someone who can fix a real business problem with AI software and make money doing it. That's further than 95% of tutorial-watchers ever get, because they learned syntax and you learned the job.
-
----
+The person who shows up where the problem lives. Not generating code in isolation — understanding a client's problem, designing the right system, directing AI to build it, verifying it works, deploying it, standing behind it. **Judgment + engineering + business.**
 
 ## Tools (all free)
 
-- Python 3.11+, VS Code, Git + a GitHub account
-- One AI coding assistant (Claude Code / ChatGPT / Cursor / Copilot — free tiers are enough)
-- One LLM API key with free credits (Google AI Studio / OpenAI / Anthropic)
-- Streamlit Cloud / Render free tier for deployments
-
-Day 1 walks you through installing everything.
-
----
+Python 3.11+, VS Code, Git + GitHub, one AI coding assistant (Claude Code / ChatGPT / Cursor / Copilot), one LLM API key with free credits, Streamlit Cloud / Render free tier. Day 1 sets it all up.
 
 ## Repos that inspired this
 
-- [Asabeneh/30-Days-Of-Python](https://github.com/Asabeneh/30-Days-Of-Python) — the gold standard of the day-by-day format
-- [Asabeneh/30-Days-Of-JavaScript](https://github.com/Asabeneh/30-Days-Of-JavaScript)
-- [preferedev/30-days-of-AI-Engineering](https://github.com/preferedev/30-days-of-AI-Engineering) — 30 days of AI engineering
-- [razaqfatiu/30days-of-GenAI](https://github.com/razaqfatiu/30days-of-GenAI) — software engineer → AI engineer
-- [notwitcheer/25-Days-To-Learn-AI-AGENTS](https://github.com/notwitcheer/25-Days-To-Learn-AI-AGENTS) — learning agents *with* Claude Code
-- [najmal-ibrahim/30-days-of-ai](https://github.com/najmal-ibrahim/30-days-of-ai) — zero-to-AI-engineer in public
-- [abhishekyadav2000/ai-engineering-from-scratch](https://github.com/abhishekyadav2000/ai-engineering-from-scratch) — phased curriculum
-- [microsoft/AI-For-Beginners](https://github.com/microsoft/AI-For-Beginners) — Microsoft's free AI curriculum
+[Asabeneh/30-Days-Of-Python](https://github.com/Asabeneh/30-Days-Of-Python) · [Asabeneh/30-Days-Of-JavaScript](https://github.com/Asabeneh/30-Days-Of-JavaScript) · [preferedev/30-days-of-AI-Engineering](https://github.com/preferedev/30-days-of-AI-Engineering) · [razaqfatiu/30days-of-GenAI](https://github.com/razaqfatiu/30days-of-GenAI) · [notwitcheer/25-Days-To-Learn-AI-AGENTS](https://github.com/notwitcheer/25-Days-To-Learn-AI-AGENTS) · [najmal-ibrahim/30-days-of-ai](https://github.com/najmal-ibrahim/30-days-of-ai) · [abhishekyadav2000/ai-engineering-from-scratch](https://github.com/abhishekyadav2000/ai-engineering-from-scratch) · [microsoft/AI-For-Beginners](https://github.com/microsoft/AI-For-Beginners)
 
-What this repo adds: **concepts-first in the AI era, engineering judgment over typing, and business from day one** — built for people who will direct AI, not compete with it.
-
----
+What this repo adds: **concepts-first in the AI era, engineering judgment over typing, business from day one** — for people who will direct AI, not compete with it.
 
 ## Contributing
 
-Found a broken link, a clearer explanation, or a better free resource? See [CONTRIBUTING.md](CONTRIBUTING.md). PRs welcome.
+Found a broken link, a clearer explanation, a better free resource? [CONTRIBUTING.md](CONTRIBUTING.md). PRs welcome.
 
 ## License
 
-MIT — learn from it, fork it, teach with it. See [LICENSE](LICENSE).
+MIT — learn from it, fork it, teach with it.
