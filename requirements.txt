@@ -1,0 +1,16 @@
+# 30 Days: Zero to AI Software Engineer
+# Install per-day as you go - you don't need everything on day 1.
+# pip install -r requirements.txt
+
+# Week 2 - web apps & APIs
+requests>=2.31
+streamlit>=1.32
+
+# Week 3 - AI engineering (install when you reach day 15)
+openai>=1.0
+python-dotenv>=1.0
+
+# Week 4 - backends & quality
+fastapi>=0.110
+uvicorn>=0.29
+pytest>=8.0

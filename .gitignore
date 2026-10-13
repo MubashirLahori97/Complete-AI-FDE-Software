@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Secrets - NEVER commit these
+.env
+*.pem
+*.key
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Data / models (keep repos light)
+*.csv
+*.pdf
+data/raw/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
