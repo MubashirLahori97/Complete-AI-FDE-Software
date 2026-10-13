@@ -1,30 +1,59 @@
-# 📘 Day 29 — Capstone, Part 2: Deploy
+# 🏁 Day 29 — Capstone, Part 2: Deploy & Harden
 
-**Concept:** Shipping = deployment checklist + monitoring + telling the world. Undeployed work has zero business value.
+![Day 29 visual](../images/days/day-29.svg)
 
-**Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
+**Concept:** "Works on my machine" is day 0. **Deployed, monitored, and stranger-proof** is the product. Today your capstone goes live with everything production needs: hosting, secrets, monitoring, runbooks, and a final red-team pass. Tomorrow you demo it.
+
+**Time:** 2–3 hours. **Done when a stranger can break it and it behaves.**
 
 ---
 
-## The loop today
+## The deployment checklist
 
-1. **Learn** — the concept above. One focused idea; own it 100%.
-2. **Specify** — Deploy with a checklist (AI drafts; you verify each item). Write the launch post.
-3. **Evaluate** — 5 real humans try it. Fix the top complaint within the day.
-4. **Business lens** — The launch post IS marketing. Founders and freelancers get clients from posts exactly like this.
-5. **Commit** — push today's work. Your history is your proof.
+### Ship it
+- [ ] Deployed to a public URL (Render/Railway/Streamlit Cloud — your day-14 playbook)
+- [ ] Secrets in platform env vars, never in code or logs
+- [ ] Health endpoint (`GET /health` → `{"status": "ok"}`) so you know it's alive
+- [ ] Works in incognito, on mobile, for a stranger
 
-> AI writes the draft. **You** specify, evaluate, and stand behind it. Never ship output you can't explain or defend.
+### Harden it
+- [ ] Guardrails live and tested *on the deployed URL* (not just locally)
+- [ ] Rate limits + daily budget cap configured; alert threshold set
+- [ ] Structured logging on; you can trace any request end-to-end
+- [ ] RUNBOOK.md deployed alongside (your future self at 2am says thanks)
 
-## 📎 The one link
+### Prove it
+- [ ] Final eval run on the deployed system — score: ___/20
+- [ ] Red-team pass: 10 fresh attacks (injections, huge inputs, rapid-fire). Log results.
+- [ ] One real human uses it while you watch silently. Write down every confusion.
+- [ ] `/stats` shows real usage data; cost math verified against actual tokens
 
-[Render - deploy a Python app](https://render.com/docs)
+### Document it
+- [ ] Project README: what it is, who it's for, live URL, architecture diagram, eval score, cost model, known limits, runbook link
+- [ ] Add it to your portfolio (day 27) as the flagship piece
+
+---
+
+## The pre-demo audit (tonight, honestly)
+
+Answer in writing:
+
+1. What's the eval score, and what are the known failures?
+2. What's the cost per 100 uses, measured (not estimated)?
+3. What happens when it gets attacked? (Show the logs.)
+4. What's explicitly OUT of scope?
+5. If the demo gods strike tomorrow (API down, no internet), what's your backup? (Recorded video. Always have a recorded video.)
+
+**A demo with honest limits beats a demo with hidden ones.** Every time.
+
+---
 
 ## ✅ Done when
 
-- [ ] You can explain the concept in plain words, no notes
-- [ ] Something runs, tested by you
-- [ ] You evaluated the AI's output and can defend every part you kept
+- [ ] Live URL, stranger-tested, mobile-checked
+- [ ] Guardrails + budget cap verified on the deployed system
+- [ ] Final eval score logged; red-team results logged
+- [ ] Portfolio updated; recorded backup video exists
 - [ ] Committed to GitHub
 
 ---
