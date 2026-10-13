@@ -97,6 +97,20 @@ Fork this repo, then tick each day as you conquer it.
 
 ---
 
+## 🗺️ Finished day 30? The road continues — days 31–180
+
+**From "I ship AI software" to "I'm a complete, hire-ready software engineer."** Five phases, week by week — everything the 30 days didn't cover: deep engineering, real products with real users, computer science for interviews, professional work, and getting hired.
+
+- [ ] [Phase 2 — Go Deep (Days 31–60)](31_Phase2_Go_Deep/) — Databases, APIs, testing, git like a team
+- [ ] [Phase 3 — Build Real Things (Days 61–90)](32_Phase3_Build_Real_Things/) — Real users, payments, DevOps basics, open-source PR
+- [ ] [Phase 4 — Think Like a Computer (Days 91–120)](33_Phase4_Think_Like_A_Computer/) — Algorithms, systems, the interview-proof core
+- [ ] [Phase 5 — Work Like a Professional (Days 121–150)](34_Phase5_Work_Like_A_Professional/) — Security, teams, clients, teaching
+- [ ] [Phase 6 — Get Hired (Days 151–180)](35_Phase6_Get_Hired/) — Portfolio, interview prep, the job-hunt funnel
+
+📖 **[Full roadmap: what "feature-ready" means and the 180-day map →](ROADMAP.md)**
+
+---
+
 ## 🧠 Try it right now — no setup needed
 
 <details>

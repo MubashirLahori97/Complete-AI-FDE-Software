@@ -278,4 +278,6 @@
 
 You have what AI can't give you: **concepts at 100%, engineering judgment, and business sense.** The next 90 days: go deep in one area, build one serious thing in it, and start charging — freelance, employment, or your own product. Your edge as an FDE: you speak both languages, the client's problem and the engineer's solution.
 
+**Want the full path, not just the next 90 days?** [ROADMAP.md](ROADMAP.md) continues from day 31 to day 180 — five phases that turn a 30-day builder into a complete, hire-ready software engineer: going deep (databases, APIs, testing), building real things with real users, computer science for interviews, professional work (security, teams, clients), and getting hired.
+
 *AI writes the code. You do everything that matters around it. Fork this repo, do it in public, and show your work.*
