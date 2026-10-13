@@ -37,6 +37,8 @@ This isn't a course. It's a **90-day transformation with a public record** — y
 
 **Part 2 — Days 31–90: the roadmap.** 3–5 hours a day. Earning to undeniable — deep engineering, real products, interviews, getting hired.
 
+One continuous plan: every phase names the exact days it builds on — nothing repeats, everything levels up. Day 30 hands you directly to Phase 2.
+
 ## How it works
 
 **⏱ 60–90 minutes a day. 1 day = 1 concept + 1 build + 1 business lens.**
@@ -109,9 +111,9 @@ Fork this repo, then tick each day as you conquer it.
 
 **From "I ship AI software" to "I'm a complete, hire-ready software engineer" — in 60 more days.** Three dense phases, week by week: deep engineering, real products with real users, interviews, clients, and getting hired. Lower-leverage topics cut on purpose; everything left is load-bearing.
 
-- [ ] [Phase 2 — Build Like an Engineer (Days 31–50)](31_Phase2_Build_Like_An_Engineer/) — Databases, APIs done right, testing, git like a team
-- [ ] [Phase 3 — Ship Real Products (Days 51–70)](32_Phase3_Ship_Real_Products/) — Real users, payments, pro deploys, security, open-source PR
-- [ ] [Phase 4 — Get Paid & Get Hired (Days 71–90)](33_Phase4_Get_Paid_Get_Hired/) — Interview-proof core, paid engagement, the job-hunt funnel
+- [ ] [Phase 2 — Build Like an Engineer (Days 31–50 · Weeks 5–7)](31_Phase2_Build_Like_An_Engineer/) — Databases, APIs done right, testing, git like a team
+- [ ] [Phase 3 — Ship Real Products (Days 51–70 · Weeks 8–10)](32_Phase3_Ship_Real_Products/) — Real users, payments, pro deploys, security, open-source PR
+- [ ] [Phase 4 — Get Paid & Get Hired (Days 71–90 · Weeks 11–13)](33_Phase4_Get_Paid_Get_Hired/) — Interview-proof core, paid engagement, the job-hunt funnel
 
 📖 **[Full roadmap: what "feature-ready" means and the 90-day map →](ROADMAP.md)**
 

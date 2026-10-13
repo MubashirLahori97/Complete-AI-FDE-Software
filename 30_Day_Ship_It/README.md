@@ -28,18 +28,24 @@ Answer honestly in `RETROSPECTIVE.md`:
 - What's the weakest part of your capstone? What's the plan to fix it?
 - What would you tell yourself on day 1?
 
-## Part 3: The next 90 days (30 min, concrete)
+## Part 3: The next 60 days — the roadmap (30 min, concrete)
+
+Day 30 was the first finish line, not the last. The [roadmap](../ROADMAP.md) continues to day 90 — three phases, one story:
+
+- **[Phase 2 — Build Like an Engineer (Days 31–50 · Weeks 5–7)](../31_Phase2_Build_Like_An_Engineer/)** — the depth behind everything you built: databases, APIs, testing, git like a team.
+- **[Phase 3 — Ship Real Products (Days 51–70 · Weeks 8–10)](../32_Phase3_Ship_Real_Products/)** — one real product with real users, payments, pro deploys, hardened against attack.
+- **[Phase 4 — Get Paid & Get Hired (Days 71–90 · Weeks 11–13)](../33_Phase4_Get_Paid_Get_Hired/)** — the interview core, a paid engagement with a contract, the job-hunt funnel.
 
 ```markdown
-# Next 90 Days
-Days 31-60: [e.g., 2 more client-grade projects; 10 discovery conversations;
-             first paid engagement — even a small one]
-Days 61-90: [e.g., raise rates; first retainer; teach one thing in public weekly]
-The one metric: [e.g., "paid AI work" — revenue, not followers]
-The one habit: [e.g., "ship something every week, evaluate everything"]
+# Next 60 Days
+Days 31-50: [Phase 2 — depth; "The Rebuild" of your weakest project]
+Days 51-70: [Phase 3 — Product 4 live with real users]
+Days 71-90: [Phase 4 — paid engagement + interviews in motion]
+The one metric: [e.g., "undeniable" — proof the market responds to]
+The one habit: [e.g., "3–5 hours a day; every week ships evidence"]
 ```
 
-**The rule for the next 90 days:** learning continues, but *earning* is the metric. Every week should produce evidence: a shipped thing, a conversation, a dollar.
+**What changes on day 31:** the pace. Days 1–30 ran on 60–90 minutes a day; days 31–90 need 3–5 hours. That's the honest price of three months, and the roadmap says it out loud. Same iron rule, though: *never ship output you can't explain or defend.*
 
 ---
 
@@ -76,9 +82,10 @@ Never ship AI output you can't explain or defend. Thirty days of everything else
 
 **Day 1:** "I've never written code."
 **Day 30:** "I ship AI software — and I can prove it."
+**Day 90:** "I'm a software engineer — and the market knows it."
 
-*Now go fix a real problem for a real business. That's what the 30 days were for.* 🚀
+*Go fix a real problem for a real business — that's what the 30 days were for. Then come back for Phase 2. The next 60 days make you undeniable.* 🚀
 
 ---
 
-[← Day 29](../29_Day_Capstone_Part2/)
+[← Day 29](../29_Day_Capstone_Part2/) · [Phase 2 →](../31_Phase2_Build_Like_An_Engineer/)

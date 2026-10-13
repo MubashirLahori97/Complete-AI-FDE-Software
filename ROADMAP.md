@@ -40,6 +40,18 @@ If you can tick every box, you're not "learning to code" anymore. You're a softw
 
 ---
 
+## The 90-day arc — one story
+
+**Days 1–30 — the spark (Weeks 1–4).** You go from zero to someone who ships AI software and gets paid for it. Concepts at 100%, AI as your junior, business lens from day one. The milestone isn't knowledge — it's a live capstone and the ability to walk into a business with a solution. Day 30 ends with a bridge, not a goodbye: the roadmap picks up the next morning.
+
+**Days 31–50 — the foundation (Weeks 5–7).** You go back under the hood of everything you built. Databases you actually understand (Day 24, leveled up), APIs strangers can use, tests that catch real breakage (Day 12, leveled up), git the way teams use it (Day 8, leveled up). "The Rebuild" turns your weakest project into your strongest proof. The pace shifts to 3–4 hours a day — deeper, not just more.
+
+**Days 51–70 — the evidence (Weeks 8–10).** One product, done properly: a real frontend (Days 13–14, leveled up), real auth, real payments, real users, deployed with Docker and CI/CD, hardened against attack (Day 23, leveled up). Plus your first open-source PR — proof you can read and improve code you didn't write. This is the project you'll lead interviews with.
+
+**Days 71–90 — the verdict (Weeks 11–13).** The interview core — patterns, not grinding — and system design you can defend out loud. Discovery becomes a paid engagement with a real contract (Day 26, leveled up); the portfolio becomes case studies (Day 27, leveled up). Then the funnel: mocks, applications, conversations. The phase ends when the market responds — not when you've applied.
+
+One iron rule runs through all 90 days: *never ship output you can't explain or defend.*
+
 ## How the daily loop evolves
 
 Days 1–30 ran on **60–90 minutes a day**: one concept, one build, one business lens. That loop still works — but the phases ask for more:

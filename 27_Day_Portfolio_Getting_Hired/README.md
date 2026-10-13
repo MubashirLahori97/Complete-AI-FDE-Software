@@ -81,6 +81,8 @@ Catastrophic for trust — it's the one thing that was supposed to prove reliabi
 - [ ] Proposal template + 3 outreach drafts written and de-vagued
 - [ ] Your rates written down; committed to GitHub
 
+> 🔭 **Coming back to this:** [Phase 4, week 3](../33_Phase4_Get_Paid_Get_Hired/) rebuilds this portfolio as case studies and runs the full job-hunt funnel. Today you packaged your work. There, you'll sell it.
+
 ## 📎 The one link
 
 [Patrick McKenzie — "Selling Software to Businesses"](https://www.kalzumeus.com/2011/10/28/dont-call-yourself-a-programmer/) — the classic essay on positioning yourself as a problem-solver, not a coder. Read it twice.

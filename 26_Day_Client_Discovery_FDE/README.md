@@ -93,6 +93,8 @@ You don't take it — or you re-scope to something worth 10× less effort. Price
 - [ ] A complete one-page brief exists with specific OUT list and measurable success metric
 - [ ] Committed to GitHub
 
+> 🔭 **Coming back to this:** [Phase 4, week 2](../33_Phase4_Get_Paid_Get_Hired/) turns discovery into money — scoping, contracts, pricing, and a real paid engagement. Today you learned the questions. There, you'll get paid for the answers.
+
 ## 📎 The one link
 
 [The Mom Test — summary](https://www.momtest.com/) — the short book on asking questions that get honest answers instead of compliments. Read the summary; apply it forever.

@@ -113,6 +113,8 @@ Nothing needs rebuilding: the API contract already serves any HTTP client. That'
 - [ ] Streamlit UI calls the API; history survives a restart
 - [ ] Committed to GitHub
 
+> 🔭 **Coming back to this:** [Phase 2, weeks 1–2](../31_Phase2_Build_Like_An_Engineer/) rebuilds everything you touched today — Postgres with migrations, a documented API strangers can use. Today you met the backend. There, you'll own it.
+
 ## 📎 The one link
 
 [FastAPI Tutorial — First Steps](https://fastapi.tiangolo.com/tutorial/first-steps/) — the official tutorial; you'll use the first half today.

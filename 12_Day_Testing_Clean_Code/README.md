@@ -91,6 +91,8 @@ Test your day-2 converter: correct conversions + non-number input handled. Four 
 - [ ] You can summarize a stranger's code file in 3 sentences after 15 minutes
 - [ ] Committed and pushed to GitHub
 
+> 🔭 **Coming back to this:** in [Phase 2, week 3](../31_Phase2_Build_Like_An_Engineer/) you'll take testing pro — 70%+ coverage, CI pipelines, tests as team practice. Today you learned to trust your code. There, you'll make *teams* trust it.
+
 ## 📎 The one link
 
 [pytest — Getting Started](https://docs.pytest.org/en/stable/getting-started.html) — everything you need, nothing you don't.

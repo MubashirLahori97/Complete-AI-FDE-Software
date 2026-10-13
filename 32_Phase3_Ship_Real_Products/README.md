@@ -1,8 +1,16 @@
-# 🏗️ Phase 3 — Ship Real Products: Proof, Not Promises *(Days 51–70)*
+# 🏗️ Phase 3 — Ship Real Products: Proof, Not Promises *(Days 51–70 · Weeks 8–10)*
 
 Phase 2 gave you depth. **Phase 3 turns depth into proof.** Twenty days, one real product with real users, deployed like a professional, hardened against the obvious attacks. Nobody hires potential; they hire evidence.
 
 **⏱ 3–5 hours a day.** You're building a business-grade product in 20 days — that's the pace.
+
+## 🔭 This builds on
+
+- **Days 13–14** — your first web app → now: a real frontend, no training wheels
+- **Day 23** — guardrails → now: a full security review of your own work
+- **Day 27** — your first portfolio → now: Product 4, the project you'll lead interviews with
+
+Same pattern as Phase 2: nothing new, everything leveled up.
 
 ---
 

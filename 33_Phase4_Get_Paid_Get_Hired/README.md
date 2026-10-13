@@ -1,8 +1,16 @@
-# 🎯 Phase 4 — Get Paid & Get Hired: Turn Proof Into a Paycheck *(Days 71–90)*
+# 🎯 Phase 4 — Get Paid & Get Hired: Turn Proof Into a Paycheck *(Days 71–90 · Weeks 11–13)*
 
 Seventy days of proof. **Twenty days to convert it into income.** Condensed computer science for interviews, one real paid engagement, and the job hunt run as a system. The market decides at the end — your job is to give it no reason to say no.
 
 **⏱ 3–5 hours a day.** Interviews are a separate skill. Train it like one.
+
+## 🔭 This builds on
+
+- **Day 22** — evals → now: proving your judgment in interviews, out loud
+- **Day 26** — discovery questions → now: contracts, pricing, a paid engagement
+- **Day 27** — packaging your work → now: case studies, STAR stories, the funnel
+
+Part 1 taught you to earn. This phase teaches you to be undeniable.
 
 ---
 

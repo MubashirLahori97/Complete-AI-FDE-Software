@@ -1,8 +1,20 @@
-# 🔧 Phase 2 — Build Like an Engineer: From "It Works" to "I Know Exactly Why" *(Days 31–50)*
+# 🔧 Phase 2 — Build Like an Engineer: From "It Works" to "I Know Exactly Why" *(Days 31–50 · Weeks 5–7)*
 
 **Day 30 you could ship. Now go back and understand what you shipped.** Twenty dense days: the data layer, APIs done right, and trust (testing + team git). This is the engineering depth every interview and every production system assumes you have.
 
 **⏱ This phase runs hotter: 3–5 hours a day.** Three months is a sprint — the plan is honest about what that takes.
+
+## 🔭 This builds on
+
+- **Day 8** — git basics → now: branches, PRs, team flow
+- **Day 12** — testing basics → now: 70%+ coverage, CI, tests as team practice
+- **Day 24** — your first backend → now: Postgres with migrations, documented APIs
+
+Nothing here is new territory — it's everything from Part 1, leveled up.
+
+## ⚙️ Shifting gears
+
+Days 1–30 ran on 60–90 minutes a day. This phase needs 3–4 hours. That's not "harder" — it's *deeper*. You're not learning more things; you're understanding the things you already built. Give it the hours and week 3 will feel like a superpower, not a slog.
 
 ---
 
