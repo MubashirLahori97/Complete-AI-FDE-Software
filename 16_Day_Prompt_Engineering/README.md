@@ -2,7 +2,7 @@
 
 ![Day 16 visual](../images/days/day-16.svg)
 
-**Concept:** A prompt is a **specification given to a probabilistic machine**. Vague specs → random output. Precise specs → reliable behavior. Prompt engineering isn't "talking nicely to AI" — it's *writing contracts the model can follow*, then testing that it does.
+**Concept:** A prompt is a **specification given to a guessing machine**. Vague specs → random output. Precise specs → reliable behavior. Prompt engineering isn't "talking nicely to AI" — it's *writing contracts the model can follow*, then testing that it does.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
 
@@ -31,7 +31,7 @@ Each part has a job:
 - **Format** → the *contract* for output (day 4's function contracts, for models).
 - **Rules** → the edge cases, specified upfront (day 6's failure thinking).
 - **Examples (few-shot)** → 2–3 demonstrations beat paragraphs of description. Models imitate patterns.
-- **Delimiters** (`<<< >>>`) → mark where user input starts so it can't blur into instructions.
+- **Markers** (`<<< >>>`, called *delimiters* in docs) → mark where user input starts so it can't blur into instructions.
 
 ### Why this works
 
@@ -55,7 +55,7 @@ Note the meta-move: **you're using AI to help write the spec, then you'll evalua
 - For each failure, decide: **was the spec vague, or was an example missing?** Fix exactly that. Re-run all 10 (regression — day 12's instinct).
 - The reliability bar: **10/10, three runs in a row** (temperature=0). If it wavers, the spec isn't done.
 - Try an **off-topic ticket** ("what's the weather?"). Does it follow your rules or improvise? Improvisation = spec gap.
-- Ask the AI: "Quiz me — what does each part of my prompt do? What breaks if I remove the examples? The delimiters?"
+- Ask the AI: "Quiz me — what does each part of my prompt do? What breaks if I remove the examples? The markers?"
 
 ## 4. Business lens 💼
 
@@ -68,7 +68,7 @@ Note the meta-move: **you're using AI to help write the spec, then you'll evalua
 <details>
 <summary><b>Q1.</b> Why do few-shot examples beat long descriptions?</summary>
 
-Models imitate patterns. Two examples of exact input→output demonstrate the format, the tone, and the edge handling more precisely than paragraphs describing them.
+Models imitate patterns. Two examples of exact input→output show the format, the tone, and the edge handling more precisely than paragraphs describing them.
 </details>
 
 <details>
@@ -78,7 +78,7 @@ Study the 1 failure, decide whether the spec was vague or an example was missing
 </details>
 
 <details>
-<summary><b>Q3.</b> What's the job of delimiters like &lt;&lt;&lt; &gt;&gt;&gt;?</summary>
+<summary><b>Q3.</b> What's the job of markers like &lt;&lt;&lt; &gt;&gt;&gt;?</summary>
 
 They mark where untrusted user input begins and ends, so it can't blur into your instructions. It's the first, simplest defense against prompt injection (day 23).
 </details>

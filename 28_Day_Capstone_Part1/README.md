@@ -41,7 +41,7 @@ Risks: [honest list]
 - [ ] Architecture: API backend (day 24) + RAG or tools (days 17–19) + logging (day 25)
 - [ ] Eval set FIRST (day 22): 20 cases written before tuning — this is your contract with yourself
 - [ ] Guardrails (day 23): input limits, injection handling, budget cap — all three layers
-- [ ] Iterate: build → eval → fix → eval. Log every change and score.
+- [ ] Repeat: build → eval → fix → eval. Log every change and score.
 - [ ] The honesty tests: unanswerable questions, injection attempts, bad inputs — all must behave
 
 ## The senior review (end of day)

@@ -33,7 +33,7 @@ Text is chopped into **tokens** (~4 characters each in English; ~¾ of a word):
 
 ### Temperature: the randomness dial
 
-- `temperature=0` → always picks the *most likely* token. Deterministic, boring, reliable. Use for classification, extraction, code.
+- `temperature=0` → always picks the *most likely* token. Predictable, boring, reliable. Use for classification, extraction, code.
 - `temperature=1` → samples from the likely tokens. Creative, varied, unpredictable. Use for brainstorming, writing.
 - Most production work lives at **0–0.3**. Creativity is a bug when you want reliability.
 

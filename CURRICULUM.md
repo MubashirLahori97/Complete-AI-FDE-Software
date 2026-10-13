@@ -147,8 +147,8 @@
 - **Done when:** You can explain tokens, context, and temperature to a non-technical friend.
 
 ### Day 16: Specification — prompts as engineering
-- **Concept:** A prompt is a *specification* given to a probabilistic machine. Vague specs → random output. Precise specs → reliable behavior.
-- **Specify → AI builds:** A ticket classifier that outputs JSON, right 10/10 times. Iterate on the *spec*, not the code.
+- **Concept:** A prompt is a *specification* given to a guessing machine. Vague specs → random output. Precise specs → reliable behavior.
+- **Specify → AI builds:** A ticket classifier that outputs JSON, right 10/10 times. Improve the *spec* step by step, not the code.
 - **Evaluate:** 10 test tickets. Score it. Find the one it gets wrong and fix the specification.
 - **💼 Business lens:** "Make it behave reliably" is what businesses pay for. Reliability is the product.
 - **The one link:** [Anthropic — prompt engineering](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
@@ -201,7 +201,7 @@
 *Theme: the FDE is where engineering meets business — deployed systems, real clients, real money.*
 
 ### Day 22: Proof — evaluating AI systems
-- **Concept:** AI output is probabilistic, so "it worked once" proves nothing. Evals = a fixed test set you re-run — your regression safety net.
+- **Concept:** AI output is guess-based, so "it worked once" proves nothing. Evals = a fixed test set you re-run — your regression safety net.
 - **Specify → AI builds:** A 20-question eval set for your chatbot, with a scoring rubric. AI can help *draft* questions; you approve each one.
 - **Evaluate:** Run it. Record the score: "my bot scores X/40." Change your prompt, re-run, prove improvement (or catch regression).
 - **💼 Business lens:** Evals are how you *sell* reliability: "we test every change against 40 cases" is a sentence clients pay for.
@@ -258,7 +258,7 @@
 
 ### Day 29: 🏁 Capstone, part 2 — deploy it live
 - **Concept:** Shipping = the entire deployment checklist + monitoring + telling the world. Undeployed work has zero business value.
-- **Specify → AI builds:** Deploy with a checklist (AI drafts it; you verify each item). Write the launch post: problem, what you built, demo link, learnings.
+- **Specify → AI builds:** Deploy with a checklist (AI drafts it; you verify each item). Write the launch post: problem, what you built, demo link, lessons learned.
 - **Evaluate:** 5 real humans try it. Collect feedback. Fix the top complaint within the day.
 - **💼 Business lens:** The launch post IS marketing. Founders and freelancers get clients from posts exactly like this one.
 - **The one link:** [Render — deploy a Python app](https://render.com/docs)

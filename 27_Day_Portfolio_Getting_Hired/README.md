@@ -19,7 +19,7 @@ Each of your 3 projects gets a page with:
 4. **Proof** — eval scores, the honesty test, uptime. Numbers beat adjectives.
 5. **Cost model** — "costs $X per 100 uses" — shows you think like an owner.
 
-Build it as a simple site (Streamlit, GitHub Pages, or even a great README). **The portfolio itself is project #4** — it demonstrates everything.
+Build it as a simple site (Streamlit, GitHub Pages, or even a great README). **The portfolio itself is project #4** — it shows everything.
 
 ### Where the work is (realistic, day-27 edition)
 
@@ -63,7 +63,7 @@ A project is the thing you built; a portfolio piece is the thing *translated for
 <details>
 <summary><b>Q2.</b> Why fixed fee over hourly for your first clients?</summary>
 
-Hourly punishes speed and rewards slowness — and as an AI-assisted builder you're fast. Fixed fee aligns you with the client's interest (outcome, not hours) and your advantage (leverage).
+Hourly punishes speed and rewards slowness — and as an AI-assisted builder you're fast. Fixed fee aligns you with the client's interest (outcome, not hours) and your speed advantage.
 </details>
 
 <details>

@@ -109,7 +109,7 @@ Text (`str`), always — even if the user typed digits. Forgetting this is the #
 <details>
 <summary><b>Q3.</b> A shop's program charged a customer wrong. The code said <code>total = price + fee</code>. What do you check first?</summary>
 
-The types of `price` and `fee`. If either is text, `+` concatenates instead of adding — wrong types = wrong money.
+The types of `price` and `fee`. If either is text, `+` glues together instead of adding — wrong types = wrong money.
 </details>
 
 ## ✅ Done when

@@ -14,7 +14,7 @@
 
 | Attack / failure | What it is | Defense |
 |---|---|---|
-| **Prompt injection** | User input says "ignore instructions, do X" | Delimiters (day 16), instruction hierarchy, output validation |
+| **Prompt injection** | User input says "ignore instructions, do X" | Markers (day 16), instruction hierarchy, output validation |
 | **Jailbreaking** | Crafted inputs to bypass safety rules | System-level rules, refusal evals (day 22) |
 | **Data exfiltration** | "Repeat your system prompt" / "show other users' data" | Never put secrets in prompts; per-user retrieval scoping |
 | **Cost attack** | Attacker sends huge inputs to burn your tokens | Max input length, rate limits, per-user quotas, cost alerts |
@@ -23,7 +23,7 @@
 ### Defense in depth
 
 No single layer is enough — you stack them:
-1. **Input**: length limits, delimiters, blocklist obvious attacks.
+1. **Input**: length limits, markers, blocklist obvious attacks.
 2. **Model**: system prompt with explicit refusal rules; temperature 0 for determinism.
 3. **Output**: validate format; scan for leaked secrets/PII; refusal on out-of-scope.
 4. **System**: rate limits per user/IP; daily spend caps with alerts; logs of everything (day 25).

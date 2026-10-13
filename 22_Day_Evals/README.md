@@ -20,7 +20,7 @@
 | Groundedness | Answer supported by retrieved chunks? | Check each claim against the chunks |
 | Honest refusal | Says "I don't know" when it should | Unanswerable questions, count refusals |
 | Format reliability | Valid JSON / correct schema | Parse it; count failures |
-| Robustness | Handles paraphrases, typos | Same question, 5 rewordings |
+| Toughness | Handles paraphrases, typos | Same question, 5 rewordings |
 
 ### The eval set: your most valuable artifact
 

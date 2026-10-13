@@ -63,7 +63,7 @@ Then the twist — **you** write one more test the AI didn't think of. That's th
 - Run `pytest -v`. All green? Now **break your code on purpose** (change a `+` to `-` in totals) and re-run. Does the suite catch it? A test suite that can't catch a deliberate bug is decoration.
 - **Mutation review:** for each test, ask "what bug would slip past this test?" Write down one gap per test file. Gaps are normal — *knowing* them is the skill.
 - Read one real file from an open-source project you use (e.g., a small function in `requests`). Entry point → follow calls → 3-sentence summary. Time yourself: 15 minutes max.
-- Ask the AI: "Quiz me — what's the difference between testing the contract vs testing the implementation? Why do we test edges more than happy paths?"
+- Ask the AI: "Quiz me — what's the difference between testing the contract vs testing the insides? Why do we test edges more than happy paths?"
 
 ## 4. Business lens 💼
 
