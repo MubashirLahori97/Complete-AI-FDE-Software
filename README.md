@@ -1,12 +1,14 @@
-# 🚀 30 Days: Zero to AI Software Engineer
+# 🚀 90 Days: Zero to Feature-Ready Software Engineer
 
-![30 days](https://img.shields.io/badge/30-days-blue) ![price](https://img.shields.io/badge/price-free-brightgreen) ![license](https://img.shields.io/badge/license-MIT-yellow) ![level](https://img.shields.io/badge/level-absolute%20beginner-orange)
+![90 days](https://img.shields.io/badge/90-days-blue) ![price](https://img.shields.io/badge/price-free-brightgreen) ![license](https://img.shields.io/badge/license-MIT-yellow) ![level](https://img.shields.io/badge/level-absolute%20beginner-orange)
 
-![From zero to AI software engineer in 30 days](images/hero-banner.svg)
+![From zero to feature-ready software engineer in 90 days](images/hero-banner.svg)
 
 **AI writes the code now. This repo teaches what AI can't do for you: concepts, engineering judgment, and business.**
 
-**The promise:** a normal person starting from zero — 30 days later — walks into a business, finds a real problem, fixes it with AI software, and gets paid for it. Learning never stops, but earning starts on day 30.
+**The promise:** a normal person starting from zero — 90 days later — is a complete, hire-ready software engineer. Ships real products. Reasons about systems. Works like a professional. And can prove all of it.
+
+**The milestones:** day 30 — you earn from AI software. Day 90 — the market can't ignore you.
 
 > 📖 **New here? Read [THE VISION](VISION.md) first.** Two minutes. It's the reason this repo exists — and the reason you'll finish it.
 
@@ -14,26 +16,32 @@
 
 ## The transformation
 
-| Day 1 | Day 30 |
-|---|---|
-| "I've never written code." | "I ship AI software." |
-| Watches tutorials, learns fragments | Owns concepts 100%, explains them in plain words |
-| Afraid of errors | Reads tracebacks like a map |
-| "AI is magic" | Directs AI, evaluates its output, stands behind it |
-| No proof of skill | 3 deployed projects + 1 capstone, live URLs |
-| Can't charge for anything | Can walk into a business, scope a problem, fix it, name a price |
+| Day 1 | Day 30 | Day 90 |
+|---|---|---|
+| "I've never written code." | "I ship AI software." | "I'm a software engineer. Here's the proof." |
+| Watches tutorials, learns fragments | Owns concepts 100%, explains them in plain words | Reasons about systems, defends designs out loud |
+| Afraid of errors | Reads tracebacks like a map | Debugs production, reads any codebase |
+| "AI is magic" | Directs AI, evaluates its output, stands behind it | Ships tested, deployed, secure products |
+| No proof of skill | 3 deployed projects + 1 capstone, live URLs | Real users, paying clients, interviews in motion |
+| Can't charge for anything | Can walk into a business, scope a problem, fix it, name a price | Has contracts, testimonials, and a salary number |
 
-This isn't a course. It's a **30-day transformation with a public record** — your commit history is the proof.
+This isn't a course. It's a **90-day transformation with a public record** — your commit history is the proof.
 
 ---
 
 ## Your journey
 
-![Your 30-day journey: from zero to getting paid](images/journey.svg)
+![Your 90-day journey: from zero to feature-ready](images/roadmap.svg)
+
+**Part 1 — Days 1–30: the sprint.** 60–90 minutes a day. Zero to earning from AI software. (The original 30-day map lives in the tracker below.)
+
+**Part 2 — Days 31–90: the roadmap.** 3–5 hours a day. Earning to undeniable — deep engineering, real products, interviews, getting hired.
 
 ## How it works
 
 **⏱ 60–90 minutes a day. 1 day = 1 concept + 1 build + 1 business lens.**
+
+**Part 2 (days 31–90) runs hotter: 3–5 hours a day.** Three months is a sprint, and the plan is honest about what that takes. At one hour a day, this is a 6-month plan — the roadmap says so out loud.
 
 1. **Learn the concept** — one idea, owned 100%. Short lesson + one curated link. Not ten links. One.
 2. **Specify it to AI** — you write the specification; AI writes the first draft. Precise specs are now a core engineering skill.
@@ -97,17 +105,15 @@ Fork this repo, then tick each day as you conquer it.
 
 ---
 
-## 🗺️ Finished day 30? The road continues — days 31–180
+## 🗺️ Finished day 30? The road continues — days 31–90
 
-**From "I ship AI software" to "I'm a complete, hire-ready software engineer."** Five phases, week by week — everything the 30 days didn't cover: deep engineering, real products with real users, computer science for interviews, professional work, and getting hired.
+**From "I ship AI software" to "I'm a complete, hire-ready software engineer" — in 60 more days.** Three dense phases, week by week: deep engineering, real products with real users, interviews, clients, and getting hired. Lower-leverage topics cut on purpose; everything left is load-bearing.
 
-- [ ] [Phase 2 — Go Deep (Days 31–60)](31_Phase2_Go_Deep/) — Databases, APIs, testing, git like a team
-- [ ] [Phase 3 — Build Real Things (Days 61–90)](32_Phase3_Build_Real_Things/) — Real users, payments, DevOps basics, open-source PR
-- [ ] [Phase 4 — Think Like a Computer (Days 91–120)](33_Phase4_Think_Like_A_Computer/) — Algorithms, systems, the interview-proof core
-- [ ] [Phase 5 — Work Like a Professional (Days 121–150)](34_Phase5_Work_Like_A_Professional/) — Security, teams, clients, teaching
-- [ ] [Phase 6 — Get Hired (Days 151–180)](35_Phase6_Get_Hired/) — Portfolio, interview prep, the job-hunt funnel
+- [ ] [Phase 2 — Build Like an Engineer (Days 31–50)](31_Phase2_Build_Like_An_Engineer/) — Databases, APIs done right, testing, git like a team
+- [ ] [Phase 3 — Ship Real Products (Days 51–70)](32_Phase3_Ship_Real_Products/) — Real users, payments, pro deploys, security, open-source PR
+- [ ] [Phase 4 — Get Paid & Get Hired (Days 71–90)](33_Phase4_Get_Paid_Get_Hired/) — Interview-proof core, paid engagement, the job-hunt funnel
 
-📖 **[Full roadmap: what "feature-ready" means and the 180-day map →](ROADMAP.md)**
+📖 **[Full roadmap: what "feature-ready" means and the 90-day map →](ROADMAP.md)**
 
 ---
 
