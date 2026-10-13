@@ -237,7 +237,7 @@
 - **Specify → AI builds:** Interview a real small business for 20 minutes (AI helps you *prepare* questions, not conduct it). Write a one-page brief: problem, users, in-scope, out-of-scope, price.
 - **Evaluate:** Is the brief so clear a stranger could build v1? What's deliberately excluded — and why?
 - **💼 Business lens:** This IS the business. Discovery → scoped brief → price → build → deploy. The FDE loop in one day.
-- **The one link:** [The Mom Test — principles](https://www.amazon.com/Mom-Test-customers-business-everyone/dp/1119883780) (library has it)
+- **The one link:** [The Mom Test — official site](https://www.momtest.com/) (short book on asking honest questions; library has it)
 - **Done when:** The brief exists as `CLIENT_BRIEF.md` — clear enough for a stranger to build from.
 
 ### Day 27: 💼 Packaging — portfolio & getting paid

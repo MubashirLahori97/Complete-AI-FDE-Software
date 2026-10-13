@@ -146,7 +146,7 @@ Python 3.11+, VS Code, Git + GitHub, one AI coding assistant (Claude Code / Chat
 
 ## Repos that inspired this
 
-[Asabeneh/30-Days-Of-Python](https://github.com/Asabeneh/30-Days-Of-Python) · [Asabeneh/30-Days-Of-JavaScript](https://github.com/Asabeneh/30-Days-Of-JavaScript) · [preferedev/30-days-of-AI-Engineering](https://github.com/preferedev/30-days-of-AI-Engineering) · [razaqfatiu/30days-of-GenAI](https://github.com/razaqfatiu/30days-of-GenAI) · [notwitcheer/25-Days-To-Learn-AI-AGENTS](https://github.com/notwitcheer/25-Days-To-Learn-AI-AGENTS) · [najmal-ibrahim/30-days-of-ai](https://github.com/najmal-ibrahim/30-days-of-ai) · [abhishekyadav2000/ai-engineering-from-scratch](https://github.com/abhishekyadav2000/ai-engineering-from-scratch) · [microsoft/AI-For-Beginners](https://github.com/microsoft/AI-For-Beginners)
+[Asabeneh/30-Days-Of-Python](https://github.com/Asabeneh/30-Days-Of-Python) · [Asabeneh/30-Days-Of-JavaScript](https://github.com/Asabeneh/30-Days-Of-JavaScript) · [razaqfatiu/30days-of-GenAI](https://github.com/razaqfatiu/30days-of-GenAI) · [najmal-ibrahim/30-days-of-ai](https://github.com/najmal-ibrahim/30-days-of-ai) · [abhishekyadav2000/ai-engineering-from-scratch](https://github.com/abhishekyadav2000/ai-engineering-from-scratch) · [microsoft/AI-For-Beginners](https://github.com/microsoft/AI-For-Beginners)
 
 What this repo adds: **concepts-first in the AI era, engineering judgment over typing, business from day one** — for people who will direct AI, not compete with it.
 
