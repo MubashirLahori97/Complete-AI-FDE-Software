@@ -72,7 +72,7 @@ export default function AminaLesson() {
               ? 'Press Add 1 message.'
               : phase === 'changed'
                 ? 'Press again to add 1.'
-                : 'You can keep adding messages.'}
+                : 'Play more if you like.'}
           </p>
           <button className="amina-button" onClick={() => setMessages((count) => count + 1)}>
             <Plus size={22} aria-hidden="true" />
