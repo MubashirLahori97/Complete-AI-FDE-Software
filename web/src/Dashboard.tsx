@@ -84,10 +84,7 @@ export default function Dashboard({ progress }: { progress: Progress }) {
       <section className="sample-invite">
         <div>
           <h2>Try one idea at Amina’s shop.</h2>
-          <p>
-            A simpler sample lesson: help count messages, learn what a variable is, and make a small
-            counter.
-          </p>
+          <p>Press one button, watch the message count change, and learn one idea.</p>
         </div>
         <a className="button primary" href="#/sample/amina">
           Try the sample lesson

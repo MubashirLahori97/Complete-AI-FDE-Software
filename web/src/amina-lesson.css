@@ -1,489 +1,205 @@
 .amina-page {
-  --amina-ink: #263d31;
-  --amina-muted: #596759;
-  --amina-line: #d8e0cf;
-  --amina-green: #254b3e;
-  --amina-cream: #fff9ed;
   min-height: 100vh;
-  color: var(--amina-ink);
-  background: var(--amina-cream);
-  font-size: 18px;
-}
-.amina-page h1 {
-  font-size: clamp(29px, 4vw, 40px);
-  line-height: 1.15;
-  letter-spacing: -1.2px;
-  max-width: 22ch;
-  text-wrap: balance;
-}
-.amina-page h1:focus {
-  outline: none;
+  background: #fff9ed;
+  color: #263d31;
+  font-size: 19px;
 }
 .amina-page p {
-  line-height: 1.7;
+  line-height: 1.6;
 }
 .amina-header {
-  max-width: 1060px;
+  max-width: 920px;
   margin: auto;
-  padding: 24px 32px;
+  padding: 22px 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
 }
 .amina-brand {
   display: flex;
+  gap: 9px;
   align-items: center;
-  gap: 10px;
   font-size: 17px;
   font-weight: 600;
 }
-.amina-brand-mark {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: var(--amina-green);
-  color: white;
-  display: grid;
-  place-items: center;
-}
-.amina-sample-tag {
-  padding: 5px 9px;
-  border: 1px solid var(--amina-line);
-  border-radius: 7px;
-  font-size: 12px;
-  font-weight: 400;
-}
 .amina-course-link {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
   gap: 6px;
+  align-items: center;
   font-size: 14px;
   min-height: 44px;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 .amina-main {
-  width: min(100% - 40px, 740px);
-  margin: 24px auto 0;
-  padding-bottom: 28px;
-}
-.amina-progress {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 14px;
-  color: var(--amina-muted);
-  padding: 0 6px 20px;
-}
-.amina-progress-track {
-  width: 100%;
-  display: flex;
-  gap: 6px;
-}
-.amina-progress-track span {
-  height: 7px;
-  border-radius: 10px;
-  flex: 1;
-  background: #e1e5d7;
-}
-.amina-progress-track span.done {
-  background: var(--amina-green);
-}
-.amina-progress-track span.current {
-  background: #8eab6e;
+  max-width: 510px;
+  margin: 22px auto 0;
+  padding: 0 20px 30px;
 }
 .amina-card {
   background: #fffefa;
-  padding: 36px 44px;
-  border: 1px solid var(--amina-line);
-  border-radius: 24px;
-  box-shadow: 0 5px 0 #e7eadb;
+  padding: 30px;
+  border: 1px solid #d8e0cf;
+  border-radius: 22px;
+  box-shadow: 0 4px 0 #e7eadb;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 20px;
 }
-.amina-kicker {
-  color: var(--amina-muted);
-  font-size: 14px;
-  font-weight: 500;
+.amina-card h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  text-wrap: balance;
 }
-.amina-intro {
+.amina-card h1:focus {
+  outline: none;
+}
+.amina-story {
   color: #445447;
+  min-height: 3.2em;
 }
-.amina-story-card {
-  gap: 16px;
-}
-.amina-scene {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.amina-scene .amina-speech {
-  flex: 1;
-}
-.amina-shop-art {
-  width: 160px;
-  height: auto;
-  align-self: center;
-  margin: 0;
-}
-.amina-speech {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px;
-  background: #f7e8dd;
+.amina-counter {
+  padding: 22px;
+  border: 1px solid #d7e3cb;
   border-radius: 16px;
-  font-size: 17px;
-}
-.amina-speech strong {
-  font-size: 14px;
-}
-.amina-speech p {
-  margin-top: 4px;
-}
-.amina-person {
-  width: 38px;
-  height: 38px;
-  border: 1px solid #ddb799;
-  border-radius: 50%;
-  background: #fff9ed;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  font-weight: 600;
-}
-.amina-inbox {
-  border: 1px solid var(--amina-line);
-  border-radius: 16px;
-  background: #f0f5e9;
-  padding: 16px;
+  background: #edf4e4;
   text-align: center;
 }
-.amina-inbox > div:first-child {
+.amina-counter-label {
   display: flex;
+  gap: 8px;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
+  font-size: 17px;
+  line-height: 1.4;
 }
-.amina-inbox output {
-  font-size: 48px;
-  font-weight: 600;
-  letter-spacing: -3px;
+.amina-counter-label code {
+  font-family: 'DM Mono', monospace;
+  font-size: 17px;
+}
+.amina-counter output {
   display: block;
-  line-height: 1.3;
-  margin: 6px 0 12px;
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -3px;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
 }
-.amina-message-dots {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-.amina-message-dots span {
-  width: 17px;
-  height: 13px;
-  border: 1px solid #4f7259;
-  border-radius: 3px;
-  background: #c4d7ac;
-}
-.amina-message-dots span.new {
-  background: #ebaa83;
-  border-color: #976142;
+.amina-value-label {
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  line-height: 1.6;
 }
 .amina-instruction {
+  text-align: center;
   font-size: 17px;
   font-weight: 500;
+  min-height: 1.6em;
+}
+@media (max-width: 360px) {
+  .amina-card h1 {
+    min-height: 2.4em;
+  }
 }
 .amina-button {
-  border: 1px solid transparent;
-  border-radius: 12px;
-  padding: 16px 20px;
-  min-height: 52px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 10px;
-  font-size: 17px;
+  width: 100%;
+  min-height: 60px;
+  padding: 16px;
+  color: white;
+  background: #254b3e;
+  border: 0;
+  border-radius: 12px;
   font-weight: 600;
+  font-size: 20px;
   line-height: 1.4;
-  transition: background-color 150ms ease;
 }
-.amina-button.primary {
-  color: #fff;
-  background: var(--amina-green);
-}
-.amina-button.primary:hover {
+.amina-button:hover {
   background: #1b392e;
 }
-.amina-text-button,
-.amina-back {
-  border: 0;
-  background: none;
+.amina-remember {
+  font-size: 16px;
+  text-align: center;
+  color: #445447;
+}
+.amina-after-lesson {
+  margin-top: 20px;
+}
+.amina-reset {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 7px;
   min-height: 44px;
+  margin: 0 auto 16px;
+  border: 0;
+  background: none;
   font-size: 15px;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.amina-back {
-  margin: 16px auto 0;
-  color: var(--amina-muted);
-}
-.amina-reassurance {
-  color: var(--amina-muted);
-  font-size: 14px;
-  text-align: center;
-}
-.amina-feedback {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 18px;
-  border: 1px solid var(--amina-line);
-  border-radius: 14px;
-  font-size: 16px;
-}
-.amina-feedback svg {
-  margin-top: 3px;
-}
-.amina-feedback.success {
-  background: #edf4e4;
-}
-.amina-feedback.try-again {
-  background: #fff2d9;
-  border-color: #e3cb9b;
-}
-.amina-page code {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.86em;
-  background: #eaf0e5;
-  border-radius: 5px;
-  padding: 2px 5px;
-  overflow-wrap: anywhere;
-}
-.amina-variable {
-  display: grid;
-  grid-template-columns: 1fr auto 90px;
-  gap: 8px 20px;
-  align-items: center;
-  border: 1px solid var(--amina-line);
-  border-radius: 16px;
-  background: #f0f5e9;
-  padding: 24px;
-}
-.amina-variable > .amina-variable-label {
-  grid-column: 1 / -1;
-}
-.amina-variable > code {
-  font-size: 20px;
-  padding: 0;
-  background: none;
-}
-.amina-variable strong {
-  display: block;
-  font-size: 42px;
-  line-height: 1.2;
-}
-.amina-variable-label {
-  display: block;
-  font-size: 13px;
-  color: var(--amina-muted);
-}
-.amina-definition {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.amina-definition svg {
-  margin-top: 4px;
-}
-.amina-definition h2 {
-  font-size: 22px;
-  margin-bottom: 8px;
-}
 .amina-details {
-  border: 1px solid var(--amina-line);
+  background: #fffefa;
+  border: 1px solid #d8e0cf;
   border-radius: 12px;
-  padding: 0 16px;
+  padding: 0 18px;
   font-size: 16px;
 }
 .amina-details summary {
-  padding: 14px 0;
   cursor: pointer;
+  padding: 15px 0;
   min-height: 48px;
-  font-weight: 500;
 }
-.amina-details > p,
-.amina-code-explained {
-  padding-bottom: 18px;
+.amina-details > div {
+  padding: 4px 0 18px;
 }
-.amina-code-explained ol {
-  padding-left: 24px;
-}
-.amina-code-explained li {
-  margin: 18px 0;
-}
-.amina-code-explained li > code {
-  display: block;
-  padding: 10px;
-}
-.amina-code-explained li p {
-  margin-top: 8px;
-}
-.amina-counter-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
-}
-.amina-starting-count {
+.amina-download {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 16px 20px;
-  grid-column: 1 / -1;
-  background: #edf3e6;
-  border-radius: 12px;
-}
-.amina-starting-count strong {
-  font-size: 28px;
-}
-.amina-starting-count small {
-  margin-left: auto;
-  font-size: 13px;
-  color: var(--amina-muted);
-}
-.amina-field label {
-  display: block;
-  min-height: 54px;
-  font-size: 17px;
-  font-weight: 500;
-}
-.amina-field input {
-  display: block;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
   width: 100%;
-  min-width: 0;
-  padding: 12px 14px;
-  background: white;
-  border: 1px solid #9ea98f;
+  min-height: 48px;
+  margin: 14px 0 10px;
+  border: 1px solid #7b8e71;
   border-radius: 10px;
-  font-size: 24px;
-  margin: 10px 0 6px;
+  color: #254b3e;
+  background: #edf4e4;
+  font-size: 16px;
 }
-.amina-field p {
-  font-size: 13px;
-  color: var(--amina-muted);
+.amina-small {
+  color: #596759;
+  font-size: 14px;
 }
-.amina-counter-form .amina-button {
-  grid-column: 1 / -1;
+.amina-code {
+  margin-top: 14px;
+  border-top: 1px solid #d8e0cf;
 }
-.amina-result {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding-bottom: 12px;
-}
-.amina-result strong {
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 1.2;
-}
-.amina-result small {
-  display: block;
-  flex-basis: 100%;
+.amina-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #edf4e4;
+  padding: 14px;
+  border-radius: 10px;
   font-family: 'DM Mono', monospace;
   font-size: 14px;
 }
-.amina-quiz {
-  border: none;
-  padding: 0;
-  margin: 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.amina-quiz legend {
-  padding: 0 0 16px;
-  font-weight: 600;
-  font-size: 18px;
-}
-.amina-quiz button {
-  text-align: left;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  border: 1px solid #c4cebb;
-  border-radius: 12px;
-  background: white;
-  padding: 17px;
-  line-height: 1.5;
-  font-size: 17px;
-  min-height: 56px;
-}
-.amina-quiz button.selected {
-  border-color: var(--amina-green);
-  background: #edf3e6;
-  box-shadow: 0 0 0 1px var(--amina-green);
-}
-.amina-choice-dot {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1px solid #7b8e71;
-  flex-shrink: 0;
-}
-.amina-finish-art {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--amina-green);
-  padding: 18px;
-  border-radius: 15px;
-  background: #edf3e6;
-  font-weight: 500;
-}
-.amina-takeaway {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 16px;
-  border: 1px solid var(--amina-line);
-  border-radius: 14px;
-  padding: 20px;
-  font-size: 15px;
-}
-.amina-takeaway strong {
-  font-size: 28px;
-}
-.amina-download-help {
-  color: var(--amina-muted);
-  font-size: 14px;
-}
-.amina-next-note {
-  border-top: 1px solid var(--amina-line);
-  padding-top: 20px;
-  font-size: 16px;
-}
-.amina-next-note p {
-  margin-top: 8px;
+.amina-code p + p {
+  margin-top: 10px;
 }
 .amina-footer {
+  color: #596759;
   text-align: center;
-  font-size: 13px;
-  color: var(--amina-muted);
-  margin-top: 28px;
+  font-size: 14px;
+  margin-top: 22px;
 }
 .sample-invite {
   display: flex;
@@ -508,98 +224,42 @@
 }
 @media (max-width: 600px) {
   .amina-header {
-    padding: 14px 20px;
-    align-items: flex-start;
+    padding: 10px 20px;
   }
   .amina-brand {
-    gap: 7px;
-    flex-wrap: wrap;
-    max-width: 205px;
     font-size: 15px;
-  }
-  .amina-sample-tag {
-    display: none;
   }
   .amina-course-link {
     font-size: 12px;
-    max-width: 98px;
-    line-height: 1.5;
   }
   .amina-main {
-    width: calc(100% - 28px);
-    margin-top: 16px;
+    margin-top: 12px;
+    padding: 0 16px 24px;
   }
   .amina-card {
-    padding: 26px 22px;
+    padding: 24px;
+    gap: 18px;
     border-radius: 18px;
-    gap: 20px;
   }
-  .amina-story-card {
-    gap: 14px;
-  }
-  .amina-scene {
-    gap: 10px;
-  }
-  .amina-shop-art {
-    width: 80px;
-  }
-  .amina-scene .amina-person {
-    display: none;
+  .amina-card h1 {
+    font-size: 28px;
   }
   .amina-page {
-    font-size: 17px;
+    font-size: 18px;
   }
-  .amina-speech {
-    padding: 14px;
-    gap: 10px;
-    font-size: 16px;
-  }
-  .amina-button {
-    font-size: 16px;
-    padding: 14px 16px;
-  }
-  .amina-variable {
+  .amina-counter {
     padding: 18px;
-    grid-template-columns: 1fr auto 68px;
-    gap: 8px;
   }
-  .amina-variable > code {
+  .amina-counter output {
+    font-size: 72px;
+  }
+  .amina-instruction {
     font-size: 16px;
-  }
-  .amina-variable strong {
-    font-size: 34px;
-  }
-  .amina-counter-form {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .amina-field label {
-    min-height: 0;
-  }
-  .amina-starting-count {
-    gap: 8px;
-    padding: 14px;
-  }
-  .amina-starting-count small {
-    margin-left: 0;
-    flex-basis: 100%;
-  }
-  .amina-takeaway {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .amina-takeaway span:nth-of-type(2) {
-    margin-top: 10px;
   }
   .sample-invite {
     flex-direction: column;
     align-items: stretch;
     padding: 22px;
     gap: 16px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .amina-button {
-    transition: none;
   }
 }

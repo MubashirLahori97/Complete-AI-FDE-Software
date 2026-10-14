@@ -33,7 +33,7 @@ On an existing Windows installation, `PLAYWRIGHT_BROWSER_PATH` can point to a Ch
 
 ## What learners can do
 
-Try the separate beginner sample at `#/sample/amina`: help Amina count unread shop messages, understand a variable, change an input and predict its result, then answer one concept question. This four-step lesson has no setup or external runtime. It ends with a downloadable HTML counter that works offline. Sample state lasts for the current visit and does not mark existing course lessons complete. This is a single teaching prototype to review before redesigning the course.
+Try the separate beginner sample at `#/sample/amina`. One button adds one message. The first two clicks show 10 becoming 11 and then 12 before a short explanation introduces a variable. Learners can keep pressing the same button to see the value change. Code and an offline HTML counter download are optional and appear under “More, when you’re ready” after the idea is introduced. There are no forms, predictions, quizzes, or external runtimes. Sample state lasts for the current visit and does not mark existing course lessons complete. This is a single teaching prototype to review before redesigning the course.
 
 - Follow all 30 existing lessons, grouped into four connected chapters.
 - Search by skill, filter by chapter or completion, and open deep links.
