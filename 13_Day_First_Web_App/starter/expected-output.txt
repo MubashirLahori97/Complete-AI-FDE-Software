@@ -1,0 +1,3 @@
+The initial screen shows Total: 0 cents.
+Submitting 250 shows Total: 250 cents.
+Submitting another 100 shows Total: 350 cents.

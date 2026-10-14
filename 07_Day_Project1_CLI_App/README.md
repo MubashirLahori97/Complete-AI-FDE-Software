@@ -1,7 +1,120 @@
-# 📘 Day 7 — 🛠 Project 1: Scoping & Shipping a Complete Tool
+# Day 7 — Scope and ship a complete command-line tool
 
-![Day 7 visual](../images/days/day-07.svg)
+A project becomes useful when another person can complete a task with it. Today you will combine data, decisions, functions, and persistence into an expense tracker. The challenge is finishing a small, coherent product: an understandable workflow, reliable behavior, useful errors, and instructions that work outside your own terminal session.
 
+**Your project:** [A usable CLI expense tracker](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Turn a user problem into a bounded feature list and acceptance criteria.
+- Compose earlier concepts into a complete expense workflow.
+- Observe a new user and distinguish usability feedback from implementation guesses.
+
+## Understand the concept
+
+### Scope is a design decision
+
+A first version should support a clear task from beginning to end. For an expense tracker, adding an expense, listing expenses, and showing a total form a coherent workflow. Bank integrations, receipt recognition, and multi-user permissions can wait. An explicit out-of-scope list protects the finish line. Scope is not measured by the number of technologies used; it is measured by whether the chosen user's problem can be addressed with the available time and evidence.
+
+### Design around a vertical slice
+
+A vertical slice crosses input, business logic, and storage for one useful action. Start by adding one valid expense and seeing it after a restart. That proves more than implementing several disconnected screens or functions. Keep the calculation independent of command parsing. Store amounts in a documented representation, such as integer cents. Decide whether the total includes all records or only a filtered view and state that meaning in the output.
+
+### A new user tests your assumptions
+
+Give a person the README and observe them trying a representative task. Avoid explaining each hesitation immediately, because coaching hides confusing steps. Record the action, expectation, and obstacle before proposing a fix. One person's feedback is useful evidence about that test, not proof that every user will behave the same way. Ask permission before collecting or publishing identifying feedback; fictional sample expenses are enough for the learning project.
+
+## A worked example, step by step
+
+A simple list supplies the data for a total. No bank connection or live financial data is involved.
+
+```python
+expenses = [
+    {"id": "E1", "label": "Lunch", "amount_cents": 500},
+    {"id": "E2", "label": "Bus", "amount_cents": 200},
+]
+total_cents = sum(expense["amount_cents"] for expense in expenses)
+for expense in expenses:
+    print(expense["id"], expense["label"], expense["amount_cents"])
+print(f"Total: {total_cents} cents")
+```
+
+**Expected result**
+
+```text
+E1 Lunch 500
+E2 Bus 200
+Total: 700 cents
+```
+
+Each record has an identity, label, and numeric amount. The generator expression supplies amounts to sum without changing the records. The display loop shows individual records before the summary so a user can inspect what the total contains. An empty list naturally totals zero. A complete tracker still needs validation, persistence, and an interface; this working calculation is one vertical slice's business logic, not the finished product.
+
+## Practise before building
+
+### Exercise 1: Write the smallest specification
+
+Describe the user, three core actions, and three excluded features in a short paragraph.
+
+**Hint:** Choose a workflow that a new user can complete in a few minutes.
+
+**Check your result:** Every core action has an observable success condition.
+
+### Exercise 2: Trace a total
+
+Add and remove a sample expense, predicting the total after each action.
+
+**Hint:** Keep the record count and amount total as different quantities.
+
+**Check your result:** The displayed records explain the calculated total.
+
+### Exercise 3: Run a usability check
+
+Write a task such as add one expense and inspect the total, then watch a new user follow only your instructions.
+
+**Hint:** Record what they attempted before deciding what to change.
+
+**Check your result:** You have one concrete observation and a corresponding improvement.
+
+## Common mistakes and how to debug them
+
+- Adding optional features before one workflow works end to end.
+- Calculating with unvalidated text or unclear money units.
+- Calling a coached demonstration a usability test without recording the help provided.
+
+## The FDE connection
+
+Customers need completed workflows, not a collection of impressive fragments. An FDE agrees on a useful slice, demonstrates it with realistic data, and keeps the acceptance criteria visible. Your expense tracker is practice for that delivery discipline.
+
+## Build your lesson project
+
+**A usable CLI expense tracker**
+
+A freelancer needs to record small expenses and inspect a reliable total. Build a command-line tool that adds, lists, and totals fictional expenses, saves them between runs, and explains invalid input. A stranger should be able to install and use it from the README. Receipt scanning, accounts, and bank connections are outside the first version.
+
+- An add/list/total command workflow with JSON persistence.
+- A clear data model and money-unit policy.
+- A README with setup, sample commands, and error examples.
+- A recorded user observation and a test-results table.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- What did you intentionally leave out of version one?
+- Where does one vertical slice cross the system's boundaries?
+- What did a new user's behavior reveal that your own testing missed?
+
+## References and next steps
+
+- [Python: argparse](https://docs.python.org/3/library/argparse.html)
+- [Python: JSON](https://docs.python.org/3/library/json.html)
+
+[← Lesson 6](../06_Day_Files_Errors_Debugging/) · [Lesson 8 →](../08_Day_Git_GitHub/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** **Scoping** — deciding what's in and what's out. A finished small thing beats an unfinished big thing, always. Shipping — putting a *complete, usable* thing in front of a human — is the skill this whole repo is building toward.
 
 **Time:** ~90 minutes. **Rule:** done = a stranger can run it from your README alone.
@@ -87,3 +200,6 @@ Add **one** scoped feature from your v2 list: monthly summary. Update the scope 
 🎉 **Week 1 complete.** You own the core concepts: data, decisions, repetition, abstraction, modeling, persistence, failure, scoping, shipping. Everything from here is composition.
 
 [← Day 6](../06_Day_Files_Errors_Debugging/) · [Day 8 →](../08_Day_Git_GitHub/)
+<!-- original-workshop:end -->
+
+</details>

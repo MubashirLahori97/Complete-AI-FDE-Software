@@ -1,7 +1,122 @@
-# 📘 Day 24 — Backends: APIs & Persistence
+# Day 24 — Backend APIs, databases, and durable feedback
 
-![Day 24 visual](../images/days/day-24.svg)
+A backend owns shared rules and durable state behind a contract other programs can use. Today you will connect HTTP input validation, database operations, and explicit error behavior. Your project is a small FastAPI feedback service for the assistant, with parameterized SQL and a documented trust boundary.
 
+**Your project:** [FastAPI feedback and question service](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Specify API methods, request fields, response fields, and failure categories.
+- Store and retrieve records using parameterized SQL.
+- Distinguish request validation, authentication, authorization, and database consistency.
+
+## Understand the concept
+
+### An API is a caller-facing contract
+
+Describe what POST /feedback accepts, what a successful response contains, and which invalid inputs are rejected. HTTP validation and domain validation are related but different: a string can be structurally valid while being an empty or unauthorized source reference. FastAPI can parse and validate declared request shapes, but your application still owns domain rules and resource permissions. Keep responses stable enough for callers to handle them deliberately.
+
+### SQL separates values from commands
+
+Parameterized queries pass values separately from SQL text. Building SQL by joining arbitrary input into a command risks confusing data with executable syntax. Use stable record IDs and constraints appropriate to the model. Transactions group related changes that must succeed or fail together. A single-process SQLite demonstration helps teach durable data, but production concurrency, migrations, backups, and recovery need their own operating plan.
+
+### Trusted identity and validation are different
+
+A valid feedback payload does not establish who sent it or whether they may inspect another user's feedback. Authenticate at a trusted boundary, then authorize the requested operation. For a local lesson prototype, a clearly labelled identity fixture can demonstrate policy, but a free-form user ID header is not production authentication. Keep provider credentials on the backend and avoid returning private internals in error responses.
+
+## A worked example, step by step
+
+User content is a parameter value, not part of the SQL command structure.
+
+```python
+import sqlite3
+
+connection = sqlite3.connect(":memory:")
+connection.execute("CREATE TABLE feedback (id INTEGER PRIMARY KEY, note TEXT NOT NULL)")
+note = "The source passage helped me check the answer."
+with connection:
+    connection.execute("INSERT INTO feedback (note) VALUES (?)", (note,))
+row = connection.execute("SELECT id, note FROM feedback WHERE id = ?", (1,)).fetchone()
+print("Stored feedback:", row[0])
+print(row[1])
+connection.close()
+```
+
+**Expected result**
+
+```text
+Stored feedback: 1
+The source passage helped me check the answer.
+```
+
+The connection creates a temporary in-memory database. The placeholder question mark marks a value position, and the tuple supplies the value separately. The connection context manages transaction success or failure, and the later explicit close releases the connection. The SELECT also uses a parameter. An in-memory database disappears when closed, so a durable service must use a documented file path or another persistence system and test a real restart.
+
+## Practise before building
+
+### Exercise 1: Write the endpoint contract
+
+Specify feedback input, successful output, invalid input, and missing-record behavior before implementing HTTP handlers.
+
+**Hint:** Use concrete example requests and responses.
+
+**Check your result:** A frontend developer can build against the contract without reading database internals.
+
+### Exercise 2: Separate data from SQL
+
+Store a note containing quotation marks through a parameterized query.
+
+**Hint:** Pass it as a value instead of escaping it into command text.
+
+**Check your result:** The complete note is stored as data and the table still exists.
+
+### Exercise 3: Test durable restart
+
+Change the demonstration to a disposable file database and inspect it after reopening the connection.
+
+**Hint:** Document the file location and commit behavior.
+
+**Check your result:** The record remains after process restart.
+
+## Common mistakes and how to debug them
+
+- Concatenating request input into SQL commands.
+- Treating a valid request schema as authentication or authorization.
+- Claiming persistence based only on an in-memory database demonstration.
+
+## The FDE connection
+
+An FDE connects customer-facing workflows to trusted shared state. The API contract, permission boundary, and database operating story should be understandable to both the integration team and the future operator.
+
+## Build your lesson project
+
+**FastAPI feedback and question service**
+
+Build POST /feedback, GET /feedback/{id}, and POST /ask for the fictional assistant. Use validated request models, a documented SQLite file, parameterized queries, and a trusted-identity boundary or explicitly labelled local identity fixtures. Reuse your answer contract and make invalid, missing, and forbidden outcomes clear. Verify the current FastAPI installation command in the linked documentation.
+
+- An API contract and runnable FastAPI service with documented setup.
+- A durable feedback schema and parameterized storage layer.
+- Request validation and explicitly scoped access checks.
+- HTTP, restart, and invalid-input test results.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Which rules belong to schema validation versus authorization?
+- What makes the SQL operation safe for arbitrary note text?
+- What evidence proves the feedback is actually durable?
+
+## References and next steps
+
+- [FastAPI tutorial](https://fastapi.tiangolo.com/tutorial/)
+- [Python: sqlite3](https://docs.python.org/3/library/sqlite3.html)
+
+[← Lesson 23](../23_Day_Guardrails_Cost/) · [Lesson 25 →](../25_Day_Observability_Debugging/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** Streamlit is a demo vehicle; **real products need a backend**: an API (FastAPI) that serves your AI logic to any client — web, mobile, WhatsApp — and a **database** (SQLite/Postgres) that remembers users, conversations, and usage. Today your RAG chatbot grows a spine: HTTP in, answers out, everything recorded.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -122,3 +237,6 @@ Nothing needs rebuilding: the API contract already serves any HTTP client. That'
 ---
 
 [← Day 23](../23_Day_Guardrails_Cost/) · [Day 25 →](../25_Day_Observability_Debugging/)
+<!-- original-workshop:end -->
+
+</details>

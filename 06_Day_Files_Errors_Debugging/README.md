@@ -1,7 +1,125 @@
-# 📘 Day 6 — State, Persistence & Failure
+# Day 6 — Persistence, errors, and systematic debugging
 
-![Day 6 visual](../images/days/day-06.svg)
+An in-memory directory disappears when the process stops. A useful tool often needs durable state, but saving state introduces new failure modes: missing files, invalid data, and interrupted writes. Today you will connect persistence to recovery and learn to investigate errors using evidence rather than a sequence of guesses.
 
+**Your project:** [Persistent contact book with recovery](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Serialize structured data to JSON and load it back deliberately.
+- Distinguish missing, corrupt, and invalid stored data.
+- Read an exception and investigate the relevant failing operation.
+
+## Understand the concept
+
+### Persistence is a boundary
+
+Memory belongs to a running process. A file survives beyond that process, but the file format becomes a contract between versions of the application. JSON represents a useful subset of values such as objects, arrays, strings, numbers, booleans, and null. It does not automatically preserve custom Python objects or validate your business rules. Loading syntactically valid JSON is therefore followed by checking that the stored shape and required fields match what your program expects.
+
+### Failures need different recovery policies
+
+A missing data file on first launch can mean an empty directory. A corrupt existing file may represent information the user expects you to preserve. Do not treat both cases as permission to overwrite the file with an empty object. Decide which errors are recoverable, which need user action, and what evidence to keep. For writes, an intermediate file followed by an appropriate replacement can reduce partial-write risks; the exact durability guarantee still depends on the operating system and storage setup.
+
+### Debugging starts with reproduction
+
+Read the exception type, message, and relevant stack frames. Identify the input and operation that caused the failure. Reproduce it with the smallest useful example, state a hypothesis, and test one targeted change. Catching every exception and continuing silently removes the evidence you need. A useful error message explains the problem and next action while avoiding private data. After the fix, re-run the successful path as well as the failing case.
+
+## A worked example, step by step
+
+JSON parsing and application-level validation are separate checks. A small in-memory example keeps the two concepts visible.
+
+```python
+import json
+
+contacts = {"C001": {"name": "Ali", "city": "Lahore"}}
+saved_text = json.dumps(contacts)
+loaded = json.loads(saved_text)
+if not isinstance(loaded, dict):
+    raise ValueError("Expected a contact directory")
+assert loaded == contacts
+print("Round trip preserved 1 contact")
+
+try:
+    json.loads("not valid JSON")
+except json.JSONDecodeError:
+    print("Stored data is not valid JSON; keep the original for investigation")
+```
+
+**Expected result**
+
+```text
+Round trip preserved 1 contact
+Stored data is not valid JSON; keep the original for investigation
+```
+
+dumps converts the dictionary into a JSON text representation, while loads parses that representation into Python values. The isinstance check validates the outer shape and the assertion confirms this sample round trip. A real application must also inspect each contact's fields. The deliberate invalid text produces JSONDecodeError, which is handled specifically. The message recommends preserving the original data instead of pretending a failed read means there are no contacts.
+
+## Practise before building
+
+### Exercise 1: Separate parsing from validation
+
+Load a valid JSON array where the program expects a dictionary. Reject the shape clearly.
+
+**Hint:** Valid JSON is not necessarily valid application data.
+
+**Check your result:** The failure is a schema problem, not incorrectly reported as corrupt JSON.
+
+### Exercise 2: Record a debugging hypothesis
+
+Introduce a missing contact field and write the input, observed failure, hypothesis, and fix in four short lines.
+
+**Hint:** Find the operation that assumes the missing field exists.
+
+**Check your result:** Your fix addresses the assumption and a regression example remains.
+
+### Exercise 3: Test recovery locally
+
+Use a temporary project data file to test first launch, a normal save, and a damaged copy.
+
+**Hint:** Do not experiment on your only copy of useful data.
+
+**Check your result:** The normal state reloads and damaged data is not silently overwritten.
+
+## Common mistakes and how to debug them
+
+- Equating valid JSON with valid records: validate the expected data shape after parsing.
+- Returning empty data for every exception: that can hide corruption and cause information loss.
+- Fixing the symptom without preserving a regression case: keep the input that exposed the assumption.
+
+## The FDE connection
+
+Customer data is part of the product, not disposable debugging material. An FDE plans how to diagnose a failure, protect existing records, and explain recovery to the operator. A modest contact file is a good place to learn these habits before working with a production database.
+
+## Build your lesson project
+
+**Persistent contact book with recovery**
+
+Extend the contact directory so records survive closing and reopening the program. Store them in a documented JSON file, validate loaded records, and distinguish first launch from damaged existing data. Add a recovery message and a backup approach that preserves the user's information while you investigate a failure.
+
+- Save and load operations with a documented data-file path and format.
+- A validated contact schema compatible with lesson 5.
+- A recovery policy for missing, malformed, and invalid files.
+- A restart test and a debugging log for one controlled failure.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- How are parsing, validation, and recovery different?
+- Which failure must not be treated as empty data?
+- What evidence helped you choose a targeted debugging fix?
+
+## References and next steps
+
+- [Python: reading and writing files](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
+- [Python: errors and exceptions](https://docs.python.org/3/tutorial/errors.html)
+
+[← Lesson 5](../05_Day_Lists_Dictionaries/) · [Lesson 7 →](../07_Day_Project1_CLI_App/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** Programs have **amnesia** — when they stop, everything in memory vanishes. *Persistence* (saving to files) is how software remembers. And *everything fails*: files vanish, users type nonsense, networks drop. Engineering isn't writing the happy path — it's expecting failure and handling it gracefully.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -113,3 +231,6 @@ Ask the AI to write **three buggy programs** (one type error, one file error, on
 ---
 
 [← Day 5](../05_Day_Lists_Dictionaries/) · [Day 7 →](../07_Day_Project1_CLI_App/)
+<!-- original-workshop:end -->
+
+</details>

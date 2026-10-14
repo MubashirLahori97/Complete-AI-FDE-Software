@@ -1,0 +1,54 @@
+name: Academy checks
+
+on:
+  pull_request:
+    paths:
+      - "web/**"
+      - "scripts/**"
+      - "**/PROJECT.md"
+      - "**/starter/**"
+      - "**/README.md"
+      - "*.md"
+      - ".github/workflows/academy-ci.yml"
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - "scripts/**"
+      - "**/PROJECT.md"
+      - "**/starter/**"
+      - "**/README.md"
+      - "*.md"
+      - ".github/workflows/academy-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python ../scripts/check-starters.py
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: academy-browser-test-results
+          path: web/test-results/
+          retention-days: 7

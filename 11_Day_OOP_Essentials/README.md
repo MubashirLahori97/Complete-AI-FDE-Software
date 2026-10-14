@@ -1,7 +1,128 @@
-# 📘 Day 11 — Modeling Reality: Objects (Just Enough)
+# Day 11 — Objects, state, and domain rules
 
-![Day 11 visual](../images/days/day-11.svg)
+Objects can make a domain clearer when related state and behavior belong together. They also add complexity if introduced without a useful responsibility. Today you will model a support ticket and its allowed status transitions, then compare that design with a simpler dictionary-and-function version.
 
+**Your project:** [Support-ticket domain model](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Identify an object's identity, state, and related behavior.
+- Keep domain rules in a clear place rather than spreading them across callers.
+- Compare a class with a simpler representation using actual change scenarios.
+
+## Understand the concept
+
+### State and behavior can form a useful unit
+
+A ticket has an ID, title, and status. Closing the ticket is behavior governed by a rule about its current state. A class can keep those ideas together so callers do not each invent their own transition rules. The object is one representation of the domain, not the domain itself. Begin by writing the supported states and transitions in ordinary language. The useful abstraction is the rule, not merely a class declaration containing the same fields as a dictionary.
+
+### Invariants constrain valid state
+
+An invariant is a condition your design intends to keep true, such as a ticket always having a non-blank title. Decide whether invalid input is rejected at construction, at a method boundary, or elsewhere. Public mutable fields can let callers bypass a method's validation, so be honest about what a simple dataclass does and does not enforce. In a small lesson project, test and document the boundaries rather than claiming that a class automatically prevents all invalid state.
+
+### Prefer the simplest model that earns its cost
+
+A dictionary plus pure functions may be clearer for a simple transformation or one-off report. A class may help when an entity owns state and several related operations. Compare how a new rule would be added in both versions. Avoid inheritance unless the substitution relationship and behavior are clear; sharing a couple of fields is not enough reason. Good design reduces the mental work of making a correct change.
+
+## A worked example, step by step
+
+The close operation checks the current state rather than letting the caller silently choose an arbitrary transition.
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Ticket:
+    ticket_id: str
+    title: str
+    status: str = "open"
+
+    def close(self):
+        if self.status != "open":
+            raise ValueError("Only an open ticket can be closed")
+        self.status = "closed"
+
+ticket = Ticket("T001", "Order question")
+print(ticket.ticket_id, ticket.status)
+ticket.close()
+print(ticket.ticket_id, ticket.status)
+```
+
+**Expected result**
+
+```text
+T001 open
+T001 closed
+```
+
+The dataclass supplies an initializer for the declared fields. self refers to the object receiving the method call. close validates the starting state before mutating status. The two output lines show the same identity through a transition. This minimal example does not validate titles or prevent direct assignment to status; those limitations are visible requirements for your project to address or document.
+
+## Practise before building
+
+### Exercise 1: Draw the state diagram
+
+List the supported ticket states and allowed transitions, including attempts to repeat a transition.
+
+**Hint:** A second close may be rejected or idempotent; choose and document one policy.
+
+**Check your result:** Every transition has a defined result.
+
+### Exercise 2: Protect a rule
+
+Add a non-blank-title requirement and test where it is checked.
+
+**Hint:** Think about creation and later updates, not just the first constructor call.
+
+**Check your result:** Your stated boundary actually enforces or clearly limits the invariant.
+
+### Exercise 3: Compare representations
+
+Implement the close operation using a dictionary and function, then compare the two designs.
+
+**Hint:** Judge a future rule change rather than counting class syntax.
+
+**Check your result:** You can defend the simpler design for at least one use case.
+
+## Common mistakes and how to debug them
+
+- Introducing classes without an entity responsibility or a useful contract.
+- Assuming a dataclass automatically validates every field or mutation.
+- Using inheritance to share names while the behaviors do not support substitution.
+
+## The FDE connection
+
+A customer's workflow contains entities and rules, not merely database rows. An FDE makes those rules visible and chooses a representation that is practical for future changes. Showing where a model can still be bypassed is part of an honest design explanation.
+
+## Build your lesson project
+
+**Support-ticket domain model**
+
+A help desk needs tickets with stable IDs, readable titles, and controlled status changes. Build a small domain model with create, close, and optional reopen operations. Test invalid creation and repeated transitions. Compare your object-based design with a simpler alternative and explain which one you would use for this scope.
+
+- A ticket model and a written state-transition policy.
+- Validation for required identity and title fields.
+- Tests for normal, invalid, and repeated operations.
+- A short class-versus-functions design comparison.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Which rule does the object own?
+- What invariant can still be bypassed in your design?
+- When would a dictionary and functions be clearer than this class?
+
+## References and next steps
+
+- [Python: classes](https://docs.python.org/3/tutorial/classes.html)
+- [Python: dataclasses](https://docs.python.org/3/library/dataclasses.html)
+
+[← Lesson 10](../10_Day_Environments_Packages/) · [Lesson 12 →](../12_Day_Testing_Clean_Code/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** A class models a thing with **state** (data it holds) + **behavior** (things it can do). The real skill isn't syntax — it's **judgment**: when does a class earn its existence, and when is a plain function or dict better? Most OOP tutorials teach too much; you need just enough, plus the judgment.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -99,3 +220,6 @@ Model a **library book**: title, author, `is_borrowed` state, `borrow()`/`return
 ---
 
 [← Day 10](../10_Day_Environments_Packages/) · [Day 12 →](../12_Day_Testing_Clean_Code/)
+<!-- original-workshop:end -->
+
+</details>

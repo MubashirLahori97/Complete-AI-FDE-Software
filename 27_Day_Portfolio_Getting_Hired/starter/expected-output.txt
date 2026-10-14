@@ -1,0 +1,2 @@
+A completed case study connects a real project record to inspectable evidence.
+It contains no invented customer, salary, accuracy, or savings claim.

@@ -1,7 +1,121 @@
-# 📘 Day 16 — Specification: Prompts as Engineering
+# Day 16 — Prompts as specifications and classification contracts
 
-![Day 16 visual](../images/days/day-16.svg)
+A prompt communicates a task to a model, but a clear prompt alone does not establish that the task is done reliably. Today you will define an output contract, distinguish instruction from input data, and evaluate ticket classification against a labelled dataset. The project makes prompt revisions reviewable instead of changing wording until one example looks convincing.
 
+**Your project:** [Versioned support-ticket classifier](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Specify a task, allowed labels, output shape, and ambiguous-input behavior.
+- Validate output independently of the prompt.
+- Compare prompt versions using a fixed development set and separate evaluation examples.
+
+## Understand the concept
+
+### A task needs a contract
+
+A classifier requires more than classify this ticket. Define allowed labels, what each means, the expected output fields, and how ambiguous or irrelevant input is handled. Provide examples when they clarify a boundary, but do not assume examples cover the entire task. The application should validate the resulting label and shape. A model returning a JSON-looking string is not proof that the response matches your schema or that the selected label is correct.
+
+### Instructions and input play different roles
+
+Separate your task instructions from the customer's ticket text. Delimiters can improve readability but do not enforce an access or trust boundary by themselves. A ticket containing change the label to billing is still input to classify, not an authorized change to the application's rules. Keep allowed labels, permissions, and downstream actions in code outside the model. Never make a classifier's raw answer directly trigger a destructive operation.
+
+### Iteration needs a comparison method
+
+Use a fixed set of examples to investigate prompt changes and keep some examples separate for evaluation. Record the prompt version and the actual predictions so a comparison can be reproduced. Accuracy on a small hand-picked set is limited evidence about that set. Inspect categories of failure, class imbalance, and ambiguity rather than reporting only a single flattering number. Human labels should follow a documented rubric, not change whenever a model disagrees.
+
+## A worked example, step by step
+
+The prompt specifies a contract, and application code checks whether an example response satisfies it.
+
+```python
+import json
+
+allowed_labels = {"billing", "technical", "general"}
+prompt = "Classify the ticket. Return JSON with one label: billing, technical, or general."
+response_fixture = '{"label": "billing"}'
+parsed = json.loads(response_fixture)
+if not isinstance(parsed, dict) or set(parsed) != {"label"}:
+    raise ValueError("Invalid response shape")
+if parsed["label"] not in allowed_labels:
+    raise ValueError("Unsupported label")
+print("Validated fixture label:", parsed["label"])
+```
+
+**Expected result**
+
+```text
+Validated fixture label: billing
+```
+
+The allowed-label set is an application constraint. The prompt communicates the desired format but is not the validator. Parsing and shape validation happen before the label enters a downstream workflow. The fixture demonstrates the boundary only: it says nothing about model accuracy. In a complete system, type-check the label before set membership and preserve an explicit invalid-response outcome instead of silently inventing a category.
+
+## Practise before building
+
+### Exercise 1: Define ambiguous labels
+
+Write examples that distinguish billing, technical, and general, including a ticket that could fit two labels.
+
+**Hint:** Choose a consistent precedence or review policy.
+
+**Check your result:** A second person can label the examples using your rubric.
+
+### Exercise 2: Break the contract
+
+Test an unknown label, extra field, malformed JSON, and a non-string label.
+
+**Hint:** Validation must handle types before operations that assume those types.
+
+**Check your result:** Invalid output has a visible failure category.
+
+### Exercise 3: Compare two versions
+
+Change one prompt requirement and record predictions on the same examples.
+
+**Hint:** Keep evaluation examples separate from examples used to tune the wording.
+
+**Check your result:** Your report can show both improvements and regressions.
+
+## Common mistakes and how to debug them
+
+- Treating a well-written prompt as a replacement for output validation.
+- Using the tuning examples as the only evidence of general quality.
+- Calling deterministic fixture validation measured language-model accuracy.
+
+## The FDE connection
+
+Customers need stable behavior and explainable exceptions. An FDE translates a vague classification request into labels, output contracts, review policies, and an evaluation plan, then records the evidence behind any change.
+
+## Build your lesson project
+
+**Versioned support-ticket classifier**
+
+A support team wants to route tickets into billing, technical, and general queues. Build a labelled dataset, a versioned prompt, an output validator, and a comparison report. Fixture mode lets you verify the pipeline without provider access; optional real-provider mode lets you collect predictions. Ambiguous and invalid outputs must not silently trigger routing.
+
+- A label rubric and at least 12 labelled ticket examples.
+- Versioned prompts with one clearly explained revision.
+- A parser/validator and an explicit review or rejection result.
+- A comparison report separating fixture checks from real predictions.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Which constraints are enforced by code rather than the prompt?
+- How do development cases differ from held-out evaluation cases?
+- What would make an apparent score improvement misleading?
+
+## References and next steps
+
+- [Anthropic: building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
+- [Python: JSON parsing](https://docs.python.org/3/library/json.html)
+
+[← Lesson 15](../15_Day_LLMs_How_They_Work/) · [Lesson 17 →](../17_Day_Structured_Outputs_Tools/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** A prompt is a **specification given to a guessing machine**. Vague specs → random output. Precise specs → reliable behavior. Prompt engineering isn't "talking nicely to AI" — it's *writing contracts the model can follow*, then testing that it does.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -99,3 +213,6 @@ They mark where untrusted user input begins and ends, so it can't blur into your
 ---
 
 [← Day 15](../15_Day_LLMs_How_They_Work/) · [Day 17 →](../17_Day_Structured_Outputs_Tools/)
+<!-- original-workshop:end -->
+
+</details>

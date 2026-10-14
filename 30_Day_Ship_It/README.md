@@ -1,7 +1,122 @@
-# 🏁 Day 30 — Ship It: Demo, Retrospective & Next 90 Days ⭐
+# Day 30 — Customer demo, handoff, and an evidence-based next plan
 
-![Day 30 visual](../images/days/day-30.svg)
+A delivery is complete when its intended user can understand, use, and operate the agreed result, and the team knows what remains. Today you will demonstrate the capstone against its acceptance criteria, package the operating handoff, and write a retrospective that turns experience into a practical next learning plan. Completing the course is a milestone, not proof of instant mastery.
 
+**Your project:** [A customer-ready demo and handoff pack](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Demonstrate an actual workflow and critical failure behavior against a brief.
+- Hand over setup, data, configuration, support, and recovery responsibilities.
+- Choose next learning work from evidence about current weaknesses.
+
+## Understand the concept
+
+### A demo proves specific behavior
+
+Lead with the user's problem and agreed scope. Show a normal task, inspect its evidence, then show a meaningful boundary such as insufficient sources or forbidden access. State which execution mode and version the audience is seeing. Avoid a rehearsed happy path that quietly depends on special fixtures while being described as real customer production behavior. A useful demo records both what worked and the limitations the customer should understand.
+
+### Handoff transfers capability
+
+A repository URL is only part of a handoff. Include startup and operating instructions, data/configuration ownership, backup and recovery steps, known limitations, and a support/escalation path. Verify that another person can use the material. If a customer needs training, make the task and expected result clear. The goal is to leave them able to operate the scoped system, not permanently dependent on the builder's private knowledge.
+
+### Reflection should change the next decision
+
+Use actual errors, test results, and user observations to identify weak skills. Explain where AI helped and where you accepted output too quickly. Choose a concrete next project or improvement with a observable completion condition. A learning roadmap should adapt to your available time and demonstrated understanding; a day number is not a guarantee of hiring, income, or expertise. Continue deepening frontend, backend, AI evaluation, and customer work through repeated delivery.
+
+## A worked example, step by step
+
+The demo and handoff refer to the same version and scope.
+
+```markdown
+# Delivery pack
+Customer workflow and agreed scope:
+Released version and verified URL or local setup:
+Demo task 1: normal supported answer with evidence
+Demo task 2: missing evidence or forbidden source
+Acceptance results: link to actual checks and eval outputs
+Operate: setup, configuration owner, data owner, and health checks
+Recover: tested runbook and escalation roles
+Known limitations and unfinished work:
+Retrospective: three lessons, one failure, one improvement
+Next project: a specific weakness and completion criterion
+```
+
+**Expected result**
+
+```text
+A reviewable delivery pack connects the demo, acceptance evidence, operating instructions, limitations, and next action.
+Another person can identify the released version and how to use it.
+```
+
+The first lines establish context and release identity. The two demo tasks show both useful behavior and a meaningful boundary. Acceptance results point to actual artifacts rather than vague assurance. Operational roles and recovery steps transfer responsibility visibly. The retrospective chooses learning work from observed weaknesses, while the next project's completion criterion prevents the roadmap from becoming another list of topics to watch.
+
+## Practise before building
+
+### Exercise 1: Record a concise demo
+
+Create a short walkthrough showing the problem, normal workflow, source evidence, and a failure boundary.
+
+**Hint:** Use the actual released version and label fixtures or fictional data.
+
+**Check your result:** A new viewer can connect the behavior to the agreed acceptance criteria.
+
+### Exercise 2: Test a handoff
+
+Give the operating pack to another learner and observe one task and one recovery question.
+
+**Hint:** Record where they needed undocumented assistance.
+
+**Check your result:** The revised pack removes at least one hidden assumption.
+
+### Exercise 3: Plan from evidence
+
+Choose one weak frontend, backend, evaluation, or discovery skill and define a follow-up project.
+
+**Hint:** Name a concrete task and how you will know it improved.
+
+**Check your result:** The next plan has an observable outcome rather than a promise of instant expertise.
+
+## Common mistakes and how to debug them
+
+- Describing a scripted happy path as a complete production verification.
+- Treating a repository link as sufficient operating documentation.
+- Choosing the next technology based only on popularity rather than a demonstrated skill gap.
+
+## The FDE connection
+
+The FDE outcome includes the customer's ability to use the solution and the team's ability to maintain it. A clear demonstration, honest evidence, and a usable handoff are engineering deliverables. The next cycle starts from what the delivery taught you.
+
+## Build your lesson project
+
+**A customer-ready demo and handoff pack**
+
+Package your capstone as a scoped delivery. Record a concise demo, assemble acceptance and evaluation evidence, verify the operating instructions with another person, and write a retrospective. Produce a next-project plan tied to one demonstrated weakness. Do not publish private customer data or send promotional messages as part of this learning exercise.
+
+- A short demo script or recording tied to actual acceptance criteria.
+- A versioned delivery pack with operating and recovery instructions.
+- A handoff walkthrough observation and a corrected documentation gap.
+- A retrospective and a concrete follow-up learning project.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- What useful task can someone perform after your handoff?
+- What did your tests and user observations actually establish?
+- Which next project will strengthen the weakest part of your current delivery?
+
+## References and next steps
+
+- [GitHub: repository READMEs](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)
+- [Atlassian: the forward deployed engineer](https://www.atlassian.com/blog/how-we-build/meet-the-forward-deployed-engineer)
+
+[← Lesson 29](../29_Day_Capstone_Part2/)[Continue into the longer roadmap](../ROADMAP.md)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **You made it.** Thirty days ago: zero. Today: three shipped projects, a client-grade capstone with a live URL, evals, guardrails, a cost model, a portfolio, and a business brief template. Today you **prove it, reflect on it, and plan what's next.**
 
 ---
@@ -89,3 +204,6 @@ Never ship AI output you can't explain or defend. Thirty days of everything else
 ---
 
 [← Day 29](../29_Day_Capstone_Part2/) · [Phase 2 →](../31_Phase2_Build_Like_An_Engineer/)
+<!-- original-workshop:end -->
+
+</details>

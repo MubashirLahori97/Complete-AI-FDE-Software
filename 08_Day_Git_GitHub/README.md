@@ -1,7 +1,121 @@
-# 📘 Day 8 — Version Control: Time Travel for Software
+# Day 8 — Git, collaboration, and reviewable changes
 
-![Day 8 visual](../images/days/day-08.svg)
+Version control gives you a record of changes and a way to collaborate without losing the explanation of how a system evolved. Today you will practise the difference between your files, staged changes, commits, and branches. Your project is a small feature delivered through a reviewable branch, complete with a regression example and a useful change description.
 
+**Your project:** [A reviewed validation feature](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Explain the working tree, staging area, commit, and branch.
+- Review a diff before recording a change.
+- Deliver a bounded feature with evidence and clear review notes.
+
+## Understand the concept
+
+### A commit records a chosen snapshot
+
+The working tree contains files you are editing. The staging area selects changes for the next commit. A commit records that chosen snapshot with its parent history and message. Saving a file in an editor does not create a commit, and staging it does not send it to GitHub. Use git status to see what state you are in and git diff to inspect the actual change. The distinction helps you avoid including unrelated experiments or sensitive configuration in a feature.
+
+### Branches separate lines of work
+
+A branch names a line of commits. Creating a feature branch allows a change to be reviewed before it joins the shared main line. It does not create a separate backup of every uncommitted file, so understand the current working state before switching. A merge combines histories and can require resolving conflicting edits. Read the conflicting requirements and preserve the intended behavior; removing conflict markers without testing is not sufficient.
+
+### A review needs context and evidence
+
+A useful change description starts with the problem, states the resulting behavior, and explains the relevant tests. Keep the diff focused enough for another person to understand. A reviewer should not have to reconstruct your chat history to learn why a change exists. A regression example links the change to a real failure. Record the remaining limitation as well as the successful path, and do not claim tests you did not run.
+
+## A worked example, step by step
+
+Use these commands while delivering a small validation feature in a separate learner project.
+
+```bash
+# Inspect before editing or switching branches
+git status
+git switch -c feature/expense-validation
+# Make and test the intended changes in your editor
+git diff
+git add expenses.py README.md
+git diff --cached
+git commit -m "Reject invalid expense amounts with a useful message"
+git log -1 --oneline
+```
+
+**Expected result**
+
+```text
+A new feature branch contains one reviewed commit.
+The commit includes the intended code and documentation changes.
+Exact commit IDs and command output vary by repository.
+```
+
+The initial status establishes the starting state. switch creates a named feature branch. diff before staging shows the working changes, while diff --cached shows what the commit will contain. Naming files when staging helps keep the change bounded. The commit message describes behavior rather than a vague update. The final log displays the recorded commit. Pushing a branch and opening a pull request are later collaboration steps, not automatic consequences of the commit.
+
+## Practise before building
+
+### Exercise 1: Inspect three states
+
+Edit a file, stage it, then commit it while inspecting status and the relevant diff at each stage.
+
+**Hint:** A working diff and a staged diff answer different questions.
+
+**Check your result:** You can identify which version will enter the commit.
+
+### Exercise 2: Write review context
+
+Describe the validation bug, before/after behavior, and the test input in three sentences.
+
+**Hint:** Lead with the user-visible problem.
+
+**Check your result:** A reviewer understands the purpose without reading your study journal.
+
+### Exercise 3: Reason about a conflict
+
+On disposable branches, change the same sample rule differently and explain the required combined behavior.
+
+**Hint:** Use a separate exercise repository and inspect the conflict before resolving it.
+
+**Check your result:** The resolution is tested against both original requirements.
+
+## Common mistakes and how to debug them
+
+- Assuming saving, committing, and pushing are the same action.
+- Staging the entire repository without reviewing unrelated files.
+- Resolving a conflict based only on its text markers instead of the intended behavior.
+
+## The FDE connection
+
+Customer delivery usually involves other engineers, existing systems, and future operators. Small, reviewable changes make it easier to establish trust and hand work over. Your history should explain decisions, not merely prove that many lines were generated.
+
+## Build your lesson project
+
+**A reviewed validation feature**
+
+A teammate reports that your expense tool accepts an invalid amount. Deliver a targeted fix in a feature branch of your own project repository. Include a reproduction case, tests, updated instructions, and a review description. Preserve unrelated work and make the result easy to inspect before merging.
+
+- A feature branch containing a bounded behavior change.
+- Before/after output for the reported input.
+- A regression test and updated user-facing instructions.
+- A pull-request-style description and a reviewed diff.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- What is recorded in a commit and what is not?
+- How did you keep unrelated work out of this change?
+- What evidence would help a reviewer find a missed edge case?
+
+## References and next steps
+
+- [Pro Git: recording changes](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository)
+- [Pro Git: branching](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
+
+[← Lesson 7](../07_Day_Project1_CLI_App/) · [Lesson 9 →](../09_Day_HTTP_APIs_JSON/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** Git is a **timeline of every decision** you ever made in a project. A commit is a saved snapshot with a message explaining *why*. A branch is a **parallel universe** where you can experiment without breaking the real world. This is how professionals — and teams — stay sane.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -99,3 +213,6 @@ Branch → break → fix → PR → merge, all on your expense tracker. Write th
 ---
 
 [← Day 7](../07_Day_Project1_CLI_App/) · [Day 9 →](../09_Day_HTTP_APIs_JSON/)
+<!-- original-workshop:end -->
+
+</details>

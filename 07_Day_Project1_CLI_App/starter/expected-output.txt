@@ -1,0 +1,3 @@
+E1 Lunch 500
+E2 Bus 200
+Total: 700 cents

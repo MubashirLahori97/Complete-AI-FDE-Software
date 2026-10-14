@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expense dashboard</title>
+<style>body{font-family:system-ui;max-width:600px;margin:40px auto;padding:20px}input,button{padding:12px}label{display:block;margin-bottom:8px}</style>
+<h1>Expense dashboard</h1>
+<form id="expense-form">
+  <label for="amount">Amount in cents</label>
+  <input id="amount" type="number" min="0" step="1" required>
+  <button type="submit">Add expense</button>
+</form>
+<p id="result" role="status">Total: 0 cents</p>
+<script>
+let total = 0;
+document.getElementById('expense-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const raw = document.getElementById('amount').value;
+  const amount = Number(raw);
+  if (raw.trim() === '' || !Number.isInteger(amount) || amount < 0) {
+    document.getElementById('result').textContent = 'Enter a non-negative integer amount';
+    return;
+  }
+  total += amount;
+  document.getElementById('result').textContent = `Total: ${total} cents`;
+});
+</script>
+</html>

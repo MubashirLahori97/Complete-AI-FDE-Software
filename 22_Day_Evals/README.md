@@ -1,7 +1,122 @@
-# 📘 Day 22 — Proof: Evaluating AI Systems
+# Day 22 — Evaluation datasets, rubrics, and regression analysis
 
-![Day 22 visual](../images/days/day-22.svg)
+Evaluation makes a quality claim inspectable. A fixed set of inputs and a clear rubric help you compare revisions, but the dataset's coverage and the scoring method still matter. Today you will build a repeatable evaluation harness for your document assistant and report different failure categories rather than hiding them inside one impressive score.
 
+**Your project:** [A repeatable document-assistant evaluation harness](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Create labelled evaluation cases with observable acceptance criteria.
+- Separate retrieval, answer support, abstention, and operational failure metrics.
+- Compare revisions while recording dataset identity and scoring limits.
+
+## Understand the concept
+
+### A dataset represents a chosen workload
+
+Choose examples from the tasks and failure modes your intended users face. Include common questions, ambiguous questions, missing evidence, adversarial text, and permission boundaries. Keep stable case IDs and a dataset version so results can be compared. A tiny curated dataset is useful for regression checks, but it is limited evidence about broad future traffic. Record which cases were used to tune the system and which were held out.
+
+### A rubric defines observable quality
+
+For document answers, consider whether relevant evidence was retrieved, claims are supported, the answer addresses the question, and abstention is appropriate. Operational checks such as timeouts and permissions are separate from fluent wording. A model judge can help scale scoring, but it has its own errors and needs calibration against human judgments. Define what a pass means and preserve the actual outputs that led to the score.
+
+### Comparisons need controlled context
+
+Record source versions, prompt version, model/configuration, retrieval settings, and scoring method. Otherwise a score change may come from a changed dataset or source collection rather than the implementation revision you intended to test. Inspect regressions by case and category. An average improvement can conceal a failure on the specific workflow the customer most needs. Re-run critical cases after changing any pipeline boundary.
+
+## A worked example, step by step
+
+Two categories are reported separately so an abstention failure does not disappear inside an overall average.
+
+```python
+cases = [
+    {"id": "Q1", "category": "supported", "passed": True},
+    {"id": "Q2", "category": "supported", "passed": True},
+    {"id": "Q3", "category": "abstention", "passed": False},
+]
+for category in sorted({case["category"] for case in cases}):
+    group = [case for case in cases if case["category"] == category]
+    passed = sum(case["passed"] for case in group)
+    print(f"{category}: {passed}/{len(group)}")
+print("Failed IDs:", ', '.join(case["id"] for case in cases if not case["passed"]))
+```
+
+**Expected result**
+
+```text
+abstention: 0/1
+supported: 2/2
+Failed IDs: Q3
+```
+
+Stable case IDs connect the summary to individual evidence. The category set defines the groups, and each group receives a numerator and denominator. Sorting makes the demonstration output deterministic. Reporting the failed ID keeps the underlying defect visible. The fixture does not run a model or justify a quality claim; your project harness will obtain outputs from a clearly named system mode and apply a reviewed rubric.
+
+## Practise before building
+
+### Exercise 1: Write a rubric
+
+Define supported, unsupported, and partially supported answer criteria using concrete examples.
+
+**Hint:** Do not make confidence or word count the correctness criterion.
+
+**Check your result:** Two reviewers can discuss disagreements using the same criteria.
+
+### Exercise 2: Find a hidden regression
+
+Create two result versions where overall score improves but a critical category worsens.
+
+**Hint:** Inspect counts and case IDs, not only a rounded percentage.
+
+**Check your result:** Your report makes the critical regression visible.
+
+### Exercise 3: Preserve reproducibility
+
+Record source, prompt, model/mode, dataset, and scoring versions for one run.
+
+**Hint:** A filename alone may not identify what data was used.
+
+**Check your result:** A reviewer can reproduce the intended comparison conditions.
+
+## Common mistakes and how to debug them
+
+- Reporting one overall score without category coverage or denominators.
+- Tuning on every evaluation case and then claiming independent validation.
+- Treating an uncalibrated model judge as an unquestionable ground truth.
+
+## The FDE connection
+
+A customer's success criteria should become checks the team can repeat. An FDE connects the metric to the real workload and explains both observed improvement and remaining failure categories.
+
+## Build your lesson project
+
+**A repeatable document-assistant evaluation harness**
+
+Build a harness for at least 20 labelled questions or boundary cases. Run the grounded assistant under a named execution mode, save its actual outputs, score them using a documented rubric, and compare two versions. Include supported answers, no-evidence behavior, permission checks, and failures. Report critical regressions even if an overall average improves.
+
+- A versioned dataset with at least 20 stable case IDs.
+- A rubric and repeatable run/scoring command.
+- Per-case output records and category summaries.
+- A before/after report identifying regressions and limits.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- What user workload does the dataset represent?
+- What makes the comparison reproducible?
+- Which critical failure would block a release despite a higher average score?
+
+## References and next steps
+
+- [Anthropic: building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
+- [Python: unittest](https://docs.python.org/3/library/unittest.html)
+
+[← Lesson 21](../21_Day_Project3_RAG_Chatbot/) · [Lesson 23 →](../23_Day_Guardrails_Cost/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** **Evals** = the test suite for AI behavior. You can't unit-test a model the way you test code (same input, exact output) — so you test *properties*: accuracy on labeled examples, groundedness (does the answer match the sources?), refusal rate on unanswerable questions, and human spot-checks. **"It worked on my 3 examples" is not evidence. Evals are.**
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -93,3 +208,6 @@ Only if the trade is worth it and you understand why. Re-run the full set, log t
 ---
 
 [← Day 21](../21_Day_Project3_RAG_Chatbot/) · [Day 23 →](../23_Day_Guardrails_Cost/)
+<!-- original-workshop:end -->
+
+</details>

@@ -1,0 +1,2 @@
+A completed release record names the version, environment, observed check results, recovery outcome, and operational owners.
+Pending checks remain visible until evidence exists.

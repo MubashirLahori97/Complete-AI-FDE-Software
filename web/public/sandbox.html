@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Isolated learning runner</title>
+  </head>
+  <body>
+    <script type="module">
+      // This page is embedded without allow-same-origin. Code never runs in the app.
+      let worker;
+      let currentId;
+      let workerUrl;
+      const releaseWorker = () => {
+        worker?.terminate();
+        worker = undefined;
+        if (workerUrl) URL.revokeObjectURL(workerUrl);
+        workerUrl = undefined;
+      };
+      const javascriptSource = `
+  self.onmessage = ({ data }) => {
+    self.postMessage({ type: 'ready' });
+    let lines = 0;
+    let size = 0;
+    const format = value => {
+      if (typeof value === 'string') return value;
+      try { return JSON.stringify(value) ?? String(value); } catch { return String(value); }
+    };
+    const log = (...values) => {
+      if (lines >= 200 || size >= 64000) return;
+      const text = values.map(format).join(' ').slice(0, 4000);
+      lines++; size += text.length;
+      self.postMessage({ type: 'output', text });
+    };
+    try {
+      new Function('console', '"use strict";\\n' + data.code)({ log, info: log, warn: log, error: log });
+      self.postMessage({ type: 'done' });
+    } catch (error) { self.postMessage({ type: 'error', text: error.message }); }
+  };
+`;
+      const pythonSource = `
+  self.onmessage = async ({ data }) => {
+    let globals;
+    try {
+      // A classic-worker runtime preserves opaque-origin iframe isolation.
+      importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js');
+      const pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/' });
+      let lines = 0;
+      let size = 0;
+      const output = text => {
+        if (lines >= 200 || size >= 64000) return;
+        text = String(text).slice(0, 4000); lines++; size += text.length;
+        self.postMessage({ type: 'output', text });
+      };
+      pyodide.setStdout({ batched: output });
+      pyodide.setStderr({ batched: output });
+      pyodide.setStdin({ stdin: () => { throw new Error('Interactive input() is unavailable here. Assign a variable instead.'); } });
+      globals = pyodide.globals.get('dict')();
+      self.postMessage({ type: 'ready' });
+      const result = await pyodide.runPythonAsync(data.code, { globals });
+      if (result !== undefined && result !== null) { output(String(result)); result.destroy?.(); }
+      self.postMessage({ type: 'done' });
+    } catch (error) { self.postMessage({ type: 'error', text: String(error.message || error).slice(0, 6000) }); }
+    finally { globals?.destroy(); }
+  };
+`;
+      const tellParent = (data) =>
+        parent.postMessage({ ...data, id: currentId, source: 'fde-runner' }, '*');
+      window.addEventListener('message', (event) => {
+        if (event.source !== parent) return;
+        const data = event.data;
+        if (data?.type === 'fde:stop') {
+          releaseWorker();
+          return;
+        }
+        if (
+          data?.type !== 'fde:run' ||
+          !['python', 'javascript'].includes(data.language) ||
+          typeof data.code !== 'string'
+        )
+          return;
+        releaseWorker();
+        currentId = data.id;
+        const blobUrl = URL.createObjectURL(
+          new Blob([data.language === 'python' ? pythonSource : javascriptSource], {
+            type: 'application/javascript',
+          }),
+        );
+        workerUrl = blobUrl;
+        try {
+          // Chromium cannot fetch module workers from an opaque-origin document.
+          worker = new Worker(blobUrl);
+          worker.onmessage = (event) => tellParent(event.data);
+          worker.onerror = (event) =>
+            tellParent({
+              type: 'error',
+              text:
+                event.message ||
+                'The runtime could not start. Check your connection and try again.',
+            });
+          worker.postMessage({ code: data.code.slice(0, 50000) });
+        } catch (error) {
+          tellParent({ type: 'error', text: error.message });
+        }
+      });
+      parent.postMessage({ source: 'fde-runner', type: 'loaded' }, '*');
+    </script>
+  </body>
+</html>

@@ -4,6 +4,22 @@
 
 ![From zero to feature-ready software engineer in 90 days](images/hero-banner.svg)
 
+## Interactive FDE Academy
+
+This curriculum now has an interactive web companion in [`web/`](web/): searchable lessons, concept checks, Python/JavaScript/HTML exercises, saved progress, customer scenarios, and a portfolio tracker.
+
+**Every one of the 30 lessons now includes a dedicated project.** The expanded lessons add deeper explanations, worked examples, three practice exercises, debugging guidance, and FDE context. Each [project guide](PROJECTS.md) provides milestones, five acceptance checks, a test matrix, stretch challenges, and a downloadable starter kit in the app.
+
+```bash
+cd web
+npm ci
+npm run dev
+```
+
+Read the [app setup and publishing guide](web/README.md) to run it or publish it with GitHub Pages. The course is a practice path: day numbers are suggested stages, and completion does not guarantee employment, earnings, or professional mastery.
+
+---
+
 **AI writes the code now. This repo teaches what AI can't do for you: concepts, engineering judgment, and business.**
 
 **The promise:** a normal person starting from zero — 90 days later — is a complete, hire-ready software engineer. Ships real products. Reasons about systems. Works like a professional. And can prove all of it.
