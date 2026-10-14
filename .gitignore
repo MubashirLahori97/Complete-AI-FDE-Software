@@ -23,3 +23,10 @@ data/raw/
 .DS_Store
 .vscode/
 .idea/
+
+# Interactive academy
+web/node_modules/
+web/dist/
+web/test-results/
+web/playwright-report/
+web/*.tsbuildinfo
