@@ -145,7 +145,7 @@ export default function Curriculum({
                           ) : (
                             <>
                               <BookOpen size={15} />
-                              Learn + build
+                              Learn + project
                             </>
                           )}
                         </span>

@@ -238,6 +238,11 @@ export function Resources() {
             'Objectives, builds, and exercises for each core lesson.',
           ],
           [
+            'PROJECTS.md',
+            'All 30 lesson projects',
+            'Dedicated project guides, starter kits, milestones, and acceptance checks.',
+          ],
+          [
             'ROADMAP.md',
             'The longer roadmap',
             'Deepen your engineering skills after the first 30 lessons.',
@@ -357,6 +362,7 @@ export function Document({ filename }: { filename: string }) {
     'ROADMAP.md': 'The full roadmap',
     'CURRICULUM.md': 'The complete curriculum',
     'VISION.md': 'The course vision',
+    'PROJECTS.md': 'The 30 lesson projects',
   };
   return (
     <>

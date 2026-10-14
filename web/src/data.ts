@@ -1,4 +1,7 @@
+import lessonProjects from './lesson-projects.json';
+
 export const REPO = 'https://github.com/MubashirLahori97/Complete-AI-FDE-Software';
+export const dailyProjects = lessonProjects;
 export type Track = 'Foundations' | 'Engineering' | 'AI systems' | 'Field work';
 export interface Lesson {
   day: number;
@@ -197,7 +200,7 @@ export const lessons: Lesson[] = definitions.map(([folder, title, summary, build
   folder: `${String(index + 1).padStart(2, '0')}_Day_${folder}`,
   title,
   summary,
-  build,
+  build: `Build ${lessonProjects[index].title.toLowerCase()}.`,
   track:
     index < 7
       ? 'Foundations'

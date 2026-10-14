@@ -57,6 +57,14 @@ test('a quiz alone cannot complete a lesson; a full evidence flow survives reloa
   await page
     .getByLabel('I built something, tested it, and checked a failure or boundary case.')
     .check();
+  await expect(page.getByRole('button', { name: 'Mark lesson complete' })).toBeDisabled();
+  await page.getByRole('tab', { name: 'Project', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: 'A reliable unit conversion desk' }),
+  ).toBeVisible();
+  for (const checkbox of await page.locator('.lesson-project-checks input[type="checkbox"]').all())
+    await checkbox.check();
+  await page.getByRole('tab', { name: 'Record your build' }).click();
   await page.getByRole('button', { name: 'Mark lesson complete' }).click();
   await expect(page.getByText(/Lesson completed on/)).toBeVisible();
   await page.reload();

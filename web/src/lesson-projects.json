@@ -1,0 +1,602 @@
+[
+  {
+    "day": 1,
+    "title": "Personal learning profile generator",
+    "brief": "A new learner wants a short profile they can paste into their study journal. Build a program that represents their name, city, learning goal, and daily study time, then prints a readable profile. Keep the first version small enough to explain line by line. Use fixed values first; collecting interactive input is an optional extension.",
+    "deliverables": [
+      "A runnable profile.py file with four named values.",
+      "A sample output showing the complete profile.",
+      "A README explaining how to run it and what each value means.",
+      "A prediction-versus-result note for two changed profiles."
+    ],
+    "acceptance": [
+      "The output includes name, city, goal, and daily study time.",
+      "Changing a profile value changes the correct output field.",
+      "Every line of the program can be explained in plain English.",
+      "The README contains a working run command and sample output.",
+      "Two prediction-versus-result checks are recorded."
+    ],
+    "starter": "lesson-01-starter.zip",
+    "filename": "profile.py"
+  },
+  {
+    "day": 2,
+    "title": "A reliable unit conversion desk",
+    "brief": "A shop employee needs a small converter for distances and temperatures. Build a program with a clearly selected conversion, labelled inputs and outputs, and helpful handling of invalid input. Keep distance validation separate from temperature rules: negative Celsius values are valid, while the project's distance contract rejects negative distances.",
+    "deliverables": [
+      "A converter supporting kilometres to metres and Celsius to Fahrenheit.",
+      "A written input contract for both conversions.",
+      "A test-results table with valid, zero, negative, and non-numeric examples.",
+      "A short explanation of types and unit names in the implementation."
+    ],
+    "acceptance": [
+      "Both conversion formulas produce the documented reference results.",
+      "Outputs include the input and output units.",
+      "Invalid numeric text produces a useful error message.",
+      "Negative temperature and distance inputs follow their separate contracts.",
+      "A test-results table records at least four boundary cases."
+    ],
+    "starter": "lesson-02-starter.zip",
+    "filename": "converter.py"
+  },
+  {
+    "day": 3,
+    "title": "Support-ticket triage queue",
+    "brief": "A support lead needs a repeatable way to review tickets. Build a program that reads a small in-memory ticket list, assigns exactly one priority to each valid ticket, and prints a summary. Critical tickets are urgent; other tickets aged at least 24 hours need review; the rest are standard. Invalid or incomplete tickets must be reported instead of silently classified.",
+    "deliverables": [
+      "A triage program with documented rule precedence.",
+      "A sample queue containing normal, critical, old, and invalid tickets.",
+      "A summary of each priority and rejected records.",
+      "A test table for empty queues and threshold cases."
+    ],
+    "acceptance": [
+      "Each valid ticket receives exactly one documented priority.",
+      "Critical severity takes precedence over the age rule.",
+      "The 24-hour boundary behaves as specified.",
+      "Invalid records and an empty queue are handled visibly.",
+      "Priority totals and rejection totals match the processed records."
+    ],
+    "starter": "lesson-03-starter.zip",
+    "filename": "triage.py"
+  },
+  {
+    "day": 4,
+    "title": "A reusable quote calculator",
+    "brief": "A small service business creates quotes with line items and a delivery fee. Build calculation functions using integer cents, plus a thin display layer. Define supported prices and quantities explicitly. The first version has no tax integration, discounts, payments, or live exchange rates; those are separate scope decisions.",
+    "deliverables": [
+      "Calculation functions for line totals, subtotal, and grand total.",
+      "A readable example quote with two line items.",
+      "A written contract for integer prices and quantities.",
+      "Tests for zero, negative, and unsupported inputs."
+    ],
+    "acceptance": [
+      "Calculations use documented integer minor units.",
+      "Line, subtotal, and grand-total functions return useful values.",
+      "The display layer is separate from the calculation functions.",
+      "Zero and invalid inputs follow the written contract.",
+      "A manually checked quote and regression examples agree with the implementation."
+    ],
+    "starter": "lesson-04-starter.zip",
+    "filename": "quote.py"
+  },
+  {
+    "day": 5,
+    "title": "Customer contact directory",
+    "brief": "A small team needs to add, find, update, and list contacts. Build an in-memory directory keyed by stable IDs. Allow duplicate display names, validate required fields, and make a missing ID understandable. Persistence is intentionally left for the next lesson, so today you can concentrate on data shape and operations.",
+    "deliverables": [
+      "A contact model with ID, name, city, and optional email.",
+      "Operations to add, look up, update, search, and list records.",
+      "A sample dataset containing duplicate names and missing optional values.",
+      "An explanation of identity, validation, and ordering decisions."
+    ],
+    "acceptance": [
+      "Each contact has a stable unique ID and a non-blank name.",
+      "Duplicate display names do not overwrite records.",
+      "Lookup and update use IDs and handle missing IDs clearly.",
+      "Search does not delete or mutate the original directory.",
+      "Required and optional fields are documented and tested."
+    ],
+    "starter": "lesson-05-starter.zip",
+    "filename": "contacts.py"
+  },
+  {
+    "day": 6,
+    "title": "Persistent contact book with recovery",
+    "brief": "Extend the contact directory so records survive closing and reopening the program. Store them in a documented JSON file, validate loaded records, and distinguish first launch from damaged existing data. Add a recovery message and a backup approach that preserves the user's information while you investigate a failure.",
+    "deliverables": [
+      "Save and load operations with a documented data-file path and format.",
+      "A validated contact schema compatible with lesson 5.",
+      "A recovery policy for missing, malformed, and invalid files.",
+      "A restart test and a debugging log for one controlled failure."
+    ],
+    "acceptance": [
+      "Contacts survive a normal process restart.",
+      "Loaded data is checked for both JSON syntax and contact shape.",
+      "First launch works when the data file is absent.",
+      "Corrupt existing data is reported and preserved for recovery.",
+      "The README documents the data path, backup, and recovery steps."
+    ],
+    "starter": "lesson-06-starter.zip",
+    "filename": "persistence.py"
+  },
+  {
+    "day": 7,
+    "title": "A usable CLI expense tracker",
+    "brief": "A freelancer needs to record small expenses and inspect a reliable total. Build a command-line tool that adds, lists, and totals fictional expenses, saves them between runs, and explains invalid input. A stranger should be able to install and use it from the README. Receipt scanning, accounts, and bank connections are outside the first version.",
+    "deliverables": [
+      "An add/list/total command workflow with JSON persistence.",
+      "A clear data model and money-unit policy.",
+      "A README with setup, sample commands, and error examples.",
+      "A recorded user observation and a test-results table."
+    ],
+    "acceptance": [
+      "Add, list, and total form a working command-line workflow.",
+      "Expenses survive a restart with stable IDs.",
+      "Amounts follow a documented numeric representation and validation policy.",
+      "A fresh setup works from the README alone.",
+      "One usability observation and all test cases are recorded."
+    ],
+    "starter": "lesson-07-starter.zip",
+    "filename": "expenses.py"
+  },
+  {
+    "day": 8,
+    "title": "A reviewed validation feature",
+    "brief": "A teammate reports that your expense tool accepts an invalid amount. Deliver a targeted fix in a feature branch of your own project repository. Include a reproduction case, tests, updated instructions, and a review description. Preserve unrelated work and make the result easy to inspect before merging.",
+    "deliverables": [
+      "A feature branch containing a bounded behavior change.",
+      "Before/after output for the reported input.",
+      "A regression test and updated user-facing instructions.",
+      "A pull-request-style description and a reviewed diff."
+    ],
+    "acceptance": [
+      "The branch is scoped to the reported validation behavior.",
+      "A reproduction case documents the original failure.",
+      "The regression check fails before the fix and passes after it.",
+      "The staged diff contains only the intended code and documentation.",
+      "The review description states behavior, tests, and remaining limits."
+    ],
+    "starter": "lesson-08-starter.zip",
+    "filename": "review-workflow.md"
+  },
+  {
+    "day": 9,
+    "title": "Weather-service adapter with offline fixtures",
+    "brief": "A travel dashboard needs a city and clearly labelled temperature, but its provider can return incomplete data or fail. Build an adapter with a fixture transport for repeatable tests and an optional live transport based on a provider's current documentation. Keep the UI independent of the provider's payload shape and distinguish offline demonstration data from live results.",
+    "deliverables": [
+      "A documented request/response and internal-result contract.",
+      "Fixture cases for valid data, missing data, timeout, and service error.",
+      "A validated adapter and a thin display layer.",
+      "An explicit retry policy and optional live-provider setup notes."
+    ],
+    "acceptance": [
+      "The adapter exposes a documented internal shape with units.",
+      "Fixture data is clearly labelled as offline demonstration data.",
+      "Malformed, missing, and wrongly typed payloads are rejected clearly.",
+      "Timeouts and service errors follow a bounded documented policy.",
+      "Transport and parsing can be tested independently."
+    ],
+    "starter": "lesson-09-starter.zip",
+    "filename": "weather_adapter.py"
+  },
+  {
+    "day": 10,
+    "title": "A reproducible release kit",
+    "brief": "A teammate needs to run your expense tracker on a clean machine or environment. Package the interpreter requirement, dependency installation, configuration examples, data-path policy, and smoke test into a release kit. Keep the original working project intact while you test the clean setup in a separate directory.",
+    "deliverables": [
+      "A setup guide with platform-appropriate commands.",
+      "A dependency declaration or an explicit standard-library-only statement.",
+      "A non-secret configuration example and data-path explanation.",
+      "A smoke test plus evidence from a clean setup."
+    ],
+    "acceptance": [
+      "The interpreter requirement and run command are documented.",
+      "Dependencies are explicitly declared or identified as standard-library only.",
+      "Required configuration is documented with no real secrets.",
+      "The data path and working-directory assumptions are clear.",
+      "A clean-environment smoke test succeeds using only the written guide."
+    ],
+    "starter": "lesson-10-starter.zip",
+    "filename": "environment_check.py"
+  },
+  {
+    "day": 11,
+    "title": "Support-ticket domain model",
+    "brief": "A help desk needs tickets with stable IDs, readable titles, and controlled status changes. Build a small domain model with create, close, and optional reopen operations. Test invalid creation and repeated transitions. Compare your object-based design with a simpler alternative and explain which one you would use for this scope.",
+    "deliverables": [
+      "A ticket model and a written state-transition policy.",
+      "Validation for required identity and title fields.",
+      "Tests for normal, invalid, and repeated operations.",
+      "A short class-versus-functions design comparison."
+    ],
+    "acceptance": [
+      "Tickets have stable IDs and validated non-blank titles.",
+      "Supported states and transitions are documented.",
+      "Closing an open ticket preserves identity and changes state correctly.",
+      "Repeated or invalid transitions follow an explicit policy.",
+      "Tests and a simpler-design comparison support the chosen model."
+    ],
+    "starter": "lesson-11-starter.zip",
+    "filename": "ticket.py"
+  },
+  {
+    "day": 12,
+    "title": "A regression suite for the expense calculator",
+    "brief": "The expense calculator once produced an incorrect total. Build a repeatable test suite that captures that failure, normal calculations, zero values, invalid input, and a storage round trip. Keep the expected results independent and write a short report describing what the suite establishes and what still requires a workflow or provider check.",
+    "deliverables": [
+      "A test module runnable with unittest or pytest.",
+      "A regression case for a documented calculation bug.",
+      "Boundary, invalid-input, and storage integration cases.",
+      "A report of assertions, observed results, and coverage limits."
+    ],
+    "acceptance": [
+      "The suite runs with a documented single command.",
+      "At least one regression case detects a concrete faulty implementation.",
+      "Expected values are independent of the code under test.",
+      "Normal, zero, invalid-input, and persistence cases are included.",
+      "The test report records results and meaningful verification limits."
+    ],
+    "starter": "lesson-12-starter.zip",
+    "filename": "regression.py"
+  },
+  {
+    "day": 13,
+    "title": "Responsive expense dashboard",
+    "brief": "A freelancer wants to add labelled expenses, see a list and total, remove a mistaken record, and return to the data later in the same browser. Build a semantic HTML/CSS/JavaScript interface using fictional data. Document that browser-local persistence is a learning constraint and does not provide shared accounts or server-side authorization.",
+    "deliverables": [
+      "A responsive form, expense list, total, and empty state.",
+      "Clear labels, keyboard behavior, and validation messages.",
+      "Browser-local persistence with useful handling of damaged saved data.",
+      "A usability and narrow-viewport test report."
+    ],
+    "acceptance": [
+      "Adding and removing named expenses updates the list and total correctly.",
+      "Form controls have visible labels and work with a keyboard.",
+      "Invalid input has a useful message and does not change stored data.",
+      "Data survives a reload in the same browser with documented limits.",
+      "The task works at 375px without page-wide horizontal overflow."
+    ],
+    "starter": "lesson-13-starter.zip",
+    "filename": "index.html"
+  },
+  {
+    "day": 14,
+    "title": "A verified public expense dashboard",
+    "brief": "Publish the dashboard from lesson 13 in your own learner project repository or chosen static host. Verify the deployed site in a clean browser, test a narrow viewport and reload, and record the release identity. Keep setup and recovery instructions alongside the project. Do not change the academy's hosting configuration as part of your learner exercise.",
+    "deliverables": [
+      "A verified public URL and the source commit that produced it.",
+      "Build or publishing instructions for the chosen host.",
+      "A completed hosted verification checklist.",
+      "A release note, known limits, and recovery steps."
+    ],
+    "acceptance": [
+      "A public URL serves the intended application version.",
+      "Required assets load under the actual hosting path.",
+      "Core form and expense workflows pass in a clean browser.",
+      "Direct loading, reload, and a narrow viewport are checked.",
+      "Release identity and recovery instructions are recorded."
+    ],
+    "starter": "lesson-14-starter.zip",
+    "filename": "release-checklist.md"
+  },
+  {
+    "day": 15,
+    "title": "LLM experiment and budget notebook",
+    "brief": "A team is deciding whether a model could help with short support summaries. Create a small experiment record containing prompts, response examples, scoring criteria, latency/usage fields, and a cost estimate. Support an offline fixture mode for learning and an optional real-provider mode. Never combine the two modes into an unlabeled performance claim.",
+    "deliverables": [
+      "An experiment log with model or fixture identity and request settings.",
+      "Three prompt cases with a human-readable quality rubric.",
+      "A usage/cost calculator with explicit scope and assumptions.",
+      "A comparison note distinguishing observations, estimates, and unknowns."
+    ],
+    "acceptance": [
+      "Every response is labelled as fixture or observed provider output.",
+      "The chosen model/settings or fixture version is recorded.",
+      "A quality rubric covers support, completeness, and task fit.",
+      "The cost calculation states volume, usage, prices, and included scope.",
+      "Results distinguish measurements, estimates, and remaining uncertainty."
+    ],
+    "starter": "lesson-15-starter.zip",
+    "filename": "model_budget.py"
+  },
+  {
+    "day": 16,
+    "title": "Versioned support-ticket classifier",
+    "brief": "A support team wants to route tickets into billing, technical, and general queues. Build a labelled dataset, a versioned prompt, an output validator, and a comparison report. Fixture mode lets you verify the pipeline without provider access; optional real-provider mode lets you collect predictions. Ambiguous and invalid outputs must not silently trigger routing.",
+    "deliverables": [
+      "A label rubric and at least 12 labelled ticket examples.",
+      "Versioned prompts with one clearly explained revision.",
+      "A parser/validator and an explicit review or rejection result.",
+      "A comparison report separating fixture checks from real predictions."
+    ],
+    "acceptance": [
+      "Allowed categories and ambiguity policy are documented.",
+      "At least 12 labelled examples include boundary and invalid-input cases.",
+      "Response parsing validates shape, types, and allowed labels.",
+      "Prompt versions and predictions are recorded for comparison.",
+      "Fixture checks and real-provider evaluations are reported separately."
+    ],
+    "starter": "lesson-16-starter.zip",
+    "filename": "classifier_contract.py"
+  },
+  {
+    "day": 17,
+    "title": "An allowlisted inventory tool service",
+    "brief": "A shop assistant needs read-only stock lookup and product search over fictional inventory. Build a dispatcher with two named tools, argument validation, not-found results, and a trusted-user access policy. Demonstrate invalid proposals and resource restrictions with fixtures before optionally connecting a model that proposes tool calls.",
+    "deliverables": [
+      "Two documented read-only tool contracts and a dispatcher.",
+      "A fictional inventory dataset and trusted-user policy fixtures.",
+      "Tests for invalid names, arguments, and forbidden resources.",
+      "A trace of proposal, validation, execution, and tool result."
+    ],
+    "acceptance": [
+      "Only the two documented read-only tools can execute.",
+      "Names, shapes, types, and ranges are validated before calls.",
+      "Trusted user/resource policy is enforced outside model arguments.",
+      "Not-found, forbidden, and failed-call results remain distinguishable.",
+      "A safe execution trace and invalid-proposal tests are recorded."
+    ],
+    "starter": "lesson-17-starter.zip",
+    "filename": "tool_dispatcher.py"
+  },
+  {
+    "day": 18,
+    "title": "FAQ retrieval comparison workbench",
+    "brief": "A team wants staff to find the right FAQ despite variations in wording. Build a small FAQ dataset, a keyword baseline, a vector-search implementation, and labelled query results. Begin with clearly labelled illustrative vectors if needed; optionally add a real embedding model. Compare the methods honestly and preserve a no-match outcome.",
+    "deliverables": [
+      "At least 10 FAQ records with stable IDs and source text.",
+      "Keyword and vector ranking functions with clear input contracts.",
+      "At least six queries with expected relevant IDs.",
+      "A comparison report naming the representation and its limits."
+    ],
+    "acceptance": [
+      "FAQ records and query relevance use stable IDs.",
+      "Keyword and vector methods are evaluated on the same labelled queries.",
+      "Vector dimensions and zero-length inputs are validated.",
+      "The vector model or illustrative-fixture identity is recorded.",
+      "No-answer queries and observed retrieval failures are reported."
+    ],
+    "starter": "lesson-18-starter.zip",
+    "filename": "vector_search.py"
+  },
+  {
+    "day": 19,
+    "title": "Source-grounded FAQ assistant",
+    "brief": "A team wants answers from a small fictional policy collection. Build a retrieval-and-answer pipeline that preserves source IDs, displays supporting passages, and handles unanswered questions. Use a clearly labelled extractive or fixture baseline first; optionally connect a real model generator without weakening permission or citation checks.",
+    "deliverables": [
+      "A small source collection with IDs, locations, and freshness notes.",
+      "A retrieval method with inspectable ranked results.",
+      "An answer contract including citations and a no-answer state.",
+      "A labelled question set covering support, conflict, and missing evidence."
+    ],
+    "acceptance": [
+      "Retrieved evidence retains source IDs and inspectable passages.",
+      "Trusted document-access policy is applied before context construction.",
+      "Answer citations refer to supplied evidence and support their claims.",
+      "Missing evidence produces a clear abstention result.",
+      "Retrieval and answer-quality failures are recorded separately."
+    ],
+    "starter": "lesson-19-starter.zip",
+    "filename": "grounded_answer.py"
+  },
+  {
+    "day": 20,
+    "title": "A bounded policy-research assistant",
+    "brief": "A team needs a short evidence-based summary from approved fictional policy documents. Build a workflow with search, read, and finish actions, then optionally replace scripted action selection with a model adapter. Enforce resource limits, permitted tools, and no-answer behavior in code. The first version is read-only and cannot send messages or modify business records.",
+    "deliverables": [
+      "An allowed-tool contract and fixed or model-selected action interface.",
+      "Application-enforced step, timeout, and budget policies.",
+      "An inspectable trace of actions and result categories.",
+      "Fixtures for success, tool failure, invalid action, and budget exhaustion."
+    ],
+    "acceptance": [
+      "Only the documented read-only tools can execute.",
+      "Application code enforces step, timeout, and resource policies.",
+      "Completion, abstention, failure, and budget exhaustion are distinct.",
+      "Observable traces identify actions and results without hidden reasoning.",
+      "Success and failure fixtures terminate within the documented limits."
+    ],
+    "starter": "lesson-20-starter.zip",
+    "filename": "bounded_workflow.py"
+  },
+  {
+    "day": 21,
+    "title": "A shareable document-assistant demo",
+    "brief": "Create a usable interface for the grounded assistant from lesson 19. Include example questions, answer/source display, no-evidence and failure states, and an honest mode label. Publish a fictional-data demo or document a reproducible local version while a trusted backend is being prepared. A real-provider extension must keep credentials out of the frontend.",
+    "deliverables": [
+      "A usable interface connected to the validated answer contract.",
+      "A fictional/public document collection and scope explanation.",
+      "A verified demo URL or a reproducible local delivery record.",
+      "A workflow test report and one observed usability improvement."
+    ],
+    "acceptance": [
+      "The interface states its document scope and actual execution mode.",
+      "Answered results display relevant supporting passages.",
+      "No-evidence and service-failure states are distinguishable and useful.",
+      "The demo contains no private documents or browser-exposed credentials.",
+      "A new-user workflow and delivery verification are recorded."
+    ],
+    "starter": "lesson-21-starter.zip",
+    "filename": "answer_contract.py"
+  },
+  {
+    "day": 22,
+    "title": "A repeatable document-assistant evaluation harness",
+    "brief": "Build a harness for at least 20 labelled questions or boundary cases. Run the grounded assistant under a named execution mode, save its actual outputs, score them using a documented rubric, and compare two versions. Include supported answers, no-evidence behavior, permission checks, and failures. Report critical regressions even if an overall average improves.",
+    "deliverables": [
+      "A versioned dataset with at least 20 stable case IDs.",
+      "A rubric and repeatable run/scoring command.",
+      "Per-case output records and category summaries.",
+      "A before/after report identifying regressions and limits."
+    ],
+    "acceptance": [
+      "At least 20 labelled cases have stable IDs and documented coverage.",
+      "The harness has a repeatable run command and a reviewed rubric.",
+      "Actual outputs and execution mode are recorded per case.",
+      "Summaries show category counts, denominators, and failed IDs.",
+      "A two-version comparison reports regressions and verification limits."
+    ],
+    "starter": "lesson-22-starter.zip",
+    "filename": "eval_report.py"
+  },
+  {
+    "day": 23,
+    "title": "A permission and budget boundary for the assistant",
+    "brief": "Harden the fictional document assistant with trusted-user fixtures, document filtering, request limits, and explicit exhausted-budget behavior. Add a small threat model and abuse test set. Keep the prototype's limits visible: fixture identity and single-process budgets demonstrate boundaries but are not a deployed authentication or distributed-quota system.",
+    "deliverables": [
+      "A trust-boundary diagram and protected-resource list.",
+      "Permission filtering before context construction.",
+      "Explicit request/resource limits and recovery results.",
+      "An abuse-test report and a reproducible cost estimate."
+    ],
+    "acceptance": [
+      "Trusted authority is separate from user text and model arguments.",
+      "Forbidden documents never enter an unauthorized user's context.",
+      "Resource limits are enforced outside the model prompt.",
+      "Budget exhaustion and policy rejection produce clear outcomes.",
+      "The threat model, attack results, and cost assumptions are recorded."
+    ],
+    "starter": "lesson-23-starter.zip",
+    "filename": "policy_gate.py"
+  },
+  {
+    "day": 24,
+    "title": "FastAPI feedback and question service",
+    "brief": "Build POST /feedback, GET /feedback/{id}, and POST /ask for the fictional assistant. Use validated request models, a documented SQLite file, parameterized queries, and a trusted-identity boundary or explicitly labelled local identity fixtures. Reuse your answer contract and make invalid, missing, and forbidden outcomes clear. Verify the current FastAPI installation command in the linked documentation.",
+    "deliverables": [
+      "An API contract and runnable FastAPI service with documented setup.",
+      "A durable feedback schema and parameterized storage layer.",
+      "Request validation and explicitly scoped access checks.",
+      "HTTP, restart, and invalid-input test results."
+    ],
+    "acceptance": [
+      "The three endpoints follow documented request/response contracts.",
+      "Invalid payloads and domain-rule failures are rejected clearly.",
+      "Feedback survives a process restart in the documented database.",
+      "Database values use parameterized SQL rather than command concatenation.",
+      "Trusted identity or fixture limits and access checks are explicitly tested."
+    ],
+    "starter": "lesson-24-starter.zip",
+    "filename": "feedback_store.py"
+  },
+  {
+    "day": 25,
+    "title": "Request tracing and an incident runbook",
+    "brief": "Instrument the fictional assistant's validation, retrieval, answer, and failure stages with structured events and a shared request ID. Create a runbook for a retrieval timeout and a bad release. Measure actual elapsed time where implemented, clearly label fixtures, and avoid unnecessary private content in logs.",
+    "deliverables": [
+      "A structured event schema and correlated request trace.",
+      "A redaction/data-minimization policy for logs.",
+      "Runbooks for timeout diagnosis and release recovery.",
+      "Evidence from a simulated incident and runbook walkthrough."
+    ],
+    "acceptance": [
+      "Events from one request share a correlation ID.",
+      "Stable event names identify success and failure stages.",
+      "Logs omit credentials and unnecessary private content.",
+      "Actual measurements and fixture values are clearly distinguished.",
+      "Runbooks include symptoms, checks, recovery verification, and ownership."
+    ],
+    "starter": "lesson-25-starter.zip",
+    "filename": "request_trace.py"
+  },
+  {
+    "day": 26,
+    "title": "A discovery interview and customer brief",
+    "brief": "Use the retailer scenario in the app or another clearly fictional business workflow. Conduct a structured roleplay, record evidence and assumptions, compare implementation alternatives, and produce a one-page brief. A real interview is optional and requires authorization from the people involved; the learning project can be completed entirely with fictional data.",
+    "deliverables": [
+      "A discovery-question plan and notes from two roleplays or authorized interviews.",
+      "A one-page problem, scope, constraints, and success brief.",
+      "A baseline-measurement and evaluation plan.",
+      "An alternatives comparison and a risk/owner list."
+    ],
+    "acceptance": [
+      "The brief identifies the user and a concrete current workflow.",
+      "Measured facts, interview estimates, and unknowns are distinguished.",
+      "In-scope and excluded tasks are explicit.",
+      "Data access, constraints, and operating ownership are recorded.",
+      "Success criteria include a baseline and an evaluation method."
+    ],
+    "starter": "lesson-26-starter.zip",
+    "filename": "discovery-notes.md"
+  },
+  {
+    "day": 27,
+    "title": "An evidence-based portfolio case study",
+    "brief": "Choose one completed learning project and package it for a reader who has no context. Write a concise case study, verify the repository and demo links, include a representative test report, and explain your own contribution. Use the app's portfolio tracker to keep the artifacts together and export a readable copy.",
+    "deliverables": [
+      "A problem-first case study with scope and contribution.",
+      "Verified project links or a clearly documented local demo.",
+      "A representative test/evaluation record and actual result.",
+      "A small implementation diagram and explicit limits."
+    ],
+    "acceptance": [
+      "The case study states a specific user problem and resulting behavior.",
+      "Your implementation and decision contribution are clear.",
+      "Outcome claims link to evidence or are labelled estimates.",
+      "Demo/repository setup or local-delivery instructions are verified.",
+      "The architecture, limitations, and next step match the actual project."
+    ],
+    "starter": "lesson-27-starter.zip",
+    "filename": "case-study.md"
+  },
+  {
+    "day": 28,
+    "title": "Customer-policy assistant capstone",
+    "brief": "Build a fictional customer's read-only policy assistant using a clear interface, trusted backend boundary, source-grounded answer flow, feedback storage, and an evaluation suite. Start with a labelled offline mode if necessary, then add a real provider only when its contract and secret handling are understood. Keep external messaging, purchases, and autonomous writes outside this capstone scope.",
+    "deliverables": [
+      "A scoped customer brief and actual architecture diagram.",
+      "A working question-to-evidence-to-answer workflow.",
+      "Feedback persistence and clear product failure states.",
+      "Acceptance evidence, a repeatable eval suite, and an unfinished-work list."
+    ],
+    "acceptance": [
+      "The capstone follows a specific brief with explicit excluded actions.",
+      "A complete user question produces supported evidence and a usable response.",
+      "Missing evidence and service failure have honest distinct states.",
+      "Access policy and feedback persistence are tested at their boundaries.",
+      "A repeatable eval report and remaining-work list accompany the implementation."
+    ],
+    "starter": "lesson-28-starter.zip",
+    "filename": "capstone_acceptance.py"
+  },
+  {
+    "day": 29,
+    "title": "A hardened capstone release package",
+    "brief": "Take the capstone through a documented release-readiness process. Verify its actual environment, permissions, bounded failures, stored feedback, and operating limits. Rehearse recovery in an isolated setup using fictional data. Produce a release decision with evidence and unresolved checks instead of claiming universal production readiness.",
+    "deliverables": [
+      "A versioned hosted or reproducible release record.",
+      "Permission, failure, resource, and data check evidence.",
+      "A recovery runbook and isolated rehearsal result.",
+      "An operational-owner map and explicit release limitations."
+    ],
+    "acceptance": [
+      "The tested release and environment are explicitly identified.",
+      "Allowed and forbidden access paths are verified after deployment.",
+      "Timeout, provider failure, and budget exhaustion are bounded and visible.",
+      "Data durability and recovery compatibility are checked in an isolated rehearsal.",
+      "Configuration, alerts, backup, and escalation have documented owners."
+    ],
+    "starter": "lesson-29-starter.zip",
+    "filename": "release-readiness.md"
+  },
+  {
+    "day": 30,
+    "title": "A customer-ready demo and handoff pack",
+    "brief": "Package your capstone as a scoped delivery. Record a concise demo, assemble acceptance and evaluation evidence, verify the operating instructions with another person, and write a retrospective. Produce a next-project plan tied to one demonstrated weakness. Do not publish private customer data or send promotional messages as part of this learning exercise.",
+    "deliverables": [
+      "A short demo script or recording tied to actual acceptance criteria.",
+      "A versioned delivery pack with operating and recovery instructions.",
+      "A handoff walkthrough observation and a corrected documentation gap.",
+      "A retrospective and a concrete follow-up learning project."
+    ],
+    "acceptance": [
+      "The demo shows a normal workflow and a meaningful failure boundary.",
+      "Claims identify the actual release, data scope, and execution mode.",
+      "Acceptance and evaluation evidence are linked in the handoff pack.",
+      "Another person can follow operating instructions with documented roles and recovery.",
+      "A retrospective and evidence-based next project are recorded."
+    ],
+    "starter": "lesson-30-starter.zip",
+    "filename": "handoff-pack.md"
+  }
+]

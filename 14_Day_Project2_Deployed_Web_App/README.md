@@ -1,7 +1,123 @@
-# 📘 Day 14 — 🛠 Project 2: Deployment — Your First Live URL
+# Day 14 — Deployment, configuration, and your first public application
 
-![Day 14 visual](../images/days/day-14.svg)
+Deployment places a reproducible version of your application where its intended users can access it. That changes the environment, not just the URL. Today you will publish your expense dashboard, verify the actual hosted result, and document how to recover from an incorrect release.
 
+**Your project:** [A verified public expense dashboard](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Distinguish development source, a deployable artifact, and a running hosted version.
+- Verify assets, routes, and core behavior on the real deployment.
+- Document release identity, configuration ownership, and recovery.
+
+## Understand the concept
+
+### An artifact is the version you deploy
+
+A static site can consist of HTML, CSS, JavaScript, and data assets. A framework may transform source files into a build directory before hosting. Keep track of which commit produced the artifact, because an edited working file is not automatically the version served to users. Paths also matter: an asset reference that works at a root URL may fail under a repository subpath. Inspect the deployed network requests instead of assuming a successful upload proves the page is usable.
+
+### Hosted users have different conditions
+
+A new user's browser does not contain your local storage, cached files, or development configuration. Test logged out or in a clean browser context, with a direct route and a reload. A localhost URL refers to the user's own device, not your development computer. A static frontend's code and configuration are visible to its visitors, so a future model API credential must stay on a trusted backend rather than being embedded in browser JavaScript.
+
+### A release needs an operating story
+
+Document how the site is built, how a release is identified, and which checks establish successful startup. A simple rollback might redeploy a previous artifact, but stateful systems also require data compatibility considerations. Keep the recovery steps practical for the person who will operate the system. A public URL alone does not verify permissions, invalid input, or every route. Record the checks you actually performed and the limitations that remain.
+
+## A worked example, step by step
+
+A release record connects the source version to a real URL and observed behavior rather than a screenshot alone.
+
+```markdown
+# Release record
+Source commit: fill in the actual commit ID
+Artifact: directory containing index.html and its assets
+Public URL: fill in the verified hosted URL
+Checks:
+- Clean browser can open the home page
+- Form validation and add/remove workflow work
+- Asset requests succeed
+- Narrow viewport remains usable
+- Reload preserves only the documented browser-local data
+Recovery: redeploy the previously verified artifact
+Known limits: browser-local data; no shared accounts
+```
+
+**Expected result**
+
+```text
+A completed release record contains an actual commit, hosted URL, observed check results, and a practical recovery step.
+Placeholders are not evidence of a deployed application.
+```
+
+The commit identifies the reviewed source. The artifact identifies what the host receives. The public URL must be checked after deployment, not invented from an expected naming pattern. Each check should contain a result and relevant evidence. Recovery points to a previously verified version. This record prevents you from confusing local success with hosted success and makes a handoff understandable to someone who did not perform the deployment.
+
+## Practise before building
+
+### Exercise 1: Inspect an asset path
+
+Compare a relative asset URL with a root-relative URL under a repository subpath.
+
+**Hint:** A leading slash refers to the origin root, not automatically the application's folder.
+
+**Check your result:** You can explain why one path can work locally and fail after hosting.
+
+### Exercise 2: Test as a new user
+
+Open the hosted dashboard in a clean browser and complete its core task.
+
+**Hint:** Do not depend on your existing saved demo records.
+
+**Check your result:** The first-use and empty states are understandable.
+
+### Exercise 3: Write a recovery sequence
+
+Describe how to return to a known good static artifact and how to verify it.
+
+**Hint:** Name the version and the checks, not merely a generic undo instruction.
+
+**Check your result:** Another person could follow the steps without guessing which release to use.
+
+## Common mistakes and how to debug them
+
+- Sharing localhost as if it were a public application URL.
+- Embedding API secrets in a static frontend's source or build settings.
+- Assuming upload success verifies routes, assets, and user behavior.
+
+## The FDE connection
+
+An FDE owns delivery beyond a local demonstration. Release identity, hosted checks, configuration responsibility, and recovery connect the implementation to the customer's operational reality. Even a small static dashboard should have a clear handoff.
+
+## Build your lesson project
+
+**A verified public expense dashboard**
+
+Publish the dashboard from lesson 13 in your own learner project repository or chosen static host. Verify the deployed site in a clean browser, test a narrow viewport and reload, and record the release identity. Keep setup and recovery instructions alongside the project. Do not change the academy's hosting configuration as part of your learner exercise.
+
+- A verified public URL and the source commit that produced it.
+- Build or publishing instructions for the chosen host.
+- A completed hosted verification checklist.
+- A release note, known limits, and recovery steps.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Which artifact is actually hosted?
+- What differed from your local environment?
+- What information would an operator need if the latest release failed?
+
+## References and next steps
+
+- [GitHub Pages: publishing sources](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+- [MDN: publishing your website](https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Publishing_your_website)
+
+[← Lesson 13](../13_Day_First_Web_App/) · [Lesson 15 →](../15_Day_LLMs_How_They_Work/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** **Deployment** is moving software from your laptop to a computer that serves strangers, 24/7. It's where "my project" becomes "a product." Everything changes at this boundary: secrets can't live in code, paths differ, versions must be pinned, and *you* can't be there to restart it. Deployment is the professional threshold — cross it today.
 
 **Time:** ~90 minutes. **Rule:** done = the URL works on your phone, on mobile data, logged out.
@@ -87,3 +203,6 @@ Add a tiny **feedback form** to the app ("What confused you?") that appends to a
 🎉 **Week 2 complete.** You now think like an engineer: versioned, reproducible, tested, interfaced, and **deployed**. Week 3 is where it gets magical — AI engineering: how the models actually work, and how to build with them.
 
 [← Day 13](../13_Day_First_Web_App/) · [Day 15 →](../15_Day_LLMs_How_They_Work/)
+<!-- original-workshop:end -->
+
+</details>

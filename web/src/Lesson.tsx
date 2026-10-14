@@ -8,12 +8,21 @@ import {
   ClipboardCheck,
   Code2,
   ExternalLink as LinkIcon,
+  FolderGit2,
 } from 'lucide-react';
-import { lessons, quizzes, projectDefinitions, REPO, type Lesson as LessonData } from './data';
+import {
+  lessons,
+  quizzes,
+  projectDefinitions,
+  dailyProjects,
+  REPO,
+  type Lesson as LessonData,
+} from './data';
 import { canComplete, localDate, type Progress } from './state';
 import { Checkbox, ExternalLink } from './ui';
 import Markdown from './Markdown';
 import Playground from './Playground';
+import LessonProject from './LessonProject';
 
 function ConceptCheck({
   day,
@@ -98,12 +107,16 @@ export default function Lesson({
   lesson,
   progress,
   update,
+  initialTab = 'learn',
 }: {
   lesson: LessonData;
   progress: Progress;
   update: (next: Progress) => void;
+  initialTab?: string;
 }) {
-  const [tab, setTab] = useState('learn');
+  const [tab, setTab] = useState(
+    ['learn', 'practice', 'project', 'build'].includes(initialTab) ? initialTab : 'learn',
+  );
   const { day } = lesson;
   const notes = progress.notes[day] || '';
   const checks = progress.checkpoints[day] || [false, false];
@@ -111,7 +124,10 @@ export default function Lesson({
   const passed = progress.quizPassed.includes(day);
   const group = lessons.filter((item) => item.track === lesson.track);
   const project = projectDefinitions.find((item) => item.day === day);
-  const statusItems = [passed, notes.trim().length >= 20, checks.every(Boolean)];
+  const dailyProject = dailyProjects[day - 1];
+  const projectDone =
+    progress.lessonProjectChecks[day]?.filter(Boolean).length === dailyProject.acceptance.length;
+  const statusItems = [passed, projectDone, notes.trim().length >= 20, checks.every(Boolean)];
   const complete = () => {
     if (!canComplete(progress, day)) return;
     update({ ...progress, completed: { ...progress.completed, [day]: localDate() } });
@@ -152,6 +168,7 @@ export default function Lesson({
             {[
               ['learn', BookOpen, 'Learn'],
               ['practice', Code2, 'Practise'],
+              ['project', FolderGit2, 'Project'],
               ['build', ClipboardCheck, 'Record your build'],
             ].map(([id, Icon, label]) => {
               const ActivityIcon = Icon as typeof BookOpen;
@@ -173,10 +190,21 @@ export default function Lesson({
               <div className="source-note">
                 <BookOpen size={15} />
                 <span>
-                  Original course notes · Read, experiment, then check your understanding.
+                  Expanded lesson · Explanations, worked examples, exercises, and your own project.
                 </span>
               </div>
-              <Markdown folder={lesson.folder} />
+              <div className="lesson-project-banner">
+                <FolderGit2 size={19} />
+                <div>
+                  <span className="eyebrow">TODAY'S PROJECT</span>
+                  <strong>{dailyProject.title}</strong>
+                </div>
+                <button className="text-button" onClick={() => setTab('project')}>
+                  Open project
+                  <ArrowRight size={14} />
+                </button>
+              </div>
+              <Markdown folder={lesson.folder} contents />
               <div className="reading-footer">
                 <button
                   className="button primary"
@@ -215,14 +243,26 @@ export default function Lesson({
               </button>
             </>
           )}
+          {tab === 'project' && (
+            <LessonProject
+              day={day}
+              folder={lesson.folder}
+              progress={progress}
+              update={update}
+              onRecord={() => {
+                setTab('build');
+                window.scrollTo({ top: 0, behavior: 'instant' });
+              }}
+            />
+          )}
           {tab === 'build' && (
             <section className="build-card">
               <p className="eyebrow">TURN PRACTICE INTO EVIDENCE</p>
-              <h2>Your build: lesson {day}</h2>
-              <p className="build-task">{lesson.build}</p>
+              <h2>{dailyProject.title}</h2>
+              <p className="build-task">{dailyProject.brief}</p>
               <p className="muted">
-                Use the course notes for the full requirements. Record what you built, a test you
-                ran, and what you learned. A link to your work is useful too.
+                Complete the Project tab's acceptance checks. Record what you built, a test you ran,
+                and what you learned. A link to your work is useful too.
               </p>
               <label className="form-label" htmlFor="build-notes">
                 Build evidence & reflection
@@ -272,6 +312,12 @@ export default function Lesson({
                   Pass the concept check in the Practise tab before completing this lesson.
                 </p>
               )}
+              {!projectDone && (
+                <p className="inline-warning">
+                  Finish the five acceptance checks in the Project tab before completing this
+                  lesson.
+                </p>
+              )}
               <div className="build-footer">
                 {completed ? (
                   <span className="success-text">
@@ -313,6 +359,7 @@ export default function Lesson({
             <p className="eyebrow">YOUR LEARNING CHECKLIST</p>
             {[
               'Pass the concept check',
+              'Verify the lesson project',
               'Record build evidence',
               'Explain and test the concept',
             ].map((label, index) => (

@@ -7,6 +7,7 @@ import '@fontsource/dm-sans/700.css';
 import '@fontsource/dm-mono/400.css';
 import App from './App';
 import './styles.css';
+import './project-styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -1,7 +1,124 @@
-# 📘 Day 3 — Decisions & Repetition
+# Day 3 — Decisions, repetition, and boundary cases
 
-![Day 3 visual](../images/days/day-03.svg)
+Conditions let a program choose an action; loops let it repeat an action over data. Together they express business rules such as which ticket needs attention and when processing should stop. Today you will move from isolated if statements to a small ticket-triage workflow with explicit priority rules and a visible summary.
 
+**Your project:** [Support-ticket triage queue](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Trace which branch runs for a given condition, including equality.
+- Process a collection without skipping or endlessly repeating work.
+- Translate written priority rules into an ordered decision structure.
+
+## Understand the concept
+
+### Conditions have precise boundaries
+
+The expression count > 10 asks a different question from count >= 10. The first excludes exactly ten; the second includes it. Test the boundary itself and the values on either side. For multiple rules, decide their order: an if/elif chain chooses the first matching branch, whereas separate if statements can run more than one branch. A ticket that is both old and critical must follow a documented priority rule, not whichever order was accidentally typed first.
+
+### A loop needs a clear unit of work
+
+A for loop visits items in an iterable. Identify what one iteration means: one ticket, one customer, or one attempt. Keep counters and accumulated results separate from the current item. An empty collection performs zero iterations, so your summary must still be meaningful. Avoid changing the collection you are iterating over unless you understand the behavior; filtering into a new collection is often clearer for a beginner.
+
+### Termination belongs in the design
+
+A while loop repeats while its condition is true. If the state used by that condition never changes, the loop can run forever. Interactive programs need a way to exit, and retrying programs need a maximum attempt count or time limit. break stops the loop; continue skips the rest of the current iteration. Neither should hide a missing design decision about what happens to rejected work or unfinished items.
+
+## A worked example, step by step
+
+The critical severity rule takes priority over the age rule. Trace each ticket before running the loop.
+
+```python
+tickets = [
+    {"id": "T1", "severity": "critical", "age_hours": 2},
+    {"id": "T2", "severity": "normal", "age_hours": 24},
+    {"id": "T3", "severity": "normal", "age_hours": 3},
+]
+for ticket in tickets:
+    if ticket["severity"] == "critical":
+        priority = "urgent"
+    elif ticket["age_hours"] >= 24:
+        priority = "review"
+    else:
+        priority = "standard"
+    print(ticket["id"], priority)
+```
+
+**Expected result**
+
+```text
+T1 urgent
+T2 review
+T3 standard
+```
+
+The list contains three dictionaries, each representing one ticket. The for statement binds ticket to each dictionary in turn. For T1, the first condition is true and the other branches are skipped. T2 reaches the age condition and qualifies at exactly 24 hours because the operator includes equality. T3 falls into the else branch. Each iteration assigns priority before it prints, so the previous ticket's result cannot accidentally be reused.
+
+## Practise before building
+
+### Exercise 1: Test the exact boundary
+
+Create tickets aged 23, 24, and 25 hours. Predict their priority.
+
+**Hint:** Focus on >= rather than the displayed age alone.
+
+**Check your result:** Exactly 24 hours follows the written rule.
+
+### Exercise 2: Count outcomes
+
+Add a counter for urgent tickets and print a summary after the loop.
+
+**Hint:** Initialise the counter before the loop and increment it only for the matching priority.
+
+**Check your result:** The summary is correct for an empty list and for multiple critical tickets.
+
+### Exercise 3: Bound repeated attempts
+
+Write a three-attempt retry simulation that stops early after success.
+
+**Hint:** Use a fixed range and break on the successful result.
+
+**Check your result:** Failure cannot cause a fourth attempt or an endless loop.
+
+## Common mistakes and how to debug them
+
+- Using > where the requirement includes equality: test the threshold explicitly.
+- Using separate if statements when only one priority should win: write down rule precedence.
+- Forgetting empty input or stop conditions: the absence of work should still produce a useful summary.
+
+## The FDE connection
+
+Business policies often contain exceptions and conflicting rules. An FDE asks which rule wins and what happens at the threshold, then records examples before implementing the policy. A short, tested decision table can prevent a long argument after delivery.
+
+## Build your lesson project
+
+**Support-ticket triage queue**
+
+A support lead needs a repeatable way to review tickets. Build a program that reads a small in-memory ticket list, assigns exactly one priority to each valid ticket, and prints a summary. Critical tickets are urgent; other tickets aged at least 24 hours need review; the rest are standard. Invalid or incomplete tickets must be reported instead of silently classified.
+
+- A triage program with documented rule precedence.
+- A sample queue containing normal, critical, old, and invalid tickets.
+- A summary of each priority and rejected records.
+- A test table for empty queues and threshold cases.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Why does rule order matter?
+- What happens when the collection is empty?
+- Which boundary case was most likely to reveal a bug?
+
+## References and next steps
+
+- [Python: control flow](https://docs.python.org/3/tutorial/controlflow.html)
+
+[← Lesson 2](../02_Day_Python_Variables_Types/) · [Lesson 4 →](../04_Day_Functions/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** `if` = decisions. Loops = repetition. Every app on earth — Instagram, banking, AI chatbots — is these two ideas composed at scale. Learn them deeply once, recognize them everywhere forever.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -123,3 +240,6 @@ A **password checker**: ask for a password, require 8+ characters AND at least o
 ---
 
 [← Day 2](../02_Day_Python_Variables_Types/) · [Day 4 →](../04_Day_Functions/)
+<!-- original-workshop:end -->
+
+</details>

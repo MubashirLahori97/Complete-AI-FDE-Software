@@ -8,6 +8,8 @@
 
 This curriculum now has an interactive web companion in [`web/`](web/): searchable lessons, concept checks, Python/JavaScript/HTML exercises, saved progress, customer scenarios, and a portfolio tracker.
 
+**Every one of the 30 lessons now includes a dedicated project.** The expanded lessons add deeper explanations, worked examples, three practice exercises, debugging guidance, and FDE context. Each [project guide](PROJECTS.md) provides milestones, five acceptance checks, a test matrix, stretch challenges, and a downloadable starter kit in the app.
+
 ```bash
 cd web
 npm ci

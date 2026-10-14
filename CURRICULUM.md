@@ -1,5 +1,7 @@
 # 📖 Full Curriculum — 30 Days: Concepts, Engineering, Business
 
+**Expanded teaching and projects:** each lesson now has a deeper guide and its own project with milestones, acceptance checks, test cases, and a starter kit. See [the complete project index](PROJECTS.md). The index is the active project path; earlier workshop build suggestions below remain useful alternatives.
+
 **Premise:** AI writes the code. Your job is the three things AI can't do for you: **understand concepts 100%, engineer systems with judgment, and turn software into business value.**
 
 **The promise:** a normal person with zero knowledge — 30 days later — walks into a business, fixes a real problem with AI software, and gets paid for it. Learning is lifelong; earning starts on day 30.

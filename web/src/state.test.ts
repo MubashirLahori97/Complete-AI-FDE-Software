@@ -19,7 +19,7 @@ describe('learner progress', () => {
     expect(nextLesson(state)).toBe(1);
     expect(streak(state)).toBe(0);
   });
-  it('requires a passed quiz, useful evidence, and both self-assessments', () => {
+  it('requires a passed quiz, evidence, self-assessments, and the lesson project checks', () => {
     const state = emptyProgress();
     state.quizPassed = [2];
     state.notes[2] = 'I tested the converter with valid and invalid input.';
@@ -27,6 +27,10 @@ describe('learner progress', () => {
     state.checkpoints[2] = [true, false];
     expect(canComplete(state, 2)).toBe(false);
     state.checkpoints[2] = [true, true];
+    expect(canComplete(state, 2)).toBe(false);
+    state.lessonProjectChecks[2] = [true, true, true, true, false];
+    expect(canComplete(state, 2)).toBe(false);
+    state.lessonProjectChecks[2] = [true, true, true, true, true];
     expect(canComplete(state, 2)).toBe(true);
     state.quizPassed = [];
     expect(canComplete(state, 2)).toBe(false);
@@ -140,6 +144,7 @@ describe('curriculum integrity and links', () => {
       '#/phase/2',
     );
     expect(documentHref('../ROADMAP.md', lessons[0].folder)).toBe('#/document/ROADMAP.md');
+    expect(documentHref('PROJECT.md', lessons[0].folder)).toBe('#/lesson/1?tab=project');
     expect(documentHref('https://docs.python.org', '')).toBe('https://docs.python.org');
   });
 });

@@ -1,0 +1,4 @@
+Python major version: 3
+Virtual environment: False
+Run command: python environment_check.py
+The second line becomes True inside a normal venv.

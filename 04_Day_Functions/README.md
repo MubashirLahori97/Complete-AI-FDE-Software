@@ -1,7 +1,117 @@
-# 📘 Day 4 — Abstraction: The Most Important Idea in Software
+# Day 4 — Functions, contracts, and useful abstraction
 
-![Day 4 visual](../images/days/day-04.svg)
+A function gives a small operation a name, explicit inputs, and an observable result. It helps you reason about a program one responsibility at a time. Today you will turn a calculation into a contract and build a quote calculator whose business rules can be tested without reading interactive input or printing a screen.
 
+**Your project:** [A reusable quote calculator](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Distinguish a function's parameters, return value, and side effects.
+- Separate pure calculation from input/output code.
+- Write and test a function contract with normal and invalid inputs.
+
+## Understand the concept
+
+### Name what the operation means
+
+A function should expose a useful idea to its caller. total_cents(price_cents, quantity) tells you more than process(a, b). The caller needs to know allowed inputs, the result, and possible errors. Those expectations are the contract. Implementation details can change while the contract stays stable, letting other parts of the program continue to work. Start with an operation you can describe in one sentence; if the sentence contains several unrelated tasks, the function may be taking on too much.
+
+### Return and print are different
+
+return passes a value back to the caller and ends that function call. print writes a representation to an output stream. A function that only prints a total is harder to reuse in a web API or a test. Let calculation functions return values; let the interface decide how to display them. A function with no explicit return returns None in Python. That often explains why a caller unexpectedly receives a missing value after an apparently successful print.
+
+### Pure logic is easier to test
+
+A pure calculation uses its inputs to produce a result without modifying external state. It does not read the keyboard, save a file, or call a network service. Such functions are straightforward to test with known examples. Side effects are necessary in real applications, but keep their boundaries visible. The goal is not to create the largest possible number of functions; it is to separate responsibilities where the separation helps you understand and change the system.
+
+## A worked example, step by step
+
+A line total is calculated in integer minor units. Validation is part of the function contract.
+
+```python
+def line_total_cents(price_cents, quantity):
+    if price_cents < 0 or quantity < 0:
+        raise ValueError("Price and quantity must be non-negative")
+    return price_cents * quantity
+
+subtotal = line_total_cents(250, 3)
+assert subtotal == 750
+print(f"Subtotal: {subtotal} cents")
+```
+
+**Expected result**
+
+```text
+Subtotal: 750 cents
+```
+
+def creates a callable function; its body runs when the caller supplies the two arguments. The validation rejects negative inputs before calculating. return gives the integer result to the caller, which stores it as subtotal. The assertion checks a known example independently of the display text. The final print belongs to the interface layer. The example assumes integer inputs; a complete project must document or validate that assumption rather than relying on the function name alone.
+
+## Practise before building
+
+### Exercise 1: Separate output from logic
+
+Replace a calculator that prints inside its calculation with a function that returns its result.
+
+**Hint:** Move print to the caller.
+
+**Check your result:** The result can be asserted without capturing printed text.
+
+### Exercise 2: Test a contract
+
+Check normal quantity, zero quantity, negative quantity, and a non-integer quantity.
+
+**Hint:** Decide which inputs are supported before writing validation.
+
+**Check your result:** Supported values return predictable results and rejected values have clear errors.
+
+### Exercise 3: Compose operations
+
+Add two line totals and an explicit delivery fee using separate named operations.
+
+**Hint:** Reuse line_total_cents rather than copying its formula.
+
+**Check your result:** Changing one unit price affects only the related line and grand total.
+
+## Common mistakes and how to debug them
+
+- Confusing printed output with a return value: inspect what the caller actually receives.
+- Reading input inside every calculation: isolate the interface so tests can call the logic directly.
+- Making an abstraction before understanding the rule: a shorter name does not automatically make a clearer contract.
+
+## The FDE connection
+
+Customer systems change. A useful contract lets you replace a price source, UI, or storage layer without rewriting the business calculation. An FDE explains which changes stay local and which changes affect the contract other teams rely on.
+
+## Build your lesson project
+
+**A reusable quote calculator**
+
+A small service business creates quotes with line items and a delivery fee. Build calculation functions using integer cents, plus a thin display layer. Define supported prices and quantities explicitly. The first version has no tax integration, discounts, payments, or live exchange rates; those are separate scope decisions.
+
+- Calculation functions for line totals, subtotal, and grand total.
+- A readable example quote with two line items.
+- A written contract for integer prices and quantities.
+- Tests for zero, negative, and unsupported inputs.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Which function contracts could another developer rely on?
+- Why is returning a value different from printing it?
+- Which possible future change would require a contract change?
+
+## References and next steps
+
+- [Python: defining functions](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)
+
+[← Lesson 3](../03_Day_Conditionals_Loops/) · [Lesson 5 →](../05_Day_Lists_Dictionaries/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** A function hides *how* and exposes *what*. You don't need to know how `print()` works inside — you just use it. Abstraction is how humans manage complexity: the single most valuable concept in this entire repo.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -108,3 +218,6 @@ Rewrite your day-3 guessing game so `main()` is under 10 lines — everything el
 ---
 
 [← Day 3](../03_Day_Conditionals_Loops/) · [Day 5 →](../05_Day_Lists_Dictionaries/)
+<!-- original-workshop:end -->
+
+</details>

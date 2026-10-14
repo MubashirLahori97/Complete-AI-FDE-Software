@@ -1,0 +1,2 @@
+A completed release record contains an actual commit, hosted URL, observed check results, and a practical recovery step.
+Placeholders are not evidence of a deployed application.

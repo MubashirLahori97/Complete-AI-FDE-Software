@@ -1,7 +1,122 @@
-# 📘 Day 23 — Production Reality: Safety, Attacks & Cost
+# Day 23 — Permissions, prompt injection, budgets, and operating cost
 
-![Day 23 visual](../images/days/day-23.svg)
+Production AI is a surrounding system of data boundaries, application permissions, resource limits, and recovery behavior. A model prompt cannot enforce all of those responsibilities. Today you will threat-model a narrow document-assistant workflow and implement permission and budget gates outside generation.
 
+**Your project:** [A permission and budget boundary for the assistant](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Distinguish untrusted instruction-like content from trusted application authority.
+- Apply document permissions and resource limits before work is executed.
+- Estimate operating cost and test abuse/failure cases under an explicit scope.
+
+## Understand the concept
+
+### Untrusted content can contain instructions
+
+A user message or retrieved document can ask the assistant to ignore rules, disclose data, or perform an unauthorized action. Treat that text as data within your defined task, not a trusted change to application policy. Delimiters and prompt wording can help model behavior, but permission checks must remain in code and the data layer. Minimize what the model can access so a model failure does not automatically expose everything in the customer environment.
+
+### Enforce authority and resource budgets
+
+Use trusted user identity to decide which documents and tools can be used. Check limits before an expensive operation and define what happens when the limit is reached. Rate limits, per-request token budgets, timeouts, and step counts address different resource dimensions. If multiple workers share a spending or request limit, a naive in-memory counter is not a complete production enforcement mechanism. Document the scope of your lesson prototype rather than claiming it protects distributed traffic.
+
+### Cost estimates need operational assumptions
+
+State traffic volume, usage per task, provider prices, retrieval/index cost, and hosting assumptions. Distinguish estimated demand from measured demand. Include unexpected retries and large inputs in the analysis. Useful alerts need an owner and a response, not merely a dashboard number. Security tests against five sample attacks provide limited evidence about those cases; they do not prove that every future injection or data-leak path is impossible.
+
+## A worked example, step by step
+
+The trusted caller supplies identity separately from the question or model output.
+
+```python
+permissions = {"staff-1": {"public-faq"}, "manager-1": {"public-faq", "internal-pricing"}}
+
+def allowed_document(user_id, document_id):
+    return document_id in permissions.get(user_id, set())
+
+user_id = "staff-1"
+for document_id in ["public-faq", "internal-pricing"]:
+    result = "allowed" if allowed_document(user_id, document_id) else "forbidden"
+    print(document_id, result)
+print("Model text cannot change the trusted permission map")
+```
+
+**Expected result**
+
+```text
+public-faq allowed
+internal-pricing forbidden
+Model text cannot change the trusted permission map
+```
+
+The policy maps trusted fixture identities to permitted resource IDs. The default set denies unknown users rather than granting broad access. The gate is applied before selecting a document for context. A real service must authenticate the caller; accepting a user_id supplied freely in a browser request would not establish trusted identity. The model cannot override this map merely by returning an admin role in its output.
+
+## Practise before building
+
+### Exercise 1: Draw trust boundaries
+
+Mark user input, retrieved text, trusted identity, policy, and tool execution on your pipeline diagram.
+
+**Hint:** Do not place trusted authority inside model-provided text.
+
+**Check your result:** You can name the enforcement point for each protected resource.
+
+### Exercise 2: Budget a failure
+
+Estimate cost with normal traffic, doubled output length, and repeated retry attempts using fictional prices.
+
+**Hint:** Show assumptions and separate each cost component.
+
+**Check your result:** The reader can reproduce the arithmetic and see its limits.
+
+### Exercise 3: Attack a scoped fixture
+
+Test instruction-like document text asking to reveal a forbidden source.
+
+**Hint:** Inspect what reaches retrieval and context, not just the final wording.
+
+**Check your result:** The forbidden source remains absent regardless of the text's request.
+
+## Common mistakes and how to debug them
+
+- Using a model-generated role or a user-supplied ID as trusted authority.
+- Relying on a prompt to protect data that was already retrieved.
+- Calling a small attack sample or single-process counter a complete production defense.
+
+## The FDE connection
+
+Customers have permission rules, cost constraints, and operators who need to recover from failures. An FDE translates those constraints into enforceable boundaries and explicitly scopes the claims supported by the tests.
+
+## Build your lesson project
+
+**A permission and budget boundary for the assistant**
+
+Harden the fictional document assistant with trusted-user fixtures, document filtering, request limits, and explicit exhausted-budget behavior. Add a small threat model and abuse test set. Keep the prototype's limits visible: fixture identity and single-process budgets demonstrate boundaries but are not a deployed authentication or distributed-quota system.
+
+- A trust-boundary diagram and protected-resource list.
+- Permission filtering before context construction.
+- Explicit request/resource limits and recovery results.
+- An abuse-test report and a reproducible cost estimate.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Which check enforces authority outside model output?
+- What happens before and after the budget gate?
+- What would be misleading about calling the prototype fully secure?
+
+## References and next steps
+
+- [OWASP: prompt injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+- [OWASP: authorization guidance](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+
+[← Lesson 22](../22_Day_Evals/) · [Lesson 24 →](../24_Day_FastAPI_Databases/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** Demos are optimistic; production is adversarial. **Guardrails** are the layers that keep an AI system safe and sane: input validation, output filtering, injection defense, rate limits, and cost caps. And **unit economics** — cost per user vs revenue per user — decides whether the whole thing deserves to exist. Today you learn to think like someone whose system is *under attack and on a budget*.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -98,3 +213,6 @@ Because every system has gaps, and hidden gaps become incidents. Documented gaps
 ---
 
 [← Day 22](../22_Day_Evals/) · [Day 24 →](../24_Day_FastAPI_Databases/)
+<!-- original-workshop:end -->
+
+</details>

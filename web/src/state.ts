@@ -1,4 +1,4 @@
-import { lessons, projectDefinitions } from './data';
+import { lessons, projectDefinitions, dailyProjects } from './data';
 
 export const STORAGE_KEY = 'fde-academy-v1';
 export interface ProjectEvidence {
@@ -16,6 +16,7 @@ export interface Progress {
   quizPassed: number[];
   notes: Record<string, string>;
   checkpoints: Record<string, boolean[]>;
+  lessonProjectChecks: Record<string, boolean[]>;
   drafts: Record<string, string>;
   projects: Record<string, ProjectEvidence>;
   phaseTasks: Record<string, boolean[]>;
@@ -31,6 +32,7 @@ export const emptyProgress = (): Progress => ({
   quizPassed: [],
   notes: {},
   checkpoints: {},
+  lessonProjectChecks: {},
   drafts: {},
   projects: {},
   phaseTasks: {},
@@ -85,6 +87,11 @@ export function parseProgress(value: unknown): Progress {
     const key = String(lesson.day);
     if (isRecord(value.notes)) result.notes[key] = text(value.notes[key]);
     if (isRecord(value.checkpoints)) result.checkpoints[key] = flags(value.checkpoints[key], 2);
+    if (isRecord(value.lessonProjectChecks))
+      result.lessonProjectChecks[key] = flags(
+        value.lessonProjectChecks[key],
+        dailyProjects[lesson.day - 1].acceptance.length,
+      );
     if (isRecord(value.completed) && validDate(value.completed[key]))
       result.completed[key] = value.completed[key];
   }
@@ -132,7 +139,9 @@ export function canComplete(progress: Progress, day: number): boolean {
   return (
     progress.quizPassed.includes(day) &&
     (progress.notes[day] || '').trim().length >= 20 &&
-    progress.checkpoints[day]?.filter(Boolean).length === 2
+    progress.checkpoints[day]?.filter(Boolean).length === 2 &&
+    progress.lessonProjectChecks[day]?.filter(Boolean).length ===
+      dailyProjects[day - 1].acceptance.length
   );
 }
 export function completionCount(progress: Progress): number {

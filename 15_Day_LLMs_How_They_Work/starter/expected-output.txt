@@ -1,0 +1,2 @@
+Fictional estimate: $6.00
+Includes text input/output only; verify provider usage and prices separately

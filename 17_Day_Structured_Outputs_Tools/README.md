@@ -1,7 +1,125 @@
-# 📘 Day 17 — Connecting Models to Code: Tools
+# Day 17 — Structured outputs, validated tools, and safe execution boundaries
 
-![Day 17 visual](../images/days/day-17.svg)
+Tool use connects a model's proposed action to code that can perform it. The crucial engineering boundary is the application's decision to accept, reject, or require review of that proposal. Today you will build a small allowlisted dispatcher and learn why a tool schema, validation, authorization, and actual execution are separate concerns.
 
+**Your project:** [An allowlisted inventory tool service](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+
+## What you will be able to do
+
+- Describe the loop from model proposal to tool result and final response.
+- Validate tool names and argument types before execution.
+- Keep authorization and consequential actions outside model control.
+
+## Understand the concept
+
+### A proposal is not an authorized action
+
+A model may return a tool name and arguments. Your program decides whether the name exists, the arguments are valid, and the user is allowed to perform the action. A schema helps communicate the contract but does not replace application checks. Never pass arbitrary model-proposed text into eval, a shell, or unrestricted SQL. Use a small dispatcher that maps recognized names to specific functions and handles unsupported proposals visibly.
+
+### Validate before calling
+
+Check outer shape, required fields, types, ranges, and unexpected fields before passing values to a tool. An integer-looking string is not automatically an integer argument. Decide whether additional fields are rejected or ignored, and keep the policy consistent. Authorization depends on trusted identity and resource policy, not a role field supplied inside model arguments. A successful tool call returns structured data that the application can inspect before it is presented to the user.
+
+### Side effects add operational requirements
+
+A read-only lookup has a different impact from sending an email or charging a card. For consequential actions, define approval, idempotency, logging, and recovery responsibilities. A repeated request should not accidentally repeat a financial or external action. Tool timeouts and errors must have explicit results rather than being transformed into invented success messages. Begin with a read-only tool while learning the contract and observation loop.
+
+## A worked example, step by step
+
+Only one tool exists. Its contract accepts exactly one non-blank product ID.
+
+```python
+inventory = {"P001": {"name": "Notebook", "stock": 12}}
+
+def dispatch(call):
+    if call.get("name") != "get_stock":
+        raise ValueError("Unsupported tool")
+    arguments = call.get("arguments")
+    if not isinstance(arguments, dict) or set(arguments) != {"product_id"}:
+        raise ValueError("Invalid arguments")
+    product_id = arguments["product_id"]
+    if not isinstance(product_id, str) or not product_id.strip():
+        raise ValueError("A product ID is required")
+    return inventory.get(product_id, {"error": "Product not found"})
+
+proposal = {"name": "get_stock", "arguments": {"product_id": "P001"}}
+print(dispatch(proposal))
+```
+
+**Expected result**
+
+```text
+{'name': 'Notebook', 'stock': 12}
+```
+
+The dispatcher checks the recognized operation before considering arguments. It verifies the argument shape and product-ID type before lookup. The data is a fictional read-only inventory, so the example has no payment or messaging side effect. A complete dispatcher should first validate that the proposal itself is a dictionary, enforce resource access using trusted identity, and record a safe tool result. This fixture validates the application boundary, not a model's ability to choose tools.
+
+## Practise before building
+
+### Exercise 1: Draw the action loop
+
+Show the user request, model proposal, application checks, tool result, and final response as separate steps.
+
+**Hint:** Put authorization before execution.
+
+**Check your result:** You can identify which component can reject a proposal.
+
+### Exercise 2: Reject unsupported proposals
+
+Test an unknown tool, an array as arguments, an extra field, and an empty product ID.
+
+**Hint:** Validate structure before operations that assume a dictionary or string.
+
+**Check your result:** None of the invalid proposals executes a different tool.
+
+### Exercise 3: Discuss a side-effect tool
+
+Write the additional controls required before a hypothetical send-email tool could be used.
+
+**Hint:** Include permission, approval, repeated requests, and failure reporting.
+
+**Check your result:** A model cannot authorize itself by supplying a role or approval argument.
+
+## Common mistakes and how to debug them
+
+- Executing a tool proposal merely because the model emitted it.
+- Using eval or unrestricted command strings as a tool implementation.
+- Checking argument shape but omitting trusted user and resource authorization.
+
+## The FDE connection
+
+The most valuable customer integrations often touch existing records and workflows. An FDE defines the exact allowed operations and their trust boundaries, so natural-language convenience does not silently widen the customer's permissions.
+
+## Build your lesson project
+
+**An allowlisted inventory tool service**
+
+A shop assistant needs read-only stock lookup and product search over fictional inventory. Build a dispatcher with two named tools, argument validation, not-found results, and a trusted-user access policy. Demonstrate invalid proposals and resource restrictions with fixtures before optionally connecting a model that proposes tool calls.
+
+- Two documented read-only tool contracts and a dispatcher.
+- A fictional inventory dataset and trusted-user policy fixtures.
+- Tests for invalid names, arguments, and forbidden resources.
+- A trace of proposal, validation, execution, and tool result.
+
+Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
+
+## Explain it back
+
+- Who decides whether the tool is authorized?
+- What changes when a tool has external side effects?
+- Which trace fields are useful without exposing private content?
+
+## References and next steps
+
+- [Anthropic: building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
+- [OWASP: prompt injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+
+[← Lesson 16](../16_Day_Prompt_Engineering/) · [Lesson 18 →](../18_Day_Embeddings_Semantic_Search/)
+
+<details>
+<summary>Optional original workshop and alternative exercises</summary>
+
+<!-- original-workshop:begin -->
 **Concept:** **Tool calling** = the model decides *what* to do, your code does *how*. You give the model a menu of functions (with strict contracts — names, parameters, descriptions); it replies "call `calculate` with these arguments"; your code executes and returns the result; the model writes the final answer. The contract between them — the schema — is the engineering.
 
 **Time:** ~60–90 minutes. **Rule:** explain the concept in plain words, or the day doesn't count.
@@ -108,3 +226,6 @@ The model can be tricked (or just mistaken) into destructive arguments — e.g.,
 ---
 
 [← Day 16](../16_Day_Prompt_Engineering/) · [Day 18 →](../18_Day_Embeddings_Semantic_Search/)
+<!-- original-workshop:end -->
+
+</details>

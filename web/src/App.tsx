@@ -110,7 +110,7 @@ export default function App() {
   const completed = completionCount(progress);
   const lessonMatch = path.match(/^\/lesson\/(\d+)$/);
   const phaseMatch = path.match(/^\/phase\/([234])$/);
-  const documentMatch = path.match(/^\/document\/(ROADMAP|CURRICULUM|VISION)\.md$/);
+  const documentMatch = path.match(/^\/document\/(ROADMAP|CURRICULUM|VISION|PROJECTS)\.md$/);
   const lessonDay = lessonMatch ? Number(lessonMatch[1]) : 0;
   const selectedPath =
     lessonMatch || phaseMatch ? '/curriculum' : documentMatch ? '/resources' : path;
@@ -146,7 +146,13 @@ export default function App() {
   else if (path === '/settings') page = <Settings progress={progress} update={update} />;
   else if (lessonDay >= 1 && lessonDay <= 30)
     page = (
-      <Lesson key={lessonDay} lesson={lessons[lessonDay - 1]} progress={progress} update={update} />
+      <Lesson
+        key={`${lessonDay}:${params.get('tab') || 'learn'}`}
+        lesson={lessons[lessonDay - 1]}
+        progress={progress}
+        update={update}
+        initialTab={params.get('tab') || 'learn'}
+      />
     );
   else if (phaseMatch)
     page = <Phase id={Number(phaseMatch[1])} progress={progress} update={update} />;

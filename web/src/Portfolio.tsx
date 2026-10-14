@@ -1,5 +1,5 @@
 import { ArrowRight, Download, FolderGit2, Link as LinkIcon, CheckCircle2 } from 'lucide-react';
-import { projectDefinitions } from './data';
+import { projectDefinitions, dailyProjects } from './data';
 import { downloadFile, emptyEvidence, safeUrl, type Progress, type ProjectEvidence } from './state';
 import { Checkbox, PageHeading, ProgressBar } from './ui';
 
@@ -19,7 +19,7 @@ export default function Portfolio({
     });
     downloadFile(
       'fde-portfolio.md',
-      `# ${progress.name ? `${progress.name} — ` : ''}FDE Learning Portfolio\n\nSelf-reported learning evidence. Links and results have not been independently verified.\n\n${sections.join('\n\n---\n\n')}`,
+      `# ${progress.name ? `${progress.name} — ` : ''}FDE Learning Portfolio\n\nSelf-reported learning evidence. Links and results have not been independently verified.\n\n${sections.join('\n\n---\n\n')}\n\n# Lesson projects\n\n${dailyProjects.map((project) => `## Lesson ${project.day}: ${project.title}\n\n${progress.notes[project.day] || 'Build evidence not recorded.'}\n\n${project.acceptance.map((check, index) => `- [${progress.lessonProjectChecks[project.day]?.[index] ? 'x' : ' '}] ${check}`).join('\n')}`).join('\n\n')}`,
       'text/markdown',
     );
   };
@@ -155,6 +155,34 @@ export default function Portfolio({
           );
         })}
       </div>
+      <section className="daily-projects-section">
+        <h2>Your 30 lesson projects</h2>
+        <p className="muted">
+          Build a smaller project with every lesson. Choose your strongest work for the showcase
+          above.
+        </p>
+        <div className="daily-projects-grid">
+          {dailyProjects.map((project) => {
+            const done = progress.lessonProjectChecks[project.day]?.filter(Boolean).length || 0;
+            return (
+              <a
+                className="daily-project-row"
+                key={project.day}
+                href={`#/lesson/${project.day}?tab=project`}
+              >
+                <span className="day-number">{String(project.day).padStart(2, '0')}</span>
+                <div>
+                  <h3>{project.title}</h3>
+                  <p>
+                    {done} / {project.acceptance.length} checks recorded
+                  </p>
+                </div>
+                <ArrowRight size={16} />
+              </a>
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }

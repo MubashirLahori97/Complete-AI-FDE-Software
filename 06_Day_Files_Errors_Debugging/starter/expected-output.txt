@@ -1,0 +1,2 @@
+Round trip preserved 1 contact
+Stored data is not valid JSON; keep the original for investigation

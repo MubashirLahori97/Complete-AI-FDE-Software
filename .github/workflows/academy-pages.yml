@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - "web/**"
+      - "scripts/**"
+      - "**/PROJECT.md"
+      - "**/starter/**"
       - "**/README.md"
       - "*.md"
       - ".github/workflows/academy-pages.yml"

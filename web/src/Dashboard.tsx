@@ -123,7 +123,7 @@ export default function Dashboard({ progress }: { progress: Progress }) {
             </a>
           </div>
           <p className="hero-footnote">
-            Open source <span>·</span> No sign-up <span>·</span> Your own pace
+            30 lessons <span>·</span> 30 projects <span>·</span> Your own pace
           </p>
         </div>
         <JourneyArt />
