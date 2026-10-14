@@ -6,9 +6,9 @@
 
 ## Interactive FDE Academy
 
-This curriculum now has an interactive web companion in [`web/`](web/): searchable lessons, concept checks, Python/JavaScript/HTML exercises, saved progress, customer scenarios, and a portfolio tracker.
+The default path is now **Learn with Amina**: 30 guided lessons in simple English. Start with one shop change, read one idea at a time, follow an example, complete a checked code exercise, and build a real project. Read [the guided-course guide](GUIDED-COURSE.md) for setup, the complete path, and independent readiness review.
 
-**Every one of the 30 lessons now includes a dedicated project.** The expanded lessons add deeper explanations, worked examples, three practice exercises, debugging guidance, and FDE context. Each [project guide](PROJECTS.md) provides milestones, five acceptance checks, a test matrix, stretch challenges, and a downloadable starter kit in the app.
+Every guided lesson includes three project milestones, five acceptance checks, test situations, an independent extension, reflections, and downloadable files. Later lessons use [a working React/FastAPI/SQLite shop](guided-projects/shop-workspace/README.md). The earlier workshops remain in the reference library.
 
 ```bash
 cd web
@@ -20,11 +20,11 @@ Read the [app setup and publishing guide](web/README.md) to run it or publish it
 
 ---
 
-**AI writes the code now. This repo teaches what AI can't do for you: concepts, engineering judgment, and business.**
+**AI can help write code. You still need to understand, test, debug, secure, and explain the result.**
 
-**The promise:** a normal person starting from zero — 90 days later — is a complete, hire-ready software engineer. Ships real products. Reasons about systems. Works like a professional. And can prove all of it.
+**The aim:** build software and AI engineering skills through tested projects and customer work. Lesson numbers describe an order, not a deadline. A beginner may need several sessions for a lesson and more time for its project.
 
-**The milestones:** day 30 — you earn from AI software. Day 90 — the market can't ignore you.
+**Readiness evidence:** a reviewer can reproduce your work, test an unseen change, and hear you explain decisions. Completion alone does not guarantee a job, income, or mastery. Use the final skill review to choose further practice.
 
 > 📖 **New here? Read [THE VISION](VISION.md) first.** Two minutes. It's the reason this repo exists — and the reason you'll finish it.
 

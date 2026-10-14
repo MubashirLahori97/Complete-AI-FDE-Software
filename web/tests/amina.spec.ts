@@ -77,5 +77,6 @@ test('the main action fits a small phone and remains visible throughout the less
     }
   }
   await page.getByRole('link', { name: 'Leave lesson' }).click();
-  await expect(page.getByRole('link', { name: 'Try the sample lesson' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Start with one small thing.' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Start lesson 1' })).toBeVisible();
 });

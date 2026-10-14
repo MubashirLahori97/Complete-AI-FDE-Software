@@ -22,6 +22,7 @@ import { completionCount, loadProgress, STORAGE_KEY, type Progress } from './sta
 import { ProgressBar } from './ui';
 const Dashboard = lazy(() => import('./Dashboard'));
 const AminaLesson = lazy(() => import('./AminaLesson'));
+const CourseApp = lazy(() => import('./course/CourseApp'));
 const Curriculum = lazy(() => import('./Curriculum'));
 const Lesson = lazy(() => import('./Lesson'));
 const Playground = lazy(() => import('./Playground'));
@@ -39,7 +40,7 @@ const Settings = lazy(() =>
 );
 
 const navigation = [
-  { path: '/', label: 'Overview', icon: LayoutDashboard },
+  { path: '/library', label: 'Overview', icon: LayoutDashboard },
   { path: '/curriculum', label: 'Learning path', icon: BookOpen },
   { path: '/lab', label: 'Practice lab', icon: Code2 },
   { path: '/scenarios', label: 'Field scenarios', icon: Users },
@@ -95,6 +96,8 @@ export default function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
     main.current?.focus({ preventScroll: true });
+    if (path === '/' || path === '/path' || path === '/evidence' || path.startsWith('/learn/'))
+      return;
     const match = path.match(/^\/lesson\/(\d+)$/);
     const day = match ? Number(match[1]) : 0;
     const title =
@@ -132,7 +135,7 @@ export default function App() {
     )
     .slice(0, 6);
   let page;
-  if (path === '/') page = <Dashboard progress={progress} />;
+  if (path === '/library') page = <Dashboard progress={progress} />;
   else if (path === '/curriculum')
     page = (
       <Curriculum
@@ -171,6 +174,12 @@ export default function App() {
           <ArrowRight size={16} />
         </a>
       </div>
+    );
+  if (path === '/' || path === '/path' || path === '/evidence' || path.startsWith('/learn/'))
+    return (
+      <Suspense fallback={<p role="status">Opening your lesson…</p>}>
+        <CourseApp path={path} />
+      </Suspense>
     );
   if (path === '/sample/amina')
     return (

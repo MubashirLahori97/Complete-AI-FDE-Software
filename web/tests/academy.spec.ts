@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('a new learner starts with real zero progress and can search the curriculum', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#/library');
   await expect(page.getByRole('heading', { name: 'A little progress, every day.' })).toBeVisible();
   await expect(
     page.getByRole('progressbar', { name: 'Core course completion', exact: true }),
@@ -242,7 +242,7 @@ test('mobile pages fit the viewport and navigation remains usable', async ({ pag
 });
 
 test('keyboard search opens and Escape restores the page', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#/library');
   await page.keyboard.press('Control+k');
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.getByRole('textbox', { name: 'Search the curriculum' })).toBeFocused();

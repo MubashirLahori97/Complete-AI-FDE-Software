@@ -1,6 +1,6 @@
 # FDE Academy
 
-An interactive companion to the repository's existing Python, software engineering, AI, and Forward Deployed Engineering curriculum.
+The default app is the complete **Learn with Amina** guided course. Read [GUIDED-COURSE.md](../GUIDED-COURSE.md) for its 30 lessons, checked exercises, projects, real shop workspace, saved evidence, and independent review. The earlier experience described below remains available at `#/library` as a reference.
 
 ## Run locally
 

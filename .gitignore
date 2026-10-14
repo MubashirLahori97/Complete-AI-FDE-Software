@@ -31,4 +31,11 @@ web/test-results/
 web/playwright-report/
 web/*.tsbuildinfo
 web/public/projects/
+web/public/course-runtime/
+web/public/course-projects/
+web/public/course/
+guided-projects/shop-workspace/frontend/node_modules/
+guided-projects/shop-workspace/frontend/dist/
+guided-projects/shop-workspace/__pycache__/
+guided-projects/shop-workspace/*.db
 **/starter/__pycache__/
