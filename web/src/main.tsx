@@ -8,6 +8,7 @@ import '@fontsource/dm-mono/400.css';
 import App from './App';
 import './styles.css';
 import './project-styles.css';
+import './amina-lesson.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

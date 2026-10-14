@@ -21,6 +21,7 @@ import { lessons, REPO } from './data';
 import { completionCount, loadProgress, STORAGE_KEY, type Progress } from './state';
 import { ProgressBar } from './ui';
 const Dashboard = lazy(() => import('./Dashboard'));
+const AminaLesson = lazy(() => import('./AminaLesson'));
 const Curriculum = lazy(() => import('./Curriculum'));
 const Lesson = lazy(() => import('./Lesson'));
 const Playground = lazy(() => import('./Playground'));
@@ -104,7 +105,9 @@ export default function App() {
             ? 'Settings'
             : path === '/resources'
               ? 'Resources'
-              : 'Learning workspace');
+              : path === '/sample/amina'
+                ? 'Amina’s shop · Your first variable'
+                : 'Learning workspace');
     document.title = `${title} · FDE Academy`;
   }, [hash, path]);
   const completed = completionCount(progress);
@@ -168,6 +171,18 @@ export default function App() {
           <ArrowRight size={16} />
         </a>
       </div>
+    );
+  if (path === '/sample/amina')
+    return (
+      <Suspense
+        fallback={
+          <p className="muted" role="status">
+            Opening Amina’s shop…
+          </p>
+        }
+      >
+        <AminaLesson />
+      </Suspense>
     );
   return (
     <div className="app-shell">
