@@ -107,7 +107,7 @@ test('output alone cannot complete a mission; explanations and review stay separ
     .fill(
       'I predicted a missing mail app would prevent a draft; the contact link cannot itself send a message. More practice remains.',
     );
-  await page.getByLabel('Review record', { exact: true }).selectOption('revisit');
+  await page.getByRole('combobox', { name: 'Review record', exact: true }).selectOption('revisit');
   await page.getByRole('button', { name: 'Save mission practice record', exact: true }).click();
   await page.reload();
   await expect(page.locator('.mission-saved')).toContainText('more practice needed');
@@ -120,7 +120,7 @@ test('output alone cannot complete a mission; explanations and review stay separ
       'A changed project purpose needs a new understanding review, rather than reusing the old result.',
     );
   await page.getByRole('button', { name: '5 Review', exact: true }).click();
-  await expect(page.getByLabel('Review record', { exact: true })).toHaveValue('unreviewed');
+  await expect(page.getByRole('combobox', { name: 'Review record', exact: true })).toHaveValue('unreviewed');
   await expect(page.locator('.mission-saved')).toHaveCount(0);
 });
 
