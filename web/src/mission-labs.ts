@@ -100,7 +100,7 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
     case 1:
       return result(
         s('heading').trim() || 'A heading is still missing',
-        'The live page below displays your heading. The browser is doing this work locally; an AI service does not participate in this change.',
+        'The live page displays your heading. The browser is doing this work locally; an AI service does not participate in this change.',
         [
           'A visitor opens the page',
           'Files are already in this browser',

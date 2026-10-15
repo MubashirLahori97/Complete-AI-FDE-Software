@@ -28,6 +28,7 @@ import './causal-studio.css';
 import GuidedComparison, { ComparisonSwitch } from './GuidedComparison';
 import { labStories } from './lab-stories';
 import { rememberLabEdit, type LabEdit } from './lab-history';
+import './studio-presence.css';
 const LabWorld = lazy(() => import('./LabWorld'));
 
 export default function CausalStudio({
@@ -70,6 +71,9 @@ export default function CausalStudio({
   const [comparisonChoice, setComparisonChoice] = useState(0);
   const editGroup = useRef(0);
   const audio = useRef<AudioContext | null>(null);
+  const dock = useRef<HTMLDivElement>(null);
+  const pageResult = useRef<HTMLDivElement>(null);
+  const revealFrame = useRef<number | null>(null);
   const uid = useId();
   const nativePage = id === 1 || id === 3;
   const nodes = missions[id - 1].flow.map((node, index) => ({
@@ -94,6 +98,29 @@ export default function CausalStudio({
     if (!previous) return;
     setHistory(history.slice(0, -1));
     applyValues(previous.before);
+  };
+  const tryFirstChange = () => {
+    save(spec.try);
+    // On a tall phone/tablet screen, keep the sticky input with its actual page.
+    // Free typing stays in place; comparisons and system inspection keep their own layout.
+    if (
+      !nativePage ||
+      showSystem ||
+      comparisonOpen ||
+      window.innerHeight <= 600 ||
+      window.matchMedia('(min-width: 1100px)').matches
+    )
+      return;
+    if (revealFrame.current !== null) cancelAnimationFrame(revealFrame.current);
+    revealFrame.current = requestAnimationFrame(() => {
+      revealFrame.current = null;
+      const result = pageResult.current;
+      if (!result) return;
+      const bounds = result.getBoundingClientRect();
+      const inset = (dock.current?.getBoundingClientRect().height || 0) + 16;
+      if (bounds.top + Math.min(bounds.height, 300) > window.innerHeight - 16)
+        window.scrollBy({ top: Math.max(0, bounds.top - inset), behavior: 'instant' });
+    });
   };
   const tone = () => {
     if (!sound) return;
@@ -122,7 +149,8 @@ export default function CausalStudio({
   }, []);
   useEffect(
     () => () => {
-      void audio.current?.close();
+      if (revealFrame.current !== null) cancelAnimationFrame(revealFrame.current);
+      void audio.current?.close().catch(() => {});
     },
     [],
   );
@@ -197,221 +225,230 @@ export default function CausalStudio({
       className="causal-studio"
       aria-label={`Mission ${id} interactive studio`}
       data-lab={id}
+      data-native={nativePage}
     >
-      <header className="lab-heading">
-        <div>
-          <span className="lab-eyebrow">
-            THE LEARNING STUDIO <span> / </span> {String(id).padStart(2, '0')}
-          </span>
-          <h3 className="lab-title">{spec.title}</h3>
-          <p className="lab-scene-context">{labStories[id - 1].scene}</p>
-          <p className="lab-first-task">
-            <strong>Try this:</strong> {spec.task}
-          </p>
-        </div>
-        <button
-          className="lab-icon"
-          aria-label={sound ? 'Mute studio sound' : 'Enable studio sound'}
-          aria-pressed={sound}
-          onClick={() => onSoundChange(!sound)}
-        >
-          {sound ? <Volume2 size={17} /> : <VolumeX size={17} />}
-        </button>
-      </header>
-      <div className="lab-control-dock">
-        {control(primary)}
-        <button className="lab-first" onClick={() => save(spec.try)}>
-          {spec.first}
-          <ArrowRight size={16} />
-        </button>
-      </div>
-      {spec.controls.length > 1 && (
-        <details className="lab-more">
-          <summary>
-            Change another part <ChevronDown size={13} />
-          </summary>
-          <div>
-            {spec.controls.slice(1).map((item) => (
-              <div key={item.id}>{control(item)}</div>
-            ))}
-          </div>
-        </details>
-      )}
-      <div
-        className={`lab-observation lab-tone-${outcome.tone}`}
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        <span aria-hidden="true" />
-        <strong>{pageMessage || outcome.headline}</strong>
-        <small>
-          {showSystem || evidence
-            ? 'Every component shown is part of a local teaching model.'
-            : 'This preview runs real page code in your browser.'}
-        </small>
-      </div>
-      <div className="lab-stage">
-        <GuidedComparison
-          id={id}
-          values={values}
-          choice={comparisonChoice}
-          onChoice={setComparisonChoice}
-          open={comparisonOpen}
-          onOpen={setComparisonOpen}
-        />
-        <div className="lab-experiment-main">
-          <div className="lab-scene-toolbar">
-            <span>
-              <Box size={14} />
-              {showSystem
-                ? flat || renderer === 'diagram'
-                  ? 'System diagram'
-                  : 'The system in 3D'
-                : nativePage
-                  ? 'Your running page'
-                  : 'The experiment'}
-            </span>
+      <div className="lab-play-surface">
+        <div className="lab-instruction-panel">
+          <header className="lab-heading">
             <div>
-              {(nativePage || evidence) && (
-                <button onClick={() => setShowSystem(!showSystem)}>
-                  {showSystem
-                    ? nativePage
-                      ? 'Back to the page'
-                      : 'Back to the experiment'
-                    : nativePage
-                      ? 'Look behind the page'
-                      : 'Look inside the system'}
-                  <Maximize2 size={12} />
+              <span className="lab-eyebrow">
+                THE LEARNING STUDIO <span> / </span> {String(id).padStart(2, '0')}
+              </span>
+              <h3 className="lab-title">{spec.title}</h3>
+              <p className="lab-scene-context">{labStories[id - 1].scene}</p>
+              <p className="lab-first-task">
+                <strong>Try this:</strong> {spec.task}
+              </p>
+            </div>
+            <button
+              className="lab-icon"
+              aria-label={sound ? 'Mute studio sound' : 'Enable studio sound'}
+              aria-pressed={sound}
+              onClick={() => onSoundChange(!sound)}
+            >
+              {sound ? <Volume2 size={17} /> : <VolumeX size={17} />}
+            </button>
+          </header>
+          <div className="lab-control-dock" ref={dock}>
+            {control(primary)}
+            <button className="lab-first" onClick={tryFirstChange}>
+              {spec.first}
+              <ArrowRight size={16} />
+            </button>
+          </div>
+          {spec.controls.length > 1 && (
+            <details className="lab-more">
+              <summary>
+                Change another part <ChevronDown size={13} />
+              </summary>
+              <div>
+                {spec.controls.slice(1).map((item) => (
+                  <div key={item.id}>{control(item)}</div>
+                ))}
+              </div>
+            </details>
+          )}
+          <div
+            className={`lab-observation lab-tone-${outcome.tone}`}
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <span aria-hidden="true" />
+            <strong>{pageMessage || outcome.headline}</strong>
+            <small>
+              {showSystem || evidence
+                ? 'Every component shown is part of a local teaching model.'
+                : 'This preview runs real page code in your browser.'}
+            </small>
+          </div>
+        </div>
+        <div className="lab-stage">
+          <GuidedComparison
+            id={id}
+            values={values}
+            choice={comparisonChoice}
+            onChoice={setComparisonChoice}
+            open={comparisonOpen}
+            onOpen={setComparisonOpen}
+          />
+          <div className="lab-experiment-main">
+            <div className="lab-scene-toolbar">
+              <span>
+                <Box size={14} />
+                {showSystem
+                  ? flat || renderer === 'diagram'
+                    ? 'System diagram'
+                    : 'The system in 3D'
+                  : nativePage
+                    ? 'Your running page'
+                    : 'The experiment'}
+              </span>
+              <div>
+                {(nativePage || evidence) && (
+                  <button onClick={() => setShowSystem(!showSystem)}>
+                    {showSystem
+                      ? nativePage
+                        ? 'Back to the page'
+                        : 'Back to the experiment'
+                      : nativePage
+                        ? 'Look behind the page'
+                        : 'Look inside the system'}
+                    <Maximize2 size={12} />
+                  </button>
+                )}
+                {showSystem && (
+                  <>
+                    <button
+                      onClick={() => {
+                        setFlat(!flat);
+                        setInspect(false);
+                      }}
+                    >
+                      {flat ? 'Use 3D' : 'Use flat diagram'}
+                    </button>
+                  </>
+                )}
+                <button
+                  disabled={!history.length}
+                  onClick={undo}
+                  aria-label="Undo last input change"
+                >
+                  Undo
                 </button>
-              )}
-              {showSystem && (
-                <>
+                <button aria-label="Reset the experiment" onClick={() => save(labValues(id))}>
+                  Reset <RotateCcw size={12} />
+                </button>
+              </div>
+            </div>
+            {comparisonOpen && (
+              <ComparisonSwitch id={id} choice={comparisonChoice} values={values} onApply={save} />
+            )}
+            {showSystem ? (
+              <>
+                <div className="lab-scene-frame" data-renderer={flat ? 'diagram' : renderer}>
+                  {flat ? (
+                    <WorldDiagram nodes={nodes} selected={selected} onSelect={setSelected} />
+                  ) : (
+                    <Suspense
+                      fallback={
+                        <WorldDiagram nodes={nodes} selected={selected} onSelect={setSelected} />
+                      }
+                    >
+                      <LabWorld
+                        nodes={nodes}
+                        selected={selected}
+                        onSelect={setSelected}
+                        revision={revision}
+                        spread={spread}
+                        angle={angle}
+                        inspect={inspect}
+                        reduced={reduced}
+                        tone={outcome.tone}
+                        traceEnd={outcome.active}
+                        onReady={setRenderer}
+                      />
+                    </Suspense>
+                  )}
+                </div>
+                {renderer === 'diagram' && !flat && (
+                  <p className="lab-fallback-note">
+                    3D is unavailable here. The diagram shows the same system and results.
+                  </p>
+                )}
+                <div className="lab-camera">
                   <button
+                    aria-pressed={inspect}
                     onClick={() => {
-                      setFlat(!flat);
-                      setInspect(false);
+                      setInspect(!inspect);
+                      if (flat) setFlat(false);
                     }}
                   >
-                    {flat ? 'Use 3D' : 'Use flat diagram'}
+                    Inspect in 3D
                   </button>
-                </>
-              )}
-              <button disabled={!history.length} onClick={undo} aria-label="Undo last input change">
-                Undo
-              </button>
-              <button aria-label="Reset the experiment" onClick={() => save(labValues(id))}>
-                Reset <RotateCcw size={12} />
-              </button>
-            </div>
-          </div>
-          {comparisonOpen && (
-            <ComparisonSwitch id={id} choice={comparisonChoice} values={values} onApply={save} />
-          )}
-          {showSystem ? (
-            <>
-              <div className="lab-scene-frame" data-renderer={flat ? 'diagram' : renderer}>
-                {flat ? (
-                  <WorldDiagram nodes={nodes} selected={selected} onSelect={setSelected} />
-                ) : (
-                  <Suspense
-                    fallback={
-                      <WorldDiagram nodes={nodes} selected={selected} onSelect={setSelected} />
-                    }
+                  <button
+                    aria-label="Rotate system left"
+                    disabled={flat}
+                    onClick={() => setAngle((a) => a - 0.3)}
                   >
-                    <LabWorld
-                      nodes={nodes}
-                      selected={selected}
-                      onSelect={setSelected}
-                      revision={revision}
-                      spread={spread}
-                      angle={angle}
-                      inspect={inspect}
-                      reduced={reduced}
-                      tone={outcome.tone}
-                      traceEnd={outcome.active}
-                      onReady={setRenderer}
+                    <RotateCcw size={14} />
+                  </button>
+                  <button
+                    aria-label="Rotate system right"
+                    disabled={flat}
+                    onClick={() => setAngle((a) => a + 0.3)}
+                  >
+                    <RotateCw size={14} />
+                  </button>
+                  <label>
+                    Separate the parts
+                    <input
+                      aria-label="Separate the system parts"
+                      type="range"
+                      min="0"
+                      max="1"
+                      step=".05"
+                      value={spread}
+                      onChange={(e) => setSpread(Number(e.target.value))}
                     />
-                  </Suspense>
-                )}
-              </div>
-              {renderer === 'diagram' && !flat && (
-                <p className="lab-fallback-note">
-                  3D is unavailable here. The diagram shows the same system and results.
-                </p>
-              )}
-              <div className="lab-camera">
-                <button
-                  aria-pressed={inspect}
-                  onClick={() => {
-                    setInspect(!inspect);
-                    if (flat) setFlat(false);
+                  </label>
+                  <button onClick={() => setRevision((r) => r + 1)}>
+                    Follow the change
+                    <ArrowRight size={13} />
+                  </button>
+                </div>
+                <div className="lab-node-detail">
+                  <span>{String(selected + 1).padStart(2, '0')}</span>
+                  <p>
+                    <strong>{nodes[selected].name}</strong>
+                    <small>In this model: {nodes[selected].runs}</small>
+                  </p>
+                  <output>{nodes[selected].value}</output>
+                </div>
+              </>
+            ) : evidence ? (
+              <ModelEvidence outcome={outcome} onChange={save} />
+            ) : (
+              <div className="lab-native-page" ref={pageResult}>
+                <LivePage
+                  heading={String(values.heading || '')}
+                  size={Number(values.size || 30)}
+                  rule={id === 1 || values.rule === true}
+                  onAction={(open, hasRule) => {
+                    setPageMessage(
+                      hasRule
+                        ? open
+                          ? 'The click rule opened the details inside this browser.'
+                          : 'The same rule hid the details again.'
+                        : 'The button is visible, but its action rule is absent.',
+                    );
+                    setRevision((r) => r + 1);
+                    tone();
                   }}
-                >
-                  Inspect in 3D
-                </button>
-                <button
-                  aria-label="Rotate system left"
-                  disabled={flat}
-                  onClick={() => setAngle((a) => a - 0.3)}
-                >
-                  <RotateCcw size={14} />
-                </button>
-                <button
-                  aria-label="Rotate system right"
-                  disabled={flat}
-                  onClick={() => setAngle((a) => a + 0.3)}
-                >
-                  <RotateCw size={14} />
-                </button>
-                <label>
-                  Separate the parts
-                  <input
-                    aria-label="Separate the system parts"
-                    type="range"
-                    min="0"
-                    max="1"
-                    step=".05"
-                    value={spread}
-                    onChange={(e) => setSpread(Number(e.target.value))}
-                  />
-                </label>
-                <button onClick={() => setRevision((r) => r + 1)}>
-                  Follow the change
-                  <ArrowRight size={13} />
-                </button>
+                />
               </div>
-              <div className="lab-node-detail">
-                <span>{String(selected + 1).padStart(2, '0')}</span>
-                <p>
-                  <strong>{nodes[selected].name}</strong>
-                  <small>In this model: {nodes[selected].runs}</small>
-                </p>
-                <output>{nodes[selected].value}</output>
-              </div>
-            </>
-          ) : evidence ? (
-            <ModelEvidence outcome={outcome} onChange={save} />
-          ) : (
-            <div className="lab-native-page">
-              <LivePage
-                heading={String(values.heading || '')}
-                size={Number(values.size || 30)}
-                rule={id === 1 || values.rule === true}
-                onAction={(open, hasRule) => {
-                  setPageMessage(
-                    hasRule
-                      ? open
-                        ? 'The click rule opened the details inside this browser.'
-                        : 'The same rule hid the details again.'
-                      : 'The button is visible, but its action rule is absent.',
-                  );
-                  setRevision((r) => r + 1);
-                  tone();
-                }}
-              />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
       {!!outcome.facts.length && (

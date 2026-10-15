@@ -18,7 +18,9 @@ export default function LivePage({
   const uid = useId();
   const frame = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(360);
+  const [loadedChannel, setLoadedChannel] = useState('');
   const channel = `${uid}:${heading}:${size}:${rule}`;
+  const ready = loadedChannel === channel;
   const document = useMemo(
     () => websiteDocument({ title: heading, accent: 'teal', size, rule, channel }),
     [channel],
@@ -42,13 +44,21 @@ export default function LivePage({
     window.addEventListener('message', receive);
     return () => window.removeEventListener('message', receive);
   }, [channel, onAction]);
+  // Height reports describe the body. Include the frame's two 1px borders.
   return (
     <iframe
+      key={channel}
       ref={frame}
       title={title}
       sandbox="allow-scripts"
       srcDoc={document}
-      style={{ height }}
+      aria-busy={!ready}
+      tabIndex={ready ? 0 : -1}
+      onLoad={() => {
+        setLoadedChannel(channel);
+        frame.current?.contentWindow?.postMessage({ type: 'fde-visual-measure', channel }, '*');
+      }}
+      style={{ height: height + 2, pointerEvents: ready ? undefined : 'none' }}
     />
   );
 }

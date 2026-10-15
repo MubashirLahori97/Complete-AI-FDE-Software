@@ -33,7 +33,7 @@ main{padding-top:22px}.label{margin-top:18px}h1{min-height:62px;margin-bottom:12
 const button=document.querySelector('#contact');const details=document.querySelector('#details');const hasRule=${rule};const channel=${safeChannel};
 function reportHeight(){if(channel)parent.postMessage({type:'fde-visual-height',channel,height:Math.ceil(document.body.getBoundingClientRect().height)},'*');}
 button.addEventListener('click',()=>{if(hasRule){details.hidden=!details.hidden;button.setAttribute('aria-expanded',String(!details.hidden));}if(channel)parent.postMessage({type:'fde-visual-click',channel,open:!details.hidden,hasRule},'*');reportHeight();});
-${channel ? "reportHeight();window.addEventListener('resize',reportHeight);" : ''}
+${channel ? "reportHeight();window.addEventListener('resize',reportHeight);window.addEventListener('message',event=>{if(event.source===parent&&event.data?.type==='fde-visual-measure'&&event.data.channel===channel)reportHeight();});" : ''}
 </script></body></html>`;
 }
 

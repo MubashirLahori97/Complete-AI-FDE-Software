@@ -16,6 +16,16 @@ The homepage presents one Start/Continue action, a small real browser page and a
 
 The chapter journey connects each mission to its first experiment and named project. Six chapter filters and search work together, a return card leads to the current mission, and an empty result offers a clear reset. Progress is labelled as practice records rather than a validated qualification. Every chapter stays open.
 
+## Keep the first cause and effect together
+
+Explore uses a more compact mission heading. On wide screens, the real-page lessons (1 and 3) place the task, first input and result feedback beside the running page. The first lesson's useful-heading action and actual page heading share the initial desktop viewport. Supporting comparisons and system inspection remain available in the same studio. Non-page experiments retain their established visual layouts.
+
+On tall phone/tablet screens, the real-page lesson's first example button brings the changed page below its sticky input dock. It uses an immediate, finite scroll and preserves keyboard focus on the action. Free typing stays in place. Expanded comparisons, system inspection, wide screens and viewports at most 600px tall keep their own normal scrolling behaviour. Inputs, undo, notes, project content and completion rules are preserved.
+
+The narrated-story invitation owns its styling in the core lesson, so a direct first visit no longer depends on previously loading an optional sample. The shared page renderer accounts for its frame borders, waits for the current document's load before pointer/keyboard entry, and requests a fresh height report after load. Height and action reports still require the expected frame source and channel. This supports quick edits and Contact actions without treating a partially initialized frame as ready.
+
+Browser checks cover the first-screen pairing at 1265×730 and 1440×900, phone/tablet result visibility with keyboard focus, free typing and undo, narrow system/comparison panels, frame-body fit, direct-entry styling and quick repeated edits. These are interaction/layout observations, not evidence that uncoached beginners understand or enjoy the lesson.
+
 ## Make a consequence visible
 
 The shared studio already runs thirty input-driven teaching models. Its diagrams show system roles; a shared three-object scene is not sufficient to explain every concept visually. Add more specific visual representations where they reveal the actual idea.

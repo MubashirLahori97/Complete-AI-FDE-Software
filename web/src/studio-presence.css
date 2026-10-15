@@ -1,0 +1,178 @@
+/* Put a learner's action and the real result in the same view. */
+.lab-play-surface,
+.lab-instruction-panel {
+  display: contents;
+}
+
+.mission-lesson[data-step='0'] .mission-lesson-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin: 12px 0;
+  gap: 7px 16px;
+}
+.mission-lesson[data-step='0'] .mission-lesson-heading h1 {
+  grid-column: 1 / -1;
+  font-size: clamp(25px, 2.4vw, 32px);
+}
+.mission-lesson[data-step='0'] .mission-step-nav {
+  margin: 12px 0 17px;
+}
+.mission-lesson[data-step='0'] .mission-lesson-heading > p {
+  grid-column: 1 / -1;
+  font-size: 13px;
+}
+
+@media (min-width: 1100px) {
+  .causal-studio[data-native='true'] .lab-play-surface {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.85fr) minmax(0, 1.5fr);
+    align-items: start;
+  }
+  .causal-studio[data-native='true'] .lab-instruction-panel {
+    display: block;
+    min-width: 0;
+    position: sticky;
+    top: 12px;
+    border-right: 1px solid #ffffff18;
+    align-self: start;
+  }
+  .causal-studio[data-native='true'] .lab-heading {
+    position: relative;
+    padding: 20px 22px 10px;
+  }
+  .causal-studio[data-native='true'] .lab-icon {
+    position: absolute;
+    top: 17px;
+    right: 18px;
+  }
+  .causal-studio[data-native='true'] .lab-heading .lab-eyebrow {
+    display: block;
+    margin-right: 43px;
+    min-height: 28px;
+    line-height: 1.7;
+  }
+  .causal-studio[data-native='true'] .lab-title {
+    font-size: 30px;
+    line-height: 1.18;
+    text-wrap: balance;
+    margin: 8px 0;
+  }
+  .causal-studio[data-native='true'] .lab-scene-context {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 9px;
+  }
+  .causal-studio[data-native='true'] .lab-first-task {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .causal-studio[data-native='true'] .lab-control-dock {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 8px 22px 20px;
+  }
+  .causal-studio[data-native='true'] .lab-first {
+    max-width: none;
+    margin: 0;
+    width: 100%;
+  }
+  .causal-studio[data-native='true'] .lab-more {
+    padding-inline: 22px;
+  }
+  .causal-studio[data-native='true'] .lab-more[open] > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .causal-studio[data-native='true'] .lab-observation {
+    padding: 18px 22px;
+    border-bottom: 0;
+  }
+  .causal-studio[data-native='true'] .lab-observation strong {
+    font-size: 14px;
+  }
+  .causal-studio[data-native='true'] .lab-stage {
+    display: block;
+    min-width: 0;
+  }
+  .causal-studio[data-native='true'] .lab-stage > .lab-guided-comparison {
+    padding-inline: 22px;
+    border-right: 0;
+    border-bottom: 1px solid #536c7755;
+  }
+  .causal-studio[data-native='true'] .comparison-action-dock {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    border-bottom: 1px solid #536c7755;
+  }
+  .causal-studio[data-native='true']:has(.lab-guided-comparison[open]) .lab-native-page {
+    scroll-margin-top: 100px;
+  }
+  .causal-studio[data-native='true'] .lab-scene-toolbar {
+    padding: 14px 20px;
+    gap: 10px;
+  }
+  .causal-studio[data-native='true'] .lab-native-page {
+    padding: 0;
+    width: calc(100% - 40px);
+    max-width: 500px;
+    margin: 4px auto 24px;
+  }
+  .causal-studio[data-native='true'] .lab-camera {
+    flex-wrap: wrap;
+  }
+  .causal-studio[data-native='true'] .lab-node-detail {
+    flex-wrap: wrap;
+  }
+}
+
+/* This invitation belongs to the core lesson, including a direct first visit. */
+.mission-lesson .mission-motion-entry {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 20px 24px;
+  border: 1px solid #d9d5c8;
+  border-radius: 12px;
+  background: #eeebdf;
+  color: #29473f;
+  text-decoration: none;
+}
+.mission-motion-entry > svg {
+  color: #48695e;
+  flex-shrink: 0;
+}
+.mission-motion-entry > span {
+  flex: 1;
+}
+.mission-motion-entry strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+}
+.mission-motion-entry small {
+  display: block;
+  font-size: 12px;
+  color: #5e7167;
+  margin-top: 5px;
+  line-height: 1.7;
+}
+.mission-lesson .mission-motion-entry:hover {
+  background: #e4e9db;
+}
+.mission-lesson .mission-motion-entry:focus-visible {
+  outline: 3px solid #3d7d7c;
+  outline-offset: 4px;
+}
+
+@media (max-height: 600px) {
+  .causal-studio[data-native='true'] .lab-instruction-panel {
+    position: static;
+  }
+  .causal-studio[data-native='true'] .comparison-action-dock {
+    position: static;
+  }
+}
