@@ -13,7 +13,7 @@ test('the main site preserves FDE Academy and its daily lesson workflow', async 
   await page.goto('/#/lesson/1');
   await expect(page.getByRole('link', { name: 'FDE Academy home' })).toBeVisible();
   await expect(page.locator('.lesson-start')).toContainText(
-    'Your first action: Start with One idea',
+    'Your first action: Try the experiment below.',
   );
   await page.getByRole('button', { name: 'Open project', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Project acceptance checks' })).toBeVisible();
