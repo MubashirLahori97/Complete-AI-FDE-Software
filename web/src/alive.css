@@ -1042,6 +1042,9 @@ body {
   }
 }
 @media (max-width: 620px) {
+  .alive-hero > .quick-challenge {
+    grid-row: 1;
+  }
   .learning-home .welcome-heading {
     align-items: flex-start;
     gap: 14px;

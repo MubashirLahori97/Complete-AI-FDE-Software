@@ -96,7 +96,7 @@ test('playful screens fit phones and respect reduced motion', async ({ page }) =
   test.setTimeout(90000);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   for (const width of [320, 375, 768, 1440]) {
-    await page.setViewportSize({ width, height: 900 });
+    await page.setViewportSize({ width, height: width <= 375 ? 812 : 900 });
     for (const route of [
       '/',
       '/curriculum',
@@ -106,6 +106,10 @@ test('playful screens fit phones and respect reduced motion', async ({ page }) =
     ]) {
       await page.goto('/#' + route);
       await expect(page.locator('main h1')).toBeVisible();
+      if (route === '/')
+        await expect(
+          page.getByRole('button', { name: 'Receive 2 tickets', exact: true }),
+        ).toBeInViewport({ ratio: 1 });
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
         `${width} ${route}`,
