@@ -25,6 +25,7 @@ import { missions } from './missions';
 import { MissionHome, MissionPath, MissionLesson, missionCount } from './MissionPages';
 const Dashboard = lazy(() => import('./Dashboard'));
 const VisualWebsiteLesson = lazy(() => import('./VisualWebsiteLesson'));
+const MotionLesson = lazy(() => import('./MotionLesson'));
 const AminaLesson = lazy(() => import('./AminaLesson'));
 const CourseApp = lazy(() => import('./course/CourseApp'));
 const Curriculum = lazy(() => import('./Curriculum'));
@@ -127,11 +128,13 @@ export default function App() {
               ? 'Settings'
               : path === '/resources'
                 ? 'Resources'
-                : path === '/sample/website'
-                  ? 'Your first website · Visual sample'
-                  : path === '/sample/amina'
-                    ? 'Amina’s shop · Your first variable'
-                    : 'Learning workspace');
+                : path === '/sample/motion'
+                  ? 'One page. Three layers. · Motion prototype'
+                  : path === '/sample/website'
+                    ? 'Your first website · Visual sample'
+                    : path === '/sample/amina'
+                      ? 'Amina’s shop · Your first variable'
+                      : 'Learning workspace');
     document.title = `${title} · FDE Academy`;
   }, [hash, path]);
   const completed = legacyContext ? completionCount(progress) : missionCount(progress);
@@ -272,6 +275,12 @@ export default function App() {
         }
       >
         <AminaLesson />
+      </Suspense>
+    );
+  if (path === '/sample/motion')
+    return (
+      <Suspense fallback={<p role="status">Opening the visual studio…</p>}>
+        <MotionLesson />
       </Suspense>
     );
   return (

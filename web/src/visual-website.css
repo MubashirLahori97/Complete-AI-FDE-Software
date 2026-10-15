@@ -783,6 +783,41 @@
 .mission-visual-workspace > .mission-step-title {
   display: none;
 }
+.mission-motion-entry {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  color: #e8e4d9;
+  background: #111923;
+  border-bottom: 1px solid #354052;
+}
+.mission-motion-entry > svg {
+  color: #d9be87;
+  flex-shrink: 0;
+}
+.mission-motion-entry > span {
+  flex: 1;
+}
+.mission-motion-entry strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+}
+.mission-motion-entry small {
+  display: block;
+  font-size: 11px;
+  color: #aeb8c4;
+  margin-top: 5px;
+  line-height: 1.7;
+}
+.mission-motion-entry:hover {
+  background: #1a2734;
+}
+.mission-motion-entry:focus-visible {
+  outline: 3px solid #e6bf7a;
+  outline-offset: -4px;
+}
 @keyframes visual-trace {
   from {
     stroke-dashoffset: 1;

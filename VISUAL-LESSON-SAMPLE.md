@@ -1,5 +1,7 @@
 # Mission 1: a visual explanation learners can change
 
+Following learner feedback on this control-panel format, a separate [narrated motion prototype](MOTION-DIRECTION.md) is available at `#/sample/motion`. Mission 1 links to it. The original sample below remains available while the learner evaluates the new direction.
+
 This is a first-lesson teaching sample. Open `#/sample/website` for the focused version, or Mission 1's Explore step for the same experience inside the academy. Missions 2–30 retain their current learning experiences while this sample is evaluated.
 
 The requested reference is [3Blue1Brown](https://www.3blue1brown.com/): visual explanations that develop an idea through cause and effect. This sample uses original diagrams and browser code; it does not copy videos, narration, characters or other channel assets.

@@ -58,6 +58,8 @@ Progress and scenario scores are learning records and self-assessments. They do 
 
 ## Architecture
 
+- **Narrated motion prototype:** `#/sample/motion` opens `MotionLesson.tsx` in a dedicated visual stage. A locally authored MP3 clocks a GSAP sequence; learners can pause, seek or skip into real HTML/CSS/JavaScript layer-removal experiments. The voice is explicitly temporary synthetic narration. Mission 1 links to this prototype; its established project and review flow remain available. [Research, tool choice and scope](../MOTION-DIRECTION.md).
+
 - **First visual lesson sample:** `src/VisualWebsiteLesson.tsx`, `visual-website.ts` and `visual-website.css` teach Mission 1 through four scenes: content, appearance, behaviour and delivery. A constrained, escaped HTML document runs in an opaque-origin iframe; the hosting timeline is explicitly modelled. The standalone route is `#/sample/website`; the main Mission 1 Explore view uses the same component. Sample controls are session-only and do not complete a mission. See [the scope and evaluation guide](../VISUAL-LESSON-SAMPLE.md).
 
 - **Core content:** `src/missions.json` supplies all thirty accepted missions. `MissionPages.tsx` renders the homepage, six-stage path, five-step mission flow, separate evidence and understanding review, and mission portfolio. `mission.css` extends the existing academy design without changing optional exercise runtimes.

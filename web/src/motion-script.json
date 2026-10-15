@@ -1,0 +1,32 @@
+[
+  {
+    "id": "whole",
+    "title": "It feels like one thing.",
+    "text": "Look at this little website. It seems like one thing."
+  },
+  {
+    "id": "layers",
+    "title": "Let's pull it apart.",
+    "text": "But your browser builds it from three different kinds of instructions."
+  },
+  {
+    "id": "html",
+    "title": "First, something to say.",
+    "text": "HTML says what is here. A heading. Some words. A button."
+  },
+  {
+    "id": "css",
+    "title": "The same words. A new feeling.",
+    "text": "CSS changes how those same things look. Notice: the words have not changed."
+  },
+  {
+    "id": "js",
+    "title": "Then, a reason to respond.",
+    "text": "JavaScript gives the button a rule. Click, and the details appear."
+  },
+  {
+    "id": "play",
+    "title": "Now, take a layer away.",
+    "text": "Now it is yours. Take a layer away, and see what changes. You can always put it back."
+  }
+]

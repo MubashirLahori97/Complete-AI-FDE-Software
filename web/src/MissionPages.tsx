@@ -6,6 +6,7 @@ import {
   Check,
   Download,
   Layers,
+  Play,
   Search,
   Sparkles,
 } from 'lucide-react';
@@ -383,7 +384,17 @@ export function MissionLesson({
           }
         </h2>
         {step === 0 && id === 1 && (
-          <VisualWebsiteLesson onBuild={() => go(2)} onText={() => go(1)} />
+          <>
+            <a className="mission-motion-entry" href="#/sample/motion">
+              <Play size={17} />
+              <span>
+                <strong>Try the narrated visual story</strong>
+                <small>One page. Three layers. Watch it, then take it apart.</small>
+              </span>
+              <ArrowRight size={17} />
+            </a>
+            <VisualWebsiteLesson onBuild={() => go(2)} onText={() => go(1)} />
+          </>
         )}
         {step === 0 && id !== 1 && (
           <>
