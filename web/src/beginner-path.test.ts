@@ -29,7 +29,10 @@ describe('the original curriculum has a complete beginner path', () => {
       expect(readme).toContain(guide.question);
       expect(project).toContain(guide.firstStep);
       expect(
-        fs.readFileSync(path.join(directory, 'starter', teaching.example.filename), 'utf8').trim(),
+        fs
+          .readFileSync(path.join(directory, 'starter', teaching.example.filename), 'utf8')
+          .replace(/\r\n/g, '\n')
+          .trim(),
       ).toBe(teaching.example.code.trim());
       if (['python', 'html'].includes(teaching.example.language)) {
         const lab = lessonLab(guide.day);
