@@ -1,5 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import {
+  ArrowLeft,
   ArrowRight,
   BookOpen,
   Check,
@@ -23,6 +24,7 @@ import { ProgressBar } from './ui';
 import { missions } from './missions';
 import { MissionHome, MissionPath, MissionLesson, missionCount } from './MissionPages';
 const Dashboard = lazy(() => import('./Dashboard'));
+const VisualWebsiteLesson = lazy(() => import('./VisualWebsiteLesson'));
 const AminaLesson = lazy(() => import('./AminaLesson'));
 const CourseApp = lazy(() => import('./course/CourseApp'));
 const Curriculum = lazy(() => import('./Curriculum'));
@@ -125,9 +127,11 @@ export default function App() {
               ? 'Settings'
               : path === '/resources'
                 ? 'Resources'
-                : path === '/sample/amina'
-                  ? 'Amina’s shop · Your first variable'
-                  : 'Learning workspace');
+                : path === '/sample/website'
+                  ? 'Your first website · Visual sample'
+                  : path === '/sample/amina'
+                    ? 'Amina’s shop · Your first variable'
+                    : 'Learning workspace');
     document.title = `${title} · FDE Academy`;
   }, [hash, path]);
   const completed = legacyContext ? completionCount(progress) : missionCount(progress);
@@ -139,7 +143,11 @@ export default function App() {
   );
   const lessonDay = lessonMatch ? Number(lessonMatch[1]) : 0;
   const selectedPath =
-    lessonMatch || missionMatch || phaseMatch || path === '/workshop-path'
+    lessonMatch ||
+    missionMatch ||
+    phaseMatch ||
+    path === '/workshop-path' ||
+    path === '/sample/website'
       ? '/curriculum'
       : documentMatch
         ? '/resources'
@@ -196,11 +204,29 @@ export default function App() {
   else if (path === '/portfolio') page = <Portfolio progress={progress} update={update} />;
   else if (path === '/resources') page = <Resources />;
   else if (path === '/settings') page = <Settings progress={progress} update={update} />;
+  else if (path === '/sample/website')
+    page = (
+      <div className="visual-sample-page">
+        <div className="visual-sample-heading">
+          <a className="back-link" href="#/mission/1">
+            <ArrowLeft size={15} />
+            Mission 1
+          </a>
+          <h1>Watch a website take shape.</h1>
+        </div>
+        <VisualWebsiteLesson standalone />
+      </div>
+    );
   else if (missionMatch && Number(missionMatch[1]) >= 1 && Number(missionMatch[1]) <= 30)
     page = (
       <MissionLesson
-        key={missionMatch[1]}
+        key={`${missionMatch[1]}:${params.get('step') || ''}`}
         id={Number(missionMatch[1])}
+        initialStep={
+          params.has('step') && /^[0-4]$/.test(params.get('step') || '')
+            ? Number(params.get('step'))
+            : undefined
+        }
         progress={progress}
         update={update}
       />

@@ -27,6 +27,7 @@ import {
 import { downloadFile, type Progress } from './state';
 import { StudioBuddy } from './StudioArt';
 import { ProgressBar } from './ui';
+import VisualWebsiteLesson from './VisualWebsiteLesson';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
@@ -296,7 +297,12 @@ export function MissionPath({
   );
 }
 
-export function MissionLesson({ id, progress, update }: Props & { id: number }) {
+export function MissionLesson({
+  id,
+  progress,
+  update,
+  initialStep,
+}: Props & { id: number; initialStep?: number }) {
   const mission = missions[id - 1];
   const record = progress.missions[id] || newMissionRecord();
   const heading = useRef<HTMLHeadingElement>(null);
@@ -322,9 +328,13 @@ export function MissionLesson({ id, progress, update }: Props & { id: number }) 
     update({ ...progress, lastMission: id, missions: { ...progress.missions, [id]: next } });
   };
   useEffect(() => {
-    if (progress.lastMission !== id || !progress.missions[id])
-      update({ ...progress, lastMission: id, missions: { ...progress.missions, [id]: record } });
-  }, [id]); // visiting does not award completion
+    if (progress.lastMission !== id || !progress.missions[id] || initialStep !== undefined)
+      update({
+        ...progress,
+        lastMission: id,
+        missions: { ...progress.missions, [id]: { ...record, step: initialStep ?? record.step } },
+      });
+  }, [id, initialStep]); // visiting does not award completion
   const go = (next: number) => {
     save({ step: next }, false);
     setMessage('');
@@ -358,7 +368,9 @@ export function MissionLesson({ id, progress, update }: Props & { id: number }) 
           </button>
         ))}
       </nav>
-      <section className="mission-workspace">
+      <section
+        className={`mission-workspace ${id === 1 && step === 0 ? 'mission-visual-workspace' : ''}`}
+      >
         <h2 ref={heading} tabIndex={-1} className="mission-step-title">
           {
             [
@@ -370,7 +382,10 @@ export function MissionLesson({ id, progress, update }: Props & { id: number }) 
             ][step]
           }
         </h2>
-        {step === 0 && (
+        {step === 0 && id === 1 && (
+          <VisualWebsiteLesson onBuild={() => go(2)} onText={() => go(1)} />
+        )}
+        {step === 0 && id !== 1 && (
           <>
             <p className="mission-problem">{mission.problem}</p>
             <div className="mission-live-pocket" aria-hidden="true">
@@ -808,39 +823,41 @@ export function MissionLesson({ id, progress, update }: Props & { id: number }) 
           </>
         )}
         {message && <p role="status">{message}</p>}
-        <div className="mission-step-footer">
-          {step > 0 ? (
-            <button className="button light" onClick={() => go(step - 1)}>
-              <ArrowLeft size={16} />
-              Back
-            </button>
-          ) : (
-            <span className="field-help">Your place saves in this browser.</span>
-          )}
-          {step < 4 ? (
-            <button className="button primary" onClick={() => go(step + 1)}>
-              {
-                [
-                  'Understand the idea',
-                  'Build my project',
-                  'Explain my system',
-                  'Review my evidence',
-                ][step]
-              }
-              <ArrowRight size={17} />
-            </button>
-          ) : id < 30 ? (
-            <a className="button light" href={`#/mission/${id + 1}`}>
-              Explore mission {id + 1}
-              <ArrowRight size={17} />
-            </a>
-          ) : (
-            <a className="button light" href="#/portfolio">
-              Review my portfolio
-              <ArrowRight size={17} />
-            </a>
-          )}
-        </div>
+        {!(id === 1 && step === 0) && (
+          <div className="mission-step-footer">
+            {step > 0 ? (
+              <button className="button light" onClick={() => go(step - 1)}>
+                <ArrowLeft size={16} />
+                Back
+              </button>
+            ) : (
+              <span className="field-help">Your place saves in this browser.</span>
+            )}
+            {step < 4 ? (
+              <button className="button primary" onClick={() => go(step + 1)}>
+                {
+                  [
+                    'Understand the idea',
+                    'Build my project',
+                    'Explain my system',
+                    'Review my evidence',
+                  ][step]
+                }
+                <ArrowRight size={17} />
+              </button>
+            ) : id < 30 ? (
+              <a className="button light" href={`#/mission/${id + 1}`}>
+                Explore mission {id + 1}
+                <ArrowRight size={17} />
+              </a>
+            ) : (
+              <a className="button light" href="#/portfolio">
+                Review my portfolio
+                <ArrowRight size={17} />
+              </a>
+            )}
+          </div>
+        )}
       </section>
       <p className="mission-save-note">
         AI can implement everything. Understanding is demonstrated through reasoning and changed

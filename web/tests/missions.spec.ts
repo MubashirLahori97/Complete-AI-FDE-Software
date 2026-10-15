@@ -14,13 +14,14 @@ test('the core starts with a useful outcome and keeps simulations separate from 
   await expect(
     page.getByRole('heading', { name: 'Make a useful website', exact: true }),
   ).toBeVisible();
-  await expect(page.locator('.mission-result')).toContainText('cannot contact');
-  await page.getByRole('button', { name: 'Open an email draft', exact: true }).click();
-  await expect(page.locator('.mission-result')).toContainText('Nothing has been sent');
+  await page.getByRole('button', { name: 'Give it a useful heading', exact: true }).click();
+  await expect(
+    page.frameLocator('iframe[title="Your live website"]').getByRole('heading'),
+  ).toHaveText('Repairs near you.');
   await page.reload();
   await expect(
-    page.getByRole('button', { name: 'Open an email draft', exact: true }),
-  ).toHaveAttribute('aria-pressed', 'true');
+    page.frameLocator('iframe[title="Your live website"]').getByRole('heading'),
+  ).toHaveText('Welcome.');
 });
 
 test('every mission has a responsive scenario, concept teaching, AI project and distinct understanding assessment', async ({
@@ -32,11 +33,19 @@ test('every mission has a responsive scenario, concept teaching, AI project and 
   for (const mission of missions) {
     await page.goto(`/#/mission/${mission.id}`);
     await expect(page.getByRole('heading', { name: mission.title, exact: true })).toBeVisible();
-    for (const option of mission.experiment.options) {
-      await page.getByRole('button', { name: option.label, exact: true }).click();
-      await expect(page.locator('.mission-result')).toContainText(option.result);
+    if (mission.id === 1) {
+      await page.getByRole('button', { name: 'Give it a useful heading', exact: true }).click();
+      await expect(
+        page.frameLocator('iframe[title="Your live website"]').getByRole('heading'),
+      ).toHaveText('Repairs near you.');
+      await page.getByRole('link', { name: 'Read the text explanation', exact: true }).click();
+    } else {
+      for (const option of mission.experiment.options) {
+        await page.getByRole('button', { name: option.label, exact: true }).click();
+        await expect(page.locator('.mission-result')).toContainText(option.result);
+      }
+      await page.getByRole('button', { name: 'Understand the idea', exact: true }).click();
     }
-    await page.getByRole('button', { name: 'Understand the idea', exact: true }).click();
     for (const [index, concept] of mission.concepts.entries()) {
       await page
         .getByRole('button', { name: `${index + 1}. ${concept.name}`, exact: true })
@@ -120,7 +129,9 @@ test('output alone cannot complete a mission; explanations and review stay separ
       'A changed project purpose needs a new understanding review, rather than reusing the old result.',
     );
   await page.getByRole('button', { name: '5 Review', exact: true }).click();
-  await expect(page.getByRole('combobox', { name: 'Review record', exact: true })).toHaveValue('unreviewed');
+  await expect(page.getByRole('combobox', { name: 'Review record', exact: true })).toHaveValue(
+    'unreviewed',
+  );
   await expect(page.locator('.mission-saved')).toHaveCount(0);
 });
 
@@ -215,7 +226,7 @@ test('core missions fit phones, support keyboard progression and respect reduced
     }
   }
   await page.goto('/#/mission/1');
-  await page.getByRole('button', { name: 'Understand the idea', exact: true }).focus();
+  await page.getByRole('link', { name: 'Read the text explanation', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(
     page.getByRole('heading', { name: 'One idea at a time.', exact: true }),

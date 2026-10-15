@@ -8,6 +8,8 @@ Open FDE Academy and choose **Start mission 1**. The first project is a useful s
 
 The homepage's local message experiment demonstrates a small content change; it does not generate a site through a live model. Each mission's prepared simulation lets the learner inspect consequences before working on the actual project. Simulation results never stand in for real provider quality, stored business records, customer interviews or deployment evidence.
 
+Mission 1 now has a [visual teaching sample](VISUAL-LESSON-SAMPLE.md) at `#/sample/website` and in its Explore step. It connects real content, styling and click-rule changes to a running page, then uses a labelled hosting model with a controlled timeline. The remaining missions have not been converted to that sample format. The original text explanation and project requirements remain available.
+
 ## The mission loop
 
 1. **Explore:** read the concrete problem, make a prediction and change a situation. The result and flow diagram update immediately.
