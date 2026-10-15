@@ -1,5 +1,67 @@
 # Day 25 — Observability, diagnosis, and practical runbooks
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Request tracing and an incident runbook. You can take several study sessions.
+
+**The situation:** A user says the assistant failed. You need to find which stage failed without asking them to reproduce every detail.
+
+### One idea: Follow one failing request
+
+Logs are records of events during a run. Structured logs use consistent fields so you can filter and connect them. A request ID links events for one user operation across several stages. Record enough to find the failing step without storing private prompts or secrets unnecessarily. A runbook explains what an operator should check and how to recover.
+
+**New words:**
+
+- **Log:** A recorded event describing what happened during execution.
+- **Request ID:** An identifier used to connect events from one operation.
+- **Runbook:** Written steps for investigating and recovering from an operational problem.
+
+### Follow the example below
+
+1. The example creates two saved events: retrieval completed and response completed.
+2. Both use the same request ID so you can connect them.
+3. These are successful fixture events, not a real measured trace or a failure. The project adds actual instrumentation and failure investigation.
+
+### Try one small decision
+
+Three users submit questions at once. What helps you connect the logs for just one failing question?
+
+1. The longest error message
+2. A consistent request ID on each event for that operation
+3. Logging all users' secrets
+
+<details>
+<summary>A small hint</summary>
+
+You need a shared identifier across the stages of one operation.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+A timestamp helps ordering; a request ID helps establish which events belong together.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**A consistent request ID on each event for that operation** Yes. Filter by that ID to follow its path through the system.
+
+</details>
+
+**Then practise:** Change request_id and run the example. Confirm both events carry the same new ID. Then add a fictional failure event with that ID and explain what extra details an operator would need.
+
+**Your project's first action:** Draw your assistant's request stages. Choose an ID field, then write the first three investigation steps for a retrieval failure.
+
+**How it connects:** Add tracing to the backend from Day 24 and the evidence path from Day 19. Use it to understand failures found by Day 22's evaluation cases.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A working system needs enough evidence to explain why it stopped working. Observability connects events, measurements, and request context to the questions an operator needs to answer. Today you will add a safe request trace and a runbook to your assistant instead of relying on scattered print statements or private data dumps.
 
 **Your project:** [Request tracing and an incident runbook](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

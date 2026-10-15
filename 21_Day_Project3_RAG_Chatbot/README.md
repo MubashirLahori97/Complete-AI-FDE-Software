@@ -1,5 +1,67 @@
 # Day 21 — Compose and share a usable document assistant
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A shareable document-assistant demo. You can take several study sessions.
+
+**The situation:** Your retrieval and answer checks work separately. A new user needs one screen that explains waiting, answers, and missing evidence.
+
+### One idea: Make the assistant usable as a whole
+
+An AI product needs a complete user journey around the model. A person submits a question, sees that work is happening, receives a supported answer or a useful failure, and can inspect sources. Your interface should represent these states clearly. A saved sample response is useful for developing the interface, but label it as a fixture so users know what they are testing.
+
+**New words:**
+
+- **Interface state:** What the screen shows at one stage, such as loading or no evidence.
+- **Contract:** An agreement about the input, output, and allowed behaviour between components.
+- **Stranger test:** Watching someone unfamiliar with the project try its main task.
+
+### Follow the example below
+
+1. The response record contains a status, a clearly labelled fixture mode, an answer, and a source passage.
+2. The example prints the status, mode, and source count.
+3. The assertion checks a JSON round trip, not answer quality or allowed states. The project adds contract validation and a usable interface.
+
+### Try one small decision
+
+The assistant has no evidence for a question. What should its screen display?
+
+1. An endless loading indicator
+2. A blank answer card
+3. A clear no-evidence message and an appropriate next action
+
+<details>
+<summary>A small hint</summary>
+
+Every finished operation needs a visible outcome.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+No evidence is an outcome you can explain, not an empty screen.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**A clear no-evidence message and an appropriate next action** Yes. Tell the user what happened and how they can continue.
+
+</details>
+
+**Then practise:** Remove the sample source and run the example. It will print zero sources while keeping status answered. Explain why the JSON round-trip assertion still passes and what extra validation the project needs.
+
+**Your project's first action:** Sketch four screens for the same question journey: ready, loading, supported answer, and no evidence. Then connect the first complete path.
+
+**How it connects:** Bring together the frontend pattern from Day 13, retrieval from Day 18, and answer contract from Day 19. Reuse these components for the document-assistant demo.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A document assistant becomes a product when a new user can understand its scope, ask a useful question, inspect the evidence, and recover from failure. Today you will combine earlier components behind one interface and evaluate the whole workflow. The project can begin in a clearly labelled offline mode and add real generation only after its evidence boundaries work.
 
 **Your project:** [A shareable document-assistant demo](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

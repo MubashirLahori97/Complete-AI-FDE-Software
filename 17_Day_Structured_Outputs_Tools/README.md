@@ -1,5 +1,67 @@
 # Day 17 — Structured outputs, validated tools, and safe execution boundaries
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** An allowlisted inventory tool service. You can take several study sessions.
+
+**The situation:** An assistant can request an inventory lookup. It must not gain permission to delete stock records.
+
+### One idea: A model can propose; your app decides
+
+A tool is a function your app makes available to a model-driven workflow. The model can propose a tool name and arguments, but your application must validate them and decide whether the action is allowed. Structured output makes information easier to check; it does not make it trustworthy. Start with a small list of read-only tools and explicit input rules.
+
+**New words:**
+
+- **Tool call:** A proposed request to run an application function.
+- **Schema:** A description of the fields and types data should have.
+- **Allowlist:** An explicit list of permitted choices or actions.
+
+### Follow the example below
+
+1. The dispatcher looks up a requested tool in a fixed allowlist.
+2. It validates arguments before calling application code.
+3. Unknown tool names are rejected. The saved request demonstrates dispatch; it is not a live model deciding to call a tool.
+
+### Try one small decision
+
+The model proposes delete_inventory, which is not in your allowlist. What should the app do?
+
+1. Reject the request before executing a tool
+2. Run it because the model suggested it
+3. Rename it to a permitted tool and guess the arguments
+
+<details>
+<summary>A small hint</summary>
+
+The application owns the execution boundary.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Only explicitly allowed tool names with validated arguments should reach functions.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Reject the request before executing a tool** Yes. The model's proposal does not expand your app's permissions.
+
+</details>
+
+**Then practise:** Replace the requested tool name with an unknown name. Run the dispatcher and check that it rejects the request without running a different action.
+
+**Your project's first action:** Write two read-only inventory tools in plain English: their names, required inputs, and possible results. List one action they must never perform.
+
+**How it connects:** Combine Day 4 function contracts with Day 16 output validation. You will reuse the permission boundary in later agent and capstone work.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Tool use connects a model's proposed action to code that can perform it. The crucial engineering boundary is the application's decision to accept, reject, or require review of that proposal. Today you will build a small allowlisted dispatcher and learn why a tool schema, validation, authorization, and actual execution are separate concerns.
 
 **Your project:** [An allowlisted inventory tool service](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

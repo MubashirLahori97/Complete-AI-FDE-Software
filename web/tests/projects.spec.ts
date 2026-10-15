@@ -12,7 +12,9 @@ test('the main site preserves FDE Academy and its daily lesson workflow', async 
   await expect(page.locator('.lesson-row')).toHaveCount(30);
   await page.goto('/#/lesson/1');
   await expect(page.getByRole('link', { name: 'FDE Academy home' })).toBeVisible();
-  await expect(page.locator('.source-note')).toContainText('Start here: read the lesson');
+  await expect(page.locator('.lesson-start')).toContainText(
+    'Your first action: Start with One idea',
+  );
   await page.getByRole('button', { name: 'Open project', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Project acceptance checks' })).toBeVisible();
   await page.getByRole('link', { name: 'Overview', exact: true }).click();
@@ -42,6 +44,9 @@ test('every lesson renders its own project and starter kit', async ({ page }) =>
 
 test('project progress persists and lesson navigation stays on the route', async ({ page }) => {
   await page.goto('/#/lesson/13');
+  await page
+    .getByText('Full lesson notes, extra exercises, and references', { exact: true })
+    .click();
   await expect(page.locator('.markdown')).toContainText('HTML structure');
   await page.getByRole('button', { name: 'Understand the concept', exact: true }).click();
   await expect(page).toHaveURL(/#\/lesson\/13$/);
@@ -70,6 +75,9 @@ test('expanded project guides fit a phone viewport', async ({ page }) => {
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
     ).toBe(true);
     await page.getByRole('tab', { name: 'Learn', exact: true }).click();
+    await page
+      .getByText('Full lesson notes, extra exercises, and references', { exact: true })
+      .click();
     await expect(page.locator('.article-contents')).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),

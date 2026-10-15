@@ -1,5 +1,18 @@
 # Lesson 25 project — Request tracing and an incident runbook
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Draw your assistant's request stages. Choose an ID field, then write the first three investigation steps for a retrieval failure.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `request_trace.py`. Run python request_trace.py. The timing is a fixed illustrative fixture, not a benchmark.
+
+Add tracing to the backend from Day 24 and the evidence path from Day 19. Use it to understand failures found by Day 22's evaluation cases.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Instrument the fictional assistant's validation, retrieval, answer, and failure stages with structured events and a shared request ID. Create a runbook for a retrieval timeout and a bad release. Measure actual elapsed time where implemented, clearly label fixtures, and avoid unnecessary private content in logs.

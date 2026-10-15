@@ -1,5 +1,67 @@
 # Day 28 — Capstone design and a complete customer workflow
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Customer-policy assistant capstone. You can take several study sessions.
+
+**The situation:** Your capstone needs a real user journey, not a collection of disconnected components.
+
+### One idea: Connect one complete customer workflow
+
+A complete slice carries one task through the system: a user asks a question, the backend checks access, retrieval finds permitted evidence, and the interface shows an answer or a useful no-evidence result. Agree on observable acceptance criteria first. Reuse the pieces you have already tested. Keep the first version narrow enough to finish and explain.
+
+**New words:**
+
+- **Capstone:** A larger project combining the skills you have practised.
+- **Acceptance criterion:** An observable condition used to judge whether a requirement is met.
+- **Architecture:** How the system's parts connect and share responsibilities.
+
+### Follow the example below
+
+1. The example names three acceptance criteria before implementation.
+2. Each criterion starts unverified. A plan is not a passing test report.
+3. Mark a criterion verified only after running its check and attaching the actual result.
+
+### Try one small decision
+
+You have drawn the architecture and written acceptance criteria. Which status is honest before running the app?
+
+1. All checks passed because the plan looks right
+2. Planned and unverified
+3. Customer impact confirmed
+
+<details>
+<summary>A small hint</summary>
+
+Separate an intended behaviour from an observed behaviour.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+The example begins with verified set to False for a reason.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Planned and unverified** Yes. Keep the plan separate from observed results until the checks run.
+
+</details>
+
+**Then practise:** Add one acceptance criterion to the plan and leave it unverified. Run the listing, then describe the real action that would produce evidence for it.
+
+**Your project's first action:** Use your Day 26 brief to choose one user and one task. Write three observable acceptance criteria, then connect the smallest path through your existing components.
+
+**How it connects:** Reuse the interface, source contract, evaluation harness, database, and request trace where they fit the brief. Change components only when the customer requirement calls for it.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 The capstone combines discovery, frontend, backend, AI boundaries, evaluation, and operations around one scoped problem. It is not a requirement to build every possible feature in one day. Today you will select a narrow customer workflow, define the contracts between components, and implement a useful end-to-end slice with observable acceptance criteria.
 
 **Your project:** [Customer-policy assistant capstone](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

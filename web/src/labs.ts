@@ -1,3 +1,4 @@
+import { lessonTeaching } from './lesson-content';
 export type Language = 'python' | 'javascript' | 'html';
 export interface Lab {
   id: string;
@@ -109,17 +110,17 @@ export const labs: Lab[] = [
     code: '<!doctype html>\n<html lang="en">\n<head>\n<style>\nbody { font-family: system-ui; padding: 24px; color: #254b3e; }\nbutton { background: #254b3e; color: white; padding: 12px 20px; border: 0; border-radius: 8px; cursor: pointer; }\n</style>\n</head>\n<body>\n<h1>Your first interface</h1>\n<p id="message">Ready to build something useful?</p>\n<button onclick="document.getElementById(\'message\').textContent = \'Hello, engineer!\'">Say hello</button>\n</body>\n</html>\n',
   },
 ];
-export const lessonLab = (day: number): Lab =>
-  labs.find((lab) => lab.day === day) ||
-  labs.find(
-    (lab) =>
-      lab.day <= day &&
-      lab.language === 'python' &&
-      lab.day ===
-        Math.max(
-          ...labs
-            .filter((item) => item.language === 'python' && item.day <= day)
-            .map((item) => item.day),
-        ),
-  ) ||
-  labs[0];
+export const lessonLab = (day: number): Lab => {
+  const { guide, teaching } = lessonTeaching(day);
+  if (!['python', 'html'].includes(teaching.example.language))
+    throw new Error(`Lesson ${day} is a local terminal or document exercise.`);
+  return {
+    id: `lesson-${day}-practice`,
+    day,
+    title: guide.title,
+    language: teaching.example.language as Language,
+    code: teaching.example.code + '\n',
+    task: guide.codeTask,
+    hint: teaching.exercises[0].hint,
+  };
+};

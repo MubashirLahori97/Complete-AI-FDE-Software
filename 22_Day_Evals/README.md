@@ -1,5 +1,67 @@
 # Day 22 — Evaluation datasets, rubrics, and regression analysis
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A repeatable document-assistant evaluation harness. You can take several study sessions.
+
+**The situation:** Someone says a new assistant prompt is better. You need evidence before changing the version people use.
+
+### One idea: Measure behaviour before improving it
+
+An evaluation runs a collection of cases and scores the results with stated rules. Keep the questions, source versions, and rubric stable when comparing changes. Look at failures as well as averages: an answer can be well written and still reveal forbidden information. A score is meaningful only for the cases and checks it actually covers.
+
+**New words:**
+
+- **Evaluation:** A repeatable process for measuring behaviour on stated cases.
+- **Baseline:** The version or result used as the starting comparison.
+- **Failure category:** A named type of mistake that helps you investigate a result.
+
+### Follow the example below
+
+1. The saved case records contain IDs, categories, and illustrative passed flags.
+2. The report groups cases by category and counts the flags. It also lists failed IDs.
+3. This demonstrates reporting, not an evaluation of a running model. The project must execute cases, apply a rubric, and record actual outputs.
+
+### Try one small decision
+
+Version A passes 9 of 10 cases. Version B passes 90 of 100 different cases. Can you conclude B improved?
+
+1. Yes, because 90 is larger than 9
+2. No; compare versions on the same cases and rubric first
+3. Yes, because more cases always means a better model
+
+<details>
+<summary>A small hint</summary>
+
+Compare the numerator, denominator, and actual cases.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+A clean before-and-after comparison holds the test conditions stable.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**No; compare versions on the same cases and rubric first** Yes. Both rates are 90%, and different datasets prevent a clean comparison of the versions.
+
+</details>
+
+**Then practise:** Change one saved passed flag from True to False. Rerun the report and check the changed category count and failed-ID list. Explain why these flags alone do not prove model quality.
+
+**Your project's first action:** Create twenty stable case IDs for the document assistant, including answerable, missing-evidence, and forbidden-source cases. Write the expected outcomes first.
+
+**How it connects:** Extend Day 16's fixed test-set habit to your Day 21 document assistant. Keep the actual system version with each report.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Evaluation makes a quality claim inspectable. A fixed set of inputs and a clear rubric help you compare revisions, but the dataset's coverage and the scoring method still matter. Today you will build a repeatable evaluation harness for your document assistant and report different failure categories rather than hiding them inside one impressive score.
 
 **Your project:** [A repeatable document-assistant evaluation harness](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

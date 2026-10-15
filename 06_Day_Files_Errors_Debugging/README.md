@@ -1,5 +1,67 @@
 # Day 6 — Persistence, errors, and systematic debugging
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Persistent contact book with recovery. You can take several study sessions.
+
+**The situation:** Your contact directory works, but closing the program loses its records.
+
+### One idea: Save data so it survives a restart
+
+Values in a running program usually disappear when the program stops. A file can keep them for a later run. JSON is a text format for structured data. Saving turns records into file contents; loading reads those contents back. A missing file and a damaged file are different problems. Handle both deliberately so a recovery step does not silently destroy existing work.
+
+**New words:**
+
+- **Persistence:** Keeping data after the program stops.
+- **JSON:** A text format used to exchange and store structured values.
+- **Exception:** A reported problem that interrupts the normal flow of instructions.
+
+### Follow the example below
+
+1. The example turns contact data into JSON text and reads it back.
+2. Parsing checks whether the text is valid JSON. It does not guarantee the fields your app needs are present.
+3. isinstance checks that the top-level value is a dictionary. Field-level validation and local file save/load are further project work.
+
+### Try one small decision
+
+Your contacts print correctly. You close the app, reopen it, and they are gone. What was missing?
+
+1. More print statements
+2. A different contact name
+3. Saving records and loading them on the next run
+
+<details>
+<summary>A small hint</summary>
+
+Separate what exists in memory from what exists on disk.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+A complete persistence loop is load → change → save → restart → load again.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Saving records and loading them on the next run** Yes. Persistence needs a place to store data and a way to read it back.
+
+</details>
+
+**Then practise:** Keep the working round trip. Add print(isinstance(json.loads("[]"), dict)) below it. Compare that false result with the existing error from loading not valid JSON. Explain why valid JSON can still have the wrong shape.
+
+**Your project's first action:** Reuse your Day 5 contact shape. Write down the filename you will save to and what should happen if it does not exist yet.
+
+**How it connects:** Extend the contact directory rather than inventing a new data model. Browser lab files belong to its temporary environment; test real restart behaviour in your local project.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 An in-memory directory disappears when the process stops. A useful tool often needs durable state, but saving state introduces new failure modes: missing files, invalid data, and interrupted writes. Today you will connect persistence to recovery and learn to investigate errors using evidence rather than a sequence of guesses.
 
 **Your project:** [Persistent contact book with recovery](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

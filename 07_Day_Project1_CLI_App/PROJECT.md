@@ -1,5 +1,18 @@
 # Lesson 7 project — A usable CLI expense tracker
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write the exact terminal conversation for adding one fictional expense and listing it again after a restart. Use that conversation as your first test.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `expenses.py`. Run python expenses.py. This example models the calculation; add the CLI and persistent storage in the project.
+
+Combine Days 2–6: types, rules, functions, collections, and files. This becomes the expense app you will test and give a web interface later.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A freelancer needs to record small expenses and inspect a reliable total. Build a command-line tool that adds, lists, and totals fictional expenses, saves them between runs, and explains invalid input. A stranger should be able to install and use it from the README. Receipt scanning, accounts, and bank connections are outside the first version.

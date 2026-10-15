@@ -10,7 +10,7 @@ import {
   Upload,
 } from 'lucide-react';
 import { phases, REPO } from './data';
-import { downloadFile, emptyProgress, parseProgress, type Progress } from './state';
+import { downloadFile, emptyProgress, parseProgress, studyPlan, type Progress } from './state';
 import { Checkbox, PageHeading, SectionHeading } from './ui';
 import Markdown from './Markdown';
 
@@ -84,24 +84,12 @@ export function Settings({
             <option value={120}>2 hours</option>
           </select>
           <div className="study-breakdown">
-            <div>
-              <span>{Math.round(progress.minutes / 6)} min</span>Understand
-            </div>
-            <div>
-              <span>{Math.round((progress.minutes * 7) / 12)} min</span>Build
-            </div>
-            <div>
-              <span>{Math.round(progress.minutes / 6)} min</span>Evaluate
-            </div>
-            <div>
-              <span>
-                {progress.minutes -
-                  Math.round(progress.minutes / 6) * 2 -
-                  Math.round((progress.minutes * 7) / 12)}{' '}
-                min
-              </span>
-              Reflect
-            </div>
+            {studyPlan(progress.minutes).map((step) => (
+              <div key={step.label}>
+                <span>{step.minutes} min</span>
+                {step.label}
+              </div>
+            ))}
           </div>
           <p className="field-help">
             The daily time is a planning aid. Take more time when a concept or project needs it.
@@ -332,6 +320,20 @@ export function Phase({
         title={phase.title}
         description={phase.description}
       />
+      <section className="lesson-start">
+        <p className="eyebrow">YOUR FIRST ACTION</p>
+        <p>
+          {id === 2
+            ? 'Choose one core project you have already built. Sketch its data records and how they relate before changing its implementation.'
+            : id === 3
+              ? 'Choose one working project. Write the main task a user must finish and sketch the smallest screen that supports it.'
+              : 'Choose one fictional or authorized customer workflow. Describe the problem and current steps before drafting a proposal.'}
+        </p>
+        <p className="field-help">
+          Use the guide below for the full requirements. Work toward one milestone at a time; a
+          phase takes several projects and study sessions.
+        </p>
+      </section>
       <div className="phase-milestones">
         <h2>Record your milestones</h2>
         <p className="muted">

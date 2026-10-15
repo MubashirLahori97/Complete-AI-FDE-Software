@@ -1,5 +1,18 @@
 # Lesson 8 project — A reviewed validation feature
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Use a copy of your expense project. Run git status, then write down the one validation behaviour you want to change before creating a branch.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `review-workflow.md`. Read the workflow and run the commands manually inside your own clean project repository. Replace the example filenames with your project's files; do not run it as a Python script.
+
+Version your Day 7 tracker. Your project deliverable today is a small reviewed change and its history, so use your terminal rather than the browser code runner.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A teammate reports that your expense tool accepts an invalid amount. Deliver a targeted fix in a feature branch of your own project repository. Include a reproduction case, tests, updated instructions, and a review description. Preserve unrelated work and make the result easy to inspect before merging.

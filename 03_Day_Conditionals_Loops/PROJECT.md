@@ -1,5 +1,18 @@
 # Lesson 3 project — Support-ticket triage queue
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write three example tickets and their expected priorities: critical, ordinary at exactly 24 hours, and ordinary at 23 hours. Put the critical rule first.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `triage.py`. Run python triage.py or paste the example into the Python lab.
+
+Your converter had input rules. Now you can express rules directly and apply them repeatedly to a queue.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A support lead needs a repeatable way to review tickets. Build a program that reads a small in-memory ticket list, assigns exactly one priority to each valid ticket, and prints a summary. Critical tickets are urgent; other tickets aged at least 24 hours need review; the rest are standard. Invalid or incomplete tickets must be reported instead of silently classified.

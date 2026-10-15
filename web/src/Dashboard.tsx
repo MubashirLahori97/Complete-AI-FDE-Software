@@ -11,7 +11,15 @@ import {
   Users,
 } from 'lucide-react';
 import { lessons, tracks } from './data';
-import { completionCount, nextLesson, streak, type Progress } from './state';
+import {
+  completionCount,
+  resumeLesson,
+  resumeHref,
+  streak,
+  studyPlan,
+  type Progress,
+} from './state';
+import { dailyProjects } from './data';
 import { ProgressBar, SectionHeading } from './ui';
 
 const trackIcons = [Terminal, Code2, Sparkles, Users];
@@ -76,7 +84,8 @@ function JourneyArt() {
 
 export default function Dashboard({ progress }: { progress: Progress }) {
   const completed = completionCount(progress);
-  const next = lessons[nextLesson(progress) - 1];
+  const next = lessons[resumeLesson(progress) - 1];
+  const started = Object.keys(progress.lessonActivities).length > 0;
   const currentStreak = streak(progress);
   const passed = progress.quizPassed.length;
   return (
@@ -113,8 +122,12 @@ export default function Dashboard({ progress }: { progress: Progress }) {
             <br className="desktop-break" /> A practical path to Forward Deployed Engineering.
           </p>
           <div className="hero-actions">
-            <a className="button lime" href={`#/lesson/${next.day}`}>
-              {completed ? 'Continue learning' : 'Start your journey'}
+            <a className="button lime" href={resumeHref(progress)}>
+              {completed === 30
+                ? 'Explore the next phase'
+                : started || completed
+                  ? 'Continue learning'
+                  : 'Start Lesson 1'}
               <ArrowRight size={17} />
             </a>
             <a className="hero-link" href="#/curriculum">
@@ -127,6 +140,38 @@ export default function Dashboard({ progress }: { progress: Progress }) {
           </p>
         </div>
         <JourneyArt />
+      </section>
+      <section className="next-action" aria-label="Your next action">
+        <div>
+          <p className="eyebrow">
+            {completed === 30
+              ? 'YOUR NEXT CHAPTER'
+              : started
+                ? 'PICK UP WHERE YOU LEFT OFF'
+                : 'NEW HERE? START HERE'}
+          </p>
+          <h2>
+            {completed === 30
+              ? 'Keep building from real feedback'
+              : `Lesson ${next.day}: ${next.title}`}
+          </h2>
+          <p>
+            {completed === 30
+              ? 'Use your completed projects to choose a deeper engineering challenge.'
+              : `Your project: ${dailyProjects[next.day - 1].title}. Start with one idea, follow an example, then try one small task.`}
+          </p>
+          <p className="field-help">
+            Suggested session:{' '}
+            {studyPlan(progress.minutes)
+              .map((step) => `${step.label.toLowerCase()} ${step.minutes} min`)
+              .join(' · ')}
+            . Take more sessions whenever you need them.
+          </p>
+        </div>
+        <a className="button primary" href={resumeHref(progress)}>
+          {completed === 30 ? 'Open Phase 2' : started ? 'Resume my lesson' : 'Begin with one idea'}
+          <ArrowRight size={16} />
+        </a>
       </section>
       <div className="metrics">
         <div className="metric">
@@ -217,7 +262,7 @@ export default function Dashboard({ progress }: { progress: Progress }) {
       <div className="home-bottom">
         <section>
           <SectionHeading title={completed === 30 ? 'Keep building' : 'Pick up here'} />
-          <a className="next-card" href={completed === 30 ? '#/phase/2' : `#/lesson/${next.day}`}>
+          <a className="next-card" href={resumeHref(progress)}>
             <div className="next-card-main">
               <span className="badge">
                 {completed === 30

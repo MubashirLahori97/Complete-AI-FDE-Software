@@ -1,5 +1,67 @@
 # Day 30 — Customer demo, handoff, and an evidence-based next plan
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A customer-ready demo and handoff pack. You can take several study sessions.
+
+**The situation:** The customer has seen your demo. They need to run the tool, understand its limits, and know what to do when something fails.
+
+### One idea: Hand over something another person can use
+
+A handoff transfers useful ownership, not just a link. Show the task, demonstrate its result, explain setup and recovery, and name what remains unfinished. Ask the receiver to try the documented workflow without your help. Their confusion is feedback about the delivery. Use that feedback to choose your next improvement rather than adding features automatically.
+
+**New words:**
+
+- **Handoff:** Giving someone the information and access needed to use or maintain a delivery.
+- **Retrospective:** Looking back at what worked, what failed, and what to change next.
+- **Owner:** The person responsible for a stated task or next decision.
+
+### Follow the example below
+
+1. The handoff example connects a user task to demonstration steps and evidence.
+2. It includes limitations, setup, recovery, and next actions.
+3. Replace its placeholders with your own version and results. A demo script is not evidence until the described workflow has actually been demonstrated.
+
+### Try one small decision
+
+How can you test whether your handoff instructions are clear?
+
+1. Count how many pages you wrote
+2. Read them silently yourself
+3. Have a new person follow them and record where they get stuck
+
+<details>
+<summary>A small hint</summary>
+
+Test the instructions as a user journey.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+The strongest check is someone completing the task without your extra explanation.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Have a new person follow them and record where they get stuck** Yes. Observing the task gives you concrete feedback to improve the instructions.
+
+</details>
+
+**Then practise:** Use the handoff template with your own capstone. Ask a new reader to follow the main workflow, or perform a clearly labelled self-review if no reviewer is available.
+
+**Your project's first action:** Write a short demo script for your capstone: problem, normal result, failure result, and source evidence. Then prepare setup and recovery instructions for a new reader.
+
+**How it connects:** Your capstone release, portfolio evidence, and incident notes now become one handoff pack. Finishing the core course gives you practice evidence; use the longer roadmap and real feedback to keep developing.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A delivery is complete when its intended user can understand, use, and operate the agreed result, and the team knows what remains. Today you will demonstrate the capstone against its acceptance criteria, package the operating handoff, and write a retrospective that turns experience into a practical next learning plan. Completing the course is a milestone, not proof of instant mastery.
 
 **Your project:** [A customer-ready demo and handoff pack](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

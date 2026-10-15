@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowRight, Check, Search, BookOpen, CheckCircle2 } from 'lucide-react';
 import { lessons, phases, tracks, type Track } from './data';
-import type { Progress } from './state';
+import { resumeHref, type Progress } from './state';
 import { PageHeading, ProgressBar } from './ui';
 
 export default function Curriculum({
@@ -33,7 +33,13 @@ export default function Curriculum({
       <PageHeading
         eyebrow="YOUR CURRICULUM"
         title="A path you can put into practice."
-        description="Start at the beginning or explore a topic. Every lesson connects understanding to a working build."
+        description="New here? Start with Lesson 1. Each lesson explains one idea, shows an example, and gives you a small task before its project. Explore other topics whenever you need them."
+        action={
+          <a className="button primary" href={resumeHref(progress)}>
+            Go to my next step
+            <ArrowRight size={16} />
+          </a>
+        }
       />
       <div className="tabs" role="tablist" aria-label="Learning path">
         <button role="tab" aria-selected={mode === 'core'} onClick={() => setMode('core')}>

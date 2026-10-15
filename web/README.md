@@ -2,6 +2,8 @@
 
 The default app is **FDE Academy**, with its original dashboard, curriculum, daily lesson pages and projects, practice lab, scenarios, and portfolio. Optional Amina examples live at `#/guided` and `#/sample/amina`; see [GUIDED-COURSE.md](../GUIDED-COURSE.md). The main academy is available at `#/` and the compatible `#/library` alias.
 
+All 30 main lessons have a beginner path: one idea → worked example → small task, followed by the lesson's own practice and project. The homepage and lesson pages save the learner's place. Project milestones, download instructions, hints, and optional challenges are available without reading the full guide first. See [the learning experience](../LEARNING-EXPERIENCE.md) for content sources and maintenance.
+
 ## Run locally
 
 Install Node.js 22.12+ or a current Node.js 24 release. From the repository root:

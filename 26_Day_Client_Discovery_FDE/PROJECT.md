@@ -1,5 +1,18 @@
 # Lesson 26 project — A discovery interview and customer brief
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Roleplay a short interview with a fictional shop owner. Ask for the last failed task, then write their current steps before proposing features.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `discovery-notes.md`. Complete the discovery notes through a fictional roleplay or a conversation you are authorized to conduct. The starter is a writing artifact, not executable code.
+
+Use what you learned while building the assistant to ask better questions. Today's brief becomes the starting point for your capstone; it may justify changing the solution.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Use the retailer scenario in the app or another clearly fictional business workflow. Conduct a structured roleplay, record evidence and assumptions, compare implementation alternatives, and produce a one-page brief. A real interview is optional and requires authorization from the people involved; the learning project can be completed entirely with fictional data.

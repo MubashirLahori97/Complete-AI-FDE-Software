@@ -168,7 +168,7 @@ export default function App() {
         lesson={lessons[lessonDay - 1]}
         progress={progress}
         update={update}
-        initialTab={params.get('tab') || 'learn'}
+        initialTab={params.get('tab') || undefined}
       />
     );
   else if (phaseMatch)

@@ -1,5 +1,67 @@
 # Day 19 — RAG, source evidence, and honest abstention
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Source-grounded FAQ assistant. You can take several study sessions.
+
+**The situation:** A customer asks about a refund policy. The assistant should use the actual policy and show where the answer came from.
+
+### One idea: Find evidence before answering
+
+Retrieval-augmented generation, or RAG, means finding relevant source material before generating an answer. The app retrieves passages, gives permitted evidence to the answer step, and checks the result. A citation helps a reader inspect a claim. It is useful only when the cited passage actually supports the answer. If the evidence is missing, saying so is a valid result.
+
+**New words:**
+
+- **Retrieval:** Finding candidate information from a source collection.
+- **Citation:** A reference that lets someone locate supporting evidence.
+- **Abstention:** Declining to answer when there is not enough support.
+
+### Follow the example below
+
+1. The example stores one shipping passage with a source ID.
+2. For shipping, it copies the stored text into the answer and attaches that ID. This is an extractive fixture, not model generation.
+3. For an unknown topic it returns a no-evidence message. The project adds retrieval and checks that cited passages actually support answers.
+
+### Try one small decision
+
+No permitted policy passage answers the question. What should the assistant do?
+
+1. Invent a likely policy and add a citation
+2. Explain that the available evidence is insufficient
+3. Use a forbidden document because it seems useful
+
+<details>
+<summary>A small hint</summary>
+
+The goal is a supported answer, not an answer at any cost.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+When supporting evidence is absent, return a clear no-evidence result.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Explain that the available evidence is insufficient** Yes. An honest no-evidence result lets the user seek the right source.
+
+</details>
+
+**Then practise:** Add a new call for a topic that is not in evidence. Run it and check the no-evidence response. Then add a fictional source for that topic and compare the result.
+
+**Your project's first action:** Choose three public or fictional policy passages. Write one answerable question and one question they cannot answer, with expected outcomes.
+
+**How it connects:** Reuse Day 18's FAQ records and retrieval comparison. Add a source-supported answer contract rather than treating the top search result as automatically correct.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Retrieval-augmented generation supplies relevant source material before an answer is generated. It does not automatically make the sources correct or the final answer faithful. Today you will separate retrieval from generation, inspect supporting evidence, and build a document assistant that can say when its evidence is insufficient.
 
 **Your project:** [Source-grounded FAQ assistant](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

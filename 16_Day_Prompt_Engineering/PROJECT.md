@@ -1,5 +1,18 @@
 # Lesson 16 project — Versioned support-ticket classifier
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write what billing, technical, and general mean. Label twelve fictional tickets, including at least one ambiguous case, before changing a prompt.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `classifier_contract.py`. Run python classifier_contract.py. This example validates a response fixture; it does not invoke or measure a language model.
+
+Use your experiment record from Day 15. Your ticket examples will later help you test the assistant's behaviour consistently.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A support team wants to route tickets into billing, technical, and general queues. Build a labelled dataset, a versioned prompt, an output validator, and a comparison report. Fixture mode lets you verify the pipeline without provider access; optional real-provider mode lets you collect predictions. Ambiguous and invalid outputs must not silently trigger routing.

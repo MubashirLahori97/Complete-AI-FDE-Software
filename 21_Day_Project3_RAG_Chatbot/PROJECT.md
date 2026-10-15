@@ -1,5 +1,18 @@
 # Lesson 21 project — A shareable document-assistant demo
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Sketch four screens for the same question journey: ready, loading, supported answer, and no evidence. Then connect the first complete path.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `answer_contract.py`. Run python answer_contract.py. The response is a fixture for a frontend contract, not a model call.
+
+Bring together the frontend pattern from Day 13, retrieval from Day 18, and answer contract from Day 19. Reuse these components for the document-assistant demo.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Create a usable interface for the grounded assistant from lesson 19. Include example questions, answer/source display, no-evidence and failure states, and an honest mode label. Publish a fictional-data demo or document a reproducible local version while a trusted backend is being prepared. A real-provider extension must keep credentials out of the frontend.

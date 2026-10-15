@@ -1,5 +1,18 @@
 # Lesson 15 project — LLM experiment and budget notebook
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Create an experiment record with columns for input, model-or-fixture identity, output, and your check. Label any offline examples as fixtures.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `model_budget.py`. Run python model_budget.py. The prices and usage below are fictional exercise assumptions, not current provider quotes.
+
+Your earlier API adapter separated outside data from app logic. Use that same boundary for a model provider. Keep the expense project as a completed milestone while beginning the assistant track.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A team is deciding whether a model could help with short support summaries. Create a small experiment record containing prompts, response examples, scoring criteria, latency/usage fields, and a cost estimate. Support an offline fixture mode for learning and an optional real-provider mode. Never combine the two modes into an unlabeled performance claim.

@@ -1,5 +1,67 @@
 # Day 16 — Prompts as specifications and classification contracts
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Versioned support-ticket classifier. You can take several study sessions.
+
+**The situation:** A support team wants tickets labelled billing, technical, or general. Different people disagree on the labels.
+
+### One idea: Describe the task before asking AI
+
+A prompt is an instruction given to a model. A useful instruction says what to do, what information to use, and what result is allowed. Examples help define tricky cases. Before improving the wording, agree on the expected labels for a fixed set of tickets. Otherwise you cannot tell whether a prompt change actually improved the task.
+
+**New words:**
+
+- **Prompt:** The instructions and input provided to a model.
+- **Rubric:** Written rules for deciding whether a result is acceptable.
+- **Test set:** A fixed collection of cases used to compare behaviour.
+
+### Follow the example below
+
+1. The example defines the allowed classification labels.
+2. It checks sample output against that contract rather than trusting any returned text.
+3. A contract check alone does not prove the label is correct for the ticket. Compare it with a labelled test set too.
+
+### Try one small decision
+
+You change a classifier prompt. How can you make a useful before-and-after comparison?
+
+1. Try only the easiest ticket each time
+2. Run both versions on the same labelled cases and compare errors
+3. Choose whichever response is longer
+
+<details>
+<summary>A small hint</summary>
+
+Keep the evaluation inputs stable when comparing two versions.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Write expected labels first, then record each version's mistakes.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Run both versions on the same labelled cases and compare errors** Yes. A fixed test set gives you a stable comparison rather than a different challenge each time.
+
+</details>
+
+**Then practise:** Change one sample output to a label outside the allowed list. Run the contract check and explain why valid formatting is different from a correct classification.
+
+**Your project's first action:** Write what billing, technical, and general mean. Label twelve fictional tickets, including at least one ambiguous case, before changing a prompt.
+
+**How it connects:** Use your experiment record from Day 15. Your ticket examples will later help you test the assistant's behaviour consistently.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A prompt communicates a task to a model, but a clear prompt alone does not establish that the task is done reliably. Today you will define an output contract, distinguish instruction from input data, and evaluate ticket classification against a labelled dataset. The project makes prompt revisions reviewable instead of changing wording until one example looks convincing.
 
 **Your project:** [Versioned support-ticket classifier](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

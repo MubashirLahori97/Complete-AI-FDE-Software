@@ -1,5 +1,18 @@
 # Lesson 19 project — Source-grounded FAQ assistant
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Choose three public or fictional policy passages. Write one answerable question and one question they cannot answer, with expected outcomes.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `grounded_answer.py`. Run python grounded_answer.py. This is an extractive source-checking demonstration, not a language-model generator.
+
+Reuse Day 18's FAQ records and retrieval comparison. Add a source-supported answer contract rather than treating the top search result as automatically correct.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A team wants answers from a small fictional policy collection. Build a retrieval-and-answer pipeline that preserves source IDs, displays supporting passages, and handles unanswered questions. Use a clearly labelled extractive or fixture baseline first; optionally connect a real model generator without weakening permission or citation checks.

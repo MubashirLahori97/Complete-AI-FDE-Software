@@ -1,5 +1,67 @@
 # Day 15 — Language models, tokens, context, and cost
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** LLM experiment and budget notebook. You can take several study sessions.
+
+**The situation:** You want an AI assistant, but a fluent answer can still be wrong and each call uses resources.
+
+### One idea: Treat a model answer as something to check
+
+A language model generates text from its input context. It can produce a helpful answer, but it can also produce an unsupported one. Tokens are pieces of text processed by the model; they are not always whole words. Input and output both affect cost. Keep a record of what you asked, which model or fixture answered, and how you checked the response.
+
+**New words:**
+
+- **Token:** A piece of text represented for model processing.
+- **Context:** The input information available to the model for a response.
+- **Fixture:** A saved sample response used for an offline exercise, without calling a model.
+
+### Follow the example below
+
+1. The notebook uses exercise assumptions to estimate input and output costs.
+2. It multiplies requests by token counts and the fictional per-million prices.
+3. This calculation is not an AI call or a current provider quote. A real experiment needs its own request and response record.
+
+### Try one small decision
+
+An offline fixture returns a convincing answer. What can you honestly conclude?
+
+1. A live model has passed your test
+2. The answer is true because it sounds confident
+3. Your app handled this saved example; live model quality is still untested
+
+<details>
+<summary>A small hint</summary>
+
+Ask what actually ran during this exercise.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+A saved response checks your handling of that response, not the behaviour of a provider.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Your app handled this saved example; live model quality is still untested** Yes. Distinguish testing the surrounding app from evaluating an actual model.
+
+</details>
+
+**Then practise:** Double the request count in the budget example. Predict the new cost, run it, and explain which assumptions would need measurement for a real service.
+
+**Your project's first action:** Create an experiment record with columns for input, model-or-fixture identity, output, and your check. Label any offline examples as fixtures.
+
+**How it connects:** Your earlier API adapter separated outside data from app logic. Use that same boundary for a model provider. Keep the expense project as a completed milestone while beginning the assistant track.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Language models can produce useful text and code, but fluent output is not evidence that an answer is correct. Today you will build an operational understanding of generation, token budgets, context limits, and cost. Your project is an experiment log that separates observed provider results from offline fixture demonstrations and estimates.
 
 **Your project:** [LLM experiment and budget notebook](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

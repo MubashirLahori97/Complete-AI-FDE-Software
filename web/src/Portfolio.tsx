@@ -41,8 +41,9 @@ export default function Portfolio({
         <div>
           <strong>Your project is the story. Evidence makes it credible.</strong>
           <p>
-            Record a demo, repository, and honest reflection. Checks are your own assessment; the
-            app does not verify links or certify readiness.
+            Start with one project you have actually built. Add its code or demo link and explain
+            one test you ran. Leave unfinished projects blank. Checks record your own assessment;
+            the app does not verify links or certify readiness.
           </p>
         </div>
       </div>

@@ -67,7 +67,7 @@ export default function Scenarios({
       <PageHeading
         eyebrow="THE WORK BEYOND THE CODE"
         title="Practise the field part of FDE."
-        description="Listen to a customer. Make a decision. See the tradeoffs. These are scripted practice scenarios, not a live AI chat."
+        description="Start with the customer discovery scenario already selected below. Read the customer's message, choose your next action, and read the feedback. These are scripted practice scenarios, not a live AI chat."
       />
       <div className="scenario-grid">
         {scenarios.map((item, index) => {

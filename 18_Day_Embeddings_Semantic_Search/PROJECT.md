@@ -1,5 +1,18 @@
 # Lesson 18 project — FAQ retrieval comparison workbench
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write ten FAQ records with IDs. Add a question using different words from one answer and predict which record should be retrieved.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `vector_search.py`. Run python vector_search.py. These vectors are hand-authored mathematical illustrations, not learned semantic embeddings.
+
+This begins the retrieval component of your document assistant. Keep the ticket classifier's test-set habit: compare methods on the same questions.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A team wants staff to find the right FAQ despite variations in wording. Build a small FAQ dataset, a keyword baseline, a vector-search implementation, and labelled query results. Begin with clearly labelled illustrative vectors if needed; optionally add a real embedding model. Compare the methods honestly and preserve a no-match outcome.

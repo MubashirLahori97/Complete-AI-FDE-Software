@@ -1,5 +1,67 @@
 # Day 12 — Testing, regression evidence, and reading code
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A regression suite for the expense calculator. You can take several study sessions.
+
+**The situation:** You fix the expense total. How will you know a future edit has not broken it again?
+
+### One idea: Make a test catch a real mistake
+
+A test compares an actual result with an expected result for a specific case. An assertion says that a condition must be true. A regression test keeps a fixed bug from quietly returning. First see the test fail for the bug, then make the smallest fix and see it pass. If the test never notices the bug, it is not checking the behaviour you need.
+
+**New words:**
+
+- **Assertion:** A check that fails when its condition is false.
+- **Regression:** A previously working behaviour that breaks after a change.
+- **Expected result:** The outcome established from the requirement, before observing the code.
+
+### Follow the example below
+
+1. The example defines the calculation and a set of assertions.
+2. Each assertion checks one known result, including a boundary case.
+3. A passing print message comes after the assertions, so a failing assertion interrupts that normal path.
+
+### Try one small decision
+
+A test expects 5 × 3 to equal 15, but the function returns 8. What is the useful next step?
+
+1. Change the expected result to 8
+2. Delete the failing assertion
+3. Fix the calculation and rerun the test
+
+<details>
+<summary>A small hint</summary>
+
+The expected result comes from the requirement, not the current bug.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+8 suggests addition was used where multiplication was needed.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Fix the calculation and rerun the test** Yes. Keep the requirement stable and make the implementation satisfy it.
+
+</details>
+
+**Then practise:** In a disposable copy, deliberately change one correct arithmetic operation. Run the tests to see a failure, restore it, and check that the tests pass again.
+
+**Your project's first action:** Choose one expense-calculation bug. Write its smallest failing input and independently calculate the correct output.
+
+**How it connects:** Return to the Day 7 tracker. Your quote functions from Day 4 also give you small calculations that are easy to test.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A passing demonstration proves that one observed path worked. Tests preserve specific expectations so you can check them again after a change. Today you will learn to choose useful assertions, test boundaries independently of the implementation, and investigate a deliberately incorrect calculation before building a regression suite.
 
 **Your project:** [A regression suite for the expense calculator](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

@@ -1,5 +1,18 @@
 # Lesson 29 project — A hardened capstone release package
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Name a known-good capstone version. Write how you would restore it, then test the procedure in your practice environment and record the result.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `release-readiness.md`. Complete this record using the actual capstone release and an isolated recovery rehearsal. It is an operating document, not an executable script.
+
+Apply Day 14 release checks, Day 23 permissions, and Day 25 incident investigation to the complete Day 28 capstone.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Take the capstone through a documented release-readiness process. Verify its actual environment, permissions, bounded failures, stored feedback, and operating limits. Rehearse recovery in an isolated setup using fictional data. Produce a release decision with evidence and unresolved checks instead of claiming universal production readiness.

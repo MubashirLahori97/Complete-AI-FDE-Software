@@ -1,5 +1,18 @@
 # Lesson 23 project — A permission and budget boundary for the assistant
 
+<!-- beginner-path:begin -->
+## Your first action
+
+List the assistant's protected resources and who may access each. Add a request limit, then write one denied request for each boundary.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `policy_gate.py`. Run python policy_gate.py. This is a single-process authorization fixture, not a complete identity system.
+
+Apply the allowlist from Day 17 to retrieval and budget use. Add denied-access and limit cases to the evaluation harness from Day 22.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Harden the fictional document assistant with trusted-user fixtures, document filtering, request limits, and explicit exhausted-budget behavior. Add a small threat model and abuse test set. Keep the prototype's limits visible: fixture identity and single-process budgets demonstrate boundaries but are not a deployed authentication or distributed-quota system.
