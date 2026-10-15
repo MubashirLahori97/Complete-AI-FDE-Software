@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Check, Download, Play } from 'lucide-react';
 import {
   missions,
@@ -22,6 +22,7 @@ import { AcademyHome, AcademyPath } from './AcademyJourney';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
+const NeuralLearningLab = lazy(() => import('./NeuralLearningLab'));
 export function missionCount(progress: Progress) {
   return missions.filter(
     (mission) =>
@@ -161,6 +162,16 @@ export function MissionLesson({
                 </button>
               ))}
             </div>
+            {id === 18 && concept === 0 && (
+              <Suspense fallback={<p>Opening the small model lab…</p>}>
+                <NeuralLearningLab
+                  saved={progress.neuronSnapshot}
+                  onSave={(neuronSnapshot) => update({ ...progress, neuronSnapshot })}
+                  sound={progress.soundEnabled}
+                  onSoundChange={(soundEnabled) => update({ ...progress, soundEnabled })}
+                />
+              </Suspense>
+            )}
             <div className="mission-concept">
               <span className="eyebrow">
                 IDEA {concept + 1} OF {mission.concepts.length}

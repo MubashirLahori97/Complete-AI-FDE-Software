@@ -125,6 +125,12 @@ for (const [index, m] of missions.entries()) {
     'EVIDENCE.md': strToU8(evidence),
     'TOOL-RECORD.md': strToU8(toolsTemplate),
   };
+  if (m.id === 18) {
+    const neuronGuide = fs.readFileSync(path.join(root, 'NEURAL-LEARNING.md'));
+    fs.writeFileSync(path.join(directory, 'NEURON-GUIDE.md'), neuronGuide);
+    files['NEURON-GUIDE.md'] = neuronGuide;
+    files['neuron-model.ts'] = fs.readFileSync(path.join(web, 'src/neuron-model.ts'));
+  }
   if (m.id <= 5)
     files['worked-example.html'] = fs.readFileSync(
       path.join(web, 'curriculum/service-example.html'),
