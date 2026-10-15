@@ -31,3 +31,57 @@ The updater and assertions execute on two local fictional visits. This is a cont
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A regression check needs to notice a wrong-record update, including when the selected visit changes.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Does the assertion see the defect?
+
+Keep the updater faulty. Change the evidence the assertion inspects.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "check": "toast",
+  "defect": true,
+  "selected": "V-42"
+}
+```
+
+Change one control:
+
+```json
+{
+  "check": "records"
+}
+```
+
+What to understand: A passing weak check is not evidence that the relevant behaviour works. The record assertion exposes the deliberately faulty updater.
+
+### 2. Select the other record
+
+The intended record changes. Does the assertion still identify the incorrect update?
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "check": "records",
+  "defect": true,
+  "selected": "V-42"
+}
+```
+
+Change one control:
+
+```json
+{
+  "selected": "V-43"
+}
+```
+
+What to understand: A check should follow the selected record and protect the other one, rather than hard-coding one convenient identifier.

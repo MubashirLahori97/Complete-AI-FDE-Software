@@ -31,3 +31,57 @@ The timings are controlled teaching inputs. No network request or backend write 
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A customer submits a visit request. What should the browser say if it stops waiting before the response arrives?
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. The response arrives too late
+
+Compare the response delay with the client's waiting limit.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "latency": 800,
+  "timeout": 1000,
+  "valid": true
+}
+```
+
+Change one control:
+
+```json
+{
+  "latency": 1800
+}
+```
+
+What to understand: A timeout means the client stopped waiting. It does not establish whether the server stopped or whether a write happened.
+
+### 2. Give the client time to receive the response
+
+Keep the server timing fixed and change only the waiting limit.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "latency": 1800,
+  "timeout": 1000,
+  "valid": true
+}
+```
+
+Change one control:
+
+```json
+{
+  "timeout": 2000
+}
+```
+
+What to understand: The response can now arrive within the model's waiting period. Real retries still need stable identity and evidence of the final state.

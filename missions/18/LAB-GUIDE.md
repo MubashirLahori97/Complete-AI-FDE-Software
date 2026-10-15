@@ -30,3 +30,55 @@ You are running a real JSON parser and a small source-checking rule on fictional
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+An example response contains a neat date field, but the source never supplied a date.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Keep an unknown fact unknown
+
+The JSON can parse in both cases. Inspect the separate check for date support.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "output": "{\"summary\":\"Customer called about a repair.\",\"date\":\"2026-10-20\"}",
+  "sourceDate": ""
+}
+```
+
+Change one control:
+
+```json
+{
+  "output": "{\"summary\":\"Customer called about a repair.\",\"date\":null}"
+}
+```
+
+What to understand: A valid shape does not establish a fact. Null can represent an unknown date without inventing certainty.
+
+### 2. Support must come from a source
+
+Keep the response identical. Supply the matching date as fictional source evidence.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "output": "{\"summary\":\"Customer called about a repair.\",\"date\":\"2026-10-20\"}",
+  "sourceDate": ""
+}
+```
+
+Change one control:
+
+```json
+{
+  "sourceDate": "2026-10-20"
+}
+```
+
+What to understand: The source changes what the date check can support. This small rule still does not verify every claim in the summary or evaluate a real AI model.

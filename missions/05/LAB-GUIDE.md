@@ -31,3 +31,56 @@ The records are generated fictional services. The duplicate check executes in yo
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+The shop adds services. The page should create a card for each record using one display rule.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Grow the collection
+
+Count the records and cards. The display rule stays the same as the collection grows.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "count": 3,
+  "duplicate": false,
+  "prefix": "Repair"
+}
+```
+
+Change one control:
+
+```json
+{
+  "count": 6
+}
+```
+
+What to understand: A loop applies the same rule to each record. More records do not require a separately written card for each one.
+
+### 2. Different cards, repeated identity
+
+Inspect the cards marked Repeated ID. Their display labels cannot repair their repeated identifier.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "count": 3,
+  "duplicate": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "duplicate": true
+}
+```
+
+What to understand: Names and labels describe records. Stable, distinct identifiers let the system tell those records apart.

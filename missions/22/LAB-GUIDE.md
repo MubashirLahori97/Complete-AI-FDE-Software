@@ -32,3 +32,59 @@ This is a release-compatibility model. It does not build, deploy or migrate an e
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A release changes code, configuration and possibly stored information. Those parts do not roll back together automatically.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. A release needs its configuration
+
+The build passes in both cases. Inspect whether the required configuration is also present.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "credential": false,
+  "build": true,
+  "migration": false,
+  "rollback": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "credential": true
+}
+```
+
+What to understand: A passing build is one release condition. The running journey also needs its declared configuration and compatible data.
+
+### 2. Rollback only the code
+
+Watch code change from v2 to v1 while the data schema remains v2.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "credential": true,
+  "build": true,
+  "migration": true,
+  "rollback": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "rollback": true
+}
+```
+
+What to understand: Reverting code does not restore stored data. Under these declared rules, old code cannot read the migrated schema.

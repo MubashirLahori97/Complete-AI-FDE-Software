@@ -31,3 +31,57 @@ Scores and labels are deterministic fictional fixtures. These counts do not esta
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+The helper flags urgent messages. The shop needs to inspect both false alerts and missed urgent cases.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Raise the threshold
+
+Inspect the same labelled cases before and after the threshold changes.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "threshold": 30,
+  "positives": 10,
+  "negatives": 90
+}
+```
+
+Change one control:
+
+```json
+{
+  "threshold": 70
+}
+```
+
+What to understand: A threshold can reduce alerts while increasing missed positive cases. Precision and recall describe different parts of that tradeoff.
+
+### 2. Change the case mix
+
+Keep the decision threshold. Add fictional positive cases to the evaluation sample.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "threshold": 70,
+  "positives": 10,
+  "negatives": 90
+}
+```
+
+Change one control:
+
+```json
+{
+  "positives": 50
+}
+```
+
+What to understand: The sample composition affects aggregate results. Record the labels, sample definition and mistakes that matter instead of quoting a metric without context.

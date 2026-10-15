@@ -34,3 +34,61 @@ Requests target the same key at the same instant. Latency is a fictional sequent
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+The shop repeats the same read. Reuse can reduce source work, but the freshness rule affects what people receive.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Refresh once, then reuse
+
+The cached copy starts expired. Inspect the first source read and the later cache hits.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "mode": "fresh",
+  "reads": 20,
+  "age": 15,
+  "ttl": 10,
+  "changed": true
+}
+```
+
+Change one control:
+
+```json
+{
+  "mode": "cache"
+}
+```
+
+What to understand: For these same-key, same-instant requests, the first read refreshes the copy and later reads reuse it. This is a model, not a service benchmark.
+
+### 2. Within its lifetime, already stale
+
+The copy now passes the age rule even though the source changed after it was stored.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "mode": "cache",
+  "reads": 20,
+  "age": 15,
+  "ttl": 10,
+  "changed": true
+}
+```
+
+Change one control:
+
+```json
+{
+  "age": 2
+}
+```
+
+What to understand: A cache lifetime is a reuse policy, not proof that a copy equals the current source. The model now returns stale cached answers.

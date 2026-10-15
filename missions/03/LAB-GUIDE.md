@@ -31,3 +31,57 @@ This is a real local browser page. Changing its heading or style sends no reques
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+The shop wants a bigger heading. That is a different request from changing its words or its button's action.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Appearance changes, words stay
+
+Watch the heading grow. Read its words again; they have not changed.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "size": 26,
+  "heading": "Repairs near you.",
+  "rule": true
+}
+```
+
+Change one control:
+
+```json
+{
+  "size": 38
+}
+```
+
+What to understand: Presentation and content have different jobs. Changing the CSS size need not change the HTML content.
+
+### 2. A button can look ready and do nothing
+
+Try Contact in both cases. Compare its appearance with what actually happens.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "size": 26,
+  "heading": "Repairs near you.",
+  "rule": true
+}
+```
+
+Change one control:
+
+```json
+{
+  "rule": false
+}
+```
+
+What to understand: A visible button does not prove that an action rule is present. Behaviour needs its own check.

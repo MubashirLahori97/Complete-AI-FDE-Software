@@ -2,11 +2,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { zipSync, strToU8 } from 'fflate';
+import { validateLabStories } from './validate-lab-stories.mjs';
 
 const web = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const root = path.dirname(web);
 const missions = JSON.parse(fs.readFileSync(path.join(web, 'src/missions.json'), 'utf8'));
 const labs = JSON.parse(fs.readFileSync(path.join(web, 'src/mission-labs.json'), 'utf8'));
+const stories = JSON.parse(fs.readFileSync(path.join(web, 'src/lab-stories.json'), 'utf8'));
 if (labs.length !== 30) throw new Error('Every core mission needs an interactive lab.');
 for (const [index, lab] of labs.entries()) {
   if (lab.id !== index + 1 || !Array.isArray(lab.controls) || !lab.controls.length)
@@ -38,6 +40,7 @@ for (const [index, lab] of labs.entries()) {
   if (!Object.keys(lab.try).length || Object.keys(lab.try).some((id) => !ids.has(id)))
     throw new Error(`Lab ${lab.id} has an invalid first experiment`);
 }
+validateLabStories(labs, stories);
 const fields = [
   'Purpose and success',
   'Actual technologies',
@@ -91,6 +94,8 @@ for (const [index, m] of missions.entries()) {
     throw new Error(`Missing teaching content in mission ${m.id}`);
   const number = String(m.id).padStart(2, '0');
   const lab = labs[m.id - 1];
+  const story = stories[m.id - 1];
+  const guidedText = `## Two guided comparisons\n\n${story.scene}\n\nEach pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.\n\n${story.comparisons.map((comparison, index) => `### ${index + 1}. ${comparison.title}\n\n${comparison.notice}\n\nStarting overrides (other controls use this lab's defaults):\n\n\`\`\`json\n${JSON.stringify(comparison.before, null, 2)}\n\`\`\`\n\nChange one control:\n\n\`\`\`json\n${JSON.stringify(comparison.change, null, 2)}\n\`\`\`\n\nWhat to understand: ${comparison.takeaway}\n`).join('\n')}\n`;
   const labGuide = `# Mission ${m.id}: interactive experiment\n\n${lab.title}\n\n## Start here\n\nOpen mission ${m.id} in the academy. ${lab.task}\n\nFirst action: **${lab.first}**. Change the controls and observe the result. The browser executes a local teaching model; it does not contact a customer system or an AI provider.\n\n## The idea\n\n${lab.idea}\n\n## Things you can change\n\n${lab.controls.map((c) => `- **${c.label}:** starts at ${JSON.stringify(c.default)}.${c.options ? ' Choices: ' + c.options.map(([, label]) => label).join('; ') + '.' : ''}${c.type === 'range' ? ` Range: ${c.min}–${c.max} ${c.unit || ''}, step ${c.step}.` : ''}`).join('\n')}\n\n## A different situation\n\n${lab.challenge}\n\nPredict the result before trying it. Record the value you changed, what actually happened and why. Inspect the system parts in 3D or use the equivalent flat diagram. Rotation and separation change your view; the lesson controls change the model.\n\n## What this experiment establishes\n\n${lab.boundary}\n\nYour controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.\n\nAuthored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.\n`;
   const brief = `Help me deliver: ${m.project.brief}\n\nContext: ${m.problem}\n\nYou may plan, implement, test, diagnose and improve the solution. Manual coding is optional. Ask about missing information, use fictional or authorized data, label assumptions and simulations, and explain concepts in simple English. Establish budget, authority and stopping conditions. Discuss new access, spending and publication before acting.\n\nMilestones:\n${m.project.steps.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nExpected observations:\n${m.project.checks.map((s) => `- ${s}`).join('\n')}\n\nName the actual stack, supported versions, configuration, costs and opening instructions. Never invent interviews, measurements or test results. Help me inspect the system, update my system explanation and predict a changed case before showing the result. Do not complete my understanding assessment as if I had demonstrated it.\n`;
   const content = `# Mission ${m.id}: ${m.title}\n\nStage ${m.stage}: ${stages[m.stage - 1]}\n\n${m.outcome}\n\nAI can perform all implementation, research, planning, tests and diagnosis. Concepts are compulsory. This is a mission, not a one-day guarantee.\n\n## The problem\n\n${m.problem}\n\n## Understand the concepts\n\n${m.concepts.map((c) => `### ${c.name}\n\n${c.explanation}\n\n**Example:** ${c.example}\n\n**Common wrong idea:** ${c.misconception}`).join('\n\n')}\n\n## Predict, change, observe\n\n${m.experiment.prompt}\n\nPrepared teaching simulation, not live provider or business evidence. Predict before selecting.\n\n${m.experiment.options.map((o) => `- **${o.label}:** ${o.result} ${o.why}`).join('\n')}\n\nFlow: ${m.flow.map((n) => `${n.name} (${n.runs})`).join(' → ')}\n\n## Worked example\n\n${Object.entries(
@@ -103,7 +108,8 @@ for (const [index, m] of missions.entries()) {
   const directory = path.join(repositoryFolder, number);
   fs.mkdirSync(directory, { recursive: true });
   fs.writeFileSync(path.join(directory, 'README.md'), content);
-  fs.writeFileSync(path.join(directory, 'LAB-GUIDE.md'), labGuide);
+  const completeLabGuide = (labGuide + '\n' + guidedText).trimEnd() + '\n';
+  fs.writeFileSync(path.join(directory, 'LAB-GUIDE.md'), completeLabGuide);
   const evidence = `# Mission ${m.id} evidence\n\n## Product evidence\n\nArtifact / local location and opening instructions:\nStarting state:\nAction:\nExpected result:\nActual observation:\nEnvironment / revision / date:\nFixtures, reports, unrun checks and limits:\n\n${m.project.checks.map((c) => `- [ ] ${c}`).join('\n')}\n\n## Understanding demonstrations\n\n${['explain', 'locate', 'predict', 'compare', 'challenge'].map((k) => `### ${k}\n${m.assess[k]}\n\nYour reasoning and evidence:\n`).join('\n')}\n## Review\n\nReviewer or method:\nFresh scenario:\nPrediction before result:\nObserved reasoning and outcome:\nGaps and next practice:\nStatus: unreviewed / revisit / reviewer reports demonstrated\n\nField completeness is not concept mastery. AI remains available throughout.\n`;
   const files = {
     'MISSION.md': strToU8(
@@ -113,7 +119,8 @@ for (const [index, m] of missions.entries()) {
       ),
     ),
     'AI-BRIEF.txt': strToU8(brief),
-    'LAB-GUIDE.md': strToU8(labGuide),
+    'LAB-GUIDE.md': strToU8(completeLabGuide),
+    'comparisons.json': strToU8(JSON.stringify(story, null, 2)),
     'SYSTEM-EXPLANATION.md': strToU8(systemTemplate),
     'EVIDENCE.md': strToU8(evidence),
     'TOOL-RECORD.md': strToU8(toolsTemplate),

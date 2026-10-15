@@ -31,3 +31,57 @@ The updater and assertions run on fictional records in this browser. A passing c
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+The interface says Saved, but the shop needs to know whether the intended visit actually changed.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Inspect more than the toast
+
+Keep the defect. Compare the message-only check with a check of both records.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "check": "toast",
+  "defect": true,
+  "selected": "V-42"
+}
+```
+
+Change one control:
+
+```json
+{
+  "check": "records"
+}
+```
+
+What to understand: The same defect can hide behind a passing toast check. A useful assertion inspects the intended change and the state that must stay unchanged.
+
+### 2. Correct the updater
+
+Watch which record becomes confirmed. The other record should remain pending.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "check": "records",
+  "defect": true,
+  "selected": "V-42"
+}
+```
+
+Change one control:
+
+```json
+{
+  "defect": false
+}
+```
+
+What to understand: A relevant check should distinguish the faulty updater from the corrected one. A success message alone cannot do that.

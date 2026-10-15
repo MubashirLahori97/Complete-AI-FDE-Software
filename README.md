@@ -16,6 +16,8 @@ The [interactive learning studio](INTERACTIVE-STUDIO.md) lets you edit inputs an
 
 All thirty missions now lead with a real page or concept-specific visual evidence: receipts, record cards, cost curves, request steps, permission gates, structured-output checks, trace timelines, cache routes and composable capabilities. Diagram actions update the same saved experiment controls. See [the coverage map and verification boundaries](LESSON-VISUALS.md).
 
+Each lesson also has a short situation, two guided comparisons that change one control, reversible input edits and a worked example revealed one moment at a time. See [the learning flow](LEARNING-PACING.md). All thirty project kits include both comparison guides.
+
 The [illustrated academy journey](ACADEMY-DESIGN.md) connects the homepage, six chapters and core lessons. Edit a real page before starting, carry that heading into Mission 1, and see the experiment and project behind each mission. The reservation and AI evaluation lessons also expose individual operations and cases behind their totals.
 
 Every project requires an eight-part system explanation: purpose, actual stack, component roles, choices, execution, action flow, information/access/AI, and changes/failures. A reviewer checks explanations, predictions and fresh scenarios rather than accepting generated prose alone.

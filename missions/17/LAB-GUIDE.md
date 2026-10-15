@@ -33,3 +33,58 @@ The time model assumes equal independent tasks plus two coordination minutes per
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+Two workstreams are building connected parts. They need a shared interface as well as time to coordinate.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Agree on the field
+
+Compare the key the interface expects with the key in the supplied payload.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "uiField": "status",
+  "serverField": "accessStatus"
+}
+```
+
+Change one control:
+
+```json
+{
+  "uiField": "accessStatus"
+}
+```
+
+What to understand: Compatible field names let this local interface check fit. Speed elsewhere cannot repair a broken agreement between parts.
+
+### 2. More workers, one small task
+
+Look for idle workers and additional coordination time.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "uiField": "accessStatus",
+  "serverField": "accessStatus",
+  "workers": 1,
+  "tasks": 1,
+  "minutes": 5
+}
+```
+
+Change one control:
+
+```json
+{
+  "workers": 6
+}
+```
+
+What to understand: One five-minute task still needs one work round. Extra workers add coordination in this model, so the total increases rather than decreases.

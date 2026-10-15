@@ -23,6 +23,8 @@ The experiment notebook preserves controls, prediction and observation in browse
 
 ## Implementation and verification
 
+The [learning flow](LEARNING-PACING.md) adds a short context for each mission, sixty optional one-control comparisons, bounded session undo and thirty worked stories revealed one moment at a time. Comparison examples drive the same saved model inputs. Custom edits are labelled as a learner variation instead of retaining the example's takeaway as if it still describes the current state. Every kit includes the comparison guides and structured examples.
+
 Definitions: `web/src/mission-labs.json`. Executed rules: `mission-labs.ts`. Interface: `CausalStudio.tsx`, `LabWorld.tsx`, `LabDiagram.tsx`, `causal-studio.css`. Specific evidence: `lab-visuals.ts`, `LabVisualScene.tsx`, `lab-visuals.css` and `ModelEvidence.tsx`. Progress parsing: `state.ts`. Packaging validates all thirty definitions and includes their guides.
 
 All thirty missions now lead with a real page or a concept-specific evidence view. The model produces the typed visual data together with its calculations and records; the renderer does not independently invent a successful result. `SystemConceptScene.tsx` and `system-concepts.css` add the cost, authority, contract, retrieval, compatibility, trace, cache, workflow, architecture and net-benefit representations. Diagram controls use the same save function as the main controls. Comparison bars and record tables remain available in the system view without duplicating the primary evidence. See [the visual coverage map](LESSON-VISUALS.md).

@@ -34,3 +34,58 @@ All costs and capabilities are fictional. Maintenance, risk, taxes and financing
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+The shop is choosing between a package and a custom build. Compare the same period and required capabilities.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. A repeating fee accumulates
+
+Compare the growing package line with the fixed stated build cost.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "months": 1,
+  "license": 20,
+  "setup": 120,
+  "build": 600
+}
+```
+
+Change one control:
+
+```json
+{
+  "months": 24
+}
+```
+
+What to understand: The package's stated total reaches 600 units after two years in this example. This arithmetic excludes maintenance and other costs.
+
+### 2. A cheaper option can miss the need
+
+The totals stay the same. The package now lacks a capability the shop requires.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "months": 1,
+  "needExport": false,
+  "vendorExport": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "needExport": true
+}
+```
+
+What to understand: A lower price does not supply a missing requirement. Capability, omitted costs and risks belong in the decision too.

@@ -31,3 +31,57 @@ This is an authored maintenance scenario, not an observation about a real organi
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A maintenance team is preparing a site visit. The site needs approval before anyone can enter.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Faster preparation, still blocked
+
+Preparation gets faster. Watch whether the access gate opens.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "approval": false,
+  "needsAccess": true,
+  "dispatch": 15
+}
+```
+
+Change one control:
+
+```json
+{
+  "dispatch": 1
+}
+```
+
+What to understand: Optimising a later step cannot satisfy a missing prerequisite. The approval requirement still blocks this model journey.
+
+### 2. Resolve the actual prerequisite
+
+Keep preparation at one minute. Record the required approval and inspect the gate.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "approval": false,
+  "needsAccess": true,
+  "dispatch": 1
+}
+```
+
+Change one control:
+
+```json
+{
+  "approval": true
+}
+```
+
+What to understand: The journey can now proceed in the fictional scenario. A real investigation must establish who grants approval and how it is recorded.

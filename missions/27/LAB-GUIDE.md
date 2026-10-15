@@ -32,3 +32,57 @@ This checks a deliberately simplified capability model. It does not choose a rea
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A public page is working. A new requirement asks it to share private customer records between users.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Change the need
+
+The static design stays the same while the required capability changes.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "privateRecords": false,
+  "accounts": false,
+  "design": "static"
+}
+```
+
+Change one control:
+
+```json
+{
+  "privateRecords": true
+}
+```
+
+What to understand: Files alone do not supply shared private records and trusted access control. The architecture needs suitable connected capabilities.
+
+### 2. Add a suitable connected design
+
+Inspect the missing capability after the model design includes connected services.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "privateRecords": true,
+  "accounts": false,
+  "design": "static"
+}
+```
+
+Change one control:
+
+```json
+{
+  "design": "connected"
+}
+```
+
+What to understand: The declared capabilities can now fit this simplified need. Actual security, implementation and operating responsibilities still need evidence.

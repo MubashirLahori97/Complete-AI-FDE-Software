@@ -31,3 +31,55 @@ These are fictional counts. The displayed rate is arithmetic, not evidence of a 
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+Two missed visits sound small, but the meaning depends on how many eligible visits there were.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Keep the count; change the whole
+
+The missed count stays at two. Watch the fraction and percentage change.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "eligible": "10",
+  "missed": 2
+}
+```
+
+Change one control:
+
+```json
+{
+  "eligible": "100"
+}
+```
+
+What to understand: Two out of ten is 20%; two out of one hundred is 2%. The denominator changes the meaning of the same count.
+
+### 2. Unknown is not zero percent
+
+Remove the eligible total. Look for Unknown rather than a reassuring zero.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "eligible": "10",
+  "missed": 2
+}
+```
+
+Change one control:
+
+```json
+{
+  "eligible": ""
+}
+```
+
+What to understand: A rate needs a usable denominator. Missing information should remain visible instead of silently becoming a favourable result.

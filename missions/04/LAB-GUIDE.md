@@ -30,3 +30,55 @@ This estimator runs locally and uses fictional units. Its explicit rule allows w
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A visitor wants an estimate. The shop must decide which quantities are allowed before calculating a total.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Blank is different from zero
+
+Compare a zero total with a withheld total. Those results mean different things.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "quantity": "0",
+  "price": 25
+}
+```
+
+Change one control:
+
+```json
+{
+  "quantity": ""
+}
+```
+
+What to understand: Zero is an allowed quantity in this rule. Blank means the visitor has not supplied an allowed quantity, so the model withholds the total.
+
+### 2. One more item
+
+Count the item chips. One additional item adds one more unit price to the receipt.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "quantity": "2",
+  "price": 25
+}
+```
+
+Change one control:
+
+```json
+{
+  "quantity": "3"
+}
+```
+
+What to understand: The same multiplication rule works for each allowed whole quantity: quantity times price per item.

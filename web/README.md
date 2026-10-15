@@ -6,6 +6,8 @@ Each core mission contains a concrete problem, concepts, a worked example, a pre
 
 All thirty missions lead with a real page or concept-specific visual evidence, including receipts, cost curves, record cards, request steps, permission gates, structured-output checks, trace timelines, cache routes and composable capabilities. Diagram actions update the same saved experiment controls. See [visual coverage and verification boundaries](../LESSON-VISUALS.md).
 
+Short situations and sixty guided comparisons add context to the experiments. Each pair changes one control and uses the same saved model values. Undo groups a focused edit and preserves notes; worked examples reveal Before, Direction, Result and Takeaway separately. See [learning pacing](../LEARNING-PACING.md).
+
 The original coding collection is preserved at `#/workshops`, `#/library`, `#/workshop-path` and `#/lesson/1`–`#/lesson/30`, with its own projects, code, experiments and progress. Optional Amina examples remain at `#/guided` and `#/sample/amina`. Old completions do not complete new core missions. All core records round-trip through existing Settings backups. The teaching app itself makes no live AI calls; learners use available AI tools for their projects and record actual configuration, access, versions, costs and observed results.
 
 ## Run locally

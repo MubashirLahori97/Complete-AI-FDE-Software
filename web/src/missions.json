@@ -286,7 +286,7 @@
       {
         "name": "Input, types and conditions",
         "explanation": "Input is information entering the program. A type describes what kind it is: text, number or a true/false value. A condition chooses a path. Text '2' must be interpreted appropriately before numeric work; a blank field is not automatically a sensible zero.",
-        "example": "If quantity is a whole number from 1 to 10, calculate; otherwise explain how to correct it.",
+        "example": "If quantity is a whole number from 0 to 20, calculate; otherwise explain how to correct it. This example deliberately allows zero items.",
         "misconception": "A number-looking field guarantees valid input. Validation must check the actual value."
       },
       {

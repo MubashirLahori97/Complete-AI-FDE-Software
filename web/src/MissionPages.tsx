@@ -17,6 +17,7 @@ import {
 } from './mission-types';
 import { downloadFile, type Progress } from './state';
 import CausalStudio from './CausalStudio';
+import WorkedStory from './WorkedStory';
 import { AcademyHome, AcademyPath } from './AcademyJourney';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
@@ -174,26 +175,16 @@ export function MissionLesson({
                 <summary>A common wrong idea</summary>
                 <p>{mission.concepts[concept].misconception}</p>
               </details>
+              <div className="mission-concept-controls">
+                <button onClick={() => go(0)}>Return to the experiment</button>
+                {concept < mission.concepts.length - 1 && (
+                  <button onClick={() => setConcept(concept + 1)}>
+                    Next idea <ArrowRight size={15} />
+                  </button>
+                )}
+              </div>
             </div>
-            <section className="mission-worked">
-              <h3>A worked example</h3>
-              <dl>
-                {[
-                  ['Before', mission.example.before],
-                  ['Direction to AI', mission.example.action],
-                  ['Observed or intended result', mission.example.after],
-                  ['What to learn', mission.example.lesson],
-                ].map(([label, value]) => (
-                  <div key={label}>
-                    <dt>{label}</dt>
-                    <dd>{value}</dd>
-                  </div>
-                ))}
-              </dl>
-              <p className="field-help">
-                This is an authored teaching example. Your own project needs its own observations.
-              </p>
-            </section>
+            <WorkedStory key={id} example={mission.example} />
           </>
         )}
         {step === 2 && (

@@ -32,3 +32,59 @@ This is a compositional teaching model. Graduation still requires your own usefu
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+Your product faces a changed requirement. Trace what the new journey needs before adding components.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. A public page becomes a private journey
+
+The existing components stay fixed. Inspect the capabilities the changed requirement now needs.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "need": "public",
+  "server": false,
+  "permissions": false,
+  "source": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "need": "private"
+}
+```
+
+What to understand: A previously adequate public-page design can miss a new private-record need. Identify the connected and permission boundaries instead of assuming the old path still fits.
+
+### 2. Give the helper a supporting source
+
+The connected application is already present. Add the permitted supporting source and inspect the changed path.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "need": "ai",
+  "server": true,
+  "permissions": false,
+  "source": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "source": true
+}
+```
+
+What to understand: A data store is not automatically supporting knowledge for an AI answer. This model fit still needs transfer to your own product and an independent review.

@@ -32,3 +32,59 @@ This is a local rule executor, not an autonomous AI agent. Each operation costs 
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+An executor is given a task, some authority and a budget. Each boundary has its own job.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Enough budget to finish
+
+Count the operations that run and the units that remain.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "budget": 2,
+  "demand": 3,
+  "permission": "test",
+  "request": "test"
+}
+```
+
+Change one control:
+
+```json
+{
+  "budget": 4
+}
+```
+
+What to understand: A permitted task can still stop at its budget. Increasing the budget makes this three-operation model task affordable.
+
+### 2. Money does not grant permission
+
+Keep ample budget. Ask for an action outside the granted test authority.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "budget": 10,
+  "demand": 3,
+  "permission": "test",
+  "request": "test"
+}
+```
+
+Change one control:
+
+```json
+{
+  "request": "live"
+}
+```
+
+What to understand: The authority check refuses the action before spending budget. Extra resources do not expand permission.

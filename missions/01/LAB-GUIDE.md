@@ -29,3 +29,53 @@ The page runs real HTML, CSS and JavaScript. Its shop and contact details are fi
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A repair shop needs a page that helps a visitor decide whether to contact it.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. A greeting or a useful message?
+
+Read the page as someone looking for a repair. Which heading gives you useful information?
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "heading": "Welcome."
+}
+```
+
+Change one control:
+
+```json
+{
+  "heading": "Repairs near you."
+}
+```
+
+What to understand: The browser displays the words you supply. A useful result starts with the visitor's need, even when AI writes the page.
+
+### 2. A different shop
+
+Only the heading changes. The page still opens and its Contact action still works.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "heading": "Repairs near you."
+}
+```
+
+Change one control:
+
+```json
+{
+  "heading": "Bicycle repairs near you."
+}
+```
+
+What to understand: A change in the business can require different content without requiring a new database or a live AI call.

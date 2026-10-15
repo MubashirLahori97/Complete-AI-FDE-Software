@@ -32,3 +32,59 @@ These are fictional scenario inputs, with adoption rounded to whole people. The 
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A dispatch tool saves one step, but creates correction work later. Only people who use it can experience either effect.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Include the correction work
+
+Keep the local saving and adoption fixed. Compare the whole workflow's net time.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "rework": 20,
+  "saved": 10,
+  "adoption": 60,
+  "people": 5
+}
+```
+
+Change one control:
+
+```json
+{
+  "rework": 3
+}
+```
+
+What to understand: Three scenario users now save 30 minutes and incur 9 correction minutes: 21 net minutes. These are assumptions, not measured benefits.
+
+### 2. What if nobody uses it?
+
+The tool's stated per-person saving stays the same, but the active-person count changes.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "rework": 3,
+  "saved": 10,
+  "adoption": 60,
+  "people": 5
+}
+```
+
+Change one control:
+
+```json
+{
+  "adoption": 0
+}
+```
+
+What to understand: With zero adoption, this model delivers zero net time saving. Investigate actual use before treating a feature's proposed saving as a result.

@@ -16,7 +16,7 @@ Visitors want an estimated repair price before contacting the business. A calcul
 
 Input is information entering the program. A type describes what kind it is: text, number or a true/false value. A condition chooses a path. Text '2' must be interpreted appropriately before numeric work; a blank field is not automatically a sensible zero.
 
-**Example:** If quantity is a whole number from 1 to 10, calculate; otherwise explain how to correct it.
+**Example:** If quantity is a whole number from 0 to 20, calculate; otherwise explain how to correct it. This example deliberately allows zero items.
 
 **Common wrong idea:** A number-looking field guarantees valid input. Validation must check the actual value.
 

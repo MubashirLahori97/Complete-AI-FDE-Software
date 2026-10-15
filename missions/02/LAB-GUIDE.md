@@ -30,3 +30,55 @@ This builds and inspects a brief locally. It does not call or evaluate an AI bui
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+The shop owner dislikes the page, but “make it impressive” leaves the builder guessing.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Turn a feeling into a check
+
+Look for a named part, an action and an observation someone can check.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "direction": "Make it impressive.",
+  "scope": "one"
+}
+```
+
+Change one control:
+
+```json
+{
+  "direction": "Put opening hours below Services. Check that the hours are visible on a phone."
+}
+```
+
+What to understand: Concrete direction gives a builder something to act on. This tiny word checker illustrates that pattern; it does not evaluate arbitrary instructions.
+
+### 2. Keep the change small
+
+Keep the words identical. Change how much of the site the builder may alter.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "direction": "Put opening hours below Services. Check that the hours are visible on a phone.",
+  "scope": "all"
+}
+```
+
+Change one control:
+
+```json
+{
+  "scope": "one"
+}
+```
+
+What to understand: A bounded change leaves unrelated decisions outside the task. Actual AI output still needs to be inspected.

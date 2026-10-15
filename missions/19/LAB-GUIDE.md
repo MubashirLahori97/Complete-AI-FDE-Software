@@ -33,3 +33,59 @@ This is a small keyword-matching source model, not semantic embeddings or a live
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+A helper retrieves a cancellation policy. A matching topic is only the beginning of checking whether it is usable.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Relevant but too old
+
+Keep the question fixed. Compare the document age with the allowed age.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "age": 20,
+  "maxAge": 7,
+  "docAction": false,
+  "authority": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "age": 2
+}
+```
+
+What to understand: Relevance and freshness answer different questions. This fictional policy now fits the model's age rule.
+
+### 2. An instruction inside a document
+
+The source now asks to cancel the visit, but separate action authority is still absent.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "age": 2,
+  "maxAge": 7,
+  "docAction": false,
+  "authority": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "docAction": true
+}
+```
+
+What to understand: Retrieved text supplies information. It cannot grant the user and policy authority required for an action.

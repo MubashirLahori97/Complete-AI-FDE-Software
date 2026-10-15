@@ -31,3 +31,57 @@ This is an explicit storage-lifetime model with fictional records. It is not a r
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+Two customers are named Alex. After a restart, the shop also needs its records to remain available.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. A separate storage lifetime
+
+Compare the retained records after the same process restart.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "restart": true,
+  "storage": "memory",
+  "lookup": "Alex"
+}
+```
+
+Change one control:
+
+```json
+{
+  "storage": "persistent"
+}
+```
+
+What to understand: Process memory and persistent storage have different lifetimes. Persistence still needs its own protection, backup and recovery.
+
+### 2. One name, two identities
+
+Compare two name matches with one exact identifier match.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "restart": true,
+  "storage": "persistent",
+  "lookup": "Alex"
+}
+```
+
+Change one control:
+
+```json
+{
+  "lookup": "V-42"
+}
+```
+
+What to understand: A person's name may not uniquely select a record. A stable identifier can target the intended visit.

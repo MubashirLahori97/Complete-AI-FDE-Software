@@ -33,3 +33,61 @@ This executes a deterministic concurrency model. Separate reads all see the same
 Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
 
 Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.
+
+## Two guided comparisons
+
+Two booking operations compete for the last slot. Retries can also repeat a single intended operation.
+
+Each pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.
+
+### 1. Protect the last slot
+
+Inspect each operation's result. Accepted bookings must not exceed capacity.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "slots": 1,
+  "requests": 2,
+  "atomic": false,
+  "retries": 0,
+  "sameKey": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "atomic": true
+}
+```
+
+What to understand: A capacity check and reservation need a protected operation. Separate unprotected checks can both act on the same available slot.
+
+### 2. A retry is not a new intention
+
+Keep four attempts. Change whether they share one operation identifier.
+
+Starting overrides (other controls use this lab's defaults):
+
+```json
+{
+  "slots": 4,
+  "requests": 1,
+  "atomic": true,
+  "retries": 3,
+  "sameKey": false
+}
+```
+
+Change one control:
+
+```json
+{
+  "sameKey": true
+}
+```
+
+What to understand: Stable retry identity lets repeated attempts refer to one intended operation instead of creating several reservations in this model.
