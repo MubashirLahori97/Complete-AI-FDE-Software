@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, CheckCircle2, Lightbulb } from 'lucide-react';
 import { lessonTeaching } from './lesson-content';
-import type { Progress } from './state';
+import { localDate, type Progress } from './state';
+import { Companion, WinMoment } from './MissionUI';
 
 export default function LessonGuide({
   day,
@@ -18,6 +19,7 @@ export default function LessonGuide({
   const step = progress.readingSteps[day] || 0;
   const attempt = progress.quickChecks[day] || { choice: null, checked: false, hints: 0 };
   const [solution, setSolution] = useState(false);
+  const [newWin, setNewWin] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const setStep = (next: number) => {
     update({ ...progress, readingSteps: { ...progress.readingSteps, [day]: next } });
@@ -30,6 +32,23 @@ export default function LessonGuide({
     });
   return (
     <section className="guided-reading" aria-label="Guided lesson">
+      <div className="lesson-coach">
+        <Companion
+          mood={attempt.checked ? (attempt.choice === guide.answer ? 'win' : 'thinking') : 'ready'}
+        />
+        <div>
+          <span>YOUR NEXT SMALL WIN</span>
+          <strong>
+            {attempt.checked && attempt.choice === guide.answer
+              ? 'You spotted it. That is how understanding starts.'
+              : step === 2
+                ? 'Your turn. A guess is a good place to start.'
+                : step === 1
+                  ? 'Follow the example. Watch what changes.'
+                  : 'One idea. One small experiment. You have got this.'}
+          </strong>
+        </div>
+      </div>
       <div className="guide-progress" aria-label="Reading steps">
         {['One idea', 'An example', 'Your small task'].map((label, index) => (
           <button
@@ -55,6 +74,10 @@ export default function LessonGuide({
       {step === 0 && (
         <>
           <p className="guide-situation">{guide.situation}</p>
+          <button className="curiosity-button" onClick={() => setStep(2)}>
+            Curious? Try the challenge before reading
+            <ArrowRight size={15} />
+          </button>
           <p className="guide-explanation">{guide.explanation}</p>
           <details className="guide-details">
             <summary>New words, in simple English</summary>
@@ -118,7 +141,10 @@ export default function LessonGuide({
                 key={label}
                 className={attempt.choice === index ? 'selected' : ''}
                 aria-pressed={attempt.choice === index}
-                onClick={() => changeAttempt({ choice: index, checked: false })}
+                onClick={() => {
+                  setNewWin(false);
+                  changeAttempt({ choice: index, checked: false });
+                }}
               >
                 {label}
               </button>
@@ -127,7 +153,17 @@ export default function LessonGuide({
           <button
             className="button primary"
             disabled={attempt.choice === null}
-            onClick={() => changeAttempt({ checked: true })}
+            onClick={() => {
+              const first = attempt.choice === guide.answer && !progress.conceptWins[day];
+              setNewWin(first);
+              update({
+                ...progress,
+                quickChecks: { ...progress.quickChecks, [day]: { ...attempt, checked: true } },
+                conceptWins: first
+                  ? { ...progress.conceptWins, [day]: localDate() }
+                  : progress.conceptWins,
+              });
+            }}
           >
             Check my thinking
           </button>
@@ -139,6 +175,13 @@ export default function LessonGuide({
               {attempt.choice === guide.answer && <CheckCircle2 size={19} />}
               {guide.options[attempt.choice][1]}
             </p>
+          )}
+          {attempt.checked && attempt.choice === guide.answer && progress.conceptWins[day] && (
+            <WinMoment
+              title={newWin ? 'Discovery collected. +15 XP' : 'Discovery saved in your collection.'}
+            >
+              You connected the rule to the result. Try it in code next.
+            </WinMoment>
           )}
           <div className="guide-hints">
             {guide.hints.slice(0, attempt.hints).map((hint, index) => (

@@ -3,6 +3,7 @@ import { ArrowRight, Check, Search, BookOpen, CheckCircle2 } from 'lucide-react'
 import { lessons, phases, tracks, type Track } from './data';
 import { resumeHref, type Progress } from './state';
 import { PageHeading, ProgressBar } from './ui';
+import { JourneyMap } from './MissionUI';
 
 export default function Curriculum({
   progress,
@@ -17,6 +18,7 @@ export default function Curriculum({
   const [track, setTrack] = useState(initialTrack);
   const [filter, setFilter] = useState('all');
   const [mode, setMode] = useState('core');
+  const [view, setView] = useState<'map' | 'list'>('map');
   const visible = lessons.filter(
     (lesson) =>
       (!track || lesson.track === track) &&
@@ -100,68 +102,87 @@ export default function Curriculum({
             {visible.length} {visible.length === 1 ? 'lesson' : 'lessons'}
             {query ? ` matching “${query}”` : ''}
           </p>
-          {tracks
-            .filter((item) => !track || track === item.name)
-            .map((item, index) => {
-              const group = visible.filter((lesson) => lesson.track === item.name);
-              if (!group.length) return null;
-              const all = lessons.filter((lesson) => lesson.track === item.name);
-              const done = all.filter((lesson) => progress.completed[lesson.day]).length;
-              return (
-                <section className="curriculum-group" key={item.name}>
-                  <div className="curriculum-group-heading">
-                    <div>
-                      <span className="eyebrow">
-                        CHAPTER {tracks.findIndex((t) => t.name === item.name) + 1}{' '}
-                        <span className="dot-divider">/</span> {item.skill.toUpperCase()}
-                      </span>
-                      <h2>{item.name}</h2>
-                    </div>
-                    <span className="muted small-text">
-                      {done} / {all.length} complete
-                    </span>
-                  </div>
-                  <div className="lesson-list">
-                    {group.map((lesson) => (
-                      <a className="lesson-row" href={`#/lesson/${lesson.day}`} key={lesson.day}>
-                        <span
-                          className={`day-number ${progress.completed[lesson.day] ? 'completed' : `chapter-${index}`}`}
-                        >
-                          {progress.completed[lesson.day] ? (
-                            <Check size={20} />
-                          ) : (
-                            String(lesson.day).padStart(2, '0')
-                          )}
-                        </span>
-                        <div className="lesson-row-copy">
-                          <h3>{lesson.title}</h3>
-                          <p>{lesson.summary}</p>
+          <div className="journey-view-switch" role="group" aria-label="Choose learning path view">
+            <button aria-pressed={view === 'map'} onClick={() => setView('map')}>
+              Adventure map
+            </button>
+            <button aria-pressed={view === 'list'} onClick={() => setView('list')}>
+              Lesson list
+            </button>
+            <span>Every mission is open. Go at your pace.</span>
+          </div>
+          {view === 'map' ? (
+            <JourneyMap progress={progress} items={visible} />
+          ) : (
+            <>
+              {tracks
+                .filter((item) => !track || track === item.name)
+                .map((item, index) => {
+                  const group = visible.filter((lesson) => lesson.track === item.name);
+                  if (!group.length) return null;
+                  const all = lessons.filter((lesson) => lesson.track === item.name);
+                  const done = all.filter((lesson) => progress.completed[lesson.day]).length;
+                  return (
+                    <section className="curriculum-group" key={item.name}>
+                      <div className="curriculum-group-heading">
+                        <div>
+                          <span className="eyebrow">
+                            CHAPTER {tracks.findIndex((t) => t.name === item.name) + 1}{' '}
+                            <span className="dot-divider">/</span> {item.skill.toUpperCase()}
+                          </span>
+                          <h2>{item.name}</h2>
                         </div>
-                        <span className="lesson-row-status">
-                          {progress.completed[lesson.day] ? (
-                            <>
-                              <CheckCircle2 size={15} />
-                              Complete
-                            </>
-                          ) : progress.quizPassed.includes(lesson.day) ? (
-                            <>
-                              <CheckCircle2 size={15} />
-                              Check passed
-                            </>
-                          ) : (
-                            <>
-                              <BookOpen size={15} />
-                              Learn + project
-                            </>
-                          )}
+                        <span className="muted small-text">
+                          {done} / {all.length} complete
                         </span>
-                        <ArrowRight size={18} />
-                      </a>
-                    ))}
-                  </div>
-                </section>
-              );
-            })}
+                      </div>
+                      <div className="lesson-list">
+                        {group.map((lesson) => (
+                          <a
+                            className="lesson-row"
+                            href={`#/lesson/${lesson.day}`}
+                            key={lesson.day}
+                          >
+                            <span
+                              className={`day-number ${progress.completed[lesson.day] ? 'completed' : `chapter-${index}`}`}
+                            >
+                              {progress.completed[lesson.day] ? (
+                                <Check size={20} />
+                              ) : (
+                                String(lesson.day).padStart(2, '0')
+                              )}
+                            </span>
+                            <div className="lesson-row-copy">
+                              <h3>{lesson.title}</h3>
+                              <p>{lesson.summary}</p>
+                            </div>
+                            <span className="lesson-row-status">
+                              {progress.completed[lesson.day] ? (
+                                <>
+                                  <CheckCircle2 size={15} />
+                                  Complete
+                                </>
+                              ) : progress.quizPassed.includes(lesson.day) ? (
+                                <>
+                                  <CheckCircle2 size={15} />
+                                  Check passed
+                                </>
+                              ) : (
+                                <>
+                                  <BookOpen size={15} />
+                                  Learn + project
+                                </>
+                              )}
+                            </span>
+                            <ArrowRight size={18} />
+                          </a>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
+            </>
+          )}
           {!visible.length && (
             <div className="empty-state">
               <Search size={28} />

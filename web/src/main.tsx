@@ -10,6 +10,7 @@ import './styles.css';
 import './project-styles.css';
 import './learning-flow.css';
 import './amina-lesson.css';
+import './alive.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

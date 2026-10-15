@@ -31,6 +31,7 @@ import Playground from './Playground';
 import LessonProject from './LessonProject';
 import LessonGuide from './LessonGuide';
 import { lessonTeaching } from './lesson-content';
+import { MissionMeter, XPChip, WinMoment } from './MissionUI';
 
 function ConceptCheck({
   day,
@@ -129,6 +130,7 @@ export default function Lesson({
       : progress.lessonActivities[day] || 'learn',
   );
   const { guide, teaching } = lessonTeaching(day);
+  const [newBuild, setNewBuild] = useState(false);
   useEffect(() => {
     if (progress.lastLesson !== day || progress.lessonActivities[day] !== tab)
       update({
@@ -153,6 +155,7 @@ export default function Lesson({
   const statusItems = [passed, projectDone, notes.trim().length >= 20, checks.every(Boolean)];
   const complete = () => {
     if (!canComplete(progress, day)) return;
+    setNewBuild(true);
     update({ ...progress, completed: { ...progress.completed, [day]: localDate() } });
   };
   return (
@@ -184,6 +187,10 @@ export default function Lesson({
             </span>
           )}
         </div>
+      </div>
+      <div className="lesson-player-bar">
+        <MissionMeter day={day} progress={progress} />
+        <XPChip progress={progress} />
       </div>
       <section className="lesson-start" aria-label="Today's goal">
         <p className="eyebrow">ONE LESSON, ONE USEFUL RESULT</p>
@@ -339,6 +346,12 @@ export default function Lesson({
             )}
             {tab === 'build' && (
               <section className="build-card">
+                {newBuild && (
+                  <WinMoment title="You built it. +80 XP">
+                    Your project evidence is recorded. This is a good place to pause, or explore the
+                    next mission.
+                  </WinMoment>
+                )}
                 <p className="eyebrow">TURN PRACTICE INTO EVIDENCE</p>
                 <h2>{dailyProject.title}</h2>
                 <p className="build-task">{dailyProject.brief}</p>

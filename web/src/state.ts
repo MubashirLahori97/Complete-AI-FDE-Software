@@ -17,6 +17,9 @@ export interface Progress {
   lessonActivities: Record<string, LessonActivity>;
   readingSteps: Record<string, number>;
   quickChecks: Record<string, { choice: number | null; checked: boolean; hints: number }>;
+  conceptWins: Record<string, string>;
+  reviewWins: Record<string, string>;
+  warmupSolved: boolean;
   completed: Record<string, string>;
   quizPassed: number[];
   notes: Record<string, string>;
@@ -36,6 +39,9 @@ export const emptyProgress = (): Progress => ({
   lessonActivities: {},
   readingSteps: {},
   quickChecks: {},
+  conceptWins: {},
+  reviewWins: {},
+  warmupSolved: false,
   completed: {},
   quizPassed: [],
   notes: {},
@@ -84,6 +90,7 @@ export function parseProgress(value: unknown): Progress {
   if (!isRecord(value) || value.version !== 1)
     throw new Error('This is not a supported FDE Academy backup.');
   const result = emptyProgress();
+  result.warmupSolved = value.warmupSolved === true;
   result.name = text(value.name, 50);
   result.minutes = [30, 60, 90, 120].includes(Number(value.minutes)) ? Number(value.minutes) : 120;
   result.lastLesson =
@@ -104,6 +111,9 @@ export function parseProgress(value: unknown): Progress {
     : [];
   for (const lesson of lessons) {
     const key = String(lesson.day);
+    for (const field of ['conceptWins', 'reviewWins'] as const)
+      if (isRecord(value[field]) && validDate(value[field][key]))
+        result[field][key] = value[field][key];
     if (
       isRecord(value.lessonActivities) &&
       lessonActivities.includes(value.lessonActivities[key] as LessonActivity)

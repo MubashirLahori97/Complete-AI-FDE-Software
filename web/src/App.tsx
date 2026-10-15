@@ -146,7 +146,7 @@ export default function App() {
     )
     .slice(0, 6);
   let page;
-  if (path === '/' || path === '/library') page = <Dashboard progress={progress} />;
+  if (path === '/' || path === '/library') page = <Dashboard progress={progress} update={update} />;
   else if (path === '/curriculum')
     page = (
       <Curriculum

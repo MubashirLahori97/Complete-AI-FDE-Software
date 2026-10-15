@@ -6,6 +6,8 @@
 
 ## Interactive FDE Academy
 
+Start with a one-minute challenge, explore the open mission map, and collect discovery cards as you solve lesson challenges. The [engagement design](ENGAGING-LEARNING.md) explains how feedback, learning XP, review practice, and the companion support the curriculum.
+
 The app opens in **FDE Academy**, with its original dashboard, 30-day curriculum, practice lab, field scenarios, and portfolio. Each day's lesson has Learn, Practise, Project, and Record your build activities. Start with the lesson, practise the idea, build its project, and save your results.
 
 **New learner? Choose Start Lesson 1.** Every lesson now starts with one idea in simple English, a worked example, and one small task with explained feedback and two hints. Each project has a clear first action and three milestones. Continue learning remembers your last unfinished lesson and activity. Read [how the learning experience works](LEARNING-EXPERIENCE.md), including a flexible two-hour study session.

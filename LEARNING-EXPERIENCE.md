@@ -2,6 +2,8 @@
 
 The academy keeps its original curriculum, navigation, 30 daily projects, practice lab, field scenarios, and portfolio. The optional shop examples remain under Resources.
 
+The [engaging learning experience](ENGAGING-LEARNING.md) adds an interactive opening challenge, open mission map, learning XP, discovery cards, a responsive companion, and short recall challenges. These support the same lesson and project sequence described below.
+
 ## What to do first
 
 Open the academy and choose **Start Lesson 1**. Returning learners can use **Continue learning** to return to the last unfinished lesson they visited and its last activity. Finishing all 30 lessons leads to the next phase.

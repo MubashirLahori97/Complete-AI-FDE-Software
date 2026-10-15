@@ -85,6 +85,7 @@ test('JavaScript runs outside the app and runaway code is stopped', async ({ pag
     .fill(
       'let tickets = 10; tickets += 2; console.log(tickets); console.log(typeof localStorage);',
     );
+  await expect(page.getByRole('button', { name: 'Run code' })).toBeEnabled();
   await page.getByLabel('Code editor').focus();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Run code' })).toBeFocused();
