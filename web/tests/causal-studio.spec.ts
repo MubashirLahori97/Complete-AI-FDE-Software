@@ -44,6 +44,7 @@ test('WebGL failure leaves the experiment usable with equivalent component inspe
     } as any;
   });
   await page.goto('/#/mission/14');
+  await page.getByRole('button', { name: 'Look inside the system', exact: true }).click();
   await expect(page.locator('.lab-scene-frame')).toHaveAttribute('data-renderer', 'diagram');
   await page.getByRole('button', { name: "Request another customer's visit", exact: true }).click();
   await expect(page.locator('.lab-observation')).toContainText('The boundary refuses access');

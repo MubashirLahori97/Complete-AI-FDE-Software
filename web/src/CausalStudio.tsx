@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import {
   evaluateLab,
+  hasModelEvidence,
   labSpec,
   labValues,
   type LabControl,
@@ -48,6 +49,7 @@ export default function CausalStudio({
   const spec = labSpec(id);
   const values = labValues(id, record?.values);
   const outcome = useMemo(() => evaluateLab(id, values), [id, JSON.stringify(values)]);
+  const evidence = hasModelEvidence(outcome);
   const [selected, setSelected] = useState(1);
   const [revision, setRevision] = useState(0);
   const [spread, setSpread] = useState(0.65);
@@ -55,7 +57,7 @@ export default function CausalStudio({
   const [inspect, setInspect] = useState(false);
   const [flat, setFlat] = useState(false);
   const [renderer, setRenderer] = useState('loading');
-  const [showSystem, setShowSystem] = useState(![1, 3, 13, 20].includes(id));
+  const [showSystem, setShowSystem] = useState(id !== 1 && id !== 3 && !evidence);
   const [reduced, setReduced] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
@@ -63,7 +65,6 @@ export default function CausalStudio({
   const audio = useRef<AudioContext | null>(null);
   const uid = useId();
   const nativePage = id === 1 || id === 3;
-  const evidence = !!(outcome.reservations || outcome.cases);
   const nodes = missions[id - 1].flow.map((node, index) => ({
     ...node,
     value: outcome.nodes[index],

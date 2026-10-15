@@ -30,6 +30,8 @@ Primary studio controls stay available while a learner scrolls through the visua
 
 ## Evidence and unfinished work
 
+Thirteen additional missions now open with evidence tailored to their concept: highlighted instruction terms, an itemised receipt, generated service cards, percentage tiles, request steps, before/after records, an identity gate and separate parsing/schema/source checks. Inputs change the same model data used in the result. Blank quantities withhold a total, an unknown denominator stays unknown, timeouts do not claim cancellation, and provider acceptance does not claim delivery. The optional 3D view remains available. Exact coverage and limitations are recorded in [the visual map](LESSON-VISUALS.md).
+
 Check real page edits and carry-through, safe rendering, chapter/search/resume behaviour, individual-to-aggregate consistency, keyboard case inspection, reservation outcomes, graphics fallback, reduced motion and phone layouts. Application checks verify those behaviours; they do not establish enjoyment, independent understanding or retention.
 
 More lesson-specific visual explanations, concept pacing, deeper narrative continuity, detailed secondary-page design, final voice/sound production, representative-device measurements and real beginner trials remain part of the full ambition. Judge these against [the experience standard](EXPERIENCE-QUALITY.md). The design direction and passing checks are progress, not proof of worldwide uniqueness or global superiority.

@@ -4,6 +4,8 @@ The default app is **FDE Academy**, with the accepted six-stage, thirty-mission 
 
 Each core mission contains a concrete problem, concepts, a worked example, a prepared interactive scenario, a three-milestone AI-directed project, outcome checks, eight system-explanation areas and five reasoning demonstrations. Explanations appear one question at a time. Review records separate product evidence from understanding, include fresh follow-ups and remain learner-owned rather than authenticated credentials. Build preparation validates and packages all thirty project kits and repository guides.
 
+Seventeen missions lead with a real page or concept-specific visual evidence, including editable receipts, record cards, request steps, permission gates and structured-output checks. All thirty retain executed experiments and projects. See [visual coverage and remaining work](../LESSON-VISUALS.md).
+
 The original coding collection is preserved at `#/workshops`, `#/library`, `#/workshop-path` and `#/lesson/1`–`#/lesson/30`, with its own projects, code, experiments and progress. Optional Amina examples remain at `#/guided` and `#/sample/amina`. Old completions do not complete new core missions. All core records round-trip through existing Settings backups. The teaching app itself makes no live AI calls; learners use available AI tools for their projects and record actual configuration, access, versions, costs and observed results.
 
 ## Run locally

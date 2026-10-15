@@ -23,7 +23,9 @@ The experiment notebook preserves controls, prediction and observation in browse
 
 ## Implementation and verification
 
-Definitions: `web/src/mission-labs.json`. Executed rules: `mission-labs.ts`. Interface: `CausalStudio.tsx`, `LabWorld.tsx`, `LabDiagram.tsx`, `causal-studio.css`. Progress parsing: `state.ts`. Packaging validates all thirty definitions and includes their guides.
+Definitions: `web/src/mission-labs.json`. Executed rules: `mission-labs.ts`. Interface: `CausalStudio.tsx`, `LabWorld.tsx`, `LabDiagram.tsx`, `causal-studio.css`. Specific evidence: `lab-visuals.ts`, `LabVisualScene.tsx`, `lab-visuals.css` and `ModelEvidence.tsx`. Progress parsing: `state.ts`. Packaging validates all thirty definitions and includes their guides.
+
+Seventeen missions now lead with a real page or a concept-specific evidence view. The model produces the typed visual data together with its calculations and records; the renderer does not independently invent a successful result. The system view remains available on demand. See [the visual coverage map](LESSON-VISUALS.md) for the exact coverage and remaining thirteen missions.
 
 Unit checks cover numeric bounds, missing versus zero, atomic capacity, retry identity, trusted ownership checks, the wrong-record defect, malformed JSON, impossible dates, schema versus factual support, threshold monotonicity, persistent/volatile storage, restore identity, stale caches and safe progress reconstruction. Browser checks exercise the thirty project continuations, actual WebGL drawing, camera controls, flat/failure fallback, safe live page behaviour, save/reload/export, keyboard focus, phone widths and changing reduced-motion preferences.
 

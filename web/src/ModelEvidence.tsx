@@ -1,10 +1,12 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
 import type { LabResult } from './mission-labs';
+import LabVisualScene from './LabVisualScene';
 import './model-evidence.css';
 
 export default function ModelEvidence({ outcome }: { outcome: LabResult }) {
   const [chosen, setChosen] = useState('');
   const grid = useRef<HTMLDivElement>(null);
+  if (outcome.visual) return <LabVisualScene visual={outcome.visual} />;
   if (outcome.reservations) {
     const { capacity, attempts, operations } = outcome.reservations;
     const selected = operations.find((o) => o.id === chosen) || operations[0];

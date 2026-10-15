@@ -4,7 +4,7 @@
 
 Build an original, exceptionally clear, beautiful, playful learning environment across the entire thirty-mission course. Treat the user's “best in the world” ambition as the quality target. Neither a developer's opinion nor passing app tests establishes a global ranking, worldwide novelty, enjoyment, or learning effectiveness. Those claims remain unproven until appropriate independent comparison and learner evidence exist.
 
-The previous goal turn made verified progress at source commit `db7b0a2`: thirty executed mission experiments, inspectable 3D with equivalent diagrams, saved notebooks, packaged guides and a passing full CI run (53 unit checks and 92 browser checks; one optional check skipped). The published assets and thirty project kits matched that build. This establishes the behaviours checked, not completion of the broader goal.
+The previous published release at source commit `b20b3ac` added the connected academy journey, a real editable homepage page and individual evidence views, with a passing full CI run (54 unit checks and 97 browser checks; one optional check skipped). The published assets and thirty project kits matched that build. This establishes the behaviours checked, not completion of the broader goal.
 
 ## Release requirements
 
@@ -34,5 +34,7 @@ The previous goal turn made verified progress at source commit `db7b0a2`: thirty
 ## Current completion audit
 
 The thirty-mission concept foundation, projects and review workflow exist. All thirty missions have input-driven local experiments, a shared inspectable 3D stage with equivalent diagrams, a saved notebook and packaged experiment guides. A narrated sample and earlier visual playground also exist. The home, chapter journey and core shell now have a coherent creative direction, a real editable homepage page, input continuity into Mission 1, original stage illustrations and clearer experiment/project links. Reservation operations and individual evaluation cases add more specific visual teaching in Missions 13 and 20. See [the implementation and research](INTERACTIVE-STUDIO.md) and [the current design](ACADEMY-DESIGN.md). The full quality standard above is **not yet achieved**. More lesson-specific visual explanations, narrative depth and pacing, detailed secondary-page design, measured performance on representative devices, final voice production and independent beginner evaluations remain to be established. Keep the original scope and goal active as implementation and evidence improve.
+
+The current implementation adds thirteen further concept-specific evidence views, bringing the primary real-page/specific-visual coverage to seventeen missions. Receipts, generated cards, rate comparisons, request steps, record changes, permission gates and structured-output checks expose the actual model results and failures. The remaining thirteen missions still lead with shared system-role diagrams. See [the coverage map](LESSON-VISUALS.md). Current release verification belongs in CI results; independent learning evidence is still outstanding.
 
 Implementation evidence and remaining work belong in the relevant feature documentation and CI results. Update this audit when evidence changes; do not turn proposed thresholds or authored content into observed learner outcomes.

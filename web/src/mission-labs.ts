@@ -1,4 +1,5 @@
 import content from './mission-labs.json' with { type: 'json' };
+import type { LabVisual } from './lab-visuals';
 
 export type LabValue = string | number | boolean;
 export type LabValues = Record<string, LabValue>;
@@ -25,6 +26,7 @@ export type LabSpec = {
   controls: LabControl[];
 };
 export type LabResult = {
+  visual?: LabVisual;
   headline: string;
   explanation: string;
   nodes: [string, string, string];
@@ -41,6 +43,8 @@ export type LabResult = {
   cases?: { id: string; positive: boolean; score: number; alert: boolean }[];
 };
 export type LabRecord = { values: LabValues; note: string };
+export const hasModelEvidence = (outcome: LabResult) =>
+  !!(outcome.visual || outcome.reservations || outcome.cases);
 // The packaging step validates the authored JSON before publishing.
 export const labSpecs = content as unknown as LabSpec[];
 export const labSpec = (id: number) => labSpecs[id - 1];
@@ -109,9 +113,27 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
       );
     case 2: {
       const text = s('direction');
-      const part = /hours|opening|services|heading|contact/i.test(text);
-      const action = /move|put|show|replace|add|remove|keep/i.test(text);
-      const check = /check|visible|verify|phone|keyboard/i.test(text);
+      const signals = [
+        {
+          label: 'A named part',
+          regex: /\b(hours|opening|services|heading|contact)\b/i,
+          example: 'opening hours',
+        },
+        {
+          label: 'An action',
+          regex: /\b(move|put|show|replace|add|remove|keep)\b/i,
+          example: 'put below Services',
+        },
+        {
+          label: 'A check',
+          regex: /\b(check|visible|verify|phone|keyboard)\b/i,
+          example: 'check on a phone',
+        },
+      ].map(({ label, regex, example }) => {
+        const match = regex.exec(text);
+        return { label, term: match?.[0] || null, start: match?.index ?? -1, example };
+      });
+      const [part, action, check] = signals.map((signal) => !!signal.term);
       const count = Number(part) + Number(action) + Number(check);
       return result(
         count === 3 && s('scope') === 'one'
@@ -124,6 +146,7 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           check ? 'An observation is named' : 'No recognised check',
         ],
         {
+          visual: { kind: 'brief', text, scope: s('scope'), signals },
           tone: count === 3 && s('scope') === 'one' ? 'ready' : 'careful',
           facts: [
             fact('Recognised signals', `${count} / 3`),
@@ -161,6 +184,18 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           valid ? `${q * n('price')} units` : 'Explain the correction',
         ],
         {
+          visual: {
+            kind: 'estimate',
+            raw: quantity,
+            quantity: valid ? q : null,
+            price: n('price'),
+            total: valid ? q * n('price') : null,
+            reason: valid
+              ? 'Whole quantities from 0 to 20 are allowed.'
+              : quantity.trim() === ''
+                ? 'A blank quantity is missing information. It is not zero.'
+                : 'Use a whole quantity from 0 to 20.',
+          },
           tone: valid ? 'ready' : 'blocked',
           active: valid ? 2 : 1,
           facts: [fact('Unit price', n('price')), fact('Accepted quantity', valid ? q : 'None')],
@@ -189,6 +224,13 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           duplicate ? 'Resolve identity before display' : `${records.length} labelled cards`,
         ],
         {
+          visual: {
+            kind: 'collection',
+            records: records.map((row) => ({
+              ...row,
+              repeated: records.filter((other) => other.id === row.id).length > 1,
+            })),
+          },
           tone: duplicate ? 'blocked' : 'ready',
           active: duplicate ? 1 : 2,
           facts: [fact('Records', records.length), fact('Unique IDs', unique)],
@@ -236,8 +278,7 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
     }
     case 7: {
       const total = s('eligible').trim() ? n('eligible') : NaN;
-      const valid =
-        Number.isFinite(total) && Number.isInteger(total) && total > 0 && total >= n('missed');
+      const valid = Number.isSafeInteger(total) && total > 0 && total >= n('missed');
       const rate = valid ? n('missed') / total : null;
       return result(
         rate === null ? 'The rate is unknown' : `${pct(rate)} of eligible visits missed`,
@@ -250,6 +291,13 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           rate === null ? 'No defensible rate' : pct(rate),
         ],
         {
+          visual: {
+            kind: 'rate',
+            eligible: valid ? total : null,
+            missed: n('missed'),
+            percent: rate === null ? null : rate * 100,
+            target: n('target'),
+          },
           tone: valid ? 'ready' : 'blocked',
           active: valid ? 2 : 0,
           facts: [fact('Baseline', pct(rate)), fact('Target', `${n('target')}%`)],
@@ -280,6 +328,39 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
               : 'Show an input correction',
         ],
         {
+          visual: {
+            kind: 'journey',
+            title: 'Can the visitor finish the request?',
+            draft: s('visit'),
+            steps: [
+              {
+                label: 'Your draft',
+                state: valid ? 'ready' : 'blocked',
+                detail: valid
+                  ? `Visit ${s('visit')} is still in the form.`
+                  : 'A visit identifier is required.',
+              },
+              {
+                label: 'The connection',
+                state: !valid ? 'neutral' : connected ? 'ready' : 'blocked',
+                detail: !valid
+                  ? 'Submission has not been attempted.'
+                  : connected
+                    ? 'The teaching connection is available.'
+                    : 'The teaching connection is unavailable.',
+              },
+              {
+                label: 'The result',
+                state: valid && connected ? 'ready' : valid ? 'careful' : 'neutral',
+                detail:
+                  valid && connected
+                    ? 'Confirmed inside this local model.'
+                    : valid
+                      ? 'Draft kept. No confirmation claimed.'
+                      : 'Correct the input before submitting.',
+              },
+            ],
+          },
           tone: valid && connected ? 'ready' : 'blocked',
           active: !valid ? 1 : 2,
           facts: [fact('Draft preserved', s('visit') || 'Blank'), fact('Real submissions', 0)],
@@ -348,6 +429,26 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
             fact('Record behaviour', correct ? 'Correct' : 'Wrong record'),
           ],
           rows: after.map((row) => ({ label: row.id, before: 'pending', after: row.status })),
+          visual: {
+            kind: 'records',
+            title: 'What actually changed?',
+            context: `You selected ${selected}. The toast says Saved. Inspect both records.`,
+            beforeLabel: 'Before the update',
+            afterLabel: 'After the update',
+            records: after.map((row) => ({
+              id: row.id,
+              before: 'pending',
+              after: row.status,
+              state:
+                row.status === (row.id === selected ? 'confirmed' : 'pending')
+                  ? 'ready'
+                  : 'blocked',
+              detail:
+                row.id === selected
+                  ? 'This is the visit you intended to confirm.'
+                  : 'This other visit should remain pending.',
+            })),
+          },
         },
       );
     }
@@ -371,6 +472,35 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           !valid ? 'Error response' : late ? 'Client timeout' : 'Confirmation response',
         ],
         {
+          visual: {
+            kind: 'journey',
+            title: 'Where does the waiting stop?',
+            draft: valid ? 'A valid request' : 'A request with invalid input',
+            timing: valid ? { response: n('latency'), wait: n('timeout') } : undefined,
+            steps: [
+              {
+                label: 'Send a request',
+                state: 'ready',
+                detail: 'A request reaches the model server.',
+              },
+              {
+                label: 'Server handling',
+                state: valid ? 'ready' : 'blocked',
+                detail: valid
+                  ? `The model response takes ${n('latency')} ms.`
+                  : 'The server validation rule refuses the input.',
+              },
+              {
+                label: 'Client result',
+                state: !valid ? 'blocked' : late ? 'careful' : 'ready',
+                detail: !valid
+                  ? 'Show an error response, not success.'
+                  : late
+                    ? `The client stops waiting at ${n('timeout')} ms. The final server state is unknown from this timeout alone.`
+                    : 'The response arrives within the waiting limit.',
+              },
+            ],
+          },
           tone: !valid ? 'blocked' : late ? 'careful' : 'ready',
           active: valid ? 2 : 1,
           facts: [
@@ -417,6 +547,28 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
             before: row.name,
             after: records.some((r) => r.id === row.id) ? 'Retained' : 'Lost with process',
           })),
+          visual: {
+            kind: 'records',
+            title: b('restart') ? 'What survived the restart?' : 'Same name. Different records.',
+            context: `${s('storage') === 'memory' ? 'Process memory' : 'Persistent storage'} · ${b('restart') ? 'after restart' : 'process running'}. Your lookup found ${matches.length} match(es).`,
+            beforeLabel: 'Original record',
+            afterLabel: 'Current model state',
+            records: all.map((row) => ({
+              id: row.id,
+              before: row.name,
+              after: records.some((r) => r.id === row.id) ? 'Retained' : 'Lost with process',
+              state: !records.length
+                ? 'blocked'
+                : matches.some((r) => r.id === row.id)
+                  ? 'ready'
+                  : 'neutral',
+              detail: !records.length
+                ? 'The restarted process has no records to search.'
+                : matches.some((r) => r.id === row.id)
+                  ? 'This record matches your lookup.'
+                  : 'This record does not match the current lookup.',
+            })),
+          },
         },
       );
     }
@@ -477,6 +629,14 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           returned ? 'Record returned' : 'Record withheld',
         ],
         {
+          visual: {
+            kind: 'access',
+            caller: s('caller'),
+            owner: s('owner'),
+            trustedCheck: b('serverCheck'),
+            permitted,
+            returned,
+          },
           tone: returned && !permitted ? 'blocked' : permitted ? 'ready' : 'careful',
           active: returned ? 2 : 1,
           facts: [
@@ -517,6 +677,44 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
                 : 'Reconcile unknown state',
         ],
         {
+          visual: {
+            kind: 'journey',
+            title: 'Accepted is a step. Delivery needs evidence.',
+            draft: 'A fictional visit reminder',
+            steps: [
+              {
+                label: 'Your adapter',
+                state: configured ? 'ready' : 'blocked',
+                detail: configured
+                  ? 'Required configuration is present in this model.'
+                  : 'Required configuration is absent. No provider attempt is made.',
+              },
+              {
+                label: 'The provider',
+                state: !configured
+                  ? 'neutral'
+                  : provider === 'accepted'
+                    ? 'ready'
+                    : provider === 'offline'
+                      ? 'blocked'
+                      : 'careful',
+                detail: !configured
+                  ? 'This step has not run.'
+                  : provider === 'accepted'
+                    ? `${attempts} attempt(s) acknowledged.`
+                    : provider === 'offline'
+                      ? 'The dependency is unavailable.'
+                      : 'Acceptance remains unknown after the attempts.',
+              },
+              {
+                label: 'Delivery evidence',
+                state: configured ? 'careful' : 'neutral',
+                detail: configured
+                  ? 'No delivery receipt exists in this model. Do not turn acceptance or an ambiguous retry into verified delivery.'
+                  : 'No sending attempt means no delivery evidence.',
+              },
+            ],
+          },
           tone: configured && provider === 'accepted' ? 'ready' : 'careful',
           active: configured ? 2 : 1,
           facts: [fact('Attempts', attempts), fact('Verified deliveries', 0)],
@@ -583,7 +781,34 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           'The JSON parser refuses this text',
           'The response must first be parseable. A schema or factual check cannot repair malformed JSON by pretending it parsed.',
           [s('sourceDate') || 'Source date unknown', 'JSON parse fails', 'No accepted summary'],
-          { tone: 'blocked', active: 1, facts: [fact('Parser', 'Failed')] },
+          {
+            tone: 'blocked',
+            active: 1,
+            facts: [fact('Parser', 'Failed')],
+            visual: {
+              kind: 'validation',
+              raw: s('output'),
+              formatted: s('output'),
+              sourceDate: s('sourceDate'),
+              checks: [
+                {
+                  label: 'Parse the JSON',
+                  state: 'fail',
+                  detail: 'The text cannot be parsed as JSON.',
+                },
+                {
+                  label: 'Check its shape',
+                  state: 'notrun',
+                  detail: 'There is no parsed value to check.',
+                },
+                {
+                  label: 'Check date support',
+                  state: 'notrun',
+                  detail: 'Parsing and shape checks must come first.',
+                },
+              ],
+            },
+          },
         );
       }
       const obj =
@@ -618,6 +843,37 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           supported ? 'Date supported' : 'Do not accept invented certainty',
         ],
         {
+          visual: {
+            kind: 'validation',
+            raw: s('output'),
+            formatted: JSON.stringify(parsed, null, 2),
+            sourceDate: known,
+            checks: [
+              {
+                label: 'Parse the JSON',
+                state: 'pass',
+                detail: 'The JSON parser produced a value.',
+              },
+              {
+                label: 'Check its shape',
+                state: schema ? 'pass' : 'fail',
+                detail: schema
+                  ? 'A non-empty summary and null or a real ISO date are present.'
+                  : 'Require a non-empty summary and null or a real ISO date.',
+              },
+              {
+                label: 'Check date support',
+                state: !schema ? 'notrun' : supported ? 'pass' : 'fail',
+                detail: !schema
+                  ? 'The shape needs correction first.'
+                  : !sourceValid
+                    ? 'The supplied source date is not a real ISO date.'
+                    : supported
+                      ? 'The date matches the supplied source, or stays null when no date was supplied.'
+                      : 'The date is not supported by the supplied source.',
+              },
+            ],
+          },
           tone: supported ? 'ready' : 'blocked',
           active: schema ? 2 : 1,
           facts: [
@@ -818,6 +1074,24 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
             before: 'Present',
             after: after.includes(id) ? 'Present' : 'Missing',
           })),
+          visual: {
+            kind: 'records',
+            title: 'Did the records come back?',
+            context: `Snapshot ${b('backup') ? 'present' : 'absent'}. Restore ${b('restore') ? 'requested' : 'not requested'}. Identifier checks ${b('verify') ? 'run' : 'not run'}.`,
+            beforeLabel: 'Original state',
+            afterLabel: 'After chosen recovery',
+            records: original.map((id) => ({
+              id,
+              before: 'Present',
+              after: after.includes(id) ? 'Present' : 'Missing',
+              state: !after.includes(id) ? 'blocked' : b('verify') ? 'ready' : 'careful',
+              detail: !after.includes(id)
+                ? 'This expected identifier is still missing.'
+                : b('verify')
+                  ? 'The model query found this identifier.'
+                  : 'The record is present in the model, but the identifier check has not run.',
+            })),
+          },
         },
       );
     }

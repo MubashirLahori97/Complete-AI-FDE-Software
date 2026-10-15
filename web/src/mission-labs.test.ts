@@ -6,6 +6,59 @@ const value = (id: number, input: unknown, label: string) =>
   evaluateLab(id, input).facts.find((f) => f.label === label)!.value;
 
 describe('executed mission experiments', () => {
+  it('keeps visual evidence consistent with executed quantities, records and unknown states', () => {
+    for (const quantity of ['', '-1', '0', '3', '2.5']) {
+      const output = evaluateLab(4, { quantity, price: 25 });
+      expect(output.visual?.kind).toBe('estimate');
+      if (output.visual?.kind !== 'estimate') throw new Error('Missing estimate');
+      expect(output.visual.total === null).toBe(output.tone === 'blocked');
+      if (output.visual.quantity !== null)
+        expect(output.visual.total).toBe(output.visual.quantity * 25);
+    }
+    for (const count of [0, 1, 2, 12])
+      for (const duplicate of [true, false]) {
+        const output = evaluateLab(5, { count, duplicate });
+        if (output.visual?.kind !== 'collection') throw new Error('Missing collection');
+        expect(output.visual.records).toHaveLength(count);
+        expect(output.visual.records.some((r) => r.repeated)).toBe(count > 1 && duplicate);
+        expect(
+          output.visual.records.map((r) => ({
+            label: r.id,
+            before: 'Source record',
+            after: r.label,
+          })),
+        ).toEqual(output.rows);
+      }
+    for (const eligible of ['', '0', '9007199254740992', 'abc']) {
+      const output = evaluateLab(7, { eligible });
+      expect(output.visual).toMatchObject({ kind: 'rate', eligible: null, percent: null });
+    }
+    expect(evaluateLab(7, { eligible: '100', missed: 2 }).visual).toMatchObject({ percent: 2 });
+  });
+  it('does not turn recognised substrings, returned records or valid JSON into stronger claims', () => {
+    const brief = evaluateLab(2, { direction: 'My address changes.', scope: 'one' }).visual;
+    expect(brief?.kind).toBe('brief');
+    if (brief?.kind !== 'brief') throw new Error('Missing brief');
+    expect(brief.signals.every((s) => s.term === null)).toBe(true);
+    expect(evaluateLab(14, { caller: 'none', serverCheck: false }).visual).toMatchObject({
+      kind: 'access',
+      permitted: false,
+      returned: true,
+    });
+    const malformed = evaluateLab(18, { output: 'no JSON' }).visual;
+    if (malformed?.kind !== 'validation') throw new Error('Missing checks');
+    expect(malformed.checks.map((c) => c.state)).toEqual(['fail', 'notrun', 'notrun']);
+    const invented = evaluateLab(18, {}).visual;
+    if (invented?.kind !== 'validation') throw new Error('Missing date support');
+    expect(invented.checks.map((c) => c.state)).toEqual(['pass', 'pass', 'fail']);
+    for (const id of [10, 12, 21, 25]) {
+      const output = evaluateLab(id, {});
+      if (output.visual?.kind !== 'records') throw new Error('Missing record evidence');
+      expect(
+        output.visual.records.map((r) => ({ label: r.id, before: r.before, after: r.after })),
+      ).toEqual(output.rows);
+    }
+  });
   it('exposes the same individual cases and reservations as its aggregate results', () => {
     const allAlerts = evaluateLab(20, { threshold: 0 });
     expect(allAlerts.cases).toHaveLength(100);
