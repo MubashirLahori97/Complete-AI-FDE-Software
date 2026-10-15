@@ -1,5 +1,67 @@
 # Day 20 — Agents, bounded workflows, and observable tool use
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A bounded policy-research assistant. You can take several study sessions.
+
+**The situation:** A research assistant keeps searching because it never decides it has enough information.
+
+### One idea: Give a tool-using workflow a stopping rule
+
+A workflow follows planned steps. In an agent-style loop, a model may choose the next action based on the current information. That flexibility needs boundaries: permitted tools, a step limit, a budget, and explicit stopping conditions. For a predictable task, a fixed workflow may be easier to test. More autonomy is useful only when it helps the actual task.
+
+**New words:**
+
+- **Workflow:** An arranged sequence of actions for a task.
+- **Agent loop:** Repeatedly choosing an action, observing its result, and deciding what to do next.
+- **Step limit:** The maximum number of actions allowed before stopping.
+
+### Follow the example below
+
+1. The example walks through a fixed sequence of actions with a maximum number of steps.
+2. Each step is checked before continuing. Reaching a boundary stops further actions.
+3. This deterministic demonstration shows control flow. It is not proof of a live model's planning ability.
+
+### Try one small decision
+
+A tool keeps returning no useful evidence. What should a bounded assistant do?
+
+1. Stop at its limit and report what remains unresolved
+2. Search forever until it finds any answer
+3. Ignore permission rules for the next attempt
+
+<details>
+<summary>A small hint</summary>
+
+Think about what happens when the happy path never arrives.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Define a useful failure result before starting the loop.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Stop at its limit and report what remains unresolved** Yes. A controlled stop preserves the evidence and avoids endless resource use.
+
+</details>
+
+**Then practise:** Reduce the example's step limit. Run the same action plan again and inspect where it stops and what result it reports.
+
+**Your project's first action:** Draw a research loop with an allowed search tool, a maximum of three steps, and outcomes for enough evidence, no evidence, and tool failure.
+
+**How it connects:** Combine the tool boundary from Day 17 with the evidence rule from Day 19. Start with fixed steps before experimenting with model-selected actions.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A tool-using agent observes a situation, selects an action, receives a result, and may continue toward a goal. That loop is useful only when its authority, resource limits, and stop conditions are explicit. Today you will compare a fixed workflow with an agent loop and build a bounded research assistant over a small approved knowledge collection.
 
 **Your project:** [A bounded policy-research assistant](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

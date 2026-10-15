@@ -1,5 +1,67 @@
 # Day 10 — Environments, packages, and reproducible setup
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A reproducible release kit. You can take several study sessions.
+
+**The situation:** Your app works on your laptop. A teammate cannot run it because their Python packages are different.
+
+### One idea: Make setup repeatable
+
+A project depends on more than its code: the language version, packages, settings, and run commands matter too. A virtual environment keeps one project's Python packages separate from other projects. A dependency file records what needs installing. Clear setup instructions help someone recreate the environment instead of guessing what your laptop contains.
+
+**New words:**
+
+- **Dependency:** A package or tool your project needs.
+- **Virtual environment:** An isolated Python environment for a project.
+- **Reproducible:** Possible to repeat using the documented inputs and setup.
+
+### Follow the example below
+
+1. The diagnostic prints the Python major version used for this run.
+2. It reports whether the interpreter is using a virtual environment.
+3. It demonstrates inspecting setup, not creating an environment. Create and test that locally for the project.
+
+### Try one small decision
+
+A teammate has your source files but no installed packages. What helps them run the app reliably?
+
+1. A screenshot of your desktop
+2. Documented language version, dependencies, setup, and run commands
+3. Your private API key committed in Git
+
+<details>
+<summary>A small hint</summary>
+
+Think about every input a fresh machine needs.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Code + runtime + dependencies + settings + commands make a useful setup guide.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Documented language version, dependencies, setup, and run commands** Yes. They can recreate and verify the environment from those instructions.
+
+</details>
+
+**Then practise:** Run the diagnostic and read its two fields. Then run the downloaded diagnostic locally and explain why the environment result may differ.
+
+**Your project's first action:** Open your tracker README as if you had never seen the project. List every missing setup step before trying a fresh local environment.
+
+**How it connects:** Your Git repository keeps source history. Now make that source runnable by another person. Browser runtime diagnostics describe the browser environment, not your laptop.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A project is not delivered if it only runs in the environment you happened to build it in. Today's work makes the setup explicit: interpreter, dependencies, run commands, and required configuration. Your project is a reproducible release of an earlier tool, verified from a clean environment rather than your already-working session.
 
 **Your project:** [A reproducible release kit](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

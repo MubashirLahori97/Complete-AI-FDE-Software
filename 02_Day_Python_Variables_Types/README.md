@@ -1,5 +1,67 @@
 # Day 2 — Data, variables, types, and conversion
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A reliable unit conversion desk. You can take several study sessions.
+
+**The situation:** A shop needs a converter. A distance written in a form arrives as text, but multiplication needs a number.
+
+### One idea: Text and numbers have different jobs
+
+A type tells the computer what kind of value it has. The number 2 can take part in arithmetic. The text "2" is a character inside quotation marks. Adding two text values joins them: "2" + "2" becomes "22". Convert the text to a number before calculating. Always keep the unit beside the result so another person can understand it.
+
+**New words:**
+
+- **String:** A text value, written inside quotation marks.
+- **Integer:** A whole number, such as 0, 2, or -3.
+- **Conversion:** Changing a value into another type or unit.
+
+### Follow the example below
+
+1. raw_distance contains the text 2.5. float changes suitable text into a number that can have a fractional part.
+2. The condition rejects negative distances. The calculation multiplies kilometres by 1000.
+3. The print shows both units. The except block displays a useful message if conversion or validation fails.
+
+### Try one small decision
+
+A form gives you "2" kilometres as text. Which calculation gives 2000 metres?
+
+1. int("2") * 1000
+2. "2" + "1000"
+3. 2 + 1000
+
+<details>
+<summary>A small hint</summary>
+
+You need two actions: convert the type, then convert the unit.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Use int for this whole-number text and multiplication for kilometres to metres.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**int("2") * 1000** Yes. int makes the text a number; multiplying by 1000 converts kilometres to metres.
+
+</details>
+
+**Then practise:** Change the kilometre value to 3. Predict 3000 metres, run the code, and compare. Then try 0 and explain the result.
+
+**Your project's first action:** Write this reference case before coding: 2 kilometres should become 2000 metres. Then write a separate temperature case: 0 Celsius should become 32 Fahrenheit.
+
+**How it connects:** Use the values from your profile to practise identifying types. The converter introduces input rules you will reuse in later forms.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A value's type determines what operations mean. Two values can look identical on a screen and still behave differently inside a program. This lesson connects types to real failures in quantities, user input, and conversion tools. Your project is a conversion desk that accepts values deliberately, checks them, and produces clearly labelled results.
 
 **Your project:** [A reliable unit conversion desk](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

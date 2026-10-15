@@ -1,5 +1,67 @@
 # Day 26 — Customer discovery and measurable project briefs
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A discovery interview and customer brief. You can take several study sessions.
+
+**The situation:** A shop owner says, 'We need AI.' You still do not know which task is causing trouble.
+
+### One idea: Understand the customer's work first
+
+Discovery means learning how people do their work, where it becomes difficult, and what a useful improvement would look like. Ask about a recent concrete example before suggesting a solution. Find the user, the current steps, the exceptions, and the constraints. A customer may need a better search box or a simpler form; AI is one possible approach after the problem is understood.
+
+**New words:**
+
+- **Discovery:** Investigating the real user problem and working context.
+- **Constraint:** A limit the solution must respect, such as data access or time.
+- **Success measure:** An observable result used to judge whether a change helped.
+
+### Follow the example below
+
+1. The example brief names a user and describes the current workflow.
+2. It records a concrete problem and the constraints affecting a solution.
+3. Its success criteria need observed evidence later. An interview estimate is not a measured improvement.
+
+### Try one small decision
+
+A customer says, 'Build us an AI chatbot.' What is the most useful first question?
+
+1. Can you walk me through the last time this problem happened?
+2. Which animation should the chatbot use?
+3. Can we skip discovery and deploy today?
+
+<details>
+<summary>A small hint</summary>
+
+Ask for a real event rather than a preferred technology.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Explore what happened, who was involved, and what made it difficult.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Can you walk me through the last time this problem happened?** Yes. A recent example reveals the actual workflow before you choose a solution.
+
+</details>
+
+**Then practise:** Use the example brief as a template. Write a user, a recent problem, current steps, one constraint, and one observable success measure.
+
+**Your project's first action:** Roleplay a short interview with a fictional shop owner. Ask for the last failed task, then write their current steps before proposing features.
+
+**How it connects:** Use what you learned while building the assistant to ask better questions. Today's brief becomes the starting point for your capstone; it may justify changing the solution.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A customer's request for AI is often a starting hypothesis, not a complete problem statement. Discovery turns a workflow, its constraints, and its cost into a reviewable project brief. Today you will practise asking concrete questions, distinguishing estimates from measurements, and choosing a useful pilot before promising an implementation.
 
 **Your project:** [A discovery interview and customer brief](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

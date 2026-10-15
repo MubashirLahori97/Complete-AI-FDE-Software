@@ -1,5 +1,18 @@
 # Lesson 6 project — Persistent contact book with recovery
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Reuse your Day 5 contact shape. Write down the filename you will save to and what should happen if it does not exist yet.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `persistence.py`. Run python persistence.py. This worked example serializes in memory; the project adds actual file reads and writes.
+
+Extend the contact directory rather than inventing a new data model. Browser lab files belong to its temporary environment; test real restart behaviour in your local project.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Extend the contact directory so records survive closing and reopening the program. Store them in a documented JSON file, validate loaded records, and distinguish first launch from damaged existing data. Add a recovery message and a backup approach that preserves the user's information while you investigate a failure.

@@ -1,5 +1,18 @@
 # Lesson 14 project — A verified public expense dashboard
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write the version and target URL for the Day 13 dashboard. List three smoke checks before starting the release.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `release-checklist.md`. Use this as a release record in your own project. Start a local static preview with python -m http.server 8000 --bind 127.0.0.1 from the directory containing index.html; a local preview is not a public deployment.
+
+Publish the expense interface you already built. Today's project produces a verified release record rather than another unrelated app.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Publish the dashboard from lesson 13 in your own learner project repository or chosen static host. Verify the deployed site in a clean browser, test a narrow viewport and reload, and record the release identity. Keep setup and recovery instructions alongside the project. Do not change the academy's hosting configuration as part of your learner exercise.

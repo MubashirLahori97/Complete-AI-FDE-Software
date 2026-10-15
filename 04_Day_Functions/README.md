@@ -1,5 +1,67 @@
 # Day 4 — Functions, contracts, and useful abstraction
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A reusable quote calculator. You can take several study sessions.
+
+**The situation:** A business needs to calculate several quotes without copying the same arithmetic everywhere.
+
+### One idea: Give a small job its own function
+
+A function is a named set of instructions for one job. You give it inputs and it can return a result. Think of a calculator button: give it price and quantity, then receive a line total. Returning a value lets other code use it. Printing only displays it. Keep the calculation separate from the way the quote looks on screen.
+
+**New words:**
+
+- **Function:** A named, reusable piece of work.
+- **Argument:** A value you pass into a function.
+- **Return:** Send a result back to the code that called the function.
+
+### Follow the example below
+
+1. def introduces the calculation and names its inputs.
+2. The calculation uses integer cents. For example, 250 cents means 2.50 in the example currency.
+3. return gives the calculated amount back. A separate print statement displays the result.
+
+### Try one small decision
+
+One item costs 250 cents. You buy 3. What should a line-total function return?
+
+1. 253 cents
+2. 750 cents
+3. Nothing, because print already returns the total
+
+<details>
+<summary>A small hint</summary>
+
+A line total is price multiplied by quantity.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Keep the answer in cents: 250 + 250 + 250.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**750 cents** Yes. 250 × 3 = 750 cents. Returning this number lets another function add delivery.
+
+</details>
+
+**Then practise:** Keep the existing example and assertion. Add print(line_total_cents(250, 0)) below it. Check that this extra line prints 0. Explain why returning the total is useful.
+
+**Your project's first action:** Write one example quote by hand with two items and a delivery fee, all in cents. Work out the expected grand total before writing functions.
+
+**How it connects:** Use conditions from Day 3 to reject invalid quantities. This calculator can later support a web form without changing its arithmetic.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A function gives a small operation a name, explicit inputs, and an observable result. It helps you reason about a program one responsibility at a time. Today you will turn a calculation into a contract and build a quote calculator whose business rules can be tested without reading interactive input or printing a screen.
 
 **Your project:** [A reusable quote calculator](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

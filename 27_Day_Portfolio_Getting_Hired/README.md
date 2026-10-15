@@ -1,5 +1,67 @@
 # Day 27 — Portfolio evidence and clear technical communication
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** An evidence-based portfolio case study. You can take several study sessions.
+
+**The situation:** A reviewer sees 'I built an amazing AI app' in your portfolio but cannot tell what it does or whether it works.
+
+### One idea: Show evidence someone can inspect
+
+A case study explains a specific problem, your decisions, and the resulting behaviour. Link claims to evidence: a working demo, a reproducible test, or a report with its dataset and version. Clearly name your contribution, including where AI helped. Honest limits make the project easier to judge. A reader should understand the work without needing your chat history.
+
+**New words:**
+
+- **Case study:** An explanation of a problem, approach, evidence, and result.
+- **Evidence:** Something inspectable that supports a claim.
+- **Contribution:** The work and decisions you personally made.
+
+### Follow the example below
+
+1. The example opens with the user problem instead of a tool list.
+2. It connects the implementation to a result and describes how that result was checked.
+3. It records limits and next steps, so planned features are not mistaken for completed work.
+
+### Try one small decision
+
+Which portfolio statement gives a reviewer the most useful evidence?
+
+1. Production-ready and 100% accurate
+2. Built using many popular frameworks
+3. Passed 18 of 20 stated cases; the report includes the two failures
+
+<details>
+<summary>A small hint</summary>
+
+Prefer a specific claim with something a reader can verify.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Give the cases, actual result, and limitations rather than an unsupported adjective.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Passed 18 of 20 stated cases; the report includes the two failures** Yes. The scope, denominator, and inspectable failures make the claim assessable.
+
+</details>
+
+**Then practise:** Rewrite the example using your own project. Replace every claimed number with an actual measured result or an explicit estimate label.
+
+**Your project's first action:** Choose one completed project. Write two sentences: who had the problem, and what your implementation now lets them do. Then find one artifact supporting that claim.
+
+**How it connects:** Use your expense release or document assistant, its source version, and actual test results. These become evidence for your portfolio rather than a new unrelated build.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A portfolio should help a reader understand a problem you solved and assess the evidence behind your contribution. Screenshots and technology lists do not establish impact by themselves. Today you will build a case study that connects user needs, decisions, tests, results, and limitations without inventing performance or customer claims.
 
 **Your project:** [An evidence-based portfolio case study](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

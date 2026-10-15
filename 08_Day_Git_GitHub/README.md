@@ -1,5 +1,67 @@
 # Day 8 — Git, collaboration, and reviewable changes
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A reviewed validation feature. You can take several study sessions.
+
+**The situation:** You need to change your expense tracker without losing a working version or confusing a teammate.
+
+### One idea: Keep a history you can review
+
+Git records selected versions of your files. A branch lets you work on a change separately. A diff shows the lines that changed, so you can review them before committing. A commit records a local snapshot; pushing sends commits to a remote repository. These are different actions. For this lesson, use a practice repository and keep the change small.
+
+**New words:**
+
+- **Diff:** A comparison showing added and removed lines.
+- **Commit:** A saved snapshot in Git history with a message.
+- **Pull request:** A proposal to review and merge changes from a branch.
+
+### Follow the example below
+
+1. The commands create a feature branch and inspect the current state.
+2. git diff shows changes before staging. git diff --staged shows what the next commit will contain.
+3. git commit records the staged changes locally. Uploading or merging is a separate step.
+
+### Try one small decision
+
+You changed a file but have not run git add. Where can you review that change?
+
+1. git diff
+2. Only on GitHub after merging
+3. git commit automatically explains every change
+
+<details>
+<summary>A small hint</summary>
+
+Review the file before you put it in the next snapshot.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+git diff checks unstaged changes; git diff --staged checks staged changes.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**git diff** Yes. git diff shows unstaged changes to tracked files. New untracked files also need inspecting directly.
+
+</details>
+
+**Then practise:** In your practice repository, change one validation message. Inspect the unstaged diff, stage that file, then inspect the staged diff.
+
+**Your project's first action:** Use a copy of your expense project. Run git status, then write down the one validation behaviour you want to change before creating a branch.
+
+**How it connects:** Version your Day 7 tracker. Your project deliverable today is a small reviewed change and its history, so use your terminal rather than the browser code runner.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Version control gives you a record of changes and a way to collaborate without losing the explanation of how a system evolved. Today you will practise the difference between your files, staged changes, commits, and branches. Your project is a small feature delivered through a reviewable branch, complete with a regression example and a useful change description.
 
 **Your project:** [A reviewed validation feature](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

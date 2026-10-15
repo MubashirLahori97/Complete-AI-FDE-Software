@@ -1,0 +1,265 @@
+.amina-page {
+  min-height: 100vh;
+  background: #fff9ed;
+  color: #263d31;
+  font-size: 19px;
+}
+.amina-page p {
+  line-height: 1.6;
+}
+.amina-header {
+  max-width: 920px;
+  margin: auto;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.amina-brand {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 600;
+}
+.amina-course-link {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 14px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.amina-main {
+  max-width: 510px;
+  margin: 22px auto 0;
+  padding: 0 20px 30px;
+}
+.amina-card {
+  background: #fffefa;
+  padding: 30px;
+  border: 1px solid #d8e0cf;
+  border-radius: 22px;
+  box-shadow: 0 4px 0 #e7eadb;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.amina-card h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  text-wrap: balance;
+}
+.amina-card h1:focus {
+  outline: none;
+}
+.amina-story {
+  color: #445447;
+  min-height: 3.2em;
+}
+.amina-counter {
+  padding: 22px;
+  border: 1px solid #d7e3cb;
+  border-radius: 16px;
+  background: #edf4e4;
+  text-align: center;
+}
+.amina-counter-label {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.amina-counter-label code {
+  font-family: 'DM Mono', monospace;
+  font-size: 17px;
+}
+.amina-counter output {
+  display: block;
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -3px;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+}
+.amina-value-label {
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+.amina-instruction {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  min-height: 1.6em;
+}
+@media (max-width: 360px) {
+  .amina-card h1 {
+    min-height: 2.4em;
+  }
+}
+.amina-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 60px;
+  padding: 16px;
+  color: white;
+  background: #254b3e;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+}
+.amina-button:hover {
+  background: #1b392e;
+}
+.amina-remember {
+  font-size: 16px;
+  text-align: center;
+  color: #445447;
+}
+.amina-after-lesson {
+  margin-top: 20px;
+}
+.amina-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  margin: 0 auto 16px;
+  border: 0;
+  background: none;
+  font-size: 15px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.amina-details {
+  background: #fffefa;
+  border: 1px solid #d8e0cf;
+  border-radius: 12px;
+  padding: 0 18px;
+  font-size: 16px;
+}
+.amina-details summary {
+  cursor: pointer;
+  padding: 15px 0;
+  min-height: 48px;
+}
+.amina-details > div {
+  padding: 4px 0 18px;
+}
+.amina-download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  width: 100%;
+  min-height: 48px;
+  margin: 14px 0 10px;
+  border: 1px solid #7b8e71;
+  border-radius: 10px;
+  color: #254b3e;
+  background: #edf4e4;
+  font-size: 16px;
+}
+.amina-small {
+  color: #596759;
+  font-size: 14px;
+}
+.amina-code {
+  margin-top: 14px;
+  border-top: 1px solid #d8e0cf;
+}
+.amina-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #edf4e4;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+}
+.amina-code p + p {
+  margin-top: 10px;
+}
+.amina-footer {
+  color: #596759;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 22px;
+}
+.sample-invite {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 24px;
+  border: 1px solid #d3ddc6;
+  border-radius: 14px;
+  background: #fff8e9;
+  margin-bottom: 28px;
+}
+.sample-invite > div {
+  flex: 1;
+}
+.sample-invite h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.sample-invite p {
+  font-size: 14px;
+  color: #596759;
+}
+@media (max-width: 600px) {
+  .amina-header {
+    padding: 10px 20px;
+  }
+  .amina-brand {
+    font-size: 15px;
+  }
+  .amina-course-link {
+    font-size: 12px;
+  }
+  .amina-main {
+    margin-top: 12px;
+    padding: 0 16px 24px;
+  }
+  .amina-card {
+    padding: 24px;
+    gap: 18px;
+    border-radius: 18px;
+  }
+  .amina-card h1 {
+    font-size: 28px;
+  }
+  .amina-page {
+    font-size: 18px;
+  }
+  .amina-counter {
+    padding: 18px;
+  }
+  .amina-counter output {
+    font-size: 72px;
+  }
+  .amina-instruction {
+    font-size: 16px;
+  }
+  .sample-invite {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 22px;
+    gap: 16px;
+  }
+}

@@ -1,5 +1,67 @@
 # Day 1 — Your first program and your learning tools
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Personal learning profile generator. You can take several study sessions.
+
+**The situation:** You want a small profile that tells someone your name and what you want to learn.
+
+### One idea: A program follows your instructions
+
+A program is a set of instructions for a computer. Think of a short recipe: do the first step, then the next. Our program gives names to some values, then displays them. You do not need to remember every symbol yet. Start by following what each line does to the result.
+
+**New words:**
+
+- **Code:** The instructions you write.
+- **Output:** What the program shows after it runs.
+- **Variable:** A name used to refer to a value, such as your name or study time.
+
+### Follow the example below
+
+1. The first three lines set the name, goal, and study time. Text goes inside quotation marks; 120 is a number.
+2. print displays a line. In an f-string, the value of name replaces {name}.
+3. The second print uses two more values. Editing minutes_per_day changes that line's study time.
+
+### Try one small decision
+
+Change minutes_per_day from 120 to 30. What changes in the output?
+
+1. The learner's name becomes 30
+2. The study time becomes 30 minutes
+3. The program saves a profile file
+
+<details>
+<summary>A small hint</summary>
+
+Find the line that contains minutes_per_day inside braces.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+The label Study time stays the same. Only the value placed beside it changes.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**The study time becomes 30 minutes** Yes. The last line reads minutes_per_day, so the new value appears there.
+
+</details>
+
+**Then practise:** Change the name to your own name and minutes_per_day to 30. Run the code. Check that the name and study time change, while the goal stays the same.
+
+**Your project's first action:** Write a four-line profile on paper: name, city, goal, and daily study time. This is the result your project should produce.
+
+**How it connects:** Keep this profile as the first item in your learning journal. Tomorrow you will learn why text and numbers behave differently.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Software engineering starts with a small, understandable loop: describe an outcome, give the computer instructions, inspect the result, and change the instructions when the result is wrong. Today you will learn what a program actually does and build a useful first artifact: a personal learning profile. You do not need to memorise syntax or install every tool in the industry.
 
 **Your project:** [Personal learning profile generator](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

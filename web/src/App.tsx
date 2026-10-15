@@ -21,6 +21,8 @@ import { lessons, REPO } from './data';
 import { completionCount, loadProgress, STORAGE_KEY, type Progress } from './state';
 import { ProgressBar } from './ui';
 const Dashboard = lazy(() => import('./Dashboard'));
+const AminaLesson = lazy(() => import('./AminaLesson'));
+const CourseApp = lazy(() => import('./course/CourseApp'));
 const Curriculum = lazy(() => import('./Curriculum'));
 const Lesson = lazy(() => import('./Lesson'));
 const Playground = lazy(() => import('./Playground'));
@@ -94,6 +96,13 @@ export default function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
     main.current?.focus({ preventScroll: true });
+    if (
+      path === '/guided' ||
+      path === '/path' ||
+      path === '/evidence' ||
+      path.startsWith('/learn/')
+    )
+      return;
     const match = path.match(/^\/lesson\/(\d+)$/);
     const day = match ? Number(match[1]) : 0;
     const title =
@@ -104,7 +113,9 @@ export default function App() {
             ? 'Settings'
             : path === '/resources'
               ? 'Resources'
-              : 'Learning workspace');
+              : path === '/sample/amina'
+                ? 'Amina’s shop · Your first variable'
+                : 'Learning workspace');
     document.title = `${title} · FDE Academy`;
   }, [hash, path]);
   const completed = completionCount(progress);
@@ -113,7 +124,13 @@ export default function App() {
   const documentMatch = path.match(/^\/document\/(ROADMAP|CURRICULUM|VISION|PROJECTS)\.md$/);
   const lessonDay = lessonMatch ? Number(lessonMatch[1]) : 0;
   const selectedPath =
-    lessonMatch || phaseMatch ? '/curriculum' : documentMatch ? '/resources' : path;
+    lessonMatch || phaseMatch
+      ? '/curriculum'
+      : documentMatch
+        ? '/resources'
+        : path === '/library'
+          ? '/'
+          : path;
   const section =
     navigation.find((item) => item.path === selectedPath)?.label ||
     (selectedPath === '/settings'
@@ -129,7 +146,7 @@ export default function App() {
     )
     .slice(0, 6);
   let page;
-  if (path === '/') page = <Dashboard progress={progress} />;
+  if (path === '/' || path === '/library') page = <Dashboard progress={progress} update={update} />;
   else if (path === '/curriculum')
     page = (
       <Curriculum
@@ -151,7 +168,7 @@ export default function App() {
         lesson={lessons[lessonDay - 1]}
         progress={progress}
         update={update}
-        initialTab={params.get('tab') || 'learn'}
+        initialTab={params.get('tab') || undefined}
       />
     );
   else if (phaseMatch)
@@ -168,6 +185,24 @@ export default function App() {
           <ArrowRight size={16} />
         </a>
       </div>
+    );
+  if (path === '/guided' || path === '/path' || path === '/evidence' || path.startsWith('/learn/'))
+    return (
+      <Suspense fallback={<p role="status">Opening your lesson…</p>}>
+        <CourseApp path={path === '/guided' ? '/' : path} />
+      </Suspense>
+    );
+  if (path === '/sample/amina')
+    return (
+      <Suspense
+        fallback={
+          <p className="muted" role="status">
+            Opening Amina’s shop…
+          </p>
+        }
+      >
+        <AminaLesson />
+      </Suspense>
     );
   return (
     <div className="app-shell">

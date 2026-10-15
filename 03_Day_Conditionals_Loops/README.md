@@ -1,5 +1,67 @@
 # Day 3 — Decisions, repetition, and boundary cases
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Support-ticket triage queue. You can take several study sessions.
+
+**The situation:** A support lead needs critical tickets handled first and other tickets reviewed when they are at least 24 hours old.
+
+### One idea: Turn a rule into a decision
+
+A condition asks a question that has a true or false answer. if runs a block when its condition is true. elif checks another condition only if the earlier condition was false. else handles what remains. A loop repeats these instructions for each item. Rule order matters: a critical ticket should keep its urgent priority even when it is also old.
+
+**New words:**
+
+- **Condition:** A question with a true or false result.
+- **Boundary:** The exact point where a rule changes, such as 24 hours.
+- **Loop:** Instructions repeated for each item or until a stopping rule is met.
+
+### Follow the example below
+
+1. The example checks the critical-severity rule before the age rule.
+2. The age rule includes exactly 24 using >=. That symbol means greater than or equal to.
+3. The remaining tickets receive the standard priority. One ticket gets one result.
+
+### Try one small decision
+
+A ticket is critical and 30 hours old. With the critical rule checked first, what priority should it receive?
+
+1. Standard, because every ticket starts there
+2. Review and urgent at the same time
+3. Urgent
+
+<details>
+<summary>A small hint</summary>
+
+Follow the conditions from top to bottom.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+After a true if branch, Python skips the related elif and else branches.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Urgent** Yes. The first condition matches critical severity, so the later age branch is skipped.
+
+</details>
+
+**Then practise:** Find the age threshold in the example. Test an ordinary ticket at 23, 24, and 25 hours. Keep the rule unchanged and explain why exactly 24 belongs to review.
+
+**Your project's first action:** Write three example tickets and their expected priorities: critical, ordinary at exactly 24 hours, and ordinary at 23 hours. Put the critical rule first.
+
+**How it connects:** Your converter had input rules. Now you can express rules directly and apply them repeatedly to a queue.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Conditions let a program choose an action; loops let it repeat an action over data. Together they express business rules such as which ticket needs attention and when processing should stop. Today you will move from isolated if statements to a small ticket-triage workflow with explicit priority rules and a visible summary.
 
 **Your project:** [Support-ticket triage queue](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

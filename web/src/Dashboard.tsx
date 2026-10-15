@@ -1,303 +1,254 @@
-import {
-  ArrowRight,
-  BookOpen,
-  CheckCircle2,
-  Code2,
-  Flame,
-  Layers,
-  Sparkles,
-  Target,
-  Terminal,
-  Users,
-} from 'lucide-react';
-import { lessons, tracks } from './data';
-import { completionCount, nextLesson, streak, type Progress } from './state';
+import { useState } from 'react';
+import { ArrowRight, Check, Code2, Flag, Lightbulb, Sparkles, Trophy, Users } from 'lucide-react';
+import { dailyProjects, lessons, tracks } from './data';
+import { completionCount, resumeLesson, resumeHref, type Progress } from './state';
+import { learningLevel } from './motivation';
+import { Companion, JourneyMap, XPChip } from './MissionUI';
+import QuickChallenge from './QuickChallenge';
 import { ProgressBar, SectionHeading } from './ui';
 
-const trackIcons = [Terminal, Code2, Sparkles, Users];
-function JourneyArt() {
-  return (
-    <svg className="journey-art" viewBox="0 0 400 260" fill="none" aria-hidden="true">
-      <defs>
-        <pattern id="hero-grid" width="28" height="28" patternUnits="userSpaceOnUse">
-          <path d="M 28 0 L 0 0 0 28" stroke="#8eac94" strokeOpacity=".14" />
-        </pattern>
-      </defs>
-      <rect width="400" height="260" fill="url(#hero-grid)" />
-      <path
-        d="M32 215H86V174H159V133H232V92H305V51H366"
-        stroke="#d9ebb3"
-        strokeOpacity=".8"
-        strokeWidth="2"
-      />
-      <path d="m86 174 20-12h73v-41h73V80h73V39h40" stroke="#a8c0ab" strokeOpacity=".4" />
-      <path
-        d="m86 215 20-12v-41m53 12 20-12m53-29 20-12m53-29 20-12"
-        stroke="#a8c0ab"
-        strokeOpacity=".4"
-      />
-      <circle cx="86" cy="174" r="5" fill="#d9ebb3" />
-      <circle cx="159" cy="133" r="5" fill="#d9ebb3" />
-      <circle cx="232" cy="92" r="5" fill="#d9ebb3" />
-      <circle cx="305" cy="51" r="6" fill="#d9ebb3" />
-      <text x="35" y="151" fill="#b3cbb7" fontSize="10" fontFamily="DM Mono, monospace">
-        01 / UNDERSTAND
-      </text>
-      <text x="110" y="110" fill="#b3cbb7" fontSize="10" fontFamily="DM Mono, monospace">
-        02 / BUILD
-      </text>
-      <text x="183" y="69" fill="#b3cbb7" fontSize="10" fontFamily="DM Mono, monospace">
-        03 / EVALUATE
-      </text>
-      <text x="270" y="29" fill="#e0eebc" fontSize="10" fontFamily="DM Mono, monospace">
-        04 / DELIVER
-      </text>
-      <rect
-        x="209"
-        y="176"
-        width="158"
-        height="48"
-        rx="8"
-        fill="#315c4b"
-        stroke="#6e9175"
-        strokeOpacity=".55"
-      />
-      <text x="227" y="197" fill="#e1efba" fontSize="11" fontFamily="DM Mono, monospace">
-        skill = practice()
-      </text>
-      <text x="227" y="213" fill="#b4c9ba" fontSize="9" fontFamily="DM Mono, monospace">
-        // one step at a time
-      </text>
-      <path d="M293 163v-38h30" stroke="#8eac94" strokeDasharray="3 4" />
-      <circle cx="326" cy="125" r="3" stroke="#b3cbb7" />
-    </svg>
-  );
-}
-
-export default function Dashboard({ progress }: { progress: Progress }) {
+export default function Dashboard({
+  progress,
+  update,
+}: {
+  progress: Progress;
+  update: (next: Progress) => void;
+}) {
+  const [mood, setMood] = useState<'spark' | 'build'>('spark');
   const completed = completionCount(progress);
-  const next = lessons[nextLesson(progress) - 1];
-  const currentStreak = streak(progress);
-  const passed = progress.quizPassed.length;
+  const next = lessons[resumeLesson(progress) - 1];
+  const started = Object.keys(progress.lessonActivities).length > 0;
+  const level = learningLevel(progress);
+  const wins = lessons.filter((lesson) => progress.conceptWins[lesson.day]);
+  const chapter = lessons.filter((lesson) => lesson.track === next.track);
+  const destination =
+    completed === 30
+      ? '#/phase/2'
+      : mood === 'build'
+        ? `#/lesson/${next.day}?tab=project`
+        : resumeHref(progress);
   return (
-    <>
+    <div className="learning-home">
       <div className="welcome-heading">
         <div>
-          <p className="eyebrow">YOUR LEARNING WORKSPACE</p>
+          <p className="eyebrow">FDE ACADEMY · YOUR BUILDER'S JOURNEY</p>
           <h1>
             {progress.name ? `Welcome back, ${progress.name}.` : 'A little progress, every day.'}
           </h1>
-          <p className="muted">
-            Great engineers are built through practice. Here’s your next step.
-          </p>
+          <p className="muted">Pick a small challenge. Make something happen.</p>
         </div>
-        <a className="plan-pill" href="#/settings">
-          <span className="online-dot" />
-          {progress.minutes >= 60
-            ? `${progress.minutes / 60} ${progress.minutes === 60 ? 'hour' : 'hours'}`
-            : `${progress.minutes} min`}{' '}
-          / day
-          <ArrowRight size={13} />
-        </a>
+        <XPChip progress={progress} />
       </div>
-      <section className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">FROM FIRST PROGRAM TO REAL-WORLD IMPACT</p>
+      <section className="alive-hero">
+        <div className="alive-hero-copy">
+          <span className="alive-kicker">
+            <span /> SMALL WINS. REAL SKILLS.
+          </span>
           <h2>
-            Build the skills.
+            You don't need to
             <br />
-            <span>Own the outcome.</span>
+            <em>know it all.</em>
+            <br />
+            Just start something.
           </h2>
           <p>
-            Learn to build, evaluate, and ship AI software.
-            <br className="desktop-break" /> A practical path to Forward Deployed Engineering.
+            Make a guess. Change a line. See what happens. Your first small win is closer than you
+            think.
           </p>
-          <div className="hero-actions">
-            <a className="button lime" href={`#/lesson/${next.day}`}>
-              {completed ? 'Continue learning' : 'Start your journey'}
-              <ArrowRight size={17} />
-            </a>
-            <a className="hero-link" href="#/curriculum">
-              Explore the path
-              <ArrowUpIcon />
-            </a>
+          <div className="session-choice" role="group" aria-label="Choose your session">
+            <button aria-pressed={mood === 'spark'} onClick={() => setMood('spark')}>
+              <Sparkles size={16} />A quick spark
+            </button>
+            <button aria-pressed={mood === 'build'} onClick={() => setMood('build')}>
+              <Code2 size={16} />
+              Project time
+            </button>
           </div>
-          <p className="hero-footnote">
-            30 lessons <span>·</span> 30 projects <span>·</span> Your own pace
+          <a className="button alive-primary" href={destination}>
+            {completed === 30
+              ? 'Explore the next phase'
+              : mood === 'build'
+                ? "Open today's project"
+                : started || completed
+                  ? 'Continue learning'
+                  : 'Start Lesson 1'}
+            <ArrowRight size={19} />
+          </a>
+          <p className="hero-reassurance">
+            {mood === 'spark'
+              ? 'Start with one idea. Stop at a good point. Your place stays saved.'
+              : 'Pick up your project. One working improvement is a good session.'}
           </p>
+          <div className="hero-doodles" aria-hidden="true">
+            <span>&lt;/&gt;</span>
+            <span>aha!</span>
+            <span>→</span>
+          </div>
         </div>
-        <JourneyArt />
+        <QuickChallenge progress={progress} update={update} />
       </section>
-      <div className="metrics">
-        <div className="metric">
-          <div className="metric-icon sage">
-            <BookOpen size={21} />
-          </div>
+      <div className="builder-strip">
+        <div className="builder-identity">
+          <Companion mood={wins.length ? 'win' : 'ready'} />
           <div>
-            <p className="metric-label">Lessons completed</p>
-            <p className="metric-value">
-              {completed}
-              <span> / 30</span>
-            </p>
-          </div>
-          <div className="metric-end">
-            <span>{Math.round((completed / 30) * 100)}%</span>
-            <ProgressBar value={(completed / 30) * 100} label="Core course completion" />
-          </div>
-        </div>
-        <div className="metric">
-          <div className="metric-icon lavender">
-            <CheckCircle2 size={21} />
-          </div>
-          <div>
-            <p className="metric-label">Concept checks passed</p>
-            <p className="metric-value">
-              {passed}
-              <span> / 30</span>
-            </p>
-          </div>
-          <span className="metric-caption">
-            Understand it.
-            <br />
-            Then prove it.
-          </span>
-        </div>
-        <div className="metric">
-          <div className="metric-icon peach">
-            <Flame size={21} />
-          </div>
-          <div>
-            <p className="metric-label">Learning streak</p>
-            <p className="metric-value">
-              {currentStreak}
-              <span> {currentStreak === 1 ? 'day' : 'days'}</span>
-            </p>
-          </div>
-          <span className="metric-caption">
-            {currentStreak ? 'Keep showing up.' : 'Your first step\nstarts the streak.'}
-          </span>
-        </div>
-      </div>
-      <SectionHeading
-        title="Your learning path"
-        subtitle="Four chapters. One connected journey."
-        href="#/curriculum"
-        link="View all lessons"
-      />
-      <div className="track-grid">
-        {tracks.map((track, index) => {
-          const Icon = trackIcons[index];
-          const group = lessons.filter((lesson) => lesson.track === track.name);
-          const done = group.filter((lesson) => progress.completed[lesson.day]).length;
-          return (
-            <a
-              className={`track-card track-${index}`}
-              href={`#/curriculum?track=${encodeURIComponent(track.name)}`}
-              key={track.name}
-            >
-              <div className="track-card-top">
-                <span className="track-icon">
-                  <Icon size={20} />
-                </span>
-                <span className="mono muted">{track.range}</span>
-              </div>
-              <h3>{track.name}</h3>
-              <p>{track.description}</p>
-              <div className="track-card-bottom">
-                <span>
-                  {done} of {group.length} lessons
-                </span>
-                <ArrowRight size={16} />
-              </div>
-              <ProgressBar value={(done / group.length) * 100} label={`${track.name} completion`} />
-            </a>
-          );
-        })}
-      </div>
-      <div className="home-bottom">
-        <section>
-          <SectionHeading title={completed === 30 ? 'Keep building' : 'Pick up here'} />
-          <a className="next-card" href={completed === 30 ? '#/phase/2' : `#/lesson/${next.day}`}>
-            <div className="next-card-main">
-              <span className="badge">
-                {completed === 30
-                  ? 'BEYOND THE CORE'
-                  : `LESSON ${String(next.day).padStart(2, '0')}`}{' '}
-                <span className="dot-divider">·</span> {completed === 30 ? 'Phase 2' : next.track}
-              </span>
-              <h3>{completed === 30 ? 'Build like an engineer' : next.title}</h3>
-              <p className="muted">
-                {completed === 30
-                  ? 'Deepen your skills with the next phase of the roadmap.'
-                  : next.summary}
-              </p>
-              <div className="next-meta">
-                <span>
-                  <BookOpen size={14} />
-                  Learn
-                </span>
-                <span>
-                  <Code2 size={14} />
-                  Build
-                </span>
-                <span>
-                  <CheckCircle2 size={14} />
-                  Check
-                </span>
-              </div>
-              <span className="text-link">
-                {completed === 30 ? 'Open the next phase' : 'Open lesson'}
-                <ArrowRight size={16} />
-              </span>
-            </div>
-            <div className="next-illustration" aria-hidden="true">
-              <div className="code-symbol">&lt;/&gt;</div>
-              <div className="code-lines">
-                <i />
-                <i />
-                <i />
-              </div>
-              <span>ideas → working software</span>
-            </div>
-          </a>
-        </section>
-        <section>
-          <SectionHeading title="Beyond the code" />
-          <a className="field-card" href="#/scenarios">
-            <div className="field-label">
-              <Users size={17} />
-              FIELD SCENARIOS
-            </div>
-            <h3>
-              What would
-              <br />
-              you do next?
-            </h3>
-            <p>Meet a customer. Ask better questions. Make a decision with real tradeoffs.</p>
-            <span className="text-link">
-              Try a scenario
-              <ArrowRight size={16} />
+            <small>YOUR LEARNING LEVEL</small>
+            <strong>{level.name}</strong>
+            <span>
+              {level.next
+                ? `${level.next - level.xp} XP to your next level`
+                : 'Keep exploring. Every build teaches you something.'}
             </span>
-            <div className="field-orbit" aria-hidden="true">
-              <Target size={46} />
-            </div>
+          </div>
+        </div>
+        <div className="builder-progress">
+          <div>
+            <span>{level.xp} learning XP</span>
+            <strong>Level {level.index}</strong>
+          </div>
+          <ProgressBar value={level.percent} label="Learning level progress" />
+        </div>
+        <div className="builder-stat">
+          <Lightbulb size={20} />
+          <strong>{wins.length}</strong>
+          <span>discoveries</span>
+        </div>
+        <div className="builder-stat">
+          <Flag size={20} />
+          <strong>{completed}</strong>
+          <span>projects recorded</span>
+        </div>
+      </div>
+      <p className="xp-explanation">
+        XP marks recorded practice: 15 for a discovery, 25 for a concept check, 80 for a completed
+        project lesson. Levels describe practice, not a qualification.
+      </p>
+      <section className="next-action mission-invite" aria-label="Your next action">
+        <div className="mission-invite-number" aria-hidden="true">
+          {String(next.day).padStart(2, '0')}
+        </div>
+        <div>
+          <p className="eyebrow">
+            {completed === 30
+              ? 'YOUR NEXT CHAPTER'
+              : started
+                ? 'YOUR NEXT SMALL WIN'
+                : 'YOUR FIRST MISSION'}
+          </p>
+          <h2>{completed === 30 ? 'Keep building from real feedback' : next.title}</h2>
+          <p>
+            {completed === 30
+              ? 'Use your completed projects to choose a deeper engineering challenge.'
+              : dailyProjects[next.day - 1].title}
+          </p>
+          <span className="mission-tag">One idea → one experiment → your own project</span>
+        </div>
+        <a className="button alive-primary" href={resumeHref(progress)}>
+          {completed === 30 ? 'Open Phase 2' : started ? 'Resume my lesson' : 'Begin with one idea'}
+          <ArrowRight size={16} />
+        </a>
+      </section>
+      <SectionHeading
+        title="Your adventure, one mission at a time"
+        subtitle="Every dot is something you can learn to build. Explore freely."
+        href="#/curriculum"
+        link="See all 30 missions"
+      />
+      <div className="chapter-ribbon">
+        {tracks.map((track, i) => (
+          <a
+            href={`#/curriculum?track=${encodeURIComponent(track.name)}`}
+            className={track.name === next.track ? 'active' : ''}
+            key={track.name}
+          >
+            <span>{i + 1}</span>
+            <strong>{track.name}</strong>
+            <small>
+              {
+                lessons.filter((item) => item.track === track.name && progress.completed[item.day])
+                  .length
+              }
+              /{lessons.filter((item) => item.track === track.name).length}
+            </small>
           </a>
+        ))}
+      </div>
+      <JourneyMap progress={progress} items={chapter} compact />
+      <div className="discovery-and-field">
+        <section className="discovery-shelf">
+          <div className="shelf-heading">
+            <Trophy size={22} />
+            <div>
+              <p className="eyebrow">YOUR COLLECTION</p>
+              <h2>Little moments of “I get it.”</h2>
+            </div>
+          </div>
+          <p>Each solved lesson challenge adds a discovery card here.</p>
+          {wins.length ? (
+            <div className="skill-collection">
+              {wins.slice(-4).map((lesson) => (
+                <a
+                  className="skill-card"
+                  href={`#/lesson/${lesson.day}?tab=learn`}
+                  key={lesson.day}
+                >
+                  <span className="skill-seal">
+                    <Lightbulb size={23} />
+                  </span>
+                  <small>DISCOVERY {String(lesson.day).padStart(2, '0')}</small>
+                  <strong>{lesson.title}</strong>
+                  <span>
+                    <Check size={14} />
+                    Challenge solved
+                  </span>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div className="empty-collection">
+              <span className="empty-skill">
+                <Lightbulb size={30} />
+              </span>
+              <div>
+                <strong>Your first discovery belongs here.</strong>
+                <p>Solve the small task in Lesson 1 to collect it.</p>
+                <a className="text-link" href="#/lesson/1?tab=learn">
+                  Find your first aha moment
+                  <ArrowRight size={15} />
+                </a>
+              </div>
+            </div>
+          )}
         </section>
+        <a className="field-mission" href="#/scenarios">
+          <span className="field-stamp">
+            <Users size={25} />
+          </span>
+          <p className="eyebrow">STEP INTO THE REAL WORLD</p>
+          <h2>
+            A customer says,
+            <br />
+            “We need AI.”
+          </h2>
+          <p>
+            What would you ask first? Try a conversation where your decisions change the feedback.
+          </p>
+          <span className="text-link">
+            Take the customer challenge
+            <ArrowRight size={17} />
+          </span>
+        </a>
       </div>
-      <div className="footer-note">
-        <Layers size={15} />
-        <p>
-          Follow the learning loop: understand → specify → build → evaluate → reflect. Progress
-          shows practice, not certification.
-        </p>
+      <div className="home-completion">
+        <span>{completed}/30 core lessons completed</span>
+        <ProgressBar value={(completed / 30) * 100} label="Core course completion" />
+        <a href="#/portfolio">
+          See what you've built
+          <ArrowRight size={14} />
+        </a>
       </div>
-    </>
-  );
-}
-function ArrowUpIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <path d="M5 15 15 5M5 5h10v10" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
+      <p className="home-signoff">
+        A few minutes counts. Coming back after a break counts too. Your progress stays yours.
+      </p>
+    </div>
   );
 }

@@ -1,5 +1,18 @@
 # Lesson 22 project — A repeatable document-assistant evaluation harness
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Create twenty stable case IDs for the document assistant, including answerable, missing-evidence, and forbidden-source cases. Write the expected outcomes first.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `eval_report.py`. Run python eval_report.py. Results are illustrative scored fixtures, not measured live-model results.
+
+Extend Day 16's fixed test-set habit to your Day 21 document assistant. Keep the actual system version with each report.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Build a harness for at least 20 labelled questions or boundary cases. Run the grounded assistant under a named execution mode, save its actual outputs, score them using a documented rubric, and compare two versions. Include supported answers, no-evidence behavior, permission checks, and failures. Report critical regressions even if an overall average improves.

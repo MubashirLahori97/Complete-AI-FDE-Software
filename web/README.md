@@ -1,6 +1,10 @@
 # FDE Academy
 
-An interactive companion to the repository's existing Python, software engineering, AI, and Forward Deployed Engineering curriculum.
+The default app is **FDE Academy**, with its original dashboard, curriculum, daily lesson pages and projects, practice lab, scenarios, and portfolio. Optional Amina examples live at `#/guided` and `#/sample/amina`; see [GUIDED-COURSE.md](../GUIDED-COURSE.md). The main academy is available at `#/` and the compatible `#/library` alias.
+
+All 30 main lessons have a beginner path: one idea → worked example → small task, followed by the lesson's own practice and project. The homepage and lesson pages save the learner's place. Project milestones, download instructions, hints, and optional challenges are available without reading the full guide first. See [the learning experience](../LEARNING-EXPERIENCE.md) for content sources and maintenance.
+
+Each core lesson now leads with a change-and-see experiment: editable inputs, immediate outputs and explanations, a small mission, and a reset. On phones, a compact result stays visible beside the controls as you scroll. Experiment changes save per lesson and are included in progress backups. They do not earn points or complete a project. External services, AI output, Git, storage, and deployments are explicitly labelled local models or fixed examples.
 
 ## Run locally
 
@@ -33,6 +37,8 @@ On an existing Windows installation, `PLAYWRIGHT_BROWSER_PATH` can point to a Ch
 
 ## What learners can do
 
+Try the separate beginner sample at `#/sample/amina`. One button adds one message. The first two clicks show 10 becoming 11 and then 12 before a short explanation introduces a variable. Learners can keep pressing the same button to see the value change. Code and an offline HTML counter download are optional and appear under “More, when you’re ready” after the idea is introduced. There are no forms, predictions, quizzes, or external runtimes. Sample state lasts for the current visit and does not mark existing course lessons complete. This is a single teaching prototype to review before redesigning the course.
+
 - Follow all 30 existing lessons, grouped into four connected chapters.
 - Search by skill, filter by chapter or completion, and open deep links.
 - Read the original Markdown lessons without duplicating the curriculum.
@@ -57,6 +63,7 @@ Progress and scenario scores are learning records and self-assessments. They do 
 - **Learning metadata:** `src/data.ts` defines the chapter structure, 60 quiz questions, and four portfolio projects. `src/labs.ts` contains the runnable exercises. `src/scenarios-data.ts` contains transparent scripted decisions and feedback.
 - **Per-lesson projects:** `src/lesson-projects.json` contains the 30 project summaries and acceptance criteria. `scripts/package-projects.mjs` creates ZIP downloads before development, builds, and unit tests; generated archives are ignored by Git. The longer explanations and project briefs remain lazy-loaded Markdown.
 - **State:** `src/state.ts` handles browser storage, validated imports, completion requirements, safe links, and calendar-day streaks. Nothing is uploaded or synced to an account. Notes and code can be backed up in Settings.
+- **Experiments:** `src/experiments.ts` owns the 30 input schemas, teaching missions, deterministic models, and saved-input normalization. `LessonExperiment.tsx` renders accessible controls, immediate feedback, optional visualizations and rule reveals. `experiments.test.ts` covers boundaries and imported state; `tests/experiments.spec.ts` explores every lesson with browser controls. Keep simulations labelled and keep the real project tasks separate.
 - **Runner:** `public/sandbox.html` is embedded with `sandbox="allow-scripts"`, without same-origin access. JavaScript and Python run in disposable workers inside that frame, not in the application context. The app terminates execution after five seconds; runtime loading has a separate timeout. Output and code size are limited. This is a learning runner, not a hardened service for executing hostile code.
 - **Python:** Pyodide 0.27.7 loads on demand from `cdn.jsdelivr.net`. This version supports classic workers inside the opaque-origin sandbox; upgrades need browser isolation tests. The first execution downloads WebAssembly/runtime files. Standard-library exercises are supported; `input()` and arbitrary package installation are not provided. Python code is not sent to a remote interpreter. The app explains CDN failures and JavaScript/HTML exercises remain available without it.
 - **Fonts and icons:** fonts ship locally with the build; SVG icons come from Lucide. No external font request or analytics is included.

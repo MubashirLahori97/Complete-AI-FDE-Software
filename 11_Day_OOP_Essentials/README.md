@@ -1,5 +1,67 @@
 # Day 11 — Objects, state, and domain rules
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Support-ticket domain model. You can take several study sessions.
+
+**The situation:** A support ticket should move between allowed states. A random string should not become its status.
+
+### One idea: Keep related state and rules together
+
+An object groups some data with actions that use that data. A class describes how to make those objects. For a ticket, the data might be its ID and status; an action might close it. The useful part is keeping state changes behind clear rules. Use a class when this helps understanding; small functions can still be the right choice elsewhere.
+
+**New words:**
+
+- **Class:** A definition used to create objects with related data and actions.
+- **State:** The values describing something at a particular moment.
+- **Method:** A function attached to an object.
+
+### Follow the example below
+
+1. The class creates a ticket with an open starting state.
+2. close checks whether the current state is open before changing it to closed.
+3. The prints show the state before and after closing. The project adds a fuller state policy and validation.
+
+### Try one small decision
+
+A ticket only allows open and closed. Someone asks to set its status to banana. What should happen?
+
+1. Reject the unsupported state and keep the previous valid state
+2. Store banana because it is text
+3. Delete the ticket
+
+<details>
+<summary>A small hint</summary>
+
+The method should protect the rules, not just assign any string.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Validate the proposed new state before changing the current one.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Reject the unsupported state and keep the previous valid state** Yes. The transition rule protects the object's data from an invalid state.
+
+</details>
+
+**Then practise:** Add a second ticket.close() call after the existing example. Run it and inspect the error. Explain why the method refuses to close an already closed ticket.
+
+**Your project's first action:** Draw the allowed ticket states and arrows between them. Decide what closing an already closed ticket should do.
+
+**How it connects:** This revisits the support queue from Day 3. You are now putting its rules around each ticket's state.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Objects can make a domain clearer when related state and behavior belong together. They also add complexity if introduced without a useful responsibility. Today you will model a support ticket and its allowed status transitions, then compare that design with a simpler dictionary-and-function version.
 
 **Your project:** [Support-ticket domain model](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

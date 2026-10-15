@@ -1,5 +1,67 @@
 # Day 24 — Backend APIs, databases, and durable feedback
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** FastAPI feedback and question service. You can take several study sessions.
+
+**The situation:** Your assistant needs to store feedback so the team can inspect it after the server restarts.
+
+### One idea: Put durable data behind an API
+
+A backend receives requests and applies application rules. An API endpoint is an address for a particular operation. A database stores records and can enforce useful rules such as unique IDs. Validate requests before writing, use parameterized database queries, and return an understandable result. Creating a database table alone does not create a complete web service.
+
+**New words:**
+
+- **Endpoint:** An API address and method for a particular operation.
+- **Database:** A system for storing and querying structured records.
+- **Parameterized query:** A query that passes values separately from SQL instructions.
+
+### Follow the example below
+
+1. The example creates a SQLite feedback table and inserts a record.
+2. Values are passed as parameters, keeping them separate from the SQL statement.
+3. The example uses an in-memory database. Your project needs a file-backed database plus a FastAPI service to test restart persistence.
+
+### Try one small decision
+
+Your API returns 'saved', but feedback disappears after restart. What should you inspect first?
+
+1. The colour of the Save button
+2. Only the model prompt
+3. The storage path, database lifetime, and committed writes
+
+<details>
+<summary>A small hint</summary>
+
+Remember the difference between temporary memory and durable storage.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+An in-memory database belongs to the process; use and verify a durable path for this project.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**The storage path, database lifetime, and committed writes** Yes. Check where records are written and whether they are still present in a new process.
+
+</details>
+
+**Then practise:** Change the sample feedback value and read it back from the example database. Explain why this in-memory run cannot prove data survives a server restart.
+
+**Your project's first action:** Write the feedback endpoint contract: required fields, accepted values, success result, and invalid-input result. Choose a local database file path.
+
+**How it connects:** Combine Day 6 persistence with Day 9 request/response contracts. Add durable feedback to the document assistant rather than relying on browser-only state.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A backend owns shared rules and durable state behind a contract other programs can use. Today you will connect HTTP input validation, database operations, and explicit error behavior. Your project is a small FastAPI feedback service for the assistant, with parameterized SQL and a documented trust boundary.
 
 **Your project:** [FastAPI feedback and question service](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

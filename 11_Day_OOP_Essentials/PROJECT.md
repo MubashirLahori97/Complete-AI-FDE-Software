@@ -1,5 +1,18 @@
 # Lesson 11 project — Support-ticket domain model
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Draw the allowed ticket states and arrows between them. Decide what closing an already closed ticket should do.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `ticket.py`. Run python ticket.py. dataclasses is part of the standard library.
+
+This revisits the support queue from Day 3. You are now putting its rules around each ticket's state.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A help desk needs tickets with stable IDs, readable titles, and controlled status changes. Build a small domain model with create, close, and optional reopen operations. Test invalid creation and repeated transitions. Compare your object-based design with a simpler alternative and explain which one you would use for this scope.

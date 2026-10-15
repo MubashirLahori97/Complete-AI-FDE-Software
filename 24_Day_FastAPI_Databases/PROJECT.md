@@ -1,5 +1,18 @@
 # Lesson 24 project — FastAPI feedback and question service
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write the feedback endpoint contract: required fields, accepted values, success result, and invalid-input result. Choose a local database file path.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `feedback_store.py`. Run python feedback_store.py. It uses an in-memory SQLite database to demonstrate the storage operation; the project adds file persistence and HTTP endpoints.
+
+Combine Day 6 persistence with Day 9 request/response contracts. Add durable feedback to the document assistant rather than relying on browser-only state.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Build POST /feedback, GET /feedback/{id}, and POST /ask for the fictional assistant. Use validated request models, a documented SQLite file, parameterized queries, and a trusted-identity boundary or explicitly labelled local identity fixtures. Reuse your answer contract and make invalid, missing, and forbidden outcomes clear. Verify the current FastAPI installation command in the linked documentation.

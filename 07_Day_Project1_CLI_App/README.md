@@ -1,5 +1,67 @@
 # Day 7 — Scope and ship a complete command-line tool
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A usable CLI expense tracker. You can take several study sessions.
+
+**The situation:** A learner wants to record expenses, list them, and see the total from a terminal.
+
+### One idea: Finish one useful tool
+
+A useful app combines several small ideas. A command chooses the action, functions do the work, a collection holds the records, and a file keeps them between runs. Start with one complete action before adding more. A tiny expense tracker that another person can run teaches more than a large menu whose buttons do nothing.
+
+**New words:**
+
+- **CLI:** Command-line interface: an app used through typed terminal commands.
+- **Scope:** The work you agree to include in this version.
+- **End-to-end:** A complete path from a user's action to the result.
+
+### Follow the example below
+
+1. The example starts with a small collection of expenses.
+2. It adds amounts to calculate a total in integer cents.
+3. This demonstrates the calculation only. The project adds command handling and saving between runs.
+
+### Try one small decision
+
+What is the smallest useful first milestone for this expense tracker?
+
+1. Design a logo and add ten empty commands
+2. Add one expense, save it, and show it after restarting
+3. Add an AI assistant before storing expenses
+
+<details>
+<summary>A small hint</summary>
+
+Choose something a user can actually finish.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+A first complete path can be add → save → restart → list.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Add one expense, save it, and show it after restarting** Yes. This proves one complete useful path, including persistence.
+
+</details>
+
+**Then practise:** Add a fictional expense of 150 cents to the example. Predict the new total first, then run the calculation and compare.
+
+**Your project's first action:** Write the exact terminal conversation for adding one fictional expense and listing it again after a restart. Use that conversation as your first test.
+
+**How it connects:** Combine Days 2–6: types, rules, functions, collections, and files. This becomes the expense app you will test and give a web interface later.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A project becomes useful when another person can complete a task with it. Today you will combine data, decisions, functions, and persistence into an expense tracker. The challenge is finishing a small, coherent product: an understandable workflow, reliable behavior, useful errors, and instructions that work outside your own terminal session.
 
 **Your project:** [A usable CLI expense tracker](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

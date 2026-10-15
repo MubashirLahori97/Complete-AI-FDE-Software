@@ -1,5 +1,18 @@
 # Lesson 13 project — Responsive expense dashboard
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Sketch an empty expense dashboard: a labelled form, an empty-list message, and a total. Then trace what changes after adding one expense.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `index.html`. Open index.html in a browser or paste it into the HTML/CSS lab. Try the form with a keyboard as well as a pointer.
+
+Give the expense tracker from Days 7 and 12 a web interface. Keep its calculation rules even though the way users interact is changing.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A freelancer wants to add labelled expenses, see a list and total, remove a mistaken record, and return to the data later in the same browser. Build a semantic HTML/CSS/JavaScript interface using fictional data. Document that browser-local persistence is a learning constraint and does not provide shared accounts or server-side authorization.

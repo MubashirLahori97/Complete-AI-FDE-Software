@@ -1,5 +1,67 @@
 # Day 14 — Deployment, configuration, and your first public application
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A verified public expense dashboard. You can take several study sessions.
+
+**The situation:** The dashboard works on your laptop. You publish it, but a friend sees a blank page.
+
+### One idea: Check the app someone else receives
+
+Deployment means making a particular version of your app available in its target environment. A successful build does not prove the published app works. The public page may use a different path, old assets, or different settings. Test the actual public URL in a fresh session and on a small screen. Record the source version so you know what you are checking.
+
+**New words:**
+
+- **Build:** Preparing source files into the files used to run or publish the app.
+- **Deployment:** Making a version available in a target environment.
+- **Smoke test:** A short check that the main user journey works.
+
+### Follow the example below
+
+1. The release example names the source and destination of a release.
+2. It lists checks for the public URL, assets, and the main task.
+3. These lines are a checklist, not proof that a deployment has passed. Attach your observed results.
+
+### Try one small decision
+
+The build command passed. What is still needed before calling the dashboard release verified?
+
+1. Test the published URL and its main workflow in a fresh session
+2. Only inspect the source code
+3. Assume every device works
+
+<details>
+<summary>A small hint</summary>
+
+Test the thing another person receives.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Open the public address, load its assets, submit the form, and refresh.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Test the published URL and its main workflow in a fresh session** Yes. Verify the actual delivery, including assets and behaviour outside your existing session.
+
+</details>
+
+**Then practise:** Use your release checklist to test the real public URL in a fresh browser session. Record observed results instead of marking planned checks as passed.
+
+**Your project's first action:** Write the version and target URL for the Day 13 dashboard. List three smoke checks before starting the release.
+
+**How it connects:** Publish the expense interface you already built. Today's project produces a verified release record rather than another unrelated app.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Deployment places a reproducible version of your application where its intended users can access it. That changes the environment, not just the URL. Today you will publish your expense dashboard, verify the actual hosted result, and document how to recover from an incorrect release.
 
 **Your project:** [A verified public expense dashboard](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

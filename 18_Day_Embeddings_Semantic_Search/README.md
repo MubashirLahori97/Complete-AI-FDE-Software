@@ -1,5 +1,67 @@
 # Day 18 — Embeddings, vector similarity, and retrieval evaluation
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** FAQ retrieval comparison workbench. You can take several study sessions.
+
+**The situation:** A customer asks how to get their money back, but the FAQ heading says refunds.
+
+### One idea: Find related meaning, not just matching words
+
+Keyword search looks for words. Semantic search tries to find related meaning. An embedding represents information as a vector: a list of numbers that can be compared with other vectors. Similar direction can help rank related text. A high similarity score still does not prove the text answers the question. Compare search results with cases you can judge yourself.
+
+**New words:**
+
+- **Embedding:** A numerical representation used for comparisons such as text similarity.
+- **Vector:** An ordered list of numbers.
+- **Ranking:** Putting candidates in an order using a scoring rule.
+
+### Follow the example below
+
+1. The example defines cosine similarity for two vectors and rejects incompatible dimensions or zero vectors.
+2. It compares a query with one hand-written document vector, so you can inspect the arithmetic.
+3. These are teaching vectors, not live-model embeddings. The full project adds records, ranking, and a keyword comparison.
+
+### Try one small decision
+
+A document has the highest similarity score. What does that tell you?
+
+1. Every claim in it is correct
+2. It is definitely enough to answer the question
+3. It is a candidate worth checking for relevant evidence
+
+<details>
+<summary>A small hint</summary>
+
+Separate finding a promising passage from proving an answer.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+A ranking score is a search signal, not a truth certificate.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**It is a candidate worth checking for relevant evidence** Yes. Ranking helps choose candidates; evidence checks still decide whether they support an answer.
+
+</details>
+
+**Then practise:** Change illustrative_document from [1.0, 0.0] to [0.0, 1.0]. Rerun the similarity calculation and compare the score. This tests arithmetic, not a real embedding model.
+
+**Your project's first action:** Write ten FAQ records with IDs. Add a question using different words from one answer and predict which record should be retrieved.
+
+**How it connects:** This begins the retrieval component of your document assistant. Keep the ticket classifier's test-set habit: compare methods on the same questions.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 Embeddings represent information as vectors that can support similarity search. A similarity score is not a fact check, and a plausible example is not proof that retrieval will work on a customer's data. Today you will inspect the mathematics with small illustrative vectors, then design a FAQ-search project with labelled queries and a clear comparison method.
 
 **Your project:** [FAQ retrieval comparison workbench](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

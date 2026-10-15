@@ -1,5 +1,18 @@
 # Lesson 17 project — An allowlisted inventory tool service
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write two read-only inventory tools in plain English: their names, required inputs, and possible results. List one action they must never perform.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `tool_dispatcher.py`. Run python tool_dispatcher.py. The call is a fixture proposal and the tool reads fictional local inventory.
+
+Combine Day 4 function contracts with Day 16 output validation. You will reuse the permission boundary in later agent and capstone work.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A shop assistant needs read-only stock lookup and product search over fictional inventory. Build a dispatcher with two named tools, argument validation, not-found results, and a trusted-user access policy. Demonstrate invalid proposals and resource restrictions with fixtures before optionally connecting a model that proposes tool calls.

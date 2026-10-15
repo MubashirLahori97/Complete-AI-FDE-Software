@@ -1,5 +1,18 @@
 # Lesson 10 project — A reproducible release kit
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Open your tracker README as if you had never seen the project. List every missing setup step before trying a fresh local environment.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `environment_check.py`. Run python environment_check.py in your normal interpreter and in a virtual environment. The specific Python version may differ.
+
+Your Git repository keeps source history. Now make that source runnable by another person. Browser runtime diagnostics describe the browser environment, not your laptop.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A teammate needs to run your expense tracker on a clean machine or environment. Package the interpreter requirement, dependency installation, configuration examples, data-path policy, and smoke test into a release kit. Keep the original working project intact while you test the clean setup in a separate directory.

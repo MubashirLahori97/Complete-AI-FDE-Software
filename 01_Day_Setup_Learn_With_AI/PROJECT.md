@@ -1,5 +1,18 @@
 # Lesson 1 project — Personal learning profile generator
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write a four-line profile on paper: name, city, goal, and daily study time. This is the result your project should produce.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `profile.py`. Run python profile.py from the starter directory. The example uses assigned values so it also works in the browser Python lab.
+
+Keep this profile as the first item in your learning journal. Tomorrow you will learn why text and numbers behave differently.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A new learner wants a short profile they can paste into their study journal. Build a program that represents their name, city, learning goal, and daily study time, then prints a readable profile. Keep the first version small enough to explain line by line. Use fixed values first; collecting interactive input is an optional extension.

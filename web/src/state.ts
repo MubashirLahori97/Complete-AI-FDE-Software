@@ -1,6 +1,9 @@
 import { lessons, projectDefinitions, dailyProjects } from './data';
+import { experimentValues, type ExperimentValues } from './experiments';
 
 export const STORAGE_KEY = 'fde-academy-v1';
+export const lessonActivities = ['learn', 'practice', 'project', 'build'] as const;
+export type LessonActivity = (typeof lessonActivities)[number];
 export interface ProjectEvidence {
   demo: string;
   repo: string;
@@ -12,6 +15,13 @@ export interface Progress {
   name: string;
   minutes: number;
   lastLesson: number;
+  lessonActivities: Record<string, LessonActivity>;
+  readingSteps: Record<string, number>;
+  experiments: Record<string, ExperimentValues>;
+  quickChecks: Record<string, { choice: number | null; checked: boolean; hints: number }>;
+  conceptWins: Record<string, string>;
+  reviewWins: Record<string, string>;
+  warmupSolved: boolean;
   completed: Record<string, string>;
   quizPassed: number[];
   notes: Record<string, string>;
@@ -28,6 +38,13 @@ export const emptyProgress = (): Progress => ({
   name: '',
   minutes: 120,
   lastLesson: 1,
+  lessonActivities: {},
+  readingSteps: {},
+  experiments: {},
+  quickChecks: {},
+  conceptWins: {},
+  reviewWins: {},
+  warmupSolved: false,
   completed: {},
   quizPassed: [],
   notes: {},
@@ -40,6 +57,17 @@ export const emptyProgress = (): Progress => ({
 });
 export const localDate = (date = new Date()): string =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+export function studyPlan(minutes: number) {
+  const learn = Math.round(minutes / 6);
+  const reflect = Math.round(minutes / 12);
+  return [
+    { label: 'Learn', minutes: learn },
+    { label: 'Example', minutes: learn },
+    { label: 'Practise', minutes: learn },
+    { label: 'Project', minutes: minutes - learn * 3 - reflect },
+    { label: 'Reflect', minutes: reflect },
+  ];
+}
 export const safeUrl = (value: string): string | undefined => {
   try {
     const url = new URL(value);
@@ -65,6 +93,7 @@ export function parseProgress(value: unknown): Progress {
   if (!isRecord(value) || value.version !== 1)
     throw new Error('This is not a supported FDE Academy backup.');
   const result = emptyProgress();
+  result.warmupSolved = value.warmupSolved === true;
   result.name = text(value.name, 50);
   result.minutes = [30, 60, 90, 120].includes(Number(value.minutes)) ? Number(value.minutes) : 120;
   result.lastLesson =
@@ -85,6 +114,42 @@ export function parseProgress(value: unknown): Progress {
     : [];
   for (const lesson of lessons) {
     const key = String(lesson.day);
+    if (isRecord(value.experiments) && isRecord(value.experiments[key]))
+      result.experiments[key] = experimentValues(lesson.day, value.experiments[key]);
+    for (const field of ['conceptWins', 'reviewWins'] as const)
+      if (isRecord(value[field]) && validDate(value[field][key]))
+        result[field][key] = value[field][key];
+    if (
+      isRecord(value.lessonActivities) &&
+      lessonActivities.includes(value.lessonActivities[key] as LessonActivity)
+    )
+      result.lessonActivities[key] = value.lessonActivities[key] as LessonActivity;
+    if (
+      isRecord(value.readingSteps) &&
+      Number.isInteger(value.readingSteps[key]) &&
+      Number(value.readingSteps[key]) >= 0 &&
+      Number(value.readingSteps[key]) <= 2
+    )
+      result.readingSteps[key] = Number(value.readingSteps[key]);
+    const attempt = isRecord(value.quickChecks) ? value.quickChecks[key] : null;
+    if (isRecord(attempt)) {
+      const choice =
+        Number.isInteger(attempt.choice) &&
+        Number(attempt.choice) >= 0 &&
+        Number(attempt.choice) <= 2
+          ? Number(attempt.choice)
+          : null;
+      result.quickChecks[key] = {
+        choice,
+        checked: choice !== null && attempt.checked === true,
+        hints:
+          Number.isInteger(attempt.hints) &&
+          Number(attempt.hints) >= 0 &&
+          Number(attempt.hints) <= 2
+            ? Number(attempt.hints)
+            : 0,
+      };
+    }
     if (isRecord(value.notes)) result.notes[key] = text(value.notes[key]);
     if (isRecord(value.checkpoints)) result.checkpoints[key] = flags(value.checkpoints[key], 2);
     if (isRecord(value.lessonProjectChecks))
@@ -149,6 +214,16 @@ export function completionCount(progress: Progress): number {
 }
 export function nextLesson(progress: Progress): number {
   return lessons.find((lesson) => !progress.completed[lesson.day])?.day ?? 30;
+}
+export function resumeLesson(progress: Progress): number {
+  return progress.lessonActivities[progress.lastLesson] && !progress.completed[progress.lastLesson]
+    ? progress.lastLesson
+    : nextLesson(progress);
+}
+export function resumeHref(progress: Progress): string {
+  if (completionCount(progress) === lessons.length) return '#/phase/2';
+  const day = resumeLesson(progress);
+  return `#/lesson/${day}?tab=${progress.lessonActivities[day] || 'learn'}`;
 }
 export function streak(progress: Progress, today = new Date()): number {
   const dates = new Set(Object.values(progress.completed));

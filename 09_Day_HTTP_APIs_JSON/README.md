@@ -1,5 +1,67 @@
 # Day 9 — HTTP requests, API contracts, and JSON boundaries
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Weather-service adapter with offline fixtures. You can take several study sessions.
+
+**The situation:** Your weather tool asks another service for information. Sometimes the reply is missing a temperature.
+
+### One idea: Follow a request and its response
+
+An API is an agreed way for programs to communicate. With HTTP, your program sends a request and the server returns a response. The response has a status and may contain JSON data. A successful network response can still contain unexpected fields. Check both the response status and the data you need before displaying a result.
+
+**New words:**
+
+- **Request:** A message asking a server to do or return something.
+- **Response:** The server's reply to that message.
+- **Fixture:** A saved example used to test behaviour without a live service.
+
+### Follow the example below
+
+1. The example uses a saved JSON response, so it does not call a live weather service.
+2. It reads the data and checks the fields needed for a weather result.
+3. The adapter converts outside data into a shape your own program understands.
+
+### Try one small decision
+
+A response says status 200 but its JSON has no temperature. What should the weather app do?
+
+1. Show 0 degrees without explanation
+2. Assume success because 200 was returned
+3. Show a clear missing-data result
+
+<details>
+<summary>A small hint</summary>
+
+Separate delivery of a response from usefulness of its contents.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+A missing temperature is unknown, not zero.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Show a clear missing-data result** Yes. Check the content as well as the HTTP status and handle missing measurements explicitly.
+
+</details>
+
+**Then practise:** Remove temperature from the saved response in the example. Run it and check whether it reports missing data clearly rather than inventing a value.
+
+**Your project's first action:** Draw client → request → service → response → display. Write the expected result for both a complete reply and a reply missing temperature.
+
+**How it connects:** Reuse your validation and error-handling skills. Offline fixtures let you test failures repeatedly before connecting a real service.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 When one program asks another for information, both sides need an agreed contract. HTTP carries the request and response; JSON is a common representation for the data inside them. Today you will trace that round trip, distinguish transport errors from invalid payloads, and build an adapter that turns an external-style weather response into a dependable internal result.
 
 **Your project:** [Weather-service adapter with offline fixtures](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

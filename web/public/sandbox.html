@@ -17,7 +17,7 @@
         workerUrl = undefined;
       };
       const javascriptSource = `
-  self.onmessage = ({ data }) => {
+  self.onmessage = async ({ data }) => {
     self.postMessage({ type: 'ready' });
     let lines = 0;
     let size = 0;
@@ -32,7 +32,7 @@
       self.postMessage({ type: 'output', text });
     };
     try {
-      new Function('console', '"use strict";\\n' + data.code)({ log, info: log, warn: log, error: log });
+      await new Function('console', '"use strict";\\n' + data.code)({ log, info: log, warn: log, error: log });
       self.postMessage({ type: 'done' });
     } catch (error) { self.postMessage({ type: 'error', text: error.message }); }
   };
@@ -54,6 +54,7 @@
       pyodide.setStdout({ batched: output });
       pyodide.setStderr({ batched: output });
       pyodide.setStdin({ stdin: () => { throw new Error('Interactive input() is unavailable here. Assign a variable instead.'); } });
+      await pyodide.loadPackagesFromImports(data.code);
       globals = pyodide.globals.get('dict')();
       self.postMessage({ type: 'ready' });
       const result = await pyodide.runPythonAsync(data.code, { globals });

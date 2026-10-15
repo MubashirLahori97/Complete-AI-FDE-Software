@@ -1,5 +1,18 @@
 # Lesson 4 project — A reusable quote calculator
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write one example quote by hand with two items and a delivery fee, all in cents. Work out the expected grand total before writing functions.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `quote.py`. Run python quote.py. The example uses integer cents rather than live currency conversion.
+
+Use conditions from Day 3 to reject invalid quantities. This calculator can later support a web form without changing its arithmetic.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A small service business creates quotes with line items and a delivery fee. Build calculation functions using integer cents, plus a thin display layer. Define supported prices and quantities explicitly. The first version has no tax integration, discounts, payments, or live exchange rates; those are separate scope decisions.

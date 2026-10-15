@@ -4,17 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "predev": "node scripts/package-projects.mjs",
+    "predev": "node scripts/prepare-course.mjs",
     "dev": "vite --host 127.0.0.1",
-    "prebuild": "node scripts/package-projects.mjs",
+    "prebuild": "node scripts/prepare-course.mjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "format": "prettier --write src tests *.ts *.json index.html README.md public/*.html ../.github/workflows/*.yml",
-    "pretest": "node scripts/package-projects.mjs",
+    "pretest": "node scripts/prepare-course.mjs",
+    "check:course": "node scripts/validate-course.mjs && node scripts/check-course.mjs",
+    "check:dom": "node scripts/check-dom-course.mjs",
+    "check:kits": "node scripts/check-kits.mjs",
+    "check:shop": "node scripts/check-shop-browser.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@babel/standalone": "^8.0.7",
     "@fontsource/dm-mono": "^5.2.7",
     "@fontsource/dm-sans": "^5.2.8",
     "lucide-react": "^0.468.0",
@@ -31,10 +36,11 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.1.0",
-    "fflate": "^0.8.2",
+    "esbuild": "^0.28.2",
+    "fflate": "^0.8.3",
     "prettier": "^3.6.2",
     "typescript": "~5.9.3",
     "vite": "^7.2.0",
-    "vitest": "^3.2.4"
+    "vitest": "^5.0.4"
   }
 }

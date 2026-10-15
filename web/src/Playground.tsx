@@ -113,24 +113,26 @@ export default function Playground({
         />
       )}
       <div className="lab-controls">
-        <div className="select-wrap">
-          <Code2 size={17} />
-          <label className="sr-only" htmlFor="lab-select">
-            Choose an exercise
-          </label>
-          <select
-            id="lab-select"
-            value={lab.id}
-            onChange={(event) => changeLab(event.target.value)}
-          >
-            {labs.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.title} · {item.language === 'html' ? 'HTML / CSS' : item.language}
-              </option>
-            ))}
-          </select>
-          <ChevronDown size={15} />
-        </div>
+        {!day && (
+          <div className="select-wrap">
+            <Code2 size={17} />
+            <label className="sr-only" htmlFor="lab-select">
+              Choose an exercise
+            </label>
+            <select
+              id="lab-select"
+              value={lab.id}
+              onChange={(event) => changeLab(event.target.value)}
+            >
+              {labs.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.title} · {item.language === 'html' ? 'HTML / CSS' : item.language}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={15} />
+          </div>
+        )}
         <span className="badge">
           {lab.language === 'html'
             ? 'HTML + CSS + JS'
@@ -271,8 +273,9 @@ export default function Playground({
       </div>
       <p className="lab-note" id="code-editor-help">
         Use spaces for indentation; Tab moves to the next control. Execution stops after 5 seconds.
-        Python downloads its runtime on first use; use variables instead of <code>input()</code>. No
-        model API key is needed.
+        Python downloads its runtime on first use; use variables instead of <code>input()</code>. If
+        it cannot load, download today's starter kit and run it locally. Browser files belong to a
+        temporary environment. No model API key is needed; these examples do not call a live model.
       </p>
       <iframe
         ref={frame}

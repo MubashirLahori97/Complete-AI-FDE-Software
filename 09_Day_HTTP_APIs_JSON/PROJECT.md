@@ -1,5 +1,18 @@
 # Lesson 9 project — Weather-service adapter with offline fixtures
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Draw client → request → service → response → display. Write the expected result for both a complete reply and a reply missing temperature.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `weather_adapter.py`. Run python weather_adapter.py. This fixture example does not perform a live HTTP request or claim current weather.
+
+Reuse your validation and error-handling skills. Offline fixtures let you test failures repeatedly before connecting a real service.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A travel dashboard needs a city and clearly labelled temperature, but its provider can return incomplete data or fail. Build an adapter with a fixture transport for repeatable tests and an optional live transport based on a provider's current documentation. Keep the UI independent of the provider's payload shape and distinguish offline demonstration data from live results.

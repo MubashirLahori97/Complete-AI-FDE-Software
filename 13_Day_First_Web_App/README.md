@@ -1,5 +1,67 @@
 # Day 13 — Frontend fundamentals and a usable web interface
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** Responsive expense dashboard. You can take several study sessions.
+
+**The situation:** Your expense tracker works in a terminal. A user wants a labelled form and a visible total instead.
+
+### One idea: Connect a screen to an action
+
+HTML describes the parts of a web page. CSS controls their appearance. JavaScript responds to actions such as submitting a form. Follow one event from start to finish: the user enters an amount, the program validates it, adds a record, and updates the displayed total. A clear label and a useful error message are part of making the program work for people.
+
+**New words:**
+
+- **HTML:** Markup describing the structure and meaning of page elements.
+- **Event:** An action the page can respond to, such as a click or form submission.
+- **DOM:** The browser's representation of the page, which JavaScript can read and change.
+
+### Follow the example below
+
+1. The HTML creates a labelled form and a place to display results.
+2. The JavaScript listens for submission, reads the value, and prevents the default page reload.
+3. Valid input changes the displayed state. This browser example does not add a server or database.
+
+### Try one small decision
+
+A user submits an empty expense amount. Which response helps them continue?
+
+1. Silently add a zero expense
+2. Show a clear message beside the labelled field and keep their input
+3. Show only a red border
+
+<details>
+<summary>A small hint</summary>
+
+Help the person understand what went wrong and what to do next.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Keep the form usable with a keyboard and explain errors using text.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**Show a clear message beside the labelled field and keep their input** Yes. Explain the fix without making the user restart the task.
+
+</details>
+
+**Then practise:** Preview the example. Submit a normal value, then an empty value. Change one label to make the required input clearer and preview again.
+
+**Your project's first action:** Sketch an empty expense dashboard: a labelled form, an empty-list message, and a total. Then trace what changes after adding one expense.
+
+**How it connects:** Give the expense tracker from Days 7 and 12 a web interface. Keep its calculation rules even though the way users interact is changing.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 An interface translates a person's intent into operations they can understand. Today you will learn the different responsibilities of HTML, CSS, and JavaScript, connect a form to a calculation, and build a small expense dashboard. A framework can help later, but it should not hide the browser concepts you need to inspect and debug.
 
 **Your project:** [Responsive expense dashboard](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

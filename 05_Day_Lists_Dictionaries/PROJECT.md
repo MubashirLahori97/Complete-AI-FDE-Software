@@ -1,5 +1,18 @@
 # Lesson 5 project — Customer contact directory
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Draw two contact records with different IDs but the same name. Add a city to each and decide which fields are required.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `contacts.py`. Run python contacts.py. Records remain in memory in this example; lesson 6 adds persistence.
+
+Your queue already held several tickets. Now you are choosing a deliberate data structure; tomorrow you will save records between runs.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A small team needs to add, find, update, and list contacts. Build an in-memory directory keyed by stable IDs. Allow duplicate display names, validate required fields, and make a missing ID understandable. Persistence is intentionally left for the next lesson, so today you can concentrate on data shape and operations.

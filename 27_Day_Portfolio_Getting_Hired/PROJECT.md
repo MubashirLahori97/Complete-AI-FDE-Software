@@ -1,5 +1,18 @@
 # Lesson 27 project — An evidence-based portfolio case study
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Choose one completed project. Write two sentences: who had the problem, and what your implementation now lets them do. Then find one artifact supporting that claim.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `case-study.md`. Replace the prompts with evidence from one of your actual learning projects. This starter is a writing artifact.
+
+Use your expense release or document assistant, its source version, and actual test results. These become evidence for your portfolio rather than a new unrelated build.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Choose one completed learning project and package it for a reader who has no context. Write a concise case study, verify the repository and demo links, include a representative test report, and explain your own contribution. Use the app's portfolio tracker to keep the artifacts together and export a readable copy.

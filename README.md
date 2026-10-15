@@ -6,9 +6,15 @@
 
 ## Interactive FDE Academy
 
-This curriculum now has an interactive web companion in [`web/`](web/): searchable lessons, concept checks, Python/JavaScript/HTML exercises, saved progress, customer scenarios, and a portfolio tracker.
+Start with a one-minute challenge, explore the open mission map, and collect discovery cards as you solve lesson challenges. The [engagement design](ENGAGING-LEARNING.md) explains how feedback, learning XP, review practice, and the companion support the curriculum.
 
-**Every one of the 30 lessons now includes a dedicated project.** The expanded lessons add deeper explanations, worked examples, three practice exercises, debugging guidance, and FDE context. Each [project guide](PROJECTS.md) provides milestones, five acceptance checks, a test matrix, stretch challenges, and a downloadable starter kit in the app.
+The app opens in **FDE Academy**, with its original dashboard, 30-day curriculum, practice lab, field scenarios, and portfolio. Each day's lesson has Learn, Practise, Project, and Record your build activities. Start with the lesson, practise the idea, build its project, and save your results.
+
+Every core lesson begins with a small interactive experiment: change an input or rule and see the result immediately. A clear first mission, live explanation, optional rule reveal, and reset make it easy to explore before reading the worked example. Your changes save on this device. Each lesson still includes its own project.
+
+**New learner? Choose Start Lesson 1.** Every lesson now starts with one idea in simple English, a worked example, and one small task with explained feedback and two hints. Each project has a clear first action and three milestones. Continue learning remembers your last unfinished lesson and activity. Read [how the learning experience works](LEARNING-EXPERIENCE.md), including a flexible two-hour study session.
+
+Every day has a [dedicated project](PROJECTS.md) with a brief, milestones, acceptance checks, tests, and a downloadable starter kit. Amina's shop examples are optional teaching experiments under Resources. They do not replace the main curriculum; their [guide](GUIDED-COURSE.md) and [shop workspace](guided-projects/shop-workspace/README.md) remain available separately.
 
 ```bash
 cd web
@@ -20,11 +26,11 @@ Read the [app setup and publishing guide](web/README.md) to run it or publish it
 
 ---
 
-**AI writes the code now. This repo teaches what AI can't do for you: concepts, engineering judgment, and business.**
+**AI can help write code. You still need to understand, test, debug, secure, and explain the result.**
 
-**The promise:** a normal person starting from zero — 90 days later — is a complete, hire-ready software engineer. Ships real products. Reasons about systems. Works like a professional. And can prove all of it.
+**The aim:** build software and AI engineering skills through tested projects and customer work. Lesson numbers describe an order, not a deadline. A beginner may need several sessions for a lesson and more time for its project.
 
-**The milestones:** day 30 — you earn from AI software. Day 90 — the market can't ignore you.
+**Readiness evidence:** a reviewer can reproduce your work, test an unseen change, and hear you explain decisions. Completion alone does not guarantee a job, income, or mastery. Use the final skill review to choose further practice.
 
 > 📖 **New here? Read [THE VISION](VISION.md) first.** Two minutes. It's the reason this repo exists — and the reason you'll finish it.
 

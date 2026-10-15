@@ -1,5 +1,18 @@
 # Lesson 30 project — A customer-ready demo and handoff pack
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write a short demo script for your capstone: problem, normal result, failure result, and source evidence. Then prepare setup and recovery instructions for a new reader.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `handoff-pack.md`. Complete this delivery pack using your actual capstone artifacts. The starter is a handoff document rather than code.
+
+Your capstone release, portfolio evidence, and incident notes now become one handoff pack. Finishing the core course gives you practice evidence; use the longer roadmap and real feedback to keep developing.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Package your capstone as a scoped delivery. Record a concise demo, assemble acceptance and evaluation evidence, verify the operating instructions with another person, and write a retrospective. Produce a next-project plan tied to one demonstrated weakness. Do not publish private customer data or send promotional messages as part of this learning exercise.

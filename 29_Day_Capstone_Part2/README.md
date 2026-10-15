@@ -1,5 +1,67 @@
 # Day 29 — Release hardening, recovery, and operational ownership
 
+<!-- beginner-path:begin -->
+## Start here — one idea at a time
+
+**Your goal:** A hardened capstone release package. You can take several study sessions.
+
+**The situation:** Your capstone demo works. Now you need to know what happens when access is denied, a service fails, or a release breaks.
+
+### One idea: Prepare for failure as well as success
+
+A release needs more than its happy path. Check permissions, configuration, resource limits, and the failures a user is likely to meet. Keep a known-good version and a documented way to return to it. A rollback plan is stronger when you have rehearsed it. Record any remaining limits clearly so the next person can operate the version you actually delivered.
+
+**New words:**
+
+- **Rollback:** Returning to a known earlier version after a problematic release.
+- **Health check:** A check that reports a stated aspect of the running service's condition.
+- **Release record:** The version, configuration, checks, and known limits for a delivery.
+
+### Follow the example below
+
+1. The readiness example lists the version and the checks needed for a release.
+2. It includes failure handling and a rollback path rather than just a successful demo.
+3. The document is a template. Fill it with actual observations from your capstone and mark unfinished checks clearly.
+
+### Try one small decision
+
+A new release breaks the main workflow. What preparation most directly helps recovery?
+
+1. A known-good version and a rehearsed rollback procedure
+2. A longer launch announcement
+3. Deleting the old release immediately
+
+<details>
+<summary>A small hint</summary>
+
+Think about restoring working behaviour under pressure.
+
+</details>
+
+<details>
+<summary>Another hint</summary>
+
+Keep the previous version identifiable and practise the return procedure.
+
+</details>
+
+<details>
+<summary>Answer and explanation</summary>
+
+**A known-good version and a rehearsed rollback procedure** Yes. They give you a concrete recovery action instead of improvising during the failure.
+
+</details>
+
+**Then practise:** Fill the release-readiness template using your capstone. Rehearse one failure and its recovery; keep the actual results beside the planned checks.
+
+**Your project's first action:** Name a known-good capstone version. Write how you would restore it, then test the procedure in your practice environment and record the result.
+
+**How it connects:** Apply Day 14 release checks, Day 23 permissions, and Day 25 incident investigation to the complete Day 28 capstone.
+
+Use the app's **Learn → Practise → Project → Record your build** flow, or continue below for the detailed explanation and worked example. The app remembers your reading step and activity in this browser.
+
+<!-- beginner-path:end -->
+
 A capstone release needs more than a working happy path. Today you will verify the hosted environment, secret handling, access boundaries, bounded failures, and a practical recovery procedure. Your project is a release-readiness package that identifies what was checked and makes the system operable by someone other than you.
 
 **Your project:** [A hardened capstone release package](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.

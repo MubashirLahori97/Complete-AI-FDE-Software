@@ -1,5 +1,18 @@
 # Lesson 20 project — A bounded policy-research assistant
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Draw a research loop with an allowed search tool, a maximum of three steps, and outcomes for enough evidence, no evidence, and tool failure.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `bounded_workflow.py`. Run python bounded_workflow.py. The action list is scripted fixture data, not model-directed agent behavior.
+
+Combine the tool boundary from Day 17 with the evidence rule from Day 19. Start with fixed steps before experimenting with model-selected actions.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A team needs a short evidence-based summary from approved fictional policy documents. Build a workflow with search, read, and finish actions, then optionally replace scripted action selection with a model adapter. Enforce resource limits, permitted tools, and no-answer behavior in code. The first version is read-only and cannot send messages or modify business records.

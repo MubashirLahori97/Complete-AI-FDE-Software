@@ -85,6 +85,7 @@ test('JavaScript runs outside the app and runaway code is stopped', async ({ pag
     .fill(
       'let tickets = 10; tickets += 2; console.log(tickets); console.log(typeof localStorage);',
     );
+  await expect(page.getByRole('button', { name: 'Run code' })).toBeEnabled();
   await page.getByLabel('Code editor').focus();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Run code' })).toBeFocused();
@@ -242,7 +243,7 @@ test('mobile pages fit the viewport and navigation remains usable', async ({ pag
 });
 
 test('keyboard search opens and Escape restores the page', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#/library');
   await page.keyboard.press('Control+k');
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.getByRole('textbox', { name: 'Search the curriculum' })).toBeFocused();

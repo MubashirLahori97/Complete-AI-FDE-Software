@@ -1,5 +1,18 @@
 # Lesson 12 project — A regression suite for the expense calculator
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Choose one expense-calculation bug. Write its smallest failing input and independently calculate the correct output.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `regression.py`. Run python regression.py. Assertions in this lesson demonstrate tests; they are not a replacement for production input validation.
+
+Return to the Day 7 tracker. Your quote functions from Day 4 also give you small calculations that are easy to test.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 The expense calculator once produced an incorrect total. Build a repeatable test suite that captures that failure, normal calculations, zero values, invalid input, and a storage round trip. Keep the expected results independent and write a short report describing what the suite establishes and what still requires a workflow or provider check.

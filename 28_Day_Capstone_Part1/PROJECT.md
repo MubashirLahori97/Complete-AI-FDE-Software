@@ -1,5 +1,18 @@
 # Lesson 28 project — Customer-policy assistant capstone
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Use your Day 26 brief to choose one user and one task. Write three observable acceptance criteria, then connect the smallest path through your existing components.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `capstone_acceptance.py`. Run python capstone_acceptance.py. These records are illustrative acceptance-plan entries, not results from an implemented capstone.
+
+Reuse the interface, source contract, evaluation harness, database, and request trace where they fit the brief. Change components only when the customer requirement calls for it.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 Build a fictional customer's read-only policy assistant using a clear interface, trusted backend boundary, source-grounded answer flow, feedback storage, and an evaluation suite. Start with a labelled offline mode if necessary, then add a real provider only when its contract and secret handling are understood. Keep external messaging, purchases, and autonomous writes outside this capstone scope.

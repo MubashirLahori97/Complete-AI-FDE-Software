@@ -1,5 +1,18 @@
 # Lesson 2 project — A reliable unit conversion desk
 
+<!-- beginner-path:begin -->
+## Your first action
+
+Write this reference case before coding: 2 kilometres should become 2000 metres. Then write a separate temperature case: 0 Celsius should become 32 Fahrenheit.
+
+The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
+
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `converter.py`. Run python converter.py. The standard library is sufficient.
+
+Use the values from your profile to practise identifying types. The converter introduces input rules you will reuse in later forms.
+
+<!-- beginner-path:end -->
+
 ## The customer problem
 
 A shop employee needs a small converter for distances and temperatures. Build a program with a clearly selected conversion, labelled inputs and outputs, and helpful handling of invalid input. Keep distance validation separate from temperature rules: negative Celsius values are valid, while the project's distance contract rejects negative distances.
