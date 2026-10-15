@@ -4,6 +4,7 @@ import { lessonTeaching } from './lesson-content';
 import { localDate, type Progress } from './state';
 import { Companion, WinMoment } from './MissionUI';
 import LessonExperiment from './LessonExperiment';
+import { playWinSound } from './StudioArt';
 
 export default function LessonGuide({
   day,
@@ -33,6 +34,14 @@ export default function LessonGuide({
     });
   return (
     <section className="guided-reading" aria-label="Guided lesson">
+      {step === 0 && (
+        <LessonExperiment
+          day={day}
+          progress={progress}
+          update={update}
+          onContinue={() => setStep(1)}
+        />
+      )}
       <div className="lesson-coach">
         <Companion
           mood={attempt.checked ? (attempt.choice === guide.answer ? 'win' : 'thinking') : 'ready'}
@@ -75,7 +84,6 @@ export default function LessonGuide({
       {step === 0 && (
         <>
           <p className="guide-situation">{guide.situation}</p>
-          <LessonExperiment day={day} progress={progress} update={update} />
           <p className="guide-explanation">{guide.explanation}</p>
           <button className="curiosity-button" onClick={() => setStep(2)}>
             Curious? Try the challenge before reading
@@ -157,6 +165,7 @@ export default function LessonGuide({
             disabled={attempt.choice === null}
             onClick={() => {
               const first = attempt.choice === guide.answer && !progress.conceptWins[day];
+              if (first) playWinSound(progress.soundEnabled);
               setNewWin(first);
               update({
                 ...progress,

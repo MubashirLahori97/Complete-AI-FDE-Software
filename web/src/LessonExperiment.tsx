@@ -3,6 +3,7 @@ import { CheckCircle2, FlaskConical, RotateCcw, ArrowRight } from 'lucide-react'
 import { experimentValues, lessonExperiment, type ExperimentResult } from './experiments';
 import type { Progress } from './state';
 import './lesson-experiment.css';
+import { StudioBuddy, SoundSwitch, playWinSound } from './StudioArt';
 
 function ExperimentVisual({ visual }: { visual: ExperimentResult['visual'] }) {
   if (!visual) return null;
@@ -78,10 +79,12 @@ export default function LessonExperiment({
   day,
   progress,
   update,
+  onContinue,
 }: {
   day: number;
   progress: Progress;
   update: (next: Progress) => void;
+  onContinue?: () => void;
 }) {
   const experiment = lessonExperiment(day);
   const values = experimentValues(day, progress.experiments[day]);
@@ -89,20 +92,28 @@ export default function LessonExperiment({
   const [reset, setReset] = useState(false);
   const change = (key: string, value: string) => {
     setReset(false);
+    const nextValues = { ...values, [key]: value };
+    if (!output.found && experiment.result(experimentValues(day, nextValues)).found)
+      playWinSound(progress.soundEnabled);
     update({
       ...progress,
-      experiments: { ...progress.experiments, [day]: { ...values, [key]: value } },
+      experiments: { ...progress.experiments, [day]: nextValues },
     });
   };
   return (
     <section
-      className={`lesson-experiment ${output.found ? 'experiment-discovered' : ''}`}
+      className={`lesson-experiment studio-experiment chapter-${day <= 7 ? 'start' : day <= 14 ? 'build' : day <= 21 ? 'ai' : 'field'} ${output.found ? 'experiment-discovered' : ''}`}
       aria-label="Lesson experiment"
     >
       <div className="experiment-topline">
         <span>
-          <FlaskConical size={17} /> YOUR 1-MINUTE EXPERIMENT
+          <FlaskConical size={17} /> MISSION {String(day).padStart(2, '0')} · LET’S MAKE SOMETHING
+          HAPPEN
         </span>
+        <SoundSwitch
+          enabled={progress.soundEnabled}
+          change={(soundEnabled) => update({ ...progress, soundEnabled })}
+        />
         <button
           className="experiment-reset"
           onClick={() => {
@@ -125,7 +136,11 @@ export default function LessonExperiment({
       </p>
       <div className="experiment-workbench">
         <div className="experiment-controls">
-          <div className="experiment-pocket-output" aria-hidden="true">
+          <div
+            className={`experiment-pocket-output ${output.found ? 'pocket-success' : output.tone === 'careful' ? 'pocket-careful' : ''}`}
+            aria-hidden="true"
+          >
+            <StudioBuddy success={output.found} careful={output.tone === 'careful'} />
             <span>LIVE RESULT</span>
             <strong>{output.value}</strong>
           </div>
@@ -195,23 +210,33 @@ export default function LessonExperiment({
           </p>
         </div>
         <div className={`experiment-output ${output.tone || ''}`}>
-          <div className="experiment-column-label">2. See what happens</div>
-          <div className="experiment-live" role="status" aria-live="polite" aria-atomic="true">
-            <span className="experiment-result-label">{output.label}</span>
-            <strong className="experiment-result">{output.value}</strong>
-            <ExperimentVisual visual={output.visual} />
-            <p className="experiment-reason">{output.explanation}</p>
+          <div className="studio-preview-bar">
+            <span />
+            <span />
+            <span />
+            <small>YOUR LIVE PREVIEW</small>
+            <b>●</b>
           </div>
-          <dl
-            className={`experiment-readout ${[8, 20, 23, 24, 28, 29, 30].includes(day) ? 'experiment-flow' : ''}`}
-          >
-            {output.rows.map(([label, value]) => (
-              <div key={label}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="studio-preview-body">
+            <StudioBuddy success={output.found} careful={output.tone === 'careful'} />
+            <div className="experiment-column-label">2. See what happens</div>
+            <div className="experiment-live" role="status" aria-live="polite" aria-atomic="true">
+              <span className="experiment-result-label">{output.label}</span>
+              <strong className="experiment-result">{output.value}</strong>
+              <ExperimentVisual visual={output.visual} />
+              <p className="experiment-reason">{output.explanation}</p>
+            </div>
+            <dl
+              className={`experiment-readout ${[8, 20, 23, 24, 28, 29, 30].includes(day) ? 'experiment-flow' : ''}`}
+            >
+              {output.rows.map(([label, value]) => (
+                <div key={label}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
       <div className={`experiment-discovery ${output.found ? 'found' : ''}`} role="status">
@@ -231,6 +256,11 @@ export default function LessonExperiment({
           </p>
         )}
       </div>
+      {output.found && onContinue && (
+        <button className="button studio-next" onClick={onContinue}>
+          I got it. Show me how it works <ArrowRight size={18} />
+        </button>
+      )}
       <details className="experiment-rule">
         <summary>See the rule behind the result</summary>
         <pre>

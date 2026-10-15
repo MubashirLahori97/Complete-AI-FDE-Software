@@ -21,6 +21,7 @@ export default function Dashboard({
   const level = learningLevel(progress);
   const wins = lessons.filter((lesson) => progress.conceptWins[lesson.day]);
   const chapter = lessons.filter((lesson) => lesson.track === next.track);
+  const nearbyStart = Math.max(0, chapter.findIndex((lesson) => lesson.day === next.day) - 1);
   const destination =
     completed === 30
       ? '#/phase/2'
@@ -39,22 +40,37 @@ export default function Dashboard({
         </div>
         <XPChip progress={progress} />
       </div>
-      <section className="alive-hero">
-        <div className="alive-hero-copy">
-          <span className="alive-kicker">
-            <span /> SMALL WINS. REAL SKILLS.
-          </span>
-          <h2>
-            You don't need to
-            <br />
-            <em>know it all.</em>
-            <br />
-            Just start something.
-          </h2>
+      <section className="alive-hero studio-hero">
+        <div className="studio-hero-heading">
+          <div>
+            <span className="alive-kicker">
+              <span /> THIS IS YOUR BUILDING GROUND
+            </span>
+            <h2>
+              Small fix.
+              <br />
+              <em>Big “I did that.”</em>
+            </h2>
+          </div>
           <p>
-            Make a guess. Change a line. See what happens. Your first small win is closer than you
-            think.
+            Meet a problem.
+            <br />
+            Try something.
+            <br />
+            <strong>Watch it work.</strong>
           </p>
+          <span className="studio-sticker">
+            PLAY TO
+            <br />
+            FIGURE IT OUT <Sparkles size={17} />
+          </span>
+        </div>
+        <QuickChallenge progress={progress} update={update} />
+        <div className="studio-resume">
+          <div>
+            <span>READY FOR YOUR OWN BUILD?</span>
+            <strong>{next.title}</strong>
+          </div>
           <div className="session-choice" role="group" aria-label="Choose your session">
             <button aria-pressed={mood === 'spark'} onClick={() => setMood('spark')}>
               <Sparkles size={16} />A quick spark
@@ -74,54 +90,52 @@ export default function Dashboard({
                   : 'Start Lesson 1'}
             <ArrowRight size={19} />
           </a>
-          <p className="hero-reassurance">
-            {mood === 'spark'
-              ? 'Start with one idea. Stop at a good point. Your place stays saved.'
-              : 'Pick up your project. One working improvement is a good session.'}
-          </p>
-          <div className="hero-doodles" aria-hidden="true">
-            <span>&lt;/&gt;</span>
-            <span>aha!</span>
-            <span>→</span>
-          </div>
         </div>
-        <QuickChallenge progress={progress} update={update} />
       </section>
-      <div className="builder-strip">
-        <div className="builder-identity">
-          <Companion mood={wins.length ? 'win' : 'ready'} />
-          <div>
-            <small>YOUR LEARNING LEVEL</small>
-            <strong>{level.name}</strong>
-            <span>
-              {level.next
-                ? `${level.next - level.xp} XP to your next level`
-                : 'Keep exploring. Every build teaches you something.'}
-            </span>
+      <details className="studio-stat-details">
+        <summary>
+          <span>YOUR BUILDER STATS</span>
+          <strong>
+            {level.xp} XP · {wins.length} discoveries · {completed} projects
+          </strong>
+          <span>Take a look ↓</span>
+        </summary>
+        <div className="builder-strip">
+          <div className="builder-identity">
+            <Companion mood={wins.length ? 'win' : 'ready'} />
+            <div>
+              <small>YOUR LEARNING LEVEL</small>
+              <strong>{level.name}</strong>
+              <span>
+                {level.next
+                  ? `${level.next - level.xp} XP to your next level`
+                  : 'Keep exploring. Every build teaches you something.'}
+              </span>
+            </div>
+          </div>
+          <div className="builder-progress">
+            <div>
+              <span>{level.xp} learning XP</span>
+              <strong>Level {level.index}</strong>
+            </div>
+            <ProgressBar value={level.percent} label="Learning level progress" />
+          </div>
+          <div className="builder-stat">
+            <Lightbulb size={20} />
+            <strong>{wins.length}</strong>
+            <span>discoveries</span>
+          </div>
+          <div className="builder-stat">
+            <Flag size={20} />
+            <strong>{completed}</strong>
+            <span>projects recorded</span>
           </div>
         </div>
-        <div className="builder-progress">
-          <div>
-            <span>{level.xp} learning XP</span>
-            <strong>Level {level.index}</strong>
-          </div>
-          <ProgressBar value={level.percent} label="Learning level progress" />
-        </div>
-        <div className="builder-stat">
-          <Lightbulb size={20} />
-          <strong>{wins.length}</strong>
-          <span>discoveries</span>
-        </div>
-        <div className="builder-stat">
-          <Flag size={20} />
-          <strong>{completed}</strong>
-          <span>projects recorded</span>
-        </div>
-      </div>
-      <p className="xp-explanation">
-        XP marks recorded practice: 15 for a discovery, 25 for a concept check, 80 for a completed
-        project lesson. Levels describe practice, not a qualification.
-      </p>
+        <p className="xp-explanation">
+          XP marks recorded practice: 15 for a discovery, 25 for a concept check, 80 for a completed
+          project lesson. Levels describe practice, not a qualification.
+        </p>
+      </details>
       <section className="next-action mission-invite" aria-label="Your next action">
         <div className="mission-invite-number" aria-hidden="true">
           {String(next.day).padStart(2, '0')}
@@ -172,7 +186,7 @@ export default function Dashboard({
           </a>
         ))}
       </div>
-      <JourneyMap progress={progress} items={chapter} compact />
+      <JourneyMap progress={progress} items={chapter.slice(nearbyStart, nearbyStart + 3)} compact />
       <div className="discovery-and-field">
         <section className="discovery-shelf">
           <div className="shelf-heading">

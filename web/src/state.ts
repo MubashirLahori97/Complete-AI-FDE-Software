@@ -22,6 +22,7 @@ export interface Progress {
   conceptWins: Record<string, string>;
   reviewWins: Record<string, string>;
   warmupSolved: boolean;
+  soundEnabled: boolean;
   completed: Record<string, string>;
   quizPassed: number[];
   notes: Record<string, string>;
@@ -45,6 +46,7 @@ export const emptyProgress = (): Progress => ({
   conceptWins: {},
   reviewWins: {},
   warmupSolved: false,
+  soundEnabled: false,
   completed: {},
   quizPassed: [],
   notes: {},
@@ -94,6 +96,7 @@ export function parseProgress(value: unknown): Progress {
     throw new Error('This is not a supported FDE Academy backup.');
   const result = emptyProgress();
   result.warmupSolved = value.warmupSolved === true;
+  result.soundEnabled = value.soundEnabled === true;
   result.name = text(value.name, 50);
   result.minutes = [30, 60, 90, 120].includes(Number(value.minutes)) ? Number(value.minutes) : 120;
   result.lastLesson =

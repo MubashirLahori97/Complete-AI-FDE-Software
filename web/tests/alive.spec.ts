@@ -23,7 +23,9 @@ test('the homepage challenge responds to actions, teaches a mistake, and awards 
 }) => {
   await page.goto('/');
   const challenge = page.getByRole('region', { name: 'One-minute challenge' });
-  await expect(challenge.getByRole('button', { name: '9', exact: true })).toBeDisabled();
+  await expect(
+    challenge.getByRole('group', { name: 'Challenge answers', exact: true }),
+  ).toHaveCount(0);
   await challenge.getByRole('button', { name: 'Receive 2 tickets', exact: true }).click();
   await expect(challenge.locator('.ticket-counter > strong')).toHaveText('12');
   await challenge.getByRole('button', { name: '12', exact: true }).click();
