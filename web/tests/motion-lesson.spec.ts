@@ -7,7 +7,7 @@ test('the narrated scene plays, pauses, seeks backwards and hands control to the
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/#/mission/1');
-  await page.getByRole('link', { name: /Try the narrated visual story/ }).click();
+  await page.getByRole('link', { name: /Watch the narrated visual story/ }).click();
   const player = page.locator('audio');
   await expect.poll(() => player.evaluate((a) => a.duration)).toBeGreaterThan(40);
   await expect.poll(() => player.evaluate((a) => a.paused)).toBe(true);

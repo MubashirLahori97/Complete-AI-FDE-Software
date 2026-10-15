@@ -108,9 +108,9 @@ test('Mission 1 leads with the visual lesson and still offers the original text 
 }) => {
   await page.goto('/#/mission/1');
   await expect(
-    page.getByRole('region', { name: 'Visual website lesson', exact: true }),
+    page.getByRole('region', { name: 'Mission 1 interactive studio', exact: true }),
   ).toBeVisible();
-  await page.getByRole('link', { name: 'Read the text explanation', exact: true }).click();
+  await page.getByRole('button', { name: 'Understand the idea', exact: true }).click();
   await expect(
     page.getByRole('heading', { name: 'One idea at a time.', exact: true }),
   ).toBeFocused();
@@ -120,7 +120,9 @@ test('Mission 1 leads with the visual lesson and still offers the original text 
   ).toBeVisible();
   await page.goto('/#/mission/2');
   await expect(page.locator('.visual-lesson')).toHaveCount(0);
-  await expect(page.locator('.mission-experiment')).toBeVisible();
+  await expect(
+    page.getByRole('region', { name: 'Mission 2 interactive studio', exact: true }),
+  ).toBeVisible();
 });
 
 test('the visual sample fits phones, supports keyboard controls and starts quietly with reduced motion', async ({

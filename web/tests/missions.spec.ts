@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { unzipSync, strFromU8 } from 'fflate';
 import missions from '../src/missions.json' with { type: 'json' };
+import { labSpec, evaluateLab } from '../src/mission-labs';
 
 test('the core starts with a useful outcome and keeps simulations separate from live AI', async ({
   page,
@@ -21,7 +22,7 @@ test('the core starts with a useful outcome and keeps simulations separate from 
   await page.reload();
   await expect(
     page.frameLocator('iframe[title="Your live website"]').getByRole('heading'),
-  ).toHaveText('Welcome.');
+  ).toHaveText('Repairs near you.');
 });
 
 test('every mission has a responsive scenario, concept teaching, AI project and distinct understanding assessment', async ({
@@ -33,19 +34,13 @@ test('every mission has a responsive scenario, concept teaching, AI project and 
   for (const mission of missions) {
     await page.goto(`/#/mission/${mission.id}`);
     await expect(page.getByRole('heading', { name: mission.title, exact: true })).toBeVisible();
-    if (mission.id === 1) {
-      await page.getByRole('button', { name: 'Give it a useful heading', exact: true }).click();
-      await expect(
-        page.frameLocator('iframe[title="Your live website"]').getByRole('heading'),
-      ).toHaveText('Repairs near you.');
-      await page.getByRole('link', { name: 'Read the text explanation', exact: true }).click();
-    } else {
-      for (const option of mission.experiment.options) {
-        await page.getByRole('button', { name: option.label, exact: true }).click();
-        await expect(page.locator('.mission-result')).toContainText(option.result);
-      }
-      await page.getByRole('button', { name: 'Understand the idea', exact: true }).click();
-    }
+    const lab = labSpec(mission.id);
+    await page.getByRole('button', { name: lab.first, exact: true }).click();
+    await expect(page.locator('.lab-observation')).toContainText(
+      evaluateLab(mission.id, lab.try).headline,
+    );
+    await expect(page.locator('.lab-footer')).toContainText(lab.boundary);
+    await page.getByRole('button', { name: 'Understand the idea', exact: true }).click();
     for (const [index, concept] of mission.concepts.entries()) {
       await page
         .getByRole('button', { name: `${index + 1}. ${concept.name}`, exact: true })
@@ -63,6 +58,7 @@ test('every mission has a responsive scenario, concept teaching, AI project and 
     expect(response.ok()).toBe(true);
     const kit = unzipSync(await response.body());
     expect(strFromU8(kit['MISSION.md'])).toContain(mission.title);
+    expect(strFromU8(kit['LAB-GUIDE.md'])).toContain(lab.challenge);
     await page.getByRole('button', { name: 'Explain my system', exact: true }).click();
     await expect(page.locator('.mission-system-fields textarea')).toHaveCount(1);
     await expect(page.getByLabel('Choose an explanation question').locator('option')).toHaveCount(
@@ -176,6 +172,7 @@ test('new core search, old records and backup restore remain distinct', async ({
   await expect(
     page.getByRole('heading', { name: 'Keep meaningful information', exact: true }),
   ).toBeVisible();
+  await page.locator('.lab-notebook summary').click();
   await page
     .getByLabel('Your prediction')
     .fill('The persistent store should retain a visit after restarting the same service.');
@@ -202,6 +199,7 @@ test('new core search, old records and backup restore remain distinct', async ({
   await page.getByRole('link', { name: 'Learning path 30', exact: true }).click();
   await page.getByLabel('Search missions').fill('meaningful information');
   await page.locator('.mission-path-row').click();
+  await page.locator('.lab-notebook summary').click();
   await expect(page.getByLabel('Your prediction')).toHaveValue(/persistent store/);
 });
 
@@ -226,7 +224,7 @@ test('core missions fit phones, support keyboard progression and respect reduced
     }
   }
   await page.goto('/#/mission/1');
-  await page.getByRole('link', { name: 'Read the text explanation', exact: true }).focus();
+  await page.getByRole('button', { name: 'Understand the idea', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(
     page.getByRole('heading', { name: 'One idea at a time.', exact: true }),

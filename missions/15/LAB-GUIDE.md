@@ -1,0 +1,33 @@
+# Mission 15: interactive experiment
+
+Accepted does not mean delivered.
+
+## Start here
+
+Open mission 15 in the academy. Add a credential, then change the provider's response.
+
+First action: **Configure the credential**. Change the controls and observe the result. The browser executes a local teaching model; it does not contact a customer system or an AI provider.
+
+## The idea
+
+An external service has its own configuration and availability. An acceptance response can acknowledge a request without proving delivery. After an ambiguous timeout, reconciliation or a stable request identifier may be safer than blindly sending again.
+
+## Things you can change
+
+- **Required credential is configured:** starts at false.
+- **Provider response:** starts at "accepted". Choices: Request accepted; Unavailable; Timed out; acceptance unknown.
+- **Extra send attempts:** starts at 0. Range: 0–5 attempts, step 1.
+
+## A different situation
+
+Choose an unknown response and add retries. Can you honestly report that exactly one message was delivered?
+
+Predict the result before trying it. Record the value you changed, what actually happened and why. Inspect the system parts in 3D or use the equivalent flat diagram. Rotation and separation change your view; the lesson controls change the model.
+
+## What this experiment establishes
+
+No credentials are entered and no messages are sent. The switch represents configuration being present, not a secret value.
+
+Your controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.
+
+Authored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.

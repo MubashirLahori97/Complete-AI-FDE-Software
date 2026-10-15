@@ -531,7 +531,7 @@
   display: block;
   margin: 10px 0;
 }
-.mission-core textarea,
+.mission-core textarea:where(:not(.causal-studio textarea)),
 .mission-field input {
   border: 1px solid #d9d2e7;
   border-radius: 10px;
@@ -691,21 +691,21 @@
   margin: 7px 0;
   font-size: 0.9rem;
 }
-.mission-core details {
+.mission-core details:where(:not(.causal-studio details)) {
   border: 1px solid #e3dced;
   border-radius: 11px;
   padding: 16px 20px;
   margin: 22px 0;
   background: #fbfaff;
 }
-.mission-core summary {
+.mission-core summary:where(:not(.causal-studio summary)) {
   cursor: pointer;
   font-size: 0.87rem;
   font-weight: 600;
   line-height: 1.6;
   min-height: 24px;
 }
-.mission-core details p {
+.mission-core details p:where(:not(.causal-studio p)) {
   font-size: 0.88rem;
   color: #675a7b;
 }
@@ -1127,7 +1127,7 @@
     width: 100%;
     border-radius: 10px;
   }
-  .mission-core details {
+  .mission-core details:where(:not(.causal-studio details)) {
     padding: 15px;
   }
   .mission-field {

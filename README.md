@@ -12,6 +12,8 @@ Choose **Start mission 1**. Build a useful service website with AI, understand i
 
 The default core has **six stages and thirty missions**. Each mission contains a concrete problem, concept explanations, a worked example, an immediate interactive simulation, an AI-directed project, outcome checks and separate understanding prompts. Manual coding is optional. AI can plan, implement, test, diagnose and help review throughout.
 
+The [interactive learning studio](INTERACTIVE-STUDIO.md) lets you edit inputs and inspect calculated consequences in every core mission. Try the real page in Mission 1, then explore system roles in 3D or an equivalent flat diagram. Experiments and notes resume in your browser; every project kit includes its own experiment guide.
+
 Every project requires an eight-part system explanation: purpose, actual stack, component roles, choices, execution, action flow, information/access/AI, and changes/failures. A reviewer checks explanations, predictions and fresh scenarios rather than accepting generated prose alone.
 
 Read [the core learning flow](MISSION-COURSE.md), [all thirty mission guides and reuse map](MISSION-MAP.md), and [the research and scenarios](RESEARCH-2030.md). The first five kits contain a runnable static example; every mission has its own project brief and evidence kit. Simulations and fixtures are labelled and cannot establish live AI quality or real customer benefit.

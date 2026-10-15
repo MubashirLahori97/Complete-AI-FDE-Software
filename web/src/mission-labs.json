@@ -1,0 +1,1180 @@
+[
+  {
+    "id": 1,
+    "title": "Give a visitor something useful.",
+    "idea": "Your browser turns page instructions into a visible website. A useful heading tells a visitor what you do. Changing those words happens in this browser; it does not require a database or a live AI call.",
+    "task": "Replace Welcome with a heading that tells a visitor what the shop does.",
+    "first": "Give it a useful heading",
+    "try": { "heading": "Repairs near you." },
+    "boundary": "The page runs real HTML, CSS and JavaScript. Its shop and contact details are fictional; no messages are sent.",
+    "challenge": "Keep the heading useful when the shop changes from appliance repairs to bicycle repairs.",
+    "controls": [
+      { "id": "heading", "label": "The page heading", "type": "text", "default": "Welcome." }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Turn a feeling into a direction.",
+    "idea": "A builder needs an observable change. Name the part, describe what should happen, and say how you will check it. A bounded instruction leaves fewer unrelated decisions open. This does not guarantee that any particular AI will follow it.",
+    "task": "Describe one change to the hours or Services section. Include an observable check.",
+    "first": "Try a bounded direction",
+    "try": {
+      "direction": "Put opening hours below Services. Check that the hours are visible on a phone.",
+      "scope": "one"
+    },
+    "boundary": "This builds and inspects a brief locally. It does not call or evaluate an AI builder. The checklist recognises a few example terms, not the quality of arbitrary writing.",
+    "challenge": "Write a different instruction that another person could check without asking what impressive means.",
+    "controls": [
+      {
+        "id": "direction",
+        "label": "Your direction to the builder",
+        "type": "text",
+        "default": "Make it impressive."
+      },
+      {
+        "id": "scope",
+        "label": "Allowed scope",
+        "type": "select",
+        "default": "all",
+        "options": [
+          ["one", "One part"],
+          ["all", "The whole site"]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Same words. Different appearance.",
+    "idea": "HTML describes content, CSS describes its appearance, and JavaScript can define an action. These are roles in this small page. A framework may generate or coordinate these instructions in a larger project.",
+    "task": "Change the heading size. Notice what stays the same.",
+    "first": "Make the heading bigger",
+    "try": { "size": 38 },
+    "boundary": "This is a real local browser page. Changing its heading or style sends no request to an AI service.",
+    "challenge": "Remove the click rule. Can the page still look exactly the same? Try its Contact button.",
+    "controls": [
+      {
+        "id": "size",
+        "label": "Heading size",
+        "type": "range",
+        "default": 26,
+        "min": 22,
+        "max": 38,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "id": "heading",
+        "label": "The page heading",
+        "type": "text",
+        "default": "Repairs near you."
+      },
+      {
+        "id": "rule",
+        "label": "Contact button has a click rule",
+        "type": "toggle",
+        "default": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Can a number be wrong?",
+    "idea": "An input starts as text. Before multiplying, the program must decide whether that text represents an allowed quantity. Blank, negative and fractional values can mean different things from zero. Validation makes that rule explicit.",
+    "task": "Try a blank quantity, then zero, then two. Compare the results.",
+    "first": "Try a blank quantity",
+    "try": { "quantity": "" },
+    "boundary": "This estimator runs locally and uses fictional units. Its explicit rule allows whole quantities from zero to twenty.",
+    "challenge": "Change the price per item. Which inputs should still be rejected?",
+    "controls": [
+      { "id": "quantity", "label": "Number of items", "type": "text", "default": "2" },
+      {
+        "id": "price",
+        "label": "Price per item",
+        "type": "range",
+        "default": 25,
+        "min": 10,
+        "max": 100,
+        "step": 5,
+        "unit": "units"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "One rule. Many records.",
+    "idea": "A collection holds several records. A loop can apply the same function to each record. A stable identifier distinguishes one record from another; a repeated name is not automatically a repeated identity.",
+    "task": "Grow the collection. Then introduce a repeated identifier.",
+    "first": "Add three more services",
+    "try": { "count": 6 },
+    "boundary": "The records are generated fictional services. The duplicate check executes in your browser; this is not a database constraint.",
+    "challenge": "Set the collection to zero. Should the page invent a service to fill the space?",
+    "controls": [
+      {
+        "id": "count",
+        "label": "Number of services",
+        "type": "range",
+        "default": 3,
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "unit": "records"
+      },
+      {
+        "id": "duplicate",
+        "label": "Repeat the last identifier",
+        "type": "toggle",
+        "default": false
+      },
+      { "id": "prefix", "label": "Service label", "type": "text", "default": "Repair" }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "What supports the claim?",
+    "idea": "An invented example, a person's recollection and checked records support different statements. Counts need a defined sample. Even a checked association does not by itself show why appointments were missed.",
+    "task": "Change the source and the sample size. Keep the number of missed visits consistent with the sample.",
+    "first": "Inspect checked records",
+    "try": { "source": "records" },
+    "boundary": "All people and counts here are fictional teaching inputs. This is not an interview, field study or causal finding.",
+    "challenge": "Can ten missed visits come from a sample of five? What evidence would you request before choosing a solution?",
+    "controls": [
+      {
+        "id": "source",
+        "label": "Source of the claim",
+        "type": "select",
+        "default": "invented",
+        "options": [
+          ["invented", "AI-invented example"],
+          ["memory", "Owner's recollection"],
+          ["records", "Checked visit records"]
+        ]
+      },
+      {
+        "id": "sample",
+        "label": "Visits in the sample",
+        "type": "range",
+        "default": 10,
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "unit": "visits"
+      },
+      {
+        "id": "missed",
+        "label": "Missed visits",
+        "type": "range",
+        "default": 2,
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "visits"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Two missed visits out of how many?",
+    "idea": "A count and a rate answer different questions. Divide the number of missed eligible visits by all eligible visits in the same period. A target needs the same definition and denominator as the baseline.",
+    "task": "Keep two missed visits. Change the eligible total from ten to one hundred.",
+    "first": "Change the denominator",
+    "try": { "eligible": "100" },
+    "boundary": "These are fictional counts. The displayed rate is arithmetic, not evidence of a product's effectiveness.",
+    "challenge": "Erase the denominator. Is zero percent an honest replacement for an unknown rate?",
+    "controls": [
+      { "id": "eligible", "label": "Eligible visits", "type": "text", "default": "10" },
+      {
+        "id": "missed",
+        "label": "Missed visits",
+        "type": "range",
+        "default": 2,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "visits"
+      },
+      {
+        "id": "target",
+        "label": "Target missed-visit rate",
+        "type": "range",
+        "default": 10,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "A journey includes the awkward parts.",
+    "idea": "A form must help someone act and understand the result. Missing input should produce a useful correction. A lost connection should preserve the draft rather than pretend that a visit was confirmed.",
+    "task": "Enter a visit identifier, then disconnect the model's connection.",
+    "first": "Fill the visit identifier",
+    "try": { "visit": "V-42" },
+    "boundary": "This is a local form-state model. No appointment is sent or saved in a shared service.",
+    "challenge": "Reconnect. What evidence would distinguish a submitted request from a confirmed appointment?",
+    "controls": [
+      { "id": "visit", "label": "Visit identifier", "type": "text", "default": "" },
+      { "id": "connected", "label": "Connection available", "type": "toggle", "default": true }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Compare a decision, not a headline price.",
+    "idea": "A recurring fee and an initial build cost accumulate differently. Compare the same period and required capabilities. A cheap option that cannot export required records may fail the need regardless of its arithmetic cost.",
+    "task": "Change the number of months and the export requirement.",
+    "first": "Look two years ahead",
+    "try": { "months": 24 },
+    "boundary": "All costs and capabilities are fictional. Maintenance, risk, taxes and financing are excluded; this is not a provider recommendation.",
+    "challenge": "When would the cheaper arithmetic total still be the wrong choice?",
+    "controls": [
+      {
+        "id": "months",
+        "label": "Comparison period",
+        "type": "range",
+        "default": 12,
+        "min": 1,
+        "max": 24,
+        "step": 1,
+        "unit": "months"
+      },
+      {
+        "id": "license",
+        "label": "Monthly licence",
+        "type": "range",
+        "default": 20,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "unit": "units"
+      },
+      {
+        "id": "setup",
+        "label": "Setup cost",
+        "type": "range",
+        "default": 120,
+        "min": 0,
+        "max": 500,
+        "step": 20,
+        "unit": "units"
+      },
+      {
+        "id": "build",
+        "label": "Build cost",
+        "type": "range",
+        "default": 600,
+        "min": 0,
+        "max": 2000,
+        "step": 50,
+        "unit": "units"
+      },
+      {
+        "id": "needExport",
+        "label": "Record export is required",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "vendorExport",
+        "label": "The package supports export",
+        "type": "toggle",
+        "default": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "What would a useful check actually inspect?",
+    "idea": "A success message describes what an interface says. It does not prove which record changed. An acceptance check should compare the selected record and records that must stay unchanged.",
+    "task": "Inspect the records instead of only the toast.",
+    "first": "Check before and after records",
+    "try": { "check": "records" },
+    "boundary": "The updater and assertions run on fictional records in this browser. A passing check here is not a check of your own application.",
+    "challenge": "Switch the selected visit. Does the check still catch a change to the wrong record?",
+    "controls": [
+      {
+        "id": "check",
+        "label": "Evidence inspected",
+        "type": "select",
+        "default": "toast",
+        "options": [
+          ["toast", "Success message only"],
+          ["records", "Selected and other records"]
+        ]
+      },
+      {
+        "id": "defect",
+        "label": "The updater changes the wrong record",
+        "type": "toggle",
+        "default": true
+      },
+      {
+        "id": "selected",
+        "label": "Selected visit",
+        "type": "select",
+        "default": "V-42",
+        "options": [
+          ["V-42", "V-42"],
+          ["V-43", "V-43"]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "A request has a journey.",
+    "idea": "The browser sends a request, a server handles it, and a response returns. A client timeout means the client stopped waiting. It does not prove that the server stopped working or that nothing was stored.",
+    "task": "Make the response slower than the client's timeout.",
+    "first": "Delay the response",
+    "try": { "latency": 1800 },
+    "boundary": "The timings are controlled teaching inputs. No network request or backend write is performed by this model.",
+    "challenge": "What could go wrong if you retry a timed-out booking with a new request identifier?",
+    "controls": [
+      {
+        "id": "latency",
+        "label": "Response delay",
+        "type": "range",
+        "default": 800,
+        "min": 0,
+        "max": 3000,
+        "step": 100,
+        "unit": "ms"
+      },
+      {
+        "id": "timeout",
+        "label": "Client stops waiting after",
+        "type": "range",
+        "default": 1000,
+        "min": 100,
+        "max": 5000,
+        "step": 100,
+        "unit": "ms"
+      },
+      { "id": "valid", "label": "Request passes validation", "type": "toggle", "default": true }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "A name is not an identifier.",
+    "idea": "Two visits can belong to people with the same name. Stable identifiers allow exact lookup. Process memory disappears when that process restarts; persistent storage has a separate lifetime and needs its own protection and recovery.",
+    "task": "Restart the model with memory storage, then choose persistent storage.",
+    "first": "Restart the process",
+    "try": { "restart": true },
+    "boundary": "This is an explicit storage-lifetime model with fictional records. It is not a running database. Your experiment settings, separately, save in this browser.",
+    "challenge": "Both records are named Alex. Which identifier selects one visit unambiguously?",
+    "controls": [
+      { "id": "restart", "label": "Process has restarted", "type": "toggle", "default": false },
+      {
+        "id": "storage",
+        "label": "Where records were stored",
+        "type": "select",
+        "default": "memory",
+        "options": [
+          ["memory", "Process memory"],
+          ["persistent", "Persistent store"]
+        ]
+      },
+      { "id": "lookup", "label": "Look up a name or identifier", "type": "text", "default": "Alex" }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Two requests. One last slot.",
+    "idea": "Separate reads can both see an available slot before either write finishes. An atomic reservation rule checks and changes state together. An idempotency key identifies a retry of the same operation rather than a new booking.",
+    "task": "Make simultaneous requests for fewer slots. Compare the reservation rules.",
+    "first": "Use an atomic reservation",
+    "try": { "atomic": true },
+    "boundary": "This executes a deterministic concurrency model. Separate reads all see the same initial snapshot; it is not a database load test.",
+    "challenge": "Add retries. What changes when they keep the same request key?",
+    "controls": [
+      {
+        "id": "slots",
+        "label": "Available slots",
+        "type": "range",
+        "default": 1,
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "unit": "slots"
+      },
+      {
+        "id": "requests",
+        "label": "Distinct requests arriving together",
+        "type": "range",
+        "default": 2,
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "requests"
+      },
+      {
+        "id": "atomic",
+        "label": "Check and reserve atomically",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "retries",
+        "label": "Extra retry attempts",
+        "type": "range",
+        "default": 0,
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "unit": "attempts"
+      },
+      {
+        "id": "sameKey",
+        "label": "Retries keep their original key",
+        "type": "toggle",
+        "default": false
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Being signed in is not enough.",
+    "idea": "Authentication establishes an identity. Authorization decides whether that identity may access this record. Hiding a button cannot replace a trusted permission check on the request.",
+    "task": "Keep customer C7 signed in and ask for C8's visit.",
+    "first": "Request another customer's visit",
+    "try": { "owner": "C8" },
+    "boundary": "These are fictional identities and a locally executed policy. No real account, session or private record is accessed.",
+    "challenge": "Remove the server check. Does the interface's sign-in badge prevent the model from leaking a record?",
+    "controls": [
+      {
+        "id": "caller",
+        "label": "Requesting identity",
+        "type": "select",
+        "default": "C7",
+        "options": [
+          ["C7", "Customer C7"],
+          ["C8", "Customer C8"],
+          ["none", "No valid session"]
+        ]
+      },
+      {
+        "id": "owner",
+        "label": "Record belongs to",
+        "type": "select",
+        "default": "C7",
+        "options": [
+          ["C7", "Customer C7"],
+          ["C8", "Customer C8"]
+        ]
+      },
+      {
+        "id": "serverCheck",
+        "label": "Trusted boundary checks the record owner",
+        "type": "toggle",
+        "default": true
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Accepted does not mean delivered.",
+    "idea": "An external service has its own configuration and availability. An acceptance response can acknowledge a request without proving delivery. After an ambiguous timeout, reconciliation or a stable request identifier may be safer than blindly sending again.",
+    "task": "Add a credential, then change the provider's response.",
+    "first": "Configure the credential",
+    "try": { "credential": true },
+    "boundary": "No credentials are entered and no messages are sent. The switch represents configuration being present, not a secret value.",
+    "challenge": "Choose an unknown response and add retries. Can you honestly report that exactly one message was delivered?",
+    "controls": [
+      {
+        "id": "credential",
+        "label": "Required credential is configured",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "provider",
+        "label": "Provider response",
+        "type": "select",
+        "default": "accepted",
+        "options": [
+          ["accepted", "Request accepted"],
+          ["offline", "Unavailable"],
+          ["unknown", "Timed out; acceptance unknown"]
+        ]
+      },
+      {
+        "id": "retries",
+        "label": "Extra send attempts",
+        "type": "range",
+        "default": 0,
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "unit": "attempts"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Permission and budget are different boundaries.",
+    "idea": "A task brief can define the goal, allowed actions, budget and stopping conditions. Sufficient budget does not grant permission. Permission does not remove the need to stop when the budget is exhausted.",
+    "task": "Give the model enough budget without granting broader authority.",
+    "first": "Increase the task budget",
+    "try": { "budget": 4 },
+    "boundary": "This is a local rule executor, not an autonomous AI agent. Each operation costs one fictional unit; no tool or external system is used.",
+    "challenge": "Ask for a live change while granting only test-environment access. Should more budget make that allowed?",
+    "controls": [
+      {
+        "id": "budget",
+        "label": "Task budget",
+        "type": "range",
+        "default": 2,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "units"
+      },
+      {
+        "id": "demand",
+        "label": "Operations needed",
+        "type": "range",
+        "default": 3,
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "operations"
+      },
+      {
+        "id": "permission",
+        "label": "Granted authority",
+        "type": "select",
+        "default": "test",
+        "options": [
+          ["read", "Read only"],
+          ["test", "Test environment"],
+          ["live", "Explicit live-change authority"]
+        ]
+      },
+      {
+        "id": "request",
+        "label": "Requested action",
+        "type": "select",
+        "default": "test",
+        "options": [
+          ["read", "Read information"],
+          ["test", "Change the test environment"],
+          ["live", "Change the live environment"]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Parallel work still needs an agreement.",
+    "idea": "Two workstreams must agree on their interface. More workers can reduce some parallel work, but coordination and integration still cost time. A fast incompatible component does not create a working journey.",
+    "task": "Make the interface field names agree. Then vary worker count.",
+    "first": "Agree on the field name",
+    "try": { "uiField": "accessStatus" },
+    "boundary": "The time model assumes equal independent tasks plus two coordination minutes per extra worker. It is a stated toy assumption, not an estimate of real AI-agent productivity.",
+    "challenge": "With only one small task, can adding workers increase the model's total time?",
+    "controls": [
+      {
+        "id": "uiField",
+        "label": "Field the interface expects",
+        "type": "text",
+        "default": "status"
+      },
+      {
+        "id": "serverField",
+        "label": "Field the server returns",
+        "type": "text",
+        "default": "accessStatus"
+      },
+      {
+        "id": "workers",
+        "label": "Workers",
+        "type": "range",
+        "default": 2,
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "workers"
+      },
+      {
+        "id": "tasks",
+        "label": "Independent tasks",
+        "type": "range",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "unit": "tasks"
+      },
+      {
+        "id": "minutes",
+        "label": "Time per task",
+        "type": "range",
+        "default": 5,
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "unit": "minutes"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Correct JSON can still invent a fact.",
+    "idea": "A structured response can be valid JSON and still contradict its source. Parsing, checking the schema and checking factual support are separate operations. An unknown date should remain unknown when the source does not supply one.",
+    "task": "Replace the invented date with null. Keep a non-empty summary.",
+    "first": "Keep the unknown date unknown",
+    "try": { "output": "{\"date\":null,\"summary\":\"Customer called about a repair.\"}" },
+    "boundary": "You are running a real JSON parser and a small source-checking rule on fictional input. No model is called and this does not measure general factual accuracy.",
+    "challenge": "Enter a source date, then provide a different output date. Which check should reject it?",
+    "controls": [
+      {
+        "id": "output",
+        "label": "Proposed structured output",
+        "type": "text",
+        "default": "{\"date\":\"2026-10-20\",\"summary\":\"Customer called about a repair.\"}"
+      },
+      {
+        "id": "sourceDate",
+        "label": "Date explicitly present in the source (blank means unknown)",
+        "type": "text",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "title": "A relevant source can still be the wrong source.",
+    "idea": "Retrieval can find information related to a question, but relevance alone does not establish freshness or authority. Text inside a retrieved document is information, not permission to perform an action.",
+    "task": "Bring the policy within the freshness limit, then inspect an instruction embedded in it.",
+    "first": "Use a current policy",
+    "try": { "age": 2 },
+    "boundary": "This is a small keyword-matching source model, not semantic embeddings or a live retrieval service. Its policy and freshness limit are fictional.",
+    "challenge": "A document says cancel the visit. Does reading that document authorize the application to cancel it?",
+    "controls": [
+      {
+        "id": "question",
+        "label": "Question",
+        "type": "text",
+        "default": "Can I cancel my visit?"
+      },
+      {
+        "id": "age",
+        "label": "Age of the policy",
+        "type": "range",
+        "default": 20,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "days"
+      },
+      {
+        "id": "maxAge",
+        "label": "Maximum allowed source age",
+        "type": "range",
+        "default": 7,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "days"
+      },
+      {
+        "id": "docAction",
+        "label": "Document asks to cancel a visit",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "authority",
+        "label": "Separate user and policy authority allows cancellation",
+        "type": "toggle",
+        "default": false
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Which mistakes are you counting?",
+    "idea": "Precision asks how many alerts were correct. Recall asks how many real positive cases were found. A threshold changes which cases trigger an alert; it can trade one kind of error for another.",
+    "task": "Move the alert threshold and watch the same labelled cases change category.",
+    "first": "Raise the alert threshold",
+    "try": { "threshold": 70 },
+    "boundary": "Scores and labels are deterministic fictional fixtures. These counts do not establish the quality of an actual model or an overall reliability claim.",
+    "challenge": "Can you increase precision by issuing almost no alerts? What happens to missed cases?",
+    "controls": [
+      {
+        "id": "threshold",
+        "label": "Alert threshold",
+        "type": "range",
+        "default": 30,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "points"
+      },
+      {
+        "id": "positives",
+        "label": "Actually positive cases",
+        "type": "range",
+        "default": 10,
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "unit": "cases"
+      },
+      {
+        "id": "negatives",
+        "label": "Actually negative cases",
+        "type": "range",
+        "default": 90,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "cases"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Does the test notice the defect?",
+    "idea": "A test is useful when it can expose a relevant mistake. Checking a success toast misses an updater that changes the wrong record. Compare both the intended change and the state that must remain unchanged.",
+    "task": "Run the record assertion with the wrong-record defect present, then remove the defect.",
+    "first": "Inspect the changed records",
+    "try": { "check": "records" },
+    "boundary": "The updater and assertions execute on two local fictional visits. This is a controlled defect, not a test of your real application.",
+    "challenge": "Choose the other visit. Can a hard-coded assertion still be trusted?",
+    "controls": [
+      {
+        "id": "check",
+        "label": "Assertion to run",
+        "type": "select",
+        "default": "toast",
+        "options": [
+          ["toast", "Toast says Saved"],
+          ["records", "Only the selected visit changed"]
+        ]
+      },
+      { "id": "defect", "label": "Wrong-record defect present", "type": "toggle", "default": true },
+      {
+        "id": "selected",
+        "label": "Selected visit",
+        "type": "select",
+        "default": "V-42",
+        "options": [
+          ["V-42", "V-42"],
+          ["V-43", "V-43"]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Code rollback is not data rollback.",
+    "idea": "A release needs a compatible build, configuration and data. Reverting code can recover a code-only regression. It cannot automatically undo an incompatible change to stored information.",
+    "task": "Make configuration complete, then compare rollback with and without a data migration.",
+    "first": "Supply the required configuration",
+    "try": { "credential": true },
+    "boundary": "This is a release-compatibility model. It does not build, deploy or migrate an external application.",
+    "challenge": "Turn on the incompatible migration and roll code back. Which version can still understand the data?",
+    "controls": [
+      {
+        "id": "credential",
+        "label": "Required configuration is present",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "build",
+        "label": "Build and required checks pass",
+        "type": "toggle",
+        "default": true
+      },
+      {
+        "id": "migration",
+        "label": "Data migrated to an incompatible v2 schema",
+        "type": "toggle",
+        "default": false
+      },
+      { "id": "rollback", "label": "Roll code back to v1", "type": "toggle", "default": false }
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Find where the time went.",
+    "idea": "A trace divides a journey into observed spans. A slow total does not tell you which component to change. Inspect the relevant span, form a hypothesis, then verify the effect of an intervention.",
+    "task": "Select the provider span, then change its duration in this controlled trace.",
+    "first": "Inspect the provider",
+    "try": { "inspect": "provider" },
+    "boundary": "These durations are synthetic inputs. Changing a slider is an intervention in this model, not a verified diagnosis of an external service.",
+    "challenge": "Make the database the slowest span. Should the same investigation still come first?",
+    "controls": [
+      {
+        "id": "provider",
+        "label": "Provider time",
+        "type": "range",
+        "default": 1900,
+        "min": 0,
+        "max": 3000,
+        "step": 50,
+        "unit": "ms"
+      },
+      {
+        "id": "database",
+        "label": "Database time",
+        "type": "range",
+        "default": 80,
+        "min": 0,
+        "max": 1000,
+        "step": 20,
+        "unit": "ms"
+      },
+      {
+        "id": "validation",
+        "label": "Validation time",
+        "type": "range",
+        "default": 20,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "ms"
+      },
+      {
+        "id": "inspect",
+        "label": "Investigate this component",
+        "type": "select",
+        "default": "css",
+        "options": [
+          ["css", "CSS"],
+          ["database", "Database"],
+          ["provider", "Provider"]
+        ]
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Doing less work can mean older information.",
+    "idea": "A cache can reuse a recent result instead of repeating a read. Its freshness policy matters when the source changes. A queue moves work to another time; it does not inherently remove that work.",
+    "task": "Compare repeated fresh reads with a cached result, then change its age and lifetime.",
+    "first": "Reuse a cached read",
+    "try": { "mode": "cache" },
+    "boundary": "Requests target the same key at the same instant. Latency is a fictional sequential-work estimate. This is not a benchmark of a database or cache service.",
+    "challenge": "Mark the policy as changed after the cached copy. Which displayed results can now be stale?",
+    "controls": [
+      {
+        "id": "mode",
+        "label": "Read strategy",
+        "type": "select",
+        "default": "fresh",
+        "options": [
+          ["fresh", "Read the source every time"],
+          ["cache", "Reuse until expiry"],
+          ["queue", "Queue every read"]
+        ]
+      },
+      {
+        "id": "reads",
+        "label": "Repeated reads",
+        "type": "range",
+        "default": 20,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "reads"
+      },
+      {
+        "id": "latency",
+        "label": "Work per source read",
+        "type": "range",
+        "default": 200,
+        "min": 0,
+        "max": 2000,
+        "step": 50,
+        "unit": "ms"
+      },
+      {
+        "id": "age",
+        "label": "Cached copy age",
+        "type": "range",
+        "default": 15,
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "unit": "minutes"
+      },
+      {
+        "id": "ttl",
+        "label": "Cache lifetime",
+        "type": "range",
+        "default": 10,
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "unit": "minutes"
+      },
+      {
+        "id": "changed",
+        "label": "Source changed after the cached copy",
+        "type": "toggle",
+        "default": true
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Can you get the records back?",
+    "idea": "A backup's existence is different from a successful restore. Recovery requires the relevant information, a compatible application and checks that the restored state is usable. Reverting a code revision alone does not replace lost records.",
+    "task": "Restore the snapshot, then query the expected identifiers.",
+    "first": "Restore the snapshot",
+    "try": { "restore": true },
+    "boundary": "This operates on generated arrays in a local model. No real records are deleted, and it is not evidence that a production backup can be restored.",
+    "challenge": "Remove the backup and retry recovery. Which evidence is now missing?",
+    "controls": [
+      {
+        "id": "restore",
+        "label": "Restore the saved snapshot",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "count",
+        "label": "Original records",
+        "type": "range",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "unit": "records"
+      },
+      {
+        "id": "dropped",
+        "label": "Records removed by the change",
+        "type": "range",
+        "default": 2,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "records"
+      },
+      {
+        "id": "backup",
+        "label": "A snapshot was taken before the change",
+        "type": "toggle",
+        "default": true
+      },
+      {
+        "id": "verify",
+        "label": "Query every expected identifier after recovery",
+        "type": "toggle",
+        "default": false
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "title": "The fastest route may still be blocked.",
+    "idea": "An unfamiliar domain can contain a prerequisite that a proposed solution ignored. Improving dispatch speed cannot make an unapproved site visit eligible. Investigate the real workflow and separate observations from assumptions.",
+    "task": "Resolve the access prerequisite before optimising dispatch time.",
+    "first": "Record access approval",
+    "try": { "approval": true },
+    "boundary": "This is an authored maintenance scenario, not an observation about a real organisation. A real project needs authorised investigation.",
+    "challenge": "Remove the access requirement. Does approval remain the relevant bottleneck?",
+    "controls": [
+      {
+        "id": "approval",
+        "label": "Access approval is recorded",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "needsAccess",
+        "label": "The visit requires access approval",
+        "type": "toggle",
+        "default": true
+      },
+      {
+        "id": "dispatch",
+        "label": "Dispatch preparation time",
+        "type": "range",
+        "default": 15,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "unit": "minutes"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "title": "What does this product actually need?",
+    "idea": "A public information page can be delivered as static files. Shared private records need suitable connected storage and access control. Choose components because of the required behaviour, and account for their operating responsibilities.",
+    "task": "Add a private-record requirement and compare it with the chosen architecture.",
+    "first": "Require shared private records",
+    "try": { "privateRecords": true },
+    "boundary": "This checks a deliberately simplified capability model. It does not choose a real provider or prove an implementation is secure.",
+    "challenge": "Choose a connected design. What new data and permission explanations does the project need?",
+    "controls": [
+      {
+        "id": "privateRecords",
+        "label": "Shared private records are required",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "accounts",
+        "label": "User accounts are required",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "design",
+        "label": "Chosen architecture",
+        "type": "select",
+        "default": "static",
+        "options": [
+          ["static", "Static files only"],
+          ["connected", "Site plus suitable connected services"]
+        ]
+      },
+      {
+        "id": "services",
+        "label": "Independently operated components",
+        "type": "range",
+        "default": 5,
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "components"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "title": "A local improvement can cost the whole workflow.",
+    "idea": "Saving time at one step is not the same as a net benefit. Include extra correction work and actual adoption. A faster tool that is not used does not deliver that proposed saving to the workflow.",
+    "task": "Keep the dispatch saving fixed. Reduce downstream rework and change adoption.",
+    "first": "Reduce correction work",
+    "try": { "rework": 3 },
+    "boundary": "These are fictional scenario inputs, with adoption rounded to whole people. The total is arithmetic, not a measured pilot result or a financial return claim.",
+    "challenge": "Set adoption to zero. What would you investigate before building more features?",
+    "controls": [
+      {
+        "id": "rework",
+        "label": "Extra correction work per person",
+        "type": "range",
+        "default": 20,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "min/day"
+      },
+      {
+        "id": "saved",
+        "label": "Dispatch time saved per person",
+        "type": "range",
+        "default": 10,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "min/day"
+      },
+      {
+        "id": "adoption",
+        "label": "Adoption in the scenario",
+        "type": "range",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%"
+      },
+      {
+        "id": "people",
+        "label": "Eligible people",
+        "type": "range",
+        "default": 5,
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "unit": "people"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Can someone else keep the journey working?",
+    "idea": "A handoff includes opening instructions, configuration, access, recovery and evidence. A provider replacement also needs a compatible interface and a fresh journey check. Source files alone do not establish an operable handoff.",
+    "task": "Prepare the guide and access, then inspect the replacement provider's field name.",
+    "first": "Prepare the operator handoff",
+    "try": { "guide": true, "access": true, "check": true },
+    "boundary": "This executes a small adapter-contract check with fictional configuration flags. It is not a trial by a real fresh operator.",
+    "challenge": "Make the provider field match accessStatus. Which real journey would you ask another operator to demonstrate?",
+    "controls": [
+      {
+        "id": "guide",
+        "label": "Opening and recovery guide is present",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "access",
+        "label": "Required operator access is available",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "check",
+        "label": "Run the replacement journey check",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "field",
+        "label": "Replacement provider's field",
+        "type": "text",
+        "default": "status"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "title": "A new requirement reveals your system.",
+    "idea": "An unfamiliar change tests whether the system and its explanation still fit the need. Trace the changed journey, identify a missing component or boundary, and direct a correction. A simulated success or polished explanation is not a professional capability certificate.",
+    "task": "Change the requirement. Add only the components needed for that journey.",
+    "first": "Try private customer information",
+    "try": { "need": "private" },
+    "boundary": "This is a compositional teaching model. Graduation still requires your own useful product, explanation, fresh variation and reviewer observations.",
+    "challenge": "Switch to a grounded AI helper. What does a permitted source add that a database alone does not?",
+    "controls": [
+      {
+        "id": "need",
+        "label": "Changed requirement",
+        "type": "select",
+        "default": "public",
+        "options": [
+          ["public", "Public information"],
+          ["private", "Private customer information"],
+          ["ai", "Grounded AI helper"]
+        ]
+      },
+      {
+        "id": "server",
+        "label": "Suitable connected application and storage",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "permissions",
+        "label": "Trusted record permission check",
+        "type": "toggle",
+        "default": false
+      },
+      {
+        "id": "source",
+        "label": "Permitted supporting knowledge source",
+        "type": "toggle",
+        "default": false
+      }
+    ]
+  }
+]

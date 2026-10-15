@@ -26,9 +26,8 @@ import {
   type ReasoningKey,
 } from './mission-types';
 import { downloadFile, type Progress } from './state';
-import { StudioBuddy } from './StudioArt';
 import { ProgressBar } from './ui';
-import VisualWebsiteLesson from './VisualWebsiteLesson';
+import CausalStudio from './CausalStudio';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
@@ -310,7 +309,6 @@ export function MissionLesson({
   const [message, setMessage] = useState('');
   const [concept, setConcept] = useState(0);
   const step = record.step;
-  const result = mission.experiment.options[record.option];
   const reasoningKeys = Object.keys(reasoningLabels) as ReasoningKey[];
   const explanationIndex = record.explanationStep;
   const question = explanationIndex < 8 ? systemQuestions[explanationIndex] : null;
@@ -369,9 +367,7 @@ export function MissionLesson({
           </button>
         ))}
       </nav>
-      <section
-        className={`mission-workspace ${id === 1 && step === 0 ? 'mission-visual-workspace' : ''}`}
-      >
+      <section className={`mission-workspace ${step === 0 ? 'mission-studio-workspace' : ''}`}>
         <h2 ref={heading} tabIndex={-1} className="mission-step-title">
           {
             [
@@ -383,87 +379,31 @@ export function MissionLesson({
             ][step]
           }
         </h2>
-        {step === 0 && id === 1 && (
+        {step === 0 && (
           <>
-            <a className="mission-motion-entry" href="#/sample/motion">
-              <Play size={17} />
-              <span>
-                <strong>Try the narrated visual story</strong>
-                <small>One page. Three layers. Watch it, then take it apart.</small>
-              </span>
-              <ArrowRight size={17} />
-            </a>
-            <VisualWebsiteLesson onBuild={() => go(2)} onText={() => go(1)} />
-          </>
-        )}
-        {step === 0 && id !== 1 && (
-          <>
-            <p className="mission-problem">{mission.problem}</p>
-            <div className="mission-live-pocket" aria-hidden="true">
-              <strong>LIVE RESULT</strong>
-              {result.result}
-            </div>
-            <div className="mission-experiment">
-              <div className="mission-experiment-controls">
-                <span className="eyebrow">PREPARED TEACHING SIMULATION</span>
-                <h3>{mission.experiment.prompt}</h3>
-                <label htmlFor="mission-prediction">
-                  Your prediction <span className="muted">(try before changing)</span>
-                </label>
-                <textarea
-                  id="mission-prediction"
-                  rows={2}
-                  maxLength={3000}
-                  value={record.prediction}
-                  onChange={(e) => save({ prediction: e.target.value })}
-                  placeholder="I think this will happen because…"
-                />
-                <div
-                  className="mission-choice-stack"
-                  role="group"
-                  aria-label="Change the situation"
-                >
-                  {mission.experiment.options.map((option, index) => (
-                    <button
-                      key={option.label}
-                      aria-pressed={record.option === index}
-                      onClick={() => save({ option: index })}
-                    >
-                      {record.option === index ? (
-                        <Check size={17} />
-                      ) : (
-                        <span className="mission-choice-dot" />
-                      )}
-                      {option.label}
-                      <ArrowRight size={16} />
-                    </button>
-                  ))}
-                </div>
-                <p className="field-help">
-                  Change a choice to update the model immediately. This simulation does not call a
-                  provider, store business records or measure a real deployment.
-                </p>
-              </div>
-              <div className="mission-result" role="status" aria-live="polite" aria-atomic="true">
-                <div className="mission-result-top">
-                  <span className="eyebrow">WHAT HAPPENS</span>
-                  <StudioBuddy success={record.option === 1} careful={record.option === 2} />
-                </div>
-                <h3>{result.result}</h3>
-                <p>{result.why}</p>
-                <ol className="mission-flow" aria-label="Model flow">
-                  {mission.flow.map((node, index) => (
-                    <li key={node.name} className={result.node === index ? 'active' : ''}>
-                      <span>{index + 1}</span>
-                      <div>
-                        <strong>{node.name}</strong>
-                        <small>{node.runs}</small>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
+            <CausalStudio
+              key={id}
+              id={id}
+              record={progress.missionLabs[id]}
+              onSave={(lab) =>
+                update({ ...progress, missionLabs: { ...progress.missionLabs, [id]: lab } })
+              }
+              prediction={record.prediction}
+              onPrediction={(prediction) => save({ prediction })}
+              sound={progress.soundEnabled}
+              onSoundChange={(soundEnabled) => update({ ...progress, soundEnabled })}
+              onLearn={() => go(1)}
+            />
+            {id === 1 && (
+              <a className="mission-motion-entry" href="#/sample/motion">
+                <Play size={16} />
+                <span>
+                  <strong>Watch the narrated visual story</strong>
+                  <small>Optional: see the page pull apart into its three roles.</small>
+                </span>
+                <ArrowRight size={16} />
+              </a>
+            )}
           </>
         )}
         {step === 1 && (
@@ -834,7 +774,7 @@ export function MissionLesson({
           </>
         )}
         {message && <p role="status">{message}</p>}
-        {!(id === 1 && step === 0) && (
+        {step !== 0 && (
           <div className="mission-step-footer">
             {step > 0 ? (
               <button className="button light" onClick={() => go(step - 1)}>

@@ -29,13 +29,15 @@
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
     "rehype-sanitize": "^6.0.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "@types/three": "^0.186.0",
     "@vitejs/plugin-react": "^5.1.0",
     "esbuild": "^0.28.2",
     "fflate": "^0.8.3",

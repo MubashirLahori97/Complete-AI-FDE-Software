@@ -2,6 +2,7 @@ import { lessons, projectDefinitions, dailyProjects } from './data';
 import { experimentValues, type ExperimentValues } from './experiments';
 import { missions, newMissionRecord, canRecordMission } from './missions';
 import { systemQuestions, reasoningLabels, type MissionRecord } from './mission-types';
+import { labSpecs, labValues, type LabRecord } from './mission-labs';
 
 export const STORAGE_KEY = 'fde-academy-v1';
 export const lessonActivities = ['learn', 'practice', 'project', 'build'] as const;
@@ -36,6 +37,7 @@ export interface Progress {
   scenarios: Record<string, { score: number; date: string }>;
   lastMission: number;
   missions: Record<string, MissionRecord>;
+  missionLabs: Record<string, LabRecord>;
 }
 
 export const emptyProgress = (): Progress => ({
@@ -62,6 +64,7 @@ export const emptyProgress = (): Progress => ({
   scenarios: {},
   lastMission: 1,
   missions: {},
+  missionLabs: {},
 });
 export const localDate = (date = new Date()): string =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -101,6 +104,14 @@ export function parseProgress(value: unknown): Progress {
   if (!isRecord(value) || value.version !== 1)
     throw new Error('This is not a supported FDE Academy backup.');
   const result = emptyProgress();
+  for (const lab of labSpecs) {
+    const raw = isRecord(value.missionLabs) ? value.missionLabs[lab.id] : undefined;
+    if (isRecord(raw))
+      result.missionLabs[lab.id] = {
+        values: labValues(lab.id, raw.values),
+        note: text(raw.note, 3000),
+      };
+  }
   result.warmupSolved = value.warmupSolved === true;
   result.soundEnabled = value.soundEnabled === true;
   result.lastMission =
