@@ -404,7 +404,8 @@
   font-size: 12px;
 }
 .worker-lanes > div > div {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
   gap: 6px;
 }
 .worker-lanes > div > div > span {
@@ -412,10 +413,15 @@
   background: #537c7f;
   border: 1px solid #8ab3af;
   border-radius: 5px;
-  flex: 1;
   min-width: 0;
-  font-size: 11px;
+  font-size: 12px;
   text-align: center;
+}
+.worker-lanes > div > div > span > small {
+  display: block;
+  font-size: 10px;
+  margin-bottom: 6px;
+  white-space: nowrap;
 }
 .worker-lanes > div > div > .is-idle {
   background: transparent;
@@ -1082,18 +1088,20 @@
     gap: 7px;
   }
   .worker-lanes > div > span {
-    font-size: 10px;
+    font-size: 12px;
   }
   .worker-lanes > div > div {
-    gap: 3px;
+    gap: 6px;
   }
   .worker-lanes > div > div > span {
     padding: 10px 2px;
-    font-size: 9px;
-    overflow-wrap: anywhere;
+    font-size: 12px;
   }
   .schedule-total {
     gap: 9px;
+  }
+  .cost-chart text {
+    font-size: 22px;
   }
   .schedule-total strong {
     font-size: 12px;

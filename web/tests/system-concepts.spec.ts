@@ -158,7 +158,25 @@ test('all new surfaces fit narrow screens, long contracts and reduced motion', a
     for (const id of remaining) {
       await page.goto(`/#/mission/${id}`);
       await expect(page.locator('.model-evidence')).toBeVisible();
-      if (id === 17) await page.getByRole('textbox').first().fill('LongField'.repeat(50));
+      if (id === 17) {
+        await page.getByRole('textbox').first().fill('LongField'.repeat(50));
+        await page.locator('.lab-more summary').click();
+        await page.getByRole('slider', { name: /Workers/ }).focus();
+        await page.keyboard.press('Home');
+        await page.getByRole('slider', { name: /Independent tasks/ }).focus();
+        await page.keyboard.press('End');
+        const cells = page.locator('.worker-lanes>div>div>span');
+        await expect(cells).toHaveCount(10);
+        await expect(cells.last()).toContainText('Round 10');
+        const readable = await cells.evaluateAll((elements) =>
+          elements.every(
+            (element) =>
+              element.getBoundingClientRect().width >= 63 &&
+              parseFloat(getComputedStyle(element).fontSize) >= 12,
+          ),
+        );
+        expect(readable, `${width} task cells remain readable`).toBe(true);
+      }
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
         `${width} mission ${id}`,

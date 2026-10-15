@@ -328,6 +328,7 @@ export default function SystemConceptScene({
                             key={round}
                             className={task < visual.schedule!.tasks ? '' : 'is-idle'}
                           >
+                            <small>Round {round + 1}</small>
                             {task < visual.schedule!.tasks ? `Task ${task + 1}` : 'Idle'}
                           </span>
                         );
