@@ -1,15 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  ArrowLeft,
-  ArrowRight,
-  BookOpen,
-  Check,
-  Download,
-  Layers,
-  Play,
-  Search,
-  Sparkles,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Download, Play } from 'lucide-react';
 import {
   missions,
   stages,
@@ -26,8 +16,8 @@ import {
   type ReasoningKey,
 } from './mission-types';
 import { downloadFile, type Progress } from './state';
-import { ProgressBar } from './ui';
 import CausalStudio from './CausalStudio';
+import { AcademyHome, AcademyPath } from './AcademyJourney';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
@@ -38,265 +28,16 @@ export function missionCount(progress: Progress) {
       canRecordMission(mission, progress.missions[mission.id]),
   ).length;
 }
-export function MissionHome({ progress }: Props) {
-  const [changed, setChanged] = useState(false);
-  const current =
-    missions.find(
-      (item) =>
-        item.id >= progress.lastMission &&
-        (!progress.missions[item.id]?.recorded ||
-          progress.missions[item.id]?.verdict !== 'demonstrated'),
-    ) ||
-    missions.find(
-      (item) =>
-        !progress.missions[item.id]?.recorded ||
-        progress.missions[item.id]?.verdict !== 'demonstrated',
-    ) ||
-    missions[29];
-  const started = Object.keys(progress.missions).length > 0;
-  return (
-    <div className="mission-core">
-      <div className="mission-home-intro">
-        <span className="eyebrow">FDE ACADEMY · CONCEPTS + AI + USEFUL WORK</span>
-        <span className="mission-pill">30 missions. Your pace.</span>
-      </div>
-      <section className="mission-launch">
-        <div className="mission-launch-copy">
-          <span className="mission-sticker">
-            <Sparkles size={16} /> Start small. Make it work.
-          </span>
-          <h1>
-            Build it with AI.
-            <br />
-            <em>Understand what happens.</em>
-          </h1>
-          <p>
-            You can let AI write every line. Learn how the parts work, make good decisions, and
-            deliver something people can use.
-          </p>
-          <a className="button primary" href={`#/mission/${started ? current.id : 1}`}>
-            {started ? `Continue mission ${current.id}` : 'Start mission 1'}
-            <ArrowRight size={18} />
-          </a>
-          <p className="field-help">
-            First project: a useful service website. No coding experience needed.
-          </p>
-        </div>
-        <div className="mission-first-preview">
-          <div className="mission-preview-chrome">
-            <span>● ● ●</span>
-            <span>YOUR FIRST SMALL EXPERIMENT</span>
-          </div>
-          <div className="mission-service-preview">
-            <span className="mission-service-logo">
-              <Layers size={22} /> FIX & CO.
-            </span>
-            <span className="mission-preview-tag">Local teaching preview · no live AI</span>
-            <h2>
-              {changed
-                ? 'Repairs near you.\nClear hours. Easy contact.'
-                : 'Welcome to our website.'}
-            </h2>
-            <p>
-              {changed
-                ? 'Appliance repairs · North district\nMonday–Friday, 9–5'
-                : 'A page can look finished and still leave a visitor guessing.'}
-            </p>
-            <span className="mission-contact-preview">
-              {changed
-                ? 'Contact details are easy to find ↗'
-                : 'What does this service actually do?'}
-            </span>
-          </div>
-          <div className="mission-preview-action">
-            <button className="button primary" onClick={() => setChanged(!changed)}>
-              {changed ? 'See the before version' : 'Try a clearer message'}
-              <Sparkles size={16} />
-            </button>
-            <p role="status">
-              {changed
-                ? 'Same page, clearer purpose. In mission 1, direct AI to build your own useful site.'
-                : 'Press the button. Notice what becomes easier to understand.'}
-            </p>
-          </div>
-        </div>
-      </section>
-      <section className="mission-contract">
-        <div>
-          <BookOpen size={22} />
-          <h2>What are you learning to do?</h2>
-          <p>
-            A Forward Deployed Engineer helps people solve real problems with software and AI. This
-            path develops concepts, effective AI use and evidence of useful results.
-          </p>
-        </div>
-        <ol>
-          <li>
-            <strong>See one idea.</strong> Change a situation and inspect the result.
-          </li>
-          <li>
-            <strong>Build something useful.</strong> Let capable AI handle implementation.
-          </li>
-          <li>
-            <strong>Explain and adapt.</strong> Show you understand your own system.
-          </li>
-        </ol>
-      </section>
-      <div className="mission-section-heading">
-        <div>
-          <span className="eyebrow">SIX STAGES, ONE CONNECTED JOURNEY</span>
-          <h2>From your first site to an independent delivery.</h2>
-        </div>
-        <a className="text-link" href="#/curriculum">
-          Explore 30 missions <ArrowRight size={16} />
-        </a>
-      </div>
-      <div className="mission-stage-grid">
-        {stages.map((stage, index) => (
-          <a
-            key={stage.title}
-            className={`mission-stage-card tone-${stage.color}`}
-            href={`#/curriculum?stage=${index + 1}`}
-          >
-            <span className="mission-stage-number">0{index + 1}</span>
-            <h3>{stage.title}</h3>
-            <p>{stage.description}</p>
-            <span>
-              Missions {index * 5 + 1}–{index * 5 + 5} <ArrowRight size={15} />
-            </span>
-          </a>
-        ))}
-      </div>
-      <section className="mission-record-strip">
-        <div>
-          <strong>{missionCount(progress)} / 30 practice records</strong>
-          <p>
-            Product evidence and understanding are recorded separately. Review records are
-            learner-owned, not certified credentials.
-          </p>
-        </div>
-        <ProgressBar value={(missionCount(progress) / 30) * 100} label="Mission practice records" />
-      </section>
-      <p className="field-help">
-        Concepts are compulsory. Manual coding is optional. AI is available for planning, building,
-        tests and diagnosis. Missions can take several sessions; pacing and outcomes still need
-        learner pilots. <a href="#/resources">Find optional coding workshops and Amina examples.</a>
-      </p>
-    </div>
-  );
+export function MissionHome(props: Props) {
+  return <AcademyHome {...props} records={missionCount(props.progress)} />;
 }
-
-export function MissionPath({
-  progress,
-  initialStage = '',
-  initialQuery = '',
-}: {
+export function MissionPath(props: {
   progress: Progress;
   initialStage?: string;
   initialQuery?: string;
 }) {
-  const [stage, setStage] = useState(initialStage);
-  const [query, setQuery] = useState(initialQuery);
-  const visible = missions.filter(
-    (item) =>
-      (!stage || String(item.stage) === stage) &&
-      `${item.id} ${item.title} ${item.problem} ${item.foundation.join(' ')} ${item.concepts.map((c) => c.name).join(' ')}`
-        .toLowerCase()
-        .includes(query.toLowerCase()),
-  );
-  return (
-    <div className="mission-core">
-      <span className="eyebrow">THE CORE LEARNING PATH</span>
-      <h1>Make. Understand. Deliver.</h1>
-      <p className="mission-lead">
-        Thirty missions, six stages. Start with a useful website, grow it into a connected workflow,
-        then transfer the ideas to an independent project. AI can do all implementation.
-      </p>
-      <div className="mission-path-controls">
-        <label>
-          <Search size={17} />
-          <span className="sr-only">Search missions</span>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search concepts or missions"
-          />
-        </label>
-        <label>
-          Stage
-          <select
-            aria-label="Filter mission stage"
-            value={stage}
-            onChange={(e) => setStage(e.target.value)}
-          >
-            <option value="">All six stages</option>
-            {stages.map((item, index) => (
-              <option value={index + 1} key={item.title}>
-                {index + 1}. {item.title}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <p role="status">
-        {visible.length} missions · Explore freely. A record is not a verified qualification.
-      </p>
-      {stages.map((item, index) => {
-        const group = visible.filter((m) => m.stage === index + 1);
-        if (!group.length) return null;
-        return (
-          <section className="mission-path-stage" key={item.title}>
-            <div className="mission-section-heading">
-              <div>
-                <span className="eyebrow">STAGE {index + 1}</span>
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
-              </div>
-              <span className="mission-pill">
-                {group[0].id}–{group[group.length - 1].id}
-              </span>
-            </div>
-            <div className="mission-path-list">
-              {group.map((mission) => (
-                <a className="mission-path-row" href={`#/mission/${mission.id}`} key={mission.id}>
-                  <span>{String(mission.id).padStart(2, '0')}</span>
-                  <div>
-                    <h3>{mission.title}</h3>
-                    <p>{mission.outcome}</p>
-                  </div>
-                  <small>
-                    {progress.missions[mission.id]?.recorded &&
-                    canRecordMission(mission, progress.missions[mission.id])
-                      ? 'Practice recorded'
-                      : 'Explore + build + explain'}
-                  </small>
-                  <ArrowRight size={18} />
-                </a>
-              ))}
-            </div>
-          </section>
-        );
-      })}
-      {!visible.length && (
-        <button
-          className="button light"
-          onClick={() => {
-            setQuery('');
-            setStage('');
-          }}
-        >
-          Clear filters
-        </button>
-      )}
-      <p className="field-help">
-        Keep earlier work: <a href="#/workshops">original coding workshops</a> and{' '}
-        <a href="#/guided">optional guided shop examples</a>. Old progress never marks new missions
-        complete.
-      </p>
-    </div>
-  );
+  return <AcademyPath {...props} />;
 }
-
 export function MissionLesson({
   id,
   progress,
@@ -344,7 +85,7 @@ export function MissionLesson({
   };
   const prompt = missionBrief(mission);
   return (
-    <article className="mission-core mission-lesson">
+    <article className="mission-core mission-lesson" data-step={step}>
       <a className="back-link" href={`#/curriculum?stage=${mission.stage}`}>
         <ArrowLeft size={15} />
         Stage {mission.stage} · {stages[mission.stage - 1].title}

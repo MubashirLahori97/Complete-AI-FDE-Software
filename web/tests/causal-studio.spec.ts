@@ -13,6 +13,7 @@ test('the lab renders actual 3D, changes camera and depth, and exposes the same 
     };
   });
   await page.goto('/#/mission/13');
+  await page.getByRole('button', { name: 'Look inside the system', exact: true }).click();
   await expect(page.locator('.lab-scene-frame')).toHaveAttribute('data-renderer', 'webgl');
   await expect.poll(() => page.evaluate(() => (window as any).labDraws)).toBeGreaterThan(0);
   const canvas = page.locator('.lab-world canvas');
@@ -147,6 +148,7 @@ test('studios fit phones and respond to reduced-motion changes while an experime
     }
   }
   await page.goto('/#/mission/13');
+  await page.getByRole('button', { name: 'Look inside the system', exact: true }).click();
   await expect(page.locator('.lab-scene-frame')).toHaveAttribute('data-renderer', 'webgl');
   await page.getByRole('button', { name: 'Follow the change', exact: true }).click();
   await page.emulateMedia({ reducedMotion: 'reduce' });

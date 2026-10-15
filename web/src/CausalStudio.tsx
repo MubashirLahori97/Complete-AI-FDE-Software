@@ -19,7 +19,8 @@ import {
   type LabValue,
 } from './mission-labs';
 import { missions } from './missions';
-import { websiteDocument } from './visual-website';
+import LivePage from './LivePage';
+import ModelEvidence from './ModelEvidence';
 import { downloadFile } from './state';
 import WorldDiagram from './LabDiagram';
 import './causal-studio.css';
@@ -54,27 +55,15 @@ export default function CausalStudio({
   const [inspect, setInspect] = useState(false);
   const [flat, setFlat] = useState(false);
   const [renderer, setRenderer] = useState('loading');
-  const [showSystem, setShowSystem] = useState(id !== 1 && id !== 3);
+  const [showSystem, setShowSystem] = useState(![1, 3, 13, 20].includes(id));
   const [reduced, setReduced] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
   const [pageMessage, setPageMessage] = useState('');
-  const [height, setHeight] = useState(360);
   const audio = useRef<AudioContext | null>(null);
-  const frame = useRef<HTMLIFrameElement>(null);
   const uid = useId();
-  const channel = `${uid}:${id}:${JSON.stringify(values)}`;
-  const site = useMemo(
-    () =>
-      websiteDocument({
-        title: String(values.heading || ''),
-        accent: 'teal',
-        size: Number(values.size || 30),
-        rule: id === 1 || values.rule === true,
-        channel,
-      }),
-    [channel],
-  );
+  const nativePage = id === 1 || id === 3;
+  const evidence = !!(outcome.reservations || outcome.cases);
   const nodes = missions[id - 1].flow.map((node, index) => ({
     ...node,
     value: outcome.nodes[index],
@@ -117,30 +106,6 @@ export default function CausalStudio({
     },
     [],
   );
-  useEffect(() => {
-    const receive = (event: MessageEvent) => {
-      if (event.source !== frame.current?.contentWindow || event.data?.channel !== channel) return;
-      if (
-        event.data.type === 'fde-visual-height' &&
-        typeof event.data.height === 'number' &&
-        Number.isFinite(event.data.height)
-      )
-        setHeight(Math.max(330, Math.min(700, event.data.height)));
-      if (event.data.type === 'fde-visual-click' && typeof event.data.open === 'boolean') {
-        setPageMessage(
-          event.data.hasRule
-            ? event.data.open
-              ? 'The click rule opened the details inside this browser.'
-              : 'The same rule hid the details again.'
-            : 'The button is visible, but its action rule is absent.',
-        );
-        setRevision((r) => r + 1);
-        tone();
-      }
-    };
-    window.addEventListener('message', receive);
-    return () => window.removeEventListener('message', receive);
-  }, [channel, sound]);
   const control = (item: LabControl) => {
     const key = `lab-${id}-${item.id}-${uid}`;
     if (item.type === 'toggle')
@@ -252,7 +217,7 @@ export default function CausalStudio({
         <span aria-hidden="true" />
         <strong>{pageMessage || outcome.headline}</strong>
         <small>
-          {showSystem
+          {showSystem || evidence
             ? 'Every component shown is part of a local teaching model.'
             : 'This preview runs real page code in your browser.'}
         </small>
@@ -265,12 +230,20 @@ export default function CausalStudio({
               ? flat || renderer === 'diagram'
                 ? 'System diagram'
                 : 'The system in 3D'
-              : 'Your running page'}
+              : nativePage
+                ? 'Your running page'
+                : 'The experiment'}
           </span>
           <div>
-            {(id === 1 || id === 3) && (
+            {(nativePage || evidence) && (
               <button onClick={() => setShowSystem(!showSystem)}>
-                {showSystem ? 'Back to the page' : 'Look behind the page'}
+                {showSystem
+                  ? nativePage
+                    ? 'Back to the page'
+                    : 'Back to the experiment'
+                  : nativePage
+                    ? 'Look behind the page'
+                    : 'Look inside the system'}
                 <Maximize2 size={12} />
               </button>
             )}
@@ -284,19 +257,18 @@ export default function CausalStudio({
                 >
                   {flat ? 'Use 3D' : 'Use flat diagram'}
                 </button>
-                <button
-                  aria-label="Reset the experiment"
-                  onClick={() => {
-                    onSave({ values: labValues(id), note: record?.note || '' });
-                    setRevision((r) => r + 1);
-                    setPageMessage('');
-                  }}
-                >
-                  Reset
-                  <RotateCcw size={12} />
-                </button>
               </>
             )}
+            <button
+              aria-label="Reset the experiment"
+              onClick={() => {
+                onSave({ values: labValues(id), note: record?.note || '' });
+                setRevision((r) => r + 1);
+                setPageMessage('');
+              }}
+            >
+              Reset <RotateCcw size={12} />
+            </button>
           </div>
         </div>
         {showSystem ? (
@@ -381,14 +353,25 @@ export default function CausalStudio({
               <output>{nodes[selected].value}</output>
             </div>
           </>
+        ) : evidence ? (
+          <ModelEvidence outcome={outcome} />
         ) : (
           <div className="lab-native-page">
-            <iframe
-              ref={frame}
-              title="Your live website"
-              sandbox="allow-scripts"
-              srcDoc={site}
-              style={{ height }}
+            <LivePage
+              heading={String(values.heading || '')}
+              size={Number(values.size || 30)}
+              rule={id === 1 || values.rule === true}
+              onAction={(open, hasRule) => {
+                setPageMessage(
+                  hasRule
+                    ? open
+                      ? 'The click rule opened the details inside this browser.'
+                      : 'The same rule hid the details again.'
+                    : 'The button is visible, but its action rule is absent.',
+                );
+                setRevision((r) => r + 1);
+                tone();
+              }}
             />
           </div>
         )}

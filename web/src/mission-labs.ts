@@ -33,6 +33,12 @@ export type LabResult = {
   facts: { label: string; value: string }[];
   rows?: { label: string; before: string; after: string }[];
   bars?: { label: string; value: number; unit: string }[];
+  reservations?: {
+    capacity: number;
+    attempts: number;
+    operations: { id: string; state: 'accepted' | 'overbooked' | 'refused' }[];
+  };
+  cases?: { id: string; positive: boolean; score: number; alert: boolean }[];
 };
 export type LabRecord = { values: LabValues; note: string };
 // The packaging step validates the authored JSON before publishing.
@@ -436,6 +442,14 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
             fact('Accepted', accepted),
             fact('Over capacity', extra),
           ],
+          reservations: {
+            capacity: n('slots'),
+            attempts,
+            operations: Array.from({ length: unique }, (_, i) => ({
+              id: `R-${i + 1}`,
+              state: i >= accepted ? 'refused' : i >= n('slots') ? 'overbooked' : 'accepted',
+            })),
+          },
           bars: [
             { label: 'Capacity', value: n('slots'), unit: 'slots' },
             { label: 'Accepted', value: accepted, unit: 'reservations' },
@@ -652,10 +666,12 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
     case 20: {
       const cases = [
         ...Array.from({ length: n('positives') }, (_, i) => ({
+          id: `P${i + 1}`,
           positive: true,
           score: (i * 37 + 31) % 100,
         })),
         ...Array.from({ length: n('negatives') }, (_, i) => ({
+          id: `N${i + 1}`,
           positive: false,
           score: (i * 17 + 11) % 100,
         })),
@@ -675,6 +691,7 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: 'careful',
+          cases: cases.map((c) => ({ ...c, alert: c.score >= n('threshold') })),
           facts: [
             fact('Precision', pct(precision)),
             fact('Recall', pct(recall)),

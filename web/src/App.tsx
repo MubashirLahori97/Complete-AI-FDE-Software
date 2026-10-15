@@ -284,7 +284,7 @@ export default function App() {
       </Suspense>
     );
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${legacyContext ? '' : 'academy-shell'}`}>
       <a
         className="skip-link"
         href="#main-content"

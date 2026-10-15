@@ -6,6 +6,23 @@ const value = (id: number, input: unknown, label: string) =>
   evaluateLab(id, input).facts.find((f) => f.label === label)!.value;
 
 describe('executed mission experiments', () => {
+  it('exposes the same individual cases and reservations as its aggregate results', () => {
+    const allAlerts = evaluateLab(20, { threshold: 0 });
+    expect(allAlerts.cases).toHaveLength(100);
+    expect(new Set(allAlerts.cases!.map((c) => c.id)).size).toBe(100);
+    expect(allAlerts.cases!.every((c) => c.alert)).toBe(true);
+    expect(value(20, { threshold: 0 }, 'Precision')).toBe('10%');
+    const noAlerts = evaluateLab(20, { threshold: 100 });
+    expect(noAlerts.cases!.every((c) => !c.alert)).toBe(true);
+    expect(noAlerts.cases!.filter((c) => c.positive)).toHaveLength(10);
+    const collision = evaluateLab(13, { slots: 1, requests: 2, atomic: false });
+    expect(collision.reservations!.operations.map((o) => o.state)).toEqual([
+      'accepted',
+      'overbooked',
+    ]);
+    const guarded = evaluateLab(13, { slots: 1, requests: 2, atomic: true });
+    expect(guarded.reservations!.operations.map((o) => o.state)).toEqual(['accepted', 'refused']);
+  });
   it('covers all thirty missions with working initial actions and bounded numeric inputs', () => {
     expect(labSpecs.map((s) => s.id)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
     for (const spec of labSpecs) {
