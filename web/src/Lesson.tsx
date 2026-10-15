@@ -200,7 +200,7 @@ export default function Lesson({
         <p>
           <strong>Your first action:</strong>{' '}
           {tab === 'learn'
-            ? 'Start with One idea below. Nothing to install for the reading and small task.'
+            ? 'Try the experiment below. Change one input and watch the result. Nothing to install.'
             : tab === 'practice'
               ? 'Try the exercise below, then check your understanding.'
               : tab === 'project'
@@ -212,10 +212,25 @@ export default function Lesson({
             Your place saves in this browser. Take as many sessions as you need.
           </p>
           {tab === 'learn' && (
-            <button className="text-button" onClick={() => goTo('project')}>
-              Open project
-              <ArrowRight size={14} />
-            </button>
+            <>
+              <button
+                className="button primary"
+                onClick={() => {
+                  update({ ...progress, readingSteps: { ...progress.readingSteps, [day]: 0 } });
+                  requestAnimationFrame(() => {
+                    const experiment = document.getElementById(`lesson-experiment-${day}`);
+                    experiment?.scrollIntoView({ block: 'start', behavior: 'instant' });
+                    experiment?.focus({ preventScroll: true });
+                  });
+                }}
+              >
+                Try the experiment <ArrowRight size={14} />
+              </button>
+              <button className="text-button" onClick={() => goTo('project')}>
+                Open project
+                <ArrowRight size={14} />
+              </button>
+            </>
           )}
         </div>
       </section>

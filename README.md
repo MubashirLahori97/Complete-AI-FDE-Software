@@ -10,6 +10,8 @@ Start with a one-minute challenge, explore the open mission map, and collect dis
 
 The app opens in **FDE Academy**, with its original dashboard, 30-day curriculum, practice lab, field scenarios, and portfolio. Each day's lesson has Learn, Practise, Project, and Record your build activities. Start with the lesson, practise the idea, build its project, and save your results.
 
+Every core lesson begins with a small interactive experiment: change an input or rule and see the result immediately. A clear first mission, live explanation, optional rule reveal, and reset make it easy to explore before reading the worked example. Your changes save on this device. Each lesson still includes its own project.
+
 **New learner? Choose Start Lesson 1.** Every lesson now starts with one idea in simple English, a worked example, and one small task with explained feedback and two hints. Each project has a clear first action and three milestones. Continue learning remembers your last unfinished lesson and activity. Read [how the learning experience works](LEARNING-EXPERIENCE.md), including a flexible two-hour study session.
 
 Every day has a [dedicated project](PROJECTS.md) with a brief, milestones, acceptance checks, tests, and a downloadable starter kit. Amina's shop examples are optional teaching experiments under Resources. They do not replace the main curriculum; their [guide](GUIDED-COURSE.md) and [shop workspace](guided-projects/shop-workspace/README.md) remain available separately.

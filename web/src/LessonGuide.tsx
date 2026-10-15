@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Lightbulb } from 'lucide-react';
 import { lessonTeaching } from './lesson-content';
 import { localDate, type Progress } from './state';
 import { Companion, WinMoment } from './MissionUI';
+import LessonExperiment from './LessonExperiment';
 
 export default function LessonGuide({
   day,
@@ -74,11 +75,12 @@ export default function LessonGuide({
       {step === 0 && (
         <>
           <p className="guide-situation">{guide.situation}</p>
+          <LessonExperiment day={day} progress={progress} update={update} />
+          <p className="guide-explanation">{guide.explanation}</p>
           <button className="curiosity-button" onClick={() => setStep(2)}>
             Curious? Try the challenge before reading
             <ArrowRight size={15} />
           </button>
-          <p className="guide-explanation">{guide.explanation}</p>
           <details className="guide-details">
             <summary>New words, in simple English</summary>
             <dl>

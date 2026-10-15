@@ -1,4 +1,5 @@
 import { lessons, projectDefinitions, dailyProjects } from './data';
+import { experimentValues, type ExperimentValues } from './experiments';
 
 export const STORAGE_KEY = 'fde-academy-v1';
 export const lessonActivities = ['learn', 'practice', 'project', 'build'] as const;
@@ -16,6 +17,7 @@ export interface Progress {
   lastLesson: number;
   lessonActivities: Record<string, LessonActivity>;
   readingSteps: Record<string, number>;
+  experiments: Record<string, ExperimentValues>;
   quickChecks: Record<string, { choice: number | null; checked: boolean; hints: number }>;
   conceptWins: Record<string, string>;
   reviewWins: Record<string, string>;
@@ -38,6 +40,7 @@ export const emptyProgress = (): Progress => ({
   lastLesson: 1,
   lessonActivities: {},
   readingSteps: {},
+  experiments: {},
   quickChecks: {},
   conceptWins: {},
   reviewWins: {},
@@ -111,6 +114,8 @@ export function parseProgress(value: unknown): Progress {
     : [];
   for (const lesson of lessons) {
     const key = String(lesson.day);
+    if (isRecord(value.experiments) && isRecord(value.experiments[key]))
+      result.experiments[key] = experimentValues(lesson.day, value.experiments[key]);
     for (const field of ['conceptWins', 'reviewWins'] as const)
       if (isRecord(value[field]) && validDate(value[field][key]))
         result[field][key] = value[field][key];
