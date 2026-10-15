@@ -845,6 +845,7 @@
         "default": "css",
         "options": [
           ["css", "CSS"],
+          ["validation", "Validation"],
           ["database", "Database"],
           ["provider", "Provider"]
         ]

@@ -269,6 +269,7 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: !valid ? 'blocked' : source === 'records' ? 'ready' : 'careful',
+          visual: { kind: 'provenance', source, sample: n('sample'), missed: n('missed'), valid },
           facts: [
             fact('Sample rate', valid ? pct(n('missed') / n('sample')) : 'Invalid counts'),
             fact('Real field observations', 0),
@@ -385,6 +386,18 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: fits ? 'careful' : 'blocked',
+          visual: {
+            kind: 'cost',
+            months: n('months'),
+            setup: n('setup'),
+            monthly: n('license'),
+            build,
+            fits,
+            points: Array.from({ length: n('months') }, (_, i) => ({
+              month: i + 1,
+              package: n('setup') + n('license') * (i + 1),
+            })),
+          },
           facts: [
             fact('Package total', `${packaged} units`),
             fact('Build total', `${build} units`),
@@ -744,6 +757,15 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
           tone: complete ? 'ready' : 'blocked',
           active: complete ? 2 : 1,
           facts: [fact('Operations run', executed), fact('Budget left', n('budget') - executed)],
+          visual: {
+            kind: 'budget',
+            budget: n('budget'),
+            demand: n('demand'),
+            executed,
+            allowed,
+            permission: s('permission'),
+            request: s('request'),
+          },
         },
       );
     }
@@ -761,6 +783,22 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: compatible ? 'ready' : 'blocked',
+          visual: {
+            kind: 'contract',
+            title: 'Do these parts speak the same language?',
+            expected: s('uiField'),
+            actual: s('serverField'),
+            payload: JSON.stringify({ [s('serverField')]: 'approved' }, null, 2),
+            compatible,
+            schedule: {
+              workers: n('workers'),
+              tasks: n('tasks'),
+              minutes: n('minutes'),
+              rounds: Math.ceil(n('tasks') / n('workers')),
+              work,
+              coordination,
+            },
+          },
           facts: [
             fact('Parallel work', `${work} min`),
             fact('Coordination', `${coordination} min`),
@@ -911,6 +949,34 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: supported ? 'ready' : 'blocked',
+          visual: {
+            kind: 'retrieval',
+            question: s('question'),
+            age: n('age'),
+            limit: n('maxAge'),
+            docAction: b('docAction'),
+            authority: b('authority'),
+            checks: [
+              {
+                label: 'Matches this toy search',
+                pass: relevant,
+                detail:
+                  'Keyword match only: cancel, visit or appointment. No semantic search runs.',
+              },
+              {
+                label: 'Within the age limit',
+                pass: fresh,
+                detail: `${n('age')} days old; at most ${n('maxAge')} days allowed.`,
+              },
+              {
+                label: 'Any requested action has separate authority',
+                pass: actionAllowed,
+                detail: b('docAction')
+                  ? 'Document instructions do not grant user or policy authority.'
+                  : 'No cancellation action is requested by the document.',
+              },
+            ],
+          },
           facts: [
             fact('Keyword match', relevant ? 'Yes' : 'No'),
             fact('Freshness', fresh ? 'Within rule' : 'Outside rule'),
@@ -984,6 +1050,33 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: compatible && configured ? 'ready' : compatible ? 'careful' : 'blocked',
+          visual: {
+            kind: 'release',
+            code,
+            schema,
+            compatible,
+            rollback: b('rollback'),
+            checks: [
+              {
+                label: 'Build and checks',
+                pass: b('build'),
+                detail: 'A declared teaching input, not a build of your project.',
+                control: 'build',
+                value: b('build'),
+                action: b('build') ? 'Mark the build as failing' : 'Mark the build as passing',
+              },
+              {
+                label: 'Required configuration',
+                pass: b('credential'),
+                detail: 'Presence only. No secret is entered here.',
+                control: 'credential',
+                value: b('credential'),
+                action: b('credential')
+                  ? 'Mark configuration as missing'
+                  : 'Mark configuration as present',
+              },
+            ],
+          },
           facts: [
             fact('Running code', code),
             fact('Data schema', schema),
@@ -996,13 +1089,26 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
       const total = n('validation') + n('database') + n('provider');
       const selected = s('inspect');
       const spent = selected === 'css' ? 0 : n(selected);
-      const dominant = n('database') > n('provider') ? 'database' : 'provider';
+      const spans = [
+        { id: 'validation', label: 'Validation', start: 0, duration: n('validation') },
+        { id: 'database', label: 'Database', start: n('validation'), duration: n('database') },
+        {
+          id: 'provider',
+          label: 'Provider',
+          start: n('validation') + n('database'),
+          duration: n('provider'),
+        },
+      ];
+      const maximum = Math.max(...spans.map((span) => span.duration));
+      const longest =
+        maximum > 0 ? spans.filter((span) => span.duration === maximum).map((span) => span.id) : [];
       return result(
         `${total} ms end to end`,
-        `${selected === 'css' ? 'CSS is not a measured span in this trace.' : `${selected} accounts for ${spent} ms (${pct(total ? spent / total : 0)}).`} The longest of the shown database/provider spans is ${dominant}. Inspection guides a hypothesis; a real fix needs a new observation.`,
+        `${selected === 'css' ? 'CSS is not a measured span in this trace.' : `${selected} accounts for ${spent} ms (${pct(total ? spent / total : null)}).`} ${longest.length ? `Longest measured step${longest.length > 1 ? 's' : ''}: ${longest.join(', ')}.` : 'All measured durations are zero.'} Inspection guides a hypothesis; a real fix needs a new observation.`,
         [`${total} ms symptom`, `Inspect ${selected}`, `Verify an intervention; not a claim`],
         {
-          tone: selected === dominant ? 'ready' : 'careful',
+          tone: longest.includes(selected) ? 'ready' : 'careful',
+          visual: { kind: 'trace', total, selected, longest, spans },
           facts: [fact('Total', `${total} ms`), fact('Inspected', `${spent} ms`)],
           bars: [
             { label: 'Validation', value: n('validation'), unit: 'ms' },
@@ -1020,7 +1126,7 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
       const stale = mode === 'cache' && initiallyFresh && b('changed') ? hits : 0;
       return result(
         `${calls} source reads · ${stale} stale result${stale === 1 ? '' : 's'}`,
-        `${n('reads')} reads use the same key at the same instant. ${mode === 'queue' ? 'Queuing changes when work happens, not the number of source reads.' : mode === 'fresh' ? 'Every read contacts the source.' : initiallyFresh ? 'The existing cached copy is within its lifetime.' : 'The first read refreshes an expired copy; later reads can reuse it.'} ${stale ? 'The source changed after this still-valid copy, so its reused answers are stale.' : ''}`,
+        `${n('reads')} reads use the same key at the same instant. ${mode === 'queue' ? 'Queuing changes when work happens, not the number of source reads.' : mode === 'fresh' ? 'Every read contacts the source.' : n('ttl') === 0 ? 'Zero lifetime disables reuse; every read contacts the source.' : initiallyFresh ? 'The existing cached copy is within its lifetime.' : 'The first read refreshes an expired copy; later reads can reuse it.'} ${stale ? 'The source changed after this still-valid copy, so its reused answers are stale.' : ''}`,
         [
           `${n('reads')} same-key reads`,
           `${hits} cache hits; TTL ${n('ttl')} min`,
@@ -1028,6 +1134,27 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: stale ? 'careful' : 'ready',
+          visual: {
+            kind: 'cache',
+            mode,
+            age: n('age'),
+            ttl: n('ttl'),
+            changed: b('changed'),
+            reusable: initiallyFresh,
+            latency: n('latency'),
+            calls,
+            hits,
+            stale,
+            reads: Array.from({ length: n('reads') }, (_, i) => ({
+              route:
+                mode === 'queue'
+                  ? 'queue'
+                  : mode === 'fresh' || n('ttl') === 0 || (!initiallyFresh && i === 0)
+                    ? 'source'
+                    : 'cache',
+              stale: stale > 0,
+            })),
+          },
           facts: [
             fact('Source calls', calls),
             fact('Cache hits', hits),
@@ -1109,6 +1236,13 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: eligible ? 'ready' : 'blocked',
+          visual: {
+            kind: 'workflow',
+            approval: b('approval'),
+            required: b('needsAccess'),
+            eligible,
+            minutes: n('dispatch'),
+          },
           active: eligible ? 2 : 1,
           facts: [
             fact('Eligible in scenario', eligible ? 'Yes' : 'No'),
@@ -1132,6 +1266,22 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: fits ? 'ready' : 'blocked',
+          visual: {
+            kind: 'architecture',
+            title: 'Choose a capability for the actual need.',
+            need: needsConnected ? 'Shared records or accounts' : 'Public information',
+            fits,
+            design: s('design'),
+            operated: n('services'),
+            parts: [
+              { label: 'Public browser page', enabled: true, required: true },
+              {
+                label: 'Suitable connected services',
+                enabled: s('design') === 'connected',
+                required: needsConnected,
+              },
+            ],
+          },
           facts: [
             fact('Connected need', needsConnected ? 'Yes' : 'No'),
             fact('Operated components', n('services')),
@@ -1154,6 +1304,17 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: net > 0 ? 'ready' : 'careful',
+          visual: {
+            kind: 'benefit',
+            people: n('people'),
+            adoption: n('adoption'),
+            users,
+            saved: n('saved'),
+            rework: n('rework'),
+            gross,
+            correction,
+            net,
+          },
           facts: [fact('People using it', users), fact('Net time', `${net} min/day`)],
           bars: [
             { label: 'Dispatch saving', value: gross, unit: 'min/day' },
@@ -1190,6 +1351,44 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: ready ? 'ready' : 'blocked',
+          visual: {
+            kind: 'contract',
+            title: 'Can the next operator complete the journey?',
+            expected: 'accessStatus',
+            actual: s('field'),
+            payload: JSON.stringify(payload, null, 2),
+            compatible,
+            checks: [
+              {
+                label: 'Opening and recovery guide',
+                pass: b('guide'),
+                detail: 'The model records whether a guide is present.',
+                control: 'guide',
+                value: b('guide'),
+                action: b('guide') ? 'Mark the guide as missing' : 'Mark the guide as present',
+              },
+              {
+                label: 'Operator access',
+                pass: b('access'),
+                detail: 'The model records whether required access is available.',
+                control: 'access',
+                value: b('access'),
+                action: b('access')
+                  ? 'Mark operator access as missing'
+                  : 'Mark operator access as available',
+              },
+              {
+                label: 'Replacement field assertion',
+                pass: b('check') ? compatible : null,
+                detail: b('check')
+                  ? 'Checks the actual local payload for accessStatus = approved.'
+                  : 'No assertion has run.',
+                control: 'check',
+                value: b('check'),
+                action: b('check') ? 'Skip the field assertion' : 'Run the field assertion',
+              },
+            ],
+          },
           facts: [
             fact('Field assertion', b('check') ? (compatible ? 'Passed' : 'Failed') : 'Not run'),
             fact('Real operator trials', 0),
@@ -1229,6 +1428,38 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
         ],
         {
           tone: works ? 'ready' : 'blocked',
+          visual: {
+            kind: 'architecture',
+            title: 'Build the changed journey, one capability at a time.',
+            need:
+              need === 'public'
+                ? 'Public information'
+                : need === 'private'
+                  ? 'Private customer information'
+                  : 'Grounded AI helper',
+            fits: works,
+            parts: [
+              { label: 'Browser page', enabled: true, required: true },
+              {
+                label: 'Connected application and storage',
+                enabled: b('server'),
+                required: need !== 'public',
+                control: 'server',
+              },
+              {
+                label: 'Trusted record permission check',
+                enabled: b('permissions'),
+                required: need === 'private',
+                control: 'permissions',
+              },
+              {
+                label: 'Permitted supporting source',
+                enabled: b('source'),
+                required: need === 'ai',
+                control: 'source',
+              },
+            ],
+          },
           facts: [
             fact('Model path', works ? 'Fits' : 'Incomplete'),
             fact('Professional capability', 'Requires independent evidence'),

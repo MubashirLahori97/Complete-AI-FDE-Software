@@ -355,7 +355,7 @@ export default function CausalStudio({
             </div>
           </>
         ) : evidence ? (
-          <ModelEvidence outcome={outcome} />
+          <ModelEvidence outcome={outcome} onChange={save} />
         ) : (
           <div className="lab-native-page">
             <LivePage
@@ -387,7 +387,7 @@ export default function CausalStudio({
           ))}
         </dl>
       )}
-      {outcome.bars && (
+      {outcome.bars && (showSystem || !outcome.visual) && (
         <div className="lab-bars" aria-label="Calculated comparison">
           {outcome.bars.map((bar) => (
             <div key={bar.label}>
@@ -406,7 +406,7 @@ export default function CausalStudio({
           ))}
         </div>
       )}
-      {outcome.rows && (
+      {outcome.rows && (showSystem || !outcome.visual) && (
         <details className="lab-records">
           <summary>Inspect the actual model records ({outcome.rows.length})</summary>
           <div>

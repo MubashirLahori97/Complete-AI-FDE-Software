@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { ArrowRight, Check, CircleHelp, FileText, LockKeyhole, X } from 'lucide-react';
-import type { LabVisual } from './lab-visuals';
+import type { LabVisual, SystemVisual } from './lab-visuals';
 import './lab-visuals.css';
 
 const Intro = ({
@@ -22,7 +22,7 @@ const Note = ({ children }: { children: ReactNode }) => (
   <p className="evidence-boundary">{children}</p>
 );
 
-export default function LabVisualScene({ visual }: { visual: LabVisual }) {
+export default function LabVisualScene({ visual }: { visual: Exclude<LabVisual, SystemVisual> }) {
   const [chosen, setChosen] = useState(0);
   switch (visual.kind) {
     case 'brief': {

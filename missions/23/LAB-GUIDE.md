@@ -17,7 +17,7 @@ A trace divides a journey into observed spans. A slow total does not tell you wh
 - **Provider time:** starts at 1900. Range: 0–3000 ms, step 50.
 - **Database time:** starts at 80. Range: 0–1000 ms, step 20.
 - **Validation time:** starts at 20. Range: 0–100 ms, step 5.
-- **Investigate this component:** starts at "css". Choices: CSS; Database; Provider.
+- **Investigate this component:** starts at "css". Choices: CSS; Validation; Database; Provider.
 
 ## A different situation
 

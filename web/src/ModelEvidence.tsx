@@ -1,11 +1,21 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
-import type { LabResult } from './mission-labs';
+import type { LabResult, LabValue } from './mission-labs';
+import { isSystemVisual } from './lab-visuals';
+import SystemConceptScene from './SystemConceptScene';
 import LabVisualScene from './LabVisualScene';
 import './model-evidence.css';
 
-export default function ModelEvidence({ outcome }: { outcome: LabResult }) {
+export default function ModelEvidence({
+  outcome,
+  onChange,
+}: {
+  outcome: LabResult;
+  onChange: (values: Record<string, LabValue>) => void;
+}) {
   const [chosen, setChosen] = useState('');
   const grid = useRef<HTMLDivElement>(null);
+  if (outcome.visual && isSystemVisual(outcome.visual))
+    return <SystemConceptScene visual={outcome.visual} onChange={onChange} />;
   if (outcome.visual) return <LabVisualScene visual={outcome.visual} />;
   if (outcome.reservations) {
     const { capacity, attempts, operations } = outcome.reservations;

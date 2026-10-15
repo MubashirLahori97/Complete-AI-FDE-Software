@@ -14,7 +14,7 @@ The default core has **six stages and thirty missions**. Each mission contains a
 
 The [interactive learning studio](INTERACTIVE-STUDIO.md) lets you edit inputs and inspect calculated consequences in every core mission. Try the real page in Mission 1, then explore system roles in 3D or an equivalent flat diagram. Experiments and notes resume in your browser; every project kit includes its own experiment guide.
 
-Seventeen missions now lead with a real page or concept-specific visual evidence: itemised receipts, generated cards, rate comparisons, request steps, record changes, permission gates and structured-output checks. See [the coverage map and remaining work](LESSON-VISUALS.md).
+All thirty missions now lead with a real page or concept-specific visual evidence: receipts, record cards, cost curves, request steps, permission gates, structured-output checks, trace timelines, cache routes and composable capabilities. Diagram actions update the same saved experiment controls. See [the coverage map and verification boundaries](LESSON-VISUALS.md).
 
 The [illustrated academy journey](ACADEMY-DESIGN.md) connects the homepage, six chapters and core lessons. Edit a real page before starting, carry that heading into Mission 1, and see the experiment and project behind each mission. The reservation and AI evaluation lessons also expose individual operations and cases behind their totals.
 
