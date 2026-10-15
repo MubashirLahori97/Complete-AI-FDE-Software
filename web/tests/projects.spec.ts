@@ -1,5 +1,25 @@
 import { expect, test } from '@playwright/test';
 
+test('the main site preserves FDE Academy and its daily lesson workflow', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'FDE Academy home' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'A little progress, every day.' })).toBeVisible();
+  await expect(page.locator('.sample-invite')).toHaveCount(0);
+  await page
+    .getByRole('navigation', { name: 'Main navigation' })
+    .getByRole('link', { name: /^Learning path/ })
+    .click();
+  await expect(page.locator('.lesson-row')).toHaveCount(30);
+  await page.goto('/#/lesson/1');
+  await expect(page.getByRole('link', { name: 'FDE Academy home' })).toBeVisible();
+  await expect(page.locator('.source-note')).toContainText('Start here: read the lesson');
+  await page.getByRole('button', { name: 'Open project', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Project acceptance checks' })).toBeVisible();
+  await page.getByRole('link', { name: 'Overview', exact: true }).click();
+  await expect(page).toHaveURL(/#\/$/);
+  await expect(page.getByRole('heading', { name: 'A little progress, every day.' })).toBeVisible();
+});
+
 test('every lesson renders its own project and starter kit', async ({ page }) => {
   test.setTimeout(90000);
   for (let day = 1; day <= 30; day++) {

@@ -81,16 +81,6 @@ export default function Dashboard({ progress }: { progress: Progress }) {
   const passed = progress.quizPassed.length;
   return (
     <>
-      <section className="sample-invite">
-        <div>
-          <h2>Try one idea at Amina’s shop.</h2>
-          <p>Press one button, watch the message count change, and learn one idea.</p>
-        </div>
-        <a className="button primary" href="#/sample/amina">
-          Try the sample lesson
-          <ArrowRight size={17} aria-hidden="true" />
-        </a>
-      </section>
       <div className="welcome-heading">
         <div>
           <p className="eyebrow">YOUR LEARNING WORKSPACE</p>

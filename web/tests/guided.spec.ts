@@ -26,7 +26,7 @@ async function seed(page: Page, lesson: CourseLesson, stage = lesson.sections.le
 test('the first page gives one obvious next action and starts with a small change', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#/guided');
   await expect(page.getByRole('heading', { name: 'Start with one small thing.' })).toBeVisible();
   await expect(page.locator('main .course-button')).toHaveCount(1);
   await expect(page.locator('main textarea,main input')).toHaveCount(0);

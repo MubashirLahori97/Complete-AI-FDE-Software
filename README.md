@@ -6,9 +6,9 @@
 
 ## Interactive FDE Academy
 
-The default path is now **Learn with Amina**: 30 guided lessons in simple English. Start with one shop change, read one idea at a time, follow an example, complete a checked code exercise, and build a real project. Read [the guided-course guide](GUIDED-COURSE.md) for setup, the complete path, and independent readiness review.
+The app opens in **FDE Academy**, with its original dashboard, 30-day curriculum, practice lab, field scenarios, and portfolio. Each day's lesson has Learn, Practise, Project, and Record your build activities. Start with the lesson, practise the idea, build its project, and save your results.
 
-Every guided lesson includes three project milestones, five acceptance checks, test situations, an independent extension, reflections, and downloadable files. Later lessons use [a working React/FastAPI/SQLite shop](guided-projects/shop-workspace/README.md). The earlier workshops remain in the reference library.
+Every day has a [dedicated project](PROJECTS.md) with a brief, milestones, acceptance checks, tests, and a downloadable starter kit. Amina's shop examples are optional teaching experiments under Resources. They do not replace the main curriculum; their [guide](GUIDED-COURSE.md) and [shop workspace](guided-projects/shop-workspace/README.md) remain available separately.
 
 ```bash
 cd web

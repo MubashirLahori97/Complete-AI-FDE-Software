@@ -1,6 +1,6 @@
 # The complete guided course
 
-The active goal is to rebuild all 30 lessons as clear, substantial learning experiences with a real exercise and project after every lesson. The approved Amina sample supplies the simple opening interaction. Clicking a demonstration is only the beginning of a full lesson.
+This document records the optional Amina teaching experiment. The current product direction preserves FDE Academy's original context, curriculum, navigation, and daily lesson/project flow. Amina examples remain separate optional resources. They must not replace the main academy or its homepage.
 
 ## Teaching and product requirements
 
@@ -11,7 +11,7 @@ The active goal is to rebuild all 30 lessons as clear, substantial learning expe
 - Exercises run the learner's actual code. HTML/CSS/DOM/React exercises render real interfaces. Python and SQLite exercises run actual Python. Prepared AI responses are explicitly labelled; fixture results never stand in for evidence about a real model.
 - Every project has a brief, milestones, acceptance criteria, test cases, runnable starter files, commands, and a downloadable kit. Later projects join the frontend, backend, data, and AI work into one product.
 - Track completed exercise steps, current drafts, project evidence, and reflections in browser storage and backups. Preserve older course records without marking new lessons as completed.
-- The new course becomes the default opening and learning path. Keep the older workshops available as a reference library.
+- Preserve FDE Academy as the default opening and main learning path. Amina's guided examples are an optional experiment; they must not replace the academy's context, lesson sequence, or navigation.
 - Finish with an independent capstone and an evidence-based readiness review. Course completion records practice; job readiness requires demonstrating skills independently. Avoid automatic employment or mastery promises.
 
 ## The 30 lessons

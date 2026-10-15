@@ -1,6 +1,6 @@
 # Learn with Amina
 
-The default app has 30 guided lessons in simple English. Each pairs concepts with a problem at Amina's shop. A learner sees one action or idea at a time, follows a worked example, checks actual exercise code, and completes a larger project. Lesson numbers describe an order rather than a two-hour or thirty-day deadline.
+This is an optional teaching experiment at `#/guided`. The main app remains FDE Academy, with its original dashboard, curriculum, and daily project flow. These 30 shop examples are preserved separately; they do not replace or renumber the academy's lessons. Each pairs concepts with a shop problem, worked example, checked exercise, and project.
 
 ## The learning flow
 
@@ -11,7 +11,7 @@ The default app has 30 guided lessons in simple English. Each pairs concepts wit
 5. Download the local kit, follow project milestones, reproduce normal/boundary/failure tests, and record evidence and reflections.
 6. Complete an unseen requirement and have a reviewer verify the final eight skill areas.
 
-New routes are `#/learn/1` through `#/learn/30`, `#/path`, and `#/evidence`. Earlier workshops remain at `#/library`; the one-button prototype remains at `#/sample/amina`.
+Optional experiment routes are `#/guided`, `#/learn/1` through `#/learn/30`, `#/path`, and `#/evidence`. FDE Academy remains the main app at `#/`, with its curriculum at `#/curriculum` and original lessons at `#/lesson/1` through `#/lesson/30`. The `#/library` alias still opens the academy dashboard.
 
 ## The complete path
 

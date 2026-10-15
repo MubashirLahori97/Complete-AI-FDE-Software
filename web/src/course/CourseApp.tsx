@@ -143,9 +143,9 @@ export default function CourseApp({ path }: { path: string }) {
       <header className="course-header">
         <a href="#/" className="course-brand">
           <Sprout size={23} aria-hidden="true" />
-          Learn with Amina
+          FDE Academy
         </a>
-        <a href="#/path">Learning path</a>
+        <a href="#/path">Optional shop examples</a>
       </header>
       <main
         id="course-main"
@@ -292,9 +292,8 @@ export default function CourseApp({ path }: { path: string }) {
             </label>
           </div>
           <p>
-            <a href="#/library">Earlier course reference library</a> ·{' '}
-            <a href="#/sample/amina">One-button sample</a> ·{' '}
-            <a href="#/evidence">Independent evidence review</a>
+            <a href="#/">Return to FDE Academy</a> · <a href="#/sample/amina">One-button sample</a>{' '}
+            · <a href="#/evidence">Independent evidence review</a>
           </p>
         </details>
       </footer>
@@ -364,7 +363,7 @@ function GuidedLesson({
   return (
     <article>
       <div className="course-lesson-meta">
-        <a href="#/path">Lesson {lesson.day} of 30</a>
+        <a href="#/path">Shop example {lesson.day} of 30</a>
         <span>
           {stage === 0
             ? 'Watch'

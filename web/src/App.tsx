@@ -40,7 +40,7 @@ const Settings = lazy(() =>
 );
 
 const navigation = [
-  { path: '/library', label: 'Overview', icon: LayoutDashboard },
+  { path: '/', label: 'Overview', icon: LayoutDashboard },
   { path: '/curriculum', label: 'Learning path', icon: BookOpen },
   { path: '/lab', label: 'Practice lab', icon: Code2 },
   { path: '/scenarios', label: 'Field scenarios', icon: Users },
@@ -96,7 +96,12 @@ export default function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
     main.current?.focus({ preventScroll: true });
-    if (path === '/' || path === '/path' || path === '/evidence' || path.startsWith('/learn/'))
+    if (
+      path === '/guided' ||
+      path === '/path' ||
+      path === '/evidence' ||
+      path.startsWith('/learn/')
+    )
       return;
     const match = path.match(/^\/lesson\/(\d+)$/);
     const day = match ? Number(match[1]) : 0;
@@ -119,7 +124,13 @@ export default function App() {
   const documentMatch = path.match(/^\/document\/(ROADMAP|CURRICULUM|VISION|PROJECTS)\.md$/);
   const lessonDay = lessonMatch ? Number(lessonMatch[1]) : 0;
   const selectedPath =
-    lessonMatch || phaseMatch ? '/curriculum' : documentMatch ? '/resources' : path;
+    lessonMatch || phaseMatch
+      ? '/curriculum'
+      : documentMatch
+        ? '/resources'
+        : path === '/library'
+          ? '/'
+          : path;
   const section =
     navigation.find((item) => item.path === selectedPath)?.label ||
     (selectedPath === '/settings'
@@ -135,7 +146,7 @@ export default function App() {
     )
     .slice(0, 6);
   let page;
-  if (path === '/library') page = <Dashboard progress={progress} />;
+  if (path === '/' || path === '/library') page = <Dashboard progress={progress} />;
   else if (path === '/curriculum')
     page = (
       <Curriculum
@@ -175,10 +186,10 @@ export default function App() {
         </a>
       </div>
     );
-  if (path === '/' || path === '/path' || path === '/evidence' || path.startsWith('/learn/'))
+  if (path === '/guided' || path === '/path' || path === '/evidence' || path.startsWith('/learn/'))
     return (
       <Suspense fallback={<p role="status">Opening your lesson…</p>}>
-        <CourseApp path={path} />
+        <CourseApp path={path === '/guided' ? '/' : path} />
       </Suspense>
     );
   if (path === '/sample/amina')

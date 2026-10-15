@@ -13,7 +13,7 @@ const browser = await chromium.launch({
 try {
   for (const width of [375, 1280]) {
     const page = await browser.newPage({ viewport: { width, height: 900 } });
-    await page.goto(base + '#/');
+    await page.goto(base + '#/guided');
     await page.getByRole('heading', { name: 'Start with one small thing.' }).waitFor();
     await page.evaluate(() => document.fonts.ready);
     await page.screenshot({

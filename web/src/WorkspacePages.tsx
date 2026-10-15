@@ -302,6 +302,11 @@ export function Resources() {
           <ExternalLink size={16} />
         </a>
       </div>
+      <p className="muted">
+        Optional shop examples: <a href="#/sample/amina">Amina’s one-idea sample</a> and{' '}
+        <a href="#/guided">guided shop examples</a>. Your main course remains the FDE Academy
+        learning path.
+      </p>
     </>
   );
 }

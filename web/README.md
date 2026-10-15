@@ -1,6 +1,6 @@
 # FDE Academy
 
-The default app is the complete **Learn with Amina** guided course. Read [GUIDED-COURSE.md](../GUIDED-COURSE.md) for its 30 lessons, checked exercises, projects, real shop workspace, saved evidence, and independent review. The earlier experience described below remains available at `#/library` as a reference.
+The default app is **FDE Academy**, with its original dashboard, curriculum, daily lesson pages and projects, practice lab, scenarios, and portfolio. Optional Amina examples live at `#/guided` and `#/sample/amina`; see [GUIDED-COURSE.md](../GUIDED-COURSE.md). The main academy is available at `#/` and the compatible `#/library` alias.
 
 ## Run locally
 

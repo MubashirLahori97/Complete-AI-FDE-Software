@@ -190,7 +190,8 @@ export default function Lesson({
               <div className="source-note">
                 <BookOpen size={15} />
                 <span>
-                  Expanded lesson · Explanations, worked examples, exercises, and your own project.
+                  Start here: read the lesson, practise the idea, build today's project, then record
+                  your results.
                 </span>
               </div>
               <div className="lesson-project-banner">

@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('a new learner starts with real zero progress and can search the curriculum', async ({
   page,
 }) => {
-  await page.goto('/#/library');
+  await page.goto('/');
   await expect(page.getByRole('heading', { name: 'A little progress, every day.' })).toBeVisible();
   await expect(
     page.getByRole('progressbar', { name: 'Core course completion', exact: true }),
