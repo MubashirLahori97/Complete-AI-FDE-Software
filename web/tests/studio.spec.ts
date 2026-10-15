@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('the shop scene reacts to an action, a mistake, a win, and a reset', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#/workshops');
   const game = page.getByRole('region', { name: 'One-minute challenge' });
   await expect(game.locator('.shop-world').first()).not.toHaveClass(/shop-active/);
   await game.getByRole('button', { name: 'Receive 2 tickets', exact: true }).click();
@@ -52,7 +52,7 @@ test('an experiment changes the preview and offers a direct step into the worked
 test('sound stays off until opted in and its preference survives reload and lesson navigation', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#/workshops');
   const sound = page.getByRole('button', { name: 'Sound off', exact: true });
   await expect(sound).toHaveAttribute('aria-pressed', 'false');
   await sound.click();
@@ -73,7 +73,7 @@ test('sound stays off until opted in and its preference survives reload and less
 });
 
 test('secondary progress stays out of the way until requested', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#/workshops');
   await expect(page.locator('.studio-stat-details')).not.toHaveAttribute('open');
   await expect(page.locator('.builder-strip')).not.toBeVisible();
   await page.locator('.studio-stat-details summary').click();

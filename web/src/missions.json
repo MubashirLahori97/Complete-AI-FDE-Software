@@ -1,0 +1,2768 @@
+[
+  {
+    "id": 1,
+    "stage": 1,
+    "title": "Make a useful website",
+    "problem": "A neighbourhood repair service answers the same questions every day: what do you fix, where do you work, and how do I contact you? Start with a small, accurate information site. Use a fictional business until you have permission to use real details.",
+    "outcome": "A useful site you can open and explain, with AI allowed to create every file.",
+    "foundation": ["product", "stack", "execution", "interfaces"],
+    "concepts": [
+      {
+        "name": "Outcome and implementation",
+        "explanation": "An outcome is what someone can accomplish. Implementation is the machinery that makes it possible. Tell AI the visitor's task and the limits before choosing a tool. A beautiful page that omits the service area has missed the outcome.",
+        "example": "A visitor can find the service area and contact method without asking you.",
+        "misconception": "A screenshot proves the website works. It only shows one view; links and small screens still need checking."
+      },
+      {
+        "name": "Browser and technology stack",
+        "explanation": "A browser reads page structure, applies styles, and runs browser behaviour. Hosting makes files available to other devices. A stack is the collection of technologies actually used. A simple site can use HTML and CSS with no database or live AI. AI helping you build is different from AI running inside the product.",
+        "example": "HTML supplies a contact link; CSS gives it a clear appearance; the browser follows it.",
+        "misconception": "Every website needs a backend. An information site may only need hosted files."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Visitor opens URL",
+        "runs": "Visitor's device"
+      },
+      {
+        "name": "Site files arrive",
+        "runs": "Hosting → browser"
+      },
+      {
+        "name": "Browser displays page",
+        "runs": "Visitor's device"
+      }
+    ],
+    "experiment": {
+      "prompt": "A visitor presses Contact. Choose what the button actually does.",
+      "options": [
+        {
+          "label": "No destination",
+          "result": "The page stays here. The visitor cannot contact the service.",
+          "why": "A visible button needs a real behaviour. Appearance alone is insufficient.",
+          "node": 2
+        },
+        {
+          "label": "Open an email draft",
+          "result": "The visitor's configured mail app can open a draft. Nothing has been sent.",
+          "why": "An email link hands off to another app; it is not a server sending a message.",
+          "node": 2
+        },
+        {
+          "label": "Show a phone number",
+          "result": "The visitor can read the number and choose whether to call.",
+          "why": "This is a simple useful outcome without a database or account.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "The heading says Welcome and the contact button has no destination.",
+      "action": "Ask AI to name the repair service, show its area and hours, and use a clearly labelled contact link.",
+      "after": "A visitor can answer the three common questions and reach a contact option.",
+      "lesson": "Inspect the actual files with AI. If the product only contains static files, explain those files rather than inventing a server."
+    },
+    "project": {
+      "title": "Your first useful service site",
+      "brief": "Create a small information website for a repair service or another useful local service. It must show services, area, hours and a working contact option. Use truthful fictional details and no payment or private data.",
+      "steps": [
+        "Choose the visitor and write the one thing they need to do. Use any available AI builder or coding agent; ask it for a runnable or previewable site and opening instructions.",
+        "Open the result yourself. Ask AI to improve one confusing part. Inspect which files and technologies it actually produced.",
+        "Check on a narrow screen and with a keyboard. Save files or a shareable preview; publication can wait until you choose suitable hosting."
+      ],
+      "checks": [
+        "A visitor can find services, area and hours in the actual page.",
+        "The contact action has the promised behaviour; I record whether it opens another app or sends anything.",
+        "I opened the site at phone width and used the contact link with a keyboard; I recorded what happened."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the difference between the visitor's outcome and the files AI generated.",
+      "locate": "Find the actual page, its styles and its hosting or local preview. What is absent?",
+      "predict": "If hosting is unavailable, can a new visitor load the site? What about an already loaded page?",
+      "compare": "Compare a static site with an app that stores enquiries. Why choose one now?",
+      "challenge": "AI says the contact button stores messages in a database. What would you inspect or try to establish whether this is true?",
+      "guide": "Ask the learner to open their own contact action, trace it, and identify actual technologies. A copied diagram with an imaginary database needs revision.",
+      "variations": [
+        "The owner changes the service area. Show which result must change and verify it.",
+        "A visitor has no mail app configured. Explain the limitation and propose another contact option."
+      ]
+    },
+    "reuse": [1, 13, 14]
+  },
+  {
+    "id": 2,
+    "stage": 1,
+    "title": "Turn preferences into clear direction",
+    "problem": "The site exists, but 'make it better' gives AI too little direction. A visitor cannot find the opening hours. Improve one observable task instead of changing everything at once.",
+    "outcome": "An improved site with a small before-and-after record.",
+    "foundation": ["product", "collaboration", "quality"],
+    "concepts": [
+      {
+        "name": "Constraints and acceptance",
+        "explanation": "A constraint limits a solution: available budget, screen size, language or permitted data. An acceptance criterion describes an observable result. Together they let an agent choose an implementation while preserving what matters.",
+        "example": "At phone width, opening hours appear under Services and the contact link remains usable.",
+        "misconception": "Specific direction means prescribing every line of code. You can specify the result and let AI choose the details."
+      },
+      {
+        "name": "Iteration and feedback",
+        "explanation": "An iteration is a small change followed by observation. Name what confused the visitor, request a change, then repeat the same task. A visual preference is useful feedback, but it differs from evidence that a task became easier.",
+        "example": "Compare whether someone can find the hours before and after moving them.",
+        "misconception": "More changes always mean more progress. A large rewrite can hide which change helped."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Observe a task",
+        "runs": "Person + current site"
+      },
+      {
+        "name": "Give bounded direction",
+        "runs": "AI workspace"
+      },
+      {
+        "name": "Repeat the task",
+        "runs": "Actual site"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the instruction you give the builder. These are prepared examples, not live AI responses.",
+      "options": [
+        {
+          "label": "Make it impressive",
+          "result": "Several visual changes; opening hours may still be hidden.",
+          "why": "No observable target or boundary was given.",
+          "node": 1
+        },
+        {
+          "label": "Move hours below Services",
+          "result": "One targeted change with a clear place to check.",
+          "why": "The implementation can vary while the acceptance condition stays concrete.",
+          "node": 2
+        },
+        {
+          "label": "Replace the whole site",
+          "result": "The original contact option may disappear along with the old layout.",
+          "why": "A broad change needs preservation criteria as well as a desired appearance.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "A user scrolls past the hours twice.",
+      "action": "Ask AI to put Hours below Services on phones, preserve the contact destination, and show the changed result.",
+      "after": "Repeat the same find-the-hours task and check the contact link.",
+      "lesson": "Record observations, including when the change does not help. An AI report of success is a claim to check."
+    },
+    "project": {
+      "title": "One change a visitor can notice",
+      "brief": "Improve the mission-1 site using one observed confusion, two acceptance criteria and one preservation constraint.",
+      "steps": [
+        "Observe a real person with consent, or clearly label your own walkthrough as a scenario. Name one confusion.",
+        "Ask AI for the smallest suitable improvement and preserve a working part.",
+        "Repeat the task, compare the two versions, and retain or revise the change from evidence."
+      ],
+      "checks": [
+        "My request names an observable result and a constraint.",
+        "The changed site satisfies both acceptance criteria I wrote before the change.",
+        "The preserved behaviour still works and my before/after observations are recorded."
+      ]
+    },
+    "assess": {
+      "explain": "Explain a constraint and an acceptance criterion from your change.",
+      "locate": "Show the changed part and the behaviour you preserved.",
+      "predict": "If the site changes language and labels become longer, what might break?",
+      "compare": "Compare a targeted improvement with a redesign. When would each fit?",
+      "challenge": "AI says prettier colours prove visitors find the hours faster. What evidence is missing?",
+      "guide": "Change a constraint and ask the learner to revise their criteria, then inspect the result together.",
+      "variations": [
+        "The owner needs an Urdu version with longer labels. Revise your criteria.",
+        "The proposed change looks better but hides the contact link. Decide what to do and explain why."
+      ]
+    },
+    "reuse": [16, 26]
+  },
+  {
+    "id": 3,
+    "stage": 1,
+    "title": "Understand what a page does",
+    "problem": "The owner asks to change a label, a colour and what happens after a click. These changes affect different parts of the page. Learn the layers before asking AI to change them.",
+    "outcome": "An annotated page showing structure, appearance and behaviour in the actual stack.",
+    "foundation": ["interfaces", "stack", "execution"],
+    "concepts": [
+      {
+        "name": "Structure, presentation and behaviour",
+        "explanation": "HTML gives content meaning and structure. CSS controls presentation. JavaScript can change state and respond to events. Frameworks and libraries organize this work; they do not remove what the browser ultimately does.",
+        "example": "A labelled form field is structure; its width is presentation; showing an error on submit is behaviour.",
+        "misconception": "A framework is a new browser language. It usually produces or coordinates familiar browser technologies."
+      },
+      {
+        "name": "Components and dependencies",
+        "explanation": "A component is a reusable interface part with a responsibility. A library supplies reusable capabilities; a framework sets broader patterns. Configuration and versions affect how these parts build and run. Inspect the project's actual manifest and files with AI.",
+        "example": "One ContactCard component can show the same contact details on two pages.",
+        "misconception": "Every tool named in an AI explanation is installed. Check the actual project."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Structure",
+        "runs": "HTML / rendered markup"
+      },
+      {
+        "name": "Presentation",
+        "runs": "CSS in browser"
+      },
+      {
+        "name": "Behaviour",
+        "runs": "JavaScript in browser, if used"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change one layer of this prepared page model.",
+      "options": [
+        {
+          "label": "Change the heading",
+          "result": "Content changes from Welcome to Local repairs. Layout rules and click behaviour stay the same.",
+          "why": "This changes structure/content, not the contact action.",
+          "node": 0
+        },
+        {
+          "label": "Increase text size",
+          "result": "The same content and action are displayed with larger text.",
+          "why": "A presentation change may alter wrapping and layout.",
+          "node": 1
+        },
+        {
+          "label": "Reveal hours on click",
+          "result": "A click changes visible state to show opening hours.",
+          "why": "This is behaviour. A server is not required for a local reveal.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "Two pages show different contact hours.",
+      "action": "Ask AI to locate the duplicated information and propose one shared source or component.",
+      "after": "Changing the shared hours updates both places when rebuilt or rerendered as appropriate.",
+      "lesson": "Abstraction reduces repeated decisions, but a shared dependency also means one mistake can affect several places."
+    },
+    "project": {
+      "title": "A map of your page",
+      "brief": "Annotate the real service site, identify its actual stack, and ask AI to make one content, one style and one behaviour change.",
+      "steps": [
+        "Inspect files and dependency configuration with AI. Name only technologies actually present.",
+        "Make the three changes one at a time and observe each effect.",
+        "Create an annotated screenshot and component/technology map; include how this project starts or builds."
+      ],
+      "checks": [
+        "The map correctly identifies the actual structure, styling and behaviour technologies.",
+        "Each of my three changes has a separate observed result.",
+        "A shared element remains consistent across its uses; I explain what builds or runs it."
+      ]
+    },
+    "assess": {
+      "explain": "Explain HTML, CSS and browser behaviour using parts of your own page.",
+      "locate": "Find a component or repeated part, its dependency and the project's start instructions.",
+      "predict": "What changes if a shared contact component displays the wrong hours?",
+      "compare": "Compare plain HTML/CSS with the framework actually used, or a plausible framework alternative.",
+      "challenge": "AI says a CSS colour rule sends enquiries to the server. Trace the action to check this claim.",
+      "guide": "Ask for one requested change in an unfamiliar area of the page and a prediction of which layer is affected.",
+      "variations": [
+        "The same contact card is needed on a second page. Explain a suitable boundary.",
+        "Styles load but the behaviour script fails. Predict which tasks still work."
+      ]
+    },
+    "reuse": [13]
+  },
+  {
+    "id": 4,
+    "stage": 1,
+    "title": "Make an interaction work",
+    "problem": "Visitors want an estimated repair price before contacting the business. A calculator must distinguish a number from text and reject impossible quantities.",
+    "outcome": "A small estimator with explainable rules and invalid-input behaviour.",
+    "foundation": ["logic", "interfaces", "quality"],
+    "concepts": [
+      {
+        "name": "Input, types and conditions",
+        "explanation": "Input is information entering the program. A type describes what kind it is: text, number or a true/false value. A condition chooses a path. Text '2' must be interpreted appropriately before numeric work; a blank field is not automatically a sensible zero.",
+        "example": "If quantity is a whole number from 1 to 10, calculate; otherwise explain how to correct it.",
+        "misconception": "A number-looking field guarantees valid input. Validation must check the actual value."
+      },
+      {
+        "name": "Functions and state",
+        "explanation": "A function applies a named rule to inputs and produces a result. State is information the program currently remembers. A calculator's current quantity can be temporary browser state; reloading may reset it unless persistence was added.",
+        "example": "quote(2, 25) returns 50. Changing the quantity replaces the displayed estimate.",
+        "misconception": "Anything visible on screen is permanently saved."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Quantity input",
+        "runs": "Browser state"
+      },
+      {
+        "name": "Validate and multiply",
+        "runs": "Browser function"
+      },
+      {
+        "name": "Estimate or error",
+        "runs": "Browser display"
+      }
+    ],
+    "experiment": {
+      "prompt": "The prepared estimator charges 25 units per item. Change the quantity.",
+      "options": [
+        {
+          "label": "2 items",
+          "result": "Estimate: 50 units.",
+          "why": "Two valid items × 25 = 50. This is an estimate, not a payment.",
+          "node": 2
+        },
+        {
+          "label": "Blank input",
+          "result": "Enter a quantity from 1 to 10. No estimate is shown.",
+          "why": "Missing information needs a useful error, not an invented value.",
+          "node": 1
+        },
+        {
+          "label": "−1 item",
+          "result": "Quantity must be at least 1. No estimate is shown.",
+          "why": "The value is numeric but violates the business rule.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "The form displays −25 for −1 item.",
+      "action": "Ask AI to validate the permitted range before calculating, and show a useful error without losing other input.",
+      "after": "2 gives 50; blank and −1 produce explanations.",
+      "lesson": "The expected outcomes come from the business rule. A test copied from the broken calculation would preserve the defect."
+    },
+    "project": {
+      "title": "A reliable service estimator",
+      "brief": "Add a small estimator to the service site. Define units, valid range and an honest estimate label. AI may produce the implementation and tests.",
+      "steps": [
+        "Write three input/expected-result pairs before asking AI to build.",
+        "Ask AI to implement the rule, validation and accessible feedback.",
+        "Try normal, missing and invalid input; explain where the calculation runs and whether values survive reload."
+      ],
+      "checks": [
+        "A valid example produces the expected amount and units.",
+        "Missing and invalid quantities produce useful errors without a misleading estimate.",
+        "A changed valid input updates the result; reload behaviour matches my system explanation."
+      ]
+    },
+    "assess": {
+      "explain": "Explain input, type, condition, function and state through the estimator.",
+      "locate": "Show where the actual rule runs and where current input lives.",
+      "predict": "Predict the result for a new boundary input before running it.",
+      "compare": "Compare calculating in the browser with checking a final price on a server.",
+      "challenge": "AI says negative input is safe because it is a number. Explain and demonstrate the missing rule.",
+      "guide": "Give a new price or range. Ask for a prediction and an explanation of the validation boundary with AI available.",
+      "variations": [
+        "The first item costs 25 and each extra item costs 15. Predict two examples.",
+        "The owner allows half-hour units. Which validation rule must change?"
+      ]
+    },
+    "reuse": [2, 3, 4]
+  },
+  {
+    "id": 5,
+    "stage": 1,
+    "title": "Learn through experiments",
+    "problem": "The service lists several repair options. Copying the same calculation for each one makes updates inconsistent. Use a collection and a reusable rule, then test how one change affects all results.",
+    "outcome": "A generated service list with a reusable rule and a prediction log.",
+    "foundation": ["logic", "data", "architecture"],
+    "concepts": [
+      {
+        "name": "Collections and loops",
+        "explanation": "A collection groups values. Each service record can contain an identifier, name and price. A loop repeats work for records in the collection. An empty collection needs a sensible result too; repetition does not guarantee there is anything to display.",
+        "example": "Three service records become three cards; an empty list shows No services available.",
+        "misconception": "A loop automatically knows which records are valid or unique."
+      },
+      {
+        "name": "Abstraction and numeric precision",
+        "explanation": "An abstraction hides repeated detail behind a useful rule. One price-formatting function keeps displays consistent. Computers also use finite number representations; monetary calculations need an explicit rounding rule, often using integer minor units.",
+        "example": "Store 1250 cents for 12.50 and format the display consistently.",
+        "misconception": "Displayed decimal places guarantee exact arithmetic."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Service records",
+        "runs": "Local collection"
+      },
+      {
+        "name": "Repeat shared rule",
+        "runs": "Program loop + function"
+      },
+      {
+        "name": "Service cards",
+        "runs": "Browser"
+      }
+    ],
+    "experiment": {
+      "prompt": "Apply a shared display rule to a prepared collection.",
+      "options": [
+        {
+          "label": "3 services",
+          "result": "3 cards, each formatted using the same price rule.",
+          "why": "The loop applies the abstraction once per record.",
+          "node": 2
+        },
+        {
+          "label": "0 services",
+          "result": "No services available. No price cards.",
+          "why": "An empty list is a valid boundary case, not three blank records.",
+          "node": 2
+        },
+        {
+          "label": "Duplicate ID",
+          "result": "Two records share an identity; flag the conflict before accepting them.",
+          "why": "A repeated operation does not solve record identity or data correctness.",
+          "node": 0
+        }
+      ]
+    },
+    "example": {
+      "before": "Three copied price labels round amounts differently.",
+      "action": "Ask AI for one collection and shared formatter; specify the minor unit and rounding policy.",
+      "after": "Changing the formatter updates all three outputs consistently.",
+      "lesson": "Predict the effect of a changed record and a changed shared rule separately. This makes the hidden repetition easier to understand."
+    },
+    "project": {
+      "title": "A reusable service catalogue",
+      "brief": "Generate service cards from records using one reusable formatting rule. Add empty-list and duplicate-identity handling.",
+      "steps": [
+        "Describe each record's fields and create three fictional examples.",
+        "Let AI implement the repeated display and shared price rule; inspect the data-to-interface path.",
+        "Predict then test a fourth record, no records and a duplicate identifier. Save the observations."
+      ],
+      "checks": [
+        "Adding one valid record adds one correct card without copied layout work.",
+        "No records produces an understandable empty state.",
+        "Duplicate identities and the monetary rounding policy are handled as specified."
+      ]
+    },
+    "assess": {
+      "explain": "Explain a collection, a loop and an abstraction using this catalogue.",
+      "locate": "Identify the records, the repeated work and the shared formatting rule.",
+      "predict": "What changes if one price changes? What if the shared rule changes?",
+      "compare": "Compare copied cards with a generated list, including the risk of a shared mistake.",
+      "challenge": "AI says 0.1 + 0.2 always equals exactly 0.3 in every runtime. How would you investigate and choose a money representation?",
+      "guide": "Ask the learner to predict empty, added and duplicated records, then distinguish local data from persistent shared storage.",
+      "variations": [
+        "Prices now have a currency per record. Explain the required data and rule changes.",
+        "One record is missing its name. Predict a safe display or rejection policy."
+      ]
+    },
+    "reuse": [3, 4, 5]
+  },
+  {
+    "id": 6,
+    "stage": 2,
+    "title": "Investigate a workflow",
+    "problem": "The service owner asks for an AI booking app. Before agreeing, discover how requests actually become appointments. The missing step may be checking equipment or contacting a customer, not generating a new screen.",
+    "outcome": "An evidence-labelled workflow map and one unresolved question.",
+    "foundation": ["product", "evidence", "collaboration"],
+    "concepts": [
+      {
+        "name": "Discovery and domain knowledge",
+        "explanation": "Discovery investigates what people do, why, and under which constraints. Domain knowledge is understanding the actual work: a technician may need equipment, access permission or travel time. A requested feature is a possible solution, not a complete statement of the problem.",
+        "example": "Watch how a request moves from a phone call to a technician's schedule.",
+        "misconception": "An AI-generated interview is evidence that a customer said something."
+      },
+      {
+        "name": "Observation and provenance",
+        "explanation": "Provenance records where information came from. Separate direct observations, reported experiences, assumptions and fictional scenarios. Missing information should become a question instead of an invented fact.",
+        "example": "'Owner reported three missed visits' differs from a checked count in appointment records.",
+        "misconception": "A confident summary makes uncertain source information certain."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Incoming request",
+        "runs": "Customer / existing channel"
+      },
+      {
+        "name": "Eligibility and scheduling",
+        "runs": "Staff workflow"
+      },
+      {
+        "name": "Visit and follow-up",
+        "runs": "Technician + customer"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the source behind the claim 'appointments are often missed'.",
+      "options": [
+        {
+          "label": "AI invented example",
+          "result": "Useful practice scenario; no evidence about this business.",
+          "why": "Generated plausibility is not an observation.",
+          "node": 0
+        },
+        {
+          "label": "Owner's recollection",
+          "result": "Reported experience; ask for dates and examples.",
+          "why": "A recollection is valuable context with possible selection and memory limits.",
+          "node": 1
+        },
+        {
+          "label": "Checked visit records",
+          "result": "Observed records, subject to missing entries and definitions.",
+          "why": "Inspect what missed means and how the records were produced.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "The brief says Build an AI scheduler.",
+      "action": "Ask how yesterday's appointment was arranged, where it stalled, and what staff did next.",
+      "after": "The map shows that site-access confirmation is missing before dispatch.",
+      "lesson": "AI can prepare, conduct or analyse research when appropriately authorized. Label who or what supplied the evidence."
+    },
+    "project": {
+      "title": "The workflow before the app",
+      "brief": "Investigate an authorized repair or maintenance workflow, or use a clearly labelled fictional scenario. Map current steps, people, information, delays and incentives.",
+      "steps": [
+        "Choose a domain and an evidence source. Ask AI to help prepare questions about recent behaviour.",
+        "Collect or label the scenario evidence. Draw the current workflow and identify a missing requirement.",
+        "Check the interpretation with a participant if available; otherwise record what remains an assumption."
+      ],
+      "checks": [
+        "Each important claim has an identifiable source or is labelled as an assumption/scenario.",
+        "The map includes an actual constraint and a handoff between people or systems.",
+        "The brief records a missing requirement, an unresolved question and how to investigate it."
+      ]
+    },
+    "assess": {
+      "explain": "Explain why the requested feature may differ from the underlying problem.",
+      "locate": "Find a handoff and the source supporting it in your map.",
+      "predict": "What happens if access approval arrives after a technician is dispatched?",
+      "compare": "Compare observing a recent task with asking whether someone likes a proposed app.",
+      "challenge": "AI claims five fictional interviews prove demand. Explain what they establish and what evidence is still needed.",
+      "guide": "Ask which map details are observed, reported or assumed. Introduce a domain constraint and check the learner can revise the map.",
+      "variations": [
+        "Technicians can only accept jobs for equipment they are trained on. Revise the workflow.",
+        "The owner and receptionist disagree about the biggest delay. Plan an investigation."
+      ]
+    },
+    "reuse": [26]
+  },
+  {
+    "id": 7,
+    "stage": 2,
+    "title": "Define a worthwhile result",
+    "problem": "A new system could make the appointment screen faster while increasing missed visits. Decide which result matters before building more features.",
+    "outcome": "A short product brief with a baseline, success measure and explicit scope.",
+    "foundation": ["product", "evidence", "collaboration"],
+    "concepts": [
+      {
+        "name": "Outcomes, baselines and denominators",
+        "explanation": "A baseline is the starting observation. An outcome measures the change people need. A rate needs a denominator: two missed visits out of ten differs from two out of a hundred. Define exclusions consistently before comparing periods.",
+        "example": "Count preventable missed visits per 100 eligible appointments, not just app logins.",
+        "misconception": "A larger usage count proves the business outcome improved."
+      },
+      {
+        "name": "Scope and priorities",
+        "explanation": "Scope names what is included and excluded. Priorities express which result should win when time or cost is limited. A small complete workflow is often easier to evaluate than many partly connected features.",
+        "example": "Confirm access before dispatch; postpone route optimization until the first change is measured.",
+        "misconception": "Anything useful belongs in the first release."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Define eligible visits",
+        "runs": "Business definition"
+      },
+      {
+        "name": "Measure current result",
+        "runs": "Evidence / records"
+      },
+      {
+        "name": "Set a bounded target",
+        "runs": "Product brief"
+      }
+    ],
+    "experiment": {
+      "prompt": "Prepared counts: 2 missed visits. Change the denominator.",
+      "options": [
+        {
+          "label": "10 eligible visits",
+          "result": "Missed-visit rate: 20%.",
+          "why": "2 ÷ 10 = 0.20. Small samples also produce uncertain estimates.",
+          "node": 1
+        },
+        {
+          "label": "100 eligible visits",
+          "result": "Missed-visit rate: 2%.",
+          "why": "The same count can represent a very different rate.",
+          "node": 1
+        },
+        {
+          "label": "Denominator unknown",
+          "result": "The rate cannot be calculated honestly.",
+          "why": "Missing information cannot be replaced with an impressive percentage.",
+          "node": 0
+        }
+      ]
+    },
+    "example": {
+      "before": "Success means people use the dashboard.",
+      "action": "Define eligible visits, measure a starting rate, choose a target period and record other changes affecting it.",
+      "after": "The brief targets fewer preventable missed visits, with staff workload as a guardrail.",
+      "lesson": "Before/after change alone does not establish causation. Record uncertainty and plausible alternative explanations."
+    },
+    "project": {
+      "title": "A one-page outcome brief",
+      "brief": "Turn the workflow investigation into a measurable, bounded improvement with a baseline or a labelled plan to obtain one.",
+      "steps": [
+        "State the user, current process and costly problem with its evidence.",
+        "Define the outcome, denominator, target and guardrail; do not invent a measured baseline.",
+        "Use AI to challenge scope and exclusions. Agree or label the scenario assumptions."
+      ],
+      "checks": [
+        "The brief defines the outcome, eligible cases and source of its baseline or measurement plan.",
+        "In-scope and out-of-scope work are explicit, with one priority tradeoff.",
+        "A guardrail and alternative explanations prevent a misleading success claim."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the baseline, denominator and guardrail in your brief.",
+      "locate": "Show the decision that limits the first release.",
+      "predict": "If visits double but missed visits stay constant, what happens to the rate?",
+      "compare": "Compare logins, completed confirmations and missed visits as success measures.",
+      "challenge": "AI says the app caused improvement because results improved after release. What else would you investigate?",
+      "guide": "Change the denominator or remove a source and ask the learner to revise the claim without inventing data.",
+      "variations": [
+        "The target improves but staff spend an extra hour per day. Reassess success.",
+        "The baseline included cancellations; the new count excludes them. Repair the comparison."
+      ]
+    },
+    "reuse": [7, 22, 26]
+  },
+  {
+    "id": 8,
+    "stage": 2,
+    "title": "Design the user journey",
+    "problem": "A receptionist needs to confirm access on a phone while answering calls. A journey designed only for a large screen and a perfect submission will fail in ordinary use.",
+    "outcome": "An accessible prototype with a tested normal path and a recoverable error path.",
+    "foundation": ["interfaces", "product", "quality"],
+    "concepts": [
+      {
+        "name": "Journeys, errors and feedback",
+        "explanation": "A journey is the sequence from a person's intent to a useful result. Include loading, empty, error and success states. Feedback should say what happened and what to do next; preserving entered information makes recovery easier.",
+        "example": "A failed confirmation keeps the appointment details and offers a retry.",
+        "misconception": "A success message proves information reached its destination."
+      },
+      {
+        "name": "Responsive and accessible interaction",
+        "explanation": "Responsive layout adapts to available space. Accessibility lets people perceive and operate the interface through different input and assistive methods. Labels, focus order and meaningful errors are part of behaviour, not decoration.",
+        "example": "A keyboard user reaches the labelled confirmation control and understands its result.",
+        "misconception": "Smaller fonts alone make a desktop form mobile-friendly."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Find appointment",
+        "runs": "Interface"
+      },
+      {
+        "name": "Confirm access",
+        "runs": "Form + validation"
+      },
+      {
+        "name": "Understand result",
+        "runs": "Success or recoverable error"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the submission situation in this prototype model.",
+      "options": [
+        {
+          "label": "Normal submission",
+          "result": "Confirmation is shown for the correct appointment.",
+          "why": "The feedback identifies what changed, not just Done.",
+          "node": 2
+        },
+        {
+          "label": "Missing required field",
+          "result": "A named field error appears and the other answers remain.",
+          "why": "The user needs a correction path without starting over.",
+          "node": 1
+        },
+        {
+          "label": "Connection fails",
+          "result": "Show Not confirmed yet, keep the draft, and offer retry.",
+          "why": "A failed request must not produce a false success message.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "An error clears every field and says Something went wrong.",
+      "action": "Ask AI to preserve input, identify the correction and manage focus to the error.",
+      "after": "A person can recover without re-entering the appointment.",
+      "lesson": "Watch a person attempt the task without coaching. If unavailable, label your own walkthrough and seek outside feedback later."
+    },
+    "project": {
+      "title": "A confirmation journey people can finish",
+      "brief": "Create a prototype for finding an appointment and confirming access, including errors and narrow-screen keyboard use.",
+      "steps": [
+        "Sketch the intent, steps and outcomes in plain language.",
+        "Let AI build or configure a prototype with normal and failure states.",
+        "Observe another person with permission, or label a scenario walkthrough. Improve one confusion and repeat the task."
+      ],
+      "checks": [
+        "The normal journey reaches a clearly identified result.",
+        "Missing input and a simulated connection failure preserve useful work and give a next action.",
+        "Narrow-screen and keyboard observations are recorded, together with the source of user feedback."
+      ]
+    },
+    "assess": {
+      "explain": "Explain why error recovery is part of the journey.",
+      "locate": "Show the label, focus order and error message for one input.",
+      "predict": "What would a user believe if a failed request displayed Confirmed?",
+      "compare": "Compare a prototype with a working connected service. What does each establish?",
+      "challenge": "AI says its accessibility score proves every user can finish the task. What observations are still needed?",
+      "guide": "Ask the learner to complete the task by keyboard and explain a fresh error state before trying it.",
+      "variations": [
+        "The person uses a screen reader and cannot see a colour change. Improve the feedback.",
+        "Long translated labels wrap on a small phone. Revise and check the journey."
+      ]
+    },
+    "reuse": [13, 26]
+  },
+  {
+    "id": 9,
+    "stage": 2,
+    "title": "Compare proposed approaches",
+    "problem": "The owner already pays for a scheduling product. A custom app is only one option. Compare buying, configuring, integrating and building against the actual workflow.",
+    "outcome": "A documented choice with costs, boundaries and a realistic alternative.",
+    "foundation": ["product", "architecture", "stack", "evidence"],
+    "concepts": [
+      {
+        "name": "Buy, configure, integrate or build",
+        "explanation": "Buying adopts a product, configuration adjusts supported behaviour, integration connects existing systems, and building creates new behaviour. Combinations are common. Compare task fit, access, export, maintenance and total cost rather than novelty.",
+        "example": "Configure an access-confirmation field before building a second scheduling system.",
+        "misconception": "Custom software is automatically cheaper because AI writes the code."
+      },
+      {
+        "name": "Boundaries and total cost",
+        "explanation": "A boundary separates responsibilities. Every connection introduces a contract and a dependency. Total cost includes setup, usage, maintenance, migration and people's time. A low entry price can hide an expensive constraint.",
+        "example": "A free plan may lack the export or permissions the workflow needs.",
+        "misconception": "A provider's current offer is a permanent guarantee."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Workflow requirements",
+        "runs": "Product brief"
+      },
+      {
+        "name": "Compare options",
+        "runs": "Evidence + current provider terms"
+      },
+      {
+        "name": "Choose boundaries",
+        "runs": "Decision record"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the requirement before choosing an approach. These costs and offers are fictional.",
+      "options": [
+        {
+          "label": "Existing field fits",
+          "result": "Configure the current product and test the journey.",
+          "why": "The need may be met without a new system boundary.",
+          "node": 2
+        },
+        {
+          "label": "Needs an external record",
+          "result": "Evaluate an integration and its API/export contract.",
+          "why": "Connecting systems may preserve useful existing workflows.",
+          "node": 2
+        },
+        {
+          "label": "No suitable access/export",
+          "result": "Compare replacement and custom building with migration costs.",
+          "why": "A missing capability changes the feasible options, not just the screen design.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "Build a scheduler because coding is now cheap.",
+      "action": "Compare the current tool, a connector and a custom app on the same criteria.",
+      "after": "Choose configuration for v1 and record what would trigger a replacement.",
+      "lesson": "Check current capabilities and prices from the provider when doing the real project. The simulation is not market research."
+    },
+    "project": {
+      "title": "A decision you can defend",
+      "brief": "Compare at least two plausible ways to deliver the brief, including an existing tool or configuration option. Choose a small reversible trial.",
+      "steps": [
+        "List required capabilities, data ownership and local access constraints.",
+        "Ask AI to research current options and verify consequential claims at their sources; estimate setup and ongoing cost.",
+        "Record the choice, alternative, boundary diagram and conditions that would change the decision."
+      ],
+      "checks": [
+        "Both approaches are compared using the same workflow and cost criteria.",
+        "Important capability and pricing claims have dated sources or explicit unknowns.",
+        "The selected trial has an exit/export plan and a reason to revisit the choice."
+      ]
+    },
+    "assess": {
+      "explain": "Explain your approach and who owns each responsibility.",
+      "locate": "Find an integration boundary or the reason no integration is needed.",
+      "predict": "What happens if the provider removes a necessary export?",
+      "compare": "Defend the chosen approach against the strongest alternative, including maintenance.",
+      "challenge": "AI says free code generation makes ongoing cost zero. Name the missing costs and how to estimate them.",
+      "guide": "Introduce a changed budget or access constraint; check that the learner can revise the choice without defending a tool by habit.",
+      "variations": [
+        "The current provider doubles its price. Recalculate the comparison.",
+        "The team needs offline operation and a local language. Reassess suitability."
+      ]
+    },
+    "reuse": [10, 26, 28]
+  },
+  {
+    "id": 10,
+    "stage": 2,
+    "title": "Specify what counts as done",
+    "problem": "The confirmation prototype looks finished. Before connecting real data, define the observable results so tests do not merely repeat whatever the implementation happens to do.",
+    "outcome": "A small acceptance matrix covering normal, boundary and failure cases.",
+    "foundation": ["quality", "logic", "product"],
+    "concepts": [
+      {
+        "name": "Acceptance criteria and examples",
+        "explanation": "An acceptance criterion names a required behaviour. A concrete example gives a starting state, action and expected observation. Write the expectation before implementation so it can reveal the wrong behaviour.",
+        "example": "Given an unconfirmed visit, saving confirmed access changes only that visit and displays its identifier.",
+        "misconception": "A test passes, therefore the requirement must be correct."
+      },
+      {
+        "name": "Boundaries and negative cases",
+        "explanation": "Boundary cases sit at the edge of a rule. Negative cases try an action that should be refused or fail. Include what must remain unchanged after failure, not just which error appears.",
+        "example": "Submitting an empty appointment ID must not update any record.",
+        "misconception": "One successful example covers every meaningful situation."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Requirement",
+        "runs": "Agreed brief"
+      },
+      {
+        "name": "Given / action / expected",
+        "runs": "Acceptance matrix"
+      },
+      {
+        "name": "Observed evidence",
+        "runs": "Actual product"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the evidence proposed for 'only the chosen visit changes'.",
+      "options": [
+        {
+          "label": "Success toast",
+          "result": "Insufficient: a message does not establish which records changed.",
+          "why": "Check the saved record and another record that must remain unchanged.",
+          "node": 2
+        },
+        {
+          "label": "Before/after records",
+          "result": "Relevant evidence if identity and environment are correct.",
+          "why": "The observation directly concerns the required state change.",
+          "node": 2
+        },
+        {
+          "label": "AI says all good",
+          "result": "A claim awaiting reproducible evidence.",
+          "why": "Ask what was run, on which data, and what was observed.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "Done means the Confirm button works.",
+      "action": "Specify valid, missing-ID and duplicate-submit cases with expected stored state.",
+      "after": "The checks can expose a success message attached to the wrong record.",
+      "lesson": "A useful check can fail for a real defect. A suite unable to fail may be testing a convenient story."
+    },
+    "project": {
+      "title": "The definition-of-done matrix",
+      "brief": "Write and trial acceptance cases for the planned stored confirmation workflow before implementing it further.",
+      "steps": [
+        "Choose three important behaviours from the brief and define starting states and actions.",
+        "Write normal, boundary and failure expectations with unchanged-state requirements.",
+        "Ask AI to challenge missing cases and trial them against the prototype, labelling unavailable backend checks as not yet run."
+      ],
+      "checks": [
+        "The matrix distinguishes expected results from observations and unrun checks.",
+        "It includes a normal, boundary and failure case with specific record identities.",
+        "At least one deliberate prototype defect or missing behaviour is identified by a check."
+      ]
+    },
+    "assess": {
+      "explain": "Explain why expectations should come from requirements.",
+      "locate": "Show one check that concerns state and one that concerns the interface.",
+      "predict": "What would your matrix show if the wrong visit were updated?",
+      "compare": "Compare a screen assertion with checking stored state; what can each miss?",
+      "challenge": "AI says 100% test coverage proves there are no defects. Explain the limit and propose a missing scenario.",
+      "guide": "Supply a defect that preserves the toast but changes the wrong record. Ask which evidence would expose it.",
+      "variations": [
+        "A confirmation arrives twice. Add the expected behaviour.",
+        "The write fails after the form says Done. Revise the success condition."
+      ]
+    },
+    "reuse": [12, 22]
+  },
+  {
+    "id": 11,
+    "stage": 3,
+    "title": "Follow an action through the system",
+    "problem": "A staff member presses Confirm but the stored appointment does not change. Follow the action through the browser, network, server and response instead of guessing which screen to redesign.",
+    "outcome": "A traceable request journey and one diagnosed failed response.",
+    "foundation": ["networks", "execution", "stack", "architecture"],
+    "concepts": [
+      {
+        "name": "Client, server and HTTP contract",
+        "explanation": "A client requests work from a server. HTTP carries a request method, destination, headers and sometimes a body; the response has a status and data. DNS resolves a name to a destination. TLS protects transport when correctly used; it does not decide who is allowed to edit a visit.",
+        "example": "A browser sends a visit identifier and new status to an API endpoint.",
+        "misconception": "An HTTPS address means every action is authorized."
+      },
+      {
+        "name": "Asynchronous work and failure",
+        "explanation": "Network work takes time and can fail independently of the page. The interface needs pending, success and failure states. A timeout means a response was not received in time; the server may still have performed the action.",
+        "example": "A confirmation write succeeds but its response is lost, so the browser must avoid blindly duplicating it.",
+        "misconception": "No response always means no change occurred."
+      },
+      {
+        "name": "Files, processes and runtimes",
+        "explanation": "Source files describe the program. A running process executes work using memory and a runtime. Interpreters execute a language through a runtime; compilers translate source into another form. Builds may bundle and transform modules before the browser or server runs them. Dependencies, versions and configuration affect execution. Sequential work follows an order; concurrent work can overlap and share state.",
+        "example": "A TypeScript build produces browser JavaScript, while a separately configured server process handles API requests. Inspect your actual project rather than assuming this stack.",
+        "misconception": "A source file in a repository is already a running service, or a local memory value automatically survives process exit."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Click + request",
+        "runs": "Browser client"
+      },
+      {
+        "name": "Validate + handle",
+        "runs": "Application server"
+      },
+      {
+        "name": "Response + display",
+        "runs": "Server → browser"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the prepared response from the confirmation API.",
+      "options": [
+        {
+          "label": "200 with confirmation",
+          "result": "Show confirmed only after matching the response to this visit.",
+          "why": "Response identity and payload matter as well as status.",
+          "node": 2
+        },
+        {
+          "label": "400 invalid request",
+          "result": "Show a correctable error; do not claim the visit changed.",
+          "why": "The server rejected this request contract.",
+          "node": 1
+        },
+        {
+          "label": "Timeout",
+          "result": "Outcome is unknown. Check state before deciding how to retry.",
+          "why": "The write and the reply are separate events.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "The UI says Confirmed immediately when clicked.",
+      "action": "Ask AI to trace the actual request, handle pending and error states, and correlate the response to the visit.",
+      "after": "The interface reports the server's observed result instead of assuming success.",
+      "lesson": "Use the real network observation or logs. A prepared response is a teaching fixture, not a request to a deployed service."
+    },
+    "project": {
+      "title": "A connected confirmation journey",
+      "brief": "Use AI to implement or connect a small confirmation API for fictional visits. Trace one actual action and one failed request through the real stack.",
+      "steps": [
+        "Reuse the acceptance matrix and ask AI for a minimal client/server contract and runnable setup.",
+        "Open a real request trace with AI assistance; identify method, URL, payload, status and which components run where.",
+        "Trigger an invalid request and an unavailable dependency. Record observed feedback and any unknown outcome."
+      ],
+      "checks": [
+        "A real valid action reaches the intended handler and returns the correct visit identity.",
+        "An invalid request produces the specified status and useful feedback.",
+        "The diagram accurately separates browser, application server and any external service; a failed call is recorded."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the request and response, DNS, TLS and asynchronous waiting in this journey.",
+      "locate": "Identify the actual endpoint, runtime, dependencies and relevant configuration.",
+      "predict": "What if the server changes state but the reply is lost?",
+      "compare": "Compare a local browser calculation with a server request for shared data.",
+      "challenge": "AI says a timeout proves the appointment is unchanged. What observation would resolve this?",
+      "guide": "Ask the learner to trace a fresh action and distinguish a rejected request from an unknown outcome.",
+      "variations": [
+        "The API returns a different visit's ID. Decide how the client should respond.",
+        "The server is reachable by address but its hostname fails. Locate a plausible boundary."
+      ]
+    },
+    "reuse": [9, 10, 24]
+  },
+  {
+    "id": 12,
+    "stage": 3,
+    "title": "Keep meaningful information",
+    "problem": "The appointment vanishes after the server restarts. Staff also have two people with the same name. Introduce persistent records, stable identifiers and information provenance.",
+    "outcome": "A stored workflow with an accurate data model and source-quality notes.",
+    "foundation": ["data", "evidence", "execution"],
+    "concepts": [
+      {
+        "name": "Persistence, identifiers and relationships",
+        "explanation": "Memory belongs to a running process; persistent storage survives the intended restart when configured correctly. A stable identifier distinguishes records even when names match. Relationships connect records, such as one customer with several visits. Constraints protect rules at the storage boundary.",
+        "example": "Visit V12 refers to customer C7 rather than identifying a person only by name.",
+        "misconception": "An in-memory database is automatically durable."
+      },
+      {
+        "name": "Queries, SQL and provenance",
+        "explanation": "A query asks for selected data; SQL is a language for relational data operations. A model defines fields and relationships. Record where values came from and what is missing: an empty access field differs from access denied.",
+        "example": "Query pending visits while keeping unknown access status separate from refused access.",
+        "misconception": "Importing a spreadsheet makes all its contents trustworthy."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Validated visit",
+        "runs": "Application server"
+      },
+      {
+        "name": "Records + relationships",
+        "runs": "Configured persistent store"
+      },
+      {
+        "name": "Query after restart",
+        "runs": "Server → browser"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the storage and data situation in this prepared model.",
+      "options": [
+        {
+          "label": "Process memory + restart",
+          "result": "The temporary visit disappears.",
+          "why": "No persistent write was made.",
+          "node": 1
+        },
+        {
+          "label": "Persistent store + restart",
+          "result": "The saved visit can be queried after restarting with the same store.",
+          "why": "Persistence depends on the actual storage path, volume or managed service.",
+          "node": 2
+        },
+        {
+          "label": "Two identical names",
+          "result": "Names are ambiguous; stable customer IDs preserve the correct relationship.",
+          "why": "A label is not necessarily a unique identity.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "Visits store only a customer's name and an empty access string.",
+      "action": "Ask AI for stable identifiers, a customer relationship and explicit unknown access status; retain the source of imported information.",
+      "after": "The correct customer's visit survives a restart and unknown data remains visible.",
+      "lesson": "Inspect the actual storage configuration and perform the restart test. A database-shaped object in a demo is not proof of durability."
+    },
+    "project": {
+      "title": "An appointment register that survives",
+      "brief": "Persist fictional customers and visits with stable IDs, a relationship and explicit missing-data handling. Record where imported or entered information came from.",
+      "steps": [
+        "Ask AI to design a small data model and explain constraints, query and storage choices.",
+        "Store two customers with the same name and visits attached to the correct IDs.",
+        "Restart using the documented setup, query the records, and investigate a missing or questionable source value."
+      ],
+      "checks": [
+        "Saved visits remain after the intended process restart using the same storage configuration.",
+        "Same-name customers remain distinguishable and visits connect to the correct identity.",
+        "Missing information has an explicit meaning and an important value has recorded provenance."
+      ]
+    },
+    "assess": {
+      "explain": "Explain memory, persistence, model, identifier, relationship and query.",
+      "locate": "Find the actual data store, its configuration and one query with AI's help.",
+      "predict": "What happens if a deployment uses a temporary disk or a different database URL?",
+      "compare": "Compare one flat record list with related customer and visit records.",
+      "challenge": "AI says every blank access value means refused access. What source evidence and data change are needed?",
+      "guide": "Ask the learner to identify a real saved record after restart and explain an unfamiliar missing-data case.",
+      "variations": [
+        "A customer's displayed name changes. Explain which identifiers should remain stable.",
+        "An import has no source date. Explain what claims you cannot make."
+      ]
+    },
+    "reuse": [5, 6, 24]
+  },
+  {
+    "id": 13,
+    "stage": 3,
+    "title": "Protect correct state",
+    "problem": "Two staff members reserve the last appointment slot. A slow connection also makes one person press Save twice. Correct state must survive both situations.",
+    "outcome": "Validated updates with a demonstrated duplicate and concurrency policy.",
+    "foundation": ["data", "logic", "architecture", "quality"],
+    "concepts": [
+      {
+        "name": "Validation and transactions",
+        "explanation": "Validation checks a value against rules. A transaction groups related storage changes so they commit together or roll back together. Checking availability and later writing without a suitable atomic rule can let two requests claim the same slot.",
+        "example": "Reserve the slot and create its visit together, or leave both unchanged.",
+        "misconception": "A browser check prevents conflicting writes from other clients."
+      },
+      {
+        "name": "Concurrency and idempotency",
+        "explanation": "Concurrent operations overlap. Idempotency makes repeating the same intended operation avoid repeating its effect. A request key can identify a retry; it needs a policy for different data under the same key. Idempotency is not permission to skip validation or authorization.",
+        "example": "Retrying confirmation K17 returns its original result rather than creating a second visit.",
+        "misconception": "Disabling the Save button is sufficient duplicate protection."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Validate request + identity",
+        "runs": "Server boundary"
+      },
+      {
+        "name": "Atomic storage rule",
+        "runs": "Database transaction / constraint"
+      },
+      {
+        "name": "Stable retry result",
+        "runs": "Server response"
+      }
+    ],
+    "experiment": {
+      "prompt": "Two prepared requests compete for one available slot.",
+      "options": [
+        {
+          "label": "Separate check then write",
+          "result": "Both may observe availability and create conflicting reservations.",
+          "why": "The gap between checking and writing permits a race.",
+          "node": 1
+        },
+        {
+          "label": "Atomic reservation rule",
+          "result": "One reservation succeeds; the conflicting request gets a clear refusal.",
+          "why": "A suitable transaction or constraint protects the shared invariant.",
+          "node": 1
+        },
+        {
+          "label": "Retry same request key",
+          "result": "Return the original result without a second reservation.",
+          "why": "A valid retry should not multiply the business effect.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "Two requests both see one free slot and both save.",
+      "action": "Ask AI to enforce the invariant at the storage boundary and supply a concurrent-request check.",
+      "after": "One wins; the other receives a conflict. Repeating the winner's request preserves one reservation.",
+      "lesson": "A sequential happy-path check cannot establish concurrency behaviour."
+    },
+    "project": {
+      "title": "One slot, one reservation",
+      "brief": "Protect the stored appointment workflow against invalid requests, repeated submissions and competing reservations.",
+      "steps": [
+        "Define the invariant and duplicate policy with concrete examples.",
+        "Delegate implementation to AI, including atomic changes, constraints and retry identity.",
+        "Run invalid, repeated and overlapping-request checks; inspect final stored state as well as responses."
+      ],
+      "checks": [
+        "An invalid request leaves the required stored state unchanged.",
+        "Repeating the same request produces one business effect.",
+        "Overlapping requests cannot both reserve the same exclusive slot; actual observations are recorded."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the invariant, transaction, race and retry policy.",
+      "locate": "Find where the shared-state rule is enforced in the actual system.",
+      "predict": "What if two valid requests arrive before either finishes?",
+      "compare": "Compare UI disabling, server validation and a storage constraint.",
+      "challenge": "AI says one successful reservation test proves concurrent safety. Design evidence that could expose a race.",
+      "guide": "Introduce a reused request key with changed data. Ask the learner to explain an appropriate response.",
+      "variations": [
+        "A retry uses the same key but a different slot. Define the response.",
+        "The second half of a two-part write fails. Explain required stored state."
+      ]
+    },
+    "reuse": [12, 24]
+  },
+  {
+    "id": 14,
+    "stage": 3,
+    "title": "Give people the right access",
+    "problem": "Customers may see their own visits; dispatchers may schedule assigned work. Hiding a button does not stop someone calling an endpoint directly.",
+    "outcome": "A two-user permission demonstration with server-enforced boundaries.",
+    "foundation": ["security", "data", "networks"],
+    "concepts": [
+      {
+        "name": "Authentication and sessions",
+        "explanation": "Authentication establishes an identity. A session lets later requests refer to an authenticated interaction through an appropriate credential. Credentials and session configuration need protection. Use a well-supported identity mechanism rather than inventing a password system for practice.",
+        "example": "The server associates a request with customer C7 using its validated session.",
+        "misconception": "A customer ID supplied by the browser proves that person's identity."
+      },
+      {
+        "name": "Authorization and trust boundaries",
+        "explanation": "Authorization decides whether an identity may perform this action on this record. Enforce it at the server or trusted service boundary for every relevant request. Least privilege grants only the needed authority. Validation and transport encryption solve different problems.",
+        "example": "C7 cannot retrieve C8's private appointment by changing the URL.",
+        "misconception": "A hidden admin button is an access-control rule."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Authenticated request",
+        "runs": "Client + identity service"
+      },
+      {
+        "name": "Permission on this record",
+        "runs": "Trusted server boundary"
+      },
+      {
+        "name": "Allowed result or refusal",
+        "runs": "API response"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the prepared identity and record requested.",
+      "options": [
+        {
+          "label": "C7 requests C7 visit",
+          "result": "Allowed when the session and action are valid.",
+          "why": "Identity and ownership match the policy.",
+          "node": 2
+        },
+        {
+          "label": "C7 requests C8 visit",
+          "result": "Refused without disclosing private visit details.",
+          "why": "An authenticated person is not authorized for every record.",
+          "node": 1
+        },
+        {
+          "label": "No valid session",
+          "result": "No private record returned; require appropriate sign-in.",
+          "why": "A supplied record identifier does not establish identity.",
+          "node": 0
+        }
+      ]
+    },
+    "example": {
+      "before": "The API accepts any customerId sent by the page.",
+      "action": "Ask AI to derive identity from the trusted session and check ownership before returning a visit.",
+      "after": "Separate customers receive their own records and cross-customer access is denied.",
+      "lesson": "Use separate identities in actual checks. Do not infer enforcement from what one screen shows."
+    },
+    "project": {
+      "title": "The right visit for the right person",
+      "brief": "Add a supported identity mechanism and an explicit permission policy to fictional visit data. Avoid real personal data in the learning project.",
+      "steps": [
+        "Define customer and staff actions and which records each may access.",
+        "Ask AI to implement trusted identity/session handling and enforce permissions at the data/API boundary.",
+        "Use two separate users and an unauthenticated request; directly try permitted and forbidden actions."
+      ],
+      "checks": [
+        "Each test user can perform the intended action on the permitted records.",
+        "A direct cross-user request cannot read or modify another user's private record.",
+        "An unauthenticated request is refused and useful diagnostics omit secrets and private payloads."
+      ]
+    },
+    "assess": {
+      "explain": "Explain authentication, authorization and trust boundaries in this product.",
+      "locate": "Find the actual identity mechanism and enforcement point.",
+      "predict": "What happens if a customer changes a visit ID in a request?",
+      "compare": "Compare client-side hiding with trusted server enforcement.",
+      "challenge": "AI says HTTPS proves a request is authorized. Show what TLS does and which permission check remains.",
+      "guide": "Try a fresh record/action combination with two identities. A good-looking login page is insufficient evidence.",
+      "variations": [
+        "A dispatcher should see only one region. Extend the policy.",
+        "A session expires while a form is open. Explain safe recovery."
+      ]
+    },
+    "reuse": [23, 24]
+  },
+  {
+    "id": 15,
+    "stage": 3,
+    "title": "Connect another service",
+    "problem": "The owner wants appointment reminders. A messaging provider is a dependency with credentials, a contract, cost and possible failure. Sending a reminder also requires appropriate authority and recipient consent.",
+    "outcome": "A bounded integration with configuration and failure evidence.",
+    "foundation": ["networks", "security", "stack", "architecture"],
+    "concepts": [
+      {
+        "name": "Contracts, configuration and secrets",
+        "explanation": "An integration contract defines accepted requests and responses. Configuration selects the environment, destination and behaviour. A secret is a credential granting access; keep server secrets out of browser bundles and logs. Versions and capabilities must match the actual provider.",
+        "example": "A server adapter sends an authorized reminder using a configured test provider.",
+        "misconception": "An environment variable is secret even when bundled into public browser JavaScript."
+      },
+      {
+        "name": "Dependencies and safe failure",
+        "explanation": "A dependency can be unavailable or return an ambiguous result. Use timeouts, explicit status and suitable retry rules. External actions may need idempotency or reconciliation; repeating a message request can otherwise contact someone twice.",
+        "example": "A failed provider call leaves the reminder pending, not falsely delivered.",
+        "misconception": "A simulated provider response proves a real message was delivered."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Authorized reminder request",
+        "runs": "Application server"
+      },
+      {
+        "name": "Configured provider adapter",
+        "runs": "Server → external service"
+      },
+      {
+        "name": "Status + reconciliation",
+        "runs": "Application records"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the prepared provider response. No messages are sent here.",
+      "options": [
+        {
+          "label": "Accepted by provider",
+          "result": "Record provider acceptance, not necessarily delivery to the person.",
+          "why": "Accepted and delivered are different contract states.",
+          "node": 2
+        },
+        {
+          "label": "Provider unavailable",
+          "result": "Keep an explicit pending/failed state and an appropriate recovery path.",
+          "why": "Do not invent successful delivery.",
+          "node": 1
+        },
+        {
+          "label": "Missing credential",
+          "result": "Fail configuration validation without exposing the secret.",
+          "why": "Credentials belong at the trusted integration boundary.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "The UI says Reminder delivered whenever the request is submitted.",
+      "action": "Ask AI to model accepted, delivered, failed and unknown states according to the provider contract.",
+      "after": "The record reflects observed provider evidence and a bounded retry policy.",
+      "lesson": "Use a test inbox or authorized recipient. A local double checks your boundary, not external deliverability."
+    },
+    "project": {
+      "title": "A reminder integration with honest status",
+      "brief": "Connect a test messaging service or a clearly labelled local provider double. Keep credentials server-side and demonstrate unavailable-provider behaviour. Record which external claims remain untested.",
+      "steps": [
+        "Inspect the current provider contract, test mode, cost and permission requirements with AI.",
+        "Delegate a small adapter with configuration checks, timeouts and appropriate retry identity.",
+        "Exercise accepted, rejected and unavailable cases; distinguish local-double evidence from an actual test delivery."
+      ],
+      "checks": [
+        "The configuration and secret boundary are documented and secrets are absent from public output.",
+        "A successful boundary check records the contract's actual status without exaggerating delivery.",
+        "Provider failure produces an honest state and bounded recovery; no unintended contact occurs."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the provider contract, dependency and secret boundary.",
+      "locate": "Identify actual adapter configuration and whether tests use a double or real service.",
+      "predict": "If a reply is lost after acceptance, what might a blind retry do?",
+      "compare": "Compare a provider double, test mode and an authorized real delivery.",
+      "challenge": "AI says a passing mock test proves the customer received a message. Explain the gap.",
+      "guide": "Ask for the exact authority, environment and evidence behind the claimed external effect.",
+      "variations": [
+        "The provider changes its response schema. Explain the impact and investigation.",
+        "The recipient withdraws permission for reminders. Adapt the workflow."
+      ]
+    },
+    "reuse": [9, 10, 17, 23]
+  },
+  {
+    "id": 16,
+    "stage": 4,
+    "title": "Give an agent a complete task",
+    "problem": "You want AI to add a useful change, not merely write a function. Give it the goal, context, authority and evidence requirements so it can plan and execute appropriately.",
+    "outcome": "A completed delegated change with an inspectable decision and evidence record.",
+    "foundation": ["agents", "collaboration", "quality"],
+    "concepts": [
+      {
+        "name": "Goals, context and decomposition",
+        "explanation": "A goal describes the accepted outcome. Context supplies the current system, users, constraints and relevant evidence. Decomposition breaks work into dependencies. AI may propose the plan and revise it; the learner must understand why the parts serve the outcome.",
+        "example": "Add an access-confirmation filter while preserving existing permissions and saved data.",
+        "misconception": "A longer prompt or more prescribed steps always gives better delegation."
+      },
+      {
+        "name": "Authority, budgets and stopping",
+        "explanation": "Authority defines permitted actions and resources. A budget limits spend, time or work. A stopping condition describes completion or a reason to pause and report. Match controls to consequences and allow routine decisions within the agreed boundary.",
+        "example": "Work in a test environment; stop if credentials or a paid provider are required.",
+        "misconception": "An intelligent agent should automatically have unlimited access."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Goal + context + authority",
+        "runs": "Task brief"
+      },
+      {
+        "name": "Plan / act / observe",
+        "runs": "AI workspace + permitted tools"
+      },
+      {
+        "name": "Accepted outcome + evidence",
+        "runs": "Actual product review"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the authority supplied to a prepared agent task.",
+      "options": [
+        {
+          "label": "No boundary stated",
+          "result": "The task leaves spending, publication and data access ambiguous.",
+          "why": "Capability does not establish authorization.",
+          "node": 0
+        },
+        {
+          "label": "Test environment only",
+          "result": "The agent can work and test locally; external release needs a separate authorized step.",
+          "why": "A useful boundary permits meaningful work while clarifying consequences.",
+          "node": 1
+        },
+        {
+          "label": "Bounded live change",
+          "result": "Use the named environment, budget and release/recovery conditions.",
+          "why": "Broader autonomy can be appropriate when its scope is explicit.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "Make the app smarter. Do whatever is needed.",
+      "action": "State the workflow outcome, actual stack, permitted resources, preserved behaviours and observable checks.",
+      "after": "The agent can choose implementation details and report a result against the brief.",
+      "lesson": "Planning and review can also be delegated. Still connect their claims to the right objective and observations."
+    },
+    "project": {
+      "title": "Delegate a complete improvement",
+      "brief": "Give a capable AI a meaningful change to the visit application. Let it plan, implement, test and diagnose within explicit boundaries.",
+      "steps": [
+        "Choose a change and supply the actual system context, outcome, constraints, authority, budget and stopping rules.",
+        "Let AI propose and execute a suitable plan. Record significant decisions and any needed clarification.",
+        "Inspect the actual result, repeat a relevant user journey and update the system explanation."
+      ],
+      "checks": [
+        "The delegated task specifies outcome, context, authority, budget and stopping conditions.",
+        "The change meets prewritten acceptance criteria with identifiable observations.",
+        "The record distinguishes agent actions, learner decisions, unrun checks and remaining gaps."
+      ]
+    },
+    "assess": {
+      "explain": "Explain how this task permits autonomy without leaving authority ambiguous.",
+      "locate": "Find the evidence connecting the agent's changes to the requested outcome.",
+      "predict": "What should happen if the plan needs access outside its allowed scope?",
+      "compare": "Compare prescribing every edit with delegating an accepted outcome.",
+      "challenge": "AI says its own successful summary is sufficient acceptance evidence. How would you investigate?",
+      "guide": "Ask the learner to change a budget or authority limit and explain the effect on the plan and checks.",
+      "variations": [
+        "The selected tool requires a paid account outside budget. Revise the plan.",
+        "The agent discovers a useful change outside scope. Decide how to handle it."
+      ]
+    },
+    "reuse": [16, 20, 28]
+  },
+  {
+    "id": 17,
+    "stage": 4,
+    "title": "Coordinate dependent work",
+    "problem": "A UI change and an API change can be worked on separately, but incompatible assumptions will break the whole journey. More agents also create coordination cost.",
+    "outcome": "A coordinated change with a clear interface contract and integration evidence.",
+    "foundation": ["agents", "architecture", "collaboration"],
+    "concepts": [
+      {
+        "name": "Interfaces, ownership and dependencies",
+        "explanation": "An interface is an agreement between parts. Ownership identifies who changes and accepts each part. A dependency determines what must be ready first. Parallel work helps when responsibilities are separable and contracts are clear.",
+        "example": "The API returns accessStatus; the UI must agree on its name and allowed values.",
+        "misconception": "Two completed tasks automatically make one working feature."
+      },
+      {
+        "name": "Coordination cost and integration",
+        "explanation": "Coordination includes sharing context, resolving conflicts, reviewing assumptions and checking the assembled result. AI can manage this work too. Choose one agent or several according to the task, not to make the process look advanced.",
+        "example": "One agent is simpler for a small label change; separate UI and API work may fit a larger bounded feature.",
+        "misconception": "Agent count is evidence of delivery skill."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Shared contract",
+        "runs": "Task / interface record"
+      },
+      {
+        "name": "Owned workstreams",
+        "runs": "One or several AI workers"
+      },
+      {
+        "name": "Integrated journey",
+        "runs": "Assembled product"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the field agreement between two prepared workstreams.",
+      "options": [
+        {
+          "label": "Both use accessStatus",
+          "result": "The parts can exchange the expected field; integration still needs checking.",
+          "why": "Agreement is necessary but not sufficient for a working feature.",
+          "node": 2
+        },
+        {
+          "label": "UI expects status",
+          "result": "The UI receives a different field and cannot reliably display access.",
+          "why": "Both parts can pass isolated checks while the contract is broken.",
+          "node": 1
+        },
+        {
+          "label": "One small task, one agent",
+          "result": "No cross-agent handoff needed; check the complete result directly.",
+          "why": "Avoid coordination work that adds no useful separation.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "Two agents implement different meanings of confirmed.",
+      "action": "Agree on the field, allowed values, ownership and a shared example before parallel work.",
+      "after": "Run the same example through the assembled UI and API.",
+      "lesson": "A coordinating agent can help, but a shared mistaken requirement can survive every agent's review."
+    },
+    "project": {
+      "title": "A change whose parts agree",
+      "brief": "Deliver a change touching the interface and service. Use one or multiple agents as useful, with an explicit contract and an end-to-end observation.",
+      "steps": [
+        "Draw the dependencies and choose a coordination approach with a reason.",
+        "Define the interface using one normal and one failure example; delegate owned work.",
+        "Integrate, investigate disagreement and rerun the actual journey rather than only isolated tests."
+      ],
+      "checks": [
+        "The interface contract names fields, allowed values and error meaning.",
+        "Ownership and sequencing are clear, including the decision about agent count.",
+        "A real integration observation covers both the normal path and a contract failure."
+      ]
+    },
+    "assess": {
+      "explain": "Explain a dependency, interface and coordination cost in your change.",
+      "locate": "Find where each component produces or consumes the shared contract.",
+      "predict": "What if the API adds a new status the UI does not recognize?",
+      "compare": "Compare one worker with parallel workstreams for this task.",
+      "challenge": "AI says all unit tests passing proves integration works. Identify a gap and a check.",
+      "guide": "Introduce a conflicting field or meaning and ask the learner to trace the consequence across parts.",
+      "variations": [
+        "A response field is renamed in one component only. Diagnose the boundary.",
+        "The change becomes tiny after discovery. Reconsider parallel work."
+      ]
+    },
+    "reuse": [4, 8, 17, 28]
+  },
+  {
+    "id": 18,
+    "stage": 4,
+    "title": "Add an AI product capability",
+    "problem": "Staff want help turning long visit notes into a short summary. Decide what information the model receives, what it may return and what happens when its output is wrong.",
+    "outcome": "A justified AI feature with explicit uncertainty, contract and data boundaries.",
+    "foundation": ["ai", "security", "evaluation"],
+    "concepts": [
+      {
+        "name": "Training, inference, tokens and context",
+        "explanation": "Training changes model parameters using data. Inference uses a trained model to produce output from supplied context. Tokens are units of representation and often billing. Context is the information available for this call; it is not automatically the complete business history.",
+        "example": "A summary call receives one authorized visit note and an output instruction.",
+        "misconception": "A model automatically learns your latest records permanently from one call."
+      },
+      {
+        "name": "Uncertainty and structured output",
+        "explanation": "A plausible answer can be unsupported. A schema constrains output shape, not factual correctness. Validate the structure and evaluate whether meaning is supported by the input. Keep missing facts missing. Fine-tuning changes learned behaviour and differs from supplying current context or retrieval.",
+        "example": "A valid summary object can still invent an appointment date.",
+        "misconception": "Valid JSON means the content is true."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Authorized note + instruction",
+        "runs": "Application server"
+      },
+      {
+        "name": "Inference",
+        "runs": "Configured model service or local runtime"
+      },
+      {
+        "name": "Validate + show summary",
+        "runs": "Application boundary"
+      }
+    ],
+    "experiment": {
+      "prompt": "Inspect a prepared output for a note that contains no appointment date. These are fixtures, not live model calls.",
+      "options": [
+        {
+          "label": "Summary with unknown date",
+          "result": "The shape is valid and the date remains unknown.",
+          "why": "This preserves a missing fact; broader quality still needs evaluation.",
+          "node": 2
+        },
+        {
+          "label": "Valid JSON, invented date",
+          "result": "Shape passes; factual support fails.",
+          "why": "A schema cannot establish whether a statement is supported.",
+          "node": 2
+        },
+        {
+          "label": "Malformed response",
+          "result": "Reject or recover without showing a misleading result.",
+          "why": "The integration must handle an invalid contract.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "A fluent summary adds a date not in the note.",
+      "action": "Ask AI to preserve missing information, validate output and evaluate supported facts on representative notes.",
+      "after": "The feature distinguishes output format from factual support and records remaining errors.",
+      "lesson": "If using fixtures, label them. A real model experiment requires explicit configuration and budget and a separately observed result."
+    },
+    "project": {
+      "title": "A note assistant with honest limits",
+      "brief": "Add a small note-summary feature with a replaceable model adapter, data boundary and supported-fact checks. A labelled fixture adapter is acceptable practice; it cannot establish real model quality.",
+      "steps": [
+        "Justify AI against a simpler alternative and define authorized input, output and missing-information behaviour.",
+        "Let AI build the adapter and interface using a fixture or an explicitly configured model within budget.",
+        "Check normal, missing-fact and invalid-output cases; record provider/runtime, configuration, costs or fixture limits."
+      ],
+      "checks": [
+        "The actual inference or fixture path, context and data boundary are accurately identified.",
+        "Invalid structure and an unsupported factual claim are handled and recorded separately.",
+        "The feature has an observable benefit target and no unsupported claim of real-model reliability."
+      ]
+    },
+    "assess": {
+      "explain": "Explain training, inference, tokens, context and the difference between shape and truth.",
+      "locate": "Find the actual model or fixture adapter and the validation boundary.",
+      "predict": "What happens when a note exceeds the available context or lacks a date?",
+      "compare": "Compare supplying context, retrieval and fine-tuning for changing visit information.",
+      "challenge": "AI says a schema prevents hallucination. Demonstrate a well-shaped unsupported statement.",
+      "guide": "Use an unfamiliar note with a missing fact. Ask the learner to predict a safe result and explain evidence limits.",
+      "variations": [
+        "The provider's data policy no longer fits the customer. Reconsider the deployment.",
+        "The summary changes a tentative report into a certainty. Investigate the meaning error."
+      ]
+    },
+    "reuse": [15, 16, 17, 23]
+  },
+  {
+    "id": 19,
+    "stage": 4,
+    "title": "Connect AI to knowledge and actions",
+    "problem": "The assistant needs current service policies and may propose changing a visit. Finding information and taking action require different contracts and authority.",
+    "outcome": "A knowledge-assisted or bounded-action feature with source and permission evidence.",
+    "foundation": ["ai", "agents", "security", "data"],
+    "concepts": [
+      {
+        "name": "Embeddings, retrieval and grounding",
+        "explanation": "An embedding represents data as numbers useful for comparing learned similarity. Retrieval selects candidate information; grounding connects an answer to evidence. Similarity does not prove relevance or truth. Sources can be outdated, contradictory or malicious.",
+        "example": "Retrieve the current cancellation policy and show the supporting passage and version.",
+        "misconception": "A cited document is necessarily correct or actually supports the answer."
+      },
+      {
+        "name": "Tools, permissions and untrusted content",
+        "explanation": "A tool lets a model request a defined operation; the application validates arguments and authority before execution. Retrieved text is information, not permission. Limit access and use suitable approval or policy for consequential actions.",
+        "example": "A note saying ignore restrictions cannot authorize cancelling another customer's visit.",
+        "misconception": "The model choosing a tool proves the action is allowed."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Question + authorized context",
+        "runs": "Application"
+      },
+      {
+        "name": "Retrieve source / propose tool",
+        "runs": "Search + AI adapter"
+      },
+      {
+        "name": "Verify support / authority",
+        "runs": "Trusted application boundary"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the prepared evidence or tool request.",
+      "options": [
+        {
+          "label": "Current supporting policy",
+          "result": "Answer may cite the relevant passage while preserving its scope.",
+          "why": "Check the source, version and whether the claim follows from it.",
+          "node": 2
+        },
+        {
+          "label": "Relevant but obsolete policy",
+          "result": "Do not present it as current policy; investigate the version.",
+          "why": "Similarity cannot establish freshness.",
+          "node": 1
+        },
+        {
+          "label": "Document requests a cancellation",
+          "result": "Treat the instruction as untrusted content; enforce the user's actual authority.",
+          "why": "Information access is not action permission.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "The assistant executes a cancellation because a retrieved paragraph tells it to.",
+      "action": "Separate source material from instructions and enforce tool permissions outside the model.",
+      "after": "The answer may use an authorized policy; an unauthorized write is refused.",
+      "lesson": "A prepared retrieval example teaches the boundary. Test a real retriever separately before claiming search quality."
+    },
+    "project": {
+      "title": "An assistant with sources and boundaries",
+      "brief": "Connect the note assistant to a small versioned policy collection or a bounded visit tool. Explain the chosen retrieval or tool mechanism and test unsupported and unauthorized cases.",
+      "steps": [
+        "Define the allowed sources or actions and a safe unknown/refusal result.",
+        "Ask AI to implement a replaceable retrieval/tool adapter with source versions and trusted validation.",
+        "Test a supported answer, missing or stale evidence, and an untrusted instruction attempting an unauthorized action."
+      ],
+      "checks": [
+        "A claim points to an inspected supporting passage or an action has an explicit authorized contract.",
+        "Missing or outdated evidence does not become an invented current answer.",
+        "Untrusted text cannot expand the feature's authority; the observed refusal is recorded."
+      ]
+    },
+    "assess": {
+      "explain": "Explain similarity, retrieval, grounding and tool authority using your feature.",
+      "locate": "Find the source selection or tool-validation boundary in the actual system.",
+      "predict": "What if the nearest retrieved passage contradicts the current policy?",
+      "compare": "Compare keyword search, embeddings and direct structured queries for your information.",
+      "challenge": "AI says a document's instruction authorizes its tool call. Explain the trust error and test the boundary.",
+      "guide": "Supply a plausible stale source or unauthorized request and ask for the safe result and supporting evidence.",
+      "variations": [
+        "Two policy versions disagree. Explain how to resolve the answer.",
+        "A tool may read visits but is asked to cancel one. Trace the refusal."
+      ]
+    },
+    "reuse": [17, 18, 19, 20, 21]
+  },
+  {
+    "id": 20,
+    "stage": 4,
+    "title": "Compare and improve approaches",
+    "problem": "One impressive summary is not a measurement. Compare two approaches on the same representative cases, with quality, cost and delay visible.",
+    "outcome": "A reproducible comparison with failures, uncertainty and a justified choice.",
+    "foundation": ["evaluation", "evidence", "ai", "product"],
+    "concepts": [
+      {
+        "name": "Baselines, samples and held-out cases",
+        "explanation": "A baseline is a reference approach, possibly a simple rule or current process. Representative cases reflect real use. Held-out cases are kept out of tuning to probe transfer. Small or selected samples can give misleading estimates; report counts and uncertainty.",
+        "example": "Compare both assistants on the same notes, including missing and contradictory information.",
+        "misconception": "Improving the examples used to tune a prompt proves improvement on new cases."
+      },
+      {
+        "name": "Base rates, precision, recall and cost",
+        "explanation": "Precision asks how many flagged cases really belong; recall asks how many relevant cases were found. Base rate is how common the condition is. A rare condition can yield many false alarms even with a seemingly accurate classifier. Measure latency and cost alongside errors.",
+        "example": "10 true alerts and 90 false alerts give 10% precision, not 90%.",
+        "misconception": "One accuracy percentage tells you every consequence of errors."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Fixed cases + expected outcomes",
+        "runs": "Versioned evaluation set"
+      },
+      {
+        "name": "Run both approaches",
+        "runs": "Actual adapters or labelled fixtures"
+      },
+      {
+        "name": "Errors + cost + latency",
+        "runs": "Comparison report"
+      }
+    ],
+    "experiment": {
+      "prompt": "Prepared alert results: 10 true positives, 90 false positives and 10 missed positives. Choose a metric.",
+      "options": [
+        {
+          "label": "Precision",
+          "result": "10 / (10 + 90) = 10%.",
+          "why": "Only one in ten raised alerts is a true positive.",
+          "node": 2
+        },
+        {
+          "label": "Recall",
+          "result": "10 / (10 + 10) = 50%.",
+          "why": "Half the actual positives were found.",
+          "node": 2
+        },
+        {
+          "label": "Claim reliable overall",
+          "result": "Unsupported without use-case thresholds, negative cases, sample quality and costs.",
+          "why": "A persuasive label cannot replace relevant evidence.",
+          "node": 0
+        }
+      ]
+    },
+    "example": {
+      "before": "A new prompt succeeds on the five notes used to write it.",
+      "action": "Freeze expectations, add representative held-out cases and run both versions under the same conditions.",
+      "after": "Report counts by error type, measured delay and cost, including regressions.",
+      "lesson": "A small experiment supports a bounded observation, not a universal model ranking or future guarantee."
+    },
+    "project": {
+      "title": "A fair assistant comparison",
+      "brief": "Compare two implementations or configurations of the AI feature against a non-AI or existing-process baseline where meaningful. Keep tuning and held-out cases distinct.",
+      "steps": [
+        "Define expected outcomes and error costs before running; include normal, missing and adversarial cases.",
+        "Ask AI to run the same cases for each approach with actual settings, usage and timing recorded.",
+        "Investigate failures, calculate relevant rates and choose an approach with explicit limitations."
+      ],
+      "checks": [
+        "The comparison uses the same versioned cases and separates held-out cases from tuning.",
+        "The report includes counts, error types, latency and actual or clearly hypothetical cost.",
+        "The conclusion explains sample limitations, base rates and what evidence does not establish."
+      ]
+    },
+    "assess": {
+      "explain": "Explain baseline, held-out case, base rate, precision and recall with your results.",
+      "locate": "Find raw observations supporting a number in the report.",
+      "predict": "What might happen to precision if the target condition becomes much rarer?",
+      "compare": "Compare a faster cheaper option with a better-scoring option using the cost of errors.",
+      "challenge": "AI says a correlation between using the tool and fewer missed visits proves causation. What else could explain it?",
+      "guide": "Change the case distribution or error cost; check the learner can revise the interpretation and decision.",
+      "variations": [
+        "The evaluation excluded non-English notes but users need them. Reassess the claim.",
+        "The new approach has better recall and many more costly false alarms. Choose a threshold or workflow."
+      ]
+    },
+    "reuse": [15, 18, 22, 23]
+  },
+  {
+    "id": 21,
+    "stage": 5,
+    "title": "Ask AI to produce useful checks",
+    "problem": "AI has generated a green test suite, but a deliberately broken confirmation still passes. A check is useful when it can expose a relevant incorrect result.",
+    "outcome": "A test strategy connected to requirements, including a demonstrated defect.",
+    "foundation": ["quality", "evidence", "logic"],
+    "concepts": [
+      {
+        "name": "Unit, integration and end-to-end checks",
+        "explanation": "A unit check isolates a small rule. An integration check covers an agreement between parts. An end-to-end check follows a user journey across relevant components. These provide different evidence and different diagnosis costs.",
+        "example": "Check a quote rule, an API/database write, then a browser confirmation journey.",
+        "misconception": "More end-to-end checks automatically make all smaller checks unnecessary."
+      },
+      {
+        "name": "Regression and coverage limits",
+        "explanation": "A regression is previously required behaviour becoming incorrect after change. A regression check preserves that expectation. Coverage reports where execution went, not whether every important case and expectation was correct. Test data must represent relevant situations.",
+        "example": "The duplicate-submit check should fail when duplicate protection is deliberately removed in a test environment.",
+        "misconception": "A green suite establishes requirements it never checked."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Required behaviour",
+        "runs": "Acceptance matrix"
+      },
+      {
+        "name": "Appropriate checks",
+        "runs": "Unit / integration / journey"
+      },
+      {
+        "name": "Defect exposed + fixed",
+        "runs": "Test environment"
+      }
+    ],
+    "experiment": {
+      "prompt": "A deliberate defect writes the wrong visit but returns a success toast. Choose a check.",
+      "options": [
+        {
+          "label": "Assert toast only",
+          "result": "Passes while the relevant defect survives.",
+          "why": "The assertion misses record identity and stored state.",
+          "node": 1
+        },
+        {
+          "label": "Assert selected record",
+          "result": "Fails when the wrong visit changes.",
+          "why": "The check observes the actual requirement.",
+          "node": 2
+        },
+        {
+          "label": "Count test cases",
+          "result": "No conclusion about this defect.",
+          "why": "Quantity is not the same as a meaningful expectation.",
+          "node": 0
+        }
+      ]
+    },
+    "example": {
+      "before": "Tests assert the same broken calculation used by the app.",
+      "action": "Write an expected example from the business rule and deliberately introduce a defect in a disposable test change.",
+      "after": "The check fails, AI fixes the cause, and the original expectation passes.",
+      "lesson": "Do not weaken the expectation just to make the suite green. AI can generate and run every check; explain why it is relevant."
+    },
+    "project": {
+      "title": "Checks that can prove you wrong",
+      "brief": "Ask AI to create appropriate unit, integration and journey checks from the acceptance matrix. Demonstrate one real defect and keep its regression check.",
+      "steps": [
+        "Map important requirements to checks and expected observations.",
+        "Introduce or use a known defect in a test environment and show the relevant failure.",
+        "Let AI diagnose and fix it; rerun the focused check and affected journey, recording remaining limits."
+      ],
+      "checks": [
+        "Each important check has a requirement-derived expectation and suitable test data.",
+        "A deliberate or observed defect produces a meaningful failing check.",
+        "The fix passes the original expectation and relevant regression checks without hiding the failure."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the different evidence from unit, integration and journey checks.",
+      "locate": "Show the expectation that exposed your defect and its source requirement.",
+      "predict": "What would still pass if the wrong visit changed but the toast looked correct?",
+      "compare": "Compare a faster isolated check with a broader journey check.",
+      "challenge": "AI says all green means there are no bugs. Name an untested behaviour and how to investigate it.",
+      "guide": "Supply an uncovered edge case and ask the learner to choose evidence before running it.",
+      "variations": [
+        "The test uses only one customer, hiding an authorization bug. Improve the data.",
+        "A mocked provider passes while its real schema changed. Choose an additional boundary check."
+      ]
+    },
+    "reuse": [12, 22]
+  },
+  {
+    "id": 22,
+    "stage": 5,
+    "title": "Release with a way back",
+    "problem": "The app works locally but the release uses different configuration. Plan delivery and recovery together so a failed change does not become a guess under pressure.",
+    "outcome": "A documented release and a demonstrated recovery in an appropriate environment.",
+    "foundation": ["operations", "execution", "stack", "collaboration"],
+    "concepts": [
+      {
+        "name": "Version history, builds and environments",
+        "explanation": "Version history records changes and a known starting point. A build turns source and dependencies into runnable output. An environment supplies configuration, services and access. A working local setup may differ from the deployed one in any of these.",
+        "example": "A release points to a specific revision and dependency configuration.",
+        "misconception": "The latest files on a laptop identify exactly what users are running."
+      },
+      {
+        "name": "CI/CD, rollback and state",
+        "explanation": "Continuous integration checks changes; delivery/deployment pipelines prepare or release them. Rollback restores a suitable previous application version. Stored data may need a separate restoration or compatible migration plan; reverting code does not undo every external action.",
+        "example": "An older release must still understand the current data schema before it is a safe rollback.",
+        "misconception": "A green pipeline proves production is healthy."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Known revision + checks",
+        "runs": "Version control / CI"
+      },
+      {
+        "name": "Build + configure + release",
+        "runs": "Delivery environment"
+      },
+      {
+        "name": "Verify or recover",
+        "runs": "User journey + operations"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the release situation in this prepared model.",
+      "options": [
+        {
+          "label": "Build passes, secret absent",
+          "result": "Release can still fail at runtime configuration.",
+          "why": "Build success does not supply a missing server credential.",
+          "node": 1
+        },
+        {
+          "label": "Code-only regression",
+          "result": "A compatible previous release may restore the journey.",
+          "why": "Verify the actual result after rollback.",
+          "node": 2
+        },
+        {
+          "label": "Incompatible data migration",
+          "result": "Code rollback alone may be unsafe or insufficient.",
+          "why": "Stored-state compatibility needs its own recovery plan.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "Deploy whatever is in the current folder.",
+      "action": "Ask AI to release an identified revision with environment checks, smoke tests and a compatible recovery target.",
+      "after": "A failed test release can return to a known working journey.",
+      "lesson": "Demonstrate recovery in a test environment first. Record exact commands or provider actions through AI-generated instructions you can explain."
+    },
+    "project": {
+      "title": "A release you can recover",
+      "brief": "Release the product to a suitable test or authorized public environment with identified source, configuration and a recovery procedure.",
+      "steps": [
+        "Ask AI to inspect the current stack, prepare reproducible build/release instructions and name required configuration without secrets.",
+        "Release a known revision and verify its main user journey from the deployed environment.",
+        "Introduce a reversible test failure, recover, and verify both application behaviour and required data."
+      ],
+      "checks": [
+        "The running release is tied to an identified revision, build and environment.",
+        "An actual deployed user journey is observed separately from pipeline success.",
+        "A recovery demonstration restores required behaviour and accounts for stored-state compatibility."
+      ]
+    },
+    "assess": {
+      "explain": "Explain source, build, configuration, deployment and rollback in this release.",
+      "locate": "Identify the running version and where required configuration is supplied.",
+      "predict": "What might fail when local dependencies differ from the release environment?",
+      "compare": "Compare reverting code with restoring data and reconciling external effects.",
+      "challenge": "AI says the green pipeline proves the site works for users. What observation is missing?",
+      "guide": "Change one environment variable or version in a test scenario and ask for a bounded investigation and recovery.",
+      "variations": [
+        "The previous code cannot read the new schema. Revise recovery.",
+        "The build succeeds but a server configuration value is missing. Trace the failure."
+      ]
+    },
+    "reuse": [8, 10, 14, 29, 30]
+  },
+  {
+    "id": 23,
+    "stage": 5,
+    "title": "Diagnose from evidence",
+    "problem": "Some confirmations are slow and others fail. Instead of asking AI to randomly rewrite the feature, collect evidence that distinguishes possible causes.",
+    "outcome": "An incident investigation with a tested hypothesis and verified recovery.",
+    "foundation": ["operations", "evidence", "architecture"],
+    "concepts": [
+      {
+        "name": "Logs, metrics and traces",
+        "explanation": "Logs record events, metrics summarize measurements, and traces connect steps of a request. Correlation identifiers help follow one action across components. Instrumentation should avoid secrets and unnecessary personal information.",
+        "example": "A request ID connects the browser error, API event and slow provider call.",
+        "misconception": "More raw logging automatically makes diagnosis easier or safer."
+      },
+      {
+        "name": "Hypotheses and falsification",
+        "explanation": "A hypothesis is a possible explanation with a predicted observation. Choose evidence that can distinguish it from another explanation. AI can investigate and propose fixes; verify the actual user flow after change rather than treating a convincing diagnosis as the result.",
+        "example": "If the provider is slow, its span should dominate latency while local validation remains fast.",
+        "misconception": "The first plausible explanation is the established cause."
+      }
+    ],
+    "flow": [
+      {
+        "name": "User symptom + request ID",
+        "runs": "Browser / support report"
+      },
+      {
+        "name": "Compare hypotheses",
+        "runs": "Logs + metrics + traces"
+      },
+      {
+        "name": "Fix + verify journey",
+        "runs": "Test and running service"
+      }
+    ],
+    "experiment": {
+      "prompt": "Prepared trace: total 2,000 ms; validation 20 ms; database 80 ms; provider 1,900 ms. Choose an investigation.",
+      "options": [
+        {
+          "label": "Rewrite CSS",
+          "result": "No evidence links styling to the measured server delay.",
+          "why": "Choose a hypothesis connected to the observed boundary.",
+          "node": 0
+        },
+        {
+          "label": "Inspect provider span",
+          "result": "A relevant next step: check its timing, errors and comparison requests.",
+          "why": "The trace identifies a candidate; it does not yet explain why the provider is slow.",
+          "node": 1
+        },
+        {
+          "label": "Declare cause solved",
+          "result": "Premature: no corrective change or recovered journey observed.",
+          "why": "Diagnosis and verified recovery are different outcomes.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "A user reports slow saves; AI suggests a database rewrite.",
+      "action": "Collect a correlated trace and compare a provider-delay hypothesis with a database-delay hypothesis.",
+      "after": "Evidence directs a bounded change, followed by a timed user journey.",
+      "lesson": "Record contradictory evidence and remaining uncertainty. Do not expose private notes in diagnostic artifacts."
+    },
+    "project": {
+      "title": "An evidence-led incident record",
+      "brief": "Instrument and investigate one real or deliberately injected test failure using AI, with privacy-aware observations and a verified fix.",
+      "steps": [
+        "Define the symptom, environment and two plausible hypotheses.",
+        "Ask AI to collect appropriately redacted logs, metrics or traces that distinguish them.",
+        "Apply a bounded fix, rerun the relevant flow and record cause, evidence, recovery and remaining risks."
+      ],
+      "checks": [
+        "The incident record separates symptom, hypothesis and observed evidence.",
+        "A correlated observation supports or refutes a hypothesis without leaking credentials or private data.",
+        "The relevant user journey works after the fix and its observed result is recorded."
+      ]
+    },
+    "assess": {
+      "explain": "Explain a log, metric, trace and hypothesis through this incident.",
+      "locate": "Find the observation that changed the investigation's direction.",
+      "predict": "What would you expect to see if the database were the bottleneck instead?",
+      "compare": "Compare collecting all payloads with targeted privacy-aware instrumentation.",
+      "challenge": "AI says the last changed file must be the cause. Propose a distinguishing investigation.",
+      "guide": "Provide contradictory evidence and see whether the learner revises the explanation rather than defending the first guess.",
+      "variations": [
+        "Only one region experiences failures. Refine the hypotheses.",
+        "Logs contain a credential. Explain the immediate handling and instrumentation change."
+      ]
+    },
+    "reuse": [6, 25]
+  },
+  {
+    "id": 24,
+    "stage": 5,
+    "title": "Manage growing use and cost",
+    "problem": "The system feels slow as appointments grow. Caching, indexing and queues solve different problems and introduce tradeoffs. Measure before choosing.",
+    "outcome": "A measured bottleneck improvement with cost and correctness limits.",
+    "foundation": ["architecture", "data", "evaluation", "product"],
+    "concepts": [
+      {
+        "name": "Latency, throughput and algorithmic cost",
+        "explanation": "Latency is time per operation; throughput is completed work per time. A data structure organizes information and affects available operations. Algorithmic cost describes how work grows with input size. An index can speed a query while adding storage and write cost.",
+        "example": "Scanning every visit grows differently from a suitable indexed lookup.",
+        "misconception": "A faster one-user response proves the system handles more simultaneous users."
+      },
+      {
+        "name": "Caching, queues and consistency",
+        "explanation": "A cache reuses a result and can become stale. A queue defers work and needs failure and retry rules. Consistency concerns when different observations agree. Choose freshness and delay according to the business task, not just a benchmark.",
+        "example": "A cached policy may tolerate a refresh delay; a last-slot reservation needs a protected current decision.",
+        "misconception": "Caching every response preserves correct behaviour automatically."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Representative workload",
+        "runs": "Controlled measurement"
+      },
+      {
+        "name": "Chosen intervention",
+        "runs": "Query / cache / queue boundary"
+      },
+      {
+        "name": "Measure result + tradeoff",
+        "runs": "Quality and cost report"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the prepared design for repeated policy reads.",
+      "options": [
+        {
+          "label": "Always fetch current",
+          "result": "Freshness follows the source; each read pays the source latency and cost.",
+          "why": "This favours current information over reuse.",
+          "node": 1
+        },
+        {
+          "label": "Cache for 10 minutes",
+          "result": "Repeated reads may be faster but can show a policy up to the freshness limit out of date.",
+          "why": "Invalidation and an accepted freshness policy are part of the design.",
+          "node": 2
+        },
+        {
+          "label": "Queue the read",
+          "result": "Work is deferred; this alone does not make an interactive answer faster.",
+          "why": "Queues fit suitable background tasks, not every delay.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "A broad scan gets slower as the visit table grows.",
+      "action": "Measure representative queries, ask AI to propose an index, and compare the same workload afterwards.",
+      "after": "Report read improvement, write/storage effects and limitations of the test load.",
+      "lesson": "Synthetic measurements establish behaviour under the stated test conditions, not unlimited production capacity."
+    },
+    "project": {
+      "title": "One measured performance improvement",
+      "brief": "Identify one actual bottleneck in the growing workflow, compare an appropriate improvement and report correctness, cost and measurement limits.",
+      "steps": [
+        "Define representative load, latency/throughput measures and a correctness guardrail.",
+        "Let AI measure the current system and propose indexing, data-structure, cache or queue changes as appropriate.",
+        "Rerun the same workload and user journey; record improvement, resource cost and freshness/retry consequences."
+      ],
+      "checks": [
+        "Before and after measurements use comparable data, workload and environment.",
+        "The change improves the chosen measure or is honestly rejected from the results.",
+        "Correctness, freshness or retry behaviour remains acceptable and added cost is recorded."
+      ]
+    },
+    "assess": {
+      "explain": "Explain latency, throughput, workload growth and the selected mechanism.",
+      "locate": "Find the measured bottleneck and actual boundary changed.",
+      "predict": "What changes as record count or concurrent demand increases?",
+      "compare": "Compare two plausible interventions with cost and consistency tradeoffs.",
+      "challenge": "AI says a 10-minute cache always gives current availability. Show the counterexample and a suitable policy.",
+      "guide": "Change load or freshness needs; ask the learner to revisit the design rather than recite a speed figure.",
+      "variations": [
+        "The cached data now determines the last available slot. Reconsider correctness.",
+        "The queue receives work faster than it can finish. Predict backlog and recovery needs."
+      ]
+    },
+    "reuse": [5, 18, 23, 24, 25]
+  },
+  {
+    "id": 25,
+    "stage": 5,
+    "title": "Change the system without losing trust",
+    "problem": "A new visit field and a dependency update are needed. The running system contains useful records, permissions and deletion commitments that must survive the change.",
+    "outcome": "A rehearsed migration or dependency change with restoration evidence.",
+    "foundation": ["data", "operations", "security", "stack"],
+    "concepts": [
+      {
+        "name": "Migrations, backups and restoration",
+        "explanation": "A migration changes stored structure or data. A backup is a recoverable copy under a defined scope. Restoration is the act of rebuilding usable state from that copy. A backup is not proven usable until a relevant restore has been checked.",
+        "example": "Add an access-status field without silently converting unknown values into confirmed.",
+        "misconception": "Reverting source code automatically reverses a data migration."
+      },
+      {
+        "name": "Compatibility, privacy and retention",
+        "explanation": "Dependency versions and data formats define compatibility. Privacy includes what is collected, who can access it, how long it is retained and how deletion reaches relevant copies. A restore plan must consider permissions and data commitments, not just row counts.",
+        "example": "A restored copy should not re-enable a deleted user's access.",
+        "misconception": "A backup can be kept forever without any data responsibility."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Known state + recoverable copy",
+        "runs": "Test data / backup scope"
+      },
+      {
+        "name": "Rehearsed change",
+        "runs": "Migration or dependency update"
+      },
+      {
+        "name": "Verify + restore if needed",
+        "runs": "Application + data + permissions"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the prepared recovery evidence.",
+      "options": [
+        {
+          "label": "Backup file exists",
+          "result": "A copy exists; usability is unverified.",
+          "why": "The file may be incomplete, inaccessible or incompatible.",
+          "node": 0
+        },
+        {
+          "label": "Restored and queried",
+          "result": "Relevant state can be read; check permissions and required journeys too.",
+          "why": "Restoration evidence should match what the product depends on.",
+          "node": 2
+        },
+        {
+          "label": "Only code reverted",
+          "result": "Stored data and external effects may remain changed.",
+          "why": "Application history and data history are different boundaries.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "A migration maps every blank access value to confirmed.",
+      "action": "Ask AI to rehearse on a copy, preserve unknown meaning, compare records and test restoration.",
+      "after": "The new version preserves information meaning and has an observed recovery path.",
+      "lesson": "Protect fictional test copies appropriately too. Never treat a production data change as disposable practice."
+    },
+    "project": {
+      "title": "A change with a recovery rehearsal",
+      "brief": "Use AI to perform a data migration or dependency update in a test copy. Verify required data, permissions and behaviour, and demonstrate restoration.",
+      "steps": [
+        "Record compatibility, data meaning, retention commitments and recovery scope before the change.",
+        "Create a suitable test copy and let AI rehearse the change and relevant checks.",
+        "Restore from the recovery copy, verify the main flow and record what the rehearsal does and does not establish."
+      ],
+      "checks": [
+        "Important record counts, relationships and meanings are compared before and after.",
+        "Required permissions and privacy/retention decisions survive or have an explicit migration policy.",
+        "A restoration is actually demonstrated and the required user journey is verified afterwards."
+      ]
+    },
+    "assess": {
+      "explain": "Explain migration, backup, restoration and compatibility in your change.",
+      "locate": "Find the actual stored format, dependency version and recovery copy.",
+      "predict": "What if an older app reads the newly migrated data?",
+      "compare": "Compare rollback, forward correction and restoring a backup for this situation.",
+      "challenge": "AI says a backup's filename proves recoverability. What demonstration is needed?",
+      "guide": "Ask about a missing record, revoked permission or incompatible reader after recovery; check the explanation concerns the actual system.",
+      "variations": [
+        "A restored copy contains a previously deleted account. Revise recovery handling.",
+        "The new dependency changes a default used by the API. Investigate compatibility."
+      ]
+    },
+    "reuse": [6, 8, 10, 24, 29]
+  },
+  {
+    "id": 26,
+    "stage": 6,
+    "title": "Start an independent domain project",
+    "problem": "Transfer the concepts to an unfamiliar workflow: building maintenance, a clinic's non-clinical administration, logistics, education or another authorized domain. A familiar demo is not evidence that you understand this setting.",
+    "outcome": "A domain-grounded project brief with a discovered requirement and measurement plan.",
+    "foundation": ["product", "evidence", "collaboration", "security"],
+    "concepts": [
+      {
+        "name": "Domain constraints and incentives",
+        "explanation": "Domain knowledge explains the real work and its limits. Incentives explain why people may adopt, avoid or work around a change. The person requesting the app may not be the person doing the extra work. Investigate both perspectives.",
+        "example": "A manager wants more completed visits; technicians need travel and access time counted fairly.",
+        "misconception": "A reusable app template establishes the requirements of every business."
+      },
+      {
+        "name": "Success agreement and uncertainty",
+        "explanation": "A brief records the problem, source evidence, scope, authority, constraints and success conditions. Uncertainty belongs in the brief as questions and assumptions. AI can research and prepare it, but invented details must stay labelled.",
+        "example": "Separate an observed missed handoff from a guess about its annual cost.",
+        "misconception": "A detailed AI-written proposal makes an unverified workflow factual."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Unfamiliar workflow",
+        "runs": "Domain participants / authorized sources"
+      },
+      {
+        "name": "Evidence + missing requirement",
+        "runs": "Investigation"
+      },
+      {
+        "name": "Agreed or labelled brief",
+        "runs": "Project decision record"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose what you discover during a maintenance-workflow investigation.",
+      "options": [
+        {
+          "label": "Manager wants faster dispatch",
+          "result": "A goal to examine with the people doing the work.",
+          "why": "Speed may conflict with equipment, travel or access constraints.",
+          "node": 0
+        },
+        {
+          "label": "Technician lacks access approval",
+          "result": "A missing requirement that changes the workflow and acceptance criteria.",
+          "why": "A new scheduling screen alone would not resolve the blockage.",
+          "node": 1
+        },
+        {
+          "label": "AI estimates savings",
+          "result": "A hypothesis requiring assumptions and measurements.",
+          "why": "Generated numbers are not observed business benefit.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "Reuse the appointment app unchanged in a building-maintenance company.",
+      "action": "Investigate a recent visit and discover site-access approval and equipment qualifications.",
+      "after": "The brief changes the allowed assignments and definition of a preventable missed visit.",
+      "lesson": "The concepts transfer; the domain assumptions require fresh evidence."
+    },
+    "project": {
+      "title": "An independent outcome brief",
+      "brief": "Investigate an unfamiliar authorized domain and define a useful improvement with participants or a clearly labelled scenario. Include local language, connectivity, cost and data constraints.",
+      "steps": [
+        "Choose the domain, access boundary and evidence sources; use AI for research and questions.",
+        "Map the workflow, incentives and a requirement missing from the initial request.",
+        "Compare buy/configure/integrate/build options and agree or label success, scope and measurement assumptions."
+      ],
+      "checks": [
+        "The brief identifies sources, users, incentives and at least one discovered requirement.",
+        "Success, scope, authority and constraints are explicit without invented measurement.",
+        "An alternative approach and a plan to measure actual benefit are documented."
+      ]
+    },
+    "assess": {
+      "explain": "Explain what domain understanding changed in your initial idea.",
+      "locate": "Find the source behind the discovered requirement and an important unknown.",
+      "predict": "What if the person entering data gains extra work but no benefit?",
+      "compare": "Compare the selected approach with buying or configuring an existing product.",
+      "challenge": "AI says an old demo proves this workflow's business case. What fresh evidence is needed?",
+      "guide": "Introduce a plausible domain constraint omitted from the brief and ask the learner to revise scope and success.",
+      "variations": [
+        "The workflow must support low connectivity and two languages. Revise the brief.",
+        "The measured delay includes customer cancellations. Reassess the outcome definition."
+      ]
+    },
+    "reuse": [26, 28]
+  },
+  {
+    "id": 27,
+    "stage": 6,
+    "title": "Deliver through AI",
+    "problem": "Deliver the independent brief with the AI available to you. A polished artifact must be accompanied by an accurate explanation of its actual stack, information flow and decisions.",
+    "outcome": "A working solution and a maintained system explanation tied to real observations.",
+    "foundation": ["agents", "stack", "architecture", "quality", "collaboration"],
+    "concepts": [
+      {
+        "name": "Architecture as responsibilities and tradeoffs",
+        "explanation": "Architecture describes responsibilities, boundaries and dependencies. Coupling is how strongly one part depends on another. Modularity can make change easier, but extra services also add operations and failure boundaries. Choose complexity proportionate to the outcome.",
+        "example": "One application may fit a small workflow better than several separately deployed services.",
+        "misconception": "More layers always mean more professional architecture."
+      },
+      {
+        "name": "Evidence-linked delivery",
+        "explanation": "Delivery combines implementation, checks, configuration, access and a usable result. AI may perform the whole technical sequence. Keep the system explanation synchronized with meaningful changes and distinguish actual observations from planned checks.",
+        "example": "A claimed enquiry feature needs evidence that the enquiry reaches the chosen destination.",
+        "misconception": "A generated system description is accurate because the app looks complete."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Brief + acceptance + boundaries",
+        "runs": "Independent project"
+      },
+      {
+        "name": "AI-led implementation + checks",
+        "runs": "Actual chosen stack"
+      },
+      {
+        "name": "Working outcome + explanation",
+        "runs": "Demonstration evidence"
+      }
+    ],
+    "experiment": {
+      "prompt": "Change the prepared architecture for a small information-only service.",
+      "options": [
+        {
+          "label": "Static site fits the need",
+          "result": "Explain files, browser behaviour and hosting. No invented backend is needed.",
+          "why": "The explanation must match the actual product's responsibilities.",
+          "node": 2
+        },
+        {
+          "label": "Needs shared private records",
+          "result": "Add suitable storage, identity and trusted permission boundaries.",
+          "why": "The requirement adds responsibilities beyond a static page.",
+          "node": 1
+        },
+        {
+          "label": "Add many services anyway",
+          "result": "More configuration and failure boundaries without an established benefit.",
+          "why": "Complexity needs a reason connected to constraints.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "The diagram shows a database and model service copied from a template.",
+      "action": "Inspect the actual project with AI and trace a real action from start to result.",
+      "after": "The diagram contains only implemented components, with planned extensions labelled.",
+      "lesson": "A static solution can be correct. A backend solution needs deeper data, access and failure evidence as those responsibilities appear."
+    },
+    "project": {
+      "title": "The independent working solution",
+      "brief": "Use capable AI to deliver the mission-26 brief. Choose suitable technologies, implement the useful workflow and maintain an accurate explanation throughout.",
+      "steps": [
+        "Supply AI the domain evidence, acceptance matrix, authority and budget; let it plan appropriate work.",
+        "Deliver in useful increments, inspect actual technologies and update all eight system-explanation areas.",
+        "Demonstrate the main journey, a relevant failure and any permission/data boundaries; record gaps honestly."
+      ],
+      "checks": [
+        "The actual product demonstrates the brief's primary useful outcome.",
+        "Checks cover relevant normal, failure and access/data cases with reproducible observations.",
+        "The system explanation matches the real files, dependencies, runtime, hosting and information flow."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the architecture and how its boundaries serve the outcome.",
+      "locate": "Identify every important technology in actual files, configuration or service settings.",
+      "predict": "Choose one failed component and predict what the user and stored state would show.",
+      "compare": "Defend an important technology choice against a simpler or more portable alternative.",
+      "challenge": "AI's diagram includes an unused service. Explain how to verify and correct the description.",
+      "guide": "Choose an action from the live product, trace its real path and ask a new requirement question with AI available.",
+      "variations": [
+        "The budget is cut while the outcome stays the same. Revise architecture or scope.",
+        "A key provider becomes unavailable. Explain a proportionate alternative."
+      ]
+    },
+    "reuse": [14, 21, 24, 28, 29]
+  },
+  {
+    "id": 28,
+    "stage": 6,
+    "title": "Respond to reality",
+    "problem": "The product works technically, but staff avoid it. Learn whether it improves the whole workflow, causes extra work elsewhere or misses a practical constraint.",
+    "outcome": "An observed feedback cycle, a changed requirement and a bounded benefit claim.",
+    "foundation": ["product", "evidence", "collaboration", "operations"],
+    "concepts": [
+      {
+        "name": "Adoption, training and downstream effects",
+        "explanation": "Adoption means people can and choose to use the result in their work. Training, trust, time and incentives affect it. A faster step can move a bottleneck or increase another person's workload. Observe the whole journey, not just the new screen.",
+        "example": "Dispatch saves time while technicians spend longer correcting incomplete access details.",
+        "misconception": "A successful deployment proves useful adoption."
+      },
+      {
+        "name": "Feedback, maintenance and causal limits",
+        "explanation": "Feedback is evidence about experience and outcomes, with a source and context. Maintenance includes correcting defects and adapting to changed conditions. Compare outcomes carefully: selection, seasonality and other changes can explain a before/after difference.",
+        "example": "Report a small pilot's observed rate without claiming it proves the app caused every improvement.",
+        "misconception": "Positive comments alone establish financial benefit."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Actual or labelled pilot use",
+        "runs": "People + workflow"
+      },
+      {
+        "name": "Feedback + outcome measures",
+        "runs": "Evidence record"
+      },
+      {
+        "name": "Adapt + recheck",
+        "runs": "Product + whole workflow"
+      }
+    ],
+    "experiment": {
+      "prompt": "The prepared pilot reduces dispatch time by 10 minutes per day. Change what happens downstream.",
+      "options": [
+        {
+          "label": "No extra downstream work",
+          "result": "A candidate improvement, subject to measurement and sample limits.",
+          "why": "Still check data quality and other changes before a causal claim.",
+          "node": 1
+        },
+        {
+          "label": "20 extra minutes correcting visits",
+          "result": "The local speedup may worsen total workflow effort.",
+          "why": "Evaluate the whole outcome rather than the favoured step.",
+          "node": 2
+        },
+        {
+          "label": "Staff do not use it",
+          "result": "Investigate access, fit, training and incentives before claiming impact.",
+          "why": "Technical availability and adoption differ.",
+          "node": 0
+        }
+      ]
+    },
+    "example": {
+      "before": "The dashboard is live, but staff keep a separate spreadsheet.",
+      "action": "Observe the task, discover missing offline access and compare total workflow effort.",
+      "after": "Adapt the product and training, then repeat a bounded pilot.",
+      "lesson": "Clearly label scenario feedback when real participants are unavailable. Do not invent customers or benefit measurements."
+    },
+    "project": {
+      "title": "An improvement tested in use",
+      "brief": "Run an authorized pilot or clearly labelled scenario trial of the independent solution. Investigate adoption and a changed requirement, then improve and remeasure.",
+      "steps": [
+        "Define the pilot participants, consent, outcome measure and guardrails.",
+        "Observe use and capture specific confusion, extra work and a changed constraint.",
+        "Delegate a suitable improvement to AI, update the system explanation and repeat the relevant task and measurement."
+      ],
+      "checks": [
+        "Feedback and outcome observations have sources and an honest real/scenario label.",
+        "A changed requirement leads to a justified product or process improvement.",
+        "The benefit statement includes downstream effects, uncertainty and remaining adoption gaps."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the difference between deployment, adoption and demonstrated benefit.",
+      "locate": "Show evidence for a changed requirement and its resulting decision.",
+      "predict": "What if the faster workflow transfers work to another person?",
+      "compare": "Compare a training change with a software change for the observed confusion.",
+      "challenge": "AI says happier pilot users prove the product caused a 20% business improvement. What evidence is missing?",
+      "guide": "Offer contradictory pilot feedback or a different denominator and ask the learner to revise the conclusion.",
+      "variations": [
+        "The most active users are also the most experienced staff. Reassess the comparison.",
+        "The product meets its target but creates extra work for customers. Revise the guardrail."
+      ]
+    },
+    "reuse": [7, 26, 29, 30]
+  },
+  {
+    "id": 29,
+    "stage": 6,
+    "title": "Transfer the work and adapt",
+    "problem": "Another person must operate the product without relying on your memory. The current AI tool or provider may also become unsuitable. Preserve the useful outcome while changing how it is delivered.",
+    "outcome": "A usable handoff and a demonstrated transfer to an unfamiliar tool or changed constraint.",
+    "foundation": ["collaboration", "operations", "stack", "product"],
+    "concepts": [
+      {
+        "name": "Handoff, ownership and runbooks",
+        "explanation": "A handoff transfers the knowledge, access and responsibility needed to operate the result. A runbook describes observable symptoms and appropriate actions. Name ownership, escalation and maintenance decisions. Documentation must match the current product and avoid embedding secrets.",
+        "example": "A new operator can start the service, verify a visit and follow recovery instructions.",
+        "misconception": "A long README proves another person can run the product."
+      },
+      {
+        "name": "Portability and conceptual transfer",
+        "explanation": "Portability concerns moving data and behaviour across tools, services or environments. Conceptual transfer means applying a mental model in an unfamiliar setting. An adapter can isolate provider-specific details, but formats, policy and operational differences still need checks.",
+        "example": "Replace an AI provider while preserving the output contract and rerunning the same evaluation.",
+        "misconception": "Changing a model name guarantees equivalent behaviour and cost."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Current product + explanation",
+        "runs": "Known stack"
+      },
+      {
+        "name": "New operator or tool",
+        "runs": "Fresh environment / replacement"
+      },
+      {
+        "name": "Same required outcome",
+        "runs": "Rechecked journey + evidence"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose what the prepared handoff includes.",
+      "options": [
+        {
+          "label": "Source files only",
+          "result": "Setup, configuration, ownership and recovery may remain unknown.",
+          "why": "Implementation alone does not transfer operational knowledge.",
+          "node": 0
+        },
+        {
+          "label": "Guide + fresh operator trial",
+          "result": "Observed confusion can reveal missing instructions and assumptions.",
+          "why": "The handoff is evaluated by someone completing the task.",
+          "node": 2
+        },
+        {
+          "label": "Provider swapped, no checks",
+          "result": "Compatibility and quality remain unverified.",
+          "why": "A stable interface does not guarantee equivalent semantics or economics.",
+          "node": 1
+        }
+      ]
+    },
+    "example": {
+      "before": "Only the original builder knows the hidden configuration.",
+      "action": "Ask AI to draft a current setup/runbook and have another person or a fresh-context assistant follow it, labelling which was used.",
+      "after": "Fix missing steps and rerun the journey with a replacement component or unfamiliar environment.",
+      "lesson": "A fresh-context AI trial is useful evidence about instructions; it is not evidence that a human operator adopted the product."
+    },
+    "project": {
+      "title": "A handoff that survives change",
+      "brief": "Transfer the independent solution to another operator and adapt one tool, provider or environment while preserving required outcomes.",
+      "steps": [
+        "Prepare a current diagram, setup guide, configuration names, cost/ownership notes, data export and recovery runbook.",
+        "Observe a new operator or labelled fresh-context trial and repair instruction gaps.",
+        "Use an unfamiliar or replacement tool for a meaningful component; rerun relevant contract, quality and user-journey checks."
+      ],
+      "checks": [
+        "The handoff trial reaches the useful outcome from documented starting conditions.",
+        "Ownership, configuration, cost, data handling and recovery instructions match the actual product without secrets.",
+        "A replacement or unfamiliar tool preserves required behaviour with observed checks and documented differences."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the operational knowledge transferred and the concept reused across tools.",
+      "locate": "Find the provider-specific boundary and an actual instruction corrected by the trial.",
+      "predict": "What might change in quality, latency or permissions after replacement?",
+      "compare": "Compare an adapter change with a full rebuild for your portability need.",
+      "challenge": "AI says identical schemas make two providers interchangeable. Which behaviours and costs need comparison?",
+      "guide": "Ask the learner to explain an unfamiliar tool through the same concepts and demonstrate a relevant handoff task.",
+      "variations": [
+        "The operator cannot access the original AI account. Revise the handoff.",
+        "The replacement service has a different data-retention policy. Reassess suitability."
+      ]
+    },
+    "reuse": [10, 25, 27, 29, 30]
+  },
+  {
+    "id": 30,
+    "stage": 6,
+    "title": "Demonstrate professional capability",
+    "problem": "Present useful work and explain it under a fresh condition. The final challenge tests concepts and delivery with AI available, not memorized syntax or a polished presentation alone.",
+    "outcome": "An evidence-based capability review, an adapted product and an honest next-practice plan.",
+    "foundation": ["collaboration", "evidence", "product", "agents", "quality", "stack"],
+    "concepts": [
+      {
+        "name": "Demonstration and fresh-scenario reasoning",
+        "explanation": "A demonstration connects a claim to an observable result. A fresh scenario changes a requirement or failure condition to test whether a mental model transfers. AI remains available; the learner must apply the concepts, make predictions and explain evidence rather than repeat a prepared script.",
+        "example": "Explain the real stack, then adapt when a provider is unavailable or a client changes the goal.",
+        "misconception": "Course completion automatically equals years of professional employment."
+      },
+      {
+        "name": "Capability, uncertainty and adaptation",
+        "explanation": "Capability is demonstrated responsibility under stated conditions. Record help, decisions, time, costs, gaps and review. Future opportunities depend on technology, adoption and institutions. Planning and coordination may also be automated; keep learning and compare outcomes with comparable tools.",
+        "example": "A reviewer records which concepts transferred and which need another demonstration.",
+        "misconception": "A new job title guarantees a permanently protected career."
+      }
+    ],
+    "flow": [
+      {
+        "name": "Useful product + evidence",
+        "runs": "Independent project"
+      },
+      {
+        "name": "Fresh question + changed condition",
+        "runs": "Learner + available AI + reviewer"
+      },
+      {
+        "name": "Observed capability + gaps",
+        "runs": "Review and next-practice record"
+      }
+    ],
+    "experiment": {
+      "prompt": "Choose the proposed evidence for graduation.",
+      "options": [
+        {
+          "label": "Polished demo alone",
+          "result": "Product appearance is visible; conceptual transfer is unestablished.",
+          "why": "Ask the learner to explain actual technologies and respond to a fresh change.",
+          "node": 0
+        },
+        {
+          "label": "Working product + generated script",
+          "result": "The output may be good while understanding remains untested.",
+          "why": "Follow-up predictions and investigations must establish the learner's applied reasoning.",
+          "node": 1
+        },
+        {
+          "label": "Outcome + explanation + fresh change",
+          "result": "Relevant capability evidence under the stated tools and review conditions.",
+          "why": "Record limits honestly; it is not an employment guarantee or authenticated credential.",
+          "node": 2
+        }
+      ]
+    },
+    "example": {
+      "before": "A learner presents an impressive system but cannot say where its records live.",
+      "action": "Revisit storage with an experiment, then ask for a new prediction and trace in their actual product.",
+      "after": "Record demonstrated reasoning or a specific gap needing further practice.",
+      "lesson": "Useful AI output and learner understanding are separate standards. Manual coding is not required to meet either standard."
+    },
+    "project": {
+      "title": "The independent delivery challenge",
+      "brief": "Investigate an unfamiliar business problem, use available AI to improve it, explain the actual technologies and concepts, demonstrate benefit, and adapt when conditions change.",
+      "steps": [
+        "Assemble the independent product, eight-part system explanation, evidence, costs, feedback and honest contribution record.",
+        "Ask a reviewer to select a fresh requirement or failure relevant to the product; predict its effects, then use AI to adapt and verify.",
+        "Review the shared foundation, record demonstrated areas and gaps, and choose further practice. Compare with experienced participants only using actual comparable task/tool evidence."
+      ],
+      "checks": [
+        "The demonstrated product addresses an evidenced or explicitly labelled scenario problem with proportionate outcome checks.",
+        "The learner explains the actual stack, runtime, action flow, data, authority, choices and failure behaviour.",
+        "A fresh condition is investigated and handled with AI available; the review records observed reasoning, limits and next practice."
+      ]
+    },
+    "assess": {
+      "explain": "Explain the purpose, system and important decisions without relying on a prepared script.",
+      "locate": "Trace one reviewer-chosen action through the actual technologies and evidence.",
+      "predict": "Predict an unfamiliar requirement or failure before asking AI to implement the response.",
+      "compare": "Defend an important choice when cost, access or the business goal changes.",
+      "challenge": "AI claims completion proves the equivalent of five years' experience. Explain why the evidence supports only the demonstrated capabilities.",
+      "guide": "Review all eight system areas and five reasoning actions. Use a fresh relevant scenario, observe the reasoning and actual result, and record gaps. This local review record is not an authenticated qualification.",
+      "variations": [
+        "The client's goal changes, the dataset is misleading and a provider becomes unsuitable. Choose a relevant combination and adapt with evidence.",
+        "A convincing request lacks verified authority. Explain and demonstrate how the system handles it without losing the legitimate workflow."
+      ]
+    },
+    "reuse": [26, 27, 28, 29, 30]
+  }
+]

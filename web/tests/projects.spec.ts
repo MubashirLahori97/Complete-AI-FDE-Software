@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-test('the main site preserves FDE Academy and its daily lesson workflow', async ({ page }) => {
-  await page.goto('/');
+test('the optional workshop collection preserves its original lesson workflow', async ({
+  page,
+}) => {
+  await page.goto('/#/workshops');
   await expect(page.getByRole('link', { name: 'FDE Academy home' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'A little progress, every day.' })).toBeVisible();
   await expect(page.locator('.sample-invite')).toHaveCount(0);
@@ -18,7 +20,7 @@ test('the main site preserves FDE Academy and its daily lesson workflow', async 
   await page.getByRole('button', { name: 'Open project', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Project acceptance checks' })).toBeVisible();
   await page.getByRole('link', { name: 'Overview', exact: true }).click();
-  await expect(page).toHaveURL(/#\/$/);
+  await expect(page).toHaveURL(/#\/workshops$/);
   await expect(page.getByRole('heading', { name: 'A little progress, every day.' })).toBeVisible();
 });
 
@@ -87,7 +89,7 @@ test('expanded project guides fit a phone viewport', async ({ page }) => {
 
 test('the project index opens project guides inside the academy', async ({ page }) => {
   await page.goto('/#/resources');
-  await page.getByRole('link', { name: /All 30 lesson projects/ }).click();
+  await page.getByRole('link', { name: /Original 30 workshop projects/ }).click();
   await expect(
     page.getByRole('heading', { name: 'The 30 lesson projects', exact: true }),
   ).toBeVisible();

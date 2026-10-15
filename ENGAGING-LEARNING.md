@@ -1,4 +1,6 @@
-# A more inviting FDE Academy
+# The preserved workshop learning experience
+
+The concepts + AI core now opens by default; see [MISSION-COURSE.md](MISSION-COURSE.md). The interactions described below are preserved in the optional original workshop collection at `#/workshops` and `#/lesson/1`–`#/lesson/30`. They do not define compulsory core coding requirements.
 
 The curriculum, projects, source examples, portfolio, and existing progress remain in place. This pass changes the experience of starting, making a discovery, and returning.
 

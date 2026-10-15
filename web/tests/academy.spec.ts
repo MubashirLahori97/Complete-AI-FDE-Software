@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('a new learner starts with real zero progress and can search the curriculum', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#/workshops');
   await expect(page.getByRole('heading', { name: 'A little progress, every day.' })).toBeVisible();
   await expect(
     page.getByRole('progressbar', { name: 'Core course completion', exact: true }),
@@ -21,7 +21,7 @@ test('a new learner starts with real zero progress and can search the curriculum
 });
 
 test('lesson search and track filters work together', async ({ page }) => {
-  await page.goto('/#/curriculum');
+  await page.goto('/#/workshop-path');
   await page.getByRole('button', { name: 'AI systems', exact: true }).click();
   await expect(page.locator('.lesson-row')).toHaveCount(7);
   await page.getByRole('textbox', { name: 'Search lessons', exact: true }).fill('embeddings');
@@ -216,8 +216,8 @@ test('phase milestones persist independently of the core lesson count', async ({
 test('mobile pages fit the viewport and navigation remains usable', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   for (const route of [
-    '/',
-    '/curriculum',
+    '/workshops',
+    '/workshop-path',
     '/lesson/2',
     '/lab',
     '/scenarios',

@@ -164,13 +164,13 @@ export default function Dashboard({
       <SectionHeading
         title="Your adventure, one mission at a time"
         subtitle="Every dot is something you can learn to build. Explore freely."
-        href="#/curriculum"
+        href="#/workshop-path"
         link="See all 30 missions"
       />
       <div className="chapter-ribbon">
         {tracks.map((track, i) => (
           <a
-            href={`#/curriculum?track=${encodeURIComponent(track.name)}`}
+            href={`#/workshop-path?track=${encodeURIComponent(track.name)}`}
             className={track.name === next.track ? 'active' : ''}
             key={track.name}
           >

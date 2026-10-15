@@ -1,10 +1,10 @@
 # FDE Academy
 
-The default app is **FDE Academy**, with its original dashboard, curriculum, daily lesson pages and projects, practice lab, scenarios, and portfolio. Optional Amina examples live at `#/guided` and `#/sample/amina`; see [GUIDED-COURSE.md](../GUIDED-COURSE.md). The main academy is available at `#/` and the compatible `#/library` alias.
+The default app is **FDE Academy**, with the accepted six-stage, thirty-mission concepts + AI core. Open `#/`, `#/curriculum` and `#/mission/1`–`#/mission/30`. AI can perform all implementation, planning, testing and diagnosis; conceptual understanding is compulsory. See [MISSION-COURSE.md](../MISSION-COURSE.md).
 
-All 30 main lessons have a beginner path: one idea → worked example → small task, followed by the lesson's own practice and project. The homepage and lesson pages save the learner's place. Project milestones, download instructions, hints, and optional challenges are available without reading the full guide first. See [the learning experience](../LEARNING-EXPERIENCE.md) for content sources and maintenance.
+Each core mission contains a concrete problem, concepts, a worked example, a prepared interactive scenario, a three-milestone AI-directed project, outcome checks, eight system-explanation areas and five reasoning demonstrations. Explanations appear one question at a time. Review records separate product evidence from understanding, include fresh follow-ups and remain learner-owned rather than authenticated credentials. Build preparation validates and packages all thirty project kits and repository guides.
 
-Each core lesson now leads with a change-and-see experiment: editable inputs, immediate outputs and explanations, a small mission, and a reset. On phones, a compact result stays visible beside the controls as you scroll. Experiment changes save per lesson and are included in progress backups. They do not earn points or complete a project. External services, AI output, Git, storage, and deployments are explicitly labelled local models or fixed examples.
+The original coding collection is preserved at `#/workshops`, `#/library`, `#/workshop-path` and `#/lesson/1`–`#/lesson/30`, with its own projects, code, experiments and progress. Optional Amina examples remain at `#/guided` and `#/sample/amina`. Old completions do not complete new core missions. All core records round-trip through existing Settings backups. The teaching app itself makes no live AI calls; learners use available AI tools for their projects and record actual configuration, access, versions, costs and observed results.
 
 ## Run locally
 
@@ -35,7 +35,7 @@ npm run test:e2e
 
 On an existing Windows installation, `PLAYWRIGHT_BROWSER_PATH` can point to a Chrome or Edge executable instead of downloading Chromium. The standard browser suite does not require the Python CDN; enable the optional check to verify it on your connection.
 
-## What learners can do
+## Preserved optional workshop features
 
 Try the separate beginner sample at `#/sample/amina`. One button adds one message. The first two clicks show 10 becoming 11 and then 12 before a short explanation introduces a variable. Learners can keep pressing the same button to see the value change. Code and an offline HTML counter download are optional and appear under “More, when you’re ready” after the idea is introduced. There are no forms, predictions, quizzes, or external runtimes. Sample state lasts for the current visit and does not mark existing course lessons complete. This is a single teaching prototype to review before redesigning the course.
 
@@ -57,6 +57,10 @@ Try the separate beginner sample at `#/sample/amina`. One button adds one messag
 Progress and scenario scores are learning records and self-assessments. They do not independently verify projects, certify professional readiness, or guarantee jobs or earnings. The roadmap's day numbers are suggested stages; learners can adjust their pace.
 
 ## Architecture
+
+- **Core content:** `src/missions.json` supplies all thirty accepted missions. `MissionPages.tsx` renders the homepage, six-stage path, five-step mission flow, separate evidence and understanding review, and mission portfolio. `mission.css` extends the existing academy design without changing optional exercise runtimes.
+- **Core kits and source guides:** `scripts/pack-missions.mjs` validates content, creates `public/mission-projects/mission-01.zip`–`mission-30.zip`, and regenerates the tracked `missions/01`–`missions/30` guides and `MISSION-MAP.md`. The first five kits include a runnable static worked example. Later kits are complete project briefs and evidence sheets, not prebuilt independent customer products.
+- **Core progress:** `Progress.missions` stores current step, scenario, prediction, explanation question, outcome evidence, system map, reasoning and review. `parseProgress` reconstructs recognized fields and bounds imported values. Product/explanation edits clear the previous review; field completeness cannot establish semantic mastery. `missions.test.ts` and `tests/missions.spec.ts` cover these boundaries and all mission journeys, kits, phone/keyboard layouts and compatibility.
 
 - **React + TypeScript + Vite:** static application, relative asset paths, and hash routes compatible with GitHub Pages.
 - **Source content:** `src/Markdown.tsx` lazily imports the repository's original lesson and roadmap files at build time. Internal course links become app routes. Raw HTML is sanitized before rendering.

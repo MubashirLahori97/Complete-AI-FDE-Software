@@ -1,0 +1,108 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { zipSync, strToU8 } from 'fflate';
+
+const web = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = path.dirname(web);
+const missions = JSON.parse(fs.readFileSync(path.join(web, 'src/missions.json'), 'utf8'));
+const fields = [
+  'Purpose and success',
+  'Actual technologies',
+  'How the parts fit',
+  'Choices and alternatives',
+  'Where it runs',
+  'One action, end to end',
+  'Information, access and AI',
+  'Changes and failures',
+];
+const systemTemplate = `# Explain the system you actually built\n\nWrite or transcribe in your own words. AI may help inspect and teach. A generated explanation alone is insufficient; demonstrate that you can apply the concepts. Update this after meaningful changes. A static site can have no database, accounts, server or live AI.\n\n${fields.map((title) => `## ${title}\n\nYour explanation, actual component/configuration evidence and useful diagram:\n`).join('\n')}\nDo not put secrets or private customer data here.\n`;
+const toolsTemplate = `# Current tool and environment record\n\nVerification date:\nAI builder/agent and model, if known:\nActual languages / runtimes / frameworks / libraries / versions:\nActual database / services / hosting (or absent):\nStart / build / test / deployment instructions:\nConfiguration names (never secret values):\nObserved capability and relevant limits:\nProvider pricing source + date, or cost explicitly unknown:\nBudget, authority and stopping conditions:\nReal observations versus fixtures / simulations / unrun checks:\nReplacement or export route:\n`;
+const stages = [
+  'Build with AI and understand the result',
+  'Understand the problem and design the product',
+  'Understand how the complete system works',
+  'Direct AI work at greater scale',
+  'Establish quality and keep the product working',
+  'Deliver value and demonstrate ownership',
+];
+const destination = path.join(web, 'public/mission-projects');
+fs.mkdirSync(destination, { recursive: true });
+const repositoryFolder = path.join(root, 'missions');
+fs.mkdirSync(repositoryFolder, { recursive: true });
+const validateText = (value) => typeof value === 'string' && value.trim().length > 15;
+if (missions.length !== 30) throw new Error('The core requires exactly 30 missions.');
+for (const [index, m] of missions.entries()) {
+  if (m.id !== index + 1 || m.stage !== Math.ceil(m.id / 5))
+    throw new Error(`Invalid mission sequence ${m.id}`);
+  if (
+    m.concepts.length < 2 ||
+    m.experiment.options.length !== 3 ||
+    m.project.steps.length !== 3 ||
+    m.project.checks.length !== 3 ||
+    m.assess.variations.length !== 2
+  )
+    throw new Error(`Incomplete mission ${m.id}`);
+  if (
+    ![
+      m.problem,
+      m.outcome,
+      m.project.brief,
+      ...Object.values(m.example),
+      ...m.concepts.flatMap((c) => Object.values(c)),
+      ...m.experiment.options.flatMap((o) => [o.label + ' (scenario)', o.result, o.why]),
+      ...m.project.steps,
+      ...m.project.checks,
+      ...Object.values(m.assess).flat(),
+    ].every(validateText)
+  )
+    throw new Error(`Missing teaching content in mission ${m.id}`);
+  const number = String(m.id).padStart(2, '0');
+  const brief = `Help me deliver: ${m.project.brief}\n\nContext: ${m.problem}\n\nYou may plan, implement, test, diagnose and improve the solution. Manual coding is optional. Ask about missing information, use fictional or authorized data, label assumptions and simulations, and explain concepts in simple English. Establish budget, authority and stopping conditions. Discuss new access, spending and publication before acting.\n\nMilestones:\n${m.project.steps.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nExpected observations:\n${m.project.checks.map((s) => `- ${s}`).join('\n')}\n\nName the actual stack, supported versions, configuration, costs and opening instructions. Never invent interviews, measurements or test results. Help me inspect the system, update my system explanation and predict a changed case before showing the result. Do not complete my understanding assessment as if I had demonstrated it.\n`;
+  const content = `# Mission ${m.id}: ${m.title}\n\nStage ${m.stage}: ${stages[m.stage - 1]}\n\n${m.outcome}\n\nAI can perform all implementation, research, planning, tests and diagnosis. Concepts are compulsory. This is a mission, not a one-day guarantee.\n\n## The problem\n\n${m.problem}\n\n## Understand the concepts\n\n${m.concepts.map((c) => `### ${c.name}\n\n${c.explanation}\n\n**Example:** ${c.example}\n\n**Common wrong idea:** ${c.misconception}`).join('\n\n')}\n\n## Predict, change, observe\n\n${m.experiment.prompt}\n\nPrepared teaching simulation, not live provider or business evidence. Predict before selecting.\n\n${m.experiment.options.map((o) => `- **${o.label}:** ${o.result} ${o.why}`).join('\n')}\n\nFlow: ${m.flow.map((n) => `${n.name} (${n.runs})`).join(' → ')}\n\n## Worked example\n\n${Object.entries(
+    m.example,
+  )
+    .map(([label, value]) => `**${label}:** ${value}`)
+    .join(
+      '\n\n',
+    )}\n\nAuthored example; your project requires its own observations.\n\n## Project: ${m.project.title}\n\n${m.project.brief}\n\n${m.project.steps.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n## Outcome checks\n\n${m.project.checks.map((s) => `- [ ] ${s}`).join('\n')}\n\nRecord starting state, action, expected result, observed result, environment and evidence location. Leave unrun checks unticked.\n\n## System explanation\n\n${fields.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\nExplain the actual project; mark absent components as absent. Use your own words and a diagram where useful. Update after meaningful changes.\n\n## Understanding, separately from output\n\n${['explain', 'locate', 'predict', 'compare', 'challenge'].map((k) => `- **${k}:** ${m.assess[k]}`).join('\n')}\n\n## Reviewer guidance\n\n${m.assess.guide}\n\nAI stays available. A working output plus generated prose does not establish understanding if the learner cannot apply the concept. Practise these variations, then ask a reviewer for a fresh relevant variation:\n\n${m.assess.variations.map((s) => `- ${s}`).join('\n')}\n\nRecord who or what reviewed, the learner's predictions and reasoning, observed results, gaps and next practice. Local review records are not authenticated qualifications.\n\n## Optional implementation source material\n\n${m.reuse.map((day) => `- [Original workshop ${day}](../../${fs.readdirSync(root).find((name) => name.startsWith(`${String(day).padStart(2, '0')}_Day_`))}/README.md)`).join('\n')}\n\nUse relevant material; manual coding and the old sequence are not core gates.\n\n<!-- Generated from web/src/missions.json by web/scripts/pack-missions.mjs. -->\n`;
+  const directory = path.join(repositoryFolder, number);
+  fs.mkdirSync(directory, { recursive: true });
+  fs.writeFileSync(path.join(directory, 'README.md'), content);
+  const evidence = `# Mission ${m.id} evidence\n\n## Product evidence\n\nArtifact / local location and opening instructions:\nStarting state:\nAction:\nExpected result:\nActual observation:\nEnvironment / revision / date:\nFixtures, reports, unrun checks and limits:\n\n${m.project.checks.map((c) => `- [ ] ${c}`).join('\n')}\n\n## Understanding demonstrations\n\n${['explain', 'locate', 'predict', 'compare', 'challenge'].map((k) => `### ${k}\n${m.assess[k]}\n\nYour reasoning and evidence:\n`).join('\n')}\n## Review\n\nReviewer or method:\nFresh scenario:\nPrediction before result:\nObserved reasoning and outcome:\nGaps and next practice:\nStatus: unreviewed / revisit / reviewer reports demonstrated\n\nField completeness is not concept mastery. AI remains available throughout.\n`;
+  const files = {
+    'MISSION.md': strToU8(
+      content.replace(
+        /\]\(\.\.\/\.\.\/([^)]+)\)/g,
+        '](https://github.com/MubashirLahori97/Complete-AI-FDE-Software/blob/main/$1)',
+      ),
+    ),
+    'AI-BRIEF.txt': strToU8(brief),
+    'SYSTEM-EXPLANATION.md': strToU8(systemTemplate),
+    'EVIDENCE.md': strToU8(evidence),
+    'TOOL-RECORD.md': strToU8(toolsTemplate),
+  };
+  if (m.id <= 5)
+    files['worked-example.html'] = fs.readFileSync(
+      path.join(web, 'curriculum/service-example.html'),
+    );
+  fs.writeFileSync(path.join(destination, `mission-${number}.zip`), zipSync(files));
+}
+const mapping = `# Core mission implementation and reuse map\n\nThe six-stage core is implemented at \`#/mission/1\` through \`#/mission/30\`. Original workshops remain at \`#/lesson/1\` through \`#/lesson/30\`; Amina remains optional. Old completions do not complete new missions.\n\n## Mapping and added teaching\n\n| Mission | Shared foundation | Reused workshop material | Added concept / assessment depth |\n| --- | --- | --- | --- |\n${missions.map((m) => `| [${m.id}. ${m.title}](missions/${String(m.id).padStart(2, '0')}/README.md) | ${m.foundation.join(', ')} | ${m.reuse.join(', ')} | ${m.concepts.map((c) => c.name).join('; ')}; five reasoning actions and two practice variations |`).join('\n')}\n\n## Foundation coverage\n\n${[
+  ...new Set(missions.flatMap((m) => m.foundation)),
+]
+  .sort()
+  .map(
+    (area) =>
+      `- **${area}:** missions ${missions
+        .filter((m) => m.foundation.includes(area))
+        .map((m) => m.id)
+        .join(', ')}`,
+  )
+  .join(
+    '\n',
+  )}\n\n## Remaining work that cannot be claimed from authored content\n\nThe thirty mission experiences, project kits, system-explanation records and reviewer prompts are implemented. The first five kits include a runnable static worked example; later kits contain complete briefs, evidence sheets and optional source-workshop links. They are not prebuilt independent customer solutions. Learners and their available AI build and verify those projects.\n\nBeginner pilots, delayed concept-transfer measurements, practitioner calibration with comparable tools, real business outcomes and future 2028/2029 tool compatibility remain unmeasured. No pacing estimate, employment equivalence or graduate outcome is established by implementation or passing app tests. Source research separates observations, forecasts and curriculum scenarios.\n\nGenerated from \`web/src/missions.json\` by \`web/scripts/pack-missions.mjs\`.\n`;
+fs.writeFileSync(path.join(root, 'MISSION-MAP.md'), mapping);
+console.log(
+  `Validated and packaged ${missions.length} core missions, repository guides and project kits.`,
+);

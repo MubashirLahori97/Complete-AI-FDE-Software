@@ -26,7 +26,7 @@ export function Settings({
   const importFile = async (file: File | undefined) => {
     if (!file) return;
     try {
-      if (file.size > 1000000) throw new Error('Choose a backup smaller than 1 MB.');
+      if (file.size > 5000000) throw new Error('Choose a backup smaller than 5 MB.');
       const parsed = parseProgress(JSON.parse(await file.text()));
       if (
         !window.confirm(
@@ -98,9 +98,9 @@ export function Settings({
         <section className="settings-card">
           <h2>Your progress, your copy.</h2>
           <p className="muted">
-            Lessons, notes, code drafts, scenarios, and portfolio evidence are saved in this
-            browser. There is no account or cross-device sync. Clearing browser storage removes the
-            saved copy.
+            Core mission explanations, review records, original lessons, code drafts, scenarios, and
+            portfolio evidence are saved in this browser. There is no account or cross-device sync.
+            Clearing browser storage removes the saved copy.
           </p>
           <div className="backup-actions">
             <button
@@ -173,7 +173,7 @@ export function Resources() {
     {
       title: 'Python tutorial',
       description:
-        'The language behind the core lessons. Learn types, control flow, functions, and more.',
+        'Optional implementation depth: explore types, control flow and functions in Python.',
       url: 'https://docs.python.org/3/tutorial/',
       label: 'PYTHON',
     },
@@ -222,18 +222,33 @@ export function Resources() {
         {[
           [
             'CURRICULUM.md',
-            'The complete curriculum',
-            'Objectives, builds, and exercises for each core lesson.',
+            'Original workshop curriculum',
+            'Original workshop material for optional implementation practice.',
           ],
           [
             'PROJECTS.md',
-            'All 30 lesson projects',
+            'Original 30 workshop projects',
             'Dedicated project guides, starter kits, milestones, and acceptance checks.',
           ],
           [
             'ROADMAP.md',
-            'The longer roadmap',
-            'Deepen your engineering skills after the first 30 lessons.',
+            'The accepted core roadmap',
+            'The accepted concept foundation, six stages and thirty core missions.',
+          ],
+          [
+            'MISSION-COURSE.md',
+            'The concepts + AI core course',
+            'How missions, system explanations and separate understanding reviews work.',
+          ],
+          [
+            'MISSION-MAP.md',
+            'All 30 missions and reused workshops',
+            'The core sequence, concept coverage, source material and remaining pilot work.',
+          ],
+          [
+            'RESEARCH-2030.md',
+            'Research and future scenarios',
+            'Observed evidence, conditional forecasts and curriculum design scenarios.',
           ],
           [
             'VISION.md',
@@ -290,6 +305,11 @@ export function Resources() {
           <ExternalLink size={16} />
         </a>
       </div>
+      <p className="muted">
+        Optional implementation collection: <a href="#/workshops">original workshop dashboard</a>{' '}
+        and <a href="#/workshop-path">all 30 coding workshops</a>. These retain their earlier code,
+        projects and saved progress. Manual coding is optional in the new core.
+      </p>
       <p className="muted">
         Optional shop examples: <a href="#/sample/amina">Amina’s one-idea sample</a> and{' '}
         <a href="#/guided">guided shop examples</a>. Your main course remains the FDE Academy
@@ -370,6 +390,9 @@ export function Document({ filename }: { filename: string }) {
     'CURRICULUM.md': 'The complete curriculum',
     'VISION.md': 'The course vision',
     'PROJECTS.md': 'The 30 lesson projects',
+    'MISSION-COURSE.md': 'The concepts + AI core course',
+    'MISSION-MAP.md': 'The mission and reuse map',
+    'RESEARCH-2030.md': 'Research and future scenarios',
   };
   return (
     <>

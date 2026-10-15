@@ -1,41 +1,13 @@
 # Learning in FDE Academy
 
-The academy keeps its original curriculum, navigation, 30 daily projects, practice lab, field scenarios, and portfolio. The optional shop examples remain under Resources.
+The default experience follows the accepted concepts + AI direction. Start at **Mission 1: Make a useful website**. AI can perform all implementation, planning, testing and diagnosis. Conceptual understanding is compulsory.
 
-The [engaging learning experience](ENGAGING-LEARNING.md) adds an interactive opening challenge, open mission map, learning XP, discovery cards, a responsive companion, and short recall challenges. These support the same lesson and project sequence described below.
+Read [the complete core learning flow](MISSION-COURSE.md) for the five steps: Explore, Understand, Build with AI, Explain your system, and Review. Each mission has its own project and kit. Product evidence and applied conceptual understanding are recorded separately. Every project needs an accurate eight-part system explanation.
 
-## What to do first
+Use a sustainable session such as the learner's two hours; a mission can take several sessions. Pacing should be established through pilots, not a compulsory hour budget.
 
-Open the academy and choose **Start Lesson 1**. Returning learners can use **Continue learning** to return to the last unfinished lesson they visited and its last activity. Finishing all 30 lessons leads to the next phase.
+The first five missions grow a useful service site. Stages two through five develop workflow understanding, complete-system concepts, capable-AI delegation, evaluation, quality and operations. The last five transfer those concepts to an unfamiliar domain and an independent delivery challenge.
 
-Every lesson follows the same loop:
+The [reuse map](MISSION-MAP.md) identifies original teaching material, added depth and remaining pilot work. Optional coding workshops, their projects, Amina examples and old progress are preserved separately. Their earlier manual-coding requirements are not core graduation rules.
 
-1. **Learn:** read one idea, follow one worked example, and try one small decision. New words have plain-English definitions. Wrong choices explain what to reconsider. Two hints come before the optional answer explanation.
-2. **Practise:** edit and run this lesson's own example, or complete its terminal/document task locally. Then use the concept check to check your understanding.
-3. **Project:** start with the stated first action, build the three milestones, and test the five behaviours on the done checklist. The download is a worked example to extend. Extra challenges are optional.
-4. **Record your build:** explain what you built, give an actual input and observed result, and say what you learned. Keep a code or demo link where possible.
-
-Your reading step, small-task attempt, hints, last activity, code drafts, project checks, and notes save in this browser. Use Settings to export a backup or move your progress to another browser. Existing version-1 backups remain supported. Opening or answering a small exercise does not mark a lesson or project complete.
-
-## A flexible two-hour session
-
-Try 20 minutes understanding the idea, 20 minutes following the example, 20 minutes practising, 50 minutes on the project, and 10 minutes reflecting. These are suggestions, not timers or deadlines. A lesson or larger project may take several sessions.
-
-## How projects connect
-
-- Days 1–6 introduce programs, data, decisions, functions, collections, and persistence through small builds.
-- Day 7 combines those skills into an expense tracker. The engineering lessons revisit validation, environments, testing, the interface, and its public release.
-- Days 15–25 build AI experiment habits, contracts, retrieval, answer checks, a document-assistant interface, evaluation, permissions, durable storage, and tracing. Reuse earlier parts when their contracts fit.
-- Days 26–30 use discovery, inspectable evidence, a scoped capstone, release checks, and handoff to practise delivering a customer workflow.
-
-Each day still has its own project. The explanation shows what you can reuse and what that day's example actually demonstrates. Browser-only exercises, saved fixtures, synthetic vectors, in-memory databases, and planned checks are labelled so they are not mistaken for live AI, durable storage, or verified delivery.
-
-## Going deeper
-
-Full lesson notes, project guides, test matrices, references, and optional original workshops remain available. New learners can open these when needed without reading the whole document before taking a first step.
-
-An AI assistant can help with explanations and hints. Each project includes a prompt asking it to give one hint and help test a normal case and a failure case. Learners still inspect the code, make decisions, and check results.
-
-## Maintaining the content
-
-The detailed curriculum in `scripts/curriculum/*.json` supplies the web examples and project milestones. `web/src/beginner-path.json` supplies the beginner explanations, vocabulary, decision tasks, feedback, and first actions. Run `node scripts/sync-beginner-path.mjs` after editing that file to update the README and PROJECT documents. The curriculum expansion script also performs that sync. The web build packages those updated documents into the 30 starter ZIPs.
+Saved mission work and original workshop work round-trip through Settings backups without converting old completion into new mastery. Local completeness checks and reviewer reports are not authenticated qualifications or measured employment outcomes.

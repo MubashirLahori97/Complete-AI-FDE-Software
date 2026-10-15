@@ -1,6 +1,6 @@
 # Learn with Amina
 
-This is an optional teaching experiment at `#/guided`. The main app remains FDE Academy, with its original dashboard, curriculum, and daily project flow. These 30 shop examples are preserved separately; they do not replace or renumber the academy's lessons. Each pairs concepts with a shop problem, worked example, checked exercise, and project.
+This is an optional teaching experiment at `#/guided`. The main app remains FDE Academy, now following the concepts + AI core in [MISSION-COURSE.md](MISSION-COURSE.md). The original coding workshops remain optional. These 30 shop examples are preserved separately; they do not replace or renumber the academy's lessons. Each pairs concepts with a shop problem, worked example, checked exercise, and project.
 
 ## The learning flow
 
@@ -11,7 +11,7 @@ This is an optional teaching experiment at `#/guided`. The main app remains FDE 
 5. Download the local kit, follow project milestones, reproduce normal/boundary/failure tests, and record evidence and reflections.
 6. Complete an unseen requirement and have a reviewer verify the final eight skill areas.
 
-Optional experiment routes are `#/guided`, `#/learn/1` through `#/learn/30`, `#/path`, and `#/evidence`. FDE Academy remains the main app at `#/`, with its curriculum at `#/curriculum` and original lessons at `#/lesson/1` through `#/lesson/30`. The `#/library` alias still opens the academy dashboard.
+Optional experiment routes are `#/guided`, `#/learn/1` through `#/learn/30`, `#/path`, and `#/evidence`. FDE Academy remains the main app at `#/`, with its curriculum at `#/curriculum` and core missions at `#/mission/1` through `#/mission/30`. Original workshops remain at `#/lesson/1` through `#/lesson/30`. The `#/library` alias still opens the academy dashboard.
 
 ## The complete path
 

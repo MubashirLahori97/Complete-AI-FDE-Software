@@ -1,64 +1,63 @@
 # The Vision
 
+FDE Academy prepares someone starting in 2028 or 2029 to understand software and AI concepts, direct capable AI systems, and deliver useful products.
+
+**Concepts are compulsory. AI can perform all implementation.** A learner should understand what the system does, how its parts interact, why decisions matter, and how to establish that it works. They can demonstrate that understanding through explanations, diagrams, predictions, experiments, and successful delivery.
+
+Every project requires the learner to explain what they intend to build, which technologies it actually uses, why those technologies were selected, where its parts run, and how a user action becomes a result. This system understanding is a requirement for progression and graduation.
+
+The [roadmap](ROADMAP.md) defines the accepted concept foundation, thirty missions, and assessments.
+
+The [2030 research](RESEARCH-2030.md) examines how work and daily life could change under much stronger AI. It adds evidence and quantitative judgement, domain knowledge, product adoption, trust, and adaptability to the preparation strategy. Its scenarios guide course design without promising a particular labour-market outcome.
+
 ## Why this exists
 
-I spent 10+ years building automation in the physical world — buildings, ELV systems, projects with real clients and real deadlines. Then I joined a software house, and within three months I saw something that changed how I think about learning software:
+My background is in building automation, ELV systems, and projects with real clients and deadlines. That work teaches a durable lesson: a solution matters when it works for the people who depend on it and continues working after handoff.
 
-**99% of developers let AI write their code.**
+Capable AI opens software building to people who have never written code. The course should develop that opportunity from the first lesson. Someone can describe an idea, direct iterations, and produce a useful website while learning the concepts behind it.
 
-Not some of them. Nearly all of them. The thing every tutorial, course, and bootcamp teaches — typing code — is the part that's been automated. It's gone.
+As the work becomes more demanding, their conceptual understanding and ability to demonstrate results should grow with it.
 
-And yet people are still out there grinding through syntax lessons, collecting certificates, watching their 40th "Python for Beginners" video — learning the one skill machines now do for free, while the skills that actually matter go untaught.
+## The future we design for
 
-This repo is my answer.
+Assume that AI in 2028 or 2029 can handle much of implementation, architecture, testing, diagnosis, deployment, and maintenance. This is the scenario the course prepares for. Let learners use those capabilities throughout.
 
-## The insight
-
-If AI writes the code, then what is a software engineer *for*?
-
-Three things AI can't do for you:
-
-1. **Understand — concepts at 100%.** When AI generates something, *you* have to know whether it's right. When it breaks at 2 AM, *you* have to know why. Concepts are the difference between using AI and being used by it.
-
-2. **Engineer — judgment around the code.** Specify precisely. Evaluate ruthlessly. Test, debug, deploy, keep it running. *AI writes; you engineer.* This is the actual job now.
-
-3. **Do business — turn software into value.** Find a real problem. Scope it. Talk to the human who has it. Demo the fix. Name a price. Software nobody pays for is a hobby.
-
-Concepts. Engineering. Business. That's the whole curriculum. Everything else is details.
-
-## The promise
-
-A normal person, starting from zero — 30 days later — walks into a business, finds a real problem, fixes it with AI software, and gets paid for it.
-
-Learning never stops. But earning starts on day 30.
+AI can also help with planning, research, evaluation, and learning. The course should improve as those activities become easier to delegate. Avoid building its identity around a permanent list of things AI cannot do.
 
 ## Who this is for
 
-Someone with no background, no connections, no head start — just a laptop and 60–90 minutes a day. If that's you, this was built for you. The only prerequisite is the willingness to think.
+Someone with a laptop, no software background, and the willingness to think, experiment, and learn. Start with plain English and useful building. Introduce technical vocabulary through visible examples and revisit it in progressively richer products.
 
-## How you'll know it's working
+Learners can complete the core course without manually writing code. Optional implementation and specialist tracks support particular interests and career requirements.
 
-- **Day 7:** you scoped and shipped a complete tool, and watched a real human use it.
-- **Day 14:** you have a live URL on the internet. Strangers can use your software.
-- **Day 21:** you have a live *AI product* — a chatbot over real documents.
-- **Day 26:** you interviewed a real business and wrote a brief a stranger could build from.
-- **Day 30:** you can demo everything, explain everything, and charge for it.
+## The foundation is conceptual understanding
 
-Your commit history is the public record of the transformation. That's not a metaphor — employers and clients will read it.
+Cover program logic, execution, data, networks, interfaces, identity, security, quality, delivery, architecture, AI foundations, agents, evaluation, product thinking, and collaboration.
 
-## The rules of the road
+For each important concept, the learner explains it, finds it in a working system, predicts a changed situation, compares choices, and investigates a mistaken explanation. Copying an AI answer does not establish that understanding.
 
-- **Concepts 100%, or it doesn't count.** If you can't explain it in plain words, redo the day.
-- **Never ship AI output you can't defend.** The AI is your junior developer: fast, confident, sometimes wrong. You are the senior.
-- **A day isn't done until something runs.** Reading doesn't count.
-- **Don't break the chain.** Tick the box every day. Thirty ticks is a new person.
+Concepts should help the learner make better decisions and direct better work. Use diagrams, simulations, generated examples, and experiments before adding unnecessary implementation detail.
 
-## The future
+## The graduate we want
 
-Day 30 is the first finish line, not the last. The [roadmap](ROADMAP.md) continues to day 90 — three phases that turn a 30-day builder into a complete, hire-ready software engineer: engineering depth, real products with real users, interviews, clients, getting hired. Same iron rules, hotter pace.
+A graduate can understand a workflow, define a worthwhile outcome, direct AI to build the solution, explain the important decisions, obtain relevant evidence, respond to feedback, and arrange a useful handoff.
 
-And if you finish all 90 days — tell the world. Your story is someone else's permission to start.
+They can keep doing this when the requirements or AI tools change. Their evidence includes conceptual reasoning, a working product, user feedback, and successful handling of unfamiliar changes.
 
----
+We aim for the ability to compete on relevant work with experienced engineers using the AI available at the time. Assess comparable outcomes with comparable tools. Describe measured capability honestly rather than convert course completion into years of employment.
 
-*AI writes the code. You do everything that matters around it.*
+## What readiness means
+
+A good-looking site is useful evidence of visual direction and iteration. Further claims need the relevant demonstration: enquiries arrive, private information stays private, or an order is processed correctly.
+
+AI can create and run the checks. The learner understands the intended behaviour, interprets the observations, and directs corrections. The required depth grows with what people depend on the product to do.
+
+Thirty missions define the proposed learning sequence. Pacing should come from pilot evidence and individual learning needs; conceptual mastery and successful delivery determine progress.
+
+## How the course stays relevant
+
+Separate enduring concepts and outcomes from current tool instructions. Test new AI capabilities regularly and delegate more work when the tools can handle it well.
+
+Refresh the challenges, verify the examples, and assess a learner's ability to transfer concepts to an unfamiliar tool. Preserve their previous work and evidence as the course evolves.
+
+The [roadmap](ROADMAP.md) records the accepted direction. The [core mission experience](MISSION-COURSE.md) is implemented; learner pilots and calibration are still required. Original coding workshops remain optional source material.
