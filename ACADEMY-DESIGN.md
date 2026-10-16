@@ -28,6 +28,8 @@ Browser checks cover the first-screen pairing at 1265×730 and 1440×900, phone/
 
 ## Make a consequence visible
 
+The learner selected the repair-visit scene's dark teal stage, warm gold actions and isometric illustration as the direction for all thirty core lessons. Every lesson now has a question, an immediately responsive scene and a direct handoff to its actual project. Twenty-seven new model-specific illustrations accompany the two real browser-page scenes and the existing repair visit. Detailed evidence is disclosed separately; the course, notebook and model rules remain authoritative. Finite explanation playback supports pause/replay/direct selection, focus-preserving interruption and reduced motion. See [all thirty scenes](ALL-LESSON-SCENES.md).
+
 Mission 1's Understand step keeps the same saved page in view. A visitor's question connects the outcome to a service-area line: hide it, change colour independently and restore the information. The next concept connects Content/HTML, Appearance/CSS and Behaviour/JavaScript to actual text, styles and Contact actions. Selected elements are outlined and small extracts show current instructions. Changes return to Explore and backup, notes stay separate, and input undo/reset remain available. The guide distinguishes the tracked line from judging the whole page's meaning. See [the connected explanations](PAGE-UNDERSTANDING.md).
 
 Live preview regions opt out of browser scroll anchoring to keep controls steady during updates. An observed missed-click trace included a 50px root scroll between locating and pressing Contact. Repeated first-use checks now assert the action and stable page position. Explicit example reveals work from either side of the page, while free typing stays in place.

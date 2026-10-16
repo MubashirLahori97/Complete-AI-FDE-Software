@@ -99,6 +99,8 @@ The Pages workflow sets `BASE_PATH` to the repository name so assets and the run
 
 ## Contributing
 
+`LessonScene.tsx`, `LessonIllustration.tsx` and `scene-lessons.ts` provide the thirty-lesson illustrated experience, preserving native pages 1/3 and `AccessJourney` in 26. Illustrations read the existing typed model result; scene controls patch one saved input, and project links open the actual existing Build step. Detailed evidence remains in a disclosure. Each kit/repository mission folder includes `SCENE-GUIDE.md`.
+
 Mission 4's `LogicUnderstanding.tsx` connects both concept explanations to the saved estimator inputs. `estimate-model.ts` supplies Explore and the explanations with actual ordered validation results; the explicit-call scene separates temporary calculation memory from saved input. Its guide and model source are packaged with Mission 4.
 
 The expanded content is authored in the repository root's `scripts/curriculum/*.json`. After editing it, run `node scripts/expand-curriculum.mjs` from the repository root to regenerate the lesson READMEs, PROJECT.md files, starter files, project index, and app metadata. The original workshops remain in a marked optional section; regeneration preserves that section and is idempotent. Review and commit the generated source files together.

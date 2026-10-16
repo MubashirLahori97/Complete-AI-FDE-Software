@@ -1,3 +1,4 @@
+import { openEvidence } from './evidence-helper';
 import { test, expect } from '@playwright/test';
 import { labSpec, evaluateLab } from '../src/mission-labs';
 import missions from '../src/missions.json' with { type: 'json' };
@@ -11,6 +12,7 @@ test('every remaining concept opens with specific evidence and retains its proje
   page.on('pageerror', (error) => errors.push(error.message));
   for (const id of remaining) {
     await page.goto(`/#/mission/${id}`);
+    await openEvidence(page);
     await expect(page.locator('.lab-stage .model-evidence')).toBeVisible();
     await expect(page.locator('.lab-world')).toHaveCount(0);
     await page.getByRole('button', { name: labSpec(id).first, exact: true }).click();
@@ -28,6 +30,7 @@ test('evidence sources, cost periods and missing capabilities change the display
   page,
 }) => {
   await page.goto('/#/mission/6');
+  await openEvidence(page);
   await page.getByRole('button', { name: 'Checked sample', exact: true }).click();
   await expect(page.locator('.claim-paper')).toContainText('FICTIONAL CHECKED SAMPLE');
   await page.locator('.lab-more summary').click();
@@ -35,6 +38,7 @@ test('evidence sources, cost periods and missing capabilities change the display
   await page.keyboard.press('End');
   await expect(page.locator('.claim-conflict')).toBeVisible();
   await page.goto('/#/mission/9');
+  await openEvidence(page);
   await page.getByRole('button', { name: 'Compare two years', exact: true }).click();
   await expect(page.locator('.cost-totals').first()).toContainText('600');
   await expect(page.getByRole('slider', { name: /Comparison period/ })).toHaveValue('24');
@@ -46,6 +50,7 @@ test('budget cannot grant authority and contract diagrams expose incompatible wo
   page,
 }) => {
   await page.goto('/#/mission/16');
+  await openEvidence(page);
   await page.getByRole('slider', { name: /Task budget/ }).focus();
   await page.keyboard.press('End');
   await page.locator('.lab-more summary').click();
@@ -53,6 +58,7 @@ test('budget cannot grant authority and contract diagrams expose incompatible wo
   await expect(page.locator('.operation-strip li[data-state=fail]')).toHaveCount(3);
   await expect(page.locator('.budget-coins .is-spent')).toHaveCount(0);
   await page.goto('/#/mission/17');
+  await openEvidence(page);
   await expect(page.locator('.contract-fit')).toContainText('disagree');
   await page.getByRole('button', { name: labSpec(17).first, exact: true }).click();
   await expect(page.locator('.contract-fit')).toContainText('agree');
@@ -60,6 +66,7 @@ test('budget cannot grant authority and contract diagrams expose incompatible wo
 });
 test('retrieved instructions cannot substitute for separate authority', async ({ page }) => {
   await page.goto('/#/mission/19');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(19).first, exact: true }).click();
   await page
     .getByRole('button', { name: 'Add an instruction inside the document', exact: true })
@@ -73,6 +80,7 @@ test('rollback leaves the schema changed while trace selection follows all measu
   page,
 }) => {
   await page.goto('/#/mission/22');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(22).first, exact: true }).click();
   await page.locator('.lab-more summary').click();
   await page.getByLabel('Data migrated to an incompatible v2 schema', { exact: true }).check();
@@ -81,6 +89,7 @@ test('rollback leaves the schema changed while trace selection follows all measu
     'Cannot read',
   );
   await page.goto('/#/mission/23');
+  await openEvidence(page);
   await page
     .locator('.trace-spans')
     .getByRole('button', { name: /Validation/ })
@@ -99,6 +108,7 @@ test('cache shows actual routes, stale answers, refresh boundaries and queued wo
   page,
 }) => {
   await page.goto('/#/mission/24');
+  await openEvidence(page);
   await page.getByRole('button', { name: 'Reuse cache', exact: true }).click();
   await expect(page.locator('.read-source')).toHaveCount(1);
   await expect(page.locator('.read-cache')).toHaveCount(19);
@@ -117,19 +127,23 @@ test('prerequisites, adoption and added capabilities affect the real saved model
   page,
 }) => {
   await page.goto('/#/mission/26');
+  await openEvidence(page);
   await expect(page.locator('.site-gate')).not.toHaveClass(/is-open/);
   await page.getByRole('button', { name: 'Record approval', exact: true }).click();
   await expect(page.locator('.site-gate')).toHaveClass(/is-open/);
   await page.goto('/#/mission/27');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(27).first, exact: true }).click();
   await expect(page.locator('.architecture-parts>div[data-state=fail]')).toHaveCount(1);
   await page.getByRole('button', { name: 'Include connected services', exact: true }).click();
   await expect(page.locator('.architecture-parts>div[data-state=fail]')).toHaveCount(0);
   await page.goto('/#/mission/28');
+  await openEvidence(page);
   await expect(page.locator('.net-time')).toContainText('-30');
   await page.getByRole('button', { name: 'What if nobody uses it?', exact: true }).click();
   await expect(page.locator('.net-time')).toContainText('No net time');
   await page.goto('/#/mission/29');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(29).first, exact: true }).click();
   await expect(page.locator('.concept-checks li[data-state=fail]')).toHaveCount(1);
   await page.locator('.lab-more summary').click();
@@ -138,6 +152,7 @@ test('prerequisites, adoption and added capabilities affect the real saved model
     .fill('accessStatus');
   await expect(page.locator('.concept-checks li[data-state=pass]')).toHaveCount(3);
   await page.goto('/#/mission/30');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(30).first, exact: true }).click();
   await page
     .getByRole('button', { name: 'Add connected application and storage', exact: true })
@@ -157,6 +172,7 @@ test('all new surfaces fit narrow screens, long contracts and reduced motion', a
     await page.setViewportSize({ width, height: 812 });
     for (const id of remaining) {
       await page.goto(`/#/mission/${id}`);
+      await openEvidence(page);
       await expect(page.locator('.model-evidence')).toBeVisible();
       if (id === 17) {
         await page.getByRole('textbox').first().fill('LongField'.repeat(50));
@@ -185,5 +201,6 @@ test('all new surfaces fit narrow screens, long contracts and reduced motion', a
   }
   await page.setViewportSize({ width: 640, height: 900 });
   await page.goto('/#/mission/24');
+  await openEvidence(page);
   await expect(page.getByRole('slider', { name: /Inspect read/ })).toBeVisible();
 });

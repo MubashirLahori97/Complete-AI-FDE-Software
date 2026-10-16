@@ -1,3 +1,4 @@
+import { openEvidence } from './evidence-helper';
 import { test, expect } from '@playwright/test';
 import { unzipSync, strFromU8 } from 'fflate';
 import { labStories, comparisonValues } from '../src/lab-stories';
@@ -97,6 +98,7 @@ test('free edits stop presenting a guided takeaway as the current example state'
   await page.getByRole('textbox', { name: 'Number of items', exact: true }).fill('5');
   await expect(page.locator('.comparison-result')).toContainText('Your own variation');
   await expect(page.locator('.comparison-result')).not.toContainText('model withholds the total');
+  await openEvidence(page);
   await expect(page.locator('.receipt-equation')).toContainText('125 units');
   await page.getByRole('button', { name: 'Undo last input change', exact: true }).click();
   await expect(page.locator('.comparison-result')).toContainText('Changed case');
@@ -164,6 +166,7 @@ test('expanded comparisons, stories and system controls fit phone and desktop wi
         `${width}: comparison ${id}`,
       ).toBe(true);
       if (id === 4 && width <= 768) {
+        await openEvidence(page);
         await page.locator('.receipt-withheld').scrollIntoViewIfNeeded();
         const dock = await page.locator('.comparison-action-dock').boundingBox();
         expect(dock).not.toBeNull();

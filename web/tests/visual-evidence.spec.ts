@@ -1,3 +1,4 @@
+import { openEvidence } from './evidence-helper';
 import { expect, test } from '@playwright/test';
 import { labSpec, evaluateLab } from '../src/mission-labs';
 
@@ -11,6 +12,7 @@ test('specific visual evidence leads each registered lesson and responds to its 
   page.on('pageerror', (error) => errors.push(error.message));
   for (const id of visualMissions) {
     await page.goto(`/#/mission/${id}`);
+    await openEvidence(page);
     const spec = labSpec(id);
     await expect(page.locator('.lab-stage .model-evidence')).toBeVisible();
     await expect(page.locator('.lab-world')).toHaveCount(0);
@@ -29,6 +31,7 @@ test('the receipt distinguishes invalid input, zero items and an actual itemised
   page,
 }) => {
   await page.goto('/#/mission/4');
+  await openEvidence(page);
   const quantity = page.getByLabel('Number of items', { exact: true });
   await quantity.fill('');
   await expect(page.locator('.receipt-withheld')).toContainText('No total');
@@ -45,6 +48,7 @@ test('the receipt distinguishes invalid input, zero items and an actual itemised
   await quantity.fill('-1');
   await expect(page.locator('.receipt-withheld')).toBeVisible();
   await page.goto('/#/mission/7');
+  await openEvidence(page);
   const eligible = page.getByLabel('Eligible visits', { exact: true });
   await expect(page.locator('.rate-panel').first()).toContainText('20%');
   await eligible.fill('100');
@@ -58,6 +62,7 @@ test('generated cards expose repeated identity, empty collections and storage li
   page,
 }) => {
   await page.goto('/#/mission/5');
+  await openEvidence(page);
   const count = page.getByRole('slider', { name: /Number of services/ });
   await count.focus();
   await page.keyboard.press('End');
@@ -73,6 +78,7 @@ test('generated cards expose repeated identity, empty collections and storage li
   await page.keyboard.press('Home');
   await expect(page.locator('.collection-empty')).toContainText('No records. No cards.');
   await page.goto('/#/mission/12');
+  await openEvidence(page);
   await page.getByLabel('Process has restarted', { exact: true }).check();
   await expect(page.locator('.record-pairs >button.evidence-state-blocked')).toHaveCount(2);
   await page.locator('.lab-more summary').click();
@@ -88,6 +94,7 @@ test('the access gate exposes both a correct refusal and a missing-check leak', 
   page,
 }) => {
   await page.goto('/#/mission/14');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(14).first, exact: true }).click();
   await expect(page.locator('.access-record')).toContainText('Record withheld');
   await page.locator('.lab-more summary').click();
@@ -105,6 +112,7 @@ test('the access gate exposes both a correct refusal and a missing-check leak', 
 
 test('JSON format, shape and date evidence remain distinct visible checks', async ({ page }) => {
   await page.goto('/#/mission/18');
+  await openEvidence(page);
   const response = page.getByLabel('Proposed structured output', { exact: true });
   await expect(page.locator('.validation-checks >.validation-pass')).toHaveCount(2);
   await expect(page.locator('.validation-checks >.validation-fail')).toHaveCount(1);
@@ -122,6 +130,7 @@ test('request states preserve a draft and distinguish timeout from cancellation 
   page,
 }) => {
   await page.goto('/#/mission/8');
+  await openEvidence(page);
   await page.getByRole('textbox').first().fill('V-42');
   await page.locator('.lab-more summary').click();
   await page
@@ -131,11 +140,13 @@ test('request states preserve a draft and distinguish timeout from cancellation 
   await page.locator('.request-stops >button').last().click();
   await expect(page.locator('.evidence-inspector')).toContainText('No confirmation claimed');
   await page.goto('/#/mission/11');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(11).first, exact: true }).click();
   await page.locator('.request-stops >button').last().click();
   await expect(page.locator('.evidence-inspector')).toContainText('final server state is unknown');
   await expect(page.locator('.request-timing >div')).toHaveCount(2);
   await page.goto('/#/mission/15');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(15).first, exact: true }).click();
   await page.locator('.request-stops >button').last().click();
   await expect(page.locator('.evidence-inspector')).toContainText('No delivery receipt');
@@ -146,6 +157,7 @@ test('record views reveal wrong updates and distinguish a restore from its verif
 }) => {
   for (const id of [10, 21]) {
     await page.goto(`/#/mission/${id}`);
+    await openEvidence(page);
     await expect(page.locator('.record-pairs >button.evidence-state-blocked')).toHaveCount(2);
     await page.locator('.lab-more summary').click();
     await page
@@ -155,6 +167,7 @@ test('record views reveal wrong updates and distinguish a restore from its verif
     await expect(page.locator('.record-pairs >button').first()).toContainText('confirmed');
   }
   await page.goto('/#/mission/25');
+  await openEvidence(page);
   await page.getByRole('button', { name: labSpec(25).first, exact: true }).click();
   await expect(page.locator('.record-pairs >button.evidence-state-careful')).toHaveCount(4);
   await page.locator('.lab-more summary').click();
@@ -177,6 +190,7 @@ test('specific lesson visuals fit phones, including long inputs and the system-v
     await page.setViewportSize({ width, height: 812 });
     for (const id of visualMissions) {
       await page.goto(`/#/mission/${id}`);
+      await openEvidence(page);
       await expect(page.locator('.lab-stage .model-evidence')).toBeVisible();
       if (id === 2) await page.getByRole('textbox').first().fill('Unbroken'.repeat(60));
       expect(

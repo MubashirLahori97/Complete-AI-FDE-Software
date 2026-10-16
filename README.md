@@ -24,6 +24,8 @@ In **Mission 1 → Understand**, [keep learning with the page you changed](PAGE-
 
 In **Mission 4 → Understand**, [follow the estimator's logic](LOGIC-UNDERSTANDING.md): compare blank with zero, inspect the checks that actually run, then separate editing input from calling a function and remembering its result. The guide and model source travel in Mission 4's kit.
 
+All **30 core lessons** now share the [illustrated scene experience](ALL-LESSON-SCENES.md): dark teal stages, warm gold actions, immediate visual consequences and a direct route to each lesson's actual project. Two browser-page scenes, the repair visit and twenty-seven model-specific illustrations teach different ideas. Every kit includes its own scene guide.
+
 In **Mission 26 → Explore**, [get a repair visit moving](ACCESS-JOURNEY.md): try a faster preparation time, see the van remain at its workshop, then change the access prerequisite. The finite illustrated sequence supports pause/replay and reduced motion, using the same saved workflow model.
 
 The [illustrated academy journey](ACADEMY-DESIGN.md) connects the homepage, six chapters and core lessons. Edit a real page before starting, carry that heading into Mission 1, and see the experiment and project behind each mission. The reservation and AI evaluation lessons also expose individual operations and cases behind their totals.

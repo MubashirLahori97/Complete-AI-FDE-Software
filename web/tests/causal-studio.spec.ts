@@ -1,3 +1,4 @@
+import { openEvidence } from './evidence-helper';
 import { expect, test } from '@playwright/test';
 
 test('the lab renders actual 3D, changes camera and depth, and exposes the same model in a flat view', async ({
@@ -13,6 +14,7 @@ test('the lab renders actual 3D, changes camera and depth, and exposes the same 
     };
   });
   await page.goto('/#/mission/13');
+  await openEvidence(page);
   await page.getByRole('button', { name: 'Look inside the system', exact: true }).click();
   await expect(page.locator('.lab-scene-frame')).toHaveAttribute('data-renderer', 'webgl');
   await expect.poll(() => page.evaluate(() => (window as any).labDraws)).toBeGreaterThan(0);
@@ -44,6 +46,7 @@ test('WebGL failure leaves the experiment usable with equivalent component inspe
     } as any;
   });
   await page.goto('/#/mission/14');
+  await openEvidence(page);
   await page.getByRole('button', { name: 'Look inside the system', exact: true }).click();
   await expect(page.locator('.lab-scene-frame')).toHaveAttribute('data-renderer', 'diagram');
   await page.getByRole('button', { name: "Request another customer's visit", exact: true }).click();
@@ -60,6 +63,7 @@ test('learner edits run safely, survive reload, export as a local experiment, an
   page,
 }) => {
   await page.goto('/#/mission/1');
+  await openEvidence(page);
   await page.getByLabel('The page heading', { exact: true }).fill('<img src=x onerror="alert(1)">');
   const site = page.frameLocator('iframe[title="Your live website"]');
   await expect(site.getByRole('heading')).toHaveText('<img src=x onerror="alert(1)">');
@@ -103,6 +107,7 @@ test('actual validation, coupled controls and the page action respond to learner
   page,
 }) => {
   await page.goto('/#/mission/4');
+  await openEvidence(page);
   await page.getByLabel('Number of items', { exact: true }).fill('');
   await expect(page.locator('.lab-observation')).toContainText('No estimate produced');
   await page.getByLabel('Number of items', { exact: true }).fill('3');
@@ -112,6 +117,7 @@ test('actual validation, coupled controls and the page action respond to learner
   await page.keyboard.press('End');
   await expect(page.locator('.lab-observation')).toContainText('300 units');
   await page.goto('/#/mission/3');
+  await openEvidence(page);
   const site = page.frameLocator('iframe[title="Your live website"]');
   await site.getByRole('button', { name: 'Contact', exact: true }).click();
   await expect(site.locator('#details')).toBeVisible();
@@ -139,6 +145,7 @@ test('studios fit phones and respond to reduced-motion changes while an experime
     await page.setViewportSize({ width, height: 900 });
     for (const id of [1, 9, 13, 18, 20, 30]) {
       await page.goto(`/#/mission/${id}`);
+      await openEvidence(page);
       await expect(page.locator('.lab-first')).toBeVisible();
       if (await page.locator('.lab-more summary').count())
         await page.locator('.lab-more summary').click();
@@ -149,6 +156,7 @@ test('studios fit phones and respond to reduced-motion changes while an experime
     }
   }
   await page.goto('/#/mission/13');
+  await openEvidence(page);
   await page.getByRole('button', { name: 'Look inside the system', exact: true }).click();
   await expect(page.locator('.lab-scene-frame')).toHaveAttribute('data-renderer', 'webgl');
   await page.getByRole('button', { name: 'Follow the change', exact: true }).click();

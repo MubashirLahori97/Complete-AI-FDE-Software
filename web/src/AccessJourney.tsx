@@ -3,6 +3,7 @@ import { ArrowRight, Pause, Play, RotateCcw } from 'lucide-react';
 import type { SystemVisual } from './lab-visuals';
 import type { LabValue } from './mission-labs';
 import './access-journey.css';
+import { missions } from './missions';
 
 type Workflow = Extract<SystemVisual, { kind: 'workflow' }>;
 export default function AccessJourney({
@@ -97,12 +98,17 @@ export default function AccessJourney({
   return (
     <section
       className="model-evidence workflow-scene access-journey"
+      data-scene={26}
       aria-label="Access prerequisite and dispatch"
     >
       <header className="aj-intro">
         <span>A SMALL WORKFLOW YOU CAN TRY</span>
         <h4>Get the repair visit moving.</h4>
-        <p>One van. One visit. Something is stopping it. Try the journey, then change one cause.</p>
+        <p>
+          {visual.eligible
+            ? 'The access prerequisite is met. Try the journey, then change one cause.'
+            : 'One van. One visit. Something is stopping it. Try the journey, then change one cause.'}
+        </p>
       </header>
       <div className="aj-stage">
         <div className="aj-place-labels">
@@ -252,6 +258,14 @@ export default function AccessJourney({
         measured journey or proof of arrival. Changing the requirement is a different scenario, not
         permission to bypass a real rule. Find who actually grants access in your project.
       </p>
+      <div className="aj-project">
+        <span>USE THIS IN YOUR PROJECT</span>
+        <strong>{missions[25].project.title}</strong>
+        <p>{missions[25].project.steps[0]}</p>
+        <a href="#/mission/26?step=2">
+          Build this with AI <ArrowRight size={16} />
+        </a>
+      </div>
     </section>
   );
 }

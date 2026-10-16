@@ -112,6 +112,7 @@ for (const [index, m] of missions.entries()) {
   fs.writeFileSync(path.join(directory, 'LAB-GUIDE.md'), completeLabGuide);
   const evidence = `# Mission ${m.id} evidence\n\n## Product evidence\n\nArtifact / local location and opening instructions:\nStarting state:\nAction:\nExpected result:\nActual observation:\nEnvironment / revision / date:\nFixtures, reports, unrun checks and limits:\n\n${m.project.checks.map((c) => `- [ ] ${c}`).join('\n')}\n\n## Understanding demonstrations\n\n${['explain', 'locate', 'predict', 'compare', 'challenge'].map((k) => `### ${k}\n${m.assess[k]}\n\nYour reasoning and evidence:\n`).join('\n')}\n## Review\n\nReviewer or method:\nFresh scenario:\nPrediction before result:\nObserved reasoning and outcome:\nGaps and next practice:\nStatus: unreviewed / revisit / reviewer reports demonstrated\n\nField completeness is not concept mastery. AI remains available throughout.\n`;
   const files = {
+    'SCENE-GUIDE.md': strToU8(`# Mission ${m.id}: learn through the scene\n\n${m.title}\n\n## Try one change\n\n${lab.task}\n\nFirst action: **${lab.first}**. The scene uses the same saved inputs and local rules as the original experiment. Changes appear immediately. ${[1,3].includes(m.id) ? 'The framed page runs actual HTML, CSS and browser JavaScript.' : m.id===26 ? 'Try the visit, compare speed with access approval, and pause or replay the finite illustrated sequence.' : 'Use either scene change, inspect a reading moment, or choose Follow the idea. Pause, restart and replay are available.'}\n\nThe illustration is a teaching view, not measured execution or real customer/provider evidence. ${lab.boundary}\n\n## Your own project: ${m.project.title}\n\n${m.project.brief}\n\nStart here: ${m.project.steps[0]}\n\nUse Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.\n\nInputs and notes use the saved experiment and progress backup. Undo/reset remain available. Playback is temporary and never records mastery. Inspect the numbers and rules for full values. System/3D inspection and guided comparisons remain available.\n`),
     'MISSION.md': strToU8(
       content.replace(
         /\]\(\.\.\/\.\.\/([^)]+)\)/g,
@@ -125,6 +126,7 @@ for (const [index, m] of missions.entries()) {
     'EVIDENCE.md': strToU8(evidence),
     'TOOL-RECORD.md': strToU8(toolsTemplate),
   };
+  fs.writeFileSync(path.join(directory, 'SCENE-GUIDE.md'), files['SCENE-GUIDE.md']);
   if (m.id === 18) {
     const neuronGuide = fs.readFileSync(path.join(root, 'NEURAL-LEARNING.md'));
     fs.writeFileSync(path.join(directory, 'NEURON-GUIDE.md'), neuronGuide);

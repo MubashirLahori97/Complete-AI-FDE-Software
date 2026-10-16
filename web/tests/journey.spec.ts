@@ -1,9 +1,11 @@
+import { openEvidence } from './evidence-helper';
 import { expect, test } from '@playwright/test';
 
 test('a homepage edit changes actual page behaviour and carries into the first mission without completing it', async ({
   page,
 }) => {
   await page.goto('/');
+  await openEvidence(page);
   const preview = page.frameLocator('iframe[title="Your first live page"]');
   await page
     .getByLabel('What should the visitor see?', { exact: true })
@@ -36,6 +38,7 @@ test('chapter navigation, search, project context and resume remain connected', 
   page,
 }) => {
   await page.goto('/#/curriculum');
+  await openEvidence(page);
   await expect(page.locator('.journey-mission-row')).toHaveCount(30);
   const chapter = page.getByRole('button', { name: /Direct capable AI/ });
   await chapter.click();
@@ -59,6 +62,7 @@ test('the reservation visual exposes the same overbooking and refusal as the exe
   page,
 }) => {
   await page.goto('/#/mission/13');
+  await openEvidence(page);
   await expect(page.locator('.reservation-slots > div')).toHaveCount(1);
   await page.locator('.operation-overbooked').click();
   await expect(page.locator('.evidence-inspector')).toContainText('R-2 · Accepted beyond capacity');
@@ -76,6 +80,7 @@ test('individual evaluation cases respond to thresholds and support one-stop key
   page,
 }) => {
   await page.goto('/#/mission/20');
+  await openEvidence(page);
   await expect(page.getByRole('radio')).toHaveCount(100);
   const first = page.getByRole('radio').first();
   await expect(first).toHaveAttribute('aria-checked', 'true');
@@ -108,6 +113,7 @@ test('the home, chapter list and case field fit small screens with a visible fir
     await page.setViewportSize({ width, height: 812 });
     for (const route of ['/', '/curriculum', '/mission/13', '/mission/20']) {
       await page.goto('/#' + route);
+      await openEvidence(page);
       await expect(page.locator('main h1')).toBeVisible();
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),

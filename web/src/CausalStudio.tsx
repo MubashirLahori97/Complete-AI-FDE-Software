@@ -23,6 +23,7 @@ import { missions } from './missions';
 import LivePage from './LivePage';
 import type { VisualAccent } from './visual-website';
 import ModelEvidence from './ModelEvidence';
+import LessonScene from './LessonScene';
 import { downloadFile } from './state';
 import WorldDiagram from './LabDiagram';
 import './causal-studio.css';
@@ -105,7 +106,6 @@ export default function CausalStudio({
     // On a tall phone/tablet screen, keep the sticky input with its actual page.
     // Free typing stays in place; comparisons and system inspection keep their own layout.
     if (
-      (!nativePage && id !== 26) ||
       showSystem ||
       comparisonOpen ||
       window.innerHeight <= 600 ||
@@ -433,28 +433,63 @@ export default function CausalStudio({
                   <ModelEvidence outcome={outcome} onChange={save} onCue={tone} />
                 </div>
               ) : (
-                <ModelEvidence outcome={outcome} onChange={save} onCue={tone} />
+                <div ref={pageResult}>
+                  <LessonScene
+                    id={id}
+                    values={values}
+                    outcome={outcome}
+                    onChange={save}
+                    onCue={tone}
+                  />
+                  <details className="scene-detail">
+                    <summary>Inspect the numbers and rules</summary>
+                    <ModelEvidence outcome={outcome} onChange={save} onCue={tone} />
+                  </details>
+                </div>
               )
             ) : (
               <div className="lab-native-page" ref={pageResult}>
-                <LivePage
-                  heading={String(values.heading || '')}
-                  size={Number(values.size || 30)}
-                  rule={values.rule === true}
-                  showArea={id !== 1 || values.showArea === true}
-                  accent={id === 1 ? (values.accent as VisualAccent) : 'teal'}
-                  onAction={(open, hasRule) => {
-                    setPageMessage(
-                      hasRule
-                        ? open
-                          ? 'The click rule opened the details inside this browser.'
-                          : 'The same rule hid the details again.'
-                        : 'The button is visible, but its action rule is absent.',
-                    );
-                    setRevision((r) => r + 1);
-                    tone();
-                  }}
-                />
+                <div
+                  className="native-scene"
+                  data-scene={id}
+                  role="region"
+                  aria-label={`Lesson ${id} illustrated scene`}
+                >
+                  <div className="native-scene-labels">
+                    <span>YOUR BROWSER</span>
+                    <span>LOCAL WORKING PAGE</span>
+                  </div>
+                  <LivePage
+                    heading={String(values.heading || '')}
+                    size={Number(values.size || 30)}
+                    rule={values.rule === true}
+                    showArea={id !== 1 || values.showArea === true}
+                    accent={id === 1 ? (values.accent as VisualAccent) : 'teal'}
+                    onAction={(open, hasRule) => {
+                      setPageMessage(
+                        hasRule
+                          ? open
+                            ? 'The click rule opened the details inside this browser.'
+                            : 'The same rule hid the details again.'
+                          : 'The button is visible, but its action rule is absent.',
+                      );
+                      setRevision((r) => r + 1);
+                      tone();
+                    }}
+                  />
+                  <p className="native-scene-caption">
+                    Change an input beside this page. The actual words, appearance or button rule
+                    change here immediately.
+                  </p>
+                  <div className="ls-project">
+                    <span>USE THIS IN YOUR PROJECT</span>
+                    <strong>{missions[id - 1].project.title}</strong>
+                    <p>{missions[id - 1].project.steps[0]}</p>
+                    <a href={`#/mission/${id}?step=2`}>
+                      Build this with AI <ArrowRight size={16} />
+                    </a>
+                  </div>
+                </div>
               </div>
             )}
           </div>
