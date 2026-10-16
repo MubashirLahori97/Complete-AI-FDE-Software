@@ -28,7 +28,7 @@ import { downloadFile } from './state';
 import WorldDiagram from './LabDiagram';
 import './causal-studio.css';
 import GuidedComparison, { ComparisonSwitch } from './GuidedComparison';
-import { labStories } from './lab-stories';
+import { lessonGuides } from './lesson-guides';
 import { rememberLabEdit, type LabEdit } from './lab-history';
 import './studio-presence.css';
 const LabWorld = lazy(() => import('./LabWorld'));
@@ -221,6 +221,8 @@ export default function CausalStudio({
     );
   };
   const primary = spec.controls[0];
+  const guide = lessonGuides[id - 1];
+  const firstLoaded = Object.entries(spec.try).every(([key, value]) => values[key] === value);
   return (
     <section
       className="causal-studio"
@@ -236,12 +238,14 @@ export default function CausalStudio({
                 THE LEARNING STUDIO <span> / </span> {String(id).padStart(2, '0')}
               </span>
               <h3 className="lab-title">{spec.title}</h3>
-              <p className="lab-scene-context">{labStories[id - 1].scene}</p>
-              <p className="lab-first-task">
-                <strong>{id === 1 ? 'Start here:' : 'Try this:'}</strong>{' '}
-                {id === 1
-                  ? `Press “${spec.first}” below. Watch the page heading change.`
-                  : spec.task}
+              <p className="lab-scene-context">
+                <strong>Why this matters:</strong> {guide.why}
+              </p>
+              <p className="lab-first-task" data-first-loaded={firstLoaded}>
+                <strong>{firstLoaded ? 'Example loaded:' : 'Start here:'}</strong>{' '}
+                {firstLoaded
+                  ? 'Try another input, or choose Next below.'
+                  : `Press “${spec.first}” below.`}
               </p>
             </div>
             <button
@@ -259,13 +263,9 @@ export default function CausalStudio({
               {spec.first}
               <ArrowRight size={16} />
             </button>
-            {id === 1 &&
-              String(values.heading).trim() &&
-              values.heading !== spec.controls[0].default && (
-                <button className="lab-next-idea" onClick={onLearn}>
-                  Next: understand the idea <ArrowRight size={16} />
-                </button>
-              )}
+            <button className="lab-next-idea" onClick={onLearn}>
+              Next: understand the idea <ArrowRight size={16} />
+            </button>
           </div>
           {spec.controls.length > 1 && (
             <details className="lab-more">
@@ -273,6 +273,7 @@ export default function CausalStudio({
                 Change another part <ChevronDown size={13} />
               </summary>
               <div>
+                <p className="lab-extra-task">{spec.task}</p>
                 {spec.controls.slice(1).map((item) => (
                   <div key={item.id}>{control(item)}</div>
                 ))}
@@ -293,6 +294,9 @@ export default function CausalStudio({
                 : 'This preview runs real page code in your browser.'}
             </small>
           </div>
+          <p className="lab-look-for">
+            <strong>What to look for:</strong> {guide.lookFor}
+          </p>
         </div>
         <div className="lab-stage">
           <GuidedComparison

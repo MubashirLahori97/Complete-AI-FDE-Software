@@ -2,6 +2,26 @@
 
 Compare proposed approaches
 
+## Why this lesson
+
+Choosing a tool means comparing what it can do and what it costs over time. A cheap option may still miss a required feature.
+
+## What to look for
+
+Changing the number of months changes the cost comparison. Also check whether each option supports the required capability.
+
+## Start your project
+
+List what your project must do. Compare two possible approaches over the same time period, including where you can keep or export the data.
+
+## Explain your own result
+
+Explain why your choice fits the requirements, the time period you compared, and one trade-off you accepted.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Change the number of months and the export requirement.

@@ -2,6 +2,26 @@
 
 Diagnose from evidence
 
+## Why this lesson
+
+A slow app can spend time in several places. Measuring each step helps you investigate the part that is actually taking the time.
+
+## What to look for
+
+Select the provider step and read its duration. Compare all measured steps before deciding what to investigate; the longest step can change.
+
+## Start your project
+
+Write one visible symptom and two possible causes. Ask AI to gather observations that could distinguish them before changing the app.
+
+## Explain your own result
+
+Explain your hypothesis, the evidence you inspected, the change you made, and the new observation used to check recovery.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Select the provider span, then change its duration in this controlled trace.

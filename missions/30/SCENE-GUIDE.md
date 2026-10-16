@@ -2,6 +2,26 @@
 
 Demonstrate professional capability
 
+## Why this lesson
+
+Delivering software means adapting to the user’s actual needs and explaining the result. A new private-data requirement may need a different system.
+
+## What to look for
+
+Change the requirement to private customer information. Compare the required parts with those supplied by the selected design.
+
+## Start your project
+
+Gather your independent project, its opening instructions, observations and system explanation. If you have not built it yet, begin the project sequence in Lesson 26.
+
+## Explain your own result
+
+Demonstrate one real user journey, explain your choices and limits, and show how you respond when a reviewer changes a requirement.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Change the requirement. Add only the components needed for that journey.

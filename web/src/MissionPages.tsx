@@ -19,6 +19,7 @@ import { downloadFile, type Progress } from './state';
 import CausalStudio from './CausalStudio';
 import WorkedStory from './WorkedStory';
 import { AcademyHome, AcademyPath } from './AcademyJourney';
+import LessonDirections from './LessonDirections';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
@@ -140,6 +141,14 @@ export function MissionLesson({
             ][step]
           }
         </h2>
+        {step > 0 && (
+          <LessonDirections
+            mission={mission}
+            step={step}
+            conceptName={mission.concepts[concept].name}
+            questionLabel={questionLabel}
+          />
+        )}
         {step === 0 && (
           <>
             <CausalStudio
@@ -233,6 +242,11 @@ export function MissionLesson({
                 {concept < mission.concepts.length - 1 && (
                   <button onClick={() => chooseConcept(concept + 1)}>
                     Next idea <ArrowRight size={15} />
+                  </button>
+                )}
+                {concept === mission.concepts.length - 1 && (
+                  <button className="lesson-build-next" onClick={() => go(2)}>
+                    Next: build my project <ArrowRight size={15} />
                   </button>
                 )}
               </div>
@@ -582,8 +596,8 @@ export function MissionLesson({
                 <ArrowRight size={17} />
               </button>
             ) : id < 30 ? (
-              <a className="button light" href={`#/mission/${id + 1}`}>
-                Explore mission {id + 1}
+              <a className="button light" href={`#/mission/${id + 1}?step=0`}>
+                Next lesson: {id + 1}
                 <ArrowRight size={17} />
               </a>
             ) : (

@@ -2,6 +2,26 @@
 
 Transfer the work and adapt
 
+## Why this lesson
+
+A project must remain usable when another person takes over or a provider changes. Instructions, access and a working connection all matter.
+
+## What to look for
+
+Preparing a guide and access does not guarantee that the replacement provider fits. Read the field check and inspect any mismatch.
+
+## Start your project
+
+Prepare instructions for opening, configuring and recovering your project. Include the required access and ask someone else to try a full journey.
+
+## Explain your own result
+
+Explain what the next operator needs, what changed at the provider boundary, and what their actual trial showed.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Prepare the guide and access, then inspect the replacement provider's field name.

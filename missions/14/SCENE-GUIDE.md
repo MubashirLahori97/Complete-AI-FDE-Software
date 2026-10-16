@@ -2,6 +2,26 @@
 
 Give people the right access
 
+## Why this lesson
+
+Signing in proves who is asking. A separate rule must decide which customer’s visit that person may read.
+
+## What to look for
+
+Compare the signed-in customer with the record’s owner. With the trusted check enabled, a different owner should cause a refusal.
+
+## Start your project
+
+Write who may read and change each kind of visit. Ask AI to show one allowed request and one refused request using fictional accounts.
+
+## Explain your own result
+
+Explain how your app identifies the caller, where it checks permission, and what an unauthorised caller receives.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Keep customer C7 signed in and ask for C8's visit.

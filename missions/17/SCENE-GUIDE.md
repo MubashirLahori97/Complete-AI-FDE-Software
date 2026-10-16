@@ -2,6 +2,26 @@
 
 Coordinate dependent work
 
+## Why this lesson
+
+Two people or agents can build different parts, but those parts must agree on the information they exchange. More workers cannot fix a naming mismatch.
+
+## What to look for
+
+Compare the field name sent by the server with the name read by the interface. Matching those names fixes this model’s connection.
+
+## Start your project
+
+Draw which parts depend on which others. Write the shared field names before asking AI to change the page and server.
+
+## Explain your own result
+
+Explain what each part expects, how you kept those expectations aligned, and how you checked the combined result.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Make the interface field names agree. Then vary worker count.

@@ -2,6 +2,26 @@
 
 Protect correct state
 
+## Why this lesson
+
+Two people can ask for the last appointment at the same time. Checking and reserving together helps prevent both from claiming it.
+
+## What to look for
+
+An atomic rule means ‘check and reserve as one step’. Compare which requests fit and which are refused when there is only one slot.
+
+## Start your project
+
+Write the rule ‘accepted bookings must not exceed available slots’. Ask AI to demonstrate two competing requests and a retry of the same request.
+
+## Explain your own result
+
+Explain how your booking rule protects capacity and how it recognises a repeated attempt at the same booking.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Make simultaneous requests for fewer slots. Compare the reservation rules.

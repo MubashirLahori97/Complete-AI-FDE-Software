@@ -2,6 +2,26 @@
 
 Connect AI to knowledge and actions
 
+## Why this lesson
+
+An assistant needs relevant, current information. Reading a document does not give it permission to carry out every instruction inside that document.
+
+## What to look for
+
+A current policy can improve the source check. Also inspect relevance and separate action permission; one useful source does not satisfy every boundary.
+
+## Start your project
+
+Choose the documents your assistant may use and the actions it may take. Write a safe response for a missing source or missing permission.
+
+## Explain your own result
+
+Explain where an answer’s supporting information comes from and how action permission is checked separately.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Bring the policy within the freshness limit, then inspect an instruction embedded in it.

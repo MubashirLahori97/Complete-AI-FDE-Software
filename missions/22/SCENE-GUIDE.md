@@ -2,6 +2,26 @@
 
 Release with a way back
 
+## Why this lesson
+
+A release needs working code and the right settings. Returning to older code does not automatically restore an older data structure.
+
+## What to look for
+
+Supplying configuration satisfies one release requirement. Later, compare the running code with the data version after a rollback.
+
+## Start your project
+
+Ask AI to inspect how your app starts and is released. List required setting names, a release check and a way to return to a working version.
+
+## Explain your own result
+
+Explain what your release changes, which checks you ran, and what your recovery plan does to code and stored data.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Make configuration complete, then compare rollback with and without a data migration.

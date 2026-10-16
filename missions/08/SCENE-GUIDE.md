@@ -2,6 +2,26 @@
 
 Design the user journey
 
+## Why this lesson
+
+A person confirming a visit needs to know whether it worked. If something fails, keeping their input helps them try again.
+
+## What to look for
+
+A visit identifier gives the request something to refer to. Check the displayed outcome; filling an identifier alone does not fix every missing condition.
+
+## Start your project
+
+Draw a person’s steps from opening a visit to seeing its result. Include a missing identifier and a lost connection, not just the successful path.
+
+## Explain your own result
+
+Explain what the person enters, how your app reports the result, and what remains available after a failure.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Enter a visit identifier, then disconnect the model's connection.

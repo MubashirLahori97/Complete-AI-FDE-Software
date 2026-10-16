@@ -2,6 +2,26 @@
 
 Investigate a workflow
 
+## Why this lesson
+
+Before building an app, you need to know what problem people actually have. Made-up examples and checked records support different claims.
+
+## What to look for
+
+Changing the source changes what the model can claim. A checked count still does not explain why a visit was missed.
+
+## Start your project
+
+Choose one real workflow, such as booking a repair. Name where you could learn about it: a person, records, or a clearly labelled practice scenario.
+
+## Explain your own result
+
+Explain what you observed, where it came from, and which parts are still assumptions.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Change the source and the sample size. Keep the number of missed visits consistent with the sample.

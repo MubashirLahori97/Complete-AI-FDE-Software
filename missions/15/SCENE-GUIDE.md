@@ -2,6 +2,26 @@
 
 Connect another service
 
+## Why this lesson
+
+Sending a reminder involves another service. Your app needs its configuration and must report only the delivery status it can actually support.
+
+## What to look for
+
+Configuration is one requirement, not proof of delivery. Read the resulting status: accepted, unavailable and delivered mean different things.
+
+## Start your project
+
+Ask AI to inspect a reminder service’s test mode and required configuration names. Use fictional messages and define how your app will show each outcome.
+
+## Explain your own result
+
+Explain the boundary between your app and the provider, what status you know, and how you handle a failed or uncertain attempt.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Add a credential, then change the provider's response.

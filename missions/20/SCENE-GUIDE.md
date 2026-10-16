@@ -2,6 +2,26 @@
 
 Compare and improve approaches
 
+## Why this lesson
+
+An urgent-message helper can raise false alarms or miss important messages. Changing its cutoff trades one kind of mistake against another.
+
+## What to look for
+
+Raise the threshold and watch the same labelled cases change category. Compare false alerts with missed urgent cases, not just the alert count.
+
+## Start your project
+
+Write example messages with expected outcomes before comparing approaches. Include ordinary, missing-information and misleading cases, and decide which errors cost more.
+
+## Explain your own result
+
+Explain the cases you tested, the mistakes each approach made, and why your chosen trade-off fits the users.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Move the alert threshold and watch the same labelled cases change category.

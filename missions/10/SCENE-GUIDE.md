@@ -2,6 +2,26 @@
 
 Specify what counts as done
 
+## Why this lesson
+
+A success message can appear even when the wrong record changed. You need a check of the result that actually matters.
+
+## What to look for
+
+Compare the intended visit with the records before and after the action. Notice whether the check catches the wrong update.
+
+## Start your project
+
+Choose three important actions in your project. For each, write the starting state, the action and the exact result you expect to observe.
+
+## Explain your own result
+
+Explain how your checks distinguish a correct result from a message that merely says it worked.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Inspect the records instead of only the toast.

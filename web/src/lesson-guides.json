@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "why": "Visitors need to know what the shop does. A clear heading helps them decide whether to contact it.",
+    "lookFor": "Read the heading on the page. Compare it with the words in the input.",
+    "projectStart": "Choose one service and its visitor. Write: ‘This page helps ___ to ___.’ Ask AI to make a page for that task.",
+    "explainFocus": "Explain who your page helps, which words they see, and what its Contact button actually does."
+  },
+  {
+    "id": 2,
+    "why": "‘Make it impressive’ leaves a builder guessing. A clear request names one change and a way to check it.",
+    "lookFor": "Compare the vague request with the example. Find the named section, the change, and the check. The local checker only recognises a few phrases.",
+    "projectStart": "Look at a page and name one confusing part. Write one change you want AI to make and how you will check the result.",
+    "explainFocus": "Explain the visitor’s problem, your exact request, and what you observed after the change."
+  },
+  {
+    "id": 3,
+    "why": "A page’s words, appearance and button actions have different jobs. Knowing the difference helps you ask AI for the right change.",
+    "lookFor": "Watch the heading become bigger. Its words stay the same. Later, try changing the words or the button’s rule separately.",
+    "projectStart": "Open your service page. Ask AI to show where its words, styles and button actions come from. Draw three labelled boxes.",
+    "explainFocus": "Point to one piece of content, one style and one action in your actual page. Explain what each controls."
+  },
+  {
+    "id": 4,
+    "why": "A price estimate should not invent an amount when a customer leaves the quantity blank. The app needs a rule before multiplying.",
+    "lookFor": "An empty quantity stops the estimate. Then enter 0 and 2. Notice that a missing quantity is different from a valid zero.",
+    "projectStart": "Write what your estimator should do for 2 items, a blank quantity and a negative quantity. Give those examples to AI before it builds.",
+    "explainFocus": "Explain which inputs your estimator allows, how it calculates an amount, and what happens when the input is invalid."
+  },
+  {
+    "id": 5,
+    "why": "A shop may offer more services tomorrow. One shared rule can turn each service record into a card without copying the whole page.",
+    "lookFor": "Count the service cards before and after the change. More records should produce more cards using the same pattern.",
+    "projectStart": "Write three fictional services with an identifier, name and price. Ask AI to display each record using the same card layout.",
+    "explainFocus": "Explain where your service records live, which rule creates the cards, and how each record is identified."
+  },
+  {
+    "id": 6,
+    "why": "Before building an app, you need to know what problem people actually have. Made-up examples and checked records support different claims.",
+    "lookFor": "Changing the source changes what the model can claim. A checked count still does not explain why a visit was missed.",
+    "projectStart": "Choose one real workflow, such as booking a repair. Name where you could learn about it: a person, records, or a clearly labelled practice scenario.",
+    "explainFocus": "Explain what you observed, where it came from, and which parts are still assumptions."
+  },
+  {
+    "id": 7,
+    "why": "Two missed visits out of ten is different from two out of a hundred. A useful target needs a count and a meaningful total.",
+    "lookFor": "The missed count stays the same while the total changes. Watch the percentage change. A blank total cannot give a known rate.",
+    "projectStart": "Write the problem, who it affects, and the result you want to improve. Name the count, total and source you would use to measure it.",
+    "explainFocus": "Explain what your measure counts, which cases belong in the total, and what evidence would show an improvement."
+  },
+  {
+    "id": 8,
+    "why": "A person confirming a visit needs to know whether it worked. If something fails, keeping their input helps them try again.",
+    "lookFor": "A visit identifier gives the request something to refer to. Check the displayed outcome; filling an identifier alone does not fix every missing condition.",
+    "projectStart": "Draw a person’s steps from opening a visit to seeing its result. Include a missing identifier and a lost connection, not just the successful path.",
+    "explainFocus": "Explain what the person enters, how your app reports the result, and what remains available after a failure."
+  },
+  {
+    "id": 9,
+    "why": "Choosing a tool means comparing what it can do and what it costs over time. A cheap option may still miss a required feature.",
+    "lookFor": "Changing the number of months changes the cost comparison. Also check whether each option supports the required capability.",
+    "projectStart": "List what your project must do. Compare two possible approaches over the same time period, including where you can keep or export the data.",
+    "explainFocus": "Explain why your choice fits the requirements, the time period you compared, and one trade-off you accepted."
+  },
+  {
+    "id": 10,
+    "why": "A success message can appear even when the wrong record changed. You need a check of the result that actually matters.",
+    "lookFor": "Compare the intended visit with the records before and after the action. Notice whether the check catches the wrong update.",
+    "projectStart": "Choose three important actions in your project. For each, write the starting state, the action and the exact result you expect to observe.",
+    "explainFocus": "Explain how your checks distinguish a correct result from a message that merely says it worked."
+  },
+  {
+    "id": 11,
+    "why": "A browser and a server work in different places. If a response is slow, the browser may stop waiting before the server’s outcome is known.",
+    "lookFor": "Compare response delay with the browser’s waiting limit. A timeout means the wait ended; it does not by itself prove the server cancelled the work.",
+    "projectStart": "Pick one action, such as confirming a visit. Ask AI to connect a page to a small server and show the request and response between them.",
+    "explainFocus": "Trace your action from browser to server and back. Explain what your user sees when the response is delayed."
+  },
+  {
+    "id": 12,
+    "why": "Appointments should not vanish when a program restarts. You also need a way to find the right visit when two people share a name.",
+    "lookFor": "Restarting loses records held only in process memory. Try persistent storage next. Use a visit identifier to tell same-name records apart.",
+    "projectStart": "Choose the information one appointment needs. Ask AI to save two fictional appointments and show how to find one after restarting the app.",
+    "explainFocus": "Explain where records are stored, what survives a restart, and which identifier selects one exact appointment."
+  },
+  {
+    "id": 13,
+    "why": "Two people can ask for the last appointment at the same time. Checking and reserving together helps prevent both from claiming it.",
+    "lookFor": "An atomic rule means ‘check and reserve as one step’. Compare which requests fit and which are refused when there is only one slot.",
+    "projectStart": "Write the rule ‘accepted bookings must not exceed available slots’. Ask AI to demonstrate two competing requests and a retry of the same request.",
+    "explainFocus": "Explain how your booking rule protects capacity and how it recognises a repeated attempt at the same booking."
+  },
+  {
+    "id": 14,
+    "why": "Signing in proves who is asking. A separate rule must decide which customer’s visit that person may read.",
+    "lookFor": "Compare the signed-in customer with the record’s owner. With the trusted check enabled, a different owner should cause a refusal.",
+    "projectStart": "Write who may read and change each kind of visit. Ask AI to show one allowed request and one refused request using fictional accounts.",
+    "explainFocus": "Explain how your app identifies the caller, where it checks permission, and what an unauthorised caller receives."
+  },
+  {
+    "id": 15,
+    "why": "Sending a reminder involves another service. Your app needs its configuration and must report only the delivery status it can actually support.",
+    "lookFor": "Configuration is one requirement, not proof of delivery. Read the resulting status: accepted, unavailable and delivered mean different things.",
+    "projectStart": "Ask AI to inspect a reminder service’s test mode and required configuration names. Use fictional messages and define how your app will show each outcome.",
+    "explainFocus": "Explain the boundary between your app and the provider, what status you know, and how you handle a failed or uncertain attempt."
+  },
+  {
+    "id": 16,
+    "why": "An AI agent needs a clear task, limits and permission. Giving it more time or budget cannot grant permission it does not have.",
+    "lookFor": "Compare the budget with the authority check. Extra budget may allow more work, but a missing permission should still stop the protected action.",
+    "projectStart": "Choose one small improvement. Write the desired result, files it may change, actions it may take, spending limit and when it must stop.",
+    "explainFocus": "Explain what you delegated, which boundaries applied, and how you checked the agent’s actual work."
+  },
+  {
+    "id": 17,
+    "why": "Two people or agents can build different parts, but those parts must agree on the information they exchange. More workers cannot fix a naming mismatch.",
+    "lookFor": "Compare the field name sent by the server with the name read by the interface. Matching those names fixes this model’s connection.",
+    "projectStart": "Draw which parts depend on which others. Write the shared field names before asking AI to change the page and server.",
+    "explainFocus": "Explain what each part expects, how you kept those expectations aligned, and how you checked the combined result."
+  },
+  {
+    "id": 18,
+    "why": "An AI answer can look neatly formatted while inventing a fact. A repair-note helper must keep an unknown date unknown.",
+    "lookFor": "The example replaces the invented date with null, meaning ‘unknown’. Compare the format checks with the separate check against the supplied facts.",
+    "projectStart": "Choose one useful job for a note assistant. Write what information it may receive, what it should return, and what it must do when information is missing.",
+    "explainFocus": "Explain why your feature uses AI, which facts support its answer, and how you handle missing or unsupported information."
+  },
+  {
+    "id": 19,
+    "why": "An assistant needs relevant, current information. Reading a document does not give it permission to carry out every instruction inside that document.",
+    "lookFor": "A current policy can improve the source check. Also inspect relevance and separate action permission; one useful source does not satisfy every boundary.",
+    "projectStart": "Choose the documents your assistant may use and the actions it may take. Write a safe response for a missing source or missing permission.",
+    "explainFocus": "Explain where an answer’s supporting information comes from and how action permission is checked separately."
+  },
+  {
+    "id": 20,
+    "why": "An urgent-message helper can raise false alarms or miss important messages. Changing its cutoff trades one kind of mistake against another.",
+    "lookFor": "Raise the threshold and watch the same labelled cases change category. Compare false alerts with missed urgent cases, not just the alert count.",
+    "projectStart": "Write example messages with expected outcomes before comparing approaches. Include ordinary, missing-information and misleading cases, and decide which errors cost more.",
+    "explainFocus": "Explain the cases you tested, the mistakes each approach made, and why your chosen trade-off fits the users."
+  },
+  {
+    "id": 21,
+    "why": "A useful test must be able to expose a real mistake. Checking a friendly message alone can miss an update to the wrong appointment.",
+    "lookFor": "Read the intended record and the actual changed record. Notice whether the selected check fails when the model has a defect.",
+    "projectStart": "Choose one important rule in your app. Ask AI for a check that passes when it works and fails when a deliberate mistake is introduced.",
+    "explainFocus": "Explain what your check observes and show a defect that makes it fail. Keep unrun checks labelled as unrun."
+  },
+  {
+    "id": 22,
+    "why": "A release needs working code and the right settings. Returning to older code does not automatically restore an older data structure.",
+    "lookFor": "Supplying configuration satisfies one release requirement. Later, compare the running code with the data version after a rollback.",
+    "projectStart": "Ask AI to inspect how your app starts and is released. List required setting names, a release check and a way to return to a working version.",
+    "explainFocus": "Explain what your release changes, which checks you ran, and what your recovery plan does to code and stored data."
+  },
+  {
+    "id": 23,
+    "why": "A slow app can spend time in several places. Measuring each step helps you investigate the part that is actually taking the time.",
+    "lookFor": "Select the provider step and read its duration. Compare all measured steps before deciding what to investigate; the longest step can change.",
+    "projectStart": "Write one visible symptom and two possible causes. Ask AI to gather observations that could distinguish them before changing the app.",
+    "explainFocus": "Explain your hypothesis, the evidence you inspected, the change you made, and the new observation used to check recovery."
+  },
+  {
+    "id": 24,
+    "why": "Reusing a saved copy can reduce repeated work. That copy is called a cache, and it may become out of date when the source changes.",
+    "lookFor": "Follow whether a read uses the source or a cached copy. Check the copy’s age and freshness as well as the amount of work saved.",
+    "projectStart": "Choose one repeated operation. Measure it with representative examples, try one improvement with AI, and check that the answers are still correct.",
+    "explainFocus": "Explain what work you reduced, what you measured, and how your app handles old copies or queued requests."
+  },
+  {
+    "id": 25,
+    "why": "A system change can damage information people trust. Restoring a backup is useful only if the right records can actually be recovered and checked.",
+    "lookFor": "Compare the restored records with the saved snapshot. Restored data and a verified lookup are separate observations.",
+    "projectStart": "Choose a harmless practice copy of your data. Write what must survive a change and rehearse restoring and checking that copy with AI.",
+    "explainFocus": "Explain what was backed up, what the change affected, what you restored and how you verified the recovered information."
+  },
+  {
+    "id": 26,
+    "why": "A real project starts by finding what prevents the useful result. Preparing faster cannot get a repair van past a missing site approval.",
+    "lookFor": "The van stays blocked when preparation becomes faster but approval is still missing. Compare speed with the actual access requirement.",
+    "projectStart": "Choose a real domain or a clearly labelled practice scenario. Identify a person, their desired result, and the evidence and access you can use.",
+    "explainFocus": "Explain the outcome you chose, the actual obstacle, what supports that conclusion and what still needs investigation."
+  },
+  {
+    "id": 27,
+    "why": "Your system needs parts that can support the required job. Public page files alone cannot provide shared private customer records.",
+    "lookFor": "Turning on shared private records adds a requirement. Inspect which parts are now needed and whether the proposed system supplies them.",
+    "projectStart": "Use your independent project brief. Give AI the user’s task, required behaviour, allowed data and operating limits before it proposes a system.",
+    "explainFocus": "Explain why each part of your independent solution exists and trace one real action through the parts."
+  },
+  {
+    "id": 28,
+    "why": "An improvement helps only if people use it and the work saved outweighs new work it creates. A faster step can still make the whole process worse.",
+    "lookFor": "Reduce correction work and compare the net time saved. Also check how many people actually use the change.",
+    "projectStart": "Choose a small, agreed pilot for your project. Decide who will try it, what result you will measure and what would make you stop or revise it.",
+    "explainFocus": "Explain what happened in use, how it compared with the earlier process, and which feedback led to your next change."
+  },
+  {
+    "id": 29,
+    "why": "A project must remain usable when another person takes over or a provider changes. Instructions, access and a working connection all matter.",
+    "lookFor": "Preparing a guide and access does not guarantee that the replacement provider fits. Read the field check and inspect any mismatch.",
+    "projectStart": "Prepare instructions for opening, configuring and recovering your project. Include the required access and ask someone else to try a full journey.",
+    "explainFocus": "Explain what the next operator needs, what changed at the provider boundary, and what their actual trial showed."
+  },
+  {
+    "id": 30,
+    "why": "Delivering software means adapting to the user’s actual needs and explaining the result. A new private-data requirement may need a different system.",
+    "lookFor": "Change the requirement to private customer information. Compare the required parts with those supplied by the selected design.",
+    "projectStart": "Gather your independent project, its opening instructions, observations and system explanation. If you have not built it yet, begin the project sequence in Lesson 26.",
+    "explainFocus": "Demonstrate one real user journey, explain your choices and limits, and show how you respond when a reviewer changes a requirement."
+  }
+]

@@ -2,6 +2,26 @@
 
 Start an independent domain project
 
+## Why this lesson
+
+A real project starts by finding what prevents the useful result. Preparing faster cannot get a repair van past a missing site approval.
+
+## What to look for
+
+The van stays blocked when preparation becomes faster but approval is still missing. Compare speed with the actual access requirement.
+
+## Start your project
+
+Choose a real domain or a clearly labelled practice scenario. Identify a person, their desired result, and the evidence and access you can use.
+
+## Explain your own result
+
+Explain the outcome you chose, the actual obstacle, what supports that conclusion and what still needs investigation.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Make preparation faster. Does that give the van permission to leave? Try the visit and find what still blocks it.

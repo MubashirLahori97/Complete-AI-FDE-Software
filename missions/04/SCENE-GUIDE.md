@@ -2,6 +2,26 @@
 
 Make an interaction work
 
+## Why this lesson
+
+A price estimate should not invent an amount when a customer leaves the quantity blank. The app needs a rule before multiplying.
+
+## What to look for
+
+An empty quantity stops the estimate. Then enter 0 and 2. Notice that a missing quantity is different from a valid zero.
+
+## Start your project
+
+Write what your estimator should do for 2 items, a blank quantity and a negative quantity. Give those examples to AI before it builds.
+
+## Explain your own result
+
+Explain which inputs your estimator allows, how it calculates an amount, and what happens when the input is invalid.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Try a blank quantity, then zero, then two. Compare the results.

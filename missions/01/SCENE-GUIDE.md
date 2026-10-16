@@ -2,6 +2,26 @@
 
 Make a useful website
 
+## Why this lesson
+
+Visitors need to know what the shop does. A clear heading helps them decide whether to contact it.
+
+## What to look for
+
+Read the heading on the page. Compare it with the words in the input.
+
+## Start your project
+
+Choose one service and its visitor. Write: ‘This page helps ___ to ___.’ Ask AI to make a page for that task.
+
+## Explain your own result
+
+Explain who your page helps, which words they see, and what its Contact button actually does.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Replace Welcome with a heading that tells a visitor what the shop does.

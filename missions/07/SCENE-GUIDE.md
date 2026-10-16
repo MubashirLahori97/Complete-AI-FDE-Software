@@ -2,6 +2,26 @@
 
 Define a worthwhile result
 
+## Why this lesson
+
+Two missed visits out of ten is different from two out of a hundred. A useful target needs a count and a meaningful total.
+
+## What to look for
+
+The missed count stays the same while the total changes. Watch the percentage change. A blank total cannot give a known rate.
+
+## Start your project
+
+Write the problem, who it affects, and the result you want to improve. Name the count, total and source you would use to measure it.
+
+## Explain your own result
+
+Explain what your measure counts, which cases belong in the total, and what evidence would show an improvement.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Keep two missed visits. Change the eligible total from ten to one hundred.

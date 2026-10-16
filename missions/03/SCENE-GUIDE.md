@@ -2,6 +2,26 @@
 
 Understand what a page does
 
+## Why this lesson
+
+A page’s words, appearance and button actions have different jobs. Knowing the difference helps you ask AI for the right change.
+
+## What to look for
+
+Watch the heading become bigger. Its words stay the same. Later, try changing the words or the button’s rule separately.
+
+## Start your project
+
+Open your service page. Ask AI to show where its words, styles and button actions come from. Draw three labelled boxes.
+
+## Explain your own result
+
+Point to one piece of content, one style and one action in your actual page. Explain what each controls.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Change the heading size. Notice what stays the same.

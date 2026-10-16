@@ -2,6 +2,26 @@
 
 Deliver through AI
 
+## Why this lesson
+
+Your system needs parts that can support the required job. Public page files alone cannot provide shared private customer records.
+
+## What to look for
+
+Turning on shared private records adds a requirement. Inspect which parts are now needed and whether the proposed system supplies them.
+
+## Start your project
+
+Use your independent project brief. Give AI the user’s task, required behaviour, allowed data and operating limits before it proposes a system.
+
+## Explain your own result
+
+Explain why each part of your independent solution exists and trace one real action through the parts.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Add a private-record requirement and compare it with the chosen architecture.

@@ -2,6 +2,26 @@
 
 Follow an action through the system
 
+## Why this lesson
+
+A browser and a server work in different places. If a response is slow, the browser may stop waiting before the server’s outcome is known.
+
+## What to look for
+
+Compare response delay with the browser’s waiting limit. A timeout means the wait ended; it does not by itself prove the server cancelled the work.
+
+## Start your project
+
+Pick one action, such as confirming a visit. Ask AI to connect a page to a small server and show the request and response between them.
+
+## Explain your own result
+
+Trace your action from browser to server and back. Explain what your user sees when the response is delayed.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Make the response slower than the client's timeout.

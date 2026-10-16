@@ -9,6 +9,14 @@ const root = path.dirname(web);
 const missions = JSON.parse(fs.readFileSync(path.join(web, 'src/missions.json'), 'utf8'));
 const labs = JSON.parse(fs.readFileSync(path.join(web, 'src/mission-labs.json'), 'utf8'));
 const stories = JSON.parse(fs.readFileSync(path.join(web, 'src/lab-stories.json'), 'utf8'));
+const guides = JSON.parse(fs.readFileSync(path.join(web, 'src/lesson-guides.json'), 'utf8'));
+if (guides.length !== 30) throw new Error('Every core lesson needs beginner directions.');
+for (const [index, guide] of guides.entries()) {
+  if (guide.id !== index + 1) throw new Error('Lesson directions must follow the course order.');
+  for (const key of ['why', 'lookFor', 'projectStart', 'explainFocus'])
+    if (typeof guide[key] !== 'string' || !guide[key].trim())
+      throw new Error(`Lesson ${guide.id} needs ${key}`);
+}
 if (labs.length !== 30) throw new Error('Every core mission needs an interactive lab.');
 for (const [index, lab] of labs.entries()) {
   if (lab.id !== index + 1 || !Array.isArray(lab.controls) || !lab.controls.length)
@@ -94,6 +102,7 @@ for (const [index, m] of missions.entries()) {
     throw new Error(`Missing teaching content in mission ${m.id}`);
   const number = String(m.id).padStart(2, '0');
   const lab = labs[m.id - 1];
+  const guide = guides[m.id - 1];
   const story = stories[m.id - 1];
   const guidedText = `## Two guided comparisons\n\n${story.scene}\n\nEach pair loads fictional example inputs and changes one control. Compare the result, then try your own variation. Undo restores earlier values during the current lesson visit; it does not certify understanding.\n\n${story.comparisons.map((comparison, index) => `### ${index + 1}. ${comparison.title}\n\n${comparison.notice}\n\nStarting overrides (other controls use this lab's defaults):\n\n\`\`\`json\n${JSON.stringify(comparison.before, null, 2)}\n\`\`\`\n\nChange one control:\n\n\`\`\`json\n${JSON.stringify(comparison.change, null, 2)}\n\`\`\`\n\nWhat to understand: ${comparison.takeaway}\n`).join('\n')}\n`;
   const labGuide = `# Mission ${m.id}: interactive experiment\n\n${lab.title}\n\n## Start here\n\nOpen mission ${m.id} in the academy. ${lab.task}\n\nFirst action: **${lab.first}**. Change the controls and observe the result. The browser executes a local teaching model; it does not contact a customer system or an AI provider.\n\n## The idea\n\n${lab.idea}\n\n## Things you can change\n\n${lab.controls.map((c) => `- **${c.label}:** starts at ${JSON.stringify(c.default)}.${c.options ? ' Choices: ' + c.options.map(([, label]) => label).join('; ') + '.' : ''}${c.type === 'range' ? ` Range: ${c.min}–${c.max} ${c.unit || ''}, step ${c.step}.` : ''}`).join('\n')}\n\n## A different situation\n\n${lab.challenge}\n\nPredict the result before trying it. Record the value you changed, what actually happened and why. Inspect the system parts in 3D or use the equivalent flat diagram. Rotation and separation change your view; the lesson controls change the model.\n\n## What this experiment establishes\n\n${lab.boundary}\n\nYour controls and notebook are saved in this browser and included in a progress backup. The experiment JSON export records the model inputs and output. It is separate from real project evidence and understanding review. Continue to Understand, then Build with AI to create your own project using MISSION.md and AI-BRIEF.txt.\n\nAuthored source: web/src/mission-labs.json; executable rules: web/src/mission-labs.ts.\n`;
@@ -126,6 +135,9 @@ for (const [index, m] of missions.entries()) {
     'EVIDENCE.md': strToU8(evidence),
     'TOOL-RECORD.md': strToU8(toolsTemplate),
   };
+  const sceneDirections = `## Why this lesson\n\n${guide.why}\n\n## What to look for\n\n${guide.lookFor}\n\n## Start your project\n\n${guide.projectStart}\n\n## Explain your own result\n\n${guide.explainFocus}\n\n## Your next steps\n\nUse **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.\n\n`;
+  const sceneGuide = new TextDecoder().decode(files['SCENE-GUIDE.md']);
+  files['SCENE-GUIDE.md'] = strToU8(sceneGuide.replace('## Try one change', sceneDirections + '## Try one change'));
   fs.writeFileSync(path.join(directory, 'SCENE-GUIDE.md'), files['SCENE-GUIDE.md']);
   if (m.id === 18) {
     const neuronGuide = fs.readFileSync(path.join(root, 'NEURAL-LEARNING.md'));

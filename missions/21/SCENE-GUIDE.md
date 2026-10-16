@@ -2,6 +2,26 @@
 
 Ask AI to produce useful checks
 
+## Why this lesson
+
+A useful test must be able to expose a real mistake. Checking a friendly message alone can miss an update to the wrong appointment.
+
+## What to look for
+
+Read the intended record and the actual changed record. Notice whether the selected check fails when the model has a defect.
+
+## Start your project
+
+Choose one important rule in your app. Ask AI for a check that passes when it works and fails when a deliberate mistake is introduced.
+
+## Explain your own result
+
+Explain what your check observes and show a defect that makes it fail. Keep unrun checks labelled as unrun.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Run the record assertion with the wrong-record defect present, then remove the defect.

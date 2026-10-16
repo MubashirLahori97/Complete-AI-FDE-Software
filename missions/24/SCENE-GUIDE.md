@@ -2,6 +2,26 @@
 
 Manage growing use and cost
 
+## Why this lesson
+
+Reusing a saved copy can reduce repeated work. That copy is called a cache, and it may become out of date when the source changes.
+
+## What to look for
+
+Follow whether a read uses the source or a cached copy. Check the copy’s age and freshness as well as the amount of work saved.
+
+## Start your project
+
+Choose one repeated operation. Measure it with representative examples, try one improvement with AI, and check that the answers are still correct.
+
+## Explain your own result
+
+Explain what work you reduced, what you measured, and how your app handles old copies or queued requests.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Compare repeated fresh reads with a cached result, then change its age and lifetime.

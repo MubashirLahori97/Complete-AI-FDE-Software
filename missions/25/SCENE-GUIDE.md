@@ -2,6 +2,26 @@
 
 Change the system without losing trust
 
+## Why this lesson
+
+A system change can damage information people trust. Restoring a backup is useful only if the right records can actually be recovered and checked.
+
+## What to look for
+
+Compare the restored records with the saved snapshot. Restored data and a verified lookup are separate observations.
+
+## Start your project
+
+Choose a harmless practice copy of your data. Write what must survive a change and rehearse restoring and checking that copy with AI.
+
+## Explain your own result
+
+Explain what was backed up, what the change affected, what you restored and how you verified the recovered information.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Restore the snapshot, then query the expected identifiers.

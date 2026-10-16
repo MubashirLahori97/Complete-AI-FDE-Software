@@ -2,6 +2,26 @@
 
 Keep meaningful information
 
+## Why this lesson
+
+Appointments should not vanish when a program restarts. You also need a way to find the right visit when two people share a name.
+
+## What to look for
+
+Restarting loses records held only in process memory. Try persistent storage next. Use a visit identifier to tell same-name records apart.
+
+## Start your project
+
+Choose the information one appointment needs. Ask AI to save two fictional appointments and show how to find one after restarting the app.
+
+## Explain your own result
+
+Explain where records are stored, what survives a restart, and which identifier selects one exact appointment.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Restart the model with memory storage, then choose persistent storage.

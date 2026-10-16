@@ -2,6 +2,26 @@
 
 Give an agent a complete task
 
+## Why this lesson
+
+An AI agent needs a clear task, limits and permission. Giving it more time or budget cannot grant permission it does not have.
+
+## What to look for
+
+Compare the budget with the authority check. Extra budget may allow more work, but a missing permission should still stop the protected action.
+
+## Start your project
+
+Choose one small improvement. Write the desired result, files it may change, actions it may take, spending limit and when it must stop.
+
+## Explain your own result
+
+Explain what you delegated, which boundaries applied, and how you checked the agent’s actual work.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
 ## Try one change
 
 Give the model enough budget without granting broader authority.
