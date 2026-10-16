@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Turn the workflow investigation into a measurable, bounded improvement with a baseline or a labelled plan to obtain one.
 
-1. State the user, current process and costly problem with its evidence.
-2. Define the outcome, denominator, target and guardrail; do not invent a measured baseline.
-3. Use AI to challenge scope and exclusions. Agree or label the scenario assumptions.
+1. Write who has the problem, what they do now and what it costs them. Name the observations that support your description.
+2. Choose the result to improve, which cases belong in the total, and your target. Name one thing that must not get worse. Leave the starting measurement unknown if you have not measured it.
+3. Ask AI what your brief leaves unclear or outside the project. Agree those limits with the people involved, or label them as practice assumptions.
 
 ## Outcome checks
 

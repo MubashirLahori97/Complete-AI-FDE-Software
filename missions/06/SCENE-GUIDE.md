@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Investigate an authorized repair or maintenance workflow, or use a clearly labelled fictional scenario. Map current steps, people, information, delays and incentives.
 
-Start here: Choose a domain and an evidence source. Ask AI to help prepare questions about recent behaviour.
+Start here: Choose a real-world process and where you could learn about it. Ask AI to help prepare questions about what people recently did.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Add a small estimator to the service site. Define units, valid range and an honest estimate label. AI may produce the implementation and tests.
 
-Start here: Write three input/expected-result pairs before asking AI to build.
+Start here: Before building, write three examples of a quantity and the result you expect. Include a valid number, a blank entry and an invalid number.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

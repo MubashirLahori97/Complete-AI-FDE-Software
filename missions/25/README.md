@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Use AI to perform a data migration or dependency update in a test copy. Verify required data, permissions and behaviour, and demonstrate restoration.
 
-1. Record compatibility, data meaning, retention commitments and recovery scope before the change.
-2. Create a suitable test copy and let AI rehearse the change and relevant checks.
-3. Restore from the recovery copy, verify the main flow and record what the rehearsal does and does not establish.
+1. Before changing the system, record which versions must work together, what the data means, how long it must be kept and what you need to recover.
+2. Create a suitable test copy. Ask AI to rehearse the change and run checks of the behaviour and information that must be preserved.
+3. Restore from the recovery copy and check the main user task. Record what this practice recovery showed and what has not yet been tested.
 
 ## Outcome checks
 

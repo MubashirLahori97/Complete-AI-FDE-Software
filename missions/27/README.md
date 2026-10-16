@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Use capable AI to deliver the mission-26 brief. Choose suitable technologies, implement the useful workflow and maintain an accurate explanation throughout.
 
-1. Supply AI the domain evidence, acceptance matrix, authority and budget; let it plan appropriate work.
-2. Deliver in useful increments, inspect actual technologies and update all eight system-explanation areas.
-3. Demonstrate the main journey, a relevant failure and any permission/data boundaries; record gaps honestly.
+1. Give AI the evidence, expected-result table, allowed actions and budget for your independent project. Ask for a plan that fits those limits.
+2. Build in small useful pieces. Inspect the technologies actually used and keep all eight areas of your system explanation up to date.
+3. Demonstrate the main user task, a relevant failure, and the rules protecting data and access. Record what works and what still needs attention.
 
 ## Outcome checks
 

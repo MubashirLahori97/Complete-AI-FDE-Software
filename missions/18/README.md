@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Add a small note-summary feature with a replaceable model adapter, data boundary and supported-fact checks. A labelled fixture adapter is acceptable practice; it cannot establish real model quality.
 
-1. Justify AI against a simpler alternative and define authorized input, output and missing-information behaviour.
-2. Let AI build the adapter and interface using a fixture or an explicitly configured model within budget.
-3. Check normal, missing-fact and invalid-output cases; record provider/runtime, configuration, costs or fixture limits.
+1. Explain why this job needs AI rather than a simpler rule. Decide what information it may receive, what it should return and how it should handle missing facts.
+2. Ask AI to build the connection and interface. Start with a clearly labelled fixed example, or configure an actual model with an agreed budget.
+3. Try ordinary input, missing facts and wrongly shaped answers. Record the actual provider or runtime, settings, cost, or the limits of using fixed examples.
 
 ## Outcome checks
 

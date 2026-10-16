@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Instrument and investigate one real or deliberately injected test failure using AI, with privacy-aware observations and a verified fix.
 
-1. Define the symptom, environment and two plausible hypotheses.
-2. Ask AI to collect appropriately redacted logs, metrics or traces that distinguish them.
-3. Apply a bounded fix, rerun the relevant flow and record cause, evidence, recovery and remaining risks.
+1. Write what went wrong, where it happened and two possible causes.
+2. Ask AI to gather records, measurements or request traces that could distinguish those causes. Remove private information from anything you share.
+3. Make a small fix and repeat the affected task. Record the cause, supporting observations, recovery result and anything that remains uncertain.
 
 ## Outcome checks
 

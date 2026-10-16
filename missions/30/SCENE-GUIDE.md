@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Investigate an unfamiliar business problem, use available AI to improve it, explain the actual technologies and concepts, demonstrate benefit, and adapt when conditions change.
 
-Start here: Assemble the independent product, eight-part system explanation, evidence, costs, feedback and honest contribution record.
+Start here: Gather your independent product, eight-part system explanation, observations, costs and feedback. State what you and AI each contributed.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

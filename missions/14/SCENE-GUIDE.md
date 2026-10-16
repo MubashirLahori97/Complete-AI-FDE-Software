@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Add a supported identity mechanism and an explicit permission policy to fictional visit data. Avoid real personal data in the learning project.
 
-Start here: Define customer and staff actions and which records each may access.
+Start here: Write which actions customers and staff may take and whose records each person may read or change.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

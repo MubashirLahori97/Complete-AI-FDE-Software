@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Deliver a change touching the interface and service. Use one or multiple agents as useful, with an explicit contract and an end-to-end observation.
 
-Start here: Draw the dependencies and choose a coordination approach with a reason.
+Start here: Draw which parts need work from other parts. Choose how people or agents will coordinate and explain why that approach fits.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

@@ -64,9 +64,9 @@ Authored example; your project requires its own observations.
 
 Use AI to implement or connect a small confirmation API for fictional visits. Trace one actual action and one failed request through the real stack.
 
-1. Reuse the acceptance matrix and ask AI for a minimal client/server contract and runnable setup.
-2. Open a real request trace with AI assistance; identify method, URL, payload, status and which components run where.
-3. Trigger an invalid request and an unavailable dependency. Record observed feedback and any unknown outcome.
+1. Give AI your expected-result table. Ask it to connect the browser and server, define the messages they exchange, and provide instructions to run both parts.
+2. With AI's help, inspect one actual network request. Identify its action, address, sent data and response code, and explain which parts run in the browser and on the server.
+3. Try invalid input and a service that is unavailable. Save the feedback you observed and say when the final outcome is still unknown.
 
 ## Outcome checks
 

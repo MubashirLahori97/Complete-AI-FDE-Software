@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Investigate an unfamiliar authorized domain and define a useful improvement with participants or a clearly labelled scenario. Include local language, connectivity, cost and data constraints.
 
-1. Choose the domain, access boundary and evidence sources; use AI for research and questions.
-2. Map the workflow, incentives and a requirement missing from the initial request.
-3. Compare buy/configure/integrate/build options and agree or label success, scope and measurement assumptions.
+1. Choose a real-world setting, what you have permission to access and where you can gather evidence. Use AI to help research and prepare questions.
+2. Draw the current workflow. Explain why people would use or avoid a change, and find one requirement missing from the first request.
+3. Compare buying a tool, configuring one, connecting services and building something. Agree the useful result, scope and measurement plan, or clearly label practice assumptions.
 
 ## Outcome checks
 

@@ -67,9 +67,9 @@
       "title": "Your first useful service site",
       "brief": "Create a small information website for a repair service or another useful local service. It must show services, area, hours and a working contact option. Use truthful fictional details and no payment or private data.",
       "steps": [
-        "Choose the visitor and write the one thing they need to do. Use any available AI builder or coding agent; ask it for a runnable or previewable site and opening instructions.",
-        "Open the result yourself. Ask AI to improve one confusing part. Inspect which files and technologies it actually produced.",
-        "Check on a narrow screen and with a keyboard. Save files or a shareable preview; publication can wait until you choose suitable hosting."
+        "Choose who your page is for and the one thing they need to do. Ask an AI builder or coding assistant to create the page and explain how to open it.",
+        "Open the result yourself. Ask AI to improve one confusing part and show which files and technologies make the page work.",
+        "Try the page on a narrow screen and using a keyboard. Save the files or a preview you can reopen. Choose hosting later when you are ready to publish."
       ],
       "checks": [
         "A visitor can find services, area and hours in the actual page.",
@@ -159,9 +159,9 @@
       "title": "One change a visitor can notice",
       "brief": "Improve the mission-1 site using one observed confusion, two acceptance criteria and one preservation constraint.",
       "steps": [
-        "Observe a real person with consent, or clearly label your own walkthrough as a scenario. Name one confusion.",
-        "Ask AI for the smallest suitable improvement and preserve a working part.",
-        "Repeat the task, compare the two versions, and retain or revise the change from evidence."
+        "Ask permission to watch someone try your page, or clearly label your own walkthrough as a practice scenario. Name one thing that confused the visitor.",
+        "Ask AI for one small change to address that confusion. Keep a working part of the page so you can compare before and after.",
+        "Repeat the same task and compare the two versions. Keep or revise the change based on what you observed."
       ],
       "checks": [
         "My request names an observable result and a constraint.",
@@ -251,9 +251,9 @@
       "title": "A map of your page",
       "brief": "Annotate the real service site, identify its actual stack, and ask AI to make one content, one style and one behaviour change.",
       "steps": [
-        "Inspect files and dependency configuration with AI. Name only technologies actually present.",
-        "Make the three changes one at a time and observe each effect.",
-        "Create an annotated screenshot and component/technology map; include how this project starts or builds."
+        "Ask AI to inspect your page's files and list the technologies it actually uses. Include any file that lists the project's libraries or packages.",
+        "Change the page's words, appearance and button action separately. Observe what changes and what stays the same each time.",
+        "Label a screenshot and draw a map showing which files or tools control each part. Include the instructions used to start or build your page."
       ],
       "checks": [
         "The map correctly identifies the actual structure, styling and behaviour technologies.",
@@ -343,9 +343,9 @@
       "title": "A reliable service estimator",
       "brief": "Add a small estimator to the service site. Define units, valid range and an honest estimate label. AI may produce the implementation and tests.",
       "steps": [
-        "Write three input/expected-result pairs before asking AI to build.",
-        "Ask AI to implement the rule, validation and accessible feedback.",
-        "Try normal, missing and invalid input; explain where the calculation runs and whether values survive reload."
+        "Before building, write three examples of a quantity and the result you expect. Include a valid number, a blank entry and an invalid number.",
+        "Ask AI to build the calculation, reject inputs outside your rule, and show clear feedback that also works with a keyboard and screen reader.",
+        "Try valid, missing and invalid quantities yourself. Explain where the calculation runs and whether the values remain after a page reload."
       ],
       "checks": [
         "A valid example produces the expected amount and units.",
@@ -435,9 +435,9 @@
       "title": "A reusable service catalogue",
       "brief": "Generate service cards from records using one reusable formatting rule. Add empty-list and duplicate-identity handling.",
       "steps": [
-        "Describe each record's fields and create three fictional examples.",
-        "Let AI implement the repeated display and shared price rule; inspect the data-to-interface path.",
-        "Predict then test a fourth record, no records and a duplicate identifier. Save the observations."
+        "Choose the information each service needs, such as an identifier, name and price. Write three fictional service records.",
+        "Ask AI to turn those records into cards using one shared display and price rule. Follow one record from the stored data to its visible card.",
+        "Predict what should happen when you add a fourth record, remove all records or reuse an identifier. Try each case and save what happened."
       ],
       "checks": [
         "Adding one valid record adds one correct card without copied layout work.",
@@ -527,9 +527,9 @@
       "title": "The workflow before the app",
       "brief": "Investigate an authorized repair or maintenance workflow, or use a clearly labelled fictional scenario. Map current steps, people, information, delays and incentives.",
       "steps": [
-        "Choose a domain and an evidence source. Ask AI to help prepare questions about recent behaviour.",
-        "Collect or label the scenario evidence. Draw the current workflow and identify a missing requirement.",
-        "Check the interpretation with a participant if available; otherwise record what remains an assumption."
+        "Choose a real-world process and where you could learn about it. Ask AI to help prepare questions about what people recently did.",
+        "Collect observations or clearly label practice examples. Draw the current steps and name one requirement that the first request did not mention.",
+        "Check your interpretation with a participant if one is available. Otherwise, write down which conclusions are still assumptions."
       ],
       "checks": [
         "Each important claim has an identifiable source or is labelled as an assumption/scenario.",
@@ -619,9 +619,9 @@
       "title": "A one-page outcome brief",
       "brief": "Turn the workflow investigation into a measurable, bounded improvement with a baseline or a labelled plan to obtain one.",
       "steps": [
-        "State the user, current process and costly problem with its evidence.",
-        "Define the outcome, denominator, target and guardrail; do not invent a measured baseline.",
-        "Use AI to challenge scope and exclusions. Agree or label the scenario assumptions."
+        "Write who has the problem, what they do now and what it costs them. Name the observations that support your description.",
+        "Choose the result to improve, which cases belong in the total, and your target. Name one thing that must not get worse. Leave the starting measurement unknown if you have not measured it.",
+        "Ask AI what your brief leaves unclear or outside the project. Agree those limits with the people involved, or label them as practice assumptions."
       ],
       "checks": [
         "The brief defines the outcome, eligible cases and source of its baseline or measurement plan.",
@@ -711,9 +711,9 @@
       "title": "A confirmation journey people can finish",
       "brief": "Create a prototype for finding an appointment and confirming access, including errors and narrow-screen keyboard use.",
       "steps": [
-        "Sketch the intent, steps and outcomes in plain language.",
-        "Let AI build or configure a prototype with normal and failure states.",
-        "Observe another person with permission, or label a scenario walkthrough. Improve one confusion and repeat the task."
+        "Draw the visitor's goal, the steps they take and the possible outcomes in plain language.",
+        "Ask AI to make a small working preview. Include a successful path and useful responses to missing information or a failed connection.",
+        "With permission, watch someone try it, or label your own trial as a practice scenario. Improve one confusing part and repeat the task."
       ],
       "checks": [
         "The normal journey reaches a clearly identified result.",
@@ -803,9 +803,9 @@
       "title": "A decision you can defend",
       "brief": "Compare at least two plausible ways to deliver the brief, including an existing tool or configuration option. Choose a small reversible trial.",
       "steps": [
-        "List required capabilities, data ownership and local access constraints.",
-        "Ask AI to research current options and verify consequential claims at their sources; estimate setup and ongoing cost.",
-        "Record the choice, alternative, boundary diagram and conditions that would change the decision."
+        "List what your project must do, who controls its data and what access is available in your setting.",
+        "Ask AI to compare current options. Check important claims against their sources and estimate both setup cost and ongoing cost over the same period.",
+        "Record your choice, one alternative and a drawing of which parts connect. Explain what new information would make you choose differently."
       ],
       "checks": [
         "Both approaches are compared using the same workflow and cost criteria.",
@@ -895,9 +895,9 @@
       "title": "The definition-of-done matrix",
       "brief": "Write and trial acceptance cases for the planned stored confirmation workflow before implementing it further.",
       "steps": [
-        "Choose three important behaviours from the brief and define starting states and actions.",
-        "Write normal, boundary and failure expectations with unchanged-state requirements.",
-        "Ask AI to challenge missing cases and trial them against the prototype, labelling unavailable backend checks as not yet run."
+        "Choose three important actions from your brief. Make a table with the starting state, the action and the result you expect.",
+        "Include ordinary input, values at the allowed limits and failures. State what information should stay unchanged in each case.",
+        "Ask AI to find missing cases, then try the checks against your working preview. Mark checks of an unavailable server or other unfinished part as not yet run."
       ],
       "checks": [
         "The matrix distinguishes expected results from observations and unrun checks.",
@@ -993,9 +993,9 @@
       "title": "A connected confirmation journey",
       "brief": "Use AI to implement or connect a small confirmation API for fictional visits. Trace one actual action and one failed request through the real stack.",
       "steps": [
-        "Reuse the acceptance matrix and ask AI for a minimal client/server contract and runnable setup.",
-        "Open a real request trace with AI assistance; identify method, URL, payload, status and which components run where.",
-        "Trigger an invalid request and an unavailable dependency. Record observed feedback and any unknown outcome."
+        "Give AI your expected-result table. Ask it to connect the browser and server, define the messages they exchange, and provide instructions to run both parts.",
+        "With AI's help, inspect one actual network request. Identify its action, address, sent data and response code, and explain which parts run in the browser and on the server.",
+        "Try invalid input and a service that is unavailable. Save the feedback you observed and say when the final outcome is still unknown."
       ],
       "checks": [
         "A real valid action reaches the intended handler and returns the correct visit identity.",
@@ -1085,9 +1085,9 @@
       "title": "An appointment register that survives",
       "brief": "Persist fictional customers and visits with stable IDs, a relationship and explicit missing-data handling. Record where imported or entered information came from.",
       "steps": [
-        "Ask AI to design a small data model and explain constraints, query and storage choices.",
-        "Store two customers with the same name and visits attached to the correct IDs.",
-        "Restart using the documented setup, query the records, and investigate a missing or questionable source value."
+        "Ask AI what information each appointment needs, which values must be unique or valid, how records can be looked up, and where they should be stored.",
+        "Save two fictional customers with the same name. Give them different identifiers and attach each visit to the correct customer.",
+        "Restart using the project's instructions and look up the records again. Investigate any missing information or a value whose source you cannot support."
       ],
       "checks": [
         "Saved visits remain after the intended process restart using the same storage configuration.",
@@ -1177,9 +1177,9 @@
       "title": "One slot, one reservation",
       "brief": "Protect the stored appointment workflow against invalid requests, repeated submissions and competing reservations.",
       "steps": [
-        "Define the invariant and duplicate policy with concrete examples.",
-        "Delegate implementation to AI, including atomic changes, constraints and retry identity.",
-        "Run invalid, repeated and overlapping-request checks; inspect final stored state as well as responses."
+        "Write a rule that must always hold, such as 'accepted bookings never exceed available slots'. Decide whether a repeated request should create a new booking.",
+        "Ask AI to check and reserve a slot as one operation, called an atomic change. Give each intended booking an identifier so repeated attempts can reuse it.",
+        "Try invalid input, the same request twice and two requests at once. Check the final stored bookings as well as the responses."
       ],
       "checks": [
         "An invalid request leaves the required stored state unchanged.",
@@ -1269,9 +1269,9 @@
       "title": "The right visit for the right person",
       "brief": "Add a supported identity mechanism and an explicit permission policy to fictional visit data. Avoid real personal data in the learning project.",
       "steps": [
-        "Define customer and staff actions and which records each may access.",
-        "Ask AI to implement trusted identity/session handling and enforce permissions at the data/API boundary.",
-        "Use two separate users and an unauthenticated request; directly try permitted and forbidden actions."
+        "Write which actions customers and staff may take and whose records each person may read or change.",
+        "Ask AI to identify signed-in users and keep their sessions correctly. Enforce permission checks where records are read or changed, rather than relying only on hidden buttons.",
+        "Try two separate fictional users and a request with nobody signed in. Directly test actions that should be allowed and actions that should be refused."
       ],
       "checks": [
         "Each test user can perform the intended action on the permitted records.",
@@ -1361,9 +1361,9 @@
       "title": "A reminder integration with honest status",
       "brief": "Connect a test messaging service or a clearly labelled local provider double. Keep credentials server-side and demonstrate unavailable-provider behaviour. Record which external claims remain untested.",
       "steps": [
-        "Inspect the current provider contract, test mode, cost and permission requirements with AI.",
-        "Delegate a small adapter with configuration checks, timeouts and appropriate retry identity.",
-        "Exercise accepted, rejected and unavailable cases; distinguish local-double evidence from an actual test delivery."
+        "With AI, check what the reminder provider expects, how its test mode works, what it costs and which actions are allowed.",
+        "Ask AI to build a small connection to the provider. Check required settings, limit how long it waits, and recognise retries of the same intended reminder.",
+        "Try accepted, rejected and unavailable responses. Clearly distinguish a local simulated provider from an actual delivery in the provider's test mode."
       ],
       "checks": [
         "The configuration and secret boundary are documented and secrets are absent from public output.",
@@ -1453,9 +1453,9 @@
       "title": "Delegate a complete improvement",
       "brief": "Give a capable AI a meaningful change to the visit application. Let it plan, implement, test and diagnose within explicit boundaries.",
       "steps": [
-        "Choose a change and supply the actual system context, outcome, constraints, authority, budget and stopping rules.",
-        "Let AI propose and execute a suitable plan. Record significant decisions and any needed clarification.",
-        "Inspect the actual result, repeat a relevant user journey and update the system explanation."
+        "Choose one change. Give AI the current system, desired result, limits, allowed actions, budget and conditions that mean it must stop.",
+        "Let AI propose a plan and carry out the work it is allowed to do. Record important decisions and questions it needed answered.",
+        "Inspect the actual result and repeat a relevant user task. Update your explanation of how the changed system works."
       ],
       "checks": [
         "The delegated task specifies outcome, context, authority, budget and stopping conditions.",
@@ -1545,9 +1545,9 @@
       "title": "A change whose parts agree",
       "brief": "Deliver a change touching the interface and service. Use one or multiple agents as useful, with an explicit contract and an end-to-end observation.",
       "steps": [
-        "Draw the dependencies and choose a coordination approach with a reason.",
-        "Define the interface using one normal and one failure example; delegate owned work.",
-        "Integrate, investigate disagreement and rerun the actual journey rather than only isolated tests."
+        "Draw which parts need work from other parts. Choose how people or agents will coordinate and explain why that approach fits.",
+        "Agree what the parts exchange using one successful message and one failure message. Give each worker a clearly owned part of the change.",
+        "Bring the parts together, investigate any mismatch, and repeat the complete user journey. Separate passing checks are not enough to show that the parts work together."
       ],
       "checks": [
         "The interface contract names fields, allowed values and error meaning.",
@@ -1637,9 +1637,9 @@
       "title": "A note assistant with honest limits",
       "brief": "Add a small note-summary feature with a replaceable model adapter, data boundary and supported-fact checks. A labelled fixture adapter is acceptable practice; it cannot establish real model quality.",
       "steps": [
-        "Justify AI against a simpler alternative and define authorized input, output and missing-information behaviour.",
-        "Let AI build the adapter and interface using a fixture or an explicitly configured model within budget.",
-        "Check normal, missing-fact and invalid-output cases; record provider/runtime, configuration, costs or fixture limits."
+        "Explain why this job needs AI rather than a simpler rule. Decide what information it may receive, what it should return and how it should handle missing facts.",
+        "Ask AI to build the connection and interface. Start with a clearly labelled fixed example, or configure an actual model with an agreed budget.",
+        "Try ordinary input, missing facts and wrongly shaped answers. Record the actual provider or runtime, settings, cost, or the limits of using fixed examples."
       ],
       "checks": [
         "The actual inference or fixture path, context and data boundary are accurately identified.",
@@ -1729,9 +1729,9 @@
       "title": "An assistant with sources and boundaries",
       "brief": "Connect the note assistant to a small versioned policy collection or a bounded visit tool. Explain the chosen retrieval or tool mechanism and test unsupported and unauthorized cases.",
       "steps": [
-        "Define the allowed sources or actions and a safe unknown/refusal result.",
-        "Ask AI to implement a replaceable retrieval/tool adapter with source versions and trusted validation.",
-        "Test a supported answer, missing or stale evidence, and an untrusted instruction attempting an unauthorized action."
+        "Choose which sources the assistant may read and which actions it may take. Write what it should say when information or permission is missing.",
+        "Ask AI to build a replaceable connection to those sources or actions. Record which source version was used and keep trusted checks separate from returned text.",
+        "Try a supported answer, a missing or outdated source, and a document that asks for an action the assistant is not allowed to take. Check the actual outcomes."
       ],
       "checks": [
         "A claim points to an inspected supporting passage or an action has an explicit authorized contract.",
@@ -1821,9 +1821,9 @@
       "title": "A fair assistant comparison",
       "brief": "Compare two implementations or configurations of the AI feature against a non-AI or existing-process baseline where meaningful. Keep tuning and held-out cases distinct.",
       "steps": [
-        "Define expected outcomes and error costs before running; include normal, missing and adversarial cases.",
-        "Ask AI to run the same cases for each approach with actual settings, usage and timing recorded.",
-        "Investigate failures, calculate relevant rates and choose an approach with explicit limitations."
+        "Write the expected result for each test case before comparing approaches. Include ordinary cases, missing information and attempts to mislead the assistant. Decide which mistakes matter most.",
+        "Ask AI to run the same cases through each approach. Record the actual settings, usage and time taken so the comparison can be repeated.",
+        "Inspect failures and calculate the rates that matter to your users. Choose an approach and explain what the comparison still does not establish."
       ],
       "checks": [
         "The comparison uses the same versioned cases and separates held-out cases from tuning.",
@@ -1913,9 +1913,9 @@
       "title": "Checks that can prove you wrong",
       "brief": "Ask AI to create appropriate unit, integration and journey checks from the acceptance matrix. Demonstrate one real defect and keep its regression check.",
       "steps": [
-        "Map important requirements to checks and expected observations.",
-        "Introduce or use a known defect in a test environment and show the relevant failure.",
-        "Let AI diagnose and fix it; rerun the focused check and affected journey, recording remaining limits."
+        "Choose important requirements and write a check for each, including the result you expect to observe.",
+        "In a separate test environment, introduce or use a known mistake. Show that the relevant check fails because of that mistake.",
+        "Ask AI to investigate and fix the cause. Rerun the check and the affected user task, and record any remaining limits."
       ],
       "checks": [
         "Each important check has a requirement-derived expectation and suitable test data.",
@@ -2005,9 +2005,9 @@
       "title": "A release you can recover",
       "brief": "Release the product to a suitable test or authorized public environment with identified source, configuration and a recovery procedure.",
       "steps": [
-        "Ask AI to inspect the current stack, prepare reproducible build/release instructions and name required configuration without secrets.",
-        "Release a known revision and verify its main user journey from the deployed environment.",
-        "Introduce a reversible test failure, recover, and verify both application behaviour and required data."
+        "Ask AI to inspect the tools your project uses and write repeatable build and release instructions. List required setting names while keeping secret values private.",
+        "Release a version you can identify. Open that deployed version and verify its main user journey there.",
+        "In an appropriate test setting, introduce a failure you can reverse. Recover and check both the app's behaviour and the information it needs."
       ],
       "checks": [
         "The running release is tied to an identified revision, build and environment.",
@@ -2097,9 +2097,9 @@
       "title": "An evidence-led incident record",
       "brief": "Instrument and investigate one real or deliberately injected test failure using AI, with privacy-aware observations and a verified fix.",
       "steps": [
-        "Define the symptom, environment and two plausible hypotheses.",
-        "Ask AI to collect appropriately redacted logs, metrics or traces that distinguish them.",
-        "Apply a bounded fix, rerun the relevant flow and record cause, evidence, recovery and remaining risks."
+        "Write what went wrong, where it happened and two possible causes.",
+        "Ask AI to gather records, measurements or request traces that could distinguish those causes. Remove private information from anything you share.",
+        "Make a small fix and repeat the affected task. Record the cause, supporting observations, recovery result and anything that remains uncertain."
       ],
       "checks": [
         "The incident record separates symptom, hypothesis and observed evidence.",
@@ -2189,9 +2189,9 @@
       "title": "One measured performance improvement",
       "brief": "Identify one actual bottleneck in the growing workflow, compare an appropriate improvement and report correctness, cost and measurement limits.",
       "steps": [
-        "Define representative load, latency/throughput measures and a correctness guardrail.",
-        "Let AI measure the current system and propose indexing, data-structure, cache or queue changes as appropriate.",
-        "Rerun the same workload and user journey; record improvement, resource cost and freshness/retry consequences."
+        "Choose work that resembles real use. Decide how to measure waiting time and work completed, and state what must remain correct.",
+        "Ask AI to measure the current system and suggest one suitable change. Options might include faster data lookup, a saved copy called a cache, or a queue for work that can wait.",
+        "Repeat the same workload and user task. Record any improvement and resource cost, plus effects on old data or repeated requests."
       ],
       "checks": [
         "Before and after measurements use comparable data, workload and environment.",
@@ -2281,9 +2281,9 @@
       "title": "A change with a recovery rehearsal",
       "brief": "Use AI to perform a data migration or dependency update in a test copy. Verify required data, permissions and behaviour, and demonstrate restoration.",
       "steps": [
-        "Record compatibility, data meaning, retention commitments and recovery scope before the change.",
-        "Create a suitable test copy and let AI rehearse the change and relevant checks.",
-        "Restore from the recovery copy, verify the main flow and record what the rehearsal does and does not establish."
+        "Before changing the system, record which versions must work together, what the data means, how long it must be kept and what you need to recover.",
+        "Create a suitable test copy. Ask AI to rehearse the change and run checks of the behaviour and information that must be preserved.",
+        "Restore from the recovery copy and check the main user task. Record what this practice recovery showed and what has not yet been tested."
       ],
       "checks": [
         "Important record counts, relationships and meanings are compared before and after.",
@@ -2373,9 +2373,9 @@
       "title": "An independent outcome brief",
       "brief": "Investigate an unfamiliar authorized domain and define a useful improvement with participants or a clearly labelled scenario. Include local language, connectivity, cost and data constraints.",
       "steps": [
-        "Choose the domain, access boundary and evidence sources; use AI for research and questions.",
-        "Map the workflow, incentives and a requirement missing from the initial request.",
-        "Compare buy/configure/integrate/build options and agree or label success, scope and measurement assumptions."
+        "Choose a real-world setting, what you have permission to access and where you can gather evidence. Use AI to help research and prepare questions.",
+        "Draw the current workflow. Explain why people would use or avoid a change, and find one requirement missing from the first request.",
+        "Compare buying a tool, configuring one, connecting services and building something. Agree the useful result, scope and measurement plan, or clearly label practice assumptions."
       ],
       "checks": [
         "The brief identifies sources, users, incentives and at least one discovered requirement.",
@@ -2465,9 +2465,9 @@
       "title": "The independent working solution",
       "brief": "Use capable AI to deliver the mission-26 brief. Choose suitable technologies, implement the useful workflow and maintain an accurate explanation throughout.",
       "steps": [
-        "Supply AI the domain evidence, acceptance matrix, authority and budget; let it plan appropriate work.",
-        "Deliver in useful increments, inspect actual technologies and update all eight system-explanation areas.",
-        "Demonstrate the main journey, a relevant failure and any permission/data boundaries; record gaps honestly."
+        "Give AI the evidence, expected-result table, allowed actions and budget for your independent project. Ask for a plan that fits those limits.",
+        "Build in small useful pieces. Inspect the technologies actually used and keep all eight areas of your system explanation up to date.",
+        "Demonstrate the main user task, a relevant failure, and the rules protecting data and access. Record what works and what still needs attention."
       ],
       "checks": [
         "The actual product demonstrates the brief's primary useful outcome.",
@@ -2557,9 +2557,9 @@
       "title": "An improvement tested in use",
       "brief": "Run an authorized pilot or clearly labelled scenario trial of the independent solution. Investigate adoption and a changed requirement, then improve and remeasure.",
       "steps": [
-        "Define the pilot participants, consent, outcome measure and guardrails.",
-        "Observe use and capture specific confusion, extra work and a changed constraint.",
-        "Delegate a suitable improvement to AI, update the system explanation and repeat the relevant task and measurement."
+        "Plan a small trial with people who agree to take part. Decide what result to measure and which outcomes must not get worse.",
+        "Observe use. Record a specific confusion, extra work created by the change and a requirement or limit that changed.",
+        "Ask AI for a suitable improvement. Update your system explanation, then repeat the relevant task and measurement to check the effect."
       ],
       "checks": [
         "Feedback and outcome observations have sources and an honest real/scenario label.",
@@ -2649,9 +2649,9 @@
       "title": "A handoff that survives change",
       "brief": "Transfer the independent solution to another operator and adapt one tool, provider or environment while preserving required outcomes.",
       "steps": [
-        "Prepare a current diagram, setup guide, configuration names, cost/ownership notes, data export and recovery runbook.",
-        "Observe a new operator or labelled fresh-context trial and repair instruction gaps.",
-        "Use an unfamiliar or replacement tool for a meaningful component; rerun relevant contract, quality and user-journey checks."
+        "Prepare a current system drawing and instructions for setup, setting names, costs, ownership, data export and recovery.",
+        "Ask a new operator to try the instructions and record where they get stuck. If this is a simulated fresh-start trial, label it that way. Improve the instructions from the observations.",
+        "Replace one meaningful part with an unfamiliar tool. Check that its messages and results still fit the other parts, then repeat quality checks and the relevant user journey."
       ],
       "checks": [
         "The handoff trial reaches the useful outcome from documented starting conditions.",
@@ -2741,9 +2741,9 @@
       "title": "The independent delivery challenge",
       "brief": "Investigate an unfamiliar business problem, use available AI to improve it, explain the actual technologies and concepts, demonstrate benefit, and adapt when conditions change.",
       "steps": [
-        "Assemble the independent product, eight-part system explanation, evidence, costs, feedback and honest contribution record.",
-        "Ask a reviewer to select a fresh requirement or failure relevant to the product; predict its effects, then use AI to adapt and verify.",
-        "Review the shared foundation, record demonstrated areas and gaps, and choose further practice. Compare with experienced participants only using actual comparable task/tool evidence."
+        "Gather your independent product, eight-part system explanation, observations, costs and feedback. State what you and AI each contributed.",
+        "Ask a reviewer to choose a new requirement or failure that fits your product. Predict what it affects, then use AI to adapt the system and verify the result.",
+        "Review the shared foundations, record what you demonstrated and what needs practice, and choose the next task. Any comparison with experienced people needs actual comparable tasks, tools and observations."
       ],
       "checks": [
         "The demonstrated product addresses an evidenced or explicitly labelled scenario problem with proportionate outcome checks.",

@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Create a prototype for finding an appointment and confirming access, including errors and narrow-screen keyboard use.
 
-Start here: Sketch the intent, steps and outcomes in plain language.
+Start here: Draw the visitor's goal, the steps they take and the possible outcomes in plain language.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

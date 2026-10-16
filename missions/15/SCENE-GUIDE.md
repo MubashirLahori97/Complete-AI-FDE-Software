@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Connect a test messaging service or a clearly labelled local provider double. Keep credentials server-side and demonstrate unavailable-provider behaviour. Record which external claims remain untested.
 
-Start here: Inspect the current provider contract, test mode, cost and permission requirements with AI.
+Start here: With AI, check what the reminder provider expects, how its test mode works, what it costs and which actions are allowed.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

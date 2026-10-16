@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Create a small information website for a repair service or another useful local service. It must show services, area, hours and a working contact option. Use truthful fictional details and no payment or private data.
 
-1. Choose the visitor and write the one thing they need to do. Use any available AI builder or coding agent; ask it for a runnable or previewable site and opening instructions.
-2. Open the result yourself. Ask AI to improve one confusing part. Inspect which files and technologies it actually produced.
-3. Check on a narrow screen and with a keyboard. Save files or a shareable preview; publication can wait until you choose suitable hosting.
+1. Choose who your page is for and the one thing they need to do. Ask an AI builder or coding assistant to create the page and explain how to open it.
+2. Open the result yourself. Ask AI to improve one confusing part and show which files and technologies make the page work.
+3. Try the page on a narrow screen and using a keyboard. Save the files or a preview you can reopen. Choose hosting later when you are ready to publish.
 
 ## Outcome checks
 

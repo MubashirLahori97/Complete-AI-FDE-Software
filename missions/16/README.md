@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Give a capable AI a meaningful change to the visit application. Let it plan, implement, test and diagnose within explicit boundaries.
 
-1. Choose a change and supply the actual system context, outcome, constraints, authority, budget and stopping rules.
-2. Let AI propose and execute a suitable plan. Record significant decisions and any needed clarification.
-3. Inspect the actual result, repeat a relevant user journey and update the system explanation.
+1. Choose one change. Give AI the current system, desired result, limits, allowed actions, budget and conditions that mean it must stop.
+2. Let AI propose a plan and carry out the work it is allowed to do. Record important decisions and questions it needed answered.
+3. Inspect the actual result and repeat a relevant user task. Update your explanation of how the changed system works.
 
 ## Outcome checks
 

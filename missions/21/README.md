@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Ask AI to create appropriate unit, integration and journey checks from the acceptance matrix. Demonstrate one real defect and keep its regression check.
 
-1. Map important requirements to checks and expected observations.
-2. Introduce or use a known defect in a test environment and show the relevant failure.
-3. Let AI diagnose and fix it; rerun the focused check and affected journey, recording remaining limits.
+1. Choose important requirements and write a check for each, including the result you expect to observe.
+2. In a separate test environment, introduce or use a known mistake. Show that the relevant check fails because of that mistake.
+3. Ask AI to investigate and fix the cause. Rerun the check and the affected user task, and record any remaining limits.
 
 ## Outcome checks
 

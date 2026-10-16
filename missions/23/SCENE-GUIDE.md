@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Instrument and investigate one real or deliberately injected test failure using AI, with privacy-aware observations and a verified fix.
 
-Start here: Define the symptom, environment and two plausible hypotheses.
+Start here: Write what went wrong, where it happened and two possible causes.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

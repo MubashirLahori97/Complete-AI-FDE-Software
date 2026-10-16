@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Create a small information website for a repair service or another useful local service. It must show services, area, hours and a working contact option. Use truthful fictional details and no payment or private data.
 
-Start here: Choose the visitor and write the one thing they need to do. Use any available AI builder or coding agent; ask it for a runnable or previewable site and opening instructions.
+Start here: Choose who your page is for and the one thing they need to do. Ask an AI builder or coding assistant to create the page and explain how to open it.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

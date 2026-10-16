@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Create a prototype for finding an appointment and confirming access, including errors and narrow-screen keyboard use.
 
-1. Sketch the intent, steps and outcomes in plain language.
-2. Let AI build or configure a prototype with normal and failure states.
-3. Observe another person with permission, or label a scenario walkthrough. Improve one confusion and repeat the task.
+1. Draw the visitor's goal, the steps they take and the possible outcomes in plain language.
+2. Ask AI to make a small working preview. Include a successful path and useful responses to missing information or a failed connection.
+3. With permission, watch someone try it, or label your own trial as a practice scenario. Improve one confusing part and repeat the task.
 
 ## Outcome checks
 

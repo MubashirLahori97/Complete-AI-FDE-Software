@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Add a supported identity mechanism and an explicit permission policy to fictional visit data. Avoid real personal data in the learning project.
 
-1. Define customer and staff actions and which records each may access.
-2. Ask AI to implement trusted identity/session handling and enforce permissions at the data/API boundary.
-3. Use two separate users and an unauthenticated request; directly try permitted and forbidden actions.
+1. Write which actions customers and staff may take and whose records each person may read or change.
+2. Ask AI to identify signed-in users and keep their sessions correctly. Enforce permission checks where records are read or changed, rather than relying only on hidden buttons.
+3. Try two separate fictional users and a request with nobody signed in. Directly test actions that should be allowed and actions that should be refused.
 
 ## Outcome checks
 

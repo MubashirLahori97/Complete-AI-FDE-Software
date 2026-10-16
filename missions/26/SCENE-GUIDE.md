@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Investigate an unfamiliar authorized domain and define a useful improvement with participants or a clearly labelled scenario. Include local language, connectivity, cost and data constraints.
 
-Start here: Choose the domain, access boundary and evidence sources; use AI for research and questions.
+Start here: Choose a real-world setting, what you have permission to access and where you can gather evidence. Use AI to help research and prepare questions.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

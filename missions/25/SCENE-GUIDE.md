@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Use AI to perform a data migration or dependency update in a test copy. Verify required data, permissions and behaviour, and demonstrate restoration.
 
-Start here: Record compatibility, data meaning, retention commitments and recovery scope before the change.
+Start here: Before changing the system, record which versions must work together, what the data means, how long it must be kept and what you need to recover.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

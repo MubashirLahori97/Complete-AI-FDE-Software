@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Compare at least two plausible ways to deliver the brief, including an existing tool or configuration option. Choose a small reversible trial.
 
-Start here: List required capabilities, data ownership and local access constraints.
+Start here: List what your project must do, who controls its data and what access is available in your setting.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

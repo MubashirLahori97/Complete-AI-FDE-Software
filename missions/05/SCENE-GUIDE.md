@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Generate service cards from records using one reusable formatting rule. Add empty-list and duplicate-identity handling.
 
-Start here: Describe each record's fields and create three fictional examples.
+Start here: Choose the information each service needs, such as an identifier, name and price. Write three fictional service records.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

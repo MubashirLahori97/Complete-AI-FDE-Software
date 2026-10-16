@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Turn the workflow investigation into a measurable, bounded improvement with a baseline or a labelled plan to obtain one.
 
-Start here: State the user, current process and costly problem with its evidence.
+Start here: Write who has the problem, what they do now and what it costs them. Name the observations that support your description.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

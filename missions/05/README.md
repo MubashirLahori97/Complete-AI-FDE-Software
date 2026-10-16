@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Generate service cards from records using one reusable formatting rule. Add empty-list and duplicate-identity handling.
 
-1. Describe each record's fields and create three fictional examples.
-2. Let AI implement the repeated display and shared price rule; inspect the data-to-interface path.
-3. Predict then test a fourth record, no records and a duplicate identifier. Save the observations.
+1. Choose the information each service needs, such as an identifier, name and price. Write three fictional service records.
+2. Ask AI to turn those records into cards using one shared display and price rule. Follow one record from the stored data to its visible card.
+3. Predict what should happen when you add a fourth record, remove all records or reuse an identifier. Try each case and save what happened.
 
 ## Outcome checks
 

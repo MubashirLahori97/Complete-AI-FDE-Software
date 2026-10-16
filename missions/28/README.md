@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Run an authorized pilot or clearly labelled scenario trial of the independent solution. Investigate adoption and a changed requirement, then improve and remeasure.
 
-1. Define the pilot participants, consent, outcome measure and guardrails.
-2. Observe use and capture specific confusion, extra work and a changed constraint.
-3. Delegate a suitable improvement to AI, update the system explanation and repeat the relevant task and measurement.
+1. Plan a small trial with people who agree to take part. Decide what result to measure and which outcomes must not get worse.
+2. Observe use. Record a specific confusion, extra work created by the change and a requirement or limit that changed.
+3. Ask AI for a suitable improvement. Update your system explanation, then repeat the relevant task and measurement to check the effect.
 
 ## Outcome checks
 

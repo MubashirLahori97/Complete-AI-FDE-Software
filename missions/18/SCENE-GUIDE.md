@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Add a small note-summary feature with a replaceable model adapter, data boundary and supported-fact checks. A labelled fixture adapter is acceptable practice; it cannot establish real model quality.
 
-Start here: Justify AI against a simpler alternative and define authorized input, output and missing-information behaviour.
+Start here: Explain why this job needs AI rather than a simpler rule. Decide what information it may receive, what it should return and how it should handle missing facts.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

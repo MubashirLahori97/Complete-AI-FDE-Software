@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Identify one actual bottleneck in the growing workflow, compare an appropriate improvement and report correctness, cost and measurement limits.
 
-1. Define representative load, latency/throughput measures and a correctness guardrail.
-2. Let AI measure the current system and propose indexing, data-structure, cache or queue changes as appropriate.
-3. Rerun the same workload and user journey; record improvement, resource cost and freshness/retry consequences.
+1. Choose work that resembles real use. Decide how to measure waiting time and work completed, and state what must remain correct.
+2. Ask AI to measure the current system and suggest one suitable change. Options might include faster data lookup, a saved copy called a cache, or a queue for work that can wait.
+3. Repeat the same workload and user task. Record any improvement and resource cost, plus effects on old data or repeated requests.
 
 ## Outcome checks
 

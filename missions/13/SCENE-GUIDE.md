@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Protect the stored appointment workflow against invalid requests, repeated submissions and competing reservations.
 
-Start here: Define the invariant and duplicate policy with concrete examples.
+Start here: Write a rule that must always hold, such as 'accepted bookings never exceed available slots'. Decide whether a repeated request should create a new booking.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

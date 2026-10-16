@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Ask AI to create appropriate unit, integration and journey checks from the acceptance matrix. Demonstrate one real defect and keep its regression check.
 
-Start here: Map important requirements to checks and expected observations.
+Start here: Choose important requirements and write a check for each, including the result you expect to observe.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

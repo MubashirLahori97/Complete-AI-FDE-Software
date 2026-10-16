@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Add a small estimator to the service site. Define units, valid range and an honest estimate label. AI may produce the implementation and tests.
 
-1. Write three input/expected-result pairs before asking AI to build.
-2. Ask AI to implement the rule, validation and accessible feedback.
-3. Try normal, missing and invalid input; explain where the calculation runs and whether values survive reload.
+1. Before building, write three examples of a quantity and the result you expect. Include a valid number, a blank entry and an invalid number.
+2. Ask AI to build the calculation, reject inputs outside your rule, and show clear feedback that also works with a keyboard and screen reader.
+3. Try valid, missing and invalid quantities yourself. Explain where the calculation runs and whether the values remain after a page reload.
 
 ## Outcome checks
 

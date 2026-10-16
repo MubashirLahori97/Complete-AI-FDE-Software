@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Deliver a change touching the interface and service. Use one or multiple agents as useful, with an explicit contract and an end-to-end observation.
 
-1. Draw the dependencies and choose a coordination approach with a reason.
-2. Define the interface using one normal and one failure example; delegate owned work.
-3. Integrate, investigate disagreement and rerun the actual journey rather than only isolated tests.
+1. Draw which parts need work from other parts. Choose how people or agents will coordinate and explain why that approach fits.
+2. Agree what the parts exchange using one successful message and one failure message. Give each worker a clearly owned part of the change.
+3. Bring the parts together, investigate any mismatch, and repeat the complete user journey. Separate passing checks are not enough to show that the parts work together.
 
 ## Outcome checks
 

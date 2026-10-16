@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Improve the mission-1 site using one observed confusion, two acceptance criteria and one preservation constraint.
 
-1. Observe a real person with consent, or clearly label your own walkthrough as a scenario. Name one confusion.
-2. Ask AI for the smallest suitable improvement and preserve a working part.
-3. Repeat the task, compare the two versions, and retain or revise the change from evidence.
+1. Ask permission to watch someone try your page, or clearly label your own walkthrough as a practice scenario. Name one thing that confused the visitor.
+2. Ask AI for one small change to address that confusion. Keep a working part of the page so you can compare before and after.
+3. Repeat the same task and compare the two versions. Keep or revise the change based on what you observed.
 
 ## Outcome checks
 

@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Protect the stored appointment workflow against invalid requests, repeated submissions and competing reservations.
 
-1. Define the invariant and duplicate policy with concrete examples.
-2. Delegate implementation to AI, including atomic changes, constraints and retry identity.
-3. Run invalid, repeated and overlapping-request checks; inspect final stored state as well as responses.
+1. Write a rule that must always hold, such as 'accepted bookings never exceed available slots'. Decide whether a repeated request should create a new booking.
+2. Ask AI to check and reserve a slot as one operation, called an atomic change. Give each intended booking an identifier so repeated attempts can reuse it.
+3. Try invalid input, the same request twice and two requests at once. Check the final stored bookings as well as the responses.
 
 ## Outcome checks
 

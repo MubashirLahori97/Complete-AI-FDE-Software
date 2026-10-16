@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Investigate an unfamiliar business problem, use available AI to improve it, explain the actual technologies and concepts, demonstrate benefit, and adapt when conditions change.
 
-1. Assemble the independent product, eight-part system explanation, evidence, costs, feedback and honest contribution record.
-2. Ask a reviewer to select a fresh requirement or failure relevant to the product; predict its effects, then use AI to adapt and verify.
-3. Review the shared foundation, record demonstrated areas and gaps, and choose further practice. Compare with experienced participants only using actual comparable task/tool evidence.
+1. Gather your independent product, eight-part system explanation, observations, costs and feedback. State what you and AI each contributed.
+2. Ask a reviewer to choose a new requirement or failure that fits your product. Predict what it affects, then use AI to adapt the system and verify the result.
+3. Review the shared foundations, record what you demonstrated and what needs practice, and choose the next task. Any comparison with experienced people needs actual comparable tasks, tools and observations.
 
 ## Outcome checks
 

@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Release the product to a suitable test or authorized public environment with identified source, configuration and a recovery procedure.
 
-1. Ask AI to inspect the current stack, prepare reproducible build/release instructions and name required configuration without secrets.
-2. Release a known revision and verify its main user journey from the deployed environment.
-3. Introduce a reversible test failure, recover, and verify both application behaviour and required data.
+1. Ask AI to inspect the tools your project uses and write repeatable build and release instructions. List required setting names while keeping secret values private.
+2. Release a version you can identify. Open that deployed version and verify its main user journey there.
+3. In an appropriate test setting, introduce a failure you can reverse. Recover and check both the app's behaviour and the information it needs.
 
 ## Outcome checks
 

@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Investigate an authorized repair or maintenance workflow, or use a clearly labelled fictional scenario. Map current steps, people, information, delays and incentives.
 
-1. Choose a domain and an evidence source. Ask AI to help prepare questions about recent behaviour.
-2. Collect or label the scenario evidence. Draw the current workflow and identify a missing requirement.
-3. Check the interpretation with a participant if available; otherwise record what remains an assumption.
+1. Choose a real-world process and where you could learn about it. Ask AI to help prepare questions about what people recently did.
+2. Collect observations or clearly label practice examples. Draw the current steps and name one requirement that the first request did not mention.
+3. Check your interpretation with a participant if one is available. Otherwise, write down which conclusions are still assumptions.
 
 ## Outcome checks
 

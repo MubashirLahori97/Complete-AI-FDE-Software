@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Compare two implementations or configurations of the AI feature against a non-AI or existing-process baseline where meaningful. Keep tuning and held-out cases distinct.
 
-1. Define expected outcomes and error costs before running; include normal, missing and adversarial cases.
-2. Ask AI to run the same cases for each approach with actual settings, usage and timing recorded.
-3. Investigate failures, calculate relevant rates and choose an approach with explicit limitations.
+1. Write the expected result for each test case before comparing approaches. Include ordinary cases, missing information and attempts to mislead the assistant. Decide which mistakes matter most.
+2. Ask AI to run the same cases through each approach. Record the actual settings, usage and time taken so the comparison can be repeated.
+3. Inspect failures and calculate the rates that matter to your users. Choose an approach and explain what the comparison still does not establish.
 
 ## Outcome checks
 

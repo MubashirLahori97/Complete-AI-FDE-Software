@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Write and trial acceptance cases for the planned stored confirmation workflow before implementing it further.
 
-Start here: Choose three important behaviours from the brief and define starting states and actions.
+Start here: Choose three important actions from your brief. Make a table with the starting state, the action and the result you expect.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

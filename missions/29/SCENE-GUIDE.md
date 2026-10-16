@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Transfer the independent solution to another operator and adapt one tool, provider or environment while preserving required outcomes.
 
-Start here: Prepare a current diagram, setup guide, configuration names, cost/ownership notes, data export and recovery runbook.
+Start here: Prepare a current system drawing and instructions for setup, setting names, costs, ownership, data export and recovery.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

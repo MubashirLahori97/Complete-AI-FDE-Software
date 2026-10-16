@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Compare two implementations or configurations of the AI feature against a non-AI or existing-process baseline where meaningful. Keep tuning and held-out cases distinct.
 
-Start here: Define expected outcomes and error costs before running; include normal, missing and adversarial cases.
+Start here: Write the expected result for each test case before comparing approaches. Include ordinary cases, missing information and attempts to mislead the assistant. Decide which mistakes matter most.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

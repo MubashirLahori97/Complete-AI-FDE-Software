@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Connect a test messaging service or a clearly labelled local provider double. Keep credentials server-side and demonstrate unavailable-provider behaviour. Record which external claims remain untested.
 
-1. Inspect the current provider contract, test mode, cost and permission requirements with AI.
-2. Delegate a small adapter with configuration checks, timeouts and appropriate retry identity.
-3. Exercise accepted, rejected and unavailable cases; distinguish local-double evidence from an actual test delivery.
+1. With AI, check what the reminder provider expects, how its test mode works, what it costs and which actions are allowed.
+2. Ask AI to build a small connection to the provider. Check required settings, limit how long it waits, and recognise retries of the same intended reminder.
+3. Try accepted, rejected and unavailable responses. Clearly distinguish a local simulated provider from an actual delivery in the provider's test mode.
 
 ## Outcome checks
 

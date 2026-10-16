@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Annotate the real service site, identify its actual stack, and ask AI to make one content, one style and one behaviour change.
 
-Start here: Inspect files and dependency configuration with AI. Name only technologies actually present.
+Start here: Ask AI to inspect your page's files and list the technologies it actually uses. Include any file that lists the project's libraries or packages.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

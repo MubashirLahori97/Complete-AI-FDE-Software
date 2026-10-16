@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Write and trial acceptance cases for the planned stored confirmation workflow before implementing it further.
 
-1. Choose three important behaviours from the brief and define starting states and actions.
-2. Write normal, boundary and failure expectations with unchanged-state requirements.
-3. Ask AI to challenge missing cases and trial them against the prototype, labelling unavailable backend checks as not yet run.
+1. Choose three important actions from your brief. Make a table with the starting state, the action and the result you expect.
+2. Include ordinary input, values at the allowed limits and failures. State what information should stay unchanged in each case.
+3. Ask AI to find missing cases, then try the checks against your working preview. Mark checks of an unavailable server or other unfinished part as not yet run.
 
 ## Outcome checks
 

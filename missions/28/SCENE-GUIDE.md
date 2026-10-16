@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Run an authorized pilot or clearly labelled scenario trial of the independent solution. Investigate adoption and a changed requirement, then improve and remeasure.
 
-Start here: Define the pilot participants, consent, outcome measure and guardrails.
+Start here: Plan a small trial with people who agree to take part. Decide what result to measure and which outcomes must not get worse.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

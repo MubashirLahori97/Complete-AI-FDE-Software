@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Use AI to implement or connect a small confirmation API for fictional visits. Trace one actual action and one failed request through the real stack.
 
-Start here: Reuse the acceptance matrix and ask AI for a minimal client/server contract and runnable setup.
+Start here: Give AI your expected-result table. Ask it to connect the browser and server, define the messages they exchange, and provide instructions to run both parts.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

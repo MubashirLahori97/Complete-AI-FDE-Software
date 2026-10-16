@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Persist fictional customers and visits with stable IDs, a relationship and explicit missing-data handling. Record where imported or entered information came from.
 
-Start here: Ask AI to design a small data model and explain constraints, query and storage choices.
+Start here: Ask AI what information each appointment needs, which values must be unique or valid, how records can be looked up, and where they should be stored.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

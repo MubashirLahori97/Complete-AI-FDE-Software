@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Persist fictional customers and visits with stable IDs, a relationship and explicit missing-data handling. Record where imported or entered information came from.
 
-1. Ask AI to design a small data model and explain constraints, query and storage choices.
-2. Store two customers with the same name and visits attached to the correct IDs.
-3. Restart using the documented setup, query the records, and investigate a missing or questionable source value.
+1. Ask AI what information each appointment needs, which values must be unique or valid, how records can be looked up, and where they should be stored.
+2. Save two fictional customers with the same name. Give them different identifiers and attach each visit to the correct customer.
+3. Restart using the project's instructions and look up the records again. Investigate any missing information or a value whose source you cannot support.
 
 ## Outcome checks
 

@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Give a capable AI a meaningful change to the visit application. Let it plan, implement, test and diagnose within explicit boundaries.
 
-Start here: Choose a change and supply the actual system context, outcome, constraints, authority, budget and stopping rules.
+Start here: Choose one change. Give AI the current system, desired result, limits, allowed actions, budget and conditions that mean it must stop.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

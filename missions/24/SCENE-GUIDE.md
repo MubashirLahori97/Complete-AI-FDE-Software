@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Identify one actual bottleneck in the growing workflow, compare an appropriate improvement and report correctness, cost and measurement limits.
 
-Start here: Define representative load, latency/throughput measures and a correctness guardrail.
+Start here: Choose work that resembles real use. Decide how to measure waiting time and work completed, and state what must remain correct.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

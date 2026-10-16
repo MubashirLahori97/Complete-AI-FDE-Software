@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Improve the mission-1 site using one observed confusion, two acceptance criteria and one preservation constraint.
 
-Start here: Observe a real person with consent, or clearly label your own walkthrough as a scenario. Name one confusion.
+Start here: Ask permission to watch someone try your page, or clearly label your own walkthrough as a practice scenario. Name one thing that confused the visitor.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

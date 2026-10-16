@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Use capable AI to deliver the mission-26 brief. Choose suitable technologies, implement the useful workflow and maintain an accurate explanation throughout.
 
-Start here: Supply AI the domain evidence, acceptance matrix, authority and budget; let it plan appropriate work.
+Start here: Give AI the evidence, expected-result table, allowed actions and budget for your independent project. Ask for a plan that fits those limits.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

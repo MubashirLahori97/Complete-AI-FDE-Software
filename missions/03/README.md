@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Annotate the real service site, identify its actual stack, and ask AI to make one content, one style and one behaviour change.
 
-1. Inspect files and dependency configuration with AI. Name only technologies actually present.
-2. Make the three changes one at a time and observe each effect.
-3. Create an annotated screenshot and component/technology map; include how this project starts or builds.
+1. Ask AI to inspect your page's files and list the technologies it actually uses. Include any file that lists the project's libraries or packages.
+2. Change the page's words, appearance and button action separately. Observe what changes and what stays the same each time.
+3. Label a screenshot and draw a map showing which files or tools control each part. Include the instructions used to start or build your page.
 
 ## Outcome checks
 

@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Transfer the independent solution to another operator and adapt one tool, provider or environment while preserving required outcomes.
 
-1. Prepare a current diagram, setup guide, configuration names, cost/ownership notes, data export and recovery runbook.
-2. Observe a new operator or labelled fresh-context trial and repair instruction gaps.
-3. Use an unfamiliar or replacement tool for a meaningful component; rerun relevant contract, quality and user-journey checks.
+1. Prepare a current system drawing and instructions for setup, setting names, costs, ownership, data export and recovery.
+2. Ask a new operator to try the instructions and record where they get stuck. If this is a simulated fresh-start trial, label it that way. Improve the instructions from the observations.
+3. Replace one meaningful part with an unfamiliar tool. Check that its messages and results still fit the other parts, then repeat quality checks and the relevant user journey.
 
 ## Outcome checks
 

@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Compare at least two plausible ways to deliver the brief, including an existing tool or configuration option. Choose a small reversible trial.
 
-1. List required capabilities, data ownership and local access constraints.
-2. Ask AI to research current options and verify consequential claims at their sources; estimate setup and ongoing cost.
-3. Record the choice, alternative, boundary diagram and conditions that would change the decision.
+1. List what your project must do, who controls its data and what access is available in your setting.
+2. Ask AI to compare current options. Check important claims against their sources and estimate both setup cost and ongoing cost over the same period.
+3. Record your choice, one alternative and a drawing of which parts connect. Explain what new information would make you choose differently.
 
 ## Outcome checks
 

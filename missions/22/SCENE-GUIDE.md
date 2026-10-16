@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Release the product to a suitable test or authorized public environment with identified source, configuration and a recovery procedure.
 
-Start here: Ask AI to inspect the current stack, prepare reproducible build/release instructions and name required configuration without secrets.
+Start here: Ask AI to inspect the tools your project uses and write repeatable build and release instructions. List required setting names while keeping secret values private.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 

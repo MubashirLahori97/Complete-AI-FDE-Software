@@ -56,9 +56,9 @@ Authored example; your project requires its own observations.
 
 Connect the note assistant to a small versioned policy collection or a bounded visit tool. Explain the chosen retrieval or tool mechanism and test unsupported and unauthorized cases.
 
-1. Define the allowed sources or actions and a safe unknown/refusal result.
-2. Ask AI to implement a replaceable retrieval/tool adapter with source versions and trusted validation.
-3. Test a supported answer, missing or stale evidence, and an untrusted instruction attempting an unauthorized action.
+1. Choose which sources the assistant may read and which actions it may take. Write what it should say when information or permission is missing.
+2. Ask AI to build a replaceable connection to those sources or actions. Record which source version was used and keep trusted checks separate from returned text.
+3. Try a supported answer, a missing or outdated source, and a document that asks for an action the assistant is not allowed to take. Check the actual outcomes.
 
 ## Outcome checks
 

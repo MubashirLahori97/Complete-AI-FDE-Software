@@ -34,7 +34,7 @@ The illustration is a teaching view, not measured execution or real customer/pro
 
 Connect the note assistant to a small versioned policy collection or a bounded visit tool. Explain the chosen retrieval or tool mechanism and test unsupported and unauthorized cases.
 
-Start here: Define the allowed sources or actions and a safe unknown/refusal result.
+Start here: Choose which sources the assistant may read and which actions it may take. Write what it should say when information or permission is missing.
 
 Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
 
