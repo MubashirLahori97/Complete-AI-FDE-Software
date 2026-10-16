@@ -83,6 +83,12 @@ describe('30 change-and-see lesson experiments', () => {
 });
 
 describe('saved experiments and backups', () => {
+  it('starts quietly and only restores an explicit sound preference', () => {
+    expect(emptyProgress().soundEnabled).toBe(false);
+    expect(parseProgress({ version: 1 }).soundEnabled).toBe(false);
+    expect(parseProgress({ version: 1, soundEnabled: 'true' }).soundEnabled).toBe(false);
+    expect(parseProgress({ version: 1, soundEnabled: true }).soundEnabled).toBe(true);
+  });
   it('round-trips all experiments without awarding achievements or completing projects', () => {
     const progress = emptyProgress();
     for (const e of experiments)

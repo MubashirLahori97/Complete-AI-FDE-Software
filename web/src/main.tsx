@@ -11,6 +11,9 @@ import './project-styles.css';
 import './learning-flow.css';
 import './amina-lesson.css';
 import './alive.css';
+import './studio.css';
+import './mission.css';
+import './academy-journey.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

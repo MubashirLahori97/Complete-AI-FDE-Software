@@ -1,20 +1,40 @@
-# 🚀 90 Days: Zero to Feature-Ready Software Engineer
+# FDE Academy — Software and AI Engineering
 
-![90 days](https://img.shields.io/badge/90-days-blue) ![price](https://img.shields.io/badge/price-free-brightgreen) ![license](https://img.shields.io/badge/license-MIT-yellow) ![level](https://img.shields.io/badge/level-absolute%20beginner-orange)
+![path](https://img.shields.io/badge/path-competency%20based-blue) ![price](https://img.shields.io/badge/price-free-brightgreen) ![license](https://img.shields.io/badge/license-MIT-yellow) ![level](https://img.shields.io/badge/level-absolute%20beginner-orange)
 
-![From zero to feature-ready software engineer in 90 days](images/hero-banner.svg)
+**Designed for learners starting in 2028 or 2029.** Master software and AI concepts, direct capable AI systems, and deliver useful products. AI can produce all implementation code; the learner demonstrates understanding and successful outcomes. Read [the accepted roadmap and thirty missions](ROADMAP.md). The app now implements this sequence, with separate product and understanding records. Beginner pilots, pacing and practitioner calibration remain to be measured.
+
+Read the [2030 research and scenarios](RESEARCH-2030.md) for the evidence behind this direction and the additional preparation needed for changing work, stronger automation, and everyday life with AI.
 
 ## Interactive FDE Academy
 
-Start with a one-minute challenge, explore the open mission map, and collect discovery cards as you solve lesson challenges. The [engagement design](ENGAGING-LEARNING.md) explains how feedback, learning XP, review practice, and the companion support the curriculum.
+Choose **Start mission 1**. Build a useful service website with AI, understand its actual technologies, then grow towards connected systems and an independent domain project.
 
-The app opens in **FDE Academy**, with its original dashboard, 30-day curriculum, practice lab, field scenarios, and portfolio. Each day's lesson has Learn, Practise, Project, and Record your build activities. Start with the lesson, practise the idea, build its project, and save your results.
+The default core has **six stages and thirty missions**. Each mission contains a concrete problem, concept explanations, a worked example, an immediate interactive simulation, an AI-directed project, outcome checks and separate understanding prompts. Manual coding is optional. AI can plan, implement, test, diagnose and help review throughout.
 
-Every core lesson begins with a small interactive experiment: change an input or rule and see the result immediately. A clear first mission, live explanation, optional rule reveal, and reset make it easy to explore before reading the worked example. Your changes save on this device. Each lesson still includes its own project.
+The [interactive learning studio](INTERACTIVE-STUDIO.md) lets you edit inputs and inspect calculated consequences in every core mission. Try the real page in Mission 1, then explore system roles in 3D or an equivalent flat diagram. Experiments and notes resume in your browser; every project kit includes its own experiment guide.
 
-**New learner? Choose Start Lesson 1.** Every lesson now starts with one idea in simple English, a worked example, and one small task with explained feedback and two hints. Each project has a clear first action and three milestones. Continue learning remembers your last unfinished lesson and activity. Read [how the learning experience works](LEARNING-EXPERIENCE.md), including a flexible two-hour study session.
+All thirty missions now lead with a real page or concept-specific visual evidence: receipts, record cards, cost curves, request steps, permission gates, structured-output checks, trace timelines, cache routes and composable capabilities. Diagram actions update the same saved experiment controls. See [the coverage map and verification boundaries](LESSON-VISUALS.md).
 
-Every day has a [dedicated project](PROJECTS.md) with a brief, milestones, acceptance checks, tests, and a downloadable starter kit. Amina's shop examples are optional teaching experiments under Resources. They do not replace the main curriculum; their [guide](GUIDED-COURSE.md) and [shop workspace](guided-projects/shop-workspace/README.md) remain available separately.
+Each lesson also has a short situation, two guided comparisons that change one control, reversible input edits and a worked example revealed one moment at a time. See [the learning flow](LEARNING-PACING.md). All thirty project kits include both comparison guides.
+
+In **Mission 18 → Understand**, [teach a small model](NEURAL-LEARNING.md): move an input, change a connection, run real training updates and check separate examples. The live map, connection diagram and loss curve show the same calculation. Its guide and model source travel in Mission 18's kit.
+
+In **Mission 1 → Understand**, [keep learning with the page you changed](PAGE-UNDERSTANDING.md): hide an information line, change colour independently, then explore content, appearance and actual click behaviour. These controls share saved values with Explore and lead into the existing project. The guide is included in Mission 1's kit.
+
+In **Mission 4 → Understand**, [follow the estimator's logic](LOGIC-UNDERSTANDING.md): compare blank with zero, inspect the checks that actually run, then separate editing input from calling a function and remembering its result. The guide and model source travel in Mission 4's kit.
+
+All **30 core lessons** now share the [illustrated scene experience](ALL-LESSON-SCENES.md): dark teal stages, warm gold actions, immediate visual consequences and a direct route to each lesson's actual project. Two browser-page scenes, the repair visit and twenty-seven model-specific illustrations teach different ideas. Every kit includes its own scene guide.
+
+In **Mission 26 → Explore**, [get a repair visit moving](ACCESS-JOURNEY.md): try a faster preparation time, see the van remain at its workshop, then change the access prerequisite. The finite illustrated sequence supports pause/replay and reduced motion, using the same saved workflow model.
+
+The [illustrated academy journey](ACADEMY-DESIGN.md) connects the homepage, six chapters and core lessons. Edit a real page before starting, carry that heading into Mission 1, and see the experiment and project behind each mission. The reservation and AI evaluation lessons also expose individual operations and cases behind their totals.
+
+Every project requires an eight-part system explanation: purpose, actual stack, component roles, choices, execution, action flow, information/access/AI, and changes/failures. A reviewer checks explanations, predictions and fresh scenarios rather than accepting generated prose alone.
+
+Read [the core learning flow](MISSION-COURSE.md), [all thirty mission guides and reuse map](MISSION-MAP.md), and [the research and scenarios](RESEARCH-2030.md). The first five kits contain a runnable static example; every mission has its own project brief and evidence kit. Simulations and fixtures are labelled and cannot establish live AI quality or real customer benefit.
+
+The [original coding workshops and projects](PROJECTS.md), practice lab, field scenarios, portfolio and saved records remain available. Amina's [guided examples](GUIDED-COURSE.md) and [shop workspace](guided-projects/shop-workspace/README.md) remain optional resources. Old progress does not complete new missions.
 
 ```bash
 cd web
@@ -22,15 +42,15 @@ npm ci
 npm run dev
 ```
 
-Read the [app setup and publishing guide](web/README.md) to run it or publish it with GitHub Pages. The course is a practice path: day numbers are suggested stages, and completion does not guarantee employment, earnings, or professional mastery.
+Read the [app setup and publishing guide](web/README.md). Thirty missions define a sequence, not thirty days of guaranteed readiness. Passing app checks does not establish learning outcomes, employment or equivalence to years of experience.
 
 ---
 
-**AI can help write code. You still need to understand, test, debug, secure, and explain the result.**
+**Concepts are compulsory. AI can perform all implementation.** Understand what the system does, why its parts work together, and how to establish that it meets the user's needs.
 
-**The aim:** build software and AI engineering skills through tested projects and customer work. Lesson numbers describe an order, not a deadline. A beginner may need several sessions for a lesson and more time for its project.
+**The aim:** develop conceptual understanding and the ability to deliver through AI. Practise problem definition, delegation, evaluation, diagnosis, and improvement with AI available throughout. Lesson numbers describe an order, not a deadline.
 
-**Readiness evidence:** a reviewer can reproduce your work, test an unseen change, and hear you explain decisions. Completion alone does not guarantee a job, income, or mastery. Use the final skill review to choose further practice.
+**Readiness evidence:** explain what you are building, identify its actual technologies and their roles, describe why they were chosen, and trace how the system works from a user action to the result. Every project includes this explanation. A reviewer checks conceptual understanding through a walkthrough and changed scenarios, alongside useful behaviour demonstrated with AI. Completion alone does not guarantee employment or income.
 
 > 📖 **New here? Read [THE VISION](VISION.md) first.** Two minutes. It's the reason this repo exists — and the reason you'll finish it.
 
@@ -38,54 +58,46 @@ Read the [app setup and publishing guide](web/README.md) to run it or publish it
 
 ## The transformation
 
-| Day 1 | Day 30 | Day 90 |
+| Starting out | Foundation practice | Evidence of readiness |
 |---|---|---|
-| "I've never written code." | "I ship AI software." | "I'm a software engineer. Here's the proof." |
-| Watches tutorials, learns fragments | Owns concepts 100%, explains them in plain words | Reasons about systems, defends designs out loud |
-| Afraid of errors | Reads tracebacks like a map | Debugs production, reads any codebase |
-| "AI is magic" | Directs AI, evaluates its output, stands behind it | Ships tested, deployed, secure products |
-| No proof of skill | 3 deployed projects + 1 capstone, live URLs | Real users, paying clients, interviews in motion |
-| Can't charge for anything | Can walk into a business, scope a problem, fix it, name a price | Has contracts, testimonials, and a salary number |
+| Learning the first concepts | Builds with AI and explains the major parts | Applies the concepts to an unfamiliar request |
+| Needs worked examples | Predicts behaviour and investigates with AI | Directs changes and explains the resulting evidence |
+| Learning what AI can do | Delegates implementation and evaluates results | Uses stronger tools to solve more demanding problems |
+| No delivery evidence yet | Records products, decisions, and observations | Shows useful outcomes, feedback, and successful maintenance |
 
-This isn't a course. It's a **90-day transformation with a public record** — your commit history is the proof.
+Progress combines conceptual explanations, predictions, decisions, working products, and observed results. AI can perform the technical work throughout; a reviewer assesses the learner's understanding and ability to deliver.
 
 ---
 
 ## Your journey
 
-![Your 90-day journey: from zero to feature-ready](images/roadmap.svg)
+**The existing 30 workshops are reusable learning material.** [MISSION-MAP.md](MISSION-MAP.md) records their mapping into the implemented core. Day numbers below describe the optional original order.
 
-**Part 1 — Days 1–30: the sprint.** 60–90 minutes a day. Zero to earning from AI software. (The original 30-day map lives in the tracker below.)
-
-**Part 2 — Days 31–90: the roadmap.** 3–5 hours a day. Earning to undeniable — deep engineering, real products, interviews, getting hired.
-
-One continuous plan: every phase names the exact days it builds on — nothing repeats, everything levels up. Day 30 hands you directly to Phase 2.
+**The six core stages:** build with AI → understand and design the problem → understand the complete system → direct AI work at scale → establish quality and operate → deliver value. Every stage includes compulsory concepts. The [roadmap](ROADMAP.md) lists all thirty missions and their evidence; pilots will establish realistic pacing.
 
 ## How it works
 
-**⏱ 60–90 minutes a day. 1 day = 1 concept + 1 build + 1 business lens.**
+**Use a sustainable study session.** Understand an idea, predict an outcome, direct AI work, and explain what the result shows. Deeper concepts and projects require repeated sessions.
 
-**Part 2 (days 31–90) runs hotter: 3–5 hours a day.** Three months is a sprint, and the plan is honest about what that takes. At one hour a day, this is a 6-month plan — the roadmap says so out loud.
-
-1. **Learn the concept** — one idea, owned 100%. Short lesson + one curated link. Not ten links. One.
-2. **Specify it to AI** — you write the specification; AI writes the first draft. Precise specs are now a core engineering skill.
-3. **Evaluate like an engineer** — read the AI's code, test it, break it, fix it. *Never ship output you can't explain or defend.*
-4. **Business lens** — who pays for this? What does it cost? What breaks in production?
-5. **Commit & tick the box** — push your work, then tick the day below. Watch the list fill. Don't break the chain.
+1. **Understand the concept** — use an example, diagram, or experiment; explain it and predict a variation.
+2. **Define the outcome** — describe the user, required behaviour, constraints, and what success looks like.
+3. **Direct AI** — let it research, plan, implement, test, or diagnose with appropriate context and authority.
+4. **Establish the result** — compare observations with the requirement and direct improvements where needed.
+5. **Explain and record** — describe the important concepts, decisions, evidence, and remaining gaps.
 
 ![The daily loop: learn, specify, evaluate, business lens, commit](images/daily-loop.svg)
 
 ### The 3 rules
 
-1. **Concepts 100%, or it doesn't count.** If you can't explain it in plain words, redo the day.
-2. **The AI is your junior developer** — fast, confident, sometimes wrong. You are the senior.
-3. **A day isn't done until something runs.** Reading doesn't count. Running, tested, committed code counts.
+1. **Demonstrate understanding.** Explain the behaviour and solve a different version with less help.
+2. **Use AI fully and thoughtfully.** Delegate implementation, understand its role, and establish the required result.
+3. **Build evidence over time.** Running code, meaningful tests, feedback, and maintenance all contribute.
 
 ---
 
-## 🗺️ The 30 days — your progress tracker
+## Optional original workshops — your practice tracker
 
-Fork this repo, then tick each day as you conquer it.
+The core path is indexed in [MISSION-MAP.md](MISSION-MAP.md). The original workshops below retain implementation exercises and their historical schedules; those manual-coding and line-by-line requirements do not apply to core graduation.
 
 **Week 1 — Think like a programmer** *("the concepts underneath every program ever written")*
 - [ ] [Day 01](01_Day_Setup_Learn_With_AI/) — Your toolchain + what a program IS
@@ -129,15 +141,15 @@ Fork this repo, then tick each day as you conquer it.
 
 ---
 
-## 🗺️ Finished day 30? The road continues — days 31–90
+## Continue beyond the initial lessons
 
-**From "I ship AI software" to "I'm a complete, hire-ready software engineer" — in 60 more days.** Three dense phases, week by week: deep engineering, real products with real users, interviews, clients, and getting hired. Lower-leverage topics cut on purpose; everything left is load-bearing.
+Follow the [proposed roadmap](ROADMAP.md) for the complete concept foundation and thirty missions in AI-led delivery. The original extension outlines below are reusable source material; their compressed schedules and any compulsory manual implementation expectations are superseded by the new direction.
 
 - [ ] [Phase 2 — Build Like an Engineer (Days 31–50 · Weeks 5–7)](31_Phase2_Build_Like_An_Engineer/) — Databases, APIs done right, testing, git like a team
 - [ ] [Phase 3 — Ship Real Products (Days 51–70 · Weeks 8–10)](32_Phase3_Ship_Real_Products/) — Real users, payments, pro deploys, security, open-source PR
 - [ ] [Phase 4 — Get Paid & Get Hired (Days 71–90 · Weeks 11–13)](33_Phase4_Get_Paid_Get_Hired/) — Interview-proof core, paid engagement, the job-hunt funnel
 
-📖 **[Full roadmap: what "feature-ready" means and the 90-day map →](ROADMAP.md)**
+📖 **[Full roadmap: competencies, assessments, and relevance for 2028–2029 →](ROADMAP.md)**
 
 ---
 
@@ -163,7 +175,7 @@ Fork this repo, then tick each day as you conquer it.
 <details>
 <summary>Reveal answer</summary>
 
-Evaluate: read it, test the edges, try to break it, and make sure you can explain every part. AI writes the draft — you stand behind it. That's the whole repo in one sentence.
+Establish that it does what was requested. Ask AI to help test the relevant behaviour, inspect the observed results, and explain the important concepts and decisions. Use a changed scenario to check your understanding.
 </details>
 
 <br>
@@ -184,15 +196,15 @@ Not code — questions. What problem? Who has it? What does it cost them today? 
 
 The person who shows up where the problem lives. Not generating code in isolation — understanding a client's problem, designing the right system, directing AI to build it, verifying it works, deploying it, standing behind it. **Judgment + engineering + business.**
 
-## Tools (all free)
+## Tools
 
-Python 3.11+, VS Code, Git + GitHub, one AI coding assistant (Claude Code / ChatGPT / Cursor / Copilot), one LLM API key with free credits, Streamlit Cloud / Render free tier. Day 1 sets it all up.
+The current course uses Python, Git, an editor, web tools, and AI examples. Check each lesson's setup for supported versions and practice modes. Live models and hosting may incur costs. The proposed curriculum keeps provider and setup instructions replaceable so future learners can use supported tools.
 
 ## Repos that inspired this
 
 [Asabeneh/30-Days-Of-Python](https://github.com/Asabeneh/30-Days-Of-Python) · [Asabeneh/30-Days-Of-JavaScript](https://github.com/Asabeneh/30-Days-Of-JavaScript) · [razaqfatiu/30days-of-GenAI](https://github.com/razaqfatiu/30days-of-GenAI) · [najmal-ibrahim/30-days-of-ai](https://github.com/najmal-ibrahim/30-days-of-ai) · [abhishekyadav2000/ai-engineering-from-scratch](https://github.com/abhishekyadav2000/ai-engineering-from-scratch) · [microsoft/AI-For-Beginners](https://github.com/microsoft/AI-For-Beginners)
 
-What this repo adds: **concepts-first in the AI era, engineering judgment over typing, business from day one** — for people who will direct AI, not compete with it.
+What this repo develops: conceptual understanding, effective AI direction, and the ability to connect software to users' needs.
 
 ## Contributing
 

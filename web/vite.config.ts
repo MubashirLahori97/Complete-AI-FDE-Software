@@ -5,5 +5,5 @@ export default defineConfig({
   plugins: [react()],
   base: process.env.BASE_PATH || './',
   server: { fs: { allow: ['..'] } },
-  test: { include: ['src/**/*.test.ts'] },
+  test: { include: ['src/**/*.test.ts', 'scripts/**/*.test.mjs'] },
 });

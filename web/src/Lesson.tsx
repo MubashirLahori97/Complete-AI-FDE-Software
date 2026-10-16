@@ -192,7 +192,10 @@ export default function Lesson({
         <MissionMeter day={day} progress={progress} />
         <XPChip progress={progress} />
       </div>
-      <section className="lesson-start" aria-label="Today's goal">
+      <section
+        className={`lesson-start ${tab === 'learn' ? 'studio-lesson-start' : ''}`}
+        aria-label="Today's goal"
+      >
         <p className="eyebrow">ONE LESSON, ONE USEFUL RESULT</p>
         <p>
           <strong>{dailyProject.title}</strong>
@@ -234,7 +237,7 @@ export default function Lesson({
           )}
         </div>
       </section>
-      <div className="lesson-layout">
+      <div className={`lesson-layout ${tab === 'learn' ? 'studio-lesson-layout' : ''}`}>
         <div className="lesson-content">
           <div className="tabs" role="tablist" aria-label="Lesson activities">
             {[

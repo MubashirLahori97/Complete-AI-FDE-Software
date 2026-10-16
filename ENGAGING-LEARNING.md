@@ -1,6 +1,10 @@
-# A more inviting FDE Academy
+# The preserved workshop learning experience
+
+The concepts + AI core now opens by default; see [MISSION-COURSE.md](MISSION-COURSE.md). The interactions described below are preserved in the optional original workshop collection at `#/workshops` and `#/lesson/1`–`#/lesson/30`. They do not define compulsory core coding requirements.
 
 The curriculum, projects, source examples, portfolio, and existing progress remain in place. This pass changes the experience of starting, making a discovery, and returning.
+
+The visual workspace now uses an ink-and-violet palette with warm accent colours, an illustrated shop that responds to the ticket challenge, and browser-like preview windows in every lesson. The homepage reveals the prediction after the first action; a correct prediction visibly resolves three tickets. Secondary statistics are collapsed until requested. Lesson experiments lead the reading flow and offer a direct next step into the worked example. Short character reactions accompany meaningful state changes, and reduced-motion preferences disable those animations. Optional quiet sound feedback starts off, requires an explicit opt-in, and can be switched off from either a lesson or the homepage. The preference is included in progress backups. These changes aim to make the experience clearer and more inviting; they do not establish a particular emotional response or improved learning outcomes.
 
 - **Start by doing:** a homepage ticket-counter challenge changes visible state before asking for a prediction. Learners receive specific feedback and can retry.
 - **Learn by changing something:** each of the 30 core lessons starts with a distinct one-minute experiment. Change a name, quantity, rule, response fixture, budget, permission, or workflow connection; the output and explanation update immediately. A small mission gives the learner a first action. The rule behind the result is available on demand, followed by the existing explanation, worked example, practice, and daily project.

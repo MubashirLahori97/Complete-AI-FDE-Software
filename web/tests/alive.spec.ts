@@ -21,9 +21,11 @@ test('older saved answers do not claim a discovery before it is earned', async (
 test('the homepage challenge responds to actions, teaches a mistake, and awards once', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#/workshops');
   const challenge = page.getByRole('region', { name: 'One-minute challenge' });
-  await expect(challenge.getByRole('button', { name: '9', exact: true })).toBeDisabled();
+  await expect(
+    challenge.getByRole('group', { name: 'Challenge answers', exact: true }),
+  ).toHaveCount(0);
   await challenge.getByRole('button', { name: 'Receive 2 tickets', exact: true }).click();
   await expect(challenge.locator('.ticket-counter > strong')).toHaveText('12');
   await challenge.getByRole('button', { name: '12', exact: true }).click();
@@ -82,11 +84,11 @@ test('a lesson discovery creates a real collection card, survives wrong retries,
 });
 
 test('all 30 missions stay open and both journey views remain usable', async ({ page }) => {
-  await page.goto('/#/curriculum');
+  await page.goto('/#/workshop-path');
   await expect(page.locator('.mission-node')).toHaveCount(30);
   await page.locator('.mission-node').last().click();
   await expect(page).toHaveURL(/#\/lesson\/30$/);
-  await page.goto('/#/curriculum');
+  await page.goto('/#/workshop-path');
   await page.getByRole('button', { name: 'Lesson list', exact: true }).click();
   await expect(page.locator('.lesson-row')).toHaveCount(30);
   await expect(page.locator('.mission-node')).toHaveCount(0);
@@ -98,15 +100,15 @@ test('playful screens fit phones and respect reduced motion', async ({ page }) =
   for (const width of [320, 375, 768, 1440]) {
     await page.setViewportSize({ width, height: width <= 375 ? 812 : 900 });
     for (const route of [
-      '/',
-      '/curriculum',
+      '/workshops',
+      '/workshop-path',
       '/lesson/1?tab=learn',
       '/lesson/24?tab=project',
       '/portfolio',
     ]) {
       await page.goto('/#' + route);
       await expect(page.locator('main h1')).toBeVisible();
-      if (route === '/')
+      if (route === '/workshops')
         await expect(
           page.getByRole('button', { name: 'Receive 2 tickets', exact: true }),
         ).toBeInViewport({ ratio: 1 });
@@ -116,7 +118,7 @@ test('playful screens fit phones and respect reduced motion', async ({ page }) =
       ).toBe(true);
     }
   }
-  await page.goto('/');
+  await page.goto('/#/workshops');
   await page.getByRole('button', { name: 'Receive 2 tickets', exact: true }).click();
   await page.getByRole('button', { name: '9', exact: true }).click();
   expect(

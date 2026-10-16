@@ -1,6 +1,6 @@
 # The complete guided course
 
-This document records the optional Amina teaching experiment. The current product direction preserves FDE Academy's original context, curriculum, navigation, and daily lesson/project flow. Amina examples remain separate optional resources. They must not replace the main academy or its homepage.
+This document records the optional Amina teaching experiment. The current core follows [MISSION-COURSE.md](MISSION-COURSE.md) and the accepted roadmap. The original workshops remain optional and retain their own exercise rules. Amina examples remain separate optional resources. They must not replace the main academy or its homepage.
 
 ## Teaching and product requirements
 

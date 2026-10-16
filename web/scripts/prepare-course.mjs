@@ -4,3 +4,4 @@ await readCourse();
 await import('./package-projects.mjs');
 await import('./pack-course.mjs');
 await import('./pack-runtime.mjs');
+await import('./pack-missions.mjs');

@@ -2,6 +2,7 @@ import { ArrowRight, Download, FolderGit2, Link as LinkIcon, CheckCircle2 } from
 import { projectDefinitions, dailyProjects } from './data';
 import { downloadFile, emptyEvidence, safeUrl, type Progress, type ProjectEvidence } from './state';
 import { Checkbox, PageHeading, ProgressBar } from './ui';
+import { MissionPortfolio } from './MissionPages';
 
 export default function Portfolio({
   progress,
@@ -36,6 +37,8 @@ export default function Portfolio({
           </button>
         }
       />
+      <MissionPortfolio progress={progress} />
+      <h2>Optional implementation portfolio</h2>
       <div className="portfolio-intro">
         <FolderGit2 size={24} />
         <div>

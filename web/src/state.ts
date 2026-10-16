@@ -1,5 +1,9 @@
 import { lessons, projectDefinitions, dailyProjects } from './data';
 import { experimentValues, type ExperimentValues } from './experiments';
+import { missions, newMissionRecord, canRecordMission } from './missions';
+import { systemQuestions, reasoningLabels, type MissionRecord } from './mission-types';
+import { labSpecs, labValues, type LabRecord } from './mission-labs';
+import { parseNeuronSnapshot, type NeuronSnapshot } from './neuron-model';
 
 export const STORAGE_KEY = 'fde-academy-v1';
 export const lessonActivities = ['learn', 'practice', 'project', 'build'] as const;
@@ -22,6 +26,7 @@ export interface Progress {
   conceptWins: Record<string, string>;
   reviewWins: Record<string, string>;
   warmupSolved: boolean;
+  soundEnabled: boolean;
   completed: Record<string, string>;
   quizPassed: number[];
   notes: Record<string, string>;
@@ -31,6 +36,10 @@ export interface Progress {
   projects: Record<string, ProjectEvidence>;
   phaseTasks: Record<string, boolean[]>;
   scenarios: Record<string, { score: number; date: string }>;
+  lastMission: number;
+  missions: Record<string, MissionRecord>;
+  missionLabs: Record<string, LabRecord>;
+  neuronSnapshot: NeuronSnapshot | null;
 }
 
 export const emptyProgress = (): Progress => ({
@@ -45,6 +54,7 @@ export const emptyProgress = (): Progress => ({
   conceptWins: {},
   reviewWins: {},
   warmupSolved: false,
+  soundEnabled: false,
   completed: {},
   quizPassed: [],
   notes: {},
@@ -54,6 +64,10 @@ export const emptyProgress = (): Progress => ({
   projects: {},
   phaseTasks: {},
   scenarios: {},
+  lastMission: 1,
+  missions: {},
+  missionLabs: {},
+  neuronSnapshot: null,
 });
 export const localDate = (date = new Date()): string =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -93,7 +107,62 @@ export function parseProgress(value: unknown): Progress {
   if (!isRecord(value) || value.version !== 1)
     throw new Error('This is not a supported FDE Academy backup.');
   const result = emptyProgress();
+  result.neuronSnapshot = parseNeuronSnapshot(value.neuronSnapshot);
+  for (const lab of labSpecs) {
+    const raw = isRecord(value.missionLabs) ? value.missionLabs[lab.id] : undefined;
+    if (isRecord(raw))
+      result.missionLabs[lab.id] = {
+        values: labValues(lab.id, raw.values),
+        note: text(raw.note, 3000),
+      };
+  }
   result.warmupSolved = value.warmupSolved === true;
+  result.soundEnabled = value.soundEnabled === true;
+  result.lastMission =
+    Number.isInteger(value.lastMission) &&
+    Number(value.lastMission) >= 1 &&
+    Number(value.lastMission) <= 30
+      ? Number(value.lastMission)
+      : 1;
+  for (const mission of missions) {
+    const raw = isRecord(value.missions) ? value.missions[mission.id] : undefined;
+    if (!isRecord(raw)) continue;
+    const record = newMissionRecord();
+    record.step =
+      Number.isInteger(raw.step) && Number(raw.step) >= 0 && Number(raw.step) <= 4
+        ? Number(raw.step)
+        : 0;
+    record.option =
+      Number.isInteger(raw.option) &&
+      Number(raw.option) >= 0 &&
+      Number(raw.option) < mission.experiment.options.length
+        ? Number(raw.option)
+        : 0;
+    record.variation = raw.variation === 1 ? 1 : 0;
+    record.explanationStep =
+      Number.isInteger(raw.explanationStep) &&
+      Number(raw.explanationStep) >= 0 &&
+      Number(raw.explanationStep) <= 12
+        ? Number(raw.explanationStep)
+        : 0;
+    record.prediction = text(raw.prediction, 3000);
+    record.artifact = text(raw.artifact, 2000);
+    record.observation = text(raw.observation, 5000);
+    record.reviewer = text(raw.reviewer, 200);
+    record.review = text(raw.review, 5000);
+    record.checks = flags(raw.checks, mission.project.checks.length);
+    for (const [key] of systemQuestions)
+      record.system[key] = isRecord(raw.system) ? text(raw.system[key], 3000) : '';
+    for (const key of Object.keys(reasoningLabels) as (keyof typeof reasoningLabels)[])
+      record.reasoning[key] = isRecord(raw.reasoning) ? text(raw.reasoning[key], 3000) : '';
+    record.verdict =
+      raw.verdict === 'demonstrated' || raw.verdict === 'revisit' ? raw.verdict : 'unreviewed';
+    // These are learner-owned review records, never authenticated qualifications.
+    if (record.reviewer.trim().length < 2 || record.review.trim().length < 30)
+      record.verdict = 'unreviewed';
+    record.recorded = raw.recorded === true && canRecordMission(mission, record);
+    result.missions[mission.id] = record;
+  }
   result.name = text(value.name, 50);
   result.minutes = [30, 60, 90, 120].includes(Number(value.minutes)) ? Number(value.minutes) : 120;
   result.lastLesson =
