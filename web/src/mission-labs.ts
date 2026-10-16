@@ -99,15 +99,17 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
   switch (id) {
     case 1:
       return result(
-        s('heading').trim() || 'A heading is still missing',
-        'The live page displays your heading. The browser is doing this work locally; an AI service does not participate in this change.',
+        (s('heading').trim() || 'A heading is still missing') +
+          (!b('showArea') ? ' · area line hidden' : '') +
+          (!b('rule') ? ' · click rule absent' : ''),
+        `The live page displays your heading. Its dedicated service-area line is ${b('showArea') ? 'shown' : 'hidden'} and its contact rule is ${b('rule') ? 'present' : 'absent'}. Colour changes appearance, not those inputs. The browser does this locally, with no AI service call.`,
         [
           'A visitor opens the page',
           'Files are already in this browser',
           s('heading').trim() || 'No useful heading yet',
         ],
         {
-          tone: s('heading') === 'Welcome.' ? 'careful' : 'ready',
+          tone: s('heading') === 'Welcome.' || !b('showArea') || !b('rule') ? 'careful' : 'ready',
           facts: [fact('Heading characters', s('heading').length), fact('Live AI calls', 0)],
         },
       );

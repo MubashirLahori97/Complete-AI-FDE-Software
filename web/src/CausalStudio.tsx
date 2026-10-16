@@ -21,6 +21,7 @@ import {
 } from './mission-labs';
 import { missions } from './missions';
 import LivePage from './LivePage';
+import type { VisualAccent } from './visual-website';
 import ModelEvidence from './ModelEvidence';
 import { downloadFile } from './state';
 import WorldDiagram from './LabDiagram';
@@ -118,8 +119,8 @@ export default function CausalStudio({
       if (!result) return;
       const bounds = result.getBoundingClientRect();
       const inset = (dock.current?.getBoundingClientRect().height || 0) + 16;
-      if (bounds.top + Math.min(bounds.height, 300) > window.innerHeight - 16)
-        window.scrollBy({ top: Math.max(0, bounds.top - inset), behavior: 'instant' });
+      if (bounds.top < inset || bounds.top + Math.min(bounds.height, 300) > window.innerHeight - 16)
+        window.scrollBy({ top: bounds.top - inset, behavior: 'instant' });
     });
   };
   const tone = () => {
@@ -433,7 +434,9 @@ export default function CausalStudio({
                 <LivePage
                   heading={String(values.heading || '')}
                   size={Number(values.size || 30)}
-                  rule={id === 1 || values.rule === true}
+                  rule={values.rule === true}
+                  showArea={id !== 1 || values.showArea === true}
+                  accent={id === 1 ? (values.accent as VisualAccent) : 'teal'}
                   onAction={(open, hasRule) => {
                     setPageMessage(
                       hasRule

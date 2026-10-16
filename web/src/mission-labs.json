@@ -9,7 +9,30 @@
     "boundary": "The page runs real HTML, CSS and JavaScript. Its shop and contact details are fictional; no messages are sent.",
     "challenge": "Keep the heading useful when the shop changes from appliance repairs to bicycle repairs.",
     "controls": [
-      { "id": "heading", "label": "The page heading", "type": "text", "default": "Welcome." }
+      { "id": "heading", "label": "The page heading", "type": "text", "default": "Welcome." },
+      {
+        "id": "showArea",
+        "label": "Show the service-area line",
+        "type": "toggle",
+        "default": true
+      },
+      {
+        "id": "accent",
+        "label": "Page colour",
+        "type": "select",
+        "default": "teal",
+        "options": [
+          ["teal", "Teal"],
+          ["coral", "Coral"],
+          ["violet", "Violet"]
+        ]
+      },
+      {
+        "id": "rule",
+        "label": "Contact button has a click rule",
+        "type": "toggle",
+        "default": true
+      }
     ]
   },
   {

@@ -265,6 +265,7 @@
   min-width: 0;
   padding: 0;
   align-self: center;
+  overflow-anchor: none;
 }
 .journey-playground-heading {
   display: flex;

@@ -131,6 +131,11 @@ for (const [index, m] of missions.entries()) {
     files['NEURON-GUIDE.md'] = neuronGuide;
     files['neuron-model.ts'] = fs.readFileSync(path.join(web, 'src/neuron-model.ts'));
   }
+  if (m.id === 1) {
+    const pageGuide = fs.readFileSync(path.join(root, 'PAGE-UNDERSTANDING.md'));
+    fs.writeFileSync(path.join(directory, 'PAGE-CONCEPTS.md'), pageGuide);
+    files['PAGE-CONCEPTS.md'] = pageGuide;
+  }
   if (m.id <= 5)
     files['worked-example.html'] = fs.readFileSync(
       path.join(web, 'curriculum/service-example.html'),

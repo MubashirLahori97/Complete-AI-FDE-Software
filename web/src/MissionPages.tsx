@@ -23,6 +23,7 @@ import { AcademyHome, AcademyPath } from './AcademyJourney';
 type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
 const NeuralLearningLab = lazy(() => import('./NeuralLearningLab'));
+const WebsiteUnderstanding = lazy(() => import('./WebsiteUnderstanding'));
 export function missionCount(progress: Progress) {
   return missions.filter(
     (mission) =>
@@ -77,6 +78,14 @@ export function MissionLesson({
         missions: { ...progress.missions, [id]: { ...record, step: initialStep ?? record.step } },
       });
   }, [id, initialStep]); // visiting does not award completion
+  useEffect(() => {
+    if (id !== 1 || initialStep !== 1 || step !== 1) return;
+    const frame = requestAnimationFrame(() => {
+      heading.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+      heading.current?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [id, initialStep, step]);
   const go = (next: number) => {
     save({ step: next }, false);
     setMessage('');
@@ -84,6 +93,14 @@ export function MissionLesson({
       heading.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
       heading.current?.focus({ preventScroll: true });
     });
+  };
+  const chooseConcept = (next: number) => {
+    setConcept(next);
+    if (id === 1)
+      requestAnimationFrame(() => {
+        heading.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+        heading.current?.focus({ preventScroll: true });
+      });
   };
   const prompt = missionBrief(mission);
   return (
@@ -156,12 +173,24 @@ export function MissionLesson({
                 <button
                   key={item.name}
                   aria-pressed={index === concept}
-                  onClick={() => setConcept(index)}
+                  onClick={() => chooseConcept(index)}
                 >
                   {index + 1}. {item.name}
                 </button>
               ))}
             </div>
+            {id === 1 && (
+              <Suspense fallback={<p>Opening your page explanation…</p>}>
+                <WebsiteUnderstanding
+                  concept={concept}
+                  record={progress.missionLabs[1]}
+                  onSave={(lab) =>
+                    update({ ...progress, missionLabs: { ...progress.missionLabs, 1: lab } })
+                  }
+                  onNext={() => (concept === 0 ? chooseConcept(1) : go(2))}
+                />
+              </Suspense>
+            )}
             {id === 18 && concept === 0 && (
               <Suspense fallback={<p>Opening the small model lab…</p>}>
                 <NeuralLearningLab
@@ -189,7 +218,7 @@ export function MissionLesson({
               <div className="mission-concept-controls">
                 <button onClick={() => go(0)}>Return to the experiment</button>
                 {concept < mission.concepts.length - 1 && (
-                  <button onClick={() => setConcept(concept + 1)}>
+                  <button onClick={() => chooseConcept(concept + 1)}>
                     Next idea <ArrowRight size={15} />
                   </button>
                 )}

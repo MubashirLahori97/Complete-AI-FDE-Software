@@ -3,6 +3,9 @@
 .lab-instruction-panel {
   display: contents;
 }
+.lab-native-page {
+  overflow-anchor: none;
+}
 
 .mission-lesson[data-step='0'] .mission-lesson-heading {
   display: grid;

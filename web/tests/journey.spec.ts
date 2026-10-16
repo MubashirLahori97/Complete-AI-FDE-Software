@@ -9,8 +9,10 @@ test('a homepage edit changes actual page behaviour and carries into the first m
     .getByLabel('What should the visitor see?', { exact: true })
     .fill('Bicycle repairs near you.');
   await expect(preview.getByRole('heading')).toHaveText('Bicycle repairs near you.');
+  const beforeContact = await page.evaluate(() => scrollY);
   await preview.getByRole('button', { name: 'Contact', exact: true }).click();
   await expect(preview.locator('#details')).toBeVisible();
+  expect(Math.abs((await page.evaluate(() => scrollY)) - beforeContact)).toBeLessThan(2);
   await expect(page.locator('.journey-sign-editor')).toContainText('fictional contact details');
   await page.getByRole('link', { name: 'Start mission 1', exact: true }).click();
   await expect(page.getByLabel('The page heading', { exact: true })).toHaveValue(

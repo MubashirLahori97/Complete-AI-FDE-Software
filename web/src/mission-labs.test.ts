@@ -6,6 +6,29 @@ const value = (id: number, input: unknown, label: string) =>
   evaluateLab(id, input).facts.find((f) => f.label === label)!.value;
 
 describe('executed mission experiments', () => {
+  it('restores older first-page inputs with safe defaults and preserves concept edits in backups', () => {
+    expect(labValues(1, { heading: 'My useful page' })).toEqual({
+      heading: 'My useful page',
+      showArea: true,
+      accent: 'teal',
+      rule: true,
+    });
+    const progress = emptyProgress();
+    progress.missionLabs[1] = {
+      values: { heading: 'North district repairs', showArea: false, accent: 'coral', rule: false },
+      note: 'My own observation',
+    };
+    const restored = parseProgress(JSON.parse(JSON.stringify(progress)));
+    expect(restored.missionLabs[1]).toEqual(progress.missionLabs[1]);
+    expect(restored.missions).toEqual({});
+    expect(labValues(1, { accent: '<style>', showArea: 'false', rule: 'false' })).toMatchObject({
+      accent: 'teal',
+      showArea: true,
+      rule: true,
+    });
+    expect(evaluateLab(1, progress.missionLabs[1].values).headline).toContain('area line hidden');
+    expect(evaluateLab(1, progress.missionLabs[1].values).headline).toContain('click rule absent');
+  });
   it('gives every core experiment a specific representation or a real page', () => {
     for (const spec of labSpecs) {
       if ([1, 3].includes(spec.id)) continue;

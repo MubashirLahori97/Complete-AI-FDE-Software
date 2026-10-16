@@ -22,11 +22,15 @@ Explore uses a more compact mission heading. On wide screens, the real-page less
 
 On tall phone/tablet screens, the real-page lesson's first example button brings the changed page below its sticky input dock. It uses an immediate, finite scroll and preserves keyboard focus on the action. Free typing stays in place. Expanded comparisons, system inspection, wide screens and viewports at most 600px tall keep their own normal scrolling behaviour. Inputs, undo, notes, project content and completion rules are preserved.
 
-The narrated-story invitation owns its styling in the core lesson, so a direct first visit no longer depends on previously loading an optional sample. The shared page renderer accounts for its frame borders, waits for the current document's load before pointer/keyboard entry, and requests a fresh height report after load. Height and action reports still require the expected frame source and channel. This supports quick edits and Contact actions without treating a partially initialized frame as ready.
+The narrated-story invitation owns its styling in the core lesson, so a direct first visit no longer depends on previously loading an optional sample. The shared page renderer accounts for frame borders and requests a current-document height report after load. After layout it asks the page to enable its own Contact button, then marks the frame ready on acknowledgement. Each document has a fresh correlation channel, including when earlier inputs return. Height, action and readiness reports require the expected frame source/channel. This supports quick edits without treating a partially initialized button as ready.
 
 Browser checks cover the first-screen pairing at 1265×730 and 1440×900, phone/tablet result visibility with keyboard focus, free typing and undo, narrow system/comparison panels, frame-body fit, direct-entry styling and quick repeated edits. These are interaction/layout observations, not evidence that uncoached beginners understand or enjoy the lesson.
 
 ## Make a consequence visible
+
+Mission 1's Understand step keeps the same saved page in view. A visitor's question connects the outcome to a service-area line: hide it, change colour independently and restore the information. The next concept connects Content/HTML, Appearance/CSS and Behaviour/JavaScript to actual text, styles and Contact actions. Selected elements are outlined and small extracts show current instructions. Changes return to Explore and backup, notes stay separate, and input undo/reset remain available. The guide distinguishes the tracked line from judging the whole page's meaning. See [the connected explanations](PAGE-UNDERSTANDING.md).
+
+Live preview regions opt out of browser scroll anchoring to keep controls steady during updates. An observed missed-click trace included a 50px root scroll between locating and pressing Contact. Repeated first-use checks now assert the action and stable page position. Explicit example reveals work from either side of the page, while free typing stays in place.
 
 The shared studio already runs thirty input-driven teaching models. Its diagrams show system roles; a shared three-object scene is not sufficient to explain every concept visually. Add more specific visual representations where they reveal the actual idea.
 

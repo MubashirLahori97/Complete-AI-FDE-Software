@@ -15,6 +15,9 @@ Your browser turns page instructions into a visible website. A useful heading te
 ## Things you can change
 
 - **The page heading:** starts at "Welcome.".
+- **Show the service-area line:** starts at true.
+- **Page colour:** starts at "teal". Choices: Teal; Coral; Violet.
+- **Contact button has a click rule:** starts at true.
 
 ## A different situation
 

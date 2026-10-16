@@ -20,6 +20,8 @@ Each lesson also has a short situation, two guided comparisons that change one c
 
 In **Mission 18 → Understand**, [teach a small model](NEURAL-LEARNING.md): move an input, change a connection, run real training updates and check separate examples. The live map, connection diagram and loss curve show the same calculation. Its guide and model source travel in Mission 18's kit.
 
+In **Mission 1 → Understand**, [keep learning with the page you changed](PAGE-UNDERSTANDING.md): hide an information line, change colour independently, then explore content, appearance and actual click behaviour. These controls share saved values with Explore and lead into the existing project. The guide is included in Mission 1's kit.
+
 The [illustrated academy journey](ACADEMY-DESIGN.md) connects the homepage, six chapters and core lessons. Edit a real page before starting, carry that heading into Mission 1, and see the experiment and project behind each mission. The reservation and AI evaluation lessons also expose individual operations and cases behind their totals.
 
 Every project requires an eight-part system explanation: purpose, actual stack, component roles, choices, execution, action flow, information/access/AI, and changes/failures. A reviewer checks explanations, predictions and fresh scenarios rather than accepting generated prose alone.
