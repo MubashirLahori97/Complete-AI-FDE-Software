@@ -8,14 +8,16 @@ import './model-evidence.css';
 export default function ModelEvidence({
   outcome,
   onChange,
+  onCue,
 }: {
   outcome: LabResult;
   onChange: (values: Record<string, LabValue>) => void;
+  onCue?: () => void;
 }) {
   const [chosen, setChosen] = useState('');
   const grid = useRef<HTMLDivElement>(null);
   if (outcome.visual && isSystemVisual(outcome.visual))
-    return <SystemConceptScene visual={outcome.visual} onChange={onChange} />;
+    return <SystemConceptScene visual={outcome.visual} onChange={onChange} onCue={onCue} />;
   if (outcome.visual) return <LabVisualScene visual={outcome.visual} />;
   if (outcome.reservations) {
     const { capacity, attempts, operations } = outcome.reservations;

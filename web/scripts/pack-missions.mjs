@@ -144,6 +144,11 @@ for (const [index, m] of missions.entries()) {
     fs.writeFileSync(path.join(directory, 'estimate-model.ts'), logicModel);
     files['estimate-model.ts'] = logicModel;
   }
+  if (m.id === 26) {
+    const accessGuide = fs.readFileSync(path.join(root, 'ACCESS-JOURNEY.md'));
+    fs.writeFileSync(path.join(directory, 'ACCESS-SCENE.md'), accessGuide);
+    files['ACCESS-SCENE.md'] = accessGuide;
+  }
   if (m.id <= 5)
     files['worked-example.html'] = fs.readFileSync(
       path.join(web, 'curriculum/service-example.html'),

@@ -105,7 +105,7 @@ export default function CausalStudio({
     // On a tall phone/tablet screen, keep the sticky input with its actual page.
     // Free typing stays in place; comparisons and system inspection keep their own layout.
     if (
-      !nativePage ||
+      (!nativePage && id !== 26) ||
       showSystem ||
       comparisonOpen ||
       window.innerHeight <= 600 ||
@@ -428,7 +428,13 @@ export default function CausalStudio({
                 </div>
               </>
             ) : evidence ? (
-              <ModelEvidence outcome={outcome} onChange={save} />
+              id === 26 ? (
+                <div ref={pageResult}>
+                  <ModelEvidence outcome={outcome} onChange={save} onCue={tone} />
+                </div>
+              ) : (
+                <ModelEvidence outcome={outcome} onChange={save} onCue={tone} />
+              )
             ) : (
               <div className="lab-native-page" ref={pageResult}>
                 <LivePage

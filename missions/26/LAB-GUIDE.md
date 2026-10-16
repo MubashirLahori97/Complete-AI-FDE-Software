@@ -4,9 +4,9 @@ The fastest route may still be blocked.
 
 ## Start here
 
-Open mission 26 in the academy. Resolve the access prerequisite before optimising dispatch time.
+Open mission 26 in the academy. Make preparation faster. Does that give the van permission to leave? Try the visit and find what still blocks it.
 
-First action: **Record access approval**. Change the controls and observe the result. The browser executes a local teaching model; it does not contact a customer system or an AI provider.
+First action: **Try one-minute preparation**. Change the controls and observe the result. The browser executes a local teaching model; it does not contact a customer system or an AI provider.
 
 ## The idea
 
@@ -14,9 +14,9 @@ An unfamiliar domain can contain a prerequisite that a proposed solution ignored
 
 ## Things you can change
 
+- **Dispatch preparation time:** starts at 15. Range: 1–60 minutes, step 1.
 - **Access approval is recorded:** starts at false.
 - **The visit requires access approval:** starts at true.
-- **Dispatch preparation time:** starts at 15. Range: 1–60 minutes, step 1.
 
 ## A different situation
 

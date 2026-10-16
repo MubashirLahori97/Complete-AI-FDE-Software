@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { SystemVisual, VisualCheck } from './lab-visuals';
 import type { LabValue } from './mission-labs';
 import './system-concepts.css';
+import AccessJourney from './AccessJourney';
 
 type Change = (values: Record<string, LabValue>) => void;
 function Heading({
@@ -52,9 +53,11 @@ const Note = ({ children }: { children: string }) => (
 export default function SystemConceptScene({
   visual,
   onChange,
+  onCue,
 }: {
   visual: SystemVisual;
   onChange: Change;
+  onCue?: () => void;
 }) {
   const [chosen, setChosen] = useState(0);
   switch (visual.kind) {
@@ -625,58 +628,12 @@ export default function SystemConceptScene({
     }
     case 'workflow':
       return (
-        <section
-          className="model-evidence workflow-scene"
-          aria-label="Access prerequisite and dispatch"
-        >
-          <Heading
-            eyebrow="FIND WHAT REALLY BLOCKS THE JOURNEY"
-            title="Fast dispatch cannot open a locked site."
-          >
-            The visit must meet the access rule before preparation can matter. Change approval or
-            remove the prerequisite.
-          </Heading>
-          <div className={`site-gate ${visual.eligible ? 'is-open' : ''}`}>
-            <div className="site-door" aria-hidden="true">
-              <i />
-              <i />
-              <i />
-              <i />
-            </div>
-            <div>
-              <span>SITE ACCESS</span>
-              <strong>{visual.eligible ? 'The gate is open' : 'The gate is closed'}</strong>
-              <p>
-                {visual.required
-                  ? visual.approval
-                    ? 'Required approval is recorded.'
-                    : 'Approval is required and missing.'
-                  : 'This scenario has no approval prerequisite.'}
-              </p>
-            </div>
-          </div>
-          <div className="dispatch-ticket" data-state={visual.eligible ? 'pass' : 'fail'}>
-            <span>Dispatch preparation</span>
-            <strong>{visual.minutes} min</strong>
-            <p>
-              {visual.eligible
-                ? 'Can proceed in this model.'
-                : 'Blocked before dispatch, whatever this duration.'}
-            </p>
-          </div>
-          <div className="concept-choices">
-            <button onClick={() => onChange({ approval: !visual.approval })}>
-              {visual.approval ? 'Remove' : 'Record'} approval
-            </button>
-            <button onClick={() => onChange({ needsAccess: !visual.required })}>
-              {visual.required ? 'Remove' : 'Require'} the access prerequisite
-            </button>
-          </div>
-          <Note>
-            This is an authored scenario. No real approval is granted. Investigate who actually
-            grants access and how it is recorded in your project.
-          </Note>
-        </section>
+        <AccessJourney
+          key={JSON.stringify(visual)}
+          visual={visual}
+          onChange={onChange}
+          onCue={onCue}
+        />
       );
     case 'architecture':
       return (

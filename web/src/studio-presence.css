@@ -26,12 +26,12 @@
 }
 
 @media (min-width: 1100px) {
-  .causal-studio[data-native='true'] .lab-play-surface {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-play-surface {
     display: grid;
     grid-template-columns: minmax(270px, 0.85fr) minmax(0, 1.5fr);
     align-items: start;
   }
-  .causal-studio[data-native='true'] .lab-instruction-panel {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-instruction-panel {
     display: block;
     min-width: 0;
     position: sticky;
@@ -39,37 +39,37 @@
     border-right: 1px solid #ffffff18;
     align-self: start;
   }
-  .causal-studio[data-native='true'] .lab-heading {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-heading {
     position: relative;
     padding: 20px 22px 10px;
   }
-  .causal-studio[data-native='true'] .lab-icon {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-icon {
     position: absolute;
     top: 17px;
     right: 18px;
   }
-  .causal-studio[data-native='true'] .lab-heading .lab-eyebrow {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-heading .lab-eyebrow {
     display: block;
     margin-right: 43px;
     min-height: 28px;
     line-height: 1.7;
   }
-  .causal-studio[data-native='true'] .lab-title {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-title {
     font-size: 30px;
     line-height: 1.18;
     text-wrap: balance;
     margin: 8px 0;
   }
-  .causal-studio[data-native='true'] .lab-scene-context {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-scene-context {
     font-size: 13px;
     line-height: 1.7;
     margin-top: 9px;
   }
-  .causal-studio[data-native='true'] .lab-first-task {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-first-task {
     font-size: 13px;
     line-height: 1.7;
   }
-  .causal-studio[data-native='true'] .lab-control-dock {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-control-dock {
     position: static;
     display: flex;
     flex-direction: column;
@@ -77,56 +77,57 @@
     gap: 12px;
     padding: 8px 22px 20px;
   }
-  .causal-studio[data-native='true'] .lab-first {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-first {
     max-width: none;
     margin: 0;
     width: 100%;
   }
-  .causal-studio[data-native='true'] .lab-more {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-more {
     padding-inline: 22px;
   }
-  .causal-studio[data-native='true'] .lab-more[open] > div {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-more[open] > div {
     grid-template-columns: minmax(0, 1fr);
   }
-  .causal-studio[data-native='true'] .lab-observation {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-observation {
     padding: 18px 22px;
     border-bottom: 0;
   }
-  .causal-studio[data-native='true'] .lab-observation strong {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-observation strong {
     font-size: 14px;
   }
-  .causal-studio[data-native='true'] .lab-stage {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-stage {
     display: block;
     min-width: 0;
   }
-  .causal-studio[data-native='true'] .lab-stage > .lab-guided-comparison {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-stage > .lab-guided-comparison {
     padding-inline: 22px;
     border-right: 0;
     border-bottom: 1px solid #536c7755;
   }
-  .causal-studio[data-native='true'] .comparison-action-dock {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .comparison-action-dock {
     position: sticky;
     top: 0;
     z-index: 5;
     border-bottom: 1px solid #536c7755;
   }
-  .causal-studio[data-native='true']:has(.lab-guided-comparison[open]) .lab-native-page {
+  .causal-studio:is([data-native='true'], [data-lab='26']):has(.lab-guided-comparison[open])
+    .lab-native-page {
     scroll-margin-top: 100px;
   }
-  .causal-studio[data-native='true'] .lab-scene-toolbar {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-scene-toolbar {
     padding: 14px 20px;
     gap: 10px;
   }
-  .causal-studio[data-native='true'] .lab-native-page {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-native-page {
     padding: 0;
     width: calc(100% - 40px);
     max-width: 500px;
     margin: 4px auto 24px;
   }
-  .causal-studio[data-native='true'] .lab-camera {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-camera {
     flex-wrap: wrap;
   }
-  .causal-studio[data-native='true'] .lab-node-detail {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-node-detail {
     flex-wrap: wrap;
   }
 }
@@ -172,10 +173,10 @@
 }
 
 @media (max-height: 600px) {
-  .causal-studio[data-native='true'] .lab-instruction-panel {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .lab-instruction-panel {
     position: static;
   }
-  .causal-studio[data-native='true'] .comparison-action-dock {
+  .causal-studio:is([data-native='true'], [data-lab='26']) .comparison-action-dock {
     position: static;
   }
 }

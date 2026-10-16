@@ -998,12 +998,22 @@
     "id": 26,
     "title": "The fastest route may still be blocked.",
     "idea": "An unfamiliar domain can contain a prerequisite that a proposed solution ignored. Improving dispatch speed cannot make an unapproved site visit eligible. Investigate the real workflow and separate observations from assumptions.",
-    "task": "Resolve the access prerequisite before optimising dispatch time.",
-    "first": "Record access approval",
-    "try": { "approval": true },
+    "task": "Make preparation faster. Does that give the van permission to leave? Try the visit and find what still blocks it.",
+    "first": "Try one-minute preparation",
+    "try": { "dispatch": 1 },
     "boundary": "This is an authored maintenance scenario, not an observation about a real organisation. A real project needs authorised investigation.",
     "challenge": "Remove the access requirement. Does approval remain the relevant bottleneck?",
     "controls": [
+      {
+        "id": "dispatch",
+        "label": "Dispatch preparation time",
+        "type": "range",
+        "default": 15,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "unit": "minutes"
+      },
       {
         "id": "approval",
         "label": "Access approval is recorded",
@@ -1015,16 +1025,6 @@
         "label": "The visit requires access approval",
         "type": "toggle",
         "default": true
-      },
-      {
-        "id": "dispatch",
-        "label": "Dispatch preparation time",
-        "type": "range",
-        "default": 15,
-        "min": 1,
-        "max": 60,
-        "step": 1,
-        "unit": "minutes"
       }
     ]
   },
