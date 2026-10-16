@@ -127,7 +127,7 @@ export const sceneLessons = [
     'A useful assertion inspects the intended result and can fail when a real defect is present.',
   ],
   [
-    'Release with a way back',
+    'The code goes back. The data stays.',
     'If code goes back, does the data go back too?',
     'Build|Code version|Data schema',
     'Check configuration and compatibility. Rolling back code does not automatically reverse a data change.',
