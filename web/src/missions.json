@@ -321,13 +321,13 @@
         },
         {
           "label": "Blank input",
-          "result": "Enter a quantity from 1 to 10. No estimate is shown.",
+          "result": "Enter a whole quantity from 0 to 20. No estimate is shown for blank input.",
           "why": "Missing information needs a useful error, not an invented value.",
           "node": 1
         },
         {
           "label": "−1 item",
-          "result": "Quantity must be at least 1. No estimate is shown.",
+          "result": "Quantity must be at least 0. No estimate is shown for negative input.",
           "why": "The value is numeric but violates the business rule.",
           "node": 1
         }

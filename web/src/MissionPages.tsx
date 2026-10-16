@@ -24,6 +24,7 @@ type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
 const NeuralLearningLab = lazy(() => import('./NeuralLearningLab'));
 const WebsiteUnderstanding = lazy(() => import('./WebsiteUnderstanding'));
+const LogicUnderstanding = lazy(() => import('./LogicUnderstanding'));
 export function missionCount(progress: Progress) {
   return missions.filter(
     (mission) =>
@@ -79,7 +80,7 @@ export function MissionLesson({
       });
   }, [id, initialStep]); // visiting does not award completion
   useEffect(() => {
-    if (id !== 1 || initialStep !== 1 || step !== 1) return;
+    if (![1, 4].includes(id) || initialStep !== 1 || step !== 1) return;
     const frame = requestAnimationFrame(() => {
       heading.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
       heading.current?.focus({ preventScroll: true });
@@ -96,7 +97,7 @@ export function MissionLesson({
   };
   const chooseConcept = (next: number) => {
     setConcept(next);
-    if (id === 1)
+    if ([1, 4].includes(id))
       requestAnimationFrame(() => {
         heading.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
         heading.current?.focus({ preventScroll: true });
@@ -186,6 +187,18 @@ export function MissionLesson({
                   record={progress.missionLabs[1]}
                   onSave={(lab) =>
                     update({ ...progress, missionLabs: { ...progress.missionLabs, 1: lab } })
+                  }
+                  onNext={() => (concept === 0 ? chooseConcept(1) : go(2))}
+                />
+              </Suspense>
+            )}
+            {id === 4 && (
+              <Suspense fallback={<p>Opening the estimator explanation…</p>}>
+                <LogicUnderstanding
+                  concept={concept}
+                  record={progress.missionLabs[4]}
+                  onSave={(lab) =>
+                    update({ ...progress, missionLabs: { ...progress.missionLabs, 4: lab } })
                   }
                   onNext={() => (concept === 0 ? chooseConcept(1) : go(2))}
                 />

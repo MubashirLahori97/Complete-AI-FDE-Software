@@ -1,5 +1,6 @@
 import content from './mission-labs.json' with { type: 'json' };
 import type { LabVisual } from './lab-visuals';
+import { quote } from './estimate-model';
 
 export type LabValue = string | number | boolean;
 export type LabValues = Record<string, LabValue>;
@@ -172,18 +173,18 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
       );
     case 4: {
       const quantity = s('quantity');
-      const q = Number(quantity);
-      const valid =
-        quantity.trim() !== '' && Number.isFinite(q) && Number.isInteger(q) && q >= 0 && q <= 20;
+      const estimate = quote(quantity, n('price'));
+      const q = estimate.quantity;
+      const valid = q !== null;
       return result(
-        valid ? `${q * n('price')} units` : 'No estimate produced',
+        valid ? `${estimate.total} units` : 'No estimate produced',
         valid
-          ? `${q} whole items × ${n('price')} units per item = ${q * n('price')} units. Zero is allowed by this rule.`
+          ? `${q} whole items × ${n('price')} units per item = ${estimate.total} units. Zero is allowed by this rule.`
           : 'This rule requires a whole quantity from 0 to 20. A blank input is missing information; converting it to zero silently would change its meaning.',
         [
           quantity.trim() || 'Blank input',
           valid ? 'Whole quantity in range' : 'Validation refuses input',
-          valid ? `${q * n('price')} units` : 'Explain the correction',
+          valid ? `${estimate.total} units` : 'Explain the correction',
         ],
         {
           visual: {
@@ -191,7 +192,7 @@ export function evaluateLab(id: number, raw: unknown): LabResult {
             raw: quantity,
             quantity: valid ? q : null,
             price: n('price'),
-            total: valid ? q * n('price') : null,
+            total: estimate.total,
             reason: valid
               ? 'Whole quantities from 0 to 20 are allowed.'
               : quantity.trim() === ''

@@ -136,6 +136,14 @@ for (const [index, m] of missions.entries()) {
     fs.writeFileSync(path.join(directory, 'PAGE-CONCEPTS.md'), pageGuide);
     files['PAGE-CONCEPTS.md'] = pageGuide;
   }
+  if (m.id === 4) {
+    const logicGuide = fs.readFileSync(path.join(root, 'LOGIC-UNDERSTANDING.md'));
+    fs.writeFileSync(path.join(directory, 'LOGIC-CONCEPTS.md'), logicGuide);
+    files['LOGIC-CONCEPTS.md'] = logicGuide;
+    const logicModel = fs.readFileSync(path.join(web, 'src/estimate-model.ts'));
+    fs.writeFileSync(path.join(directory, 'estimate-model.ts'), logicModel);
+    files['estimate-model.ts'] = logicModel;
+  }
   if (m.id <= 5)
     files['worked-example.html'] = fs.readFileSync(
       path.join(web, 'curriculum/service-example.html'),

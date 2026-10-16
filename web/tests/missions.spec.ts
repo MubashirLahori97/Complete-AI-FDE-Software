@@ -144,6 +144,17 @@ test('the worked site runs actual browser behaviour without needing a server or 
   await expect(page.locator('#services article')).toHaveCount(3);
   await page.getByRole('button', { name: 'Calculate estimate' }).click();
   await expect(page.locator('#result')).toHaveText('Estimate: 50 units.');
+  for (const [quantity, amount] of [
+    ['0', '0'],
+    ['20', '500'],
+  ]) {
+    await page.getByLabel('Number of items').fill(quantity);
+    await page.getByRole('button', { name: 'Calculate estimate' }).click();
+    await expect(page.locator('#result')).toHaveText(`Estimate: ${amount} units.`);
+  }
+  await page.getByLabel('Number of items').fill('21');
+  await page.getByRole('button', { name: 'Calculate estimate' }).click();
+  await expect(page.getByLabel('Number of items')).toHaveAttribute('aria-invalid', 'true');
   await page.getByLabel('Number of items').fill('-1');
   await page.getByRole('button', { name: 'Calculate estimate' }).click();
   await expect(page.locator('#result')).toContainText('whole quantity');

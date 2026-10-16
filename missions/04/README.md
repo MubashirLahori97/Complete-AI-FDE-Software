@@ -35,8 +35,8 @@ The prepared estimator charges 25 units per item. Change the quantity.
 Prepared teaching simulation, not live provider or business evidence. Predict before selecting.
 
 - **2 items:** Estimate: 50 units. Two valid items × 25 = 50. This is an estimate, not a payment.
-- **Blank input:** Enter a quantity from 1 to 10. No estimate is shown. Missing information needs a useful error, not an invented value.
-- **−1 item:** Quantity must be at least 1. No estimate is shown. The value is numeric but violates the business rule.
+- **Blank input:** Enter a whole quantity from 0 to 20. No estimate is shown for blank input. Missing information needs a useful error, not an invented value.
+- **−1 item:** Quantity must be at least 0. No estimate is shown for negative input. The value is numeric but violates the business rule.
 
 Flow: Quantity input (Browser state) → Validate and multiply (Browser function) → Estimate or error (Browser display)
 
