@@ -14,7 +14,7 @@ The evaluator remains `evaluateLab(26, values)` in `web/src/mission-labs.ts`: el
 
 ## Motion and control
 
-The original isometric vector scene depicts a workshop, van, barrier and customer site. A finite sequence introduces one consequence at a time. Pause, continue, replay and restart are explicit controls. Changes to model inputs remount the scene, cancel any active frame and return the van to its starting position. The previous sequence cannot continue using an earlier approval decision.
+The original isometric vector scene depicts a workshop, van, barrier and customer site. A finite sequence introduces one consequence at a time. Pause, continue, replay and restart are explicit controls. Changes to model inputs cancel active frames and return the van to its starting position before paint, while preserving the control and keyboard focus. The previous sequence cannot continue using an earlier approval decision.
 
 One illustrated moment lasts 750 milliseconds. These are storytelling beats, not measured preparation or travel durations. The current preparation value is labelled in **model minutes**. The evaluator establishes eligibility only: travel, arrival and completion have not been measured. The moving van represents permission to proceed rather than observed transport.
 
@@ -24,7 +24,7 @@ Text explains all outcomes. Native buttons support keyboard and touch. On wide s
 
 ## Saved work and project
 
-The existing quantity of preparation, recorded-approval flag, requirement flag and notes remain in the academy's local saved experiment and backup. Undo/reset continue to work. Playback position is temporary, and neither playing a sequence nor changing its inputs records mastery. Both guided comparisons, the optional system/3D inspection and the original domain-project brief remain available.
+The existing preparation time, recorded-approval flag, requirement flag and notes remain in the academy's local saved experiment and backup. Undo/reset continue to work. Playback position is temporary, and neither playing a sequence nor changing its inputs records mastery. Both guided comparisons, the optional system/3D inspection and the original domain-project brief remain available.
 
 No real approval is granted here. Removing a prerequisite changes the fictional scenario; it does not authorize bypassing a real business rule. In your own domain project, investigate who grants access, how it is recorded, and whether that condition actually comes before dispatch. Show your evidence and update your system explanation.
 

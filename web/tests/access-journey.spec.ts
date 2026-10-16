@@ -14,6 +14,7 @@ test('speed cannot move a blocked visit; approval changes the saved eligibility 
   await page.getByRole('button', { name: 'Try the visit', exact: true }).click();
   await expect(page.locator('.aj-moment')).toContainText('stops before dispatch');
   await page.getByRole('button', { name: 'Record approval', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Remove approval', exact: true })).toBeFocused();
   await expect(page.locator('.site-gate')).toHaveClass(/is-open/);
   await expect(page.locator('.aj-van')).toHaveAttribute('data-travel', '0.000');
   await page.getByRole('button', { name: 'Try the visit', exact: true }).click();

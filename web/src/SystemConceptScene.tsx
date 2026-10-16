@@ -627,14 +627,7 @@ export default function SystemConceptScene({
       );
     }
     case 'workflow':
-      return (
-        <AccessJourney
-          key={JSON.stringify(visual)}
-          visual={visual}
-          onChange={onChange}
-          onCue={onCue}
-        />
-      );
+      return <AccessJourney visual={visual} onChange={onChange} onCue={onCue} />;
     case 'architecture':
       return (
         <section

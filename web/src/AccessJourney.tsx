@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ArrowRight, Pause, Play, RotateCcw } from 'lucide-react';
 import type { SystemVisual } from './lab-visuals';
 import type { LabValue } from './mission-labs';
@@ -27,6 +27,17 @@ export default function AccessJourney({
     frame.current = null;
     setRunning(false);
   };
+  const modelKey = JSON.stringify(visual);
+  useLayoutEffect(() => {
+    if (frame.current !== null) cancelAnimationFrame(frame.current);
+    frame.current = null;
+    positionRef.current = 0;
+    setPosition(0);
+    setRunning(false);
+    return () => {
+      if (frame.current !== null) cancelAnimationFrame(frame.current);
+    };
+  }, [modelKey]);
   useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     const change = () => {
