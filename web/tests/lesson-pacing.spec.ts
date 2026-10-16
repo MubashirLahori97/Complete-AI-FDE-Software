@@ -4,6 +4,7 @@ import { unzipSync, strFromU8 } from 'fflate';
 import { labStories, comparisonValues } from '../src/lab-stories';
 import { evaluateLab } from '../src/mission-labs';
 import missions from '../src/missions.json' with { type: 'json' };
+import { lessonGuides } from '../src/lesson-guides';
 
 test('all sixty comparison cases run their actual models and are included in the project kits', async ({
   page,
@@ -13,7 +14,7 @@ test('all sixty comparison cases run their actual models and are included in the
   page.on('pageerror', (error) => errors.push(error.message));
   for (const story of labStories) {
     await page.goto(`/#/mission/${story.id}?step=0`);
-    await expect(page.locator('.lab-scene-context')).toContainText(story.scene);
+    await expect(page.locator('.lab-scene-context')).toContainText(lessonGuides[story.id - 1].why);
     await page.locator('.lab-guided-comparison>summary').click();
     for (const [index, comparison] of story.comparisons.entries()) {
       await page
