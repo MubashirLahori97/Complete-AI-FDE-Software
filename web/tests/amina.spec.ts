@@ -78,7 +78,7 @@ test('the main action fits a small phone and remains visible throughout the less
   }
   await page.getByRole('link', { name: 'Leave lesson' }).click();
   await expect(
-    page.getByRole('heading', { name: 'Build it with AI. Understand what happens.' }),
+    page.getByRole('heading', { name: 'Learn to build software with AI.' }),
   ).toBeVisible();
   await page.getByRole('button', { name: 'Open navigation' }).click();
   await expect(page.getByRole('link', { name: 'Overview', exact: true })).toBeVisible();

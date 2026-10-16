@@ -7,15 +7,15 @@ test('the core starts with a useful outcome and keeps simulations separate from 
   page,
 }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /Build it with AI/ })).toBeVisible();
-  await page.getByRole('button', { name: 'Try a clearer message' }).click();
+  await expect(page.getByRole('heading', { name: /Learn to build/ })).toBeVisible();
+  await page.getByRole('button', { name: 'Try example: a clearer message' }).click();
   await expect(
     page
       .frameLocator('iframe[title="Your first live page"]')
       .getByRole('heading', { name: /Repairs near you/ }),
   ).toBeVisible();
   await expect(page.getByText('Local teaching preview · no live AI')).toBeVisible();
-  await page.getByRole('link', { name: 'Start mission 1', exact: true }).click();
+  await page.getByRole('link', { name: 'Start here: Lesson 1', exact: true }).click();
   await expect(
     page.getByRole('heading', { name: 'Make a useful website', exact: true }),
   ).toBeVisible();
@@ -234,7 +234,7 @@ test('core missions fit phones, support keyboard progression and respect reduced
       ).toBe(true);
       if (route === '/')
         await expect(
-          page.getByRole('link', { name: /^(Start mission 1|Continue mission \d+)$/ }),
+          page.getByRole('link', { name: /^(Start here: Lesson 1|Continue lesson \d+)$/ }),
         ).toBeInViewport();
     }
   }

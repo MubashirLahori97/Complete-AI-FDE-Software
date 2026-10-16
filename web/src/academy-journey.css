@@ -174,7 +174,7 @@
   overflow: hidden;
 }
 .journey-hero-copy {
-  align-self: center;
+  align-self: start;
   padding: 4px 0 15px;
 }
 .journey-kicker {
@@ -236,6 +236,36 @@
 }
 .journey-primary:hover {
   background: #f4e8cc;
+}
+.journey-new-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 8px;
+  color: #ead6ac;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.causal-studio .lab-next-idea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #647c75;
+  border-radius: 8px;
+  background: #183139;
+  color: #e8d5ad;
+  font-size: 13px;
+}
+.journey-hero-copy > .journey-course-note {
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 17px 0 0;
+  color: #b7c9c6;
 }
 .journey-first-note {
   display: block;
@@ -354,15 +384,20 @@
 }
 .journey-sign-editor button {
   flex-shrink: 0;
-  width: 46px;
+  width: auto;
+  padding: 0 12px;
+  gap: 7px;
   border: 0;
   border-left: 1px solid #627d85;
   color: #f4e3bb;
   background: #29424a;
-  display: grid;
+  display: flex;
   place-items: center;
   cursor: pointer;
   min-height: 44px;
+}
+.journey-sign-editor button span {
+  font-size: 12px;
 }
 .journey-sign-editor button:hover {
   background: #3a5860;

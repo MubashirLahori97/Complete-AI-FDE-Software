@@ -238,7 +238,10 @@ export default function CausalStudio({
               <h3 className="lab-title">{spec.title}</h3>
               <p className="lab-scene-context">{labStories[id - 1].scene}</p>
               <p className="lab-first-task">
-                <strong>Try this:</strong> {spec.task}
+                <strong>{id === 1 ? 'Start here:' : 'Try this:'}</strong>{' '}
+                {id === 1
+                  ? `Press “${spec.first}” below. Watch the page heading change.`
+                  : spec.task}
               </p>
             </div>
             <button
@@ -256,6 +259,13 @@ export default function CausalStudio({
               {spec.first}
               <ArrowRight size={16} />
             </button>
+            {id === 1 &&
+              String(values.heading).trim() &&
+              values.heading !== spec.controls[0].default && (
+                <button className="lab-next-idea" onClick={onLearn}>
+                  Next: understand the idea <ArrowRight size={16} />
+                </button>
+              )}
           </div>
           {spec.controls.length > 1 && (
             <details className="lab-more">

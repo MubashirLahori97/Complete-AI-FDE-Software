@@ -1,6 +1,36 @@
 import { openEvidence } from './evidence-helper';
 import { expect, test } from '@playwright/test';
 
+test('a returning visitor can find the beginning without replacing their saved project or page', async ({
+  page,
+}) => {
+  await page.goto('/#/mission/1?step=0');
+  await page.getByLabel('The page heading', { exact: true }).fill('My saved repair page');
+  await page.goto('/#/mission/4?step=2');
+  await page.getByLabel('Product artifact or local file location').fill('/my-estimator/');
+  await page.goto('/#/');
+  await expect(page.getByRole('link', { name: 'Continue lesson 4', exact: true })).toHaveAttribute(
+    'href',
+    '#/mission/4',
+  );
+  await page
+    .getByLabel('What should the visitor see?', { exact: true })
+    .fill('An optional demo edit');
+  await page.getByRole('link', { name: 'New here? Start with Lesson 1', exact: true }).click();
+  await expect(page.getByRole('button', { name: '1 Explore', exact: true })).toHaveAttribute(
+    'aria-current',
+    'step',
+  );
+  await expect(page.getByLabel('The page heading', { exact: true })).toHaveValue(
+    'My saved repair page',
+  );
+  const records = await page.evaluate(
+    () => JSON.parse(localStorage.getItem('fde-academy-v1')!).missions,
+  );
+  expect(records[4].artifact).toBe('/my-estimator/');
+  expect(records[1].recorded).toBe(false);
+});
+
 test('a homepage edit changes actual page behaviour and carries into the first mission without completing it', async ({
   page,
 }) => {
@@ -16,7 +46,7 @@ test('a homepage edit changes actual page behaviour and carries into the first m
   await expect(preview.locator('#details')).toBeVisible();
   expect(Math.abs((await page.evaluate(() => scrollY)) - beforeContact)).toBeLessThan(2);
   await expect(page.locator('.journey-sign-editor')).toContainText('fictional contact details');
-  await page.getByRole('link', { name: 'Start mission 1', exact: true }).click();
+  await page.getByRole('link', { name: 'Start here: Lesson 1', exact: true }).click();
   await expect(page.getByLabel('The page heading', { exact: true })).toHaveValue(
     'Bicycle repairs near you.',
   );
@@ -32,6 +62,10 @@ test('a homepage edit changes actual page behaviour and carries into the first m
       () => JSON.parse(localStorage.getItem('fde-academy-v1')!).missions[1].recorded,
     ),
   ).toBe(false);
+  await page.getByRole('button', { name: 'Next: understand the idea', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: 'One idea at a time.', exact: true }),
+  ).toBeVisible();
 });
 
 test('chapter navigation, search, project context and resume remain connected', async ({

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowRight, BookOpen, Check, CornerDownRight, Search } from 'lucide-react';
+import { ArrowDown, ArrowRight, BookOpen, Check, Search } from 'lucide-react';
 import { missions, stages, canRecordMission } from './missions';
 import { labSpec } from './mission-labs';
 import type { Progress } from './state';
@@ -47,49 +47,48 @@ export function AcademyHome({ progress, update, records }: Props & { records: nu
     <div className="mission-core academy-journey academy-home">
       <div className="journey-masthead">
         <span>FDE ACADEMY</span>
-        <span>30 missions · one idea at a time</span>
+        <span>30 interactive lessons · start from zero</span>
       </div>
       <section className="journey-hero">
         <div className="journey-hero-copy">
           <span className="journey-kicker">
-            <i /> A place for curious builders
+            <i /> A software course for complete beginners
           </span>
           <h1>
-            Build it with AI.
+            Learn to build
             <br />
-            <em>
-              Understand
-              <br className="journey-desktop-break" /> what happens.
-            </em>
+            <em>software with AI.</em>
           </h1>
           <p>
-            Change something. See the result. Learn why it works. Then build something useful with
-            AI by your side.
+            Learn how websites, servers and AI apps work. Try small examples that respond to your
+            changes, then build your own projects with AI.
           </p>
           <a
             className="journey-primary"
-            href={`#/mission/${started ? current.id : 1}`}
+            href={started ? `#/mission/${current.id}` : '#/mission/1?step=0'}
             onClick={carryExperiment}
           >
-            {started ? `Continue mission ${current.id}` : 'Start mission 1'}
+            {started ? `Continue lesson ${current.id}` : 'Start here: Lesson 1'}
             <ArrowRight size={18} />
           </a>
           <span className="journey-first-note">
-            {started ? current.title : 'Your first project: a useful service website.'}
+            {started
+              ? current.title
+              : 'First: change a repair shop’s page heading and watch the page update. No setup needed.'}
           </span>
-          <div className="journey-invitation">
-            <CornerDownRight size={20} />
-            <span>
-              No coding experience needed.
-              <br />
-              Your curiosity is enough to start.
-            </span>
-          </div>
+          {started && (
+            <a className="journey-new-start" href="#/mission/1?step=0">
+              New here? Start with Lesson 1 <ArrowRight size={14} />
+            </a>
+          )}
+          <p className="journey-course-note">
+            No coding experience needed. AI can help you write the code.
+          </p>
         </div>
         <div className="journey-playground">
           <div className="journey-playground-heading">
-            <span>BEFORE YOU START</span>
-            <strong>Make this little page yours.</strong>
+            <span>OPTIONAL PREVIEW · YOU CAN START LESSON 1 DIRECTLY</span>
+            <strong>Change the heading. Watch the page update.</strong>
           </div>
           <div className="journey-browser">
             <div className="journey-browser-chrome">
@@ -131,8 +130,11 @@ export function AcademyHome({ progress, update, records }: Props & { records: nu
                   setHeading(changed ? 'Welcome.' : 'Repairs near you.');
                   setContact('');
                 }}
-                aria-label={changed ? 'See the before version' : 'Try a clearer message'}
+                aria-label={
+                  changed ? 'See before: the original message' : 'Try example: a clearer message'
+                }
               >
+                <span>{changed ? 'See before' : 'Try example'}</span>
                 <ArrowRight size={18} />
               </button>
             </div>
@@ -152,40 +154,44 @@ export function AcademyHome({ progress, update, records }: Props & { records: nu
         </span>
         <span>AI can do the implementation</span>
         <a href="#/curriculum">
-          Explore the journey <ArrowDown size={14} />
+          See all 30 lessons <ArrowDown size={14} />
         </a>
       </div>
       <section className="journey-principle">
         <div>
-          <span className="journey-kicker">A DIFFERENT WAY TO LEARN</span>
+          <span className="journey-kicker">WHAT IS THIS COURSE FOR?</span>
           <h2>
-            Small discoveries.
+            From your first page
             <br />
-            <em>Useful things.</em>
+            <em>to solving real problems.</em>
           </h2>
         </div>
         <div>
           <p>
-            A Forward Deployed Engineer works with people to solve real problems using software and
-            AI. Here, you practise that work from the first mission.
+            FDE means Forward Deployed Engineer: someone who works with customers to solve real
+            problems using software and AI. This course helps you practise those skills, starting
+            with a simple website.
           </p>
           <ol>
             <li>
               <span>01</span>
               <p>
-                <strong>Try one idea.</strong> Change an input and follow what happens.
+                <strong>Start with Lesson 1.</strong> Change the page heading. You can try it in
+                your browser.
               </p>
             </li>
             <li>
               <span>02</span>
               <p>
-                <strong>Make it useful.</strong> Build your own project with AI.
+                <strong>Follow the lesson.</strong> Try a change, learn why it works, then use AI to
+                build your own project.
               </p>
             </li>
             <li>
               <span>03</span>
               <p>
-                <strong>Make it yours.</strong> Explain your choices and handle a new situation.
+                <strong>Keep going in order.</strong> Move from websites to servers, data, AI and
+                delivering a working product. A lesson can take more than one session.
               </p>
             </li>
           </ol>
@@ -194,10 +200,10 @@ export function AcademyHome({ progress, update, records }: Props & { records: nu
       <section className="journey-sampler">
         <div className="journey-section-heading">
           <div>
-            <span className="journey-kicker">FOLLOW YOUR CURIOSITY</span>
-            <h2>A few things you can play with.</h2>
+            <span className="journey-kicker">A LOOK AT LATER LESSONS</span>
+            <h2>Explore these whenever you’re ready.</h2>
           </div>
-          <span>All missions are open.</span>
+          <span>Optional. Start with Lesson 1 if you’re new.</span>
         </div>
         <div className="journey-discoveries">
           {[

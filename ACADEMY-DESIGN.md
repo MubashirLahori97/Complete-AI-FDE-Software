@@ -12,6 +12,8 @@ The home, learning path and core lesson shell share this direction. Original cod
 
 ## A clear way in
 
+One learner reported that a new visitor could not identify the site's purpose or starting action. The homepage now explicitly describes a beginner software course, names websites, servers and AI apps, and leads with **Start here: Lesson 1**. The first task is previewed in plain language: change a repair shop's heading and watch its page update. The small homepage example is labelled optional rather than a prerequisite. Returning visitors retain Continue and also have an explicit Lesson 1 entry that preserves saved work. Lesson 1 names the exact first button to press. Course purpose, the meaning of FDE and the suggested lesson order are explained without a forced tour. These changes still need a fresh, uncoached visitor check.
+
 The homepage presents one Start/Continue action, a small real browser page and an editable heading. Learners can type their own words, try an example and use the page's actual Contact button. A new learner's heading transfers into Mission 1 when they choose Start. Returning learners continue their current mission without overwriting the first mission's work. A homepage action does not award completion.
 
 The chapter journey connects each mission to its first experiment and named project. Six chapter filters and search work together, a return card leads to the current mission, and an empty result offers a clear reset. Progress is labelled as practice records rather than a validated qualification. Every chapter stays open.
