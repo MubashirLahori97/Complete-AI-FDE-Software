@@ -73,6 +73,7 @@ test('the reservation visual exposes the same overbooking and refusal as the exe
   await expect(page.locator('.lab-scene-frame')).toHaveAttribute('data-renderer', 'webgl');
   await expect(page.locator('.lab-node-detail')).toContainText('1 accepted; 0 over capacity');
   await page.getByRole('button', { name: 'Back to the experiment', exact: true }).click();
+  await openEvidence(page);
   await expect(page.locator('.reservation-evidence')).toBeVisible();
 });
 

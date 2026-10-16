@@ -47,6 +47,13 @@
     10px/1.4 'DM Mono',
     monospace;
 }
+.ls-key {
+  margin: 0;
+  padding: 0 17px 14px;
+  color: #d2dec7;
+  font-size: 12px;
+  line-height: 1.7;
+}
 .ls-stage > .lesson-illustration {
   width: 100%;
   height: auto;

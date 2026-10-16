@@ -113,6 +113,16 @@ export default function LessonScene({
           <span>{labels[2]}</span>
         </div>
         <LessonIllustration id={id} values={values} outcome={outcome} moment={position} />
+        {id === 20 && (
+          <p className="ls-key">
+            ✓ Correct alert · × Missed urgent case · ! False alert · · Correctly left quiet
+          </p>
+        )}
+        {id === 24 && (
+          <p className="ls-key">
+            Each circle is a read: C = cached copy, S = source, Q = queued. Peach means stale data.
+          </p>
+        )}
         <div className="ls-playbar">
           <button className="ls-play" onClick={playing ? stop : play}>
             {playing ? <Pause size={16} /> : <Play size={16} />}{' '}
