@@ -1,9 +1,9 @@
-# Day 2 — Data, variables, types, and conversion
+# Day 2 — The price list
 
 <!-- beginner-path:begin -->
 ## Start here — one idea at a time
 
-**Your goal:** A reliable unit conversion desk. You can take several study sessions.
+**Your goal:** Dukaan v0.2 - totals and bills. You can take several study sessions.
 
 **The situation:** A shop needs a converter. A distance written in a form arrives as text, but multiplication needs a number.
 
@@ -62,113 +62,126 @@ Use the app's **Learn → Practise → Project → Record your build** flow, or 
 
 <!-- beginner-path:end -->
 
-A value's type determines what operations mean. Two values can look identical on a screen and still behave differently inside a program. This lesson connects types to real failures in quantities, user input, and conversion tools. Your project is a conversion desk that accepts values deliberately, checks them, and produces clearly labelled results.
+Dukaan v0.1 shows the stock list. Today it grows into v0.2: a bill calculator. A customer buys 3 bags of rice and 2 of sugar - the program multiplies, adds, and works out the change. The new idea is small, and getting it wrong breaks everything: text and numbers are different things, and the shopkeeper's typed input always arrives as text. Convert it, or the bill is nonsense.
 
-**Your project:** [A reliable unit conversion desk](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+**Your project:** [Dukaan v0.2 - totals and bills](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
 
 ## What you will be able to do
 
-- Identify strings, integers, floating-point numbers, booleans, and missing values.
-- Convert text into numbers at an input boundary and handle failed conversion.
-- Define a conversion's input unit, output unit, and expected behavior.
+- Explain the difference between text and numbers with a shop example.
+- Use *, +, and - to compute a bill total and the change.
+- Convert typed input from text to a number with int() before doing arithmetic.
 
 ## Understand the concept
 
-### A variable is a name bound to a value
+### Text and numbers look the same but behave differently
 
-In Python, amount = 10 binds the name amount to an integer object. Reassigning amount changes which value the name refers to; it does not change all values elsewhere in the program. Use names that describe the role of the value, such as distance_km, rather than an unexplained x. Including units in names prevents a subtle category of bugs: a correct calculation applied to the wrong measurement. Type information and domain meaning are related, but a float alone cannot tell you whether a number means kilometres or dollars.
+The price 250 and the text "250" look identical on your screen. To Python they are different things. 250 + 180 is 430 - arithmetic. "250" + "180" is "250180" - gluing text together. Text sticks; numbers calculate. A price you want to multiply must be a number, not text. Python calls text str (short for string, like a string of characters) and whole numbers int (short for integer). When output looks wrong - a total of 250180 instead of 430 - your first suspect is always: text where a number should be.
 
-### Representation changes behavior
+### Bills are arithmetic
 
-The string "2" contains a text character. The integer 2 represents a number. Adding two strings joins their text, while adding two integers performs arithmetic. A float represents a number approximately using binary floating-point; many decimal fractions are not represented exactly. For beginner measurement calculations, document a rounding policy. For currency, integer minor units or a carefully chosen Decimal policy are usually clearer than assuming float rounding always matches accounting rules.
+A bill is three operations. Multiply: price times quantity for each item. Add: the line totals into a grand total. Subtract: money paid minus the total gives the change. Python writes them as *, +, and -. Order matters: Python multiplies before it adds, exactly like the maths you learned in school, so 250 * 3 + 180 * 2 means (250 * 3) + (180 * 2). When in doubt, add brackets - they cost nothing and prevent real money mistakes.
 
-### Validate at the boundary
+### input() always gives you text
 
-User-entered data and API payloads arrive from outside your program. Convert them at a clear boundary before relying on arithmetic. float("2.5") succeeds, while float("two") raises ValueError. Catch the failure when you can return a useful message; do not silently substitute zero. After conversion, check domain rules too: a distance may not be negative, even though -3 is a perfectly valid number. Numeric parsing is therefore only one part of validation.
+When a program asks the shopkeeper to type a quantity, the answer arrives as text - even if they typed digits. "3" is text, and "3" * 2 is "33", not 6. So the first thing you do with typed input is convert it: int("3") turns the text into the number 3, and then you can multiply. If the text is not a number - int("three") - Python stops and shows an error naming the line. That error is useful information, not a disaster: it tells you exactly what went wrong. On Day 7 you will learn to catch it gracefully instead of crashing.
 
 ## A worked example, step by step
 
-Convert a text value representing kilometres into metres. The unit appears in both names and output.
+Amina's customer buys rice and sugar. The quantities were typed by the shopkeeper, so they arrive as text. Read the code, predict the exact output - especially the change - then run it.
 
 ```python
-raw_distance = "2.5"
-try:
-    distance_km = float(raw_distance)
-    if distance_km < 0:
-        raise ValueError("Distance cannot be negative")
-    distance_m = distance_km * 1000
-    print(f"{distance_km:g} km = {distance_m:g} m")
-except ValueError:
-    print("Enter a non-negative number of kilometres")
+price_rice = 250
+price_sugar = 180
+
+typed_rice_qty = "3"
+typed_sugar_qty = "2"
+
+qty_rice = int(typed_rice_qty)
+qty_sugar = int(typed_sugar_qty)
+
+rice_total = price_rice * qty_rice
+sugar_total = price_sugar * qty_sugar
+total = rice_total + sugar_total
+
+paid = 2000
+change = paid - total
+
+print(f"Rice: {qty_rice} x Rs {price_rice} = Rs {rice_total}")
+print(f"Sugar: {qty_sugar} x Rs {price_sugar} = Rs {sugar_total}")
+print(f"Total: Rs {total}")
+print(f"Paid Rs {paid}, change Rs {change}")
 ```
 
 **Expected result**
 
 ```text
-2.5 km = 2500 m
+Rice: 3 x Rs 250 = Rs 750
+Sugar: 2 x Rs 180 = Rs 360
+Total: Rs 1110
+Paid Rs 2000, change Rs 890
 ```
 
-raw_distance is text because it represents an input boundary. float creates a numeric value for arithmetic. The condition checks a domain rule, not a type rule. Multiplying by 1000 applies the conversion factor. The g format keeps this example's display compact; it does not change the stored numeric value. The except block handles invalid text and rejected negative distances. Try changing raw_distance to an empty string, zero, and -1 and follow the executed path in each case.
+The first two lines store prices as numbers. The next two store the typed quantities as text - this is what input() really gives you. int() converts each one into a real number. The line totals are price times quantity; adding them gives the grand total, 1110. Change is paid minus total: 2000 - 1110 = 890. If you skip the int() conversion, "3" * 250 does not multiply - it repeats the text "3" two hundred and fifty times. That is why conversion comes before arithmetic, every time.
 
 ## Practise before building
 
-### Exercise 1: Explain two different additions
+### Exercise 1: Predict the trap
 
-Run "2" + "2" and 2 + 2. Inspect each operand with type() and explain the difference.
+In a scratch file, run print("2" + "2") and print(2 + 2). Before each one, write down what you expect to see.
 
-**Hint:** Do not infer the type from the displayed characters alone.
+**Hint:** Text sticks together; numbers calculate.
 
-**Check your result:** You can predict 22 versus 4 without running the expressions again.
+**Check your result:** You predicted "22" for the text version and 4 for the number version before running.
 
-### Exercise 2: Reject invalid input
+### Exercise 2: A tea bill
 
-Test empty text, whitespace, two, zero, and a negative distance. Define the desired message for each rejected value.
+A customer buys 2 packs of Tea (Rs 950 each) and pays Rs 2000. Write the lines that compute the total and the change. Predict both numbers, then run.
 
-**Hint:** Parsing and domain validation are separate decisions.
+**Hint:** Copy the pattern: line total, then paid minus total.
 
-**Check your result:** Rejected input produces a clear message instead of a false conversion result.
+**Check your result:** Total is Rs 1900 and change is Rs 100, matching your prediction.
 
-### Exercise 3: Add temperature conversion
+### Exercise 3: Break the conversion
 
-Write the Celsius-to-Fahrenheit formula in words, then implement it using a named input and output.
+Change typed_rice_qty to "three" and run. Read the error: which line does it blame, and what does ValueError mean in your own words? Then change it back.
 
-**Hint:** fahrenheit = celsius * 9 / 5 + 32.
+**Hint:** ValueError means "this value cannot become a number".
 
-**Check your result:** 0 C becomes 32 F and 100 C becomes 212 F.
+**Check your result:** You can explain why int("three") fails without re-reading the message.
 
 ## Common mistakes and how to debug them
 
-- Joining numeric text instead of adding numbers: inspect types at the boundary.
-- Silently treating invalid input as zero: a fallback value can create a believable but wrong result.
-- Mixing units or formatting too early: compute using clearly named numeric values, then format for display.
+- Forgetting int() on typed input - then "3" * 250 repeats text instead of multiplying.
+- Using + on two pieces of text when you meant to add numbers - "250" + "180" is "250180", not 430.
+- Trying int() on text like "3kg" or "three" - only pure digit text converts; anything else is an error.
 
 ## The FDE connection
 
-Customer integrations often fail because two systems represent the same idea differently. One export contains numeric text, another uses a different unit, and a third omits missing values. Documenting and validating those boundaries is engineering work. Your converter is a small integration with an explicit contract.
+In a software house, junior tickets are full of this. "Add a totals row to the receipt" is a feature ticket. "The discount shows 250180 instead of 430 - fix it" is a bug ticket, and it is a text-vs-number bug. Seniors trust juniors who look at wrong output and name the cause in ten seconds. Today you earned that instinct: when numbers look glued together, suspect text.
 
 ## Build your lesson project
 
-**A reliable unit conversion desk**
+**Dukaan v0.2 - totals and bills**
 
-A shop employee needs a small converter for distances and temperatures. Build a program with a clearly selected conversion, labelled inputs and outputs, and helpful handling of invalid input. Keep distance validation separate from temperature rules: negative Celsius values are valid, while the project's distance contract rejects negative distances.
+Amina's customers are tired of mental maths. She wants Dukaan to print a proper bill: each item's quantity times price, the grand total, the amount paid, and the change. Quantities come from the shopkeeper typing at the keyboard. Build v0.2 on top of v0.1 - the stock list stays, the bill is new.
 
-- A converter supporting kilometres to metres and Celsius to Fahrenheit.
-- A written input contract for both conversions.
-- A test-results table with valid, zero, negative, and non-numeric examples.
-- A short explanation of types and unit names in the implementation.
+- dukaan.py extended: after the stock list, it asks for quantities and prints a bill.
+- The bill shows each line (qty x price), the grand total, the paid amount, and the change.
+- A note in your own words: why int() was needed, with one example.
 
 Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
 
 ## Explain it back
 
-- Why does input representation matter to arithmetic?
-- Which checks are type validation and which are business rules?
-- Where does rounding happen, and what information can rounding lose?
+- Where exactly does text become a number in your program - and what breaks if you skip it?
+- Show the bill for 4 bags of rice without running the program. How did you work it out?
+- What would you change to add a fourth item to the bill?
 
 ## References and next steps
 
-- [Python: numbers and text](https://docs.python.org/3/tutorial/introduction.html)
-- [Python: floating-point arithmetic](https://docs.python.org/3/tutorial/floatingpoint.html)
+- [Python: numbers](https://docs.python.org/3/tutorial/introduction.html#numbers)
+- [Python: strings](https://docs.python.org/3/tutorial/introduction.html#strings)
 
 [← Lesson 1](../01_Day_Setup_Learn_With_AI/) · [Lesson 3 →](../03_Day_Conditionals_Loops/)
 

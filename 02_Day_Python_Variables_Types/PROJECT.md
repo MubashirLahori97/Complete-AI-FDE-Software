@@ -1,4 +1,4 @@
-# Lesson 2 project — A reliable unit conversion desk
+# Lesson 2 project — Dukaan v0.2 - totals and bills
 
 <!-- beginner-path:begin -->
 ## Your first action
@@ -7,7 +7,7 @@ Write this reference case before coding: 2 kilometres should become 2000 metres.
 
 The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
 
-**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `converter.py`. Run python converter.py. The standard library is sufficient.
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `bill.py`. Run python bill.py from the starter directory.
 
 Use the values from your profile to practise identifying types. The converter introduces input rules you will reuse in later forms.
 
@@ -15,51 +15,53 @@ Use the values from your profile to practise identifying types. The converter in
 
 ## The customer problem
 
-A shop employee needs a small converter for distances and temperatures. Build a program with a clearly selected conversion, labelled inputs and outputs, and helpful handling of invalid input. Keep distance validation separate from temperature rules: negative Celsius values are valid, while the project's distance contract rejects negative distances.
+Amina's customers are tired of mental maths. She wants Dukaan to print a proper bill: each item's quantity times price, the grand total, the amount paid, and the change. Quantities come from the shopkeeper typing at the keyboard. Build v0.2 on top of v0.1 - the stock list stays, the bill is new.
 
-**Learning goal:** Identify strings, integers, floating-point numbers, booleans, and missing values. Convert text into numbers at an input boundary and handle failed conversion. Define a conversion's input unit, output unit, and expected behavior.
+**Learning goal:** Explain the difference between text and numbers with a shop example. Use *, +, and - to compute a bill total and the change. Convert typed input from text to a number with int() before doing arithmetic.
 
 **Scope:** build the core version first. The starter is a worked example, not a finished solution to the full project. Use fictional or public sample data.
 
 ## What to deliver
 
-- A converter supporting kilometres to metres and Celsius to Fahrenheit.
-- A written input contract for both conversions.
-- A test-results table with valid, zero, negative, and non-numeric examples.
-- A short explanation of types and unit names in the implementation.
+- dukaan.py extended: after the stock list, it asks for quantities and prints a bill.
+- The bill shows each line (qty x price), the grand total, the paid amount, and the change.
+- A note in your own words: why int() was needed, with one example.
 
 Include a short README with the purpose, setup steps, example use, known limitations, and the evidence from your test cases. A reviewer should be able to tell which parts you implemented and which parts are demonstrations or mocks.
 
 ## Build it in milestones
 
-### Milestone 1: Define the contract
+### Milestone 1: One line total
 
-- Write the two formulas and allowed inputs in plain English.
-- Decide how to display units and how many decimal places are useful.
+- Pick one item and a fixed quantity.
+- Compute price times quantity and print the line.
+- Predict the number before you run.
 
-**Stop and check:** Your validation rules distinguish distances from temperatures.
+**Stop and check:** The line total equals price times quantity.
 
-### Milestone 2: Convert and validate
+### Milestone 2: The full bill
 
-- Implement conversion from raw text to a numeric value.
-- Return a helpful message for invalid text and unsupported conversion names.
+- Add a second item's line total.
+- Add both lines into a grand total and print it.
+- Compute change from a fixed paid amount and print it.
 
-**Stop and check:** A rejected value cannot be mistaken for a successful result.
+**Stop and check:** Total and change are correct for your test quantities.
 
-### Milestone 3: Prove the boundaries
+### Milestone 3: Real typed input
 
-- Run the test matrix and save the results.
-- Change the input representation deliberately and explain the behavior.
+- Use input() to ask for each quantity.
+- Convert the answers with int() before multiplying.
+- Test with quantities 1, 5, and 0.
 
-**Stop and check:** Known reference conversions and invalid-input cases behave as specified.
+**Stop and check:** Typing 5 gives five times the price; typing 0 gives Rs 0.
 
 ## Acceptance checks
 
-- [ ] Both conversion formulas produce the documented reference results.
-- [ ] Outputs include the input and output units.
-- [ ] Invalid numeric text produces a useful error message.
-- [ ] Negative temperature and distance inputs follow their separate contracts.
-- [ ] A test-results table records at least four boundary cases.
+- [ ] The program prints the v0.1 stock list unchanged.
+- [ ] It asks for quantities and prints a bill with line totals, a grand total, and change.
+- [ ] Every quantity is converted with int() before any arithmetic.
+- [ ] Quantity 0 gives a line total of Rs 0; quantity 5 gives five times the price.
+- [ ] You can explain why removing int() would break the bill.
 
 These are the same checks shown in the app. Record the actual result and relevant evidence, rather than checking a box because the code looks plausible.
 
@@ -67,31 +69,31 @@ These are the same checks shown in the app. Record the actual result and relevan
 
 | Case | Action or input | Expected behavior |
 | --- | --- | --- |
-| 1 | 2.5 km | 2500 m with units |
-| 2 | 0 C and 100 C | 32 F and 212 F |
-| 3 | two or empty input | Helpful validation error and no fabricated result |
-| 4 | -1 km and -10 C | Distance rejected; temperature converted |
+| 1 | Quantities: rice 3, sugar 2, tea 0; paid 2000 | Lines show Rs 750, Rs 360, Rs 0; total Rs 1110; change Rs 890 |
+| 2 | Quantity typed as 0 for every item | Total Rs 0; change equals the paid amount |
+| 3 | Quantity typed as "two" | Program shows an error naming the conversion (fix: type digits) |
+| 4 | Change price1 to 300 and re-run the bill | Rice line and total update; nothing else changes |
 
 Run the normal path and the failure paths. Keep a failed result visible in your notes until you understand and fix it. Re-run earlier passing cases after a change to catch regressions.
 
 ## Starter and how to use it
 
-The download contains this brief, a small worked example named `converter.py`, and its expected output. Run python converter.py. The standard library is sufficient.
+The download contains this brief, a small worked example named `bill.py`, and its expected output. Run python bill.py from the starter directory.
 
 Read the example before extending it. Keep your own project in a separate working directory or repository. Do not store secrets, real customer information, or private documents in a public learning repository.
 
 ## Stretch challenges
 
-- Add metres to kilometres and test a round trip within an explicit tolerance.
-- Add a currency-formatting exercise using integer minor units; keep it separate from live exchange rates.
+- Print a "THANK YOU" footer with the shop name and the total items sold.
+- Ask for the paid amount with input() too, and print a warning if paid is less than the total.
 
 Choose an extension only after the acceptance checks pass. Describe what the extension changes in the data model, user flow, tests, or operating cost.
 
 ## Review rubric and reflection
 
-- Why does input representation matter to arithmetic?
-- Which checks are type validation and which are business rules?
-- Where does rounding happen, and what information can rounding lose?
+- Where exactly does text become a number in your program - and what breaks if you skip it?
+- Show the bill for 4 bags of rice without running the program. How did you work it out?
+- What would you change to add a fourth item to the bill?
 
 Score yourself on four areas: correctness against the brief, clarity of the implementation, useful failure handling, and strength of the evidence. For each area, record one thing that works and one thing you would improve. A polished screenshot alone does not establish that the project works.
 
@@ -99,7 +101,7 @@ Finish with a short case study: **Problem → Approach → Tests → Results →
 
 ## References
 
-- [Python: numbers and text](https://docs.python.org/3/tutorial/introduction.html)
-- [Python: floating-point arithmetic](https://docs.python.org/3/tutorial/floatingpoint.html)
+- [Python: numbers](https://docs.python.org/3/tutorial/introduction.html#numbers)
+- [Python: strings](https://docs.python.org/3/tutorial/introduction.html#strings)
 
 [Return to lesson 2](README.md)
