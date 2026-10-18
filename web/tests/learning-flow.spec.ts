@@ -56,7 +56,7 @@ test('every original lesson has an actionable idea, example, task, feedback, and
 test('small-task attempts, hints and reading position survive reload and homepage resume', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#/workshops');
   await page.getByRole('link', { name: 'Start Lesson 1', exact: true }).click();
   await page.getByRole('button', { name: 'Show me an example', exact: true }).click();
   await page.getByRole('button', { name: 'Let me try a small task', exact: true }).click();

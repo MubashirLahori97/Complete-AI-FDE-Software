@@ -1,0 +1,67 @@
+.lesson-directions {
+  margin: 0 0 24px;
+  padding: 17px 20px;
+  border: 1px solid #ced9ce;
+  border-left: 3px solid #49766c;
+  border-radius: 10px;
+  background: #edf2e9;
+  color: #304c46;
+  max-width: 85ch;
+}
+.lesson-directions p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.lesson-directions p + p {
+  margin-top: 9px;
+}
+.lesson-directions strong {
+  color: #203f39;
+  font-weight: 600;
+}
+.mission-lesson .mission-field {
+  min-width: 0;
+}
+.mission-lesson .mission-field :is(input, select, textarea) {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.causal-studio .lab-look-for {
+  color: #c5d5ca;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 0;
+  padding: 15px 22px 20px;
+  border-top: 1px solid #ffffff12;
+}
+.causal-studio .lab-look-for strong {
+  color: #e4d3af;
+  font-weight: 500;
+}
+.causal-studio .lab-extra-task {
+  grid-column: 1 / -1;
+  color: #bed0c8;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0 0 8px;
+}
+.mission-concept-controls .lesson-build-next {
+  padding: 11px 15px;
+  min-height: 44px;
+  background: #234b46;
+  color: #fff9e8;
+  border: 1px solid #234b46;
+  border-radius: 8px;
+}
+@media (max-width: 600px) {
+  .lesson-directions {
+    padding: 14px 16px;
+  }
+  .lesson-directions p {
+    font-size: 14px;
+  }
+}

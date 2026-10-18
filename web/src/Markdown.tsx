@@ -39,6 +39,9 @@ export function documentHref(href: string | undefined, folder: string): string |
       /^\/MubashirLahori97\/Complete-AI-FDE-Software\/blob\/main\//,
       '',
     );
+    const mission = path.match(/^missions\/(\d{2})\/README\.md$/);
+    if (mission && Number(mission[1]) >= 1 && Number(mission[1]) <= 30)
+      return `#/mission/${Number(mission[1])}`;
     const lesson = lessons.find(
       (item) =>
         path === `${item.folder}/` || path === `${item.folder}/README.md` || path === item.folder,
@@ -48,7 +51,17 @@ export function documentHref(href: string | undefined, folder: string): string |
     if (projectLesson) return `#/lesson/${projectLesson.day}?tab=project`;
     const phase = phases.find((item) => path.startsWith(item.folder));
     if (phase) return `#/phase/${phase.id}`;
-    if (['ROADMAP.md', 'CURRICULUM.md', 'VISION.md', 'PROJECTS.md'].includes(path))
+    if (
+      [
+        'ROADMAP.md',
+        'CURRICULUM.md',
+        'VISION.md',
+        'PROJECTS.md',
+        'MISSION-COURSE.md',
+        'MISSION-MAP.md',
+        'RESEARCH-2030.md',
+      ].includes(path)
+    )
       return `#/document/${path}`;
     return url.href;
   } catch {

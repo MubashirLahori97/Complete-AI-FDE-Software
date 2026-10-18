@@ -1,14 +1,16 @@
-# 📖 Full Curriculum — 30 Days: Concepts, Engineering, Business
+# Existing Lesson Library — Concepts, Engineering, and Business
 
-**Expanded teaching and projects:** each lesson now has a deeper guide and its own project with milestones, acceptance checks, test cases, and a starter kit. See [the complete project index](PROJECTS.md). The index is the active project path; earlier workshop build suggestions below remain useful alternatives.
+**Curriculum direction:** the [accepted roadmap for learners starting in 2028 or 2029](ROADMAP.md) makes concept mastery compulsory and allows AI to perform all implementation. It defines a shared concept foundation and thirty missions assessed through understanding and useful results. The lessons below are existing material to reuse and reorganize, including optional implementation practice. The app now implements that core sequence; [MISSION-MAP.md](MISSION-MAP.md) maps the material below to it. Piloting and outcome calibration remain required. Historical manual-coding, line-by-line and schedule requirements below belong to optional workshops, not the core.
 
-**Premise:** AI writes the code. Your job is the three things AI can't do for you: **understand concepts 100%, engineer systems with judgment, and turn software into business value.**
+**Expanded teaching and projects:** each lesson now has a deeper guide and its own project with milestones, acceptance checks, test cases, and a starter kit. See [the complete project index](PROJECTS.md). This index is the optional original-workshop project path. The active core project path is [the thirty mission guides](MISSION-MAP.md).
 
-**The promise:** a normal person with zero knowledge — 30 days later — walks into a business, fixes a real problem with AI software, and gets paid for it. Learning is lifelong; earning starts on day 30.
+**Premise:** understand the concepts, direct capable AI, establish the required behaviour, and connect decisions to users' needs. Manual coding is not a core graduation requirement.
 
-**Time per day:** 60–90 minutes. **Rule:** a day isn't done until you can explain the concept in plain words *and* something runs.
+**The aim:** demonstrate conceptual reasoning and successful delivery with AI available throughout. Readiness depends on observed capability; lesson completion does not guarantee income or employment.
 
-**The daily loop:** Learn the concept → Specify it to AI → Evaluate what AI built → Business lens → Commit.
+**Study pace:** use one or more sessions per lesson and additional time for projects. **Rule:** explain the concept in plain words and verify a working result.
+
+**The learning loop:** Understand the concept → Predict a variation → Define the outcome → Direct AI → Establish the result → Explain and record.
 
 ---
 
@@ -278,8 +280,8 @@
 
 ## After day 30
 
-You have what AI can't give you: **concepts at 100%, engineering judgment, and business sense.** The next 90 days: go deep in one area, build one serious thing in it, and start charging — freelance, employment, or your own product. Your edge as an FDE: you speak both languages, the client's problem and the engineer's solution.
+Review the evidence from your projects, identify what you still need help with, and practise unfamiliar variations. Continue developing the ability to understand the client's problem and explain the engineering solution.
 
-**Want the full path, not just the next 90 days?** [ROADMAP.md](ROADMAP.md) continues from day 31 to day 90 — three dense phases that turn a 30-day builder into a complete, hire-ready software engineer: engineering depth (databases, APIs, testing), real products with real users, and getting paid + hired. Three months total, at sprint pace.
+**Continue through the core path:** [ROADMAP.md](ROADMAP.md) defines the shared concept foundation, thirty missions, and assessments of AI-led delivery. Progress depends on understanding and demonstrated outcomes; pilots will establish realistic pacing.
 
-*AI writes the code. You do everything that matters around it. Fork this repo, do it in public, and show your work.*
+*Build, explain, test, and improve. Keep an honest record of the work and the help you used.*

@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowRight, RotateCcw, TicketCheck } from 'lucide-react';
 import { lessons, quizzes } from './data';
 import { localDate, type Progress } from './state';
 import { reviewLesson } from './motivation';
 import { Companion, WinMoment } from './MissionUI';
+import { ShopWorld, SoundSwitch, StudioBuddy, playWinSound } from './StudioArt';
 
 export default function QuickChallenge({
   progress,
@@ -15,17 +16,25 @@ export default function QuickChallenge({
   const [received, setReceived] = useState(false);
   const [choice, setChoice] = useState<number | null>(null);
   const [won, setWon] = useState(false);
+  const nextQuestion = useRef<HTMLHeadingElement>(null);
+  const nextLesson = useRef<HTMLAnchorElement>(null);
   const [reviewDay] = useState(() => (progress.warmupSolved ? reviewLesson(progress) : undefined));
   const review = reviewDay ? quizzes[reviewDay][0] : undefined;
   const options = review ? review.options : ['9', '12', '15'];
   const correct = choice !== null && (review ? choice === review.answer : choice === 0);
   const answer = (index: number) => {
     setChoice(index);
+    if (review ? index === review.answer : received && index === 0)
+      requestAnimationFrame(() =>
+        nextLesson.current?.scrollIntoView({ block: 'nearest', behavior: 'instant' }),
+      );
     if (review && reviewDay && index === review.answer) {
+      if (!correct) playWinSound(progress.soundEnabled);
       const first = !progress.reviewWins[reviewDay];
       update({ ...progress, reviewWins: { ...progress.reviewWins, [reviewDay]: localDate() } });
       setWon(first);
     } else if (!review && index === 0 && received) {
+      if (!correct) playWinSound(progress.soundEnabled);
       setWon(!progress.warmupSolved);
       if (!progress.warmupSolved) update({ ...progress, warmupSolved: true });
     }
@@ -48,88 +57,149 @@ export default function QuickChallenge({
               ? 'Practise again'
               : '+10 XP'}
         </span>
+        <SoundSwitch
+          enabled={progress.soundEnabled}
+          change={(soundEnabled) => update({ ...progress, soundEnabled })}
+        />
       </div>
-      {review ? (
-        <>
-          <p className="challenge-context">
-            From mission {reviewDay}: {lessons[reviewDay! - 1].title}
-          </p>
-          <h3>{review.prompt}</h3>
-        </>
-      ) : (
-        <>
-          <div className="ticket-counter">
-            <div>
-              <TicketCheck size={22} />
-              <span>OPEN TICKETS</span>
-            </div>
-            <strong key={received ? 'received' : 'start'}>{received ? 12 : 10}</strong>
-            <Companion mood={correct ? 'win' : 'ready'} />
+      <div className="challenge-game">
+        {review ? (
+          <div className="studio-review-world" aria-hidden="true">
+            <span>THE MEMORY LAB</span>
+            <StudioBuddy success={correct} careful={choice !== null && !correct} />
+            <p>
+              A discovery you made.
+              <br />
+              <strong>A fresh chance to use it.</strong>
+            </p>
+            <small>MISSION {String(reviewDay).padStart(2, '0')}</small>
           </div>
-          <p>A support team starts with 10 tickets. Two more arrive. Make the number change.</p>
+        ) : (
+          <ShopWorld arrived={received} solved={correct} />
+        )}
+        <div className="challenge-console">
+          <div className="challenge-beats" aria-label="Challenge progress">
+            {['Make it change', 'Predict the result', 'First win'].map((label, i) => (
+              <span
+                key={label}
+                className={
+                  (i === 0 ? received : i === 1 ? choice !== null && correct : correct)
+                    ? 'beat-done'
+                    : ''
+                }
+              >
+                <b>{i + 1}</b>
+                {label}
+              </span>
+            ))}
+          </div>
+          {review ? (
+            <>
+              <p className="challenge-context">
+                From mission {reviewDay}: {lessons[reviewDay! - 1].title}
+              </p>
+              <h3>{review.prompt}</h3>
+            </>
+          ) : (
+            <>
+              <div className="ticket-counter">
+                <div>
+                  <TicketCheck size={22} />
+                  <span>OPEN TICKETS</span>
+                </div>
+                <strong key={correct ? 'solved' : received ? 'received' : 'start'}>
+                  {correct ? 9 : received ? 12 : 10}
+                </strong>
+                <Companion mood={correct ? 'win' : 'ready'} />
+                <ShopWorld arrived={received} solved={correct} mini />
+              </div>
+              <button
+                className="button challenge-action"
+                disabled={received}
+                onClick={() => {
+                  setReceived(true);
+                  requestAnimationFrame(() => nextQuestion.current?.focus());
+                }}
+              >
+                {received ? '2 tickets received ✓' : 'Receive 2 tickets'}
+                <ArrowRight size={16} />
+              </button>
+              {!received && (
+                <p>
+                  Two new requests just arrived for Amina’s team. Update the counter to help them
+                  get started.
+                </p>
+              )}
+              {received && (
+                <h3 ref={nextQuestion} tabIndex={-1}>
+                  {correct
+                    ? 'Nine tickets. You made the rule work.'
+                    : 'Now close 3 tickets. How many remain?'}
+                </h3>
+              )}
+            </>
+          )}
+          {(review || received) && (
+            <div className="challenge-answers" role="group" aria-label="Challenge answers">
+              {options.map((label, index) => (
+                <button
+                  key={label}
+                  disabled={!review && !received}
+                  aria-pressed={choice === index}
+                  className={choice === index ? (correct ? 'answer-right' : 'answer-rethink') : ''}
+                  onClick={() => answer(index)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
+          {choice !== null && (
+            <p className={`challenge-feedback ${correct ? 'correct' : ''}`} role="status">
+              {correct
+                ? review
+                  ? review.explanation
+                  : 'You got it: 10 + 2 − 3 = 9. You just traced a program.'
+                : review
+                  ? 'Try another answer. Think about the rule you practised in this mission.'
+                  : 'Start at 12 after the new tickets arrive, then take away 3. Try again.'}
+            </p>
+          )}
+          {correct && (
+            <WinMoment
+              title={
+                won
+                  ? review
+                    ? 'Memory refreshed. +5 XP'
+                    : 'Your first small win. +10 XP'
+                  : 'Nice work. You traced it again.'
+              }
+            >
+              These points are saved once. Keep your next step small.
+            </WinMoment>
+          )}
           <button
-            className="button challenge-action"
-            disabled={received}
-            onClick={() => setReceived(true)}
+            className="challenge-reset"
+            onClick={() => {
+              setReceived(false);
+              setChoice(null);
+              setWon(false);
+            }}
           >
-            {received ? '2 tickets received ✓' : 'Receive 2 tickets'}
-            <ArrowRight size={16} />
+            <RotateCcw size={13} />
+            Try again
           </button>
-          <h3>
-            {received
-              ? 'Now close 3 tickets. How many remain?'
-              : 'Then you will close 3. Can you predict the result?'}
-          </h3>
-        </>
-      )}
-      <div className="challenge-answers" role="group" aria-label="Challenge answers">
-        {options.map((label, index) => (
-          <button
-            key={label}
-            disabled={!review && !received}
-            aria-pressed={choice === index}
-            className={choice === index ? (correct ? 'answer-right' : 'answer-rethink') : ''}
-            onClick={() => answer(index)}
-          >
-            {label}
-          </button>
-        ))}
+          {correct && (
+            <a
+              ref={nextLesson}
+              className="button studio-next"
+              href={`#/lesson/${reviewDay || 1}?tab=learn`}
+            >
+              Try a lesson next <ArrowRight size={17} />
+            </a>
+          )}
+        </div>
       </div>
-      {choice !== null && (
-        <p className={`challenge-feedback ${correct ? 'correct' : ''}`} role="status">
-          {correct
-            ? review
-              ? review.explanation
-              : 'You got it: 10 + 2 − 3 = 9. You just traced a program.'
-            : review
-              ? 'Try another answer. Think about the rule you practised in this mission.'
-              : 'Start at 12 after the new tickets arrive, then take away 3. Try again.'}
-        </p>
-      )}
-      {correct && (
-        <WinMoment
-          title={
-            won
-              ? review
-                ? 'Memory refreshed. +5 XP'
-                : 'Your first small win. +10 XP'
-              : 'Nice work. You traced it again.'
-          }
-        >
-          These points are saved once. Keep your next step small.
-        </WinMoment>
-      )}
-      <button
-        className="challenge-reset"
-        onClick={() => {
-          setReceived(false);
-          setChoice(null);
-          setWon(false);
-        }}
-      >
-        <RotateCcw size={13} />
-        Try again
-      </button>
     </section>
   );
 }
