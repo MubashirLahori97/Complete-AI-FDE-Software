@@ -1,9 +1,9 @@
-# Day 4 — Functions, contracts, and useful abstraction
+# Day 4 — The reusable counter
 
 <!-- beginner-path:begin -->
 ## Start here — one idea at a time
 
-**Your goal:** A reusable quote calculator. You can take several study sessions.
+**Your goal:** Dukaan v0.4 - organized code. You can take several study sessions.
 
 **The situation:** A business needs to calculate several quotes without copying the same arithmetic everywhere.
 
@@ -62,107 +62,115 @@ Use the app's **Learn → Practise → Project → Record your build** flow, or 
 
 <!-- beginner-path:end -->
 
-A function gives a small operation a name, explicit inputs, and an observable result. It helps you reason about a program one responsibility at a time. Today you will turn a calculation into a contract and build a quote calculator whose business rules can be tested without reading interactive input or printing a screen.
+Dukaan now computes totals, discounts, and stock checks - but the same small jobs are scattered everywhere: "price times quantity" appears in the bill, in the stock value, in the report. When Amina changes a rule, you must hunt down every copy. Today v0.4 gets organized: each repeated job becomes a function - a named, reusable piece with inputs and an answer.
 
-**Your project:** [A reusable quote calculator](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+**Your project:** [Dukaan v0.4 - organized code](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
 
 ## What you will be able to do
 
-- Distinguish a function's parameters, return value, and side effects.
-- Separate pure calculation from input/output code.
-- Write and test a function contract with normal and invalid inputs.
+- Define a function with def that packages one job under one name.
+- Pass inputs as parameters and get answers back with return.
+- Explain the difference between printing a value and returning it.
 
 ## Understand the concept
 
-### Name what the operation means
+### A function is a job with a name
 
-A function should expose a useful idea to its caller. total_cents(price_cents, quantity) tells you more than process(a, b). The caller needs to know allowed inputs, the result, and possible errors. Those expectations are the contract. Implementation details can change while the contract stays stable, letting other parts of the program continue to work. Start with an operation you can describe in one sentence; if the sentence contains several unrelated tasks, the function may be taking on too much.
+def total_value(price, qty): creates a reusable job called total_value. The indented lines are the job's instructions - they only run when you call the function by name: total_value(250, 40). You write the logic once and use it ten times. When the rule changes, you change it in one place. That is the whole point: one definition, many uses. Name it after the job it does, not after how it does it.
 
-### Return and print are different
+### Parameters in, return out
 
-return passes a value back to the caller and ends that function call. print writes a representation to an output stream. A function that only prints a total is harder to reuse in a web API or a test. Let calculation functions return values; let the interface decide how to display them. A function with no explicit return returns None in Python. That often explains why a caller unexpectedly receives a missing value after an apparently successful print.
+price and qty are parameters - empty slots that get filled each time you call. return sends the answer back to the caller: rice_value = total_value(250, 40) stores 10000 in rice_value. Contrast this with print: print shows a value on the screen and gives back nothing. A function that prints its answer cannot be reused in a calculation - you cannot add up printed lines. Return the answer; let the caller decide whether to print it.
 
-### Pure logic is easier to test
+### True and False are answers too
 
-A pure calculation uses its inputs to produce a result without modifying external state. It does not read the keyboard, save a file, or call a network service. Such functions are straightforward to test with known examples. Side effects are necessary in real applications, but keep their boundaries visible. The goal is not to create the largest possible number of functions; it is to separate responsibilities where the separation helps you understand and change the system.
+is_low_stock(40) answers a yes/no question, so it returns True or False. True and False are Python's words for yes and no - they are values, just like numbers. You can store them, print them, and use them directly in an if: "if is_low_stock(stock):" reads almost like English. Functions that answer questions make decisions readable, and readable code is code the team trusts.
 
 ## A worked example, step by step
 
-A line total is calculated in integer minor units. Validation is part of the function contract.
+Amina wants two reusable jobs: the value of some stock (price times quantity) and a low-stock test. Read the code, predict all four printed lines, then run.
 
 ```python
-def line_total_cents(price_cents, quantity):
-    if price_cents < 0 or quantity < 0:
-        raise ValueError("Price and quantity must be non-negative")
-    return price_cents * quantity
+def total_value(price, qty):
+    return price * qty
 
-subtotal = line_total_cents(250, 3)
-assert subtotal == 750
-print(f"Subtotal: {subtotal} cents")
+def is_low_stock(stock):
+    return stock < 50
+
+rice_value = total_value(250, 40)
+sugar_value = total_value(180, 90)
+
+print(f"Rice stock value: Rs {rice_value}")
+print(f"Sugar stock value: Rs {sugar_value}")
+print(f"Rice low? {is_low_stock(40)}")
+print(f"Sugar low? {is_low_stock(90)}")
 ```
 
 **Expected result**
 
 ```text
-Subtotal: 750 cents
+Rice stock value: Rs 10000
+Sugar stock value: Rs 16200
+Rice low? True
+Sugar low? False
 ```
 
-def creates a callable function; its body runs when the caller supplies the two arguments. The validation rejects negative inputs before calculating. return gives the integer result to the caller, which stores it as subtotal. The assertion checks a known example independently of the display text. The final print belongs to the interface layer. The example assumes integer inputs; a complete project must document or validate that assumption rather than relying on the function name alone.
+The two def blocks define jobs but run nothing yet - defining is not calling. total_value(250, 40) fills price with 250 and qty with 40, computes 10000, and return hands it back to be stored in rice_value. is_low_stock(40) asks "40 < 50?" - True. is_low_stock(90) asks "90 < 50?" - False. Notice the callers never see inside the functions; they only know the name, the inputs, and the answer. That separation is what lets you reuse code and change it safely.
 
 ## Practise before building
 
-### Exercise 1: Separate output from logic
+### Exercise 1: A bill-line function
 
-Replace a calculator that prints inside its calculation with a function that returns its result.
+Write bill_line(price, qty) that returns price times qty. Call it for (950, 2) and (180, 5). Predict both answers, then run.
 
-**Hint:** Move print to the caller.
+**Hint:** One def, one return, two calls.
 
-**Check your result:** The result can be asserted without capturing printed text.
+**Check your result:** 1900 and 900 - both predicted before running.
 
-### Exercise 2: Test a contract
+### Exercise 2: Return vs print
 
-Check normal quantity, zero quantity, negative quantity, and a non-integer quantity.
+Write a version of total_value that prints the answer instead of returning it. Then try adding two calls together. What happens, and why?
 
-**Hint:** Decide which inputs are supported before writing validation.
+**Hint:** A function with no return gives back a special value called None.
 
-**Check your result:** Supported values return predictable results and rejected values have clear errors.
+**Check your result:** You can explain why adding returned values works but adding printed output fails.
 
-### Exercise 3: Compose operations
+### Exercise 3: Reuse three times
 
-Add two line totals and an explicit delivery fee using separate named operations.
+Use total_value three times - rice, sugar, tea - and add the three answers into stock_worth. Predict the total, then run.
 
-**Hint:** Reuse line_total_cents rather than copying its formula.
+**Hint:** worth = total_value(250, 40) + total_value(180, 90) + total_value(950, 25)
 
-**Check your result:** Changing one unit price affects only the related line and grand total.
+**Check your result:** Rs 49950, matching your prediction. One function, three uses.
 
 ## Common mistakes and how to debug them
 
-- Confusing printed output with a return value: inspect what the caller actually receives.
-- Reading input inside every calculation: isolate the interface so tests can call the logic directly.
-- Making an abstraction before understanding the rule: a shorter name does not automatically make a clearer contract.
+- Calling a function before defining it - Python reads top to bottom, so def must come first.
+- Forgetting return - the function then gives back None, and None + 5 is an error.
+- Printing inside the function instead of returning - then the answer cannot be reused in maths.
 
 ## The FDE connection
 
-Customer systems change. A useful contract lets you replace a price source, UI, or storage layer without rewriting the business calculation. An FDE explains which changes stay local and which changes affect the contract other teams rely on.
+In code review, seniors constantly say: "extract this into a function - you wrote it three times." Duplicated logic is how real bugs are born: the discount gets fixed in the bill but not in the report. Juniors who name small jobs well - total_value, is_low_stock - write code the whole team can read. Today's project is your first refactor: same behavior, better shape. That word will follow you for your whole career.
 
 ## Build your lesson project
 
-**A reusable quote calculator**
+**Dukaan v0.4 - organized code**
 
-A small service business creates quotes with line items and a delivery fee. Build calculation functions using integer cents, plus a thin display layer. Define supported prices and quantities explicitly. The first version has no tax integration, discounts, payments, or live exchange rates; those are separate scope decisions.
+Dukaan works, but its logic is scattered: price times quantity is computed in three places, the low-stock test in two. Amina wants a small change - the low-stock limit moves to 40 - and you should only have to change it once. Rebuild v0.4: same program, organized into functions. Nothing the user sees changes; everything about the code gets better.
 
-- Calculation functions for line totals, subtotal, and grand total.
-- A readable example quote with two line items.
-- A written contract for integer prices and quantities.
-- Tests for zero, negative, and unsupported inputs.
+- dukaan.py rewritten with functions: line_total, is_low_stock, bill_total at minimum.
+- No duplicated price-times-quantity logic - every use calls the function.
+- The low-stock limit appears exactly once in the file.
+- A before/after note: which lines disappeared and why the new version is easier to change.
 
 Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
 
 ## Explain it back
 
-- Which function contracts could another developer rely on?
-- Why is returning a value different from printing it?
-- Which possible future change would require a contract change?
+- What is the difference between defining a function and calling it?
+- Why is returning better than printing inside a reusable function?
+- If Amina adds a "damaged goods" discount, which function would change - and which would not?
 
 ## References and next steps
 

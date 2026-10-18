@@ -1,4 +1,4 @@
-# Lesson 4 project — A reusable quote calculator
+# Lesson 4 project — Dukaan v0.4 - organized code
 
 <!-- beginner-path:begin -->
 ## Your first action
@@ -7,7 +7,7 @@ Write one example quote by hand with two items and a delivery fee, all in cents.
 
 The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
 
-**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `quote.py`. Run python quote.py. The example uses integer cents rather than live currency conversion.
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `counter.py`. Run python counter.py from the starter directory.
 
 Use conditions from Day 3 to reject invalid quantities. This calculator can later support a web form without changing its arithmetic.
 
@@ -15,51 +15,54 @@ Use conditions from Day 3 to reject invalid quantities. This calculator can late
 
 ## The customer problem
 
-A small service business creates quotes with line items and a delivery fee. Build calculation functions using integer cents, plus a thin display layer. Define supported prices and quantities explicitly. The first version has no tax integration, discounts, payments, or live exchange rates; those are separate scope decisions.
+Dukaan works, but its logic is scattered: price times quantity is computed in three places, the low-stock test in two. Amina wants a small change - the low-stock limit moves to 40 - and you should only have to change it once. Rebuild v0.4: same program, organized into functions. Nothing the user sees changes; everything about the code gets better.
 
-**Learning goal:** Distinguish a function's parameters, return value, and side effects. Separate pure calculation from input/output code. Write and test a function contract with normal and invalid inputs.
+**Learning goal:** Define a function with def that packages one job under one name. Pass inputs as parameters and get answers back with return. Explain the difference between printing a value and returning it.
 
 **Scope:** build the core version first. The starter is a worked example, not a finished solution to the full project. Use fictional or public sample data.
 
 ## What to deliver
 
-- Calculation functions for line totals, subtotal, and grand total.
-- A readable example quote with two line items.
-- A written contract for integer prices and quantities.
-- Tests for zero, negative, and unsupported inputs.
+- dukaan.py rewritten with functions: line_total, is_low_stock, bill_total at minimum.
+- No duplicated price-times-quantity logic - every use calls the function.
+- The low-stock limit appears exactly once in the file.
+- A before/after note: which lines disappeared and why the new version is easier to change.
 
 Include a short README with the purpose, setup steps, example use, known limitations, and the evidence from your test cases. A reviewer should be able to tell which parts you implemented and which parts are demonstrations or mocks.
 
 ## Build it in milestones
 
-### Milestone 1: Specify calculations
+### Milestone 1: Extract the repeated jobs
 
-- Write a sample quote and calculate it manually.
-- Define the unit and valid range of every input.
+- Find every place that computes price times quantity.
+- Write line_total(price, qty) and replace each copy with a call.
+- Run the bill and confirm the numbers are unchanged.
 
-**Stop and check:** The manual expected total is available before the code is written.
+**Stop and check:** The bill totals are identical to v0.4's.
 
-### Milestone 2: Build reusable functions
+### Milestone 2: One home for each rule
 
-- Return calculated values instead of printing inside business functions.
-- Keep user-facing formatting in a small separate caller.
+- Write is_low_stock(stock) with the limit inside it.
+- Replace every stock comparison with a call.
+- Change the limit to 40 in one place and re-run.
 
-**Stop and check:** The same functions can be called from a test or another interface.
+**Stop and check:** One edit changes every stock check in the program.
 
-### Milestone 3: Review change impact
+### Milestone 3: Tidy and prove
 
-- Test the boundaries and compare results with the manual quote.
-- Change the delivery fee and show which function or caller changes.
+- Move all def blocks to the top, calls below.
+- Re-run every test from v0.4.
+- Write the before/after note.
 
-**Stop and check:** The change does not alter unrelated line calculations.
+**Stop and check:** All v0.4 tests still pass with the organized code.
 
 ## Acceptance checks
 
-- [ ] Calculations use documented integer minor units.
-- [ ] Line, subtotal, and grand-total functions return useful values.
-- [ ] The display layer is separate from the calculation functions.
-- [ ] Zero and invalid inputs follow the written contract.
-- [ ] A manually checked quote and regression examples agree with the implementation.
+- [ ] Every price-times-quantity computation goes through line_total - no inline copies remain.
+- [ ] Every low-stock decision goes through is_low_stock - the limit appears once.
+- [ ] The program's output is identical to v0.4 for the same inputs.
+- [ ] Changing the stock limit to 40 requires editing exactly one line.
+- [ ] You can explain the difference between defining a function and calling it.
 
 These are the same checks shown in the app. Record the actual result and relevant evidence, rather than checking a box because the code looks plausible.
 
@@ -67,31 +70,31 @@ These are the same checks shown in the app. Record the actual result and relevan
 
 | Case | Action or input | Expected behavior |
 | --- | --- | --- |
-| 1 | 250 cents times quantity 3 | 750 cents |
-| 2 | Zero quantity and a non-zero delivery fee | Zero line total plus the documented fee |
-| 3 | Negative price or quantity | Clear rejection rather than a negative quote |
-| 4 | Change one line's quantity | Only that line, subtotal, and grand total change |
+| 1 | Run the v0.4 bill with v0.3 quantities | Identical totals to v0.3 |
+| 2 | Change limit to 40; an item with stock 45 | No longer flagged (it was flagged at 50) |
+| 3 | Call line_total(950, 0) | Returns 0 |
+| 4 | Search the file for price-times-qty outside line_total | No matches - no duplicated logic |
 
 Run the normal path and the failure paths. Keep a failed result visible in your notes until you understand and fix it. Re-run earlier passing cases after a change to catch regressions.
 
 ## Starter and how to use it
 
-The download contains this brief, a small worked example named `quote.py`, and its expected output. Run python quote.py. The example uses integer cents rather than live currency conversion.
+The download contains this brief, a small worked example named `counter.py`, and its expected output. Run python counter.py from the starter directory.
 
 Read the example before extending it. Keep your own project in a separate working directory or repository. Do not store secrets, real customer information, or private documents in a public learning repository.
 
 ## Stretch challenges
 
-- Introduce a documented percentage-discount policy with explicit rounding.
-- Use the functions behind a small web form after lesson 13.
+- Add grand_total(prices, qtys) that loops and calls line_total inside - functions calling functions.
+- Add cheapest_item(names, prices) returning the name of the cheapest item.
 
 Choose an extension only after the acceptance checks pass. Describe what the extension changes in the data model, user flow, tests, or operating cost.
 
 ## Review rubric and reflection
 
-- Which function contracts could another developer rely on?
-- Why is returning a value different from printing it?
-- Which possible future change would require a contract change?
+- What is the difference between defining a function and calling it?
+- Why is returning better than printing inside a reusable function?
+- If Amina adds a "damaged goods" discount, which function would change - and which would not?
 
 Score yourself on four areas: correctness against the brief, clarity of the implementation, useful failure handling, and strength of the evidence. For each area, record one thing that works and one thing you would improve. A polished screenshot alone does not establish that the project works.
 

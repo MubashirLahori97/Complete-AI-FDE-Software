@@ -1,140 +1,839 @@
 [
   {
-    "day": 7, "title": "Scope and ship a complete command-line tool",
-    "intro": "A project becomes useful when another person can complete a task with it. Today you will combine data, decisions, functions, and persistence into an expense tracker. The challenge is finishing a small, coherent product: an understandable workflow, reliable behavior, useful errors, and instructions that work outside your own terminal session.",
-    "objectives": ["Turn a user problem into a bounded feature list and acceptance criteria.", "Compose earlier concepts into a complete expense workflow.", "Observe a new user and distinguish usability feedback from implementation guesses."],
-    "concepts": [
-      {"title": "Scope is a design decision", "text": "A first version should support a clear task from beginning to end. For an expense tracker, adding an expense, listing expenses, and showing a total form a coherent workflow. Bank integrations, receipt recognition, and multi-user permissions can wait. An explicit out-of-scope list protects the finish line. Scope is not measured by the number of technologies used; it is measured by whether the chosen user's problem can be addressed with the available time and evidence."},
-      {"title": "Design around a vertical slice", "text": "A vertical slice crosses input, business logic, and storage for one useful action. Start by adding one valid expense and seeing it after a restart. That proves more than implementing several disconnected screens or functions. Keep the calculation independent of command parsing. Store amounts in a documented representation, such as integer cents. Decide whether the total includes all records or only a filtered view and state that meaning in the output."},
-      {"title": "A new user tests your assumptions", "text": "Give a person the README and observe them trying a representative task. Avoid explaining each hesitation immediately, because coaching hides confusing steps. Record the action, expectation, and obstacle before proposing a fix. One person's feedback is useful evidence about that test, not proof that every user will behave the same way. Ask permission before collecting or publishing identifying feedback; fictional sample expenses are enough for the learning project."}
+    "day": 7,
+    "title": "Ship Dukaan v1.0",
+    "intro": "Six days of pieces: display, bills, decisions, loops, functions, lists, files. Today they become one thing a stranger can use. v1.0 adds no new ideas - it is finishing: a menu that never crashes, a README a stranger can follow, and a demo to a real person. This is Project 1, the checkpoint for all of Phase 1.",
+    "objectives": [
+      "Assemble the week's pieces into one menu-driven program.",
+      "Write a README that lets a stranger run the tool without your help.",
+      "Demo the tool to a real person and fix what confuses them."
     ],
-    "example": {"language": "python", "filename": "expenses.py", "run": "Run python expenses.py. This example models the calculation; add the CLI and persistent storage in the project.", "context": "A simple list supplies the data for a total. No bank connection or live financial data is involved.", "code": "expenses = [\n    {\"id\": \"E1\", \"label\": \"Lunch\", \"amount_cents\": 500},\n    {\"id\": \"E2\", \"label\": \"Bus\", \"amount_cents\": 200},\n]\ntotal_cents = sum(expense[\"amount_cents\"] for expense in expenses)\nfor expense in expenses:\n    print(expense[\"id\"], expense[\"label\"], expense[\"amount_cents\"])\nprint(f\"Total: {total_cents} cents\")", "output": "E1 Lunch 500\nE2 Bus 200\nTotal: 700 cents", "walkthrough": "Each record has an identity, label, and numeric amount. The generator expression supplies amounts to sum without changing the records. The display loop shows individual records before the summary so a user can inspect what the total contains. An empty list naturally totals zero. A complete tracker still needs validation, persistence, and an interface; this working calculation is one vertical slice's business logic, not the finished product."},
+    "concepts": [
+      {
+        "title": "Done means a stranger can use it",
+        "text": "Your program works for you because you know how it wants to be used. Done means Amina's cousin can run it from your README alone: what the program does, how to start it, what each menu choice does. Scope is a design decision - v1.0 does five things: view stock, add item, print a bill, save, quit. Nothing more. Every extra feature is a new way to be broken; ship the five working."
+      },
+      {
+        "title": "One complete path beats five half-paths",
+        "text": "Pick \"add an item\" and make it work end to end: menu choice, ask for name and numbers, reject bad input with a message, save the file, confirm on screen. That is a vertical slice - one thin path through the whole program, finished. Then do the next. Five half-built features demo as five broken promises; two finished paths demo as a tool."
+      },
+      {
+        "title": "The demo is part of the project",
+        "text": "Watching a real person use your program finds what testing misses: they press 6 when the menu has 5 choices, they type the item name where the price goes. Their confusion is the bug report. A menu that never crashes is built from pieces you already own: each choice calls a function from Days 3-6, every number goes through try/except, and \"quit\" always works. Demo it, write down every stumble, fix them."
+      }
+    ],
+    "example": {
+      "language": "python",
+      "filename": "menu.py",
+      "run": "Run python menu.py from the starter directory.",
+      "context": "The v1.0 menu in miniature. The choices are simulated from a list so the example runs on its own - in your project, input() reads them from the shopkeeper. Predict what \"9\" does before you run.",
+      "code": "def view_stock():\n    print(\"Showing stock... (your Day 6 loader plugs in here)\")\n\ndef add_item():\n    print(\"Adding an item... (your code goes here)\")\n\nchoices = [\"1\", \"9\", \"3\"]\nfor choice in choices:\n    print(f\"Choose: {choice}\")\n    if choice == \"1\":\n        view_stock()\n    elif choice == \"2\":\n        add_item()\n    elif choice == \"3\":\n        print(\"Goodbye!\")\n        break\n    else:\n        print(\"Please choose 1, 2, or 3.\")",
+      "output": "Choose: 1\nShowing stock... (your Day 6 loader plugs in here)\nChoose: 9\nPlease choose 1, 2, or 3.\nChoose: 3\nGoodbye!",
+      "walkthrough": "The for loop feeds three choices. \"1\" calls view_stock(). \"9\" matches nothing, so the else prints guidance - this is the never-crash rule: every unexpected input gets a message, never a traceback. \"3\" prints goodbye and break exits the loop. In the real program this loop is while True and choice comes from input(); the structure is identical."
+    },
     "exercises": [
-      {"title": "Write the smallest specification", "task": "Describe the user, three core actions, and three excluded features in a short paragraph.", "hint": "Choose a workflow that a new user can complete in a few minutes.", "check": "Every core action has an observable success condition."},
-      {"title": "Trace a total", "task": "Add and remove a sample expense, predicting the total after each action.", "hint": "Keep the record count and amount total as different quantities.", "check": "The displayed records explain the calculated total."},
-      {"title": "Run a usability check", "task": "Write a task such as add one expense and inspect the total, then watch a new user follow only your instructions.", "hint": "Record what they attempted before deciding what to change.", "check": "You have one concrete observation and a corresponding improvement."}
-    ], "mistakes": ["Adding optional features before one workflow works end to end.", "Calculating with unvalidated text or unclear money units.", "Calling a coached demonstration a usability test without recording the help provided."],
-    "fde": "Customers need completed workflows, not a collection of impressive fragments. An FDE agrees on a useful slice, demonstrates it with realistic data, and keeps the acceptance criteria visible. Your expense tracker is practice for that delivery discipline.",
-    "project": {"title": "A usable CLI expense tracker", "brief": "A freelancer needs to record small expenses and inspect a reliable total. Build a command-line tool that adds, lists, and totals fictional expenses, saves them between runs, and explains invalid input. A stranger should be able to install and use it from the README. Receipt scanning, accounts, and bank connections are outside the first version.", "deliverables": ["An add/list/total command workflow with JSON persistence.", "A clear data model and money-unit policy.", "A README with setup, sample commands, and error examples.", "A recorded user observation and a test-results table."], "milestones": [
-      {"title": "Complete one slice", "steps": ["Write the add-expense contract and store one valid record.", "Restart the tool and confirm the record is available."], "check": "One expense travels from input to durable storage and back."},
-      {"title": "Finish the workflow", "steps": ["Add listing and total operations using shared calculation logic.", "Handle invalid amounts, empty data, and missing files."], "check": "Each core action works without a hidden manual step."},
-      {"title": "Share and refine", "steps": ["Test a fresh setup from your README.", "Observe a new user, fix one specific obstacle, and retest."], "check": "The user can complete the agreed task with less help."}
-    ], "acceptance": ["Add, list, and total form a working command-line workflow.", "Expenses survive a restart with stable IDs.", "Amounts follow a documented numeric representation and validation policy.", "A fresh setup works from the README alone.", "One usability observation and all test cases are recorded."], "tests": [["Two valid expenses of 500 and 200 cents", "Both listed; total is 700 cents"], ["Empty expense list", "Zero total and clear no-records message"], ["Invalid or negative amount", "Helpful rejection and no stored invalid record"], ["Restart after adding a record", "Stored record remains available"]], "extensions": ["Add category filtering with an explicit filtered-total label.", "Export a report and document which fields it includes."], "review": ["What did you intentionally leave out of version one?", "Where does one vertical slice cross the system's boundaries?", "What did a new user's behavior reveal that your own testing missed?"]},
-    "references": [["Python: argparse", "https://docs.python.org/3/library/argparse.html"], ["Python: JSON", "https://docs.python.org/3/library/json.html"]]
+      {
+        "title": "README first",
+        "task": "Before assembling, write the v1.0 README: what the program does, how to run it, what each menu choice does. Then build, following your own instructions word for word.",
+        "hint": "If you cannot describe a menu choice in one line, its job is unclear.",
+        "check": "The README is five lines or fewer and you followed it exactly while building."
+      },
+      {
+        "title": "The stranger test",
+        "task": "Get someone to run your program from the README while you stay silent. Write down every place they hesitate or go wrong.",
+        "hint": "Do not help, explain, or point. Silence is the test.",
+        "check": "A written list of at least two confusions - real ones, not invented."
+      },
+      {
+        "title": "Break it on purpose",
+        "task": "Feed the menu \"three\", an empty line, and \"99\" at every prompt. Every one must print a message.",
+        "hint": "Compare the choice as text: choice == \"1\", never choice == 1.",
+        "check": "No traceback for any bad input; the menu keeps running."
+      }
+    ],
+    "mistakes": [
+      "Comparing the text choice to a number - input() gives text, so choice == 1 never matches; compare to \"1\".",
+      "Forgetting break on quit - the menu loops forever with no way out.",
+      "Building all five features halfway instead of finishing one complete path first."
+    ],
+    "fde": "\"It works on my machine\" is not done. Done is: a stranger ran it from the README, bad input did not crash it, and the demo exposed the rough edges. The first time a junior's work meets a real user is a demo or a handoff - and Project 1 holds that bar. Every project after it clears the same bar.",
+    "project": {
+      "title": "Dukaan v1.0 - the complete CLI tool",
+      "brief": "This is Project 1 - the checkpoint for everything in Phase 1. Amina will use Dukaan every morning: it must load her stock from a file (or start fresh), let her view stock, add items, and print the bill, save after every change, and never crash on bad input. Build v1.0 as one menu-driven program. When it works, demo it to a real person - that demo is part of the project.",
+      "deliverables": [
+        "dukaan.py: a menu loop (view / add item / bill / save / quit) using your Day 4-6 functions.",
+        "Stock loads from dukaan_stock.json at startup; a missing file starts fresh with a message.",
+        "Every change saves to the file; quitting saves too.",
+        "A short demo video or a written walkthrough of a real person using it."
+      ],
+      "milestones": [
+        {
+          "title": "The menu loop",
+          "steps": [
+            "Write the while-True menu printing the choices.",
+            "Wire each choice to an existing function.",
+            "Quit breaks the loop; anything else prints \"unknown choice\"."
+          ],
+          "check": "Every menu choice runs its job; \"quit\" exits cleanly."
+        },
+        {
+          "title": "Memory that survives",
+          "steps": [
+            "Load the stock book at startup inside try/except.",
+            "Save after add/remove and on quit.",
+            "Close and reopen: the stock is still there."
+          ],
+          "check": "Added items survive a full restart of the program."
+        },
+        {
+          "title": "Unbreakable input",
+          "steps": [
+            "Wrap every int(input()) in try/except ValueError.",
+            "Test with \"three\", \"-5\", and an empty line.",
+            "Fix anything that crashes; record the bad inputs you tried."
+          ],
+          "check": "No typed input, however strange, crashes the program."
+        }
+      ],
+      "acceptance": [
+        "The menu offers view, add item, bill, save, and quit - each one works.",
+        "Stock added in one run is present after closing and reopening.",
+        "First launch with no save file starts fresh with a clear message.",
+        "Typing \"three\", \"-5\", or nothing at any number prompt shows a message, not a traceback.",
+        "A real person completed view, add, bill, and quit from your instructions alone."
+      ],
+      "tests": [
+        [
+          "Add \"Flour\" (120, 60), quit, restart, view",
+          "Flour is listed with price 120, qty 60"
+        ],
+        [
+          "Delete the save file, then start",
+          "\"Starting fresh\" message; the empty stock book works"
+        ],
+        [
+          "Type \"three\" at the quantity prompt",
+          "Friendly message; the menu appears again, no crash"
+        ],
+        [
+          "Bill for rice 2 + tea 1, paid 2000",
+          "Total Rs 1450; change Rs 550"
+        ]
+      ],
+      "extensions": [
+        "Add \"remove item\" and \"restock\" (change qty) choices to the menu.",
+        "Keep a backup: before each save, copy the old file to dukaan_stock.backup.json."
+      ],
+      "review": [
+        "Demo it to someone: what did they try that you did not expect?",
+        "Which Day 1-6 idea does each menu choice rely on? Name them.",
+        "What is still fragile or missing? What would v1.1 need?"
+      ]
+    },
+    "references": [
+      [
+        "Python: reading and writing files",
+        "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files"
+      ],
+      [
+        "Python: errors and exceptions",
+        "https://docs.python.org/3/tutorial/errors.html"
+      ]
+    ]
   },
   {
-    "day": 8, "title": "Git, collaboration, and reviewable changes",
+    "day": 8,
+    "title": "Git, collaboration, and reviewable changes",
     "intro": "Version control gives you a record of changes and a way to collaborate without losing the explanation of how a system evolved. Today you will practise the difference between your files, staged changes, commits, and branches. Your project is a small feature delivered through a reviewable branch, complete with a regression example and a useful change description.",
-    "objectives": ["Explain the working tree, staging area, commit, and branch.", "Review a diff before recording a change.", "Deliver a bounded feature with evidence and clear review notes."],
-    "concepts": [
-      {"title": "A commit records a chosen snapshot", "text": "The working tree contains files you are editing. The staging area selects changes for the next commit. A commit records that chosen snapshot with its parent history and message. Saving a file in an editor does not create a commit, and staging it does not send it to GitHub. Use git status to see what state you are in and git diff to inspect the actual change. The distinction helps you avoid including unrelated experiments or sensitive configuration in a feature."},
-      {"title": "Branches separate lines of work", "text": "A branch names a line of commits. Creating a feature branch allows a change to be reviewed before it joins the shared main line. It does not create a separate backup of every uncommitted file, so understand the current working state before switching. A merge combines histories and can require resolving conflicting edits. Read the conflicting requirements and preserve the intended behavior; removing conflict markers without testing is not sufficient."},
-      {"title": "A review needs context and evidence", "text": "A useful change description starts with the problem, states the resulting behavior, and explains the relevant tests. Keep the diff focused enough for another person to understand. A reviewer should not have to reconstruct your chat history to learn why a change exists. A regression example links the change to a real failure. Record the remaining limitation as well as the successful path, and do not claim tests you did not run."}
+    "objectives": [
+      "Explain the working tree, staging area, commit, and branch.",
+      "Review a diff before recording a change.",
+      "Deliver a bounded feature with evidence and clear review notes."
     ],
-    "example": {"language": "bash", "filename": "review-workflow.md", "run": "Read the workflow and run the commands manually inside your own clean project repository. Replace the example filenames with your project's files; do not run it as a Python script.", "context": "Use these commands while delivering a small validation feature in a separate learner project.", "code": "# Inspect before editing or switching branches\ngit status\ngit switch -c feature/expense-validation\n# Make and test the intended changes in your editor\ngit diff\ngit add expenses.py README.md\ngit diff --cached\ngit commit -m \"Reject invalid expense amounts with a useful message\"\ngit log -1 --oneline", "output": "A new feature branch contains one reviewed commit.\nThe commit includes the intended code and documentation changes.\nExact commit IDs and command output vary by repository.", "walkthrough": "The initial status establishes the starting state. switch creates a named feature branch. diff before staging shows the working changes, while diff --cached shows what the commit will contain. Naming files when staging helps keep the change bounded. The commit message describes behavior rather than a vague update. The final log displays the recorded commit. Pushing a branch and opening a pull request are later collaboration steps, not automatic consequences of the commit."},
+    "concepts": [
+      {
+        "title": "A commit records a chosen snapshot",
+        "text": "The working tree contains files you are editing. The staging area selects changes for the next commit. A commit records that chosen snapshot with its parent history and message. Saving a file in an editor does not create a commit, and staging it does not send it to GitHub. Use git status to see what state you are in and git diff to inspect the actual change. The distinction helps you avoid including unrelated experiments or sensitive configuration in a feature."
+      },
+      {
+        "title": "Branches separate lines of work",
+        "text": "A branch names a line of commits. Creating a feature branch allows a change to be reviewed before it joins the shared main line. It does not create a separate backup of every uncommitted file, so understand the current working state before switching. A merge combines histories and can require resolving conflicting edits. Read the conflicting requirements and preserve the intended behavior; removing conflict markers without testing is not sufficient."
+      },
+      {
+        "title": "A review needs context and evidence",
+        "text": "A useful change description starts with the problem, states the resulting behavior, and explains the relevant tests. Keep the diff focused enough for another person to understand. A reviewer should not have to reconstruct your chat history to learn why a change exists. A regression example links the change to a real failure. Record the remaining limitation as well as the successful path, and do not claim tests you did not run."
+      }
+    ],
+    "example": {
+      "language": "bash",
+      "filename": "review-workflow.md",
+      "run": "Read the workflow and run the commands manually inside your own clean project repository. Replace the example filenames with your project's files; do not run it as a Python script.",
+      "context": "Use these commands while delivering a small validation feature in a separate learner project.",
+      "code": "# Inspect before editing or switching branches\ngit status\ngit switch -c feature/expense-validation\n# Make and test the intended changes in your editor\ngit diff\ngit add expenses.py README.md\ngit diff --cached\ngit commit -m \"Reject invalid expense amounts with a useful message\"\ngit log -1 --oneline",
+      "output": "A new feature branch contains one reviewed commit.\nThe commit includes the intended code and documentation changes.\nExact commit IDs and command output vary by repository.",
+      "walkthrough": "The initial status establishes the starting state. switch creates a named feature branch. diff before staging shows the working changes, while diff --cached shows what the commit will contain. Naming files when staging helps keep the change bounded. The commit message describes behavior rather than a vague update. The final log displays the recorded commit. Pushing a branch and opening a pull request are later collaboration steps, not automatic consequences of the commit."
+    },
     "exercises": [
-      {"title": "Inspect three states", "task": "Edit a file, stage it, then commit it while inspecting status and the relevant diff at each stage.", "hint": "A working diff and a staged diff answer different questions.", "check": "You can identify which version will enter the commit."},
-      {"title": "Write review context", "task": "Describe the validation bug, before/after behavior, and the test input in three sentences.", "hint": "Lead with the user-visible problem.", "check": "A reviewer understands the purpose without reading your study journal."},
-      {"title": "Reason about a conflict", "task": "On disposable branches, change the same sample rule differently and explain the required combined behavior.", "hint": "Use a separate exercise repository and inspect the conflict before resolving it.", "check": "The resolution is tested against both original requirements."}
-    ], "mistakes": ["Assuming saving, committing, and pushing are the same action.", "Staging the entire repository without reviewing unrelated files.", "Resolving a conflict based only on its text markers instead of the intended behavior."],
+      {
+        "title": "Inspect three states",
+        "task": "Edit a file, stage it, then commit it while inspecting status and the relevant diff at each stage.",
+        "hint": "A working diff and a staged diff answer different questions.",
+        "check": "You can identify which version will enter the commit."
+      },
+      {
+        "title": "Write review context",
+        "task": "Describe the validation bug, before/after behavior, and the test input in three sentences.",
+        "hint": "Lead with the user-visible problem.",
+        "check": "A reviewer understands the purpose without reading your study journal."
+      },
+      {
+        "title": "Reason about a conflict",
+        "task": "On disposable branches, change the same sample rule differently and explain the required combined behavior.",
+        "hint": "Use a separate exercise repository and inspect the conflict before resolving it.",
+        "check": "The resolution is tested against both original requirements."
+      }
+    ],
+    "mistakes": [
+      "Assuming saving, committing, and pushing are the same action.",
+      "Staging the entire repository without reviewing unrelated files.",
+      "Resolving a conflict based only on its text markers instead of the intended behavior."
+    ],
     "fde": "Customer delivery usually involves other engineers, existing systems, and future operators. Small, reviewable changes make it easier to establish trust and hand work over. Your history should explain decisions, not merely prove that many lines were generated.",
-    "project": {"title": "A reviewed validation feature", "brief": "A teammate reports that your expense tool accepts an invalid amount. Deliver a targeted fix in a feature branch of your own project repository. Include a reproduction case, tests, updated instructions, and a review description. Preserve unrelated work and make the result easy to inspect before merging.", "deliverables": ["A feature branch containing a bounded behavior change.", "Before/after output for the reported input.", "A regression test and updated user-facing instructions.", "A pull-request-style description and a reviewed diff."], "milestones": [
-      {"title": "Reproduce and branch", "steps": ["Record the invalid input and current behavior.", "Inspect the working state and create a branch for the fix."], "check": "You have a reproducible problem and know what files are already changed."},
-      {"title": "Fix with evidence", "steps": ["Implement validation and a useful error result.", "Add the regression case and rerun the normal path."], "check": "The reported failure is fixed without breaking valid expenses."},
-      {"title": "Package for review", "steps": ["Review both working and staged diffs.", "Commit the focused change and write the problem, behavior, and validation notes."], "check": "Another person can review the change without hidden context."}
-    ], "acceptance": ["The branch is scoped to the reported validation behavior.", "A reproduction case documents the original failure.", "The regression check fails before the fix and passes after it.", "The staged diff contains only the intended code and documentation.", "The review description states behavior, tests, and remaining limits."], "tests": [["Reported invalid expense input", "Useful rejection after the fix"], ["Previously valid expense input", "Existing successful behavior preserved"], ["Inspect working versus staged diff", "You can explain what the commit will contain"], ["Fresh reviewer reads the change description", "Problem and validation are understandable without a chat transcript"]], "extensions": ["Practise a conflict resolution in a disposable repository and document both requirements.", "Add a lightweight automated check that runs on proposed changes."], "review": ["What is recorded in a commit and what is not?", "How did you keep unrelated work out of this change?", "What evidence would help a reviewer find a missed edge case?"]},
-    "references": [["Pro Git: recording changes", "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository"], ["Pro Git: branching", "https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell"]]
+    "project": {
+      "title": "A reviewed validation feature",
+      "brief": "A teammate reports that your expense tool accepts an invalid amount. Deliver a targeted fix in a feature branch of your own project repository. Include a reproduction case, tests, updated instructions, and a review description. Preserve unrelated work and make the result easy to inspect before merging.",
+      "deliverables": [
+        "A feature branch containing a bounded behavior change.",
+        "Before/after output for the reported input.",
+        "A regression test and updated user-facing instructions.",
+        "A pull-request-style description and a reviewed diff."
+      ],
+      "milestones": [
+        {
+          "title": "Reproduce and branch",
+          "steps": [
+            "Record the invalid input and current behavior.",
+            "Inspect the working state and create a branch for the fix."
+          ],
+          "check": "You have a reproducible problem and know what files are already changed."
+        },
+        {
+          "title": "Fix with evidence",
+          "steps": [
+            "Implement validation and a useful error result.",
+            "Add the regression case and rerun the normal path."
+          ],
+          "check": "The reported failure is fixed without breaking valid expenses."
+        },
+        {
+          "title": "Package for review",
+          "steps": [
+            "Review both working and staged diffs.",
+            "Commit the focused change and write the problem, behavior, and validation notes."
+          ],
+          "check": "Another person can review the change without hidden context."
+        }
+      ],
+      "acceptance": [
+        "The branch is scoped to the reported validation behavior.",
+        "A reproduction case documents the original failure.",
+        "The regression check fails before the fix and passes after it.",
+        "The staged diff contains only the intended code and documentation.",
+        "The review description states behavior, tests, and remaining limits."
+      ],
+      "tests": [
+        [
+          "Reported invalid expense input",
+          "Useful rejection after the fix"
+        ],
+        [
+          "Previously valid expense input",
+          "Existing successful behavior preserved"
+        ],
+        [
+          "Inspect working versus staged diff",
+          "You can explain what the commit will contain"
+        ],
+        [
+          "Fresh reviewer reads the change description",
+          "Problem and validation are understandable without a chat transcript"
+        ]
+      ],
+      "extensions": [
+        "Practise a conflict resolution in a disposable repository and document both requirements.",
+        "Add a lightweight automated check that runs on proposed changes."
+      ],
+      "review": [
+        "What is recorded in a commit and what is not?",
+        "How did you keep unrelated work out of this change?",
+        "What evidence would help a reviewer find a missed edge case?"
+      ]
+    },
+    "references": [
+      [
+        "Pro Git: recording changes",
+        "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository"
+      ],
+      [
+        "Pro Git: branching",
+        "https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell"
+      ]
+    ]
   },
   {
-    "day": 9, "title": "HTTP requests, API contracts, and JSON boundaries",
+    "day": 9,
+    "title": "HTTP requests, API contracts, and JSON boundaries",
     "intro": "When one program asks another for information, both sides need an agreed contract. HTTP carries the request and response; JSON is a common representation for the data inside them. Today you will trace that round trip, distinguish transport errors from invalid payloads, and build an adapter that turns an external-style weather response into a dependable internal result.",
-    "objectives": ["Describe the method, URL, headers, status, and body of an HTTP exchange.", "Parse and validate a JSON response before using its fields.", "Design explicit behavior for timeouts, missing data, and service errors."],
-    "concepts": [
-      {"title": "Requests ask for a defined operation", "text": "An HTTP request identifies a resource through its URL and a method such as GET or POST. Headers carry metadata, while a body can carry input data. The response includes a status code and may include a body. A successful connection does not guarantee a successful operation; inspect the status and the endpoint contract. GET generally retrieves a representation, while POST submits data for processing according to the service's definition. Know whether a retry could repeat a side effect before retrying an operation."},
-      {"title": "JSON is packaging, not a guarantee", "text": "Parsing JSON converts a text representation into values. It does not establish that expected fields exist, units are correct, or the service supplied current data. Map the provider's payload into a small internal shape so the rest of your application is not coupled to every external field. Preserve an explicit unit and source timestamp when they matter. A missing temperature should remain missing; silently replacing it with zero can turn an integration failure into a plausible weather report."},
-      {"title": "Failure categories guide recovery", "text": "An invalid city, a rate limit, an authentication failure, and a temporary outage call for different actions. A timeout needs a finite waiting policy. Retrying invalid input usually wastes time, while unbounded retries during an outage can worsen it. Return a useful error category to the caller and retain safe request context for diagnosis. During learning, local fixtures let you test these cases repeatably without relying on a live provider's uptime or consuming API credits."}
+    "objectives": [
+      "Describe the method, URL, headers, status, and body of an HTTP exchange.",
+      "Parse and validate a JSON response before using its fields.",
+      "Design explicit behavior for timeouts, missing data, and service errors."
     ],
-    "example": {"language": "python", "filename": "weather_adapter.py", "run": "Run python weather_adapter.py. This fixture example does not perform a live HTTP request or claim current weather.", "context": "The provider-style response uses a nested field. The adapter exposes a simpler shape with explicit units.", "code": "import json\n\npayload = '{\"city\": \"Lahore\", \"current\": {\"temperature_c\": 28}}'\ndata = json.loads(payload)\ntemperature = data.get(\"current\", {}).get(\"temperature_c\")\nif not isinstance(temperature, (int, float)):\n    raise ValueError(\"Weather response is missing a numeric temperature\")\nresult = {\"city\": data[\"city\"], \"temperature\": temperature, \"unit\": \"C\"}\nprint(f\"Fixture: {result['city']} {result['temperature']} {result['unit']}\")", "output": "Fixture: Lahore 28 C", "walkthrough": "The example begins with a deliberately labelled fixture, not a real network result. loads parses it, and the adapter inspects the field it actually needs. The numeric check prevents unsupported data from entering the internal result. The mapping separates provider names from application names and retains the unit. A fuller adapter must also check object shapes before calling get, inspect HTTP status before parsing success data, and avoid accepting booleans as temperatures if its contract excludes them."},
+    "concepts": [
+      {
+        "title": "Requests ask for a defined operation",
+        "text": "An HTTP request identifies a resource through its URL and a method such as GET or POST. Headers carry metadata, while a body can carry input data. The response includes a status code and may include a body. A successful connection does not guarantee a successful operation; inspect the status and the endpoint contract. GET generally retrieves a representation, while POST submits data for processing according to the service's definition. Know whether a retry could repeat a side effect before retrying an operation."
+      },
+      {
+        "title": "JSON is packaging, not a guarantee",
+        "text": "Parsing JSON converts a text representation into values. It does not establish that expected fields exist, units are correct, or the service supplied current data. Map the provider's payload into a small internal shape so the rest of your application is not coupled to every external field. Preserve an explicit unit and source timestamp when they matter. A missing temperature should remain missing; silently replacing it with zero can turn an integration failure into a plausible weather report."
+      },
+      {
+        "title": "Failure categories guide recovery",
+        "text": "An invalid city, a rate limit, an authentication failure, and a temporary outage call for different actions. A timeout needs a finite waiting policy. Retrying invalid input usually wastes time, while unbounded retries during an outage can worsen it. Return a useful error category to the caller and retain safe request context for diagnosis. During learning, local fixtures let you test these cases repeatably without relying on a live provider's uptime or consuming API credits."
+      }
+    ],
+    "example": {
+      "language": "python",
+      "filename": "weather_adapter.py",
+      "run": "Run python weather_adapter.py. This fixture example does not perform a live HTTP request or claim current weather.",
+      "context": "The provider-style response uses a nested field. The adapter exposes a simpler shape with explicit units.",
+      "code": "import json\n\npayload = '{\"city\": \"Lahore\", \"current\": {\"temperature_c\": 28}}'\ndata = json.loads(payload)\ntemperature = data.get(\"current\", {}).get(\"temperature_c\")\nif not isinstance(temperature, (int, float)):\n    raise ValueError(\"Weather response is missing a numeric temperature\")\nresult = {\"city\": data[\"city\"], \"temperature\": temperature, \"unit\": \"C\"}\nprint(f\"Fixture: {result['city']} {result['temperature']} {result['unit']}\")",
+      "output": "Fixture: Lahore 28 C",
+      "walkthrough": "The example begins with a deliberately labelled fixture, not a real network result. loads parses it, and the adapter inspects the field it actually needs. The numeric check prevents unsupported data from entering the internal result. The mapping separates provider names from application names and retains the unit. A fuller adapter must also check object shapes before calling get, inspect HTTP status before parsing success data, and avoid accepting booleans as temperatures if its contract excludes them."
+    },
     "exercises": [
-      {"title": "Draw the round trip", "task": "Label the request method, destination, response status, payload parsing, and internal mapping.", "hint": "Keep the network operation separate from the data conversion.", "check": "You can explain where each category of failure occurs."},
-      {"title": "Break the response shape", "task": "Try malformed JSON, an array instead of an object, a missing current object, and a text temperature.", "hint": "Validate outer shape before nested lookup.", "check": "Each invalid response produces a clear adapter failure rather than a fabricated measurement."},
-      {"title": "Define a retry policy", "task": "State what happens for a timeout, invalid city, and rate limit.", "hint": "Specify attempt count and wait limits for failures you choose to retry.", "check": "No policy retries indefinitely or treats invalid input as transient success."}
-    ], "mistakes": ["Treating any response body as successful data without checking status.", "Assuming parsed JSON has the right shape and units.", "Retrying every error indefinitely or displaying a fixture as live information."],
+      {
+        "title": "Draw the round trip",
+        "task": "Label the request method, destination, response status, payload parsing, and internal mapping.",
+        "hint": "Keep the network operation separate from the data conversion.",
+        "check": "You can explain where each category of failure occurs."
+      },
+      {
+        "title": "Break the response shape",
+        "task": "Try malformed JSON, an array instead of an object, a missing current object, and a text temperature.",
+        "hint": "Validate outer shape before nested lookup.",
+        "check": "Each invalid response produces a clear adapter failure rather than a fabricated measurement."
+      },
+      {
+        "title": "Define a retry policy",
+        "task": "State what happens for a timeout, invalid city, and rate limit.",
+        "hint": "Specify attempt count and wait limits for failures you choose to retry.",
+        "check": "No policy retries indefinitely or treats invalid input as transient success."
+      }
+    ],
+    "mistakes": [
+      "Treating any response body as successful data without checking status.",
+      "Assuming parsed JSON has the right shape and units.",
+      "Retrying every error indefinitely or displaying a fixture as live information."
+    ],
     "fde": "An FDE often connects a customer's existing services rather than replacing them. An adapter creates a manageable boundary: provider details and failures are translated into a stable application contract that can be tested independently.",
-    "project": {"title": "Weather-service adapter with offline fixtures", "brief": "A travel dashboard needs a city and clearly labelled temperature, but its provider can return incomplete data or fail. Build an adapter with a fixture transport for repeatable tests and an optional live transport based on a provider's current documentation. Keep the UI independent of the provider's payload shape and distinguish offline demonstration data from live results.", "deliverables": ["A documented request/response and internal-result contract.", "Fixture cases for valid data, missing data, timeout, and service error.", "A validated adapter and a thin display layer.", "An explicit retry policy and optional live-provider setup notes."], "milestones": [
-      {"title": "Specify the boundary", "steps": ["Write sample success and failure responses.", "Define the internal result fields and their units."], "check": "The application can use the internal shape without knowing every provider field."},
-      {"title": "Implement fixtures first", "steps": ["Separate transport from parsing and mapping.", "Validate shape and return a clear result or error category."], "check": "All failure scenarios can be reproduced without network access."},
-      {"title": "Integrate responsibly", "steps": ["Document timeout and bounded retry behavior.", "If adding a live transport, verify the current provider contract and label its data source."], "check": "A fixture cannot be mistaken for current weather."}
-    ], "acceptance": ["The adapter exposes a documented internal shape with units.", "Fixture data is clearly labelled as offline demonstration data.", "Malformed, missing, and wrongly typed payloads are rejected clearly.", "Timeouts and service errors follow a bounded documented policy.", "Transport and parsing can be tested independently."], "tests": [["Valid fixture with numeric temperature", "Correct city, temperature, and unit"], ["Missing or text temperature", "Explicit invalid-payload result"], ["Malformed JSON or wrong outer shape", "Clear parsing or schema error"], ["Timeout or rate-limit fixture", "Documented bounded recovery without false success"]], "extensions": ["Add a live read-only transport after verifying the provider's current documentation.", "Record a source timestamp and reject stale data according to an explicit policy."], "review": ["What is transport failure versus payload failure?", "Which provider details should the rest of the app not depend on?", "How does retrying a read differ from retrying an operation with side effects?"]},
-    "references": [["MDN: HTTP overview", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"], ["Python: urllib.request", "https://docs.python.org/3/library/urllib.request.html"]]
+    "project": {
+      "title": "Weather-service adapter with offline fixtures",
+      "brief": "A travel dashboard needs a city and clearly labelled temperature, but its provider can return incomplete data or fail. Build an adapter with a fixture transport for repeatable tests and an optional live transport based on a provider's current documentation. Keep the UI independent of the provider's payload shape and distinguish offline demonstration data from live results.",
+      "deliverables": [
+        "A documented request/response and internal-result contract.",
+        "Fixture cases for valid data, missing data, timeout, and service error.",
+        "A validated adapter and a thin display layer.",
+        "An explicit retry policy and optional live-provider setup notes."
+      ],
+      "milestones": [
+        {
+          "title": "Specify the boundary",
+          "steps": [
+            "Write sample success and failure responses.",
+            "Define the internal result fields and their units."
+          ],
+          "check": "The application can use the internal shape without knowing every provider field."
+        },
+        {
+          "title": "Implement fixtures first",
+          "steps": [
+            "Separate transport from parsing and mapping.",
+            "Validate shape and return a clear result or error category."
+          ],
+          "check": "All failure scenarios can be reproduced without network access."
+        },
+        {
+          "title": "Integrate responsibly",
+          "steps": [
+            "Document timeout and bounded retry behavior.",
+            "If adding a live transport, verify the current provider contract and label its data source."
+          ],
+          "check": "A fixture cannot be mistaken for current weather."
+        }
+      ],
+      "acceptance": [
+        "The adapter exposes a documented internal shape with units.",
+        "Fixture data is clearly labelled as offline demonstration data.",
+        "Malformed, missing, and wrongly typed payloads are rejected clearly.",
+        "Timeouts and service errors follow a bounded documented policy.",
+        "Transport and parsing can be tested independently."
+      ],
+      "tests": [
+        [
+          "Valid fixture with numeric temperature",
+          "Correct city, temperature, and unit"
+        ],
+        [
+          "Missing or text temperature",
+          "Explicit invalid-payload result"
+        ],
+        [
+          "Malformed JSON or wrong outer shape",
+          "Clear parsing or schema error"
+        ],
+        [
+          "Timeout or rate-limit fixture",
+          "Documented bounded recovery without false success"
+        ]
+      ],
+      "extensions": [
+        "Add a live read-only transport after verifying the provider's current documentation.",
+        "Record a source timestamp and reject stale data according to an explicit policy."
+      ],
+      "review": [
+        "What is transport failure versus payload failure?",
+        "Which provider details should the rest of the app not depend on?",
+        "How does retrying a read differ from retrying an operation with side effects?"
+      ]
+    },
+    "references": [
+      [
+        "MDN: HTTP overview",
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"
+      ],
+      [
+        "Python: urllib.request",
+        "https://docs.python.org/3/library/urllib.request.html"
+      ]
+    ]
   },
   {
-    "day": 10, "title": "Environments, packages, and reproducible setup",
+    "day": 10,
+    "title": "Environments, packages, and reproducible setup",
     "intro": "A project is not delivered if it only runs in the environment you happened to build it in. Today's work makes the setup explicit: interpreter, dependencies, run commands, and required configuration. Your project is a reproducible release of an earlier tool, verified from a clean environment rather than your already-working session.",
-    "objectives": ["Explain which resources a Python virtual environment isolates.", "Document dependency and configuration assumptions.", "Verify a project using a clean setup and repeatable smoke test."],
-    "concepts": [
-      {"title": "An environment is more than code", "text": "The interpreter version, installed packages, environment variables, data paths, and operating system can affect behavior. A Python virtual environment isolates a package installation context; it does not automatically include private data, configure external services, or reproduce every system library. Record the assumptions that matter. A failure after a fresh installation can reveal an undocumented dependency that your development environment was hiding."},
-      {"title": "Dependencies need an installation contract", "text": "A dependency declaration names what the project needs, while version constraints or a lock strategy control how those needs resolve. Pinning can improve repeatability but also creates maintenance work when security or compatibility changes. Use the package manager associated with the intended interpreter, for example python -m pip. Keep secrets out of dependency and configuration examples. An .env.example can document names and non-secret placeholders without publishing real values."},
-      {"title": "Reproduction is a test", "text": "A clean setup check exercises your documentation as well as the code. Start in a new working directory and new environment; follow only the written instructions. Note where you needed an unstated action. Use a small smoke test to establish that startup and the core task work, then run the substantive tests for behavior. Document working-directory assumptions instead of relying on where your editor happens to open the terminal."}
+    "objectives": [
+      "Explain which resources a Python virtual environment isolates.",
+      "Document dependency and configuration assumptions.",
+      "Verify a project using a clean setup and repeatable smoke test."
     ],
-    "example": {"language": "python", "filename": "environment_check.py", "run": "Run python environment_check.py in your normal interpreter and in a virtual environment. The specific Python version may differ.", "context": "This check reports interpreter facts without printing secrets or assuming an exact version string.", "code": "import sys\n\nis_virtual_environment = sys.prefix != sys.base_prefix\nprint(\"Python major version:\", sys.version_info.major)\nprint(\"Virtual environment:\", is_virtual_environment)\nprint(\"Run command: python environment_check.py\")", "output": "Python major version: 3\nVirtual environment: False\nRun command: python environment_check.py\nThe second line becomes True inside a normal venv.", "walkthrough": "sys.version_info exposes the interpreter version as structured data. A normal venv uses a prefix different from the base interpreter's prefix, which the boolean comparison reports. The output is diagnostic context, not a complete environment lock. Compare this check across environments, then run your project smoke test. If behavior differs, inspect the actual interpreter, installed dependencies, configuration, and paths before concluding that the code itself is wrong."},
+    "concepts": [
+      {
+        "title": "An environment is more than code",
+        "text": "The interpreter version, installed packages, environment variables, data paths, and operating system can affect behavior. A Python virtual environment isolates a package installation context; it does not automatically include private data, configure external services, or reproduce every system library. Record the assumptions that matter. A failure after a fresh installation can reveal an undocumented dependency that your development environment was hiding."
+      },
+      {
+        "title": "Dependencies need an installation contract",
+        "text": "A dependency declaration names what the project needs, while version constraints or a lock strategy control how those needs resolve. Pinning can improve repeatability but also creates maintenance work when security or compatibility changes. Use the package manager associated with the intended interpreter, for example python -m pip. Keep secrets out of dependency and configuration examples. An .env.example can document names and non-secret placeholders without publishing real values."
+      },
+      {
+        "title": "Reproduction is a test",
+        "text": "A clean setup check exercises your documentation as well as the code. Start in a new working directory and new environment; follow only the written instructions. Note where you needed an unstated action. Use a small smoke test to establish that startup and the core task work, then run the substantive tests for behavior. Document working-directory assumptions instead of relying on where your editor happens to open the terminal."
+      }
+    ],
+    "example": {
+      "language": "python",
+      "filename": "environment_check.py",
+      "run": "Run python environment_check.py in your normal interpreter and in a virtual environment. The specific Python version may differ.",
+      "context": "This check reports interpreter facts without printing secrets or assuming an exact version string.",
+      "code": "import sys\n\nis_virtual_environment = sys.prefix != sys.base_prefix\nprint(\"Python major version:\", sys.version_info.major)\nprint(\"Virtual environment:\", is_virtual_environment)\nprint(\"Run command: python environment_check.py\")",
+      "output": "Python major version: 3\nVirtual environment: False\nRun command: python environment_check.py\nThe second line becomes True inside a normal venv.",
+      "walkthrough": "sys.version_info exposes the interpreter version as structured data. A normal venv uses a prefix different from the base interpreter's prefix, which the boolean comparison reports. The output is diagnostic context, not a complete environment lock. Compare this check across environments, then run your project smoke test. If behavior differs, inspect the actual interpreter, installed dependencies, configuration, and paths before concluding that the code itself is wrong."
+    },
     "exercises": [
-      {"title": "Create an isolated environment", "task": "Create a venv in a disposable learner project and run its Python executable explicitly.", "hint": "Windows typically uses .venv/Scripts/python.exe; POSIX systems use .venv/bin/python.", "check": "The interpreter check identifies the environment you intended to use."},
-      {"title": "Find a hidden assumption", "task": "Move your tool into a fresh directory and follow its README without relying on the old terminal session.", "hint": "Look for implicit data paths and missing installation commands.", "check": "Every required action is now documented."},
-      {"title": "Document configuration safely", "task": "List required and optional settings using placeholder values only.", "hint": "A configuration name is not a secret; its private value may be.", "check": "The example can be shared without exposing an account credential."}
-    ], "mistakes": ["Running pip for a different interpreter from the one executing the project.", "Assuming a venv reproduces external services or customer data.", "Testing setup only in an environment where everything is already installed."],
+      {
+        "title": "Create an isolated environment",
+        "task": "Create a venv in a disposable learner project and run its Python executable explicitly.",
+        "hint": "Windows typically uses .venv/Scripts/python.exe; POSIX systems use .venv/bin/python.",
+        "check": "The interpreter check identifies the environment you intended to use."
+      },
+      {
+        "title": "Find a hidden assumption",
+        "task": "Move your tool into a fresh directory and follow its README without relying on the old terminal session.",
+        "hint": "Look for implicit data paths and missing installation commands.",
+        "check": "Every required action is now documented."
+      },
+      {
+        "title": "Document configuration safely",
+        "task": "List required and optional settings using placeholder values only.",
+        "hint": "A configuration name is not a secret; its private value may be.",
+        "check": "The example can be shared without exposing an account credential."
+      }
+    ],
+    "mistakes": [
+      "Running pip for a different interpreter from the one executing the project.",
+      "Assuming a venv reproduces external services or customer data.",
+      "Testing setup only in an environment where everything is already installed."
+    ],
     "fde": "Customer environments vary, and support teams need reproducible instructions. An FDE treats setup, configuration ownership, and startup checks as part of the deliverable. The question is not only whether the code runs, but whether another operator can recreate the working conditions.",
-    "project": {"title": "A reproducible release kit", "brief": "A teammate needs to run your expense tracker on a clean machine or environment. Package the interpreter requirement, dependency installation, configuration examples, data-path policy, and smoke test into a release kit. Keep the original working project intact while you test the clean setup in a separate directory.", "deliverables": ["A setup guide with platform-appropriate commands.", "A dependency declaration or an explicit standard-library-only statement.", "A non-secret configuration example and data-path explanation.", "A smoke test plus evidence from a clean setup."], "milestones": [
-      {"title": "Inventory assumptions", "steps": ["List the interpreter, packages, files, and settings the tool needs.", "Mark which settings are optional and which have private values."], "check": "No dependency is included only because it happened to be installed locally."},
-      {"title": "Write the setup contract", "steps": ["Create a venv and use its interpreter for installation and execution.", "Document the startup command and expected smoke-test behavior."], "check": "The guide is unambiguous about which interpreter runs the project."},
-      {"title": "Test from clean state", "steps": ["Follow the guide in a separate clean directory.", "Record and fix any missing step without modifying the original environment to hide it."], "check": "The same written process produces a usable tool again."}
-    ], "acceptance": ["The interpreter requirement and run command are documented.", "Dependencies are explicitly declared or identified as standard-library only.", "Required configuration is documented with no real secrets.", "The data path and working-directory assumptions are clear.", "A clean-environment smoke test succeeds using only the written guide."], "tests": [["Fresh environment with no project packages", "Documented installation produces a runnable tool"], ["Missing optional setting", "Documented default behavior"], ["Missing required setting", "Helpful startup failure without exposing secrets"], ["Run from a different directory", "Documented path policy behaves predictably"]], "extensions": ["Add a small automated setup smoke check in CI.", "Record a supported-version matrix after actually testing more than one interpreter."], "review": ["What does a venv isolate and what does it not reproduce?", "Which hidden assumption did the clean setup reveal?", "How would an operator know that startup succeeded?"]},
-    "references": [["Python: virtual environments", "https://docs.python.org/3/tutorial/venv.html"], ["Python Packaging User Guide", "https://packaging.python.org/en/latest/tutorials/installing-packages/"]]
+    "project": {
+      "title": "A reproducible release kit",
+      "brief": "A teammate needs to run your expense tracker on a clean machine or environment. Package the interpreter requirement, dependency installation, configuration examples, data-path policy, and smoke test into a release kit. Keep the original working project intact while you test the clean setup in a separate directory.",
+      "deliverables": [
+        "A setup guide with platform-appropriate commands.",
+        "A dependency declaration or an explicit standard-library-only statement.",
+        "A non-secret configuration example and data-path explanation.",
+        "A smoke test plus evidence from a clean setup."
+      ],
+      "milestones": [
+        {
+          "title": "Inventory assumptions",
+          "steps": [
+            "List the interpreter, packages, files, and settings the tool needs.",
+            "Mark which settings are optional and which have private values."
+          ],
+          "check": "No dependency is included only because it happened to be installed locally."
+        },
+        {
+          "title": "Write the setup contract",
+          "steps": [
+            "Create a venv and use its interpreter for installation and execution.",
+            "Document the startup command and expected smoke-test behavior."
+          ],
+          "check": "The guide is unambiguous about which interpreter runs the project."
+        },
+        {
+          "title": "Test from clean state",
+          "steps": [
+            "Follow the guide in a separate clean directory.",
+            "Record and fix any missing step without modifying the original environment to hide it."
+          ],
+          "check": "The same written process produces a usable tool again."
+        }
+      ],
+      "acceptance": [
+        "The interpreter requirement and run command are documented.",
+        "Dependencies are explicitly declared or identified as standard-library only.",
+        "Required configuration is documented with no real secrets.",
+        "The data path and working-directory assumptions are clear.",
+        "A clean-environment smoke test succeeds using only the written guide."
+      ],
+      "tests": [
+        [
+          "Fresh environment with no project packages",
+          "Documented installation produces a runnable tool"
+        ],
+        [
+          "Missing optional setting",
+          "Documented default behavior"
+        ],
+        [
+          "Missing required setting",
+          "Helpful startup failure without exposing secrets"
+        ],
+        [
+          "Run from a different directory",
+          "Documented path policy behaves predictably"
+        ]
+      ],
+      "extensions": [
+        "Add a small automated setup smoke check in CI.",
+        "Record a supported-version matrix after actually testing more than one interpreter."
+      ],
+      "review": [
+        "What does a venv isolate and what does it not reproduce?",
+        "Which hidden assumption did the clean setup reveal?",
+        "How would an operator know that startup succeeded?"
+      ]
+    },
+    "references": [
+      [
+        "Python: virtual environments",
+        "https://docs.python.org/3/tutorial/venv.html"
+      ],
+      [
+        "Python Packaging User Guide",
+        "https://packaging.python.org/en/latest/tutorials/installing-packages/"
+      ]
+    ]
   },
   {
-    "day": 11, "title": "Objects, state, and domain rules",
+    "day": 11,
+    "title": "Objects, state, and domain rules",
     "intro": "Objects can make a domain clearer when related state and behavior belong together. They also add complexity if introduced without a useful responsibility. Today you will model a support ticket and its allowed status transitions, then compare that design with a simpler dictionary-and-function version.",
-    "objectives": ["Identify an object's identity, state, and related behavior.", "Keep domain rules in a clear place rather than spreading them across callers.", "Compare a class with a simpler representation using actual change scenarios."],
-    "concepts": [
-      {"title": "State and behavior can form a useful unit", "text": "A ticket has an ID, title, and status. Closing the ticket is behavior governed by a rule about its current state. A class can keep those ideas together so callers do not each invent their own transition rules. The object is one representation of the domain, not the domain itself. Begin by writing the supported states and transitions in ordinary language. The useful abstraction is the rule, not merely a class declaration containing the same fields as a dictionary."},
-      {"title": "Invariants constrain valid state", "text": "An invariant is a condition your design intends to keep true, such as a ticket always having a non-blank title. Decide whether invalid input is rejected at construction, at a method boundary, or elsewhere. Public mutable fields can let callers bypass a method's validation, so be honest about what a simple dataclass does and does not enforce. In a small lesson project, test and document the boundaries rather than claiming that a class automatically prevents all invalid state."},
-      {"title": "Prefer the simplest model that earns its cost", "text": "A dictionary plus pure functions may be clearer for a simple transformation or one-off report. A class may help when an entity owns state and several related operations. Compare how a new rule would be added in both versions. Avoid inheritance unless the substitution relationship and behavior are clear; sharing a couple of fields is not enough reason. Good design reduces the mental work of making a correct change."}
+    "objectives": [
+      "Identify an object's identity, state, and related behavior.",
+      "Keep domain rules in a clear place rather than spreading them across callers.",
+      "Compare a class with a simpler representation using actual change scenarios."
     ],
-    "example": {"language": "python", "filename": "ticket.py", "run": "Run python ticket.py. dataclasses is part of the standard library.", "context": "The close operation checks the current state rather than letting the caller silently choose an arbitrary transition.", "code": "from dataclasses import dataclass\n\n@dataclass\nclass Ticket:\n    ticket_id: str\n    title: str\n    status: str = \"open\"\n\n    def close(self):\n        if self.status != \"open\":\n            raise ValueError(\"Only an open ticket can be closed\")\n        self.status = \"closed\"\n\nticket = Ticket(\"T001\", \"Order question\")\nprint(ticket.ticket_id, ticket.status)\nticket.close()\nprint(ticket.ticket_id, ticket.status)", "output": "T001 open\nT001 closed", "walkthrough": "The dataclass supplies an initializer for the declared fields. self refers to the object receiving the method call. close validates the starting state before mutating status. The two output lines show the same identity through a transition. This minimal example does not validate titles or prevent direct assignment to status; those limitations are visible requirements for your project to address or document."},
+    "concepts": [
+      {
+        "title": "State and behavior can form a useful unit",
+        "text": "A ticket has an ID, title, and status. Closing the ticket is behavior governed by a rule about its current state. A class can keep those ideas together so callers do not each invent their own transition rules. The object is one representation of the domain, not the domain itself. Begin by writing the supported states and transitions in ordinary language. The useful abstraction is the rule, not merely a class declaration containing the same fields as a dictionary."
+      },
+      {
+        "title": "Invariants constrain valid state",
+        "text": "An invariant is a condition your design intends to keep true, such as a ticket always having a non-blank title. Decide whether invalid input is rejected at construction, at a method boundary, or elsewhere. Public mutable fields can let callers bypass a method's validation, so be honest about what a simple dataclass does and does not enforce. In a small lesson project, test and document the boundaries rather than claiming that a class automatically prevents all invalid state."
+      },
+      {
+        "title": "Prefer the simplest model that earns its cost",
+        "text": "A dictionary plus pure functions may be clearer for a simple transformation or one-off report. A class may help when an entity owns state and several related operations. Compare how a new rule would be added in both versions. Avoid inheritance unless the substitution relationship and behavior are clear; sharing a couple of fields is not enough reason. Good design reduces the mental work of making a correct change."
+      }
+    ],
+    "example": {
+      "language": "python",
+      "filename": "ticket.py",
+      "run": "Run python ticket.py. dataclasses is part of the standard library.",
+      "context": "The close operation checks the current state rather than letting the caller silently choose an arbitrary transition.",
+      "code": "from dataclasses import dataclass\n\n@dataclass\nclass Ticket:\n    ticket_id: str\n    title: str\n    status: str = \"open\"\n\n    def close(self):\n        if self.status != \"open\":\n            raise ValueError(\"Only an open ticket can be closed\")\n        self.status = \"closed\"\n\nticket = Ticket(\"T001\", \"Order question\")\nprint(ticket.ticket_id, ticket.status)\nticket.close()\nprint(ticket.ticket_id, ticket.status)",
+      "output": "T001 open\nT001 closed",
+      "walkthrough": "The dataclass supplies an initializer for the declared fields. self refers to the object receiving the method call. close validates the starting state before mutating status. The two output lines show the same identity through a transition. This minimal example does not validate titles or prevent direct assignment to status; those limitations are visible requirements for your project to address or document."
+    },
     "exercises": [
-      {"title": "Draw the state diagram", "task": "List the supported ticket states and allowed transitions, including attempts to repeat a transition.", "hint": "A second close may be rejected or idempotent; choose and document one policy.", "check": "Every transition has a defined result."},
-      {"title": "Protect a rule", "task": "Add a non-blank-title requirement and test where it is checked.", "hint": "Think about creation and later updates, not just the first constructor call.", "check": "Your stated boundary actually enforces or clearly limits the invariant."},
-      {"title": "Compare representations", "task": "Implement the close operation using a dictionary and function, then compare the two designs.", "hint": "Judge a future rule change rather than counting class syntax.", "check": "You can defend the simpler design for at least one use case."}
-    ], "mistakes": ["Introducing classes without an entity responsibility or a useful contract.", "Assuming a dataclass automatically validates every field or mutation.", "Using inheritance to share names while the behaviors do not support substitution."],
+      {
+        "title": "Draw the state diagram",
+        "task": "List the supported ticket states and allowed transitions, including attempts to repeat a transition.",
+        "hint": "A second close may be rejected or idempotent; choose and document one policy.",
+        "check": "Every transition has a defined result."
+      },
+      {
+        "title": "Protect a rule",
+        "task": "Add a non-blank-title requirement and test where it is checked.",
+        "hint": "Think about creation and later updates, not just the first constructor call.",
+        "check": "Your stated boundary actually enforces or clearly limits the invariant."
+      },
+      {
+        "title": "Compare representations",
+        "task": "Implement the close operation using a dictionary and function, then compare the two designs.",
+        "hint": "Judge a future rule change rather than counting class syntax.",
+        "check": "You can defend the simpler design for at least one use case."
+      }
+    ],
+    "mistakes": [
+      "Introducing classes without an entity responsibility or a useful contract.",
+      "Assuming a dataclass automatically validates every field or mutation.",
+      "Using inheritance to share names while the behaviors do not support substitution."
+    ],
     "fde": "A customer's workflow contains entities and rules, not merely database rows. An FDE makes those rules visible and chooses a representation that is practical for future changes. Showing where a model can still be bypassed is part of an honest design explanation.",
-    "project": {"title": "Support-ticket domain model", "brief": "A help desk needs tickets with stable IDs, readable titles, and controlled status changes. Build a small domain model with create, close, and optional reopen operations. Test invalid creation and repeated transitions. Compare your object-based design with a simpler alternative and explain which one you would use for this scope.", "deliverables": ["A ticket model and a written state-transition policy.", "Validation for required identity and title fields.", "Tests for normal, invalid, and repeated operations.", "A short class-versus-functions design comparison."], "milestones": [
-      {"title": "Model the rules", "steps": ["Write the state-transition table and field constraints.", "Choose the policy for closing an already closed ticket."], "check": "The expected outcome is clear before methods are implemented."},
-      {"title": "Implement behavior", "steps": ["Keep transition validation together with the relevant operation.", "Decide how public field updates interact with your validation boundaries."], "check": "The model's guarantees and limitations are stated accurately."},
-      {"title": "Test and compare", "steps": ["Run the transition tests and inspect object identity.", "Compare the effort of adding one new rule in a simpler representation."], "check": "Your design choice is supported by a concrete change example."}
-    ], "acceptance": ["Tickets have stable IDs and validated non-blank titles.", "Supported states and transitions are documented.", "Closing an open ticket preserves identity and changes state correctly.", "Repeated or invalid transitions follow an explicit policy.", "Tests and a simpler-design comparison support the chosen model."], "tests": [["Create and close an open ticket", "Same ID, closed status"], ["Create a blank title", "Clear validation failure"], ["Close the same ticket twice", "Documented rejection or idempotent result"], ["Attempt an unsupported transition", "No silently invalid state"]], "extensions": ["Add an append-only transition history with timestamps.", "Introduce reopen only after documenting who may use it and which states permit it."], "review": ["Which rule does the object own?", "What invariant can still be bypassed in your design?", "When would a dictionary and functions be clearer than this class?"]},
-    "references": [["Python: classes", "https://docs.python.org/3/tutorial/classes.html"], ["Python: dataclasses", "https://docs.python.org/3/library/dataclasses.html"]]
+    "project": {
+      "title": "Support-ticket domain model",
+      "brief": "A help desk needs tickets with stable IDs, readable titles, and controlled status changes. Build a small domain model with create, close, and optional reopen operations. Test invalid creation and repeated transitions. Compare your object-based design with a simpler alternative and explain which one you would use for this scope.",
+      "deliverables": [
+        "A ticket model and a written state-transition policy.",
+        "Validation for required identity and title fields.",
+        "Tests for normal, invalid, and repeated operations.",
+        "A short class-versus-functions design comparison."
+      ],
+      "milestones": [
+        {
+          "title": "Model the rules",
+          "steps": [
+            "Write the state-transition table and field constraints.",
+            "Choose the policy for closing an already closed ticket."
+          ],
+          "check": "The expected outcome is clear before methods are implemented."
+        },
+        {
+          "title": "Implement behavior",
+          "steps": [
+            "Keep transition validation together with the relevant operation.",
+            "Decide how public field updates interact with your validation boundaries."
+          ],
+          "check": "The model's guarantees and limitations are stated accurately."
+        },
+        {
+          "title": "Test and compare",
+          "steps": [
+            "Run the transition tests and inspect object identity.",
+            "Compare the effort of adding one new rule in a simpler representation."
+          ],
+          "check": "Your design choice is supported by a concrete change example."
+        }
+      ],
+      "acceptance": [
+        "Tickets have stable IDs and validated non-blank titles.",
+        "Supported states and transitions are documented.",
+        "Closing an open ticket preserves identity and changes state correctly.",
+        "Repeated or invalid transitions follow an explicit policy.",
+        "Tests and a simpler-design comparison support the chosen model."
+      ],
+      "tests": [
+        [
+          "Create and close an open ticket",
+          "Same ID, closed status"
+        ],
+        [
+          "Create a blank title",
+          "Clear validation failure"
+        ],
+        [
+          "Close the same ticket twice",
+          "Documented rejection or idempotent result"
+        ],
+        [
+          "Attempt an unsupported transition",
+          "No silently invalid state"
+        ]
+      ],
+      "extensions": [
+        "Add an append-only transition history with timestamps.",
+        "Introduce reopen only after documenting who may use it and which states permit it."
+      ],
+      "review": [
+        "Which rule does the object own?",
+        "What invariant can still be bypassed in your design?",
+        "When would a dictionary and functions be clearer than this class?"
+      ]
+    },
+    "references": [
+      [
+        "Python: classes",
+        "https://docs.python.org/3/tutorial/classes.html"
+      ],
+      [
+        "Python: dataclasses",
+        "https://docs.python.org/3/library/dataclasses.html"
+      ]
+    ]
   },
   {
-    "day": 12, "title": "Testing, regression evidence, and reading code",
+    "day": 12,
+    "title": "Testing, regression evidence, and reading code",
     "intro": "A passing demonstration proves that one observed path worked. Tests preserve specific expectations so you can check them again after a change. Today you will learn to choose useful assertions, test boundaries independently of the implementation, and investigate a deliberately incorrect calculation before building a regression suite.",
-    "objectives": ["Write assertions that express an external requirement.", "Distinguish unit checks, integration checks, and a user workflow check.", "Create a regression case that detects a concrete bug."],
-    "concepts": [
-      {"title": "Expected results must come from the requirement", "text": "If a test calculates its expected result by calling the same faulty implementation, it may only prove that the code agrees with itself. Use a manual reference example, a defined contract, or an independent oracle. Choose cases that would fail if the intended behavior were broken. A test suite is evidence about the cases and assertions it contains, not a mathematical guarantee that every possible input is correct."},
-      {"title": "Test at useful boundaries", "text": "A unit test checks a small operation, such as a quote calculation. An integration check verifies that components cooperate, such as storing and restoring an expense. A workflow check asks whether the user can complete the whole task. Keep small deterministic checks fast and isolate external services with explicit fixtures where appropriate. A mock has a narrower meaning than a real provider test: it verifies your behavior against the mock's contract, not the provider's current availability."},
-      {"title": "Read code with a question", "text": "Instead of reading every file equally, trace the path for a specific input or failure. Identify where input is validated, where state changes, and where output is produced. After locating the bug, first preserve a regression example that reproduces it. Make the smallest justified fix and rerun related cases. AI can propose both code and tests, but review whether the assertions would catch the reported problem rather than accepting the number of tests as a quality measure."}
+    "objectives": [
+      "Write assertions that express an external requirement.",
+      "Distinguish unit checks, integration checks, and a user workflow check.",
+      "Create a regression case that detects a concrete bug."
     ],
-    "example": {"language": "python", "filename": "regression.py", "run": "Run python regression.py. Assertions in this lesson demonstrate tests; they are not a replacement for production input validation.", "context": "The expected total is calculated manually from the written contract, not by asking the function to provide its own expected value.", "code": "def total_cents(price_cents, quantity):\n    if price_cents < 0 or quantity < 0:\n        raise ValueError(\"Negative input\")\n    return price_cents * quantity\n\nassert total_cents(250, 3) == 750\nassert total_cents(250, 0) == 0\ntry:\n    total_cents(250, -1)\nexcept ValueError:\n    print(\"Invalid-input case passed\")\nelse:\n    raise AssertionError(\"Negative quantity should be rejected\")\nprint(\"3 regression cases passed\")", "output": "Invalid-input case passed\n3 regression cases passed", "walkthrough": "The first assertion checks a manually known normal result and the second checks a zero boundary. The try/except verifies a rejected input and the else branch makes the absence of an exception a failing test. If multiplication is accidentally changed to addition, the first two assertions fail. For a real suite, move these examples into a test runner such as unittest or pytest so results and failures are collected systematically. Do not use assert as the only guard on real user input because Python can disable assertions in optimized mode."},
+    "concepts": [
+      {
+        "title": "Expected results must come from the requirement",
+        "text": "If a test calculates its expected result by calling the same faulty implementation, it may only prove that the code agrees with itself. Use a manual reference example, a defined contract, or an independent oracle. Choose cases that would fail if the intended behavior were broken. A test suite is evidence about the cases and assertions it contains, not a mathematical guarantee that every possible input is correct."
+      },
+      {
+        "title": "Test at useful boundaries",
+        "text": "A unit test checks a small operation, such as a quote calculation. An integration check verifies that components cooperate, such as storing and restoring an expense. A workflow check asks whether the user can complete the whole task. Keep small deterministic checks fast and isolate external services with explicit fixtures where appropriate. A mock has a narrower meaning than a real provider test: it verifies your behavior against the mock's contract, not the provider's current availability."
+      },
+      {
+        "title": "Read code with a question",
+        "text": "Instead of reading every file equally, trace the path for a specific input or failure. Identify where input is validated, where state changes, and where output is produced. After locating the bug, first preserve a regression example that reproduces it. Make the smallest justified fix and rerun related cases. AI can propose both code and tests, but review whether the assertions would catch the reported problem rather than accepting the number of tests as a quality measure."
+      }
+    ],
+    "example": {
+      "language": "python",
+      "filename": "regression.py",
+      "run": "Run python regression.py. Assertions in this lesson demonstrate tests; they are not a replacement for production input validation.",
+      "context": "The expected total is calculated manually from the written contract, not by asking the function to provide its own expected value.",
+      "code": "def total_cents(price_cents, quantity):\n    if price_cents < 0 or quantity < 0:\n        raise ValueError(\"Negative input\")\n    return price_cents * quantity\n\nassert total_cents(250, 3) == 750\nassert total_cents(250, 0) == 0\ntry:\n    total_cents(250, -1)\nexcept ValueError:\n    print(\"Invalid-input case passed\")\nelse:\n    raise AssertionError(\"Negative quantity should be rejected\")\nprint(\"3 regression cases passed\")",
+      "output": "Invalid-input case passed\n3 regression cases passed",
+      "walkthrough": "The first assertion checks a manually known normal result and the second checks a zero boundary. The try/except verifies a rejected input and the else branch makes the absence of an exception a failing test. If multiplication is accidentally changed to addition, the first two assertions fail. For a real suite, move these examples into a test runner such as unittest or pytest so results and failures are collected systematically. Do not use assert as the only guard on real user input because Python can disable assertions in optimized mode."
+    },
     "exercises": [
-      {"title": "Prove the test can fail", "task": "In a disposable copy, change multiplication to addition and run the regression examples.", "hint": "A useful test should detect a plausible wrong implementation.", "check": "The test fails for the intended reason and passes again after repair."},
-      {"title": "Choose independent expectations", "task": "Write a manual expected quote for two line items, zero quantity, and a delivery fee.", "hint": "Do not calculate expected output using the function under test.", "check": "The reference values can be reviewed without reading the implementation."},
-      {"title": "Trace one real file", "task": "Read an earlier project's validation path and summarise its input, state change, and output in three sentences.", "hint": "Follow one task rather than describing every helper function.", "check": "Your summary predicts where a malformed input should be rejected."}
-    ], "mistakes": ["Writing expectations that duplicate the implementation's mistake.", "Mocking every layer and then claiming a real integration was verified.", "Counting passing tests without inspecting whether they assert useful behavior."],
+      {
+        "title": "Prove the test can fail",
+        "task": "In a disposable copy, change multiplication to addition and run the regression examples.",
+        "hint": "A useful test should detect a plausible wrong implementation.",
+        "check": "The test fails for the intended reason and passes again after repair."
+      },
+      {
+        "title": "Choose independent expectations",
+        "task": "Write a manual expected quote for two line items, zero quantity, and a delivery fee.",
+        "hint": "Do not calculate expected output using the function under test.",
+        "check": "The reference values can be reviewed without reading the implementation."
+      },
+      {
+        "title": "Trace one real file",
+        "task": "Read an earlier project's validation path and summarise its input, state change, and output in three sentences.",
+        "hint": "Follow one task rather than describing every helper function.",
+        "check": "Your summary predicts where a malformed input should be rejected."
+      }
+    ],
+    "mistakes": [
+      "Writing expectations that duplicate the implementation's mistake.",
+      "Mocking every layer and then claiming a real integration was verified.",
+      "Counting passing tests without inspecting whether they assert useful behavior."
+    ],
     "fde": "A customer asks how you know a change is safe. An FDE answers with concrete requirements, representative checks, and known limits. A clear regression case is stronger evidence than saying an AI assistant reviewed the code and it looks correct.",
-    "project": {"title": "A regression suite for the expense calculator", "brief": "The expense calculator once produced an incorrect total. Build a repeatable test suite that captures that failure, normal calculations, zero values, invalid input, and a storage round trip. Keep the expected results independent and write a short report describing what the suite establishes and what still requires a workflow or provider check.", "deliverables": ["A test module runnable with unittest or pytest.", "A regression case for a documented calculation bug.", "Boundary, invalid-input, and storage integration cases.", "A report of assertions, observed results, and coverage limits."], "milestones": [
-      {"title": "Choose meaningful cases", "steps": ["Write requirements and manual expected values.", "Include the exact input from a prior or deliberately reproduced bug."], "check": "Every assertion corresponds to an observable requirement."},
-      {"title": "Make the suite repeatable", "steps": ["Move assertions into a runner with isolated fixture data.", "Use a temporary directory for persistence tests."], "check": "The tests do not depend on your personal working data or a live service."},
-      {"title": "Verify the evidence", "steps": ["Demonstrate a failure before a targeted fix and a pass after it.", "Summarise which integration and user paths remain untested."], "check": "The report distinguishes a test result from a broader guarantee."}
-    ], "acceptance": ["The suite runs with a documented single command.", "At least one regression case detects a concrete faulty implementation.", "Expected values are independent of the code under test.", "Normal, zero, invalid-input, and persistence cases are included.", "The test report records results and meaningful verification limits."], "tests": [["Faulty addition implementation instead of multiplication", "Regression test fails"], ["Fixed normal calculation", "Manual expected total matches"], ["Zero and negative quantity", "Zero result and explicit negative-input rejection"], ["Save and reload in a temporary directory", "Records survive without depending on personal files"]], "extensions": ["Add a workflow check that uses only documented CLI commands.", "Introduce a small mutation and identify which test should catch it."], "review": ["What requirement does each assertion establish?", "Which test could pass while the application is still unusable?", "How did you know the regression test was capable of detecting the bug?"]},
-    "references": [["Python: unittest", "https://docs.python.org/3/library/unittest.html"], ["pytest: getting started", "https://docs.pytest.org/en/stable/getting-started.html"]]
+    "project": {
+      "title": "A regression suite for the expense calculator",
+      "brief": "The expense calculator once produced an incorrect total. Build a repeatable test suite that captures that failure, normal calculations, zero values, invalid input, and a storage round trip. Keep the expected results independent and write a short report describing what the suite establishes and what still requires a workflow or provider check.",
+      "deliverables": [
+        "A test module runnable with unittest or pytest.",
+        "A regression case for a documented calculation bug.",
+        "Boundary, invalid-input, and storage integration cases.",
+        "A report of assertions, observed results, and coverage limits."
+      ],
+      "milestones": [
+        {
+          "title": "Choose meaningful cases",
+          "steps": [
+            "Write requirements and manual expected values.",
+            "Include the exact input from a prior or deliberately reproduced bug."
+          ],
+          "check": "Every assertion corresponds to an observable requirement."
+        },
+        {
+          "title": "Make the suite repeatable",
+          "steps": [
+            "Move assertions into a runner with isolated fixture data.",
+            "Use a temporary directory for persistence tests."
+          ],
+          "check": "The tests do not depend on your personal working data or a live service."
+        },
+        {
+          "title": "Verify the evidence",
+          "steps": [
+            "Demonstrate a failure before a targeted fix and a pass after it.",
+            "Summarise which integration and user paths remain untested."
+          ],
+          "check": "The report distinguishes a test result from a broader guarantee."
+        }
+      ],
+      "acceptance": [
+        "The suite runs with a documented single command.",
+        "At least one regression case detects a concrete faulty implementation.",
+        "Expected values are independent of the code under test.",
+        "Normal, zero, invalid-input, and persistence cases are included.",
+        "The test report records results and meaningful verification limits."
+      ],
+      "tests": [
+        [
+          "Faulty addition implementation instead of multiplication",
+          "Regression test fails"
+        ],
+        [
+          "Fixed normal calculation",
+          "Manual expected total matches"
+        ],
+        [
+          "Zero and negative quantity",
+          "Zero result and explicit negative-input rejection"
+        ],
+        [
+          "Save and reload in a temporary directory",
+          "Records survive without depending on personal files"
+        ]
+      ],
+      "extensions": [
+        "Add a workflow check that uses only documented CLI commands.",
+        "Introduce a small mutation and identify which test should catch it."
+      ],
+      "review": [
+        "What requirement does each assertion establish?",
+        "Which test could pass while the application is still unusable?",
+        "How did you know the regression test was capable of detecting the bug?"
+      ]
+    },
+    "references": [
+      [
+        "Python: unittest",
+        "https://docs.python.org/3/library/unittest.html"
+      ],
+      [
+        "pytest: getting started",
+        "https://docs.pytest.org/en/stable/getting-started.html"
+      ]
+    ]
   }
 ]

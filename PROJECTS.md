@@ -7,12 +7,12 @@ Projects may take multiple study sessions. The table is the active project path;
 | Lesson | Project | Guide |
 | --- | --- | --- |
 | 1 | Dukaan v0.1 — the stock list | [Lesson](01_Day_Setup_Learn_With_AI/README.md) · [Project](01_Day_Setup_Learn_With_AI/PROJECT.md) |
-| 2 | A reliable unit conversion desk | [Lesson](02_Day_Python_Variables_Types/README.md) · [Project](02_Day_Python_Variables_Types/PROJECT.md) |
-| 3 | Support-ticket triage queue | [Lesson](03_Day_Conditionals_Loops/README.md) · [Project](03_Day_Conditionals_Loops/PROJECT.md) |
-| 4 | A reusable quote calculator | [Lesson](04_Day_Functions/README.md) · [Project](04_Day_Functions/PROJECT.md) |
-| 5 | Customer contact directory | [Lesson](05_Day_Lists_Dictionaries/README.md) · [Project](05_Day_Lists_Dictionaries/PROJECT.md) |
-| 6 | Persistent contact book with recovery | [Lesson](06_Day_Files_Errors_Debugging/README.md) · [Project](06_Day_Files_Errors_Debugging/PROJECT.md) |
-| 7 | A usable CLI expense tracker | [Lesson](07_Day_Project1_CLI_App/README.md) · [Project](07_Day_Project1_CLI_App/PROJECT.md) |
+| 2 | Dukaan v0.2 - totals and bills | [Lesson](02_Day_Python_Variables_Types/README.md) · [Project](02_Day_Python_Variables_Types/PROJECT.md) |
+| 3 | Dukaan v0.3 - the smart stock checker | [Lesson](03_Day_Conditionals_Loops/README.md) · [Project](03_Day_Conditionals_Loops/PROJECT.md) |
+| 4 | Dukaan v0.4 - organized code | [Lesson](04_Day_Functions/README.md) · [Project](04_Day_Functions/PROJECT.md) |
+| 5 | Dukaan v0.5 - the stock book | [Lesson](05_Day_Lists_Dictionaries/README.md) · [Project](05_Day_Lists_Dictionaries/PROJECT.md) |
+| 6 | Dukaan v0.6 - memory that survives | [Lesson](06_Day_Files_Errors_Debugging/README.md) · [Project](06_Day_Files_Errors_Debugging/PROJECT.md) |
+| 7 | Dukaan v1.0 - the complete CLI tool | [Lesson](07_Day_Project1_CLI_App/README.md) · [Project](07_Day_Project1_CLI_App/PROJECT.md) |
 | 8 | A reviewed validation feature | [Lesson](08_Day_Git_GitHub/README.md) · [Project](08_Day_Git_GitHub/PROJECT.md) |
 | 9 | Weather-service adapter with offline fixtures | [Lesson](09_Day_HTTP_APIs_JSON/README.md) · [Project](09_Day_HTTP_APIs_JSON/PROJECT.md) |
 | 10 | A reproducible release kit | [Lesson](10_Day_Environments_Packages/README.md) · [Project](10_Day_Environments_Packages/PROJECT.md) |

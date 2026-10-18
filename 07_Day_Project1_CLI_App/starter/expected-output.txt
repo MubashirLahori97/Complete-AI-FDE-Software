@@ -1,3 +1,6 @@
-E1 Lunch 500
-E2 Bus 200
-Total: 700 cents
+Choose: 1
+Showing stock... (your Day 6 loader plugs in here)
+Choose: 9
+Please choose 1, 2, or 3.
+Choose: 3
+Goodbye!

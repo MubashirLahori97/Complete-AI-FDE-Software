@@ -1,9 +1,9 @@
-# Day 6 — Persistence, errors, and systematic debugging
+# Day 6 — Saving the shop
 
 <!-- beginner-path:begin -->
 ## Start here — one idea at a time
 
-**Your goal:** Persistent contact book with recovery. You can take several study sessions.
+**Your goal:** Dukaan v0.6 - memory that survives. You can take several study sessions.
 
 **The situation:** Your contact directory works, but closing the program loses its records.
 
@@ -62,114 +62,134 @@ Use the app's **Learn → Practise → Project → Record your build** flow, or 
 
 <!-- beginner-path:end -->
 
-An in-memory directory disappears when the process stops. A useful tool often needs durable state, but saving state introduces new failure modes: missing files, invalid data, and interrupted writes. Today you will connect persistence to recovery and learn to investigate errors using evidence rather than a sequence of guesses.
+Everything Dukaan knows lives in the program's memory. Close the program and it forgets - every morning Amina retypes the stock. Worse: one mistyped quantity crashes the whole bill. Today Dukaan v0.6 gets two upgrades: files give it a memory that survives closing, and try/except keeps it standing when input is bad.
 
-**Your project:** [Persistent contact book with recovery](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+**Your project:** [Dukaan v0.6 - memory that survives](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
 
 ## What you will be able to do
 
-- Serialize structured data to JSON and load it back deliberately.
-- Distinguish missing, corrupt, and invalid stored data.
-- Read an exception and investigate the relevant failing operation.
+- Save a Python data structure to a file and load it back with the json module.
+- Use try/except to handle missing files and bad input without crashing.
+- Explain why JSON is the format programs use to share structured data.
 
 ## Understand the concept
 
-### Persistence is a boundary
+### Files remember after the program ends
 
-Memory belongs to a running process. A file survives beyond that process, but the file format becomes a contract between versions of the application. JSON represents a useful subset of values such as objects, arrays, strings, numbers, booleans, and null. It does not automatically preserve custom Python objects or validate your business rules. Loading syntactically valid JSON is therefore followed by checking that the stored shape and required fields match what your program expects.
+Variables die when the program stops. A file survives. open("stock.json", "w") opens the file for writing; json.dump(stock, f) translates the list of dictionaries into text and writes it. Later, open("stock.json") with json.load(f) translates the text back into Python values. JSON (JavaScript Object Notation - a boring name for a useful idea) is text shaped exactly like Python lists and dicts, which is why the round trip is so smooth. "with" closes the file for you, even if something goes wrong inside the block.
 
-### Failures need different recovery policies
+### Errors are messages, not the end
 
-A missing data file on first launch can mean an empty directory. A corrupt existing file may represent information the user expects you to preserve. Do not treat both cases as permission to overwrite the file with an empty object. Decide which errors are recoverable, which need user action, and what evidence to keep. For writes, an intermediate file followed by an appropriate replacement can reduce partial-write risks; the exact durability guarantee still depends on the operating system and storage setup.
+int("three") fails. A missing file fails. In Day 2 that meant a crash; today it means a decision. try: says "attempt this"; except ValueError: says "if that specific failure happens, do this instead." The program keeps running - it prints a helpful message, uses a safe default, and carries on. Catch specific errors (ValueError, FileNotFoundError), not everything: hiding all errors also hides your own bugs, and then nothing can be fixed.
 
-### Debugging starts with reproduction
+### JSON: the text format programs share
 
-Read the exception type, message, and relevant stack frames. Identify the input and operation that caused the failure. Reproduce it with the smallest useful example, state a hypothesis, and test one targeted change. Catching every exception and continuing silently removes the evidence you need. A useful error message explains the problem and next action while avoiding private data. After the fix, re-run the successful path as well as the failing case.
+json.dump translates your list of dictionaries into text; json.load rebuilds it. The text is not Python - it is JSON, a format almost every language reads. That is why it matters beyond this lesson: on Day 9 you will read JSON from a real supplier API, and the file you save today is the same shape as the data that API sends. Keep the stock book to lists, dicts, text, and numbers - JSON cannot hold everything Python can.
 
 ## A worked example, step by step
 
-JSON parsing and application-level validation are separate checks. A small in-memory example keeps the two concepts visible.
+Amina's stock book, saved to a file and loaded back. The file might not exist yet - the program must not crash. Read the code, predict the exact output, then run it. Then, as an experiment: comment out the save block and run again - predict which branch runs.
 
 ```python
 import json
+import os
 
-contacts = {"C001": {"name": "Ali", "city": "Lahore"}}
-saved_text = json.dumps(contacts)
-loaded = json.loads(saved_text)
-if not isinstance(loaded, dict):
-    raise ValueError("Expected a contact directory")
-assert loaded == contacts
-print("Round trip preserved 1 contact")
+FILENAME = "dukaan_stock.json"
+
+stock = [
+    {"name": "Rice", "price": 250, "qty": 40},
+    {"name": "Sugar", "price": 180, "qty": 90},
+]
+
+with open(FILENAME, "w") as f:
+    json.dump(stock, f)
+print("Saved the stock book.")
 
 try:
-    json.loads("not valid JSON")
-except json.JSONDecodeError:
-    print("Stored data is not valid JSON; keep the original for investigation")
+    with open(FILENAME) as f:
+        loaded = json.load(f)
+    print(f"Loaded {len(loaded)} items: {loaded[0]['name']} and {loaded[1]['name']}")
+except FileNotFoundError:
+    print("No saved file yet - starting fresh.")
+    loaded = []
+
+typed = "three"
+try:
+    qty = int(typed)
+except ValueError:
+    print(f"'{typed}' is not a number - using 0.")
+    qty = 0
+print(f"Quantity accepted: {qty}")
+
+os.remove(FILENAME)
+print("Demo file cleaned up.")
 ```
 
 **Expected result**
 
 ```text
-Round trip preserved 1 contact
-Stored data is not valid JSON; keep the original for investigation
+Saved the stock book.
+Loaded 2 items: Rice and Sugar
+'three' is not a number - using 0.
+Quantity accepted: 0
+Demo file cleaned up.
 ```
 
-dumps converts the dictionary into a JSON text representation, while loads parses that representation into Python values. The isinstance check validates the outer shape and the assertion confirms this sample round trip. A real application must also inspect each contact's fields. The deliberate invalid text produces JSONDecodeError, which is handled specifically. The message recommends preserving the original data instead of pretending a failed read means there are no contacts.
+json.dump translates the stock list into text and writes it to dukaan_stock.json. The try block then reads it back: the file exists, so json.load rebuilds the list and the "Loaded 2 items" line prints - the except branch is skipped. Next, int("three") raises ValueError; the except catches it, prints the friendly message, and qty becomes 0 instead of crashing. Finally the demo deletes its own file so nothing is left behind. Now the experiment: comment out the save block and run again. This time open() raises FileNotFoundError, and you will see the "starting fresh" branch run. That branch is what v1.0 uses on every first launch.
 
 ## Practise before building
 
-### Exercise 1: Separate parsing from validation
+### Exercise 1: Watch the missing-file branch
 
-Load a valid JSON array where the program expects a dictionary. Reject the shape clearly.
+Comment out the save block (the "with open ... 'w'" part) and run. Predict what prints before you run.
 
-**Hint:** Valid JSON is not necessarily valid application data.
+**Hint:** Without the save, the file does not exist when the load runs.
 
-**Check your result:** The failure is a schema problem, not incorrectly reported as corrupt JSON.
+**Check your result:** "No saved file yet - starting fresh." prints, and the program finishes normally.
 
-### Exercise 2: Record a debugging hypothesis
+### Exercise 2: Corrupt the file
 
-Introduce a missing contact field and write the input, observed failure, hypothesis, and fix in four short lines.
+In a scratch file, run only the load part after writing the text "hello" into dukaan_stock.json by hand. What error appears? Describe it in your own words.
 
-**Hint:** Find the operation that assumes the missing field exists.
+**Hint:** json.load on non-JSON text raises json.JSONDecodeError.
 
-**Check your result:** Your fix addresses the assumption and a regression example remains.
+**Check your result:** You can name the error and explain that the file's text was not valid JSON.
 
-### Exercise 3: Test recovery locally
+### Exercise 3: Round-trip your stock book
 
-Use a temporary project data file to test first launch, a normal save, and a damaged copy.
+Build your 3-item stock book (a list of dicts), save it with json.dump, load it back, and print loaded == stock_book.
 
-**Hint:** Do not experiment on your only copy of useful data.
+**Hint:** == on two lists compares every value inside them.
 
-**Check your result:** The normal state reloads and damaged data is not silently overwritten.
+**Check your result:** It prints True - the round trip lost nothing.
 
 ## Common mistakes and how to debug them
 
-- Equating valid JSON with valid records: validate the expected data shape after parsing.
-- Returning empty data for every exception: that can hide corruption and cause information loss.
-- Fixing the symptom without preserving a regression case: keep the input that exposed the assumption.
+- Catching every error with a bare "except:" - it hides your real bugs along with the expected failures.
+- Mixing up the file modes: json.dump needs the file opened for writing, json.load for reading.
+- Saving values JSON cannot hold and being surprised on load - keep the stock book to lists, dicts, text, and numbers.
 
 ## The FDE connection
 
-Customer data is part of the product, not disposable debugging material. An FDE plans how to diagnose a failure, protect existing records, and explain recovery to the operator. A modest contact file is a good place to learn these habits before working with a production database.
+Two rules every junior learns the hard way. One: users type anything - "three", "-5", an empty line. A program that crashes on bad input is a bug report waiting to happen, and "handle invalid input gracefully" is one of the most common junior tickets there is. Two: data loss is the unforgivable bug. Losing Amina's stock book would be worse than any crash. Save carefully, load defensively, and never let a missing file become a lost morning.
 
 ## Build your lesson project
 
-**Persistent contact book with recovery**
+**Dukaan v0.6 - memory that survives**
 
-Extend the contact directory so records survive closing and reopening the program. Store them in a documented JSON file, validate loaded records, and distinguish first launch from damaged existing data. Add a recovery message and a backup approach that preserves the user's information while you investigate a failure.
+Dukaan forgets everything when it closes - every morning Amina retypes the stock. Build v0.6: on start, load the stock book from dukaan_stock.json (or start fresh with a clear message if there is no file); after every change, save; and no bad input may ever crash it - "three", "-5", and empty input all get a friendly message.
 
-- Save and load operations with a documented data-file path and format.
-- A validated contact schema compatible with lesson 5.
-- A recovery policy for missing, malformed, and invalid files.
-- A restart test and a debugging log for one controlled failure.
+- dukaan.py loads the stock book from dukaan_stock.json on start, or starts fresh with a message.
+- Adding an item saves the file immediately.
+- A test note: the bad inputs you tried and what the program printed.
 
 Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
 
 ## Explain it back
 
-- How are parsing, validation, and recovery different?
-- Which failure must not be treated as empty data?
-- What evidence helped you choose a targeted debugging fix?
+- Why is the load wrapped in try/except but the save usually is not?
+- What Python values can JSON not hold? What would break if the stock book used them?
+- Amina deletes the file by accident. What does she lose, and what would you change so she loses less?
 
 ## References and next steps
 

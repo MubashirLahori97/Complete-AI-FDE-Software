@@ -1,3 +1,2 @@
-C001 Ali Lahore
-C002 Ali Karachi
-Contact not found
+Found Tea: Rs 950, qty 25
+Items in the stock book: 4

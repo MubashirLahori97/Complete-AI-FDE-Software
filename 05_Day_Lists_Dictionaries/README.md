@@ -1,9 +1,9 @@
-# Day 5 — Collections and data modelling
+# Day 5 — The real stock book
 
 <!-- beginner-path:begin -->
 ## Start here — one idea at a time
 
-**Your goal:** Customer contact directory. You can take several study sessions.
+**Your goal:** Dukaan v0.5 - the stock book. You can take several study sessions.
 
 **The situation:** Two customers have the same name. Your contact directory must keep both records.
 
@@ -62,110 +62,113 @@ Use the app's **Learn → Practise → Project → Record your build** flow, or 
 
 <!-- beginner-path:end -->
 
-Real applications usually operate on many records rather than one value. Choosing the shape of those records determines which operations are clear, safe, and efficient enough for the task. Today you will model contacts with stable identifiers, distinguish ordered collections from keyed lookup, and build a contact directory that handles duplicate names deliberately.
+Three separate lists - names, prices, quantities - are an accident waiting to happen: delete from one list and forget the others, and rice gets sugar's price. Real programs keep each item's facts together. Today Dukaan v0.5 gets a real stock book: a list of dictionaries, where every item is one labeled bundle. Add, remove, and search - the way real data works.
 
-**Your project:** [Customer contact directory](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+**Your project:** [Dukaan v0.5 - the stock book](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
 
 ## What you will be able to do
 
-- Choose between a list and a dictionary for a specific operation.
-- Model records with stable IDs rather than ambiguous display names.
-- Explain mutation, missing keys, and duplicate-record behavior.
+- Store ordered values in a list and grow it with append().
+- Label values with a dictionary so item["price"] replaces price1.
+- Build and search a list of dictionaries as a tiny in-memory database.
 
 ## Understand the concept
 
-### Lists preserve a sequence
+### A list keeps things in order
 
-A list represents an ordered collection. It is useful when display order or visiting each item matters. Indexes describe positions, not permanent identities: removing an earlier item changes later positions. A customer ID therefore should not be inferred from a list index. When you filter a list, decide whether you are producing a new view or deleting records. That distinction becomes important when a UI lets a user search without intending to remove data.
+A list is values in a row: names = ["Rice", "Sugar", "Tea"]. Positions start at 0: names[0] is "Rice". append() adds to the end, so the list grows without you rewriting it. len() tells you how many values there are. Lists are for "many of the same kind of thing" - many items, many prices, many customers. One row, one idea.
 
-### Dictionaries support named lookup
+### A dictionary labels each value
 
-A dictionary associates a key with a value. A stable contact ID can map to a dictionary containing that contact's fields. Looking up a known ID is clearer than searching for a name that may be shared by multiple people. Accessing a missing key with square brackets raises KeyError. get can return a default, but choose a default that preserves meaning: a missing contact is not the same thing as an empty contact record.
+A dictionary is values with name tags: item = {"name": "Rice", "price": 250, "qty": 40}. You read a value by its label: item["price"] gives 250. Labels beat positions: item["price"] still works if you add new labels later, while "the second value" breaks the moment the order changes. Use the wrong label - item["cost"] - and Python answers with a KeyError: the label does not exist. Label spelling must match exactly, including capitals.
 
-### A model contains decisions, not just fields
+### A list of dictionaries is a tiny database
 
-Decide what must be present, what can be missing, and what makes a record unique. Two contacts may share a display name while having different IDs. Updating a contact should preserve its identity. Lists and dictionaries are mutable, so two names can refer to the same object; a change through one reference can be visible through the other. Use an explicit copy when you need an independent record, and understand whether a shallow copy also shares nested objects.
+Put the bundles in a row: stock = [{"name": "Rice", ...}, {"name": "Sugar", ...}]. Now each item's facts travel together - deleting one item deletes all its facts at once, and nothing can desynchronize. To find something, loop and check labels: "if item["name"] == "Tea":" - the same loop-plus-decision pattern from Day 3, now with labeled data. This shape - a list of labeled records - is how almost all real data looks, including the JSON you will save on Day 6.
 
 ## A worked example, step by step
 
-Two people share a name, so the program uses IDs for lookup and names only for display.
+Amina's stock book: three items as labeled bundles in a list. Add flour, find tea, count the book. Predict the two printed lines before you run.
 
 ```python
-contacts = {
-    "C001": {"name": "Ali", "city": "Lahore"},
-    "C002": {"name": "Ali", "city": "Karachi"},
-}
-for contact_id, contact in contacts.items():
-    print(contact_id, contact["name"], contact["city"])
+stock = [
+    {"name": "Rice", "price": 250, "qty": 40},
+    {"name": "Sugar", "price": 180, "qty": 90},
+    {"name": "Tea", "price": 950, "qty": 25},
+]
 
-match = contacts.get("C003")
-print("Found" if match is not None else "Contact not found")
+stock.append({"name": "Flour", "price": 120, "qty": 60})
+
+for item in stock:
+    if item["name"] == "Tea":
+        print(f"Found Tea: Rs {item['price']}, qty {item['qty']}")
+
+print(f"Items in the stock book: {len(stock)}")
 ```
 
 **Expected result**
 
 ```text
-C001 Ali Lahore
-C002 Ali Karachi
-Contact not found
+Found Tea: Rs 950, qty 25
+Items in the stock book: 4
 ```
 
-The outer dictionary maps unique IDs to records. Each inner dictionary labels the fields of one contact. items supplies both the identifier and record to each loop iteration. The shared name does not overwrite a record because it is not used as the key. get returns None for the missing ID, which the caller converts into a helpful message. The example's insertion order makes the displayed order predictable, but it is not a substitute for an explicit sort when the product requires alphabetical output.
+stock starts as a list of three dictionaries - three bundles in a row. append() adds a fourth bundle at the end; the list is now four long, and nothing else had to change. The loop takes each bundle in turn and checks its "name" label; only Tea's bundle matches, so only one line prints. len(stock) counts the bundles: 4, because the appended flour counts. Predict first: if you searched for "Bread" instead, nothing would print - the loop would simply find no match, which is also the answer to "how do I know it is missing?"
 
 ## Practise before building
 
-### Exercise 1: Search without deleting
+### Exercise 1: Remove an item
 
-Produce a list of contacts whose city matches a query while keeping the original directory unchanged.
+Remove Sugar by building a new list with only the items you want to keep. Predict the length, then print it.
 
-**Hint:** Append matching records to a separate list.
+**Hint:** Loop over stock; append each item whose name is not "Sugar" to a new list.
 
-**Check your result:** Searching for an unknown city returns no matches without removing contacts.
+**Check your result:** Length is 3 after removal; rice, tea, and flour remain.
 
-### Exercise 2: Update by identity
+### Exercise 2: Change a price by label
 
-Change the city of C002 while preserving its ID and the other contact.
+Raise Tea's price to 1000: loop, match the name, assign item["price"] = 1000. Print the book after.
 
-**Hint:** Look up the ID before updating its fields.
+**Hint:** Loop, match the name, assign to the label.
 
-**Check your result:** Only the selected record changes.
+**Check your result:** Tea shows Rs 1000; every other item is unchanged.
 
-### Exercise 3: Observe shared state
+### Exercise 3: Count the stock value
 
-Assign one contact record to another variable, change its city, and inspect the original.
+Loop over the book and add up price times qty for every bundle. Predict the total first.
 
-**Hint:** Assignment does not automatically create a deep copy.
+**Hint:** total = 0 before the loop; inside: total = total + item["price"] * item["qty"].
 
-**Check your result:** You can explain why the update is visible through both references.
+**Check your result:** Rs 57150 (10000 + 16200 + 23750 + 7200), matching your prediction.
 
 ## Common mistakes and how to debug them
 
-- Using names as unique keys: duplicate names can overwrite valid people.
-- Treating a position as a stable ID: positions change when records are inserted or deleted.
-- Hiding missing records behind empty defaults: an explicit not-found result is easier to diagnose.
+- Using item["Price"] instead of item["price"] - labels are case-sensitive; KeyError means the label does not exist.
+- Forgetting that positions start at 0 - stock[3] on a 3-item list is an error.
+- Keeping three parallel lists instead of bundles - one deletion desynchronizes everything.
 
 ## The FDE connection
 
-A customer data export may contain duplicates, optional fields, and inconsistent identifiers. An FDE asks how records are matched across systems before building an integration. A data model should preserve useful distinctions instead of deleting them to make the code convenient.
+Almost every junior ticket touches labeled data: "the API returns a list of orders - show each customer's total." That API data arrives as JSON, which looks exactly like Python dictionaries in a list. Reading item["price"] today is reading real API responses next week. And the parallel-lists bug - rice getting sugar's price - is a real production bug juniors get asked to fix. Bundles prevent it by construction.
 
 ## Build your lesson project
 
-**Customer contact directory**
+**Dukaan v0.5 - the stock book**
 
-A small team needs to add, find, update, and list contacts. Build an in-memory directory keyed by stable IDs. Allow duplicate display names, validate required fields, and make a missing ID understandable. Persistence is intentionally left for the next lesson, so today you can concentrate on data shape and operations.
+Amina's shop now has four items and she keeps mixing up the three parallel lists. Rebuild v0.5: the stock becomes one list of dictionaries. Every feature - the list, the bill, the alerts, the report - must work on the new shape. Deleting an item must be one operation, not three.
 
-- A contact model with ID, name, city, and optional email.
-- Operations to add, look up, update, search, and list records.
-- A sample dataset containing duplicate names and missing optional values.
-- An explanation of identity, validation, and ordering decisions.
+- dukaan.py stores stock as a list of dicts with name, price, qty labels.
+- All v0.5 features work unchanged on the new shape.
+- New: remove an item by name in one operation; search prints one item's full record.
+- A note: one real mistake the old parallel lists could cause, in your own words.
 
 Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
 
 ## Explain it back
 
-- Why is an ID different from a display name?
-- Which operations benefit from keyed lookup?
-- What did you choose to do with missing and duplicate data?
+- What breaks in the parallel-lists version when you delete the second item but forget one list?
+- Why is item["price"] clearer than prices[1] to a stranger reading your code?
+- Where else in real software have you seen labeled bundles? (Hint: Day 9's APIs.)
 
 ## References and next steps
 

@@ -1,9 +1,9 @@
-# Day 7 — Scope and ship a complete command-line tool
+# Day 7 — Ship Dukaan v1.0
 
 <!-- beginner-path:begin -->
 ## Start here — one idea at a time
 
-**Your goal:** A usable CLI expense tracker. You can take several study sessions.
+**Your goal:** Dukaan v1.0 - the complete CLI tool. You can take several study sessions.
 
 **The situation:** A learner wants to record expenses, list them, and see the total from a terminal.
 
@@ -62,114 +62,127 @@ Use the app's **Learn → Practise → Project → Record your build** flow, or 
 
 <!-- beginner-path:end -->
 
-A project becomes useful when another person can complete a task with it. Today you will combine data, decisions, functions, and persistence into an expense tracker. The challenge is finishing a small, coherent product: an understandable workflow, reliable behavior, useful errors, and instructions that work outside your own terminal session.
+Six days of pieces: display, bills, decisions, loops, functions, lists, files. Today they become one thing a stranger can use. v1.0 adds no new ideas - it is finishing: a menu that never crashes, a README a stranger can follow, and a demo to a real person. This is Project 1, the checkpoint for all of Phase 1.
 
-**Your project:** [A usable CLI expense tracker](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+**Your project:** [Dukaan v1.0 - the complete CLI tool](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
 
 ## What you will be able to do
 
-- Turn a user problem into a bounded feature list and acceptance criteria.
-- Compose earlier concepts into a complete expense workflow.
-- Observe a new user and distinguish usability feedback from implementation guesses.
+- Assemble the week's pieces into one menu-driven program.
+- Write a README that lets a stranger run the tool without your help.
+- Demo the tool to a real person and fix what confuses them.
 
 ## Understand the concept
 
-### Scope is a design decision
+### Done means a stranger can use it
 
-A first version should support a clear task from beginning to end. For an expense tracker, adding an expense, listing expenses, and showing a total form a coherent workflow. Bank integrations, receipt recognition, and multi-user permissions can wait. An explicit out-of-scope list protects the finish line. Scope is not measured by the number of technologies used; it is measured by whether the chosen user's problem can be addressed with the available time and evidence.
+Your program works for you because you know how it wants to be used. Done means Amina's cousin can run it from your README alone: what the program does, how to start it, what each menu choice does. Scope is a design decision - v1.0 does five things: view stock, add item, print a bill, save, quit. Nothing more. Every extra feature is a new way to be broken; ship the five working.
 
-### Design around a vertical slice
+### One complete path beats five half-paths
 
-A vertical slice crosses input, business logic, and storage for one useful action. Start by adding one valid expense and seeing it after a restart. That proves more than implementing several disconnected screens or functions. Keep the calculation independent of command parsing. Store amounts in a documented representation, such as integer cents. Decide whether the total includes all records or only a filtered view and state that meaning in the output.
+Pick "add an item" and make it work end to end: menu choice, ask for name and numbers, reject bad input with a message, save the file, confirm on screen. That is a vertical slice - one thin path through the whole program, finished. Then do the next. Five half-built features demo as five broken promises; two finished paths demo as a tool.
 
-### A new user tests your assumptions
+### The demo is part of the project
 
-Give a person the README and observe them trying a representative task. Avoid explaining each hesitation immediately, because coaching hides confusing steps. Record the action, expectation, and obstacle before proposing a fix. One person's feedback is useful evidence about that test, not proof that every user will behave the same way. Ask permission before collecting or publishing identifying feedback; fictional sample expenses are enough for the learning project.
+Watching a real person use your program finds what testing misses: they press 6 when the menu has 5 choices, they type the item name where the price goes. Their confusion is the bug report. A menu that never crashes is built from pieces you already own: each choice calls a function from Days 3-6, every number goes through try/except, and "quit" always works. Demo it, write down every stumble, fix them.
 
 ## A worked example, step by step
 
-A simple list supplies the data for a total. No bank connection or live financial data is involved.
+The v1.0 menu in miniature. The choices are simulated from a list so the example runs on its own - in your project, input() reads them from the shopkeeper. Predict what "9" does before you run.
 
 ```python
-expenses = [
-    {"id": "E1", "label": "Lunch", "amount_cents": 500},
-    {"id": "E2", "label": "Bus", "amount_cents": 200},
-]
-total_cents = sum(expense["amount_cents"] for expense in expenses)
-for expense in expenses:
-    print(expense["id"], expense["label"], expense["amount_cents"])
-print(f"Total: {total_cents} cents")
+def view_stock():
+    print("Showing stock... (your Day 6 loader plugs in here)")
+
+def add_item():
+    print("Adding an item... (your code goes here)")
+
+choices = ["1", "9", "3"]
+for choice in choices:
+    print(f"Choose: {choice}")
+    if choice == "1":
+        view_stock()
+    elif choice == "2":
+        add_item()
+    elif choice == "3":
+        print("Goodbye!")
+        break
+    else:
+        print("Please choose 1, 2, or 3.")
 ```
 
 **Expected result**
 
 ```text
-E1 Lunch 500
-E2 Bus 200
-Total: 700 cents
+Choose: 1
+Showing stock... (your Day 6 loader plugs in here)
+Choose: 9
+Please choose 1, 2, or 3.
+Choose: 3
+Goodbye!
 ```
 
-Each record has an identity, label, and numeric amount. The generator expression supplies amounts to sum without changing the records. The display loop shows individual records before the summary so a user can inspect what the total contains. An empty list naturally totals zero. A complete tracker still needs validation, persistence, and an interface; this working calculation is one vertical slice's business logic, not the finished product.
+The for loop feeds three choices. "1" calls view_stock(). "9" matches nothing, so the else prints guidance - this is the never-crash rule: every unexpected input gets a message, never a traceback. "3" prints goodbye and break exits the loop. In the real program this loop is while True and choice comes from input(); the structure is identical.
 
 ## Practise before building
 
-### Exercise 1: Write the smallest specification
+### Exercise 1: README first
 
-Describe the user, three core actions, and three excluded features in a short paragraph.
+Before assembling, write the v1.0 README: what the program does, how to run it, what each menu choice does. Then build, following your own instructions word for word.
 
-**Hint:** Choose a workflow that a new user can complete in a few minutes.
+**Hint:** If you cannot describe a menu choice in one line, its job is unclear.
 
-**Check your result:** Every core action has an observable success condition.
+**Check your result:** The README is five lines or fewer and you followed it exactly while building.
 
-### Exercise 2: Trace a total
+### Exercise 2: The stranger test
 
-Add and remove a sample expense, predicting the total after each action.
+Get someone to run your program from the README while you stay silent. Write down every place they hesitate or go wrong.
 
-**Hint:** Keep the record count and amount total as different quantities.
+**Hint:** Do not help, explain, or point. Silence is the test.
 
-**Check your result:** The displayed records explain the calculated total.
+**Check your result:** A written list of at least two confusions - real ones, not invented.
 
-### Exercise 3: Run a usability check
+### Exercise 3: Break it on purpose
 
-Write a task such as add one expense and inspect the total, then watch a new user follow only your instructions.
+Feed the menu "three", an empty line, and "99" at every prompt. Every one must print a message.
 
-**Hint:** Record what they attempted before deciding what to change.
+**Hint:** Compare the choice as text: choice == "1", never choice == 1.
 
-**Check your result:** You have one concrete observation and a corresponding improvement.
+**Check your result:** No traceback for any bad input; the menu keeps running.
 
 ## Common mistakes and how to debug them
 
-- Adding optional features before one workflow works end to end.
-- Calculating with unvalidated text or unclear money units.
-- Calling a coached demonstration a usability test without recording the help provided.
+- Comparing the text choice to a number - input() gives text, so choice == 1 never matches; compare to "1".
+- Forgetting break on quit - the menu loops forever with no way out.
+- Building all five features halfway instead of finishing one complete path first.
 
 ## The FDE connection
 
-Customers need completed workflows, not a collection of impressive fragments. An FDE agrees on a useful slice, demonstrates it with realistic data, and keeps the acceptance criteria visible. Your expense tracker is practice for that delivery discipline.
+"It works on my machine" is not done. Done is: a stranger ran it from the README, bad input did not crash it, and the demo exposed the rough edges. The first time a junior's work meets a real user is a demo or a handoff - and Project 1 holds that bar. Every project after it clears the same bar.
 
 ## Build your lesson project
 
-**A usable CLI expense tracker**
+**Dukaan v1.0 - the complete CLI tool**
 
-A freelancer needs to record small expenses and inspect a reliable total. Build a command-line tool that adds, lists, and totals fictional expenses, saves them between runs, and explains invalid input. A stranger should be able to install and use it from the README. Receipt scanning, accounts, and bank connections are outside the first version.
+This is Project 1 - the checkpoint for everything in Phase 1. Amina will use Dukaan every morning: it must load her stock from a file (or start fresh), let her view stock, add items, and print the bill, save after every change, and never crash on bad input. Build v1.0 as one menu-driven program. When it works, demo it to a real person - that demo is part of the project.
 
-- An add/list/total command workflow with JSON persistence.
-- A clear data model and money-unit policy.
-- A README with setup, sample commands, and error examples.
-- A recorded user observation and a test-results table.
+- dukaan.py: a menu loop (view / add item / bill / save / quit) using your Day 4-6 functions.
+- Stock loads from dukaan_stock.json at startup; a missing file starts fresh with a message.
+- Every change saves to the file; quitting saves too.
+- A short demo video or a written walkthrough of a real person using it.
 
 Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
 
 ## Explain it back
 
-- What did you intentionally leave out of version one?
-- Where does one vertical slice cross the system's boundaries?
-- What did a new user's behavior reveal that your own testing missed?
+- Demo it to someone: what did they try that you did not expect?
+- Which Day 1-6 idea does each menu choice rely on? Name them.
+- What is still fragile or missing? What would v1.1 need?
 
 ## References and next steps
 
-- [Python: argparse](https://docs.python.org/3/library/argparse.html)
-- [Python: JSON](https://docs.python.org/3/library/json.html)
+- [Python: reading and writing files](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
+- [Python: errors and exceptions](https://docs.python.org/3/tutorial/errors.html)
 
 [← Lesson 6](../06_Day_Files_Errors_Debugging/) · [Lesson 8 →](../08_Day_Git_GitHub/)
 

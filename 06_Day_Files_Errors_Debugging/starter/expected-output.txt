@@ -1,2 +1,5 @@
-Round trip preserved 1 contact
-Stored data is not valid JSON; keep the original for investigation
+Saved the stock book.
+Loaded 2 items: Rice and Sugar
+'three' is not a number - using 0.
+Quantity accepted: 0
+Demo file cleaned up.

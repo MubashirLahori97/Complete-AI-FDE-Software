@@ -1,1 +1,4 @@
-Subtotal: 750 cents
+Rice stock value: Rs 10000
+Sugar stock value: Rs 16200
+Rice low? True
+Sugar low? False

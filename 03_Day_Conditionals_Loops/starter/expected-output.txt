@@ -1,3 +1,5 @@
-T1 urgent
-T2 review
-T3 standard
+Morning stock check:
+Rice: Rs 250 - LOW STOCK, order more!
+Sugar: Rs 180 - OK
+Tea: Rs 950 - LOW STOCK, order more!
+Bill: Rs 1200, discount: Rs 120.0, to pay: Rs 1080.0

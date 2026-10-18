@@ -142,404 +142,420 @@
   },
   {
     "day": 2,
-    "title": "Data, variables, types, and conversion",
-    "intro": "A value's type determines what operations mean. Two values can look identical on a screen and still behave differently inside a program. This lesson connects types to real failures in quantities, user input, and conversion tools. Your project is a conversion desk that accepts values deliberately, checks them, and produces clearly labelled results.",
+    "title": "The price list",
+    "intro": "Dukaan v0.1 shows the stock list. Today it grows into v0.2: a bill calculator. A customer buys 3 bags of rice and 2 of sugar - the program multiplies, adds, and works out the change. The new idea is small, and getting it wrong breaks everything: text and numbers are different things, and the shopkeeper's typed input always arrives as text. Convert it, or the bill is nonsense.",
     "objectives": [
-      "Identify strings, integers, floating-point numbers, booleans, and missing values.",
-      "Convert text into numbers at an input boundary and handle failed conversion.",
-      "Define a conversion's input unit, output unit, and expected behavior."
+      "Explain the difference between text and numbers with a shop example.",
+      "Use *, +, and - to compute a bill total and the change.",
+      "Convert typed input from text to a number with int() before doing arithmetic."
     ],
     "concepts": [
       {
-        "title": "A variable is a name bound to a value",
-        "text": "In Python, amount = 10 binds the name amount to an integer object. Reassigning amount changes which value the name refers to; it does not change all values elsewhere in the program. Use names that describe the role of the value, such as distance_km, rather than an unexplained x. Including units in names prevents a subtle category of bugs: a correct calculation applied to the wrong measurement. Type information and domain meaning are related, but a float alone cannot tell you whether a number means kilometres or dollars."
+        "title": "Text and numbers look the same but behave differently",
+        "text": "The price 250 and the text \"250\" look identical on your screen. To Python they are different things. 250 + 180 is 430 - arithmetic. \"250\" + \"180\" is \"250180\" - gluing text together. Text sticks; numbers calculate. A price you want to multiply must be a number, not text. Python calls text str (short for string, like a string of characters) and whole numbers int (short for integer). When output looks wrong - a total of 250180 instead of 430 - your first suspect is always: text where a number should be."
       },
       {
-        "title": "Representation changes behavior",
-        "text": "The string \"2\" contains a text character. The integer 2 represents a number. Adding two strings joins their text, while adding two integers performs arithmetic. A float represents a number approximately using binary floating-point; many decimal fractions are not represented exactly. For beginner measurement calculations, document a rounding policy. For currency, integer minor units or a carefully chosen Decimal policy are usually clearer than assuming float rounding always matches accounting rules."
+        "title": "Bills are arithmetic",
+        "text": "A bill is three operations. Multiply: price times quantity for each item. Add: the line totals into a grand total. Subtract: money paid minus the total gives the change. Python writes them as *, +, and -. Order matters: Python multiplies before it adds, exactly like the maths you learned in school, so 250 * 3 + 180 * 2 means (250 * 3) + (180 * 2). When in doubt, add brackets - they cost nothing and prevent real money mistakes."
       },
       {
-        "title": "Validate at the boundary",
-        "text": "User-entered data and API payloads arrive from outside your program. Convert them at a clear boundary before relying on arithmetic. float(\"2.5\") succeeds, while float(\"two\") raises ValueError. Catch the failure when you can return a useful message; do not silently substitute zero. After conversion, check domain rules too: a distance may not be negative, even though -3 is a perfectly valid number. Numeric parsing is therefore only one part of validation."
+        "title": "input() always gives you text",
+        "text": "When a program asks the shopkeeper to type a quantity, the answer arrives as text - even if they typed digits. \"3\" is text, and \"3\" * 2 is \"33\", not 6. So the first thing you do with typed input is convert it: int(\"3\") turns the text into the number 3, and then you can multiply. If the text is not a number - int(\"three\") - Python stops and shows an error naming the line. That error is useful information, not a disaster: it tells you exactly what went wrong. On Day 7 you will learn to catch it gracefully instead of crashing."
       }
     ],
     "example": {
       "language": "python",
-      "filename": "converter.py",
-      "run": "Run python converter.py. The standard library is sufficient.",
-      "context": "Convert a text value representing kilometres into metres. The unit appears in both names and output.",
-      "code": "raw_distance = \"2.5\"\ntry:\n    distance_km = float(raw_distance)\n    if distance_km < 0:\n        raise ValueError(\"Distance cannot be negative\")\n    distance_m = distance_km * 1000\n    print(f\"{distance_km:g} km = {distance_m:g} m\")\nexcept ValueError:\n    print(\"Enter a non-negative number of kilometres\")",
-      "output": "2.5 km = 2500 m",
-      "walkthrough": "raw_distance is text because it represents an input boundary. float creates a numeric value for arithmetic. The condition checks a domain rule, not a type rule. Multiplying by 1000 applies the conversion factor. The g format keeps this example's display compact; it does not change the stored numeric value. The except block handles invalid text and rejected negative distances. Try changing raw_distance to an empty string, zero, and -1 and follow the executed path in each case."
+      "filename": "bill.py",
+      "run": "Run python bill.py from the starter directory.",
+      "context": "Amina's customer buys rice and sugar. The quantities were typed by the shopkeeper, so they arrive as text. Read the code, predict the exact output - especially the change - then run it.",
+      "code": "price_rice = 250\nprice_sugar = 180\n\ntyped_rice_qty = \"3\"\ntyped_sugar_qty = \"2\"\n\nqty_rice = int(typed_rice_qty)\nqty_sugar = int(typed_sugar_qty)\n\nrice_total = price_rice * qty_rice\nsugar_total = price_sugar * qty_sugar\ntotal = rice_total + sugar_total\n\npaid = 2000\nchange = paid - total\n\nprint(f\"Rice: {qty_rice} x Rs {price_rice} = Rs {rice_total}\")\nprint(f\"Sugar: {qty_sugar} x Rs {price_sugar} = Rs {sugar_total}\")\nprint(f\"Total: Rs {total}\")\nprint(f\"Paid Rs {paid}, change Rs {change}\")",
+      "output": "Rice: 3 x Rs 250 = Rs 750\nSugar: 2 x Rs 180 = Rs 360\nTotal: Rs 1110\nPaid Rs 2000, change Rs 890",
+      "walkthrough": "The first two lines store prices as numbers. The next two store the typed quantities as text - this is what input() really gives you. int() converts each one into a real number. The line totals are price times quantity; adding them gives the grand total, 1110. Change is paid minus total: 2000 - 1110 = 890. If you skip the int() conversion, \"3\" * 250 does not multiply - it repeats the text \"3\" two hundred and fifty times. That is why conversion comes before arithmetic, every time."
     },
     "exercises": [
       {
-        "title": "Explain two different additions",
-        "task": "Run \"2\" + \"2\" and 2 + 2. Inspect each operand with type() and explain the difference.",
-        "hint": "Do not infer the type from the displayed characters alone.",
-        "check": "You can predict 22 versus 4 without running the expressions again."
+        "title": "Predict the trap",
+        "task": "In a scratch file, run print(\"2\" + \"2\") and print(2 + 2). Before each one, write down what you expect to see.",
+        "hint": "Text sticks together; numbers calculate.",
+        "check": "You predicted \"22\" for the text version and 4 for the number version before running."
       },
       {
-        "title": "Reject invalid input",
-        "task": "Test empty text, whitespace, two, zero, and a negative distance. Define the desired message for each rejected value.",
-        "hint": "Parsing and domain validation are separate decisions.",
-        "check": "Rejected input produces a clear message instead of a false conversion result."
+        "title": "A tea bill",
+        "task": "A customer buys 2 packs of Tea (Rs 950 each) and pays Rs 2000. Write the lines that compute the total and the change. Predict both numbers, then run.",
+        "hint": "Copy the pattern: line total, then paid minus total.",
+        "check": "Total is Rs 1900 and change is Rs 100, matching your prediction."
       },
       {
-        "title": "Add temperature conversion",
-        "task": "Write the Celsius-to-Fahrenheit formula in words, then implement it using a named input and output.",
-        "hint": "fahrenheit = celsius * 9 / 5 + 32.",
-        "check": "0 C becomes 32 F and 100 C becomes 212 F."
+        "title": "Break the conversion",
+        "task": "Change typed_rice_qty to \"three\" and run. Read the error: which line does it blame, and what does ValueError mean in your own words? Then change it back.",
+        "hint": "ValueError means \"this value cannot become a number\".",
+        "check": "You can explain why int(\"three\") fails without re-reading the message."
       }
     ],
     "mistakes": [
-      "Joining numeric text instead of adding numbers: inspect types at the boundary.",
-      "Silently treating invalid input as zero: a fallback value can create a believable but wrong result.",
-      "Mixing units or formatting too early: compute using clearly named numeric values, then format for display."
+      "Forgetting int() on typed input - then \"3\" * 250 repeats text instead of multiplying.",
+      "Using + on two pieces of text when you meant to add numbers - \"250\" + \"180\" is \"250180\", not 430.",
+      "Trying int() on text like \"3kg\" or \"three\" - only pure digit text converts; anything else is an error."
     ],
-    "fde": "Customer integrations often fail because two systems represent the same idea differently. One export contains numeric text, another uses a different unit, and a third omits missing values. Documenting and validating those boundaries is engineering work. Your converter is a small integration with an explicit contract.",
+    "fde": "In a software house, junior tickets are full of this. \"Add a totals row to the receipt\" is a feature ticket. \"The discount shows 250180 instead of 430 - fix it\" is a bug ticket, and it is a text-vs-number bug. Seniors trust juniors who look at wrong output and name the cause in ten seconds. Today you earned that instinct: when numbers look glued together, suspect text.",
     "project": {
-      "title": "A reliable unit conversion desk",
-      "brief": "A shop employee needs a small converter for distances and temperatures. Build a program with a clearly selected conversion, labelled inputs and outputs, and helpful handling of invalid input. Keep distance validation separate from temperature rules: negative Celsius values are valid, while the project's distance contract rejects negative distances.",
+      "title": "Dukaan v0.2 - totals and bills",
+      "brief": "Amina's customers are tired of mental maths. She wants Dukaan to print a proper bill: each item's quantity times price, the grand total, the amount paid, and the change. Quantities come from the shopkeeper typing at the keyboard. Build v0.2 on top of v0.1 - the stock list stays, the bill is new.",
       "deliverables": [
-        "A converter supporting kilometres to metres and Celsius to Fahrenheit.",
-        "A written input contract for both conversions.",
-        "A test-results table with valid, zero, negative, and non-numeric examples.",
-        "A short explanation of types and unit names in the implementation."
+        "dukaan.py extended: after the stock list, it asks for quantities and prints a bill.",
+        "The bill shows each line (qty x price), the grand total, the paid amount, and the change.",
+        "A note in your own words: why int() was needed, with one example."
       ],
       "milestones": [
         {
-          "title": "Define the contract",
+          "title": "One line total",
           "steps": [
-            "Write the two formulas and allowed inputs in plain English.",
-            "Decide how to display units and how many decimal places are useful."
+            "Pick one item and a fixed quantity.",
+            "Compute price times quantity and print the line.",
+            "Predict the number before you run."
           ],
-          "check": "Your validation rules distinguish distances from temperatures."
+          "check": "The line total equals price times quantity."
         },
         {
-          "title": "Convert and validate",
+          "title": "The full bill",
           "steps": [
-            "Implement conversion from raw text to a numeric value.",
-            "Return a helpful message for invalid text and unsupported conversion names."
+            "Add a second item's line total.",
+            "Add both lines into a grand total and print it.",
+            "Compute change from a fixed paid amount and print it."
           ],
-          "check": "A rejected value cannot be mistaken for a successful result."
+          "check": "Total and change are correct for your test quantities."
         },
         {
-          "title": "Prove the boundaries",
+          "title": "Real typed input",
           "steps": [
-            "Run the test matrix and save the results.",
-            "Change the input representation deliberately and explain the behavior."
+            "Use input() to ask for each quantity.",
+            "Convert the answers with int() before multiplying.",
+            "Test with quantities 1, 5, and 0."
           ],
-          "check": "Known reference conversions and invalid-input cases behave as specified."
+          "check": "Typing 5 gives five times the price; typing 0 gives Rs 0."
         }
       ],
       "acceptance": [
-        "Both conversion formulas produce the documented reference results.",
-        "Outputs include the input and output units.",
-        "Invalid numeric text produces a useful error message.",
-        "Negative temperature and distance inputs follow their separate contracts.",
-        "A test-results table records at least four boundary cases."
+        "The program prints the v0.1 stock list unchanged.",
+        "It asks for quantities and prints a bill with line totals, a grand total, and change.",
+        "Every quantity is converted with int() before any arithmetic.",
+        "Quantity 0 gives a line total of Rs 0; quantity 5 gives five times the price.",
+        "You can explain why removing int() would break the bill."
       ],
       "tests": [
         [
-          "2.5 km",
-          "2500 m with units"
+          "Quantities: rice 3, sugar 2, tea 0; paid 2000",
+          "Lines show Rs 750, Rs 360, Rs 0; total Rs 1110; change Rs 890"
         ],
         [
-          "0 C and 100 C",
-          "32 F and 212 F"
+          "Quantity typed as 0 for every item",
+          "Total Rs 0; change equals the paid amount"
         ],
         [
-          "two or empty input",
-          "Helpful validation error and no fabricated result"
+          "Quantity typed as \"two\"",
+          "Program shows an error naming the conversion (fix: type digits)"
         ],
         [
-          "-1 km and -10 C",
-          "Distance rejected; temperature converted"
+          "Change price1 to 300 and re-run the bill",
+          "Rice line and total update; nothing else changes"
         ]
       ],
       "extensions": [
-        "Add metres to kilometres and test a round trip within an explicit tolerance.",
-        "Add a currency-formatting exercise using integer minor units; keep it separate from live exchange rates."
+        "Print a \"THANK YOU\" footer with the shop name and the total items sold.",
+        "Ask for the paid amount with input() too, and print a warning if paid is less than the total."
       ],
       "review": [
-        "Why does input representation matter to arithmetic?",
-        "Which checks are type validation and which are business rules?",
-        "Where does rounding happen, and what information can rounding lose?"
+        "Where exactly does text become a number in your program - and what breaks if you skip it?",
+        "Show the bill for 4 bags of rice without running the program. How did you work it out?",
+        "What would you change to add a fourth item to the bill?"
       ]
     },
     "references": [
       [
-        "Python: numbers and text",
-        "https://docs.python.org/3/tutorial/introduction.html"
+        "Python: numbers",
+        "https://docs.python.org/3/tutorial/introduction.html#numbers"
       ],
       [
-        "Python: floating-point arithmetic",
-        "https://docs.python.org/3/tutorial/floatingpoint.html"
+        "Python: strings",
+        "https://docs.python.org/3/tutorial/introduction.html#strings"
       ]
     ]
   },
   {
     "day": 3,
-    "title": "Decisions, repetition, and boundary cases",
-    "intro": "Conditions let a program choose an action; loops let it repeat an action over data. Together they express business rules such as which ticket needs attention and when processing should stop. Today you will move from isolated if statements to a small ticket-triage workflow with explicit priority rules and a visible summary.",
+    "title": "The smart stock check",
+    "intro": "Amina has two morning jobs. One: check every item's stock and flag what is low. Two: apply the Friday rule - bills above Rs 1000 get 10% off. Writing each check by hand means one block per item, and next month there will be thirty items. Today Dukaan v0.3 learns the two halves of real work: decisions (ask a yes/no question) and loops (repeat the check for every item). One loop, one decision inside it, and the whole shop gets checked.",
     "objectives": [
-      "Trace which branch runs for a given condition, including equality.",
-      "Process a collection without skipping or endlessly repeating work.",
-      "Translate written priority rules into an ordered decision structure."
+      "Write if/elif/else decisions that apply business rules like discounts and stock alerts.",
+      "Use a for loop to run the same check once per item, however many items there are.",
+      "Combine a loop with a decision so every item is checked automatically."
     ],
     "concepts": [
       {
-        "title": "Conditions have precise boundaries",
-        "text": "The expression count > 10 asks a different question from count >= 10. The first excludes exactly ten; the second includes it. Test the boundary itself and the values on either side. For multiple rules, decide their order: an if/elif chain chooses the first matching branch, whereas separate if statements can run more than one branch. A ticket that is both old and critical must follow a documented priority rule, not whichever order was accidentally typed first."
+        "title": "Decisions are yes/no questions",
+        "text": "A shopkeeper decides all day: is the bill big enough for a discount? Is the stock too low? In code, each decision is a question with two answers - yes or no - written with if. The lines indented under if run only when the answer is yes. The lines under else run when the answer is no. Indentation is not decoration; it is how Python knows which lines belong to the decision. Rules with two questions use and (both must be yes) or or (one yes is enough): \"bill above 2000 AND it is Friday\" needs both; \"tea is low OR sugar is low\" needs one."
       },
       {
-        "title": "A loop needs a clear unit of work",
-        "text": "A for loop visits items in an iterable. Identify what one iteration means: one ticket, one customer, or one attempt. Keep counters and accumulated results separate from the current item. An empty collection performs zero iterations, so your summary must still be meaningful. Avoid changing the collection you are iterating over unless you understand the behavior; filtering into a new collection is often clearer for a beginner."
+        "title": "Comparisons ask, == is not =",
+        "text": "total > 1000 asks \"is the total above 1000?\" The answer is True (yes) or False (no). Watch the boundary: with >, a total of exactly 1000 gets no discount - the question is \"strictly above\". With >=, exactly 1000 would qualify. Real bugs live on boundaries, so always test the exact boundary value. And == (two equals signs) compares; = (one equals sign) stores. Mixing them up is the most common beginner error in every country: \"if total = 1000\" is always wrong."
       },
       {
-        "title": "Termination belongs in the design",
-        "text": "A while loop repeats while its condition is true. If the state used by that condition never changes, the loop can run forever. Interactive programs need a way to exit, and retrying programs need a maximum attempt count or time limit. break stops the loop; continue skips the rest of the current iteration. Neither should hide a missing design decision about what happens to rejected work or unfinished items."
+        "title": "Repeating beats copying",
+        "text": "Without a loop, checking three items means writing the check three times. Thirty items means thirty copies - and the day you fix a bug, you must fix it thirty times. A for loop says: \"here is the job; do it once per value.\" You write the check once, and Python repeats it for every item. Fewer copies, fewer mistakes, and adding a fourth item changes nothing in the loop."
+      },
+      {
+        "title": "for walks through a row of values",
+        "text": "A list is values in a row inside square brackets: prices = [250, 180, 950]. (You will master lists on Day 5; today just borrow the idea.) \"for price in prices:\" means \"take each value in turn, call it price, and run the block.\" First round price is 250, then 180, then 950 - then the loop ends. The block is the indented lines, just like with if. Two more tools for later: range(3) counts 0, 1, 2 for a fixed number of rounds, and while repeats until its question turns false - but a while loop must change its answer inside the block, or it never stops."
       }
     ],
     "example": {
       "language": "python",
-      "filename": "triage.py",
-      "run": "Run python triage.py or paste the example into the Python lab.",
-      "context": "The critical severity rule takes priority over the age rule. Trace each ticket before running the loop.",
-      "code": "tickets = [\n    {\"id\": \"T1\", \"severity\": \"critical\", \"age_hours\": 2},\n    {\"id\": \"T2\", \"severity\": \"normal\", \"age_hours\": 24},\n    {\"id\": \"T3\", \"severity\": \"normal\", \"age_hours\": 3},\n]\nfor ticket in tickets:\n    if ticket[\"severity\"] == \"critical\":\n        priority = \"urgent\"\n    elif ticket[\"age_hours\"] >= 24:\n        priority = \"review\"\n    else:\n        priority = \"standard\"\n    print(ticket[\"id\"], priority)",
-      "output": "T1 urgent\nT2 review\nT3 standard",
-      "walkthrough": "The list contains three dictionaries, each representing one ticket. The for statement binds ticket to each dictionary in turn. For T1, the first condition is true and the other branches are skipped. T2 reaches the age condition and qualifies at exactly 24 hours because the operator includes equality. T3 falls into the else branch. Each iteration assigns priority before it prints, so the previous ticket's result cannot accidentally be reused."
+      "filename": "smartcheck.py",
+      "run": "Run python smartcheck.py from the starter directory.",
+      "context": "Amina's two morning jobs in one program: a loop checks every item's stock and flags what is low, then one decision applies the Friday discount to a Rs 1200 bill. Predict every printed line before you run - especially which items get flagged.",
+      "code": "names = [\"Rice\", \"Sugar\", \"Tea\"]\nprices = [250, 180, 950]\nstocks = [40, 90, 25]\n\nprint(\"Morning stock check:\")\nfor i in range(3):\n    if stocks[i] < 50:\n        print(f\"{names[i]}: Rs {prices[i]} - LOW STOCK, order more!\")\n    else:\n        print(f\"{names[i]}: Rs {prices[i]} - OK\")\n\ntotal = 1200\nif total > 1000:\n    discount = total / 10\nelse:\n    discount = 0\nprint(f\"Bill: Rs {total}, discount: Rs {discount}, to pay: Rs {total - discount}\")",
+      "output": "Morning stock check:\nRice: Rs 250 - LOW STOCK, order more!\nSugar: Rs 180 - OK\nTea: Rs 950 - LOW STOCK, order more!\nBill: Rs 1200, discount: Rs 120.0, to pay: Rs 1080.0",
+      "walkthrough": "The loop runs three rounds with i = 0, 1, 2. Round 0: stocks[0] is 40, below 50, so Rice gets the LOW STOCK line. Round 1: stocks[1] is 90, so Sugar gets OK. Round 2: stocks[2] is 25, so Tea is flagged. Then the decision: 1200 > 1000 is True, so discount = 120.0 (division always gives a decimal number: 120.0). To pay is 1200 - 120.0 = 1080.0. Now predict: with total = 1000, the discount question is False - no discount. That boundary is where real discount bugs hide."
     },
     "exercises": [
       {
-        "title": "Test the exact boundary",
-        "task": "Create tickets aged 23, 24, and 25 hours. Predict their priority.",
-        "hint": "Focus on >= rather than the displayed age alone.",
-        "check": "Exactly 24 hours follows the written rule."
+        "title": "Test the boundary",
+        "task": "Set total to 1000 and predict the discount. Set it to 1001 and predict again. Run both.",
+        "hint": "The rule says \"above 1000\", not \"1000 or above\".",
+        "check": "Rs 0 discount at 1000, Rs 100.1 at 1001 - both predicted before running."
       },
       {
-        "title": "Count outcomes",
-        "task": "Add a counter for urgent tickets and print a summary after the loop.",
-        "hint": "Initialise the counter before the loop and increment it only for the matching priority.",
-        "check": "The summary is correct for an empty list and for multiple critical tickets."
+        "title": "Count the alerts",
+        "task": "Add a counter that counts how many items are LOW STOCK, and print the count after the loop.",
+        "hint": "Create low = 0 before the loop; add 1 inside the LOW STOCK branch.",
+        "check": "The count is 2 for the starter stocks."
       },
       {
-        "title": "Bound repeated attempts",
-        "task": "Write a three-attempt retry simulation that stops early after success.",
-        "hint": "Use a fixed range and break on the successful result.",
-        "check": "Failure cannot cause a fourth attempt or an endless loop."
+        "title": "Add a fourth item",
+        "task": "Add \"Flour\", 120, 60 to the three lists and change range(3) to range(4). Predict the new lines, then run.",
+        "hint": "All three lists and the range must agree on 4.",
+        "check": "Four status lines print; no other code changed."
       }
     ],
     "mistakes": [
-      "Using > where the requirement includes equality: test the threshold explicitly.",
-      "Using separate if statements when only one priority should win: write down rule precedence.",
-      "Forgetting empty input or stop conditions: the absence of work should still produce a useful summary."
+      "Writing = when you mean == - one stores a value, two compares.",
+      "Forgetting the colon after the if or for line - Python needs it to start a block.",
+      "Wrong indentation - a line that looks inside the block but is not indented runs every time (or never, inside a loop).",
+      "range(3) with four items - the loop only visits the first three. The range and the lists must agree."
     ],
-    "fde": "Business policies often contain exceptions and conflicting rules. An FDE asks which rule wins and what happens at the threshold, then records examples before implementing the policy. A short, tested decision table can prevent a long argument after delivery.",
+    "fde": "Two of the most common junior tickets arrive together: \"apply this business rule\" and \"do it for every row\". Business rules change constantly - \"discount now starts at Rs 1500\" - and seniors always ask \"what happens at exactly the threshold?\" Every-row work is always a loop; copy-pasting thirty checks is thirty chances to break. Today you practiced both halves of real tickets: the decision and the repetition.",
     "project": {
-      "title": "Support-ticket triage queue",
-      "brief": "A support lead needs a repeatable way to review tickets. Build a program that reads a small in-memory ticket list, assigns exactly one priority to each valid ticket, and prints a summary. Critical tickets are urgent; other tickets aged at least 24 hours need review; the rest are standard. Invalid or incomplete tickets must be reported instead of silently classified.",
+      "title": "Dukaan v0.3 - the smart stock checker",
+      "brief": "Amina opens the shop each morning with two jobs: check every item's stock, and apply the Friday discount to big bills. Build v0.3: one program that loops over all items printing a status line each (OK or LOW STOCK), reports the cheapest and most expensive item, then applies the discount rule to the bill. The rules live in clearly marked variables at the top, so Amina can change them without touching the logic.",
       "deliverables": [
-        "A triage program with documented rule precedence.",
-        "A sample queue containing normal, critical, old, and invalid tickets.",
-        "A summary of each priority and rejected records.",
-        "A test table for empty queues and threshold cases."
+        "dukaan.py loops over the items - no repeated per-item lines.",
+        "Each item prints one status line: name, price, OK or LOW STOCK; the end prints cheapest, priciest, and the discounted bill.",
+        "DISCOUNT_LIMIT and LOW_STOCK_LIMIT variables at the top, plus a test note with the boundary values you tried."
       ],
       "milestones": [
         {
-          "title": "Write the decision table",
+          "title": "The discount decision",
           "steps": [
-            "Create one example for each rule and one overlapping example.",
-            "Agree that critical severity takes precedence over age."
+            "Add the if/else discount after the bill total.",
+            "Test with totals 900, 1000, and 1100.",
+            "Write down the boundary result."
           ],
-          "check": "The overlapping example has one unambiguous expected priority."
+          "check": "1000 gets no discount; 1100 gets 10% off."
         },
         {
-          "title": "Process the queue",
+          "title": "The loop check",
           "steps": [
-            "Use a loop to validate and classify one ticket at a time.",
-            "Count outcomes without changing the original queue during iteration."
+            "Store names, prices, and stocks in three lists.",
+            "Replace per-item lines with one loop that prints a status line each.",
+            "Add a fourth item and confirm nothing else changes."
           ],
-          "check": "Every input ticket has a visible result or rejection reason."
+          "check": "Four items print from one loop body; the fourth needed no new logic."
         },
         {
-          "title": "Handle edges",
+          "title": "Rules Amina can change",
           "steps": [
-            "Test empty input, missing fields, and 23/24/25-hour boundaries.",
-            "Save the queue, output, and rule explanation for review."
+            "Move the numbers 1000, 10, and 50 into named variables at the top.",
+            "Change the discount to start at 1500 and re-run.",
+            "Confirm only the variable changed, not the logic."
           ],
-          "check": "Your summary agrees with the individually classified tickets."
+          "check": "One variable change updates the whole program's behavior."
         }
       ],
       "acceptance": [
-        "Each valid ticket receives exactly one documented priority.",
-        "Critical severity takes precedence over the age rule.",
-        "The 24-hour boundary behaves as specified.",
-        "Invalid records and an empty queue are handled visibly.",
-        "Priority totals and rejection totals match the processed records."
+        "All items print from a loop - adding an item means adding to the lists, not writing new code.",
+        "Every item below the stock limit is flagged LOW STOCK; items at or above print OK.",
+        "A bill of exactly Rs 1000 shows no discount; above it shows 10% off.",
+        "Changing DISCOUNT_LIMIT to 1500 changes behavior with no other edits.",
+        "You can explain what the loop variable holds on each round, and the difference between = and ==."
       ],
       "tests": [
         [
-          "Critical ticket aged 30 hours",
-          "Urgent only, not both urgent and review"
+          "Bill total Rs 1100",
+          "Discount Rs 110.0 shown; to pay Rs 990.0"
         ],
         [
-          "Normal tickets aged 23, 24, and 25 hours",
-          "Standard, review, and review"
+          "Bill total exactly Rs 1000",
+          "No discount; to pay Rs 1000"
         ],
         [
-          "Empty queue",
-          "Zero counts and a useful no-work message"
+          "Stocks 40, 90, 25 (limit 50)",
+          "Rice and Tea flagged LOW; Sugar OK"
         ],
         [
-          "Ticket missing severity or with negative age",
-          "Rejected with a reason"
+          "Fourth item added (Flour, 120, 60)",
+          "Four status lines; no new per-item code"
         ]
       ],
       "extensions": [
-        "Add a maximum batch size and show unprocessed tickets separately.",
-        "Make the threshold configurable and test two different policies."
+        "Print the total value of all stock (price x qty added up inside the loop).",
+        "Alert differently for empty stock (0): \"OUT OF STOCK - urgent!\" vs the normal low alert."
       ],
       "review": [
-        "Why does rule order matter?",
-        "What happens when the collection is empty?",
-        "Which boundary case was most likely to reveal a bug?"
+        "Why is one loop better than three copied blocks when Amina adds a fourth item?",
+        "A customer argues their Rs 1000 bill deserves the discount. What does the code say - and is the rule or the code wrong?",
+        "What breaks if the three lists have different lengths? How would you notice?"
       ]
     },
     "references": [
       [
-        "Python: control flow",
-        "https://docs.python.org/3/tutorial/controlflow.html"
+        "Python: if statements",
+        "https://docs.python.org/3/tutorial/controlflow.html#if-statements"
+      ],
+      [
+        "Python: for statements",
+        "https://docs.python.org/3/tutorial/controlflow.html#for-statements"
       ]
     ]
   },
   {
     "day": 4,
-    "title": "Functions, contracts, and useful abstraction",
-    "intro": "A function gives a small operation a name, explicit inputs, and an observable result. It helps you reason about a program one responsibility at a time. Today you will turn a calculation into a contract and build a quote calculator whose business rules can be tested without reading interactive input or printing a screen.",
+    "title": "The reusable counter",
+    "intro": "Dukaan now computes totals, discounts, and stock checks - but the same small jobs are scattered everywhere: \"price times quantity\" appears in the bill, in the stock value, in the report. When Amina changes a rule, you must hunt down every copy. Today v0.4 gets organized: each repeated job becomes a function - a named, reusable piece with inputs and an answer.",
     "objectives": [
-      "Distinguish a function's parameters, return value, and side effects.",
-      "Separate pure calculation from input/output code.",
-      "Write and test a function contract with normal and invalid inputs."
+      "Define a function with def that packages one job under one name.",
+      "Pass inputs as parameters and get answers back with return.",
+      "Explain the difference between printing a value and returning it."
     ],
     "concepts": [
       {
-        "title": "Name what the operation means",
-        "text": "A function should expose a useful idea to its caller. total_cents(price_cents, quantity) tells you more than process(a, b). The caller needs to know allowed inputs, the result, and possible errors. Those expectations are the contract. Implementation details can change while the contract stays stable, letting other parts of the program continue to work. Start with an operation you can describe in one sentence; if the sentence contains several unrelated tasks, the function may be taking on too much."
+        "title": "A function is a job with a name",
+        "text": "def total_value(price, qty): creates a reusable job called total_value. The indented lines are the job's instructions - they only run when you call the function by name: total_value(250, 40). You write the logic once and use it ten times. When the rule changes, you change it in one place. That is the whole point: one definition, many uses. Name it after the job it does, not after how it does it."
       },
       {
-        "title": "Return and print are different",
-        "text": "return passes a value back to the caller and ends that function call. print writes a representation to an output stream. A function that only prints a total is harder to reuse in a web API or a test. Let calculation functions return values; let the interface decide how to display them. A function with no explicit return returns None in Python. That often explains why a caller unexpectedly receives a missing value after an apparently successful print."
+        "title": "Parameters in, return out",
+        "text": "price and qty are parameters - empty slots that get filled each time you call. return sends the answer back to the caller: rice_value = total_value(250, 40) stores 10000 in rice_value. Contrast this with print: print shows a value on the screen and gives back nothing. A function that prints its answer cannot be reused in a calculation - you cannot add up printed lines. Return the answer; let the caller decide whether to print it."
       },
       {
-        "title": "Pure logic is easier to test",
-        "text": "A pure calculation uses its inputs to produce a result without modifying external state. It does not read the keyboard, save a file, or call a network service. Such functions are straightforward to test with known examples. Side effects are necessary in real applications, but keep their boundaries visible. The goal is not to create the largest possible number of functions; it is to separate responsibilities where the separation helps you understand and change the system."
+        "title": "True and False are answers too",
+        "text": "is_low_stock(40) answers a yes/no question, so it returns True or False. True and False are Python's words for yes and no - they are values, just like numbers. You can store them, print them, and use them directly in an if: \"if is_low_stock(stock):\" reads almost like English. Functions that answer questions make decisions readable, and readable code is code the team trusts."
       }
     ],
     "example": {
       "language": "python",
-      "filename": "quote.py",
-      "run": "Run python quote.py. The example uses integer cents rather than live currency conversion.",
-      "context": "A line total is calculated in integer minor units. Validation is part of the function contract.",
-      "code": "def line_total_cents(price_cents, quantity):\n    if price_cents < 0 or quantity < 0:\n        raise ValueError(\"Price and quantity must be non-negative\")\n    return price_cents * quantity\n\nsubtotal = line_total_cents(250, 3)\nassert subtotal == 750\nprint(f\"Subtotal: {subtotal} cents\")",
-      "output": "Subtotal: 750 cents",
-      "walkthrough": "def creates a callable function; its body runs when the caller supplies the two arguments. The validation rejects negative inputs before calculating. return gives the integer result to the caller, which stores it as subtotal. The assertion checks a known example independently of the display text. The final print belongs to the interface layer. The example assumes integer inputs; a complete project must document or validate that assumption rather than relying on the function name alone."
+      "filename": "counter.py",
+      "run": "Run python counter.py from the starter directory.",
+      "context": "Amina wants two reusable jobs: the value of some stock (price times quantity) and a low-stock test. Read the code, predict all four printed lines, then run.",
+      "code": "def total_value(price, qty):\n    return price * qty\n\ndef is_low_stock(stock):\n    return stock < 50\n\nrice_value = total_value(250, 40)\nsugar_value = total_value(180, 90)\n\nprint(f\"Rice stock value: Rs {rice_value}\")\nprint(f\"Sugar stock value: Rs {sugar_value}\")\nprint(f\"Rice low? {is_low_stock(40)}\")\nprint(f\"Sugar low? {is_low_stock(90)}\")",
+      "output": "Rice stock value: Rs 10000\nSugar stock value: Rs 16200\nRice low? True\nSugar low? False",
+      "walkthrough": "The two def blocks define jobs but run nothing yet - defining is not calling. total_value(250, 40) fills price with 250 and qty with 40, computes 10000, and return hands it back to be stored in rice_value. is_low_stock(40) asks \"40 < 50?\" - True. is_low_stock(90) asks \"90 < 50?\" - False. Notice the callers never see inside the functions; they only know the name, the inputs, and the answer. That separation is what lets you reuse code and change it safely."
     },
     "exercises": [
       {
-        "title": "Separate output from logic",
-        "task": "Replace a calculator that prints inside its calculation with a function that returns its result.",
-        "hint": "Move print to the caller.",
-        "check": "The result can be asserted without capturing printed text."
+        "title": "A bill-line function",
+        "task": "Write bill_line(price, qty) that returns price times qty. Call it for (950, 2) and (180, 5). Predict both answers, then run.",
+        "hint": "One def, one return, two calls.",
+        "check": "1900 and 900 - both predicted before running."
       },
       {
-        "title": "Test a contract",
-        "task": "Check normal quantity, zero quantity, negative quantity, and a non-integer quantity.",
-        "hint": "Decide which inputs are supported before writing validation.",
-        "check": "Supported values return predictable results and rejected values have clear errors."
+        "title": "Return vs print",
+        "task": "Write a version of total_value that prints the answer instead of returning it. Then try adding two calls together. What happens, and why?",
+        "hint": "A function with no return gives back a special value called None.",
+        "check": "You can explain why adding returned values works but adding printed output fails."
       },
       {
-        "title": "Compose operations",
-        "task": "Add two line totals and an explicit delivery fee using separate named operations.",
-        "hint": "Reuse line_total_cents rather than copying its formula.",
-        "check": "Changing one unit price affects only the related line and grand total."
+        "title": "Reuse three times",
+        "task": "Use total_value three times - rice, sugar, tea - and add the three answers into stock_worth. Predict the total, then run.",
+        "hint": "worth = total_value(250, 40) + total_value(180, 90) + total_value(950, 25)",
+        "check": "Rs 49950, matching your prediction. One function, three uses."
       }
     ],
     "mistakes": [
-      "Confusing printed output with a return value: inspect what the caller actually receives.",
-      "Reading input inside every calculation: isolate the interface so tests can call the logic directly.",
-      "Making an abstraction before understanding the rule: a shorter name does not automatically make a clearer contract."
+      "Calling a function before defining it - Python reads top to bottom, so def must come first.",
+      "Forgetting return - the function then gives back None, and None + 5 is an error.",
+      "Printing inside the function instead of returning - then the answer cannot be reused in maths."
     ],
-    "fde": "Customer systems change. A useful contract lets you replace a price source, UI, or storage layer without rewriting the business calculation. An FDE explains which changes stay local and which changes affect the contract other teams rely on.",
+    "fde": "In code review, seniors constantly say: \"extract this into a function - you wrote it three times.\" Duplicated logic is how real bugs are born: the discount gets fixed in the bill but not in the report. Juniors who name small jobs well - total_value, is_low_stock - write code the whole team can read. Today's project is your first refactor: same behavior, better shape. That word will follow you for your whole career.",
     "project": {
-      "title": "A reusable quote calculator",
-      "brief": "A small service business creates quotes with line items and a delivery fee. Build calculation functions using integer cents, plus a thin display layer. Define supported prices and quantities explicitly. The first version has no tax integration, discounts, payments, or live exchange rates; those are separate scope decisions.",
+      "title": "Dukaan v0.4 - organized code",
+      "brief": "Dukaan works, but its logic is scattered: price times quantity is computed in three places, the low-stock test in two. Amina wants a small change - the low-stock limit moves to 40 - and you should only have to change it once. Rebuild v0.4: same program, organized into functions. Nothing the user sees changes; everything about the code gets better.",
       "deliverables": [
-        "Calculation functions for line totals, subtotal, and grand total.",
-        "A readable example quote with two line items.",
-        "A written contract for integer prices and quantities.",
-        "Tests for zero, negative, and unsupported inputs."
+        "dukaan.py rewritten with functions: line_total, is_low_stock, bill_total at minimum.",
+        "No duplicated price-times-quantity logic - every use calls the function.",
+        "The low-stock limit appears exactly once in the file.",
+        "A before/after note: which lines disappeared and why the new version is easier to change."
       ],
       "milestones": [
         {
-          "title": "Specify calculations",
+          "title": "Extract the repeated jobs",
           "steps": [
-            "Write a sample quote and calculate it manually.",
-            "Define the unit and valid range of every input."
+            "Find every place that computes price times quantity.",
+            "Write line_total(price, qty) and replace each copy with a call.",
+            "Run the bill and confirm the numbers are unchanged."
           ],
-          "check": "The manual expected total is available before the code is written."
+          "check": "The bill totals are identical to v0.4's."
         },
         {
-          "title": "Build reusable functions",
+          "title": "One home for each rule",
           "steps": [
-            "Return calculated values instead of printing inside business functions.",
-            "Keep user-facing formatting in a small separate caller."
+            "Write is_low_stock(stock) with the limit inside it.",
+            "Replace every stock comparison with a call.",
+            "Change the limit to 40 in one place and re-run."
           ],
-          "check": "The same functions can be called from a test or another interface."
+          "check": "One edit changes every stock check in the program."
         },
         {
-          "title": "Review change impact",
+          "title": "Tidy and prove",
           "steps": [
-            "Test the boundaries and compare results with the manual quote.",
-            "Change the delivery fee and show which function or caller changes."
+            "Move all def blocks to the top, calls below.",
+            "Re-run every test from v0.4.",
+            "Write the before/after note."
           ],
-          "check": "The change does not alter unrelated line calculations."
+          "check": "All v0.4 tests still pass with the organized code."
         }
       ],
       "acceptance": [
-        "Calculations use documented integer minor units.",
-        "Line, subtotal, and grand-total functions return useful values.",
-        "The display layer is separate from the calculation functions.",
-        "Zero and invalid inputs follow the written contract.",
-        "A manually checked quote and regression examples agree with the implementation."
+        "Every price-times-quantity computation goes through line_total - no inline copies remain.",
+        "Every low-stock decision goes through is_low_stock - the limit appears once.",
+        "The program's output is identical to v0.4 for the same inputs.",
+        "Changing the stock limit to 40 requires editing exactly one line.",
+        "You can explain the difference between defining a function and calling it."
       ],
       "tests": [
         [
-          "250 cents times quantity 3",
-          "750 cents"
+          "Run the v0.4 bill with v0.3 quantities",
+          "Identical totals to v0.3"
         ],
         [
-          "Zero quantity and a non-zero delivery fee",
-          "Zero line total plus the documented fee"
+          "Change limit to 40; an item with stock 45",
+          "No longer flagged (it was flagged at 50)"
         ],
         [
-          "Negative price or quantity",
-          "Clear rejection rather than a negative quote"
+          "Call line_total(950, 0)",
+          "Returns 0"
         ],
         [
-          "Change one line's quantity",
-          "Only that line, subtotal, and grand total change"
+          "Search the file for price-times-qty outside line_total",
+          "No matches - no duplicated logic"
         ]
       ],
       "extensions": [
-        "Introduce a documented percentage-discount policy with explicit rounding.",
-        "Use the functions behind a small web form after lesson 13."
+        "Add grand_total(prices, qtys) that loops and calls line_total inside - functions calling functions.",
+        "Add cheapest_item(names, prices) returning the name of the cheapest item."
       ],
       "review": [
-        "Which function contracts could another developer rely on?",
-        "Why is returning a value different from printing it?",
-        "Which possible future change would require a contract change?"
+        "What is the difference between defining a function and calling it?",
+        "Why is returning better than printing inside a reusable function?",
+        "If Amina adds a \"damaged goods\" discount, which function would change - and which would not?"
       ]
     },
     "references": [
@@ -551,130 +567,133 @@
   },
   {
     "day": 5,
-    "title": "Collections and data modelling",
-    "intro": "Real applications usually operate on many records rather than one value. Choosing the shape of those records determines which operations are clear, safe, and efficient enough for the task. Today you will model contacts with stable identifiers, distinguish ordered collections from keyed lookup, and build a contact directory that handles duplicate names deliberately.",
+    "title": "The real stock book",
+    "intro": "Three separate lists - names, prices, quantities - are an accident waiting to happen: delete from one list and forget the others, and rice gets sugar's price. Real programs keep each item's facts together. Today Dukaan v0.5 gets a real stock book: a list of dictionaries, where every item is one labeled bundle. Add, remove, and search - the way real data works.",
     "objectives": [
-      "Choose between a list and a dictionary for a specific operation.",
-      "Model records with stable IDs rather than ambiguous display names.",
-      "Explain mutation, missing keys, and duplicate-record behavior."
+      "Store ordered values in a list and grow it with append().",
+      "Label values with a dictionary so item[\"price\"] replaces price1.",
+      "Build and search a list of dictionaries as a tiny in-memory database."
     ],
     "concepts": [
       {
-        "title": "Lists preserve a sequence",
-        "text": "A list represents an ordered collection. It is useful when display order or visiting each item matters. Indexes describe positions, not permanent identities: removing an earlier item changes later positions. A customer ID therefore should not be inferred from a list index. When you filter a list, decide whether you are producing a new view or deleting records. That distinction becomes important when a UI lets a user search without intending to remove data."
+        "title": "A list keeps things in order",
+        "text": "A list is values in a row: names = [\"Rice\", \"Sugar\", \"Tea\"]. Positions start at 0: names[0] is \"Rice\". append() adds to the end, so the list grows without you rewriting it. len() tells you how many values there are. Lists are for \"many of the same kind of thing\" - many items, many prices, many customers. One row, one idea."
       },
       {
-        "title": "Dictionaries support named lookup",
-        "text": "A dictionary associates a key with a value. A stable contact ID can map to a dictionary containing that contact's fields. Looking up a known ID is clearer than searching for a name that may be shared by multiple people. Accessing a missing key with square brackets raises KeyError. get can return a default, but choose a default that preserves meaning: a missing contact is not the same thing as an empty contact record."
+        "title": "A dictionary labels each value",
+        "text": "A dictionary is values with name tags: item = {\"name\": \"Rice\", \"price\": 250, \"qty\": 40}. You read a value by its label: item[\"price\"] gives 250. Labels beat positions: item[\"price\"] still works if you add new labels later, while \"the second value\" breaks the moment the order changes. Use the wrong label - item[\"cost\"] - and Python answers with a KeyError: the label does not exist. Label spelling must match exactly, including capitals."
       },
       {
-        "title": "A model contains decisions, not just fields",
-        "text": "Decide what must be present, what can be missing, and what makes a record unique. Two contacts may share a display name while having different IDs. Updating a contact should preserve its identity. Lists and dictionaries are mutable, so two names can refer to the same object; a change through one reference can be visible through the other. Use an explicit copy when you need an independent record, and understand whether a shallow copy also shares nested objects."
+        "title": "A list of dictionaries is a tiny database",
+        "text": "Put the bundles in a row: stock = [{\"name\": \"Rice\", ...}, {\"name\": \"Sugar\", ...}]. Now each item's facts travel together - deleting one item deletes all its facts at once, and nothing can desynchronize. To find something, loop and check labels: \"if item[\"name\"] == \"Tea\":\" - the same loop-plus-decision pattern from Day 3, now with labeled data. This shape - a list of labeled records - is how almost all real data looks, including the JSON you will save on Day 6."
       }
     ],
     "example": {
       "language": "python",
-      "filename": "contacts.py",
-      "run": "Run python contacts.py. Records remain in memory in this example; lesson 6 adds persistence.",
-      "context": "Two people share a name, so the program uses IDs for lookup and names only for display.",
-      "code": "contacts = {\n    \"C001\": {\"name\": \"Ali\", \"city\": \"Lahore\"},\n    \"C002\": {\"name\": \"Ali\", \"city\": \"Karachi\"},\n}\nfor contact_id, contact in contacts.items():\n    print(contact_id, contact[\"name\"], contact[\"city\"])\n\nmatch = contacts.get(\"C003\")\nprint(\"Found\" if match is not None else \"Contact not found\")",
-      "output": "C001 Ali Lahore\nC002 Ali Karachi\nContact not found",
-      "walkthrough": "The outer dictionary maps unique IDs to records. Each inner dictionary labels the fields of one contact. items supplies both the identifier and record to each loop iteration. The shared name does not overwrite a record because it is not used as the key. get returns None for the missing ID, which the caller converts into a helpful message. The example's insertion order makes the displayed order predictable, but it is not a substitute for an explicit sort when the product requires alphabetical output."
+      "filename": "stockbook.py",
+      "run": "Run python stockbook.py from the starter directory.",
+      "context": "Amina's stock book: three items as labeled bundles in a list. Add flour, find tea, count the book. Predict the two printed lines before you run.",
+      "code": "stock = [\n    {\"name\": \"Rice\", \"price\": 250, \"qty\": 40},\n    {\"name\": \"Sugar\", \"price\": 180, \"qty\": 90},\n    {\"name\": \"Tea\", \"price\": 950, \"qty\": 25},\n]\n\nstock.append({\"name\": \"Flour\", \"price\": 120, \"qty\": 60})\n\nfor item in stock:\n    if item[\"name\"] == \"Tea\":\n        print(f\"Found Tea: Rs {item['price']}, qty {item['qty']}\")\n\nprint(f\"Items in the stock book: {len(stock)}\")",
+      "output": "Found Tea: Rs 950, qty 25\nItems in the stock book: 4",
+      "walkthrough": "stock starts as a list of three dictionaries - three bundles in a row. append() adds a fourth bundle at the end; the list is now four long, and nothing else had to change. The loop takes each bundle in turn and checks its \"name\" label; only Tea's bundle matches, so only one line prints. len(stock) counts the bundles: 4, because the appended flour counts. Predict first: if you searched for \"Bread\" instead, nothing would print - the loop would simply find no match, which is also the answer to \"how do I know it is missing?\""
     },
     "exercises": [
       {
-        "title": "Search without deleting",
-        "task": "Produce a list of contacts whose city matches a query while keeping the original directory unchanged.",
-        "hint": "Append matching records to a separate list.",
-        "check": "Searching for an unknown city returns no matches without removing contacts."
+        "title": "Remove an item",
+        "task": "Remove Sugar by building a new list with only the items you want to keep. Predict the length, then print it.",
+        "hint": "Loop over stock; append each item whose name is not \"Sugar\" to a new list.",
+        "check": "Length is 3 after removal; rice, tea, and flour remain."
       },
       {
-        "title": "Update by identity",
-        "task": "Change the city of C002 while preserving its ID and the other contact.",
-        "hint": "Look up the ID before updating its fields.",
-        "check": "Only the selected record changes."
+        "title": "Change a price by label",
+        "task": "Raise Tea's price to 1000: loop, match the name, assign item[\"price\"] = 1000. Print the book after.",
+        "hint": "Loop, match the name, assign to the label.",
+        "check": "Tea shows Rs 1000; every other item is unchanged."
       },
       {
-        "title": "Observe shared state",
-        "task": "Assign one contact record to another variable, change its city, and inspect the original.",
-        "hint": "Assignment does not automatically create a deep copy.",
-        "check": "You can explain why the update is visible through both references."
+        "title": "Count the stock value",
+        "task": "Loop over the book and add up price times qty for every bundle. Predict the total first.",
+        "hint": "total = 0 before the loop; inside: total = total + item[\"price\"] * item[\"qty\"].",
+        "check": "Rs 57150 (10000 + 16200 + 23750 + 7200), matching your prediction."
       }
     ],
     "mistakes": [
-      "Using names as unique keys: duplicate names can overwrite valid people.",
-      "Treating a position as a stable ID: positions change when records are inserted or deleted.",
-      "Hiding missing records behind empty defaults: an explicit not-found result is easier to diagnose."
+      "Using item[\"Price\"] instead of item[\"price\"] - labels are case-sensitive; KeyError means the label does not exist.",
+      "Forgetting that positions start at 0 - stock[3] on a 3-item list is an error.",
+      "Keeping three parallel lists instead of bundles - one deletion desynchronizes everything."
     ],
-    "fde": "A customer data export may contain duplicates, optional fields, and inconsistent identifiers. An FDE asks how records are matched across systems before building an integration. A data model should preserve useful distinctions instead of deleting them to make the code convenient.",
+    "fde": "Almost every junior ticket touches labeled data: \"the API returns a list of orders - show each customer's total.\" That API data arrives as JSON, which looks exactly like Python dictionaries in a list. Reading item[\"price\"] today is reading real API responses next week. And the parallel-lists bug - rice getting sugar's price - is a real production bug juniors get asked to fix. Bundles prevent it by construction.",
     "project": {
-      "title": "Customer contact directory",
-      "brief": "A small team needs to add, find, update, and list contacts. Build an in-memory directory keyed by stable IDs. Allow duplicate display names, validate required fields, and make a missing ID understandable. Persistence is intentionally left for the next lesson, so today you can concentrate on data shape and operations.",
+      "title": "Dukaan v0.5 - the stock book",
+      "brief": "Amina's shop now has four items and she keeps mixing up the three parallel lists. Rebuild v0.5: the stock becomes one list of dictionaries. Every feature - the list, the bill, the alerts, the report - must work on the new shape. Deleting an item must be one operation, not three.",
       "deliverables": [
-        "A contact model with ID, name, city, and optional email.",
-        "Operations to add, look up, update, search, and list records.",
-        "A sample dataset containing duplicate names and missing optional values.",
-        "An explanation of identity, validation, and ordering decisions."
+        "dukaan.py stores stock as a list of dicts with name, price, qty labels.",
+        "All v0.5 features work unchanged on the new shape.",
+        "New: remove an item by name in one operation; search prints one item's full record.",
+        "A note: one real mistake the old parallel lists could cause, in your own words."
       ],
       "milestones": [
         {
-          "title": "Model the records",
+          "title": "Convert the shape",
           "steps": [
-            "List required and optional fields with sample values.",
-            "Choose an ID strategy and document duplicate-name behavior."
+            "Replace the three lists with one list of dicts.",
+            "Update every loop and function to use labels.",
+            "Run the full program - output must match v0.5."
           ],
-          "check": "Two people with the same name remain separate records."
+          "check": "Identical output to v0.5 for the same data."
         },
         {
-          "title": "Implement useful operations",
+          "title": "Add and remove",
           "steps": [
-            "Add lookup and update operations that use the stable ID.",
-            "Return search results without mutating the stored directory."
+            "Add \"add item\" and \"remove item\" operations by name.",
+            "Remove Sugar; confirm rice and tea are untouched.",
+            "Re-add Sugar with new values."
           ],
-          "check": "An unknown ID produces an explicit not-found outcome."
+          "check": "Removal is one operation and cannot desynchronize."
         },
         {
-          "title": "Inspect data integrity",
+          "title": "Search and report",
           "steps": [
-            "Try duplicate IDs, blank names, and missing optional email.",
-            "Check that an update preserves all unrelated records."
+            "Add search: type a name, print that item's record.",
+            "Handle a name that is not in the book with a clear message.",
+            "Print the total stock value in the morning report."
           ],
-          "check": "The dataset still follows the model after all operations."
+          "check": "Unknown names get \"not found\", not a crash."
         }
       ],
       "acceptance": [
-        "Each contact has a stable unique ID and a non-blank name.",
-        "Duplicate display names do not overwrite records.",
-        "Lookup and update use IDs and handle missing IDs clearly.",
-        "Search does not delete or mutate the original directory.",
-        "Required and optional fields are documented and tested."
+        "Stock is a single list of dicts; no parallel lists remain.",
+        "All v0.5 features produce identical output on the new shape.",
+        "Removing an item by name is one operation and leaves other items intact.",
+        "Searching an unknown name prints a clear \"not found\" message.",
+        "You can explain why bundles beat parallel lists, with a concrete failure example."
       ],
       "tests": [
         [
-          "Two contacts named Ali with different IDs",
-          "Both remain available"
+          "Same data as v0.5",
+          "Bill, alerts, and report match v0.5 exactly"
         ],
         [
-          "A duplicate ID",
-          "Rejected or handled by an explicit documented update operation"
+          "Remove \"Sugar\", then print the book",
+          "Two items remain; rice and tea unchanged"
         ],
         [
-          "An unknown ID",
-          "Useful not-found result"
+          "Search \"Bread\"",
+          "Clear \"not found\" message, no crash"
         ],
         [
-          "Blank name and missing email",
-          "Blank required name rejected; optional email handled"
+          "Add \"Flour\" (120, 60), then count",
+          "Book length is 4"
         ]
       ],
       "extensions": [
-        "Add explicit alphabetical sorting without changing stored identities.",
-        "Design an import report that distinguishes accepted, duplicate, and rejected records."
+        "Print the book sorted by price, cheapest first, without changing the stored order.",
+        "Refuse to add an item with a negative quantity, with a clear message."
       ],
       "review": [
-        "Why is an ID different from a display name?",
-        "Which operations benefit from keyed lookup?",
-        "What did you choose to do with missing and duplicate data?"
+        "What breaks in the parallel-lists version when you delete the second item but forget one list?",
+        "Why is item[\"price\"] clearer than prices[1] to a stranger reading your code?",
+        "Where else in real software have you seen labeled bundles? (Hint: Day 9's APIs.)"
       ]
     },
     "references": [
@@ -686,130 +705,132 @@
   },
   {
     "day": 6,
-    "title": "Persistence, errors, and systematic debugging",
-    "intro": "An in-memory directory disappears when the process stops. A useful tool often needs durable state, but saving state introduces new failure modes: missing files, invalid data, and interrupted writes. Today you will connect persistence to recovery and learn to investigate errors using evidence rather than a sequence of guesses.",
+    "title": "Saving the shop",
+    "intro": "Everything Dukaan knows lives in the program's memory. Close the program and it forgets - every morning Amina retypes the stock. Worse: one mistyped quantity crashes the whole bill. Today Dukaan v0.6 gets two upgrades: files give it a memory that survives closing, and try/except keeps it standing when input is bad.",
     "objectives": [
-      "Serialize structured data to JSON and load it back deliberately.",
-      "Distinguish missing, corrupt, and invalid stored data.",
-      "Read an exception and investigate the relevant failing operation."
+      "Save a Python data structure to a file and load it back with the json module.",
+      "Use try/except to handle missing files and bad input without crashing.",
+      "Explain why JSON is the format programs use to share structured data."
     ],
     "concepts": [
       {
-        "title": "Persistence is a boundary",
-        "text": "Memory belongs to a running process. A file survives beyond that process, but the file format becomes a contract between versions of the application. JSON represents a useful subset of values such as objects, arrays, strings, numbers, booleans, and null. It does not automatically preserve custom Python objects or validate your business rules. Loading syntactically valid JSON is therefore followed by checking that the stored shape and required fields match what your program expects."
+        "title": "Files remember after the program ends",
+        "text": "Variables die when the program stops. A file survives. open(\"stock.json\", \"w\") opens the file for writing; json.dump(stock, f) translates the list of dictionaries into text and writes it. Later, open(\"stock.json\") with json.load(f) translates the text back into Python values. JSON (JavaScript Object Notation - a boring name for a useful idea) is text shaped exactly like Python lists and dicts, which is why the round trip is so smooth. \"with\" closes the file for you, even if something goes wrong inside the block."
       },
       {
-        "title": "Failures need different recovery policies",
-        "text": "A missing data file on first launch can mean an empty directory. A corrupt existing file may represent information the user expects you to preserve. Do not treat both cases as permission to overwrite the file with an empty object. Decide which errors are recoverable, which need user action, and what evidence to keep. For writes, an intermediate file followed by an appropriate replacement can reduce partial-write risks; the exact durability guarantee still depends on the operating system and storage setup."
+        "title": "Errors are messages, not the end",
+        "text": "int(\"three\") fails. A missing file fails. In Day 2 that meant a crash; today it means a decision. try: says \"attempt this\"; except ValueError: says \"if that specific failure happens, do this instead.\" The program keeps running - it prints a helpful message, uses a safe default, and carries on. Catch specific errors (ValueError, FileNotFoundError), not everything: hiding all errors also hides your own bugs, and then nothing can be fixed."
       },
       {
-        "title": "Debugging starts with reproduction",
-        "text": "Read the exception type, message, and relevant stack frames. Identify the input and operation that caused the failure. Reproduce it with the smallest useful example, state a hypothesis, and test one targeted change. Catching every exception and continuing silently removes the evidence you need. A useful error message explains the problem and next action while avoiding private data. After the fix, re-run the successful path as well as the failing case."
+        "title": "JSON: the text format programs share",
+        "text": "json.dump translates your list of dictionaries into text; json.load rebuilds it. The text is not Python - it is JSON, a format almost every language reads. That is why it matters beyond this lesson: on Day 9 you will read JSON from a real supplier API, and the file you save today is the same shape as the data that API sends. Keep the stock book to lists, dicts, text, and numbers - JSON cannot hold everything Python can."
       }
     ],
     "example": {
       "language": "python",
-      "filename": "persistence.py",
-      "run": "Run python persistence.py. This worked example serializes in memory; the project adds actual file reads and writes.",
-      "context": "JSON parsing and application-level validation are separate checks. A small in-memory example keeps the two concepts visible.",
-      "code": "import json\n\ncontacts = {\"C001\": {\"name\": \"Ali\", \"city\": \"Lahore\"}}\nsaved_text = json.dumps(contacts)\nloaded = json.loads(saved_text)\nif not isinstance(loaded, dict):\n    raise ValueError(\"Expected a contact directory\")\nassert loaded == contacts\nprint(\"Round trip preserved 1 contact\")\n\ntry:\n    json.loads(\"not valid JSON\")\nexcept json.JSONDecodeError:\n    print(\"Stored data is not valid JSON; keep the original for investigation\")",
-      "output": "Round trip preserved 1 contact\nStored data is not valid JSON; keep the original for investigation",
-      "walkthrough": "dumps converts the dictionary into a JSON text representation, while loads parses that representation into Python values. The isinstance check validates the outer shape and the assertion confirms this sample round trip. A real application must also inspect each contact's fields. The deliberate invalid text produces JSONDecodeError, which is handled specifically. The message recommends preserving the original data instead of pretending a failed read means there are no contacts."
+      "filename": "save.py",
+      "run": "Run python save.py from the starter directory. It creates and deletes its own demo file.",
+      "context": "Amina's stock book, saved to a file and loaded back. The file might not exist yet - the program must not crash. Read the code, predict the exact output, then run it. Then, as an experiment: comment out the save block and run again - predict which branch runs.",
+      "code": "import json\nimport os\n\nFILENAME = \"dukaan_stock.json\"\n\nstock = [\n    {\"name\": \"Rice\", \"price\": 250, \"qty\": 40},\n    {\"name\": \"Sugar\", \"price\": 180, \"qty\": 90},\n]\n\nwith open(FILENAME, \"w\") as f:\n    json.dump(stock, f)\nprint(\"Saved the stock book.\")\n\ntry:\n    with open(FILENAME) as f:\n        loaded = json.load(f)\n    print(f\"Loaded {len(loaded)} items: {loaded[0]['name']} and {loaded[1]['name']}\")\nexcept FileNotFoundError:\n    print(\"No saved file yet - starting fresh.\")\n    loaded = []\n\ntyped = \"three\"\ntry:\n    qty = int(typed)\nexcept ValueError:\n    print(f\"'{typed}' is not a number - using 0.\")\n    qty = 0\nprint(f\"Quantity accepted: {qty}\")\n\nos.remove(FILENAME)\nprint(\"Demo file cleaned up.\")",
+      "output": "Saved the stock book.\nLoaded 2 items: Rice and Sugar\n'three' is not a number - using 0.\nQuantity accepted: 0\nDemo file cleaned up.",
+      "walkthrough": "json.dump translates the stock list into text and writes it to dukaan_stock.json. The try block then reads it back: the file exists, so json.load rebuilds the list and the \"Loaded 2 items\" line prints - the except branch is skipped. Next, int(\"three\") raises ValueError; the except catches it, prints the friendly message, and qty becomes 0 instead of crashing. Finally the demo deletes its own file so nothing is left behind. Now the experiment: comment out the save block and run again. This time open() raises FileNotFoundError, and you will see the \"starting fresh\" branch run. That branch is what v1.0 uses on every first launch."
     },
     "exercises": [
       {
-        "title": "Separate parsing from validation",
-        "task": "Load a valid JSON array where the program expects a dictionary. Reject the shape clearly.",
-        "hint": "Valid JSON is not necessarily valid application data.",
-        "check": "The failure is a schema problem, not incorrectly reported as corrupt JSON."
+        "title": "Watch the missing-file branch",
+        "task": "Comment out the save block (the \"with open ... 'w'\" part) and run. Predict what prints before you run.",
+        "hint": "Without the save, the file does not exist when the load runs.",
+        "check": "\"No saved file yet - starting fresh.\" prints, and the program finishes normally."
       },
       {
-        "title": "Record a debugging hypothesis",
-        "task": "Introduce a missing contact field and write the input, observed failure, hypothesis, and fix in four short lines.",
-        "hint": "Find the operation that assumes the missing field exists.",
-        "check": "Your fix addresses the assumption and a regression example remains."
+        "title": "Corrupt the file",
+        "task": "In a scratch file, run only the load part after writing the text \"hello\" into dukaan_stock.json by hand. What error appears? Describe it in your own words.",
+        "hint": "json.load on non-JSON text raises json.JSONDecodeError.",
+        "check": "You can name the error and explain that the file's text was not valid JSON."
       },
       {
-        "title": "Test recovery locally",
-        "task": "Use a temporary project data file to test first launch, a normal save, and a damaged copy.",
-        "hint": "Do not experiment on your only copy of useful data.",
-        "check": "The normal state reloads and damaged data is not silently overwritten."
+        "title": "Round-trip your stock book",
+        "task": "Build your 3-item stock book (a list of dicts), save it with json.dump, load it back, and print loaded == stock_book.",
+        "hint": "== on two lists compares every value inside them.",
+        "check": "It prints True - the round trip lost nothing."
       }
     ],
     "mistakes": [
-      "Equating valid JSON with valid records: validate the expected data shape after parsing.",
-      "Returning empty data for every exception: that can hide corruption and cause information loss.",
-      "Fixing the symptom without preserving a regression case: keep the input that exposed the assumption."
+      "Catching every error with a bare \"except:\" - it hides your real bugs along with the expected failures.",
+      "Mixing up the file modes: json.dump needs the file opened for writing, json.load for reading.",
+      "Saving values JSON cannot hold and being surprised on load - keep the stock book to lists, dicts, text, and numbers."
     ],
-    "fde": "Customer data is part of the product, not disposable debugging material. An FDE plans how to diagnose a failure, protect existing records, and explain recovery to the operator. A modest contact file is a good place to learn these habits before working with a production database.",
+    "fde": "Two rules every junior learns the hard way. One: users type anything - \"three\", \"-5\", an empty line. A program that crashes on bad input is a bug report waiting to happen, and \"handle invalid input gracefully\" is one of the most common junior tickets there is. Two: data loss is the unforgivable bug. Losing Amina's stock book would be worse than any crash. Save carefully, load defensively, and never let a missing file become a lost morning.",
     "project": {
-      "title": "Persistent contact book with recovery",
-      "brief": "Extend the contact directory so records survive closing and reopening the program. Store them in a documented JSON file, validate loaded records, and distinguish first launch from damaged existing data. Add a recovery message and a backup approach that preserves the user's information while you investigate a failure.",
+      "title": "Dukaan v0.6 - memory that survives",
+      "brief": "Dukaan forgets everything when it closes - every morning Amina retypes the stock. Build v0.6: on start, load the stock book from dukaan_stock.json (or start fresh with a clear message if there is no file); after every change, save; and no bad input may ever crash it - \"three\", \"-5\", and empty input all get a friendly message.",
       "deliverables": [
-        "Save and load operations with a documented data-file path and format.",
-        "A validated contact schema compatible with lesson 5.",
-        "A recovery policy for missing, malformed, and invalid files.",
-        "A restart test and a debugging log for one controlled failure."
+        "dukaan.py loads the stock book from dukaan_stock.json on start, or starts fresh with a message.",
+        "Adding an item saves the file immediately.",
+        "A test note: the bad inputs you tried and what the program printed."
       ],
       "milestones": [
         {
-          "title": "Design storage",
+          "title": "Save the stock book",
           "steps": [
-            "Choose a data-file location and write a valid sample JSON document.",
-            "Define separate behavior for missing data and damaged existing data."
+            "After adding an item, json.dump the list to dukaan_stock.json.",
+            "Run twice and open the file - it holds your items.",
+            "Confirm the file is plain text you can read."
           ],
-          "check": "The recovery policy does not erase existing data to hide a failure."
+          "check": "The file exists after the run and contains the items as JSON text."
         },
         {
-          "title": "Persist and restore",
+          "title": "Load it back",
           "steps": [
-            "Save contacts and load them through schema validation.",
-            "Close the process, reopen it, and inspect the stored records."
+            "On start, try to load the file; on FileNotFoundError start with a fresh list and a message.",
+            "Add an item, close, reopen - the item is still there.",
+            "Corrupt the file (write \"hello\" into it) and run - handle it without a traceback."
           ],
-          "check": "IDs and fields survive a normal restart."
+          "check": "Stock survives a restart; a missing or corrupt file never crashes."
         },
         {
-          "title": "Exercise recovery",
+          "title": "Unbreakable input",
           "steps": [
-            "Test a damaged copy and record the error path.",
-            "Keep a backup and demonstrate recovery without guessing."
+            "Wrap every int(input(...)) in try/except ValueError.",
+            "Test with \"three\", \"-5\", and empty input.",
+            "Negative or zero quantities get a message, not a crash."
           ],
-          "check": "A reviewer can follow the recovery steps from your README."
+          "check": "Every bad input prints a message; the program keeps running."
         }
       ],
       "acceptance": [
-        "Contacts survive a normal process restart.",
-        "Loaded data is checked for both JSON syntax and contact shape.",
-        "First launch works when the data file is absent.",
-        "Corrupt existing data is reported and preserved for recovery.",
-        "The README documents the data path, backup, and recovery steps."
+        "Stock added in one run is present after closing and reopening.",
+        "First launch with no save file starts fresh with a clear message.",
+        "A corrupt save file produces a message and a fresh start, not a traceback.",
+        "Typing \"three\", \"-5\", or nothing at a quantity prompt shows a message, not a crash.",
+        "You can explain what try/except does in one sentence, using the missing file as the example."
       ],
       "tests": [
         [
-          "Start without a data file",
-          "An empty usable directory is created according to policy"
+          "Add Rice, close, reopen",
+          "Rice is listed"
         ],
         [
-          "Save two contacts then restart",
-          "Both IDs and fields return unchanged"
+          "Delete dukaan_stock.json, run",
+          "\"No saved file yet - starting fresh.\""
         ],
         [
-          "Read malformed JSON from a damaged copy",
-          "Useful error; original damaged file preserved"
+          "Write \"hello\" into dukaan_stock.json, run",
+          "Friendly message, fresh start, no traceback"
         ],
         [
-          "Read valid JSON with an invalid contact shape",
-          "Schema error rather than silent acceptance"
+          "Type \"three\" at a quantity prompt",
+          "Message shown; program continues"
         ]
       ],
       "extensions": [
-        "Write through a temporary file and explain what guarantee it improves.",
-        "Add a format version and a migration plan for a future optional field."
+        "Keep a backup: before overwriting, copy the old file to dukaan_stock.bak.",
+        "Pretty-print the JSON with indent=2 so Amina can read the file herself."
       ],
       "review": [
-        "How are parsing, validation, and recovery different?",
-        "Which failure must not be treated as empty data?",
-        "What evidence helped you choose a targeted debugging fix?"
+        "Why is the load wrapped in try/except but the save usually is not?",
+        "What Python values can JSON not hold? What would break if the stock book used them?",
+        "Amina deletes the file by accident. What does she lose, and what would you change so she loses less?"
       ]
     },
     "references": [

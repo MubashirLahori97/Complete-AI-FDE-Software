@@ -1,9 +1,9 @@
-# Day 3 — Decisions, repetition, and boundary cases
+# Day 3 — The smart stock check
 
 <!-- beginner-path:begin -->
 ## Start here — one idea at a time
 
-**Your goal:** Support-ticket triage queue. You can take several study sessions.
+**Your goal:** Dukaan v0.3 - the smart stock checker. You can take several study sessions.
 
 **The situation:** A support lead needs critical tickets handled first and other tickets reviewed when they are at least 24 hours old.
 
@@ -62,118 +62,129 @@ Use the app's **Learn → Practise → Project → Record your build** flow, or 
 
 <!-- beginner-path:end -->
 
-Conditions let a program choose an action; loops let it repeat an action over data. Together they express business rules such as which ticket needs attention and when processing should stop. Today you will move from isolated if statements to a small ticket-triage workflow with explicit priority rules and a visible summary.
+Amina has two morning jobs. One: check every item's stock and flag what is low. Two: apply the Friday rule - bills above Rs 1000 get 10% off. Writing each check by hand means one block per item, and next month there will be thirty items. Today Dukaan v0.3 learns the two halves of real work: decisions (ask a yes/no question) and loops (repeat the check for every item). One loop, one decision inside it, and the whole shop gets checked.
 
-**Your project:** [Support-ticket triage queue](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+**Your project:** [Dukaan v0.3 - the smart stock checker](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
 
 ## What you will be able to do
 
-- Trace which branch runs for a given condition, including equality.
-- Process a collection without skipping or endlessly repeating work.
-- Translate written priority rules into an ordered decision structure.
+- Write if/elif/else decisions that apply business rules like discounts and stock alerts.
+- Use a for loop to run the same check once per item, however many items there are.
+- Combine a loop with a decision so every item is checked automatically.
 
 ## Understand the concept
 
-### Conditions have precise boundaries
+### Decisions are yes/no questions
 
-The expression count > 10 asks a different question from count >= 10. The first excludes exactly ten; the second includes it. Test the boundary itself and the values on either side. For multiple rules, decide their order: an if/elif chain chooses the first matching branch, whereas separate if statements can run more than one branch. A ticket that is both old and critical must follow a documented priority rule, not whichever order was accidentally typed first.
+A shopkeeper decides all day: is the bill big enough for a discount? Is the stock too low? In code, each decision is a question with two answers - yes or no - written with if. The lines indented under if run only when the answer is yes. The lines under else run when the answer is no. Indentation is not decoration; it is how Python knows which lines belong to the decision. Rules with two questions use and (both must be yes) or or (one yes is enough): "bill above 2000 AND it is Friday" needs both; "tea is low OR sugar is low" needs one.
 
-### A loop needs a clear unit of work
+### Comparisons ask, == is not =
 
-A for loop visits items in an iterable. Identify what one iteration means: one ticket, one customer, or one attempt. Keep counters and accumulated results separate from the current item. An empty collection performs zero iterations, so your summary must still be meaningful. Avoid changing the collection you are iterating over unless you understand the behavior; filtering into a new collection is often clearer for a beginner.
+total > 1000 asks "is the total above 1000?" The answer is True (yes) or False (no). Watch the boundary: with >, a total of exactly 1000 gets no discount - the question is "strictly above". With >=, exactly 1000 would qualify. Real bugs live on boundaries, so always test the exact boundary value. And == (two equals signs) compares; = (one equals sign) stores. Mixing them up is the most common beginner error in every country: "if total = 1000" is always wrong.
 
-### Termination belongs in the design
+### Repeating beats copying
 
-A while loop repeats while its condition is true. If the state used by that condition never changes, the loop can run forever. Interactive programs need a way to exit, and retrying programs need a maximum attempt count or time limit. break stops the loop; continue skips the rest of the current iteration. Neither should hide a missing design decision about what happens to rejected work or unfinished items.
+Without a loop, checking three items means writing the check three times. Thirty items means thirty copies - and the day you fix a bug, you must fix it thirty times. A for loop says: "here is the job; do it once per value." You write the check once, and Python repeats it for every item. Fewer copies, fewer mistakes, and adding a fourth item changes nothing in the loop.
+
+### for walks through a row of values
+
+A list is values in a row inside square brackets: prices = [250, 180, 950]. (You will master lists on Day 5; today just borrow the idea.) "for price in prices:" means "take each value in turn, call it price, and run the block." First round price is 250, then 180, then 950 - then the loop ends. The block is the indented lines, just like with if. Two more tools for later: range(3) counts 0, 1, 2 for a fixed number of rounds, and while repeats until its question turns false - but a while loop must change its answer inside the block, or it never stops.
 
 ## A worked example, step by step
 
-The critical severity rule takes priority over the age rule. Trace each ticket before running the loop.
+Amina's two morning jobs in one program: a loop checks every item's stock and flags what is low, then one decision applies the Friday discount to a Rs 1200 bill. Predict every printed line before you run - especially which items get flagged.
 
 ```python
-tickets = [
-    {"id": "T1", "severity": "critical", "age_hours": 2},
-    {"id": "T2", "severity": "normal", "age_hours": 24},
-    {"id": "T3", "severity": "normal", "age_hours": 3},
-]
-for ticket in tickets:
-    if ticket["severity"] == "critical":
-        priority = "urgent"
-    elif ticket["age_hours"] >= 24:
-        priority = "review"
+names = ["Rice", "Sugar", "Tea"]
+prices = [250, 180, 950]
+stocks = [40, 90, 25]
+
+print("Morning stock check:")
+for i in range(3):
+    if stocks[i] < 50:
+        print(f"{names[i]}: Rs {prices[i]} - LOW STOCK, order more!")
     else:
-        priority = "standard"
-    print(ticket["id"], priority)
+        print(f"{names[i]}: Rs {prices[i]} - OK")
+
+total = 1200
+if total > 1000:
+    discount = total / 10
+else:
+    discount = 0
+print(f"Bill: Rs {total}, discount: Rs {discount}, to pay: Rs {total - discount}")
 ```
 
 **Expected result**
 
 ```text
-T1 urgent
-T2 review
-T3 standard
+Morning stock check:
+Rice: Rs 250 - LOW STOCK, order more!
+Sugar: Rs 180 - OK
+Tea: Rs 950 - LOW STOCK, order more!
+Bill: Rs 1200, discount: Rs 120.0, to pay: Rs 1080.0
 ```
 
-The list contains three dictionaries, each representing one ticket. The for statement binds ticket to each dictionary in turn. For T1, the first condition is true and the other branches are skipped. T2 reaches the age condition and qualifies at exactly 24 hours because the operator includes equality. T3 falls into the else branch. Each iteration assigns priority before it prints, so the previous ticket's result cannot accidentally be reused.
+The loop runs three rounds with i = 0, 1, 2. Round 0: stocks[0] is 40, below 50, so Rice gets the LOW STOCK line. Round 1: stocks[1] is 90, so Sugar gets OK. Round 2: stocks[2] is 25, so Tea is flagged. Then the decision: 1200 > 1000 is True, so discount = 120.0 (division always gives a decimal number: 120.0). To pay is 1200 - 120.0 = 1080.0. Now predict: with total = 1000, the discount question is False - no discount. That boundary is where real discount bugs hide.
 
 ## Practise before building
 
-### Exercise 1: Test the exact boundary
+### Exercise 1: Test the boundary
 
-Create tickets aged 23, 24, and 25 hours. Predict their priority.
+Set total to 1000 and predict the discount. Set it to 1001 and predict again. Run both.
 
-**Hint:** Focus on >= rather than the displayed age alone.
+**Hint:** The rule says "above 1000", not "1000 or above".
 
-**Check your result:** Exactly 24 hours follows the written rule.
+**Check your result:** Rs 0 discount at 1000, Rs 100.1 at 1001 - both predicted before running.
 
-### Exercise 2: Count outcomes
+### Exercise 2: Count the alerts
 
-Add a counter for urgent tickets and print a summary after the loop.
+Add a counter that counts how many items are LOW STOCK, and print the count after the loop.
 
-**Hint:** Initialise the counter before the loop and increment it only for the matching priority.
+**Hint:** Create low = 0 before the loop; add 1 inside the LOW STOCK branch.
 
-**Check your result:** The summary is correct for an empty list and for multiple critical tickets.
+**Check your result:** The count is 2 for the starter stocks.
 
-### Exercise 3: Bound repeated attempts
+### Exercise 3: Add a fourth item
 
-Write a three-attempt retry simulation that stops early after success.
+Add "Flour", 120, 60 to the three lists and change range(3) to range(4). Predict the new lines, then run.
 
-**Hint:** Use a fixed range and break on the successful result.
+**Hint:** All three lists and the range must agree on 4.
 
-**Check your result:** Failure cannot cause a fourth attempt or an endless loop.
+**Check your result:** Four status lines print; no other code changed.
 
 ## Common mistakes and how to debug them
 
-- Using > where the requirement includes equality: test the threshold explicitly.
-- Using separate if statements when only one priority should win: write down rule precedence.
-- Forgetting empty input or stop conditions: the absence of work should still produce a useful summary.
+- Writing = when you mean == - one stores a value, two compares.
+- Forgetting the colon after the if or for line - Python needs it to start a block.
+- Wrong indentation - a line that looks inside the block but is not indented runs every time (or never, inside a loop).
+- range(3) with four items - the loop only visits the first three. The range and the lists must agree.
 
 ## The FDE connection
 
-Business policies often contain exceptions and conflicting rules. An FDE asks which rule wins and what happens at the threshold, then records examples before implementing the policy. A short, tested decision table can prevent a long argument after delivery.
+Two of the most common junior tickets arrive together: "apply this business rule" and "do it for every row". Business rules change constantly - "discount now starts at Rs 1500" - and seniors always ask "what happens at exactly the threshold?" Every-row work is always a loop; copy-pasting thirty checks is thirty chances to break. Today you practiced both halves of real tickets: the decision and the repetition.
 
 ## Build your lesson project
 
-**Support-ticket triage queue**
+**Dukaan v0.3 - the smart stock checker**
 
-A support lead needs a repeatable way to review tickets. Build a program that reads a small in-memory ticket list, assigns exactly one priority to each valid ticket, and prints a summary. Critical tickets are urgent; other tickets aged at least 24 hours need review; the rest are standard. Invalid or incomplete tickets must be reported instead of silently classified.
+Amina opens the shop each morning with two jobs: check every item's stock, and apply the Friday discount to big bills. Build v0.3: one program that loops over all items printing a status line each (OK or LOW STOCK), reports the cheapest and most expensive item, then applies the discount rule to the bill. The rules live in clearly marked variables at the top, so Amina can change them without touching the logic.
 
-- A triage program with documented rule precedence.
-- A sample queue containing normal, critical, old, and invalid tickets.
-- A summary of each priority and rejected records.
-- A test table for empty queues and threshold cases.
+- dukaan.py loops over the items - no repeated per-item lines.
+- Each item prints one status line: name, price, OK or LOW STOCK; the end prints cheapest, priciest, and the discounted bill.
+- DISCOUNT_LIMIT and LOW_STOCK_LIMIT variables at the top, plus a test note with the boundary values you tried.
 
 Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
 
 ## Explain it back
 
-- Why does rule order matter?
-- What happens when the collection is empty?
-- Which boundary case was most likely to reveal a bug?
+- Why is one loop better than three copied blocks when Amina adds a fourth item?
+- A customer argues their Rs 1000 bill deserves the discount. What does the code say - and is the rule or the code wrong?
+- What breaks if the three lists have different lengths? How would you notice?
 
 ## References and next steps
 
-- [Python: control flow](https://docs.python.org/3/tutorial/controlflow.html)
+- [Python: if statements](https://docs.python.org/3/tutorial/controlflow.html#if-statements)
+- [Python: for statements](https://docs.python.org/3/tutorial/controlflow.html#for-statements)
 
 [← Lesson 2](../02_Day_Python_Variables_Types/) · [Lesson 4 →](../04_Day_Functions/)
 

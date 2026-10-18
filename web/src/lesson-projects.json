@@ -20,123 +20,120 @@
   },
   {
     "day": 2,
-    "title": "A reliable unit conversion desk",
-    "brief": "A shop employee needs a small converter for distances and temperatures. Build a program with a clearly selected conversion, labelled inputs and outputs, and helpful handling of invalid input. Keep distance validation separate from temperature rules: negative Celsius values are valid, while the project's distance contract rejects negative distances.",
+    "title": "Dukaan v0.2 - totals and bills",
+    "brief": "Amina's customers are tired of mental maths. She wants Dukaan to print a proper bill: each item's quantity times price, the grand total, the amount paid, and the change. Quantities come from the shopkeeper typing at the keyboard. Build v0.2 on top of v0.1 - the stock list stays, the bill is new.",
     "deliverables": [
-      "A converter supporting kilometres to metres and Celsius to Fahrenheit.",
-      "A written input contract for both conversions.",
-      "A test-results table with valid, zero, negative, and non-numeric examples.",
-      "A short explanation of types and unit names in the implementation."
+      "dukaan.py extended: after the stock list, it asks for quantities and prints a bill.",
+      "The bill shows each line (qty x price), the grand total, the paid amount, and the change.",
+      "A note in your own words: why int() was needed, with one example."
     ],
     "acceptance": [
-      "Both conversion formulas produce the documented reference results.",
-      "Outputs include the input and output units.",
-      "Invalid numeric text produces a useful error message.",
-      "Negative temperature and distance inputs follow their separate contracts.",
-      "A test-results table records at least four boundary cases."
+      "The program prints the v0.1 stock list unchanged.",
+      "It asks for quantities and prints a bill with line totals, a grand total, and change.",
+      "Every quantity is converted with int() before any arithmetic.",
+      "Quantity 0 gives a line total of Rs 0; quantity 5 gives five times the price.",
+      "You can explain why removing int() would break the bill."
     ],
     "starter": "lesson-02-starter.zip",
-    "filename": "converter.py"
+    "filename": "bill.py"
   },
   {
     "day": 3,
-    "title": "Support-ticket triage queue",
-    "brief": "A support lead needs a repeatable way to review tickets. Build a program that reads a small in-memory ticket list, assigns exactly one priority to each valid ticket, and prints a summary. Critical tickets are urgent; other tickets aged at least 24 hours need review; the rest are standard. Invalid or incomplete tickets must be reported instead of silently classified.",
+    "title": "Dukaan v0.3 - the smart stock checker",
+    "brief": "Amina opens the shop each morning with two jobs: check every item's stock, and apply the Friday discount to big bills. Build v0.3: one program that loops over all items printing a status line each (OK or LOW STOCK), reports the cheapest and most expensive item, then applies the discount rule to the bill. The rules live in clearly marked variables at the top, so Amina can change them without touching the logic.",
     "deliverables": [
-      "A triage program with documented rule precedence.",
-      "A sample queue containing normal, critical, old, and invalid tickets.",
-      "A summary of each priority and rejected records.",
-      "A test table for empty queues and threshold cases."
+      "dukaan.py loops over the items - no repeated per-item lines.",
+      "Each item prints one status line: name, price, OK or LOW STOCK; the end prints cheapest, priciest, and the discounted bill.",
+      "DISCOUNT_LIMIT and LOW_STOCK_LIMIT variables at the top, plus a test note with the boundary values you tried."
     ],
     "acceptance": [
-      "Each valid ticket receives exactly one documented priority.",
-      "Critical severity takes precedence over the age rule.",
-      "The 24-hour boundary behaves as specified.",
-      "Invalid records and an empty queue are handled visibly.",
-      "Priority totals and rejection totals match the processed records."
+      "All items print from a loop - adding an item means adding to the lists, not writing new code.",
+      "Every item below the stock limit is flagged LOW STOCK; items at or above print OK.",
+      "A bill of exactly Rs 1000 shows no discount; above it shows 10% off.",
+      "Changing DISCOUNT_LIMIT to 1500 changes behavior with no other edits.",
+      "You can explain what the loop variable holds on each round, and the difference between = and ==."
     ],
     "starter": "lesson-03-starter.zip",
-    "filename": "triage.py"
+    "filename": "smartcheck.py"
   },
   {
     "day": 4,
-    "title": "A reusable quote calculator",
-    "brief": "A small service business creates quotes with line items and a delivery fee. Build calculation functions using integer cents, plus a thin display layer. Define supported prices and quantities explicitly. The first version has no tax integration, discounts, payments, or live exchange rates; those are separate scope decisions.",
+    "title": "Dukaan v0.4 - organized code",
+    "brief": "Dukaan works, but its logic is scattered: price times quantity is computed in three places, the low-stock test in two. Amina wants a small change - the low-stock limit moves to 40 - and you should only have to change it once. Rebuild v0.4: same program, organized into functions. Nothing the user sees changes; everything about the code gets better.",
     "deliverables": [
-      "Calculation functions for line totals, subtotal, and grand total.",
-      "A readable example quote with two line items.",
-      "A written contract for integer prices and quantities.",
-      "Tests for zero, negative, and unsupported inputs."
+      "dukaan.py rewritten with functions: line_total, is_low_stock, bill_total at minimum.",
+      "No duplicated price-times-quantity logic - every use calls the function.",
+      "The low-stock limit appears exactly once in the file.",
+      "A before/after note: which lines disappeared and why the new version is easier to change."
     ],
     "acceptance": [
-      "Calculations use documented integer minor units.",
-      "Line, subtotal, and grand-total functions return useful values.",
-      "The display layer is separate from the calculation functions.",
-      "Zero and invalid inputs follow the written contract.",
-      "A manually checked quote and regression examples agree with the implementation."
+      "Every price-times-quantity computation goes through line_total - no inline copies remain.",
+      "Every low-stock decision goes through is_low_stock - the limit appears once.",
+      "The program's output is identical to v0.4 for the same inputs.",
+      "Changing the stock limit to 40 requires editing exactly one line.",
+      "You can explain the difference between defining a function and calling it."
     ],
     "starter": "lesson-04-starter.zip",
-    "filename": "quote.py"
+    "filename": "counter.py"
   },
   {
     "day": 5,
-    "title": "Customer contact directory",
-    "brief": "A small team needs to add, find, update, and list contacts. Build an in-memory directory keyed by stable IDs. Allow duplicate display names, validate required fields, and make a missing ID understandable. Persistence is intentionally left for the next lesson, so today you can concentrate on data shape and operations.",
+    "title": "Dukaan v0.5 - the stock book",
+    "brief": "Amina's shop now has four items and she keeps mixing up the three parallel lists. Rebuild v0.5: the stock becomes one list of dictionaries. Every feature - the list, the bill, the alerts, the report - must work on the new shape. Deleting an item must be one operation, not three.",
     "deliverables": [
-      "A contact model with ID, name, city, and optional email.",
-      "Operations to add, look up, update, search, and list records.",
-      "A sample dataset containing duplicate names and missing optional values.",
-      "An explanation of identity, validation, and ordering decisions."
+      "dukaan.py stores stock as a list of dicts with name, price, qty labels.",
+      "All v0.5 features work unchanged on the new shape.",
+      "New: remove an item by name in one operation; search prints one item's full record.",
+      "A note: one real mistake the old parallel lists could cause, in your own words."
     ],
     "acceptance": [
-      "Each contact has a stable unique ID and a non-blank name.",
-      "Duplicate display names do not overwrite records.",
-      "Lookup and update use IDs and handle missing IDs clearly.",
-      "Search does not delete or mutate the original directory.",
-      "Required and optional fields are documented and tested."
+      "Stock is a single list of dicts; no parallel lists remain.",
+      "All v0.5 features produce identical output on the new shape.",
+      "Removing an item by name is one operation and leaves other items intact.",
+      "Searching an unknown name prints a clear \"not found\" message.",
+      "You can explain why bundles beat parallel lists, with a concrete failure example."
     ],
     "starter": "lesson-05-starter.zip",
-    "filename": "contacts.py"
+    "filename": "stockbook.py"
   },
   {
     "day": 6,
-    "title": "Persistent contact book with recovery",
-    "brief": "Extend the contact directory so records survive closing and reopening the program. Store them in a documented JSON file, validate loaded records, and distinguish first launch from damaged existing data. Add a recovery message and a backup approach that preserves the user's information while you investigate a failure.",
+    "title": "Dukaan v0.6 - memory that survives",
+    "brief": "Dukaan forgets everything when it closes - every morning Amina retypes the stock. Build v0.6: on start, load the stock book from dukaan_stock.json (or start fresh with a clear message if there is no file); after every change, save; and no bad input may ever crash it - \"three\", \"-5\", and empty input all get a friendly message.",
     "deliverables": [
-      "Save and load operations with a documented data-file path and format.",
-      "A validated contact schema compatible with lesson 5.",
-      "A recovery policy for missing, malformed, and invalid files.",
-      "A restart test and a debugging log for one controlled failure."
+      "dukaan.py loads the stock book from dukaan_stock.json on start, or starts fresh with a message.",
+      "Adding an item saves the file immediately.",
+      "A test note: the bad inputs you tried and what the program printed."
     ],
     "acceptance": [
-      "Contacts survive a normal process restart.",
-      "Loaded data is checked for both JSON syntax and contact shape.",
-      "First launch works when the data file is absent.",
-      "Corrupt existing data is reported and preserved for recovery.",
-      "The README documents the data path, backup, and recovery steps."
+      "Stock added in one run is present after closing and reopening.",
+      "First launch with no save file starts fresh with a clear message.",
+      "A corrupt save file produces a message and a fresh start, not a traceback.",
+      "Typing \"three\", \"-5\", or nothing at a quantity prompt shows a message, not a crash.",
+      "You can explain what try/except does in one sentence, using the missing file as the example."
     ],
     "starter": "lesson-06-starter.zip",
-    "filename": "persistence.py"
+    "filename": "save.py"
   },
   {
     "day": 7,
-    "title": "A usable CLI expense tracker",
-    "brief": "A freelancer needs to record small expenses and inspect a reliable total. Build a command-line tool that adds, lists, and totals fictional expenses, saves them between runs, and explains invalid input. A stranger should be able to install and use it from the README. Receipt scanning, accounts, and bank connections are outside the first version.",
+    "title": "Dukaan v1.0 - the complete CLI tool",
+    "brief": "This is Project 1 - the checkpoint for everything in Phase 1. Amina will use Dukaan every morning: it must load her stock from a file (or start fresh), let her view stock, add items, and print the bill, save after every change, and never crash on bad input. Build v1.0 as one menu-driven program. When it works, demo it to a real person - that demo is part of the project.",
     "deliverables": [
-      "An add/list/total command workflow with JSON persistence.",
-      "A clear data model and money-unit policy.",
-      "A README with setup, sample commands, and error examples.",
-      "A recorded user observation and a test-results table."
+      "dukaan.py: a menu loop (view / add item / bill / save / quit) using your Day 4-6 functions.",
+      "Stock loads from dukaan_stock.json at startup; a missing file starts fresh with a message.",
+      "Every change saves to the file; quitting saves too.",
+      "A short demo video or a written walkthrough of a real person using it."
     ],
     "acceptance": [
-      "Add, list, and total form a working command-line workflow.",
-      "Expenses survive a restart with stable IDs.",
-      "Amounts follow a documented numeric representation and validation policy.",
-      "A fresh setup works from the README alone.",
-      "One usability observation and all test cases are recorded."
+      "The menu offers view, add item, bill, save, and quit - each one works.",
+      "Stock added in one run is present after closing and reopening.",
+      "First launch with no save file starts fresh with a clear message.",
+      "Typing \"three\", \"-5\", or nothing at any number prompt shows a message, not a traceback.",
+      "A real person completed view, add, bill, and quit from your instructions alone."
     ],
     "starter": "lesson-07-starter.zip",
-    "filename": "expenses.py"
+    "filename": "menu.py"
   },
   {
     "day": 8,

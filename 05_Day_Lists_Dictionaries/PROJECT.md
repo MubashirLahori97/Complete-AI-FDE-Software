@@ -1,4 +1,4 @@
-# Lesson 5 project — Customer contact directory
+# Lesson 5 project — Dukaan v0.5 - the stock book
 
 <!-- beginner-path:begin -->
 ## Your first action
@@ -7,7 +7,7 @@ Draw two contact records with different IDs but the same name. Add a city to eac
 
 The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
 
-**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `contacts.py`. Run python contacts.py. Records remain in memory in this example; lesson 6 adds persistence.
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `stockbook.py`. Run python stockbook.py from the starter directory.
 
 Your queue already held several tickets. Now you are choosing a deliberate data structure; tomorrow you will save records between runs.
 
@@ -15,51 +15,54 @@ Your queue already held several tickets. Now you are choosing a deliberate data 
 
 ## The customer problem
 
-A small team needs to add, find, update, and list contacts. Build an in-memory directory keyed by stable IDs. Allow duplicate display names, validate required fields, and make a missing ID understandable. Persistence is intentionally left for the next lesson, so today you can concentrate on data shape and operations.
+Amina's shop now has four items and she keeps mixing up the three parallel lists. Rebuild v0.5: the stock becomes one list of dictionaries. Every feature - the list, the bill, the alerts, the report - must work on the new shape. Deleting an item must be one operation, not three.
 
-**Learning goal:** Choose between a list and a dictionary for a specific operation. Model records with stable IDs rather than ambiguous display names. Explain mutation, missing keys, and duplicate-record behavior.
+**Learning goal:** Store ordered values in a list and grow it with append(). Label values with a dictionary so item["price"] replaces price1. Build and search a list of dictionaries as a tiny in-memory database.
 
 **Scope:** build the core version first. The starter is a worked example, not a finished solution to the full project. Use fictional or public sample data.
 
 ## What to deliver
 
-- A contact model with ID, name, city, and optional email.
-- Operations to add, look up, update, search, and list records.
-- A sample dataset containing duplicate names and missing optional values.
-- An explanation of identity, validation, and ordering decisions.
+- dukaan.py stores stock as a list of dicts with name, price, qty labels.
+- All v0.5 features work unchanged on the new shape.
+- New: remove an item by name in one operation; search prints one item's full record.
+- A note: one real mistake the old parallel lists could cause, in your own words.
 
 Include a short README with the purpose, setup steps, example use, known limitations, and the evidence from your test cases. A reviewer should be able to tell which parts you implemented and which parts are demonstrations or mocks.
 
 ## Build it in milestones
 
-### Milestone 1: Model the records
+### Milestone 1: Convert the shape
 
-- List required and optional fields with sample values.
-- Choose an ID strategy and document duplicate-name behavior.
+- Replace the three lists with one list of dicts.
+- Update every loop and function to use labels.
+- Run the full program - output must match v0.5.
 
-**Stop and check:** Two people with the same name remain separate records.
+**Stop and check:** Identical output to v0.5 for the same data.
 
-### Milestone 2: Implement useful operations
+### Milestone 2: Add and remove
 
-- Add lookup and update operations that use the stable ID.
-- Return search results without mutating the stored directory.
+- Add "add item" and "remove item" operations by name.
+- Remove Sugar; confirm rice and tea are untouched.
+- Re-add Sugar with new values.
 
-**Stop and check:** An unknown ID produces an explicit not-found outcome.
+**Stop and check:** Removal is one operation and cannot desynchronize.
 
-### Milestone 3: Inspect data integrity
+### Milestone 3: Search and report
 
-- Try duplicate IDs, blank names, and missing optional email.
-- Check that an update preserves all unrelated records.
+- Add search: type a name, print that item's record.
+- Handle a name that is not in the book with a clear message.
+- Print the total stock value in the morning report.
 
-**Stop and check:** The dataset still follows the model after all operations.
+**Stop and check:** Unknown names get "not found", not a crash.
 
 ## Acceptance checks
 
-- [ ] Each contact has a stable unique ID and a non-blank name.
-- [ ] Duplicate display names do not overwrite records.
-- [ ] Lookup and update use IDs and handle missing IDs clearly.
-- [ ] Search does not delete or mutate the original directory.
-- [ ] Required and optional fields are documented and tested.
+- [ ] Stock is a single list of dicts; no parallel lists remain.
+- [ ] All v0.5 features produce identical output on the new shape.
+- [ ] Removing an item by name is one operation and leaves other items intact.
+- [ ] Searching an unknown name prints a clear "not found" message.
+- [ ] You can explain why bundles beat parallel lists, with a concrete failure example.
 
 These are the same checks shown in the app. Record the actual result and relevant evidence, rather than checking a box because the code looks plausible.
 
@@ -67,31 +70,31 @@ These are the same checks shown in the app. Record the actual result and relevan
 
 | Case | Action or input | Expected behavior |
 | --- | --- | --- |
-| 1 | Two contacts named Ali with different IDs | Both remain available |
-| 2 | A duplicate ID | Rejected or handled by an explicit documented update operation |
-| 3 | An unknown ID | Useful not-found result |
-| 4 | Blank name and missing email | Blank required name rejected; optional email handled |
+| 1 | Same data as v0.5 | Bill, alerts, and report match v0.5 exactly |
+| 2 | Remove "Sugar", then print the book | Two items remain; rice and tea unchanged |
+| 3 | Search "Bread" | Clear "not found" message, no crash |
+| 4 | Add "Flour" (120, 60), then count | Book length is 4 |
 
 Run the normal path and the failure paths. Keep a failed result visible in your notes until you understand and fix it. Re-run earlier passing cases after a change to catch regressions.
 
 ## Starter and how to use it
 
-The download contains this brief, a small worked example named `contacts.py`, and its expected output. Run python contacts.py. Records remain in memory in this example; lesson 6 adds persistence.
+The download contains this brief, a small worked example named `stockbook.py`, and its expected output. Run python stockbook.py from the starter directory.
 
 Read the example before extending it. Keep your own project in a separate working directory or repository. Do not store secrets, real customer information, or private documents in a public learning repository.
 
 ## Stretch challenges
 
-- Add explicit alphabetical sorting without changing stored identities.
-- Design an import report that distinguishes accepted, duplicate, and rejected records.
+- Print the book sorted by price, cheapest first, without changing the stored order.
+- Refuse to add an item with a negative quantity, with a clear message.
 
 Choose an extension only after the acceptance checks pass. Describe what the extension changes in the data model, user flow, tests, or operating cost.
 
 ## Review rubric and reflection
 
-- Why is an ID different from a display name?
-- Which operations benefit from keyed lookup?
-- What did you choose to do with missing and duplicate data?
+- What breaks in the parallel-lists version when you delete the second item but forget one list?
+- Why is item["price"] clearer than prices[1] to a stranger reading your code?
+- Where else in real software have you seen labeled bundles? (Hint: Day 9's APIs.)
 
 Score yourself on four areas: correctness against the brief, clarity of the implementation, useful failure handling, and strength of the evidence. For each area, record one thing that works and one thing you would improve. A polished screenshot alone does not establish that the project works.
 
