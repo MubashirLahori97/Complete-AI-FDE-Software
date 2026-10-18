@@ -115,25 +115,42 @@ test('the narrated-story invitation is styled on a direct visit before opening t
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('One page. Three layers.');
 });
 
-test('fast edits keep the actual contact action usable after each page refresh', async ({
+test('the landing keeps one clear first action and live mentor state after each page refresh', async ({
   page,
 }) => {
   await page.goto('/');
-  const input = page.getByLabel('What should the visitor see?', { exact: true });
-  const frame = page.frameLocator('iframe[title="Your first live page"]');
-  for (const title of [
-    'Repairs near you.',
-    'Bicycle repairs.',
-    'Home visits.',
-    'A friendly repair service.',
-  ]) {
-    await input.fill(title);
-    await expect(frame.getByRole('heading')).toHaveText(title);
-    await frame.getByRole('button', { name: 'Contact', exact: true }).click();
-    await expect(frame.locator('#details')).toBeVisible();
-    await frame.getByRole('button', { name: 'Contact', exact: true }).click();
-    await expect(frame.locator('#details')).toBeHidden();
-  }
+  await page.evaluate(() => {
+    const now = new Date();
+    const day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(
+      now.getDate(),
+    ).padStart(2, '0')}`;
+    localStorage.setItem(
+      'fde-mentor-v1',
+      JSON.stringify({
+        version: 1,
+        name: 'Amir',
+        xp: 250,
+        stepsDone: {},
+        daysComplete: [1, 2],
+        badges: ['first-program'],
+        activeDates: [day],
+      }),
+    );
+  });
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: /Meet Amina/ })).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Continue Day 3', exact: true }),
+  ).toHaveAttribute('href', '#/mentor/3');
+  await expect(page.getByText('Day 3 of 90')).toBeVisible();
+  await expect(page.getByLabel('1-day streak')).toBeVisible();
+  await expect(page.locator('.mentor-xp-fill')).toBeVisible();
+  await expect(page.getByText('Builder')).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByRole('link', { name: 'Continue Day 3', exact: true }),
+  ).toBeVisible();
+  await expect(page.getByLabel('Your badges')).toContainText('First Program');
 });
 
 test('shared live pages fit their body with a long heading and opened contact details', async ({

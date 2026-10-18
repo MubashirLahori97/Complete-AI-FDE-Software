@@ -7,15 +7,13 @@ test('the core starts with a useful outcome and keeps simulations separate from 
   page,
 }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /Learn to build/ })).toBeVisible();
-  await page.getByRole('button', { name: 'Try example: a clearer message' }).click();
+  await expect(page.getByRole('heading', { name: /Meet Amina/ })).toBeVisible();
   await expect(
-    page
-      .frameLocator('iframe[title="Your first live page"]')
-      .getByRole('heading', { name: /Repairs near you/ }),
-  ).toBeVisible();
-  await expect(page.getByText('Local teaching preview · no live AI')).toBeVisible();
-  await page.getByRole('link', { name: 'Start here: Lesson 1', exact: true }).click();
+    page.getByRole('link', { name: 'Start Lesson 1 — no setup needed', exact: true }),
+  ).toHaveAttribute('href', '#/mentor/1');
+  await expect(page.locator('.mentor-xp-bar')).toBeVisible();
+  await expect(page.getByText('Day 1 of 90')).toBeVisible();
+  await page.goto('/#/mission/1');
   await expect(
     page.getByRole('heading', { name: 'Make a useful website', exact: true }),
   ).toBeVisible();
@@ -234,7 +232,7 @@ test('core missions fit phones, support keyboard progression and respect reduced
       ).toBe(true);
       if (route === '/')
         await expect(
-          page.getByRole('link', { name: /^(Start here: Lesson 1|Continue lesson \d+)$/ }),
+          page.getByRole('link', { name: /^(Start Lesson 1 — no setup needed|Continue Day \d+)$/ }),
         ).toBeInViewport();
     }
   }

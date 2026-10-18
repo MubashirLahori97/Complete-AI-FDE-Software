@@ -18,7 +18,8 @@ import {
 import { downloadFile, type Progress } from './state';
 import CausalStudio from './CausalStudio';
 import WorkedStory from './WorkedStory';
-import { AcademyHome, AcademyPath } from './AcademyJourney';
+import { AcademyPath } from './AcademyJourney';
+import Landing from './mentor/Landing';
 import LessonDirections from './LessonDirections';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
@@ -34,7 +35,8 @@ export function missionCount(progress: Progress) {
   ).length;
 }
 export function MissionHome(props: Props) {
-  return <AcademyHome {...props} records={missionCount(props.progress)} />;
+  void props;
+  return <Landing />;
 }
 export function MissionPath(props: {
   progress: Progress;

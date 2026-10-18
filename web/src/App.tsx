@@ -27,6 +27,7 @@ const Dashboard = lazy(() => import('./Dashboard'));
 const VisualWebsiteLesson = lazy(() => import('./VisualWebsiteLesson'));
 const MotionLesson = lazy(() => import('./MotionLesson'));
 const AminaLesson = lazy(() => import('./AminaLesson'));
+const MentorLesson = lazy(() => import('./mentor/MentorLesson'));
 const CourseApp = lazy(() => import('./course/CourseApp'));
 const Curriculum = lazy(() => import('./Curriculum'));
 const Lesson = lazy(() => import('./Lesson'));
@@ -139,6 +140,7 @@ export default function App() {
   }, [hash, path]);
   const completed = legacyContext ? completionCount(progress) : missionCount(progress);
   const lessonMatch = path.match(/^\/lesson\/(\d+)$/);
+  const mentorMatch = path.match(/^\/mentor\/(\d+)$/);
   const missionMatch = path.match(/^\/mission\/(\d+)$/);
   const phaseMatch = path.match(/^\/phase\/([234])$/);
   const documentMatch = path.match(
@@ -220,6 +222,8 @@ export default function App() {
         <VisualWebsiteLesson standalone />
       </div>
     );
+  else if (mentorMatch && Number(mentorMatch[1]) >= 1 && Number(mentorMatch[1]) <= 30)
+    page = <MentorLesson key={mentorMatch[1]} day={Number(mentorMatch[1])} />;
   else if (missionMatch && Number(missionMatch[1]) >= 1 && Number(missionMatch[1]) <= 30)
     page = (
       <MissionLesson

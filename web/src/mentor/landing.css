@@ -1,0 +1,263 @@
+/* Landing + mentor strip. Mobile-first, single column, offline-safe (no external assets). */
+.landing {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #1f2937;
+  background: #fffdf8;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+  line-height: 1.6;
+}
+
+.mentor-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e5e0d5;
+  border-radius: 0.9rem;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 3px rgba(31, 41, 55, 0.08);
+}
+
+.mentor-xp {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.mentor-level-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.mentor-xp-bar {
+  flex: 1;
+  min-width: 4rem;
+  height: 0.75rem;
+  background: #e8e2d4;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.mentor-xp-fill {
+  height: 100%;
+  background: #16a34a;
+  border-radius: 999px;
+}
+
+.mentor-xp-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mentor-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mentor-streak {
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.mentor-day {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b5f4b;
+  white-space: nowrap;
+}
+
+.landing-hero {
+  margin-top: 2rem;
+}
+
+.landing-kicker {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #b45309;
+  margin: 0 0 0.5rem;
+}
+
+.landing-hero h1 {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  color: #111827;
+}
+
+.landing-hero p {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+}
+
+.landing-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0.75rem 1.75rem;
+  margin-top: 1rem;
+  background: #16a34a;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35);
+}
+
+.landing-cta:hover {
+  background: #15803d;
+}
+
+.landing-welcome {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: #6b5f4b;
+}
+
+.landing-how {
+  margin-top: 2.5rem;
+}
+
+.landing-how h2,
+.landing-map h2,
+.landing-badges h2 {
+  font-size: 1.4rem;
+  margin: 0 0 1rem;
+  color: #111827;
+}
+
+.landing-how ol {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.landing-how li {
+  counter-increment: step;
+  background: #ffffff;
+  border: 1px solid #e5e0d5;
+  border-radius: 0.75rem;
+  padding: 1rem 1rem 1rem 3.25rem;
+  position: relative;
+}
+
+.landing-how li::before {
+  content: counter(step);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #fef3c7;
+  color: #92400e;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-map {
+  margin-top: 2.5rem;
+}
+
+.landing-map-honest {
+  font-size: 0.95rem;
+  color: #6b5f4b;
+  margin: 0 0 1rem;
+}
+
+.landing-phases {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.phase {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  background: #f8f5ec;
+  border: 1px solid #e5e0d5;
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.phase.current {
+  background: #ecfdf5;
+  border-color: #16a34a;
+}
+
+.phase-range {
+  font-weight: 800;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.phase-label {
+  font-weight: 600;
+}
+
+.phase-note {
+  font-size: 0.85rem;
+  color: #6b5f4b;
+}
+
+.landing-badges {
+  margin-top: 2.5rem;
+}
+
+.landing-badges ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.badge {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (min-width: 48rem) {
+  .landing {
+    padding: 2rem 2rem 4rem;
+  }
+
+  .landing-hero h1 {
+    font-size: 3rem;
+  }
+
+  .landing-how ol {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

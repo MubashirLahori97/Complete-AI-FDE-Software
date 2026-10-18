@@ -1,71 +1,65 @@
 import { openEvidence } from './evidence-helper';
 import { expect, test } from '@playwright/test';
 
-test('a returning visitor can find the beginning without replacing their saved project or page', async ({
-  page,
-}) => {
-  await page.goto('/#/mission/1?step=0');
-  await page.getByLabel('The page heading', { exact: true }).fill('My saved repair page');
-  await page.goto('/#/mission/4?step=2');
-  await page.getByLabel('Product artifact or local file location').fill('/my-estimator/');
-  await page.goto('/#/');
-  await expect(page.getByRole('link', { name: 'Continue lesson 4', exact: true })).toHaveAttribute(
-    'href',
-    '#/mission/4',
-  );
-  await page
-    .getByLabel('What should the visitor see?', { exact: true })
-    .fill('An optional demo edit');
-  await page.getByRole('link', { name: 'New here? Start with Lesson 1', exact: true }).click();
-  await expect(page.getByRole('button', { name: '1 Explore', exact: true })).toHaveAttribute(
-    'aria-current',
-    'step',
-  );
-  await expect(page.getByLabel('The page heading', { exact: true })).toHaveValue(
-    'My saved repair page',
-  );
-  const records = await page.evaluate(
-    () => JSON.parse(localStorage.getItem('fde-academy-v1')!).missions,
-  );
-  expect(records[4].artifact).toBe('/my-estimator/');
-  expect(records[1].recorded).toBe(false);
-});
-
-test('a homepage edit changes actual page behaviour and carries into the first mission without completing it', async ({
+test('a returning learner finds their next day without losing saved work', async ({
   page,
 }) => {
   await page.goto('/');
-  await openEvidence(page);
-  const preview = page.frameLocator('iframe[title="Your first live page"]');
-  await page
-    .getByLabel('What should the visitor see?', { exact: true })
-    .fill('Bicycle repairs near you.');
-  await expect(preview.getByRole('heading')).toHaveText('Bicycle repairs near you.');
-  const beforeContact = await page.evaluate(() => scrollY);
-  await preview.getByRole('button', { name: 'Contact', exact: true }).click();
-  await expect(preview.locator('#details')).toBeVisible();
-  expect(Math.abs((await page.evaluate(() => scrollY)) - beforeContact)).toBeLessThan(2);
-  await expect(page.locator('.journey-sign-editor')).toContainText('fictional contact details');
-  await page.getByRole('link', { name: 'Start here: Lesson 1', exact: true }).click();
-  await expect(page.getByLabel('The page heading', { exact: true })).toHaveValue(
-    'Bicycle repairs near you.',
-  );
-  await expect(
-    page.frameLocator('iframe[title="Your live website"]').getByRole('heading'),
-  ).toHaveText('Bicycle repairs near you.');
+  await page.evaluate(() => {
+    const now = new Date();
+    const day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(
+      now.getDate(),
+    ).padStart(2, '0')}`;
+    localStorage.setItem(
+      'fde-mentor-v1',
+      JSON.stringify({
+        version: 1,
+        name: 'Amir',
+        xp: 120,
+        stepsDone: { '1': 5 },
+        daysComplete: [1],
+        badges: ['first-program'],
+        activeDates: [day],
+      }),
+    );
+  });
+  await page.goto('/');
+  const resume = page.getByRole('link', { name: 'Continue Day 2', exact: true });
+  await expect(resume).toHaveAttribute('href', '#/mentor/2');
+  await expect(page.getByText('Day 2 of 90')).toBeVisible();
+  await expect(page.getByLabel('1-day streak')).toBeVisible();
+  await expect(page.getByLabel('Your badges')).toContainText('First Program');
   await page.reload();
-  await expect(page.getByLabel('The page heading', { exact: true })).toHaveValue(
-    'Bicycle repairs near you.',
-  );
-  expect(
-    await page.evaluate(
-      () => JSON.parse(localStorage.getItem('fde-academy-v1')!).missions[1].recorded,
-    ),
-  ).toBe(false);
-  await page.getByRole('button', { name: 'Next: understand the idea', exact: true }).click();
+  await expect(page.getByRole('link', { name: 'Continue Day 2', exact: true })).toBeVisible();
+  const kept = await page.evaluate(() => JSON.parse(localStorage.getItem('fde-mentor-v1')!));
+  expect(kept.daysComplete).toEqual([1]);
+  expect(kept.stepsDone).toEqual({ '1': 5 });
+  expect(kept.xp).toBe(120);
+  await page.evaluate(() => localStorage.clear());
+  await page.goto('/#/');
   await expect(
-    page.getByRole('heading', { name: 'One idea at a time.', exact: true }),
-  ).toBeVisible();
+    page.getByRole('link', { name: 'Start Lesson 1 — no setup needed', exact: true }),
+  ).toHaveAttribute('href', '#/mentor/1');
+  await expect(page.getByText('Day 1 of 90')).toBeVisible();
+});
+
+test('the landing shows one clear first step, the story and the 90-day map', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { name: /Meet Amina/ })).toBeVisible();
+  await expect(page.getByText('Amina runs a small shop in Lahore.')).toBeVisible();
+  const cta = page.getByRole('link', { name: 'Start Lesson 1 — no setup needed', exact: true });
+  await expect(cta).toHaveAttribute('href', '#/mentor/1');
+  await expect(page.getByText('Day 1 of 90')).toBeVisible();
+  await expect(page.locator('.mentor-xp-fill')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'How it works', exact: true })).toBeVisible();
+  await expect(page.getByText('Ustaad tells you the next small step.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Your 90-day map', exact: true })).toBeVisible();
+  await expect(page.getByText('Days 1–7')).toBeVisible();
+  await expect(page.getByText('Job hunt')).toBeVisible();
+  await expect(page.getByLabel('What should the visitor see?', { exact: true })).toHaveCount(0);
+  await expect(page.locator('iframe[title="Your first live page"]')).toHaveCount(0);
 });
 
 test('chapter navigation, search, project context and resume remain connected', async ({

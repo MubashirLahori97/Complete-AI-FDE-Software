@@ -8,65 +8,19 @@ const roles = async (page: Page) => {
   await expect(page.getByRole('button', { name: 'Content HTML', exact: true })).toBeVisible();
 };
 
-test('a current-document acknowledgement gates interaction and rejects messages from the wrong source or channel', async ({
+test('the landing shows the first step and mentor state without a live page or network', async ({
   page,
 }) => {
-  await page.addInitScript(() => {
-    if (window !== top) {
-      addEventListener('message', (event) => {
-        if (event.data?.type === 'fde-visual-enable')
-          document.documentElement.dataset.probeChannel = event.data.channel;
-      });
-      return;
-    }
-    addEventListener('message', (event) => {
-      if (event.source === window && event.data?.type === 'fde-visual-ready')
-        document.documentElement.dataset.probeReady = event.data.channel;
-    });
-    const nativeFrame = requestAnimationFrame.bind(window),
-      nativeCancel = cancelAnimationFrame.bind(window);
-    const held = new Map<number, FrameRequestCallback>();
-    let sequence = 1000000,
-      released = false;
-    window.requestAnimationFrame = (callback) => {
-      if (released) return nativeFrame(callback);
-      const id = ++sequence;
-      held.set(id, callback);
-      return id;
-    };
-    window.cancelAnimationFrame = (id) => {
-      if (!held.delete(id)) nativeCancel(id);
-    };
-    (window as any).__releasePageLayout = () => {
-      released = true;
-      for (const callback of held.values()) nativeFrame(callback);
-      held.clear();
-    };
-  });
   await page.goto('/');
-  const iframe = page.locator('iframe[title="Your first live page"]');
-  const child = page.frameLocator('iframe[title="Your first live page"]');
-  await expect(child.getByRole('button', { name: 'Contact', exact: true })).toBeDisabled();
-  await expect(iframe).toHaveAttribute('aria-busy', 'true');
-  const markup = await iframe.getAttribute('srcdoc');
-  const channel = JSON.parse(markup!.match(/const channel=("[^"]+");/)![1]);
-  await page.evaluate(
-    (channel) => window.postMessage({ type: 'fde-visual-ready', channel }, '*'),
-    channel,
-  );
-  await expect(page.locator('html')).toHaveAttribute('data-probe-ready', channel);
-  await expect(iframe).toHaveAttribute('aria-busy', 'true');
-  await page.evaluate(() => {
-    const target = document.querySelector('iframe') as HTMLIFrameElement;
-    target.contentWindow?.postMessage({ type: 'fde-visual-enable', channel: 'wrong-channel' }, '*');
-  });
-  await expect(child.locator('html')).toHaveAttribute('data-probe-channel', 'wrong-channel');
-  await expect(child.getByRole('button', { name: 'Contact', exact: true })).toBeDisabled();
-  await page.evaluate(() => (window as any).__releasePageLayout());
-  await expect(child.getByRole('button', { name: 'Contact', exact: true })).toBeEnabled();
-  await expect(iframe).toHaveAttribute('aria-busy', 'false');
-  await child.getByRole('button', { name: 'Contact', exact: true }).click();
-  await expect(child.locator('#details')).toBeVisible();
+  await expect(page.locator('iframe[title="Your first live page"]')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: /Meet Amina/ })).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Start Lesson 1 — no setup needed', exact: true }),
+  ).toHaveAttribute('href', '#/mentor/1');
+  await expect(page.locator('.mentor-xp-bar')).toBeVisible();
+  await expect(page.getByText('Day 1 of 90')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'How it works', exact: true })).toBeVisible();
+  await expect(page.getByText('Days 1–7')).toBeVisible();
 });
 
 test('the saved Explore page carries into an information-versus-colour experiment', async ({
@@ -241,17 +195,35 @@ test('reset restarts an already-default page after opening its local contact det
   await expect(page.locator('.wu-source')).toContainText('Now press Contact');
 });
 
-test('returning rapidly to earlier inputs creates a ready current document', async ({ page }) => {
+test('a returning learner sees day, streak, XP and badges without new input', async ({
+  page,
+}) => {
   await page.goto('/');
-  const input = page.getByLabel('What should the visitor see?', { exact: true });
-  for (const heading of ['A repair service', 'A different service', 'A repair service'])
-    await input.fill(heading);
-  const target = page.frameLocator('iframe[title="Your first live page"]');
-  await expect(target.getByRole('heading')).toHaveText('A repair service');
-  await expect(page.locator('iframe[title="Your first live page"]')).toHaveAttribute(
-    'aria-busy',
-    'false',
-  );
-  await target.getByRole('button', { name: 'Contact', exact: true }).click();
-  await expect(target.locator('#details')).toBeVisible();
+  await page.evaluate(() => {
+    const now = new Date();
+    const day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(
+      now.getDate(),
+    ).padStart(2, '0')}`;
+    localStorage.setItem(
+      'fde-mentor-v1',
+      JSON.stringify({
+        version: 1,
+        name: 'Amir',
+        xp: 320,
+        stepsDone: {},
+        daysComplete: [1, 2, 3],
+        badges: ['first-program', 'three-day-fire'],
+        activeDates: [day],
+      }),
+    );
+  });
+  await page.goto('/');
+  await expect(
+    page.getByRole('link', { name: 'Continue Day 4', exact: true }),
+  ).toHaveAttribute('href', '#/mentor/4');
+  await expect(page.getByText('Day 4 of 90')).toBeVisible();
+  await expect(page.getByLabel('1-day streak')).toBeVisible();
+  await expect(page.getByText('Builder')).toBeVisible();
+  await expect(page.getByLabel('Your badges')).toContainText('First Program');
+  await expect(page.getByLabel('Your badges')).toContainText('3-Day Fire');
 });

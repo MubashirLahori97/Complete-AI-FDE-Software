@@ -1,0 +1,525 @@
+/* Mentor lesson — mobile-first chat experience with Ustaad. No external assets. */
+
+.mentor-lesson {
+  display: flex;
+  justify-content: center;
+  padding: 12px 12px 96px;
+  background: #f7f5ef;
+  min-height: 100vh;
+  color: #1f2a24;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.mentor-column {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mentor-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e0d3;
+  border-radius: 16px;
+  padding: 10px 14px;
+  position: sticky;
+  top: 8px;
+  z-index: 5;
+}
+
+.mentor-header > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.mentor-header strong {
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.mentor-header small {
+  color: #6b7268;
+  font-size: 13px;
+}
+
+.mentor-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1e6f4f;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mentor-xp {
+  background: #fff3d6;
+  border: 1px solid #ecd9a0;
+  color: #7a5b12;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 999px;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+
+.mentor-progress {
+  height: 8px;
+  background: #e7e2d4;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.mentor-progress > span {
+  display: block;
+  height: 100%;
+  background: #1e6f4f;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.mentor-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mentor-turn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mentor-bubble {
+  background: #ffffff;
+  border: 1px solid #e5e0d3;
+  border-radius: 4px 18px 18px 18px;
+  padding: 12px 16px;
+  max-width: 92%;
+  align-self: flex-start;
+}
+
+.mentor-bubble p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.mentor-bubble.past {
+  opacity: 0.62;
+}
+
+.mentor-bubble.past p {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.mentor-guide {
+  background: #eef6f1;
+  border: 1px solid #cfe3d6;
+  border-radius: 14px;
+  padding: 12px 16px;
+}
+
+.mentor-guide-title {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #1e6f4f;
+}
+
+.mentor-guide dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mentor-guide dl > div {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 8px;
+}
+
+.mentor-guide dt {
+  font-weight: 700;
+  font-size: 14px;
+  color: #1e6f4f;
+}
+
+.mentor-guide dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.mentor-action {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e0d3;
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.mentor-label {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.mentor-input,
+.mentor-code {
+  font: inherit;
+  border: 1px solid #cfc9b8;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fffdf8;
+  color: inherit;
+}
+
+.mentor-code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 96px;
+}
+
+.mentor-input:focus,
+.mentor-code:focus,
+.mentor-button:focus-visible {
+  outline: 3px solid #9ccfb4;
+  outline-offset: 2px;
+}
+
+.mentor-button {
+  font: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 14px;
+  padding: 14px 18px;
+  border: 2px solid #1e6f4f;
+  background: #ffffff;
+  color: #1e6f4f;
+  cursor: pointer;
+  min-height: 52px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mentor-button.primary {
+  background: #1e6f4f;
+  color: #ffffff;
+}
+
+.mentor-button.primary:hover {
+  background: #185c41;
+}
+
+.mentor-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mentor-link-button {
+  font: inherit;
+  font-size: 15px;
+  color: #1e6f4f;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px 0;
+  align-self: flex-start;
+}
+
+.mentor-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mentor-button.choice {
+  justify-content: flex-start;
+  text-align: left;
+  font-weight: 600;
+}
+
+.mentor-button.choice.picked:not(.correct) {
+  border-color: #b3402e;
+  color: #b3402e;
+  background: #fdf0ed;
+}
+
+.mentor-button.choice.correct {
+  border-color: #1e6f4f;
+  background: #eef6f1;
+  color: #1e6f4f;
+}
+
+.mentor-feedback {
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #fdf0ed;
+  border: 1px solid #eec5bb;
+}
+
+.mentor-feedback.good {
+  background: #eef6f1;
+  border-color: #cfe3d6;
+}
+
+.mentor-feedback p {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.mentor-feedback .mentor-button {
+  width: 100%;
+}
+
+.mentor-try-again {
+  font-size: 14px;
+  color: #6b7268;
+}
+
+.mentor-expect {
+  background: #f4f1e8;
+  border: 1px dashed #cfc9b8;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.mentor-expect-title {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7268;
+}
+
+.mentor-expect pre {
+  margin: 0;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.mentor-hint {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4c554e;
+  background: #fff8e6;
+  border: 1px solid #ecd9a0;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.mentor-success {
+  background: #eef6f1;
+  border: 1px solid #1e6f4f;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mentor-success p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e6f4f;
+}
+
+/* ExerciseRunner inner elements (course styles are not loaded here). */
+.mentor-lesson .guided-runner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mentor-lesson .course-button {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 14px;
+  padding: 12px 16px;
+  min-height: 52px;
+  border: none;
+  background: #274c3f;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mentor-lesson .course-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mentor-lesson .course-link-button {
+  font: inherit;
+  font-size: 15px;
+  color: #b3402e;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mentor-lesson .course-small {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7268;
+}
+
+.mentor-lesson .course-feedback {
+  margin: 0;
+  font-size: 15px;
+  color: #b3402e;
+  background: #fdf0ed;
+  border: 1px solid #eec5bb;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.mentor-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: #1f2a24;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 999px;
+  padding: 12px 24px;
+  z-index: 50;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  animation: mentor-toast-in 0.25s ease;
+}
+
+@keyframes mentor-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Day-complete celebration. */
+.mentor-complete {
+  background: #ffffff;
+  border: 1px solid #e5e0d3;
+  border-radius: 20px;
+  padding: 28px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.mentor-complete-kicker {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1e6f4f;
+}
+
+.mentor-complete h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.mentor-complete-xp {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #7a5b12;
+}
+
+.mentor-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.mentor-badges-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7268;
+}
+
+.mentor-badge {
+  background: #fff3d6;
+  border: 1px solid #ecd9a0;
+  color: #7a5b12;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 15px;
+}
+
+.mentor-complete-day,
+.mentor-streak,
+.mentor-level {
+  margin: 0;
+  font-size: 15px;
+  color: #4c554e;
+}
+
+.mentor-complete-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+@media (min-width: 560px) {
+  .mentor-lesson {
+    padding-top: 24px;
+  }
+}
