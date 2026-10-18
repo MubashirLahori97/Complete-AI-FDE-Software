@@ -1,4 +1,4 @@
-# Lesson 1 project — Personal learning profile generator
+# Lesson 1 project — Dukaan v0.1 — the stock list
 
 <!-- beginner-path:begin -->
 ## Your first action
@@ -7,7 +7,7 @@ Write a four-line profile on paper: name, city, goal, and daily study time. This
 
 The download is a worked example to extend, not the finished project. Follow one milestone at a time, test the behaviour, and use the five acceptance checks as your done checklist. Those checks record your observations; ticking them does not run tests.
 
-**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `profile.py`. Run python profile.py from the starter directory. The example uses assigned values so it also works in the browser Python lab.
+**Use the kit:** extract the ZIP into its own folder, open that folder in your editor, and read the example file `dukaan.py`. Run python dukaan.py from the starter directory.
 
 Keep this profile as the first item in your learning journal. Tomorrow you will learn why text and numbers behave differently.
 
@@ -15,51 +15,53 @@ Keep this profile as the first item in your learning journal. Tomorrow you will 
 
 ## The customer problem
 
-A new learner wants a short profile they can paste into their study journal. Build a program that represents their name, city, learning goal, and daily study time, then prints a readable profile. Keep the first version small enough to explain line by line. Use fixed values first; collecting interactive input is an optional extension.
+Amina runs a small shop. She keeps stock in her head and on paper slips. She wants a program that shows her stock list on screen: item names and prices, clear enough to read at a glance. Build version 0.1 — it only displays the list. This is the first brick of the system you will grow for the whole course.
 
-**Learning goal:** Distinguish code, data, a running process, and its output. Run a short Python program and explain its execution order. Change a requirement, predict the result, and verify your prediction.
+**Learning goal:** Explain what a program is in one sentence: instructions plus data. Run a Python program and describe what each line does. Change one value, predict the new output, and check your prediction.
 
 **Scope:** build the core version first. The starter is a worked example, not a finished solution to the full project. Use fictional or public sample data.
 
 ## What to deliver
 
-- A runnable profile.py file with four named values.
-- A sample output showing the complete profile.
-- A README explaining how to run it and what each value means.
-- A prediction-versus-result note for two changed profiles.
+- A dukaan.py file that runs with python dukaan.py and shows the stock list.
+- The program's output, copied into your notes or a screenshot.
+- A two-line README: what the program does and how to run it.
 
 Include a short README with the purpose, setup steps, example use, known limitations, and the evidence from your test cases. A reviewer should be able to tell which parts you implemented and which parts are demonstrations or mocks.
 
 ## Build it in milestones
 
-### Milestone 1: Describe the output
+### Milestone 1: Show the shop name
 
-- Write a sample profile in plain text before coding.
-- List which values vary between learners and which labels stay constant.
+- Create dukaan.py in your editor.
+- Store the shop name and print a welcome line.
+- Run it from the terminal.
 
-**Stop and check:** Someone else can tell what the program should print from your sample.
+**Stop and check:** The welcome line prints with your shop name.
 
-### Milestone 2: Build the smallest version
+### Milestone 2: List three items
 
-- Assign the four values and print clear labels.
-- Run the program, then change one learner value at a time.
+- Store three item names and three prices.
+- Print each item on its own line with its price.
+- Run it and read the full list.
 
-**Stop and check:** Your observed output matches your written prediction.
+**Stop and check:** All three items show with the correct prices.
 
-### Milestone 3: Make the work reviewable
+### Milestone 3: Change it and predict
 
-- Add setup instructions and an example to the README.
-- Explain every line aloud and record one error you fixed.
+- Change one price.
+- Write down what you expect the output to be.
+- Run it and compare.
 
-**Stop and check:** A beginner can run the file from your instructions.
+**Stop and check:** Your prediction matches the real output.
 
 ## Acceptance checks
 
-- [ ] The output includes name, city, goal, and daily study time.
-- [ ] Changing a profile value changes the correct output field.
-- [ ] Every line of the program can be explained in plain English.
-- [ ] The README contains a working run command and sample output.
-- [ ] Two prediction-versus-result checks are recorded.
+- [ ] python dukaan.py runs with no errors.
+- [ ] The shop name appears on the first line.
+- [ ] Three items appear, each with the correct price.
+- [ ] Changing a price changes only that line in the output.
+- [ ] You can explain every line to another person without reading.
 
 These are the same checks shown in the app. Record the actual result and relevant evidence, rather than checking a box because the code looks plausible.
 
@@ -67,31 +69,31 @@ These are the same checks shown in the app. Record the actual result and relevan
 
 | Case | Action or input | Expected behavior |
 | --- | --- | --- |
-| 1 | Use a different name and city | Both changed fields appear without changing the other fields |
-| 2 | Change 120 study minutes to 30 | The output shows 30 minutes |
-| 3 | Use text with spaces | The full text appears without being split |
-| 4 | Introduce then fix a misspelled variable in a copy | The error is understood and the repaired version runs |
+| 1 | Run with the starter values | Welcome to Amina Store, then 3 items priced 250, 180, 950 |
+| 2 | Change price1 to 300 and run | The Rice line shows Rs 300; the other lines are unchanged |
+| 3 | Change shop_name and run | The first line shows the new shop name |
+| 4 | Delete one quotation mark and run | Python shows an error naming the line (then fix it and re-run) |
 
 Run the normal path and the failure paths. Keep a failed result visible in your notes until you understand and fix it. Re-run earlier passing cases after a change to catch regressions.
 
 ## Starter and how to use it
 
-The download contains this brief, a small worked example named `profile.py`, and its expected output. Run python profile.py from the starter directory. The example uses assigned values so it also works in the browser Python lab.
+The download contains this brief, a small worked example named `dukaan.py`, and its expected output. Run python dukaan.py from the starter directory.
 
 Read the example before extending it. Keep your own project in a separate working directory or repository. Do not store secrets, real customer information, or private documents in a public learning repository.
 
 ## Stretch challenges
 
-- Collect the name with input() in the local version and explain why it returns text.
-- Save the printed profile to a journal file after learning persistence in lesson 6.
+- Ask the shopkeeper: use input() to ask for the shop name when the program starts.
+- Add a total: print the sum of all three prices as the last line.
 
 Choose an extension only after the acceptance checks pass. Describe what the extension changes in the data model, user flow, tests, or operating cost.
 
 ## Review rubric and reflection
 
-- What is the difference between a code file and a running program?
-- Which instructions store data and which produce output?
-- How did a prediction help you investigate an unexpected result?
+- Can you explain each line without looking at the screen?
+- Did you predict the output before running, at least twice?
+- To add a fourth item, what would you change — and how many minutes would it take?
 
 Score yourself on four areas: correctness against the brief, clarity of the implementation, useful failure handling, and strength of the evidence. For each area, record one thing that works and one thing you would improve. A polished screenshot alone does not establish that the project works.
 
@@ -100,6 +102,5 @@ Finish with a short case study: **Problem → Approach → Tests → Results →
 ## References
 
 - [Python: using the interpreter](https://docs.python.org/3/tutorial/interpreter.html)
-- [Python: an informal introduction](https://docs.python.org/3/tutorial/introduction.html)
 
 [Return to lesson 1](README.md)

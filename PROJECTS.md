@@ -6,7 +6,7 @@ Projects may take multiple study sessions. The table is the active project path;
 
 | Lesson | Project | Guide |
 | --- | --- | --- |
-| 1 | Personal learning profile generator | [Lesson](01_Day_Setup_Learn_With_AI/README.md) · [Project](01_Day_Setup_Learn_With_AI/PROJECT.md) |
+| 1 | Dukaan v0.1 — the stock list | [Lesson](01_Day_Setup_Learn_With_AI/README.md) · [Project](01_Day_Setup_Learn_With_AI/PROJECT.md) |
 | 2 | A reliable unit conversion desk | [Lesson](02_Day_Python_Variables_Types/README.md) · [Project](02_Day_Python_Variables_Types/PROJECT.md) |
 | 3 | Support-ticket triage queue | [Lesson](03_Day_Conditionals_Loops/README.md) · [Project](03_Day_Conditionals_Loops/PROJECT.md) |
 | 4 | A reusable quote calculator | [Lesson](04_Day_Functions/README.md) · [Project](04_Day_Functions/PROJECT.md) |

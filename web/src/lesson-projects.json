@@ -1,23 +1,22 @@
 [
   {
     "day": 1,
-    "title": "Personal learning profile generator",
-    "brief": "A new learner wants a short profile they can paste into their study journal. Build a program that represents their name, city, learning goal, and daily study time, then prints a readable profile. Keep the first version small enough to explain line by line. Use fixed values first; collecting interactive input is an optional extension.",
+    "title": "Dukaan v0.1 — the stock list",
+    "brief": "Amina runs a small shop. She keeps stock in her head and on paper slips. She wants a program that shows her stock list on screen: item names and prices, clear enough to read at a glance. Build version 0.1 — it only displays the list. This is the first brick of the system you will grow for the whole course.",
     "deliverables": [
-      "A runnable profile.py file with four named values.",
-      "A sample output showing the complete profile.",
-      "A README explaining how to run it and what each value means.",
-      "A prediction-versus-result note for two changed profiles."
+      "A dukaan.py file that runs with python dukaan.py and shows the stock list.",
+      "The program's output, copied into your notes or a screenshot.",
+      "A two-line README: what the program does and how to run it."
     ],
     "acceptance": [
-      "The output includes name, city, goal, and daily study time.",
-      "Changing a profile value changes the correct output field.",
-      "Every line of the program can be explained in plain English.",
-      "The README contains a working run command and sample output.",
-      "Two prediction-versus-result checks are recorded."
+      "python dukaan.py runs with no errors.",
+      "The shop name appears on the first line.",
+      "Three items appear, each with the correct price.",
+      "Changing a price changes only that line in the output.",
+      "You can explain every line to another person without reading."
     ],
     "starter": "lesson-01-starter.zip",
-    "filename": "profile.py"
+    "filename": "dukaan.py"
   },
   {
     "day": 2,

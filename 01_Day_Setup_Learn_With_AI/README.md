@@ -1,9 +1,9 @@
-# Day 1 — Your first program and your learning tools
+# Day 1 — Meet Dukaan: your first program
 
 <!-- beginner-path:begin -->
 ## Start here — one idea at a time
 
-**Your goal:** Personal learning profile generator. You can take several study sessions.
+**Your goal:** Dukaan v0.1 — the stock list. You can take several study sessions.
 
 **The situation:** You want a small profile that tells someone your name and what you want to learn.
 
@@ -62,111 +62,121 @@ Use the app's **Learn → Practise → Project → Record your build** flow, or 
 
 <!-- beginner-path:end -->
 
-Software engineering starts with a small, understandable loop: describe an outcome, give the computer instructions, inspect the result, and change the instructions when the result is wrong. Today you will learn what a program actually does and build a useful first artifact: a personal learning profile. You do not need to memorise syntax or install every tool in the industry.
+In this course you will build one real thing: Dukaan, a shop management system. Today it is a few lines that list stock on a screen. Step by step it will grow — a database, an API, a website, a live deployment, AI features. At the end you will demo a complete system in interviews and prove you can build software from scratch. It all starts here, with lesson 1: a program is instructions plus data.
 
-**Your project:** [Personal learning profile generator](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
+**Your project:** [Dukaan v0.1 — the stock list](PROJECT.md). Read the lesson, run the worked example, then build the project in stages. Projects may take more than one study session.
 
 ## What you will be able to do
 
-- Distinguish code, data, a running process, and its output.
-- Run a short Python program and explain its execution order.
-- Change a requirement, predict the result, and verify your prediction.
+- Explain what a program is in one sentence: instructions plus data.
+- Run a Python program and describe what each line does.
+- Change one value, predict the new output, and check your prediction.
 
 ## Understand the concept
 
-### Instructions act on data
+### You are building Dukaan
 
-A program is a sequence of instructions operating on values. The value can be a name, a ticket count, or a collection of orders. Code is the written description; running code is the computer carrying out that description. A text file containing code does nothing until an interpreter or other runtime executes it. Start by separating what the program receives, what it changes, and what it produces. This input → process → output view helps you understand a tiny greeting and a large customer application.
+Here is the whole journey, so you always know where you are. Days 1-7: Dukaan is a command-line stock list. Days 8-14: it gets version control and tests. Days 15-21: it gets AI features, like a chatbot that answers stock questions. Days 22-30: it becomes a real API on the internet. Days 31-90: a database, a website, logins, deployment on cloud servers. Each step happens because the shop outgrows the last version — that is how you will learn architecture: by feeling why each piece is needed.
 
-### The editor, interpreter, and terminal do different jobs
+### A program is instructions plus data
 
-The editor helps you write and inspect files. The Python interpreter executes Python instructions. The terminal lets you ask the operating system to run commands. A command such as python profile.py means run the file profile.py using Python; it is not a line you paste inside that Python file. The current directory tells the terminal where to look. If a file cannot be found, inspect the folder and filename before changing the program. A browser lab removes setup friction, but later projects still need reproducible local setup.
+Data is the facts: the shop name, the item names, the prices. Instructions are what to do with the facts: remember this value, show that line on the screen. Code is just these two things written down. When you run the program, Python reads your instructions from top to bottom and carries them out. Everything you will ever build — websites, APIs, AI systems — is instructions plus data, stacked higher.
 
-### A small change is an experiment
+### Your three tools
 
-Before running a change, predict its effect. Change one value and observe the output. If your prediction is wrong, trace the instructions in execution order instead of making several unrelated edits. AI can explain an unfamiliar line or suggest a draft, but you should still connect each instruction to a requirement. Learning to say why an output appeared is more valuable than collecting code that only works when someone else repairs it.
+You need three tools, and they do three different jobs. The editor (VS Code) is where you write the instructions. Python is the runner — it reads your file and carries out the instructions. The terminal is the messenger — you type 'python dukaan.py' there, which means 'hey computer, run this file with Python.' Never type terminal commands inside your Python file, and never paste Python code into the terminal as a command. Three tools, three jobs.
+
+### Predict before you run
+
+Here is the habit that separates engineers from typists: before you run a changed program, say out loud what you expect to see. Then run it. If you were right, you understand it. If you were wrong, you just found something to learn — read the lines in order until you see why. Do this every time, starting today.
 
 ## A worked example, step by step
 
-This profile uses two pieces of text and one number. Predict the two output lines before running it.
+Amina's shop needs a stock list on screen. Three items, three prices. Read the code, predict the exact output, then run it.
 
 ```python
-name = "Mubashir"
-goal = "Build useful AI software"
-minutes_per_day = 120
+shop_name = "Amina Store"
+item1 = "Rice"
+price1 = 250
+item2 = "Sugar"
+price2 = 180
+item3 = "Tea"
+price3 = 950
 
-print(f"Learner: {name}")
-print(f"Goal: {goal} | Study time: {minutes_per_day} minutes")
+print(f"Welcome to {shop_name}")
+print(f"1. {item1} - Rs {price1}")
+print(f"2. {item2} - Rs {price2}")
+print(f"3. {item3} - Rs {price3}")
 ```
 
 **Expected result**
 
 ```text
-Learner: Mubashir
-Goal: Build useful AI software | Study time: 120 minutes
+Welcome to Amina Store
+1. Rice - Rs 250
+2. Sugar - Rs 180
+3. Tea - Rs 950
 ```
 
-The first three instructions bind names to values. The blank line changes readability, not behavior. Each print call produces one output line. The f before the quotation mark allows expressions inside braces to appear in the text. Changing minutes_per_day changes the later output, because the expression is evaluated when print runs. The program does not create an account or save a file: those are separate requirements you will learn to implement later.
+The first seven lines store data: one shop name, three item names, three prices. Text goes inside quotation marks; prices are plain numbers. The last four lines are instructions: print shows text on the screen, and the f before the quotation marks lets the stored values appear inside the text. Python runs top to bottom, so the welcome line prints first. This is Dukaan v0.1 — the seed of everything you will build.
 
 ## Practise before building
 
-### Exercise 1: Predict, then change
+### Exercise 1: Change the shop
 
-Change the learner name and daily minutes. Write the expected output before running the file.
+Change the shop name to your own shop name and change one price. First write down exactly what the output will look like. Then run it.
 
-**Hint:** Keep text inside matching quotation marks and the study time as a number.
+**Hint:** Only change the values on the right side of the = sign.
 
-**Check your result:** Both new values appear in the correct output line.
+**Check your result:** The output matches your written prediction exactly.
 
-### Exercise 2: Add a requirement
+### Exercise 2: Add an item
 
-Add a city variable and a third output line. Describe the new requirement in one sentence before coding.
+Add a fourth item with its price, and one more print line so it appears in the list.
 
-**Hint:** Follow the same assignment and print pattern.
+**Hint:** Copy the pattern: one line to store the name, one line to store the price, one print line to show it.
 
-**Check your result:** The old lines still work and the new line shows the city.
+**Check your result:** Four items print, each with the correct price.
 
-### Exercise 3: Read a controlled failure
+### Exercise 3: Break it on purpose
 
-In a disposable copy, misspell the name used inside one print call. Read the error and then repair the spelling.
+Delete one quotation mark and run the program. Read the error message carefully — which line does it blame? Then fix it.
 
-**Hint:** Python distinguishes name from Name and from names that have never been assigned.
+**Hint:** Python tells you the line number. The real mistake is often just before it.
 
-**Check your result:** You can identify the failing line and explain why it could not find the variable.
+**Check your result:** You can point at the error and explain in your own words what went wrong.
 
 ## Common mistakes and how to debug them
 
-- Pasting terminal commands into a Python file: keep commands and program instructions separate.
-- Changing several things after an error: reproduce the error and make one targeted change.
-- Thinking printed output is persistent storage: closing the process does not save an application record.
+- Typing 'python dukaan.py' inside the Python file — that is a terminal command, not a Python instruction.
+- Forgetting quotation marks around text — Python then thinks your words are instruction names.
+- Changing three things at once when something breaks — change one thing, predict, run, observe.
 
 ## The FDE connection
 
-An FDE begins by making an outcome understandable to a customer and executable by a team. Even this small profile has a user, inputs, an output format, and a test. Practise describing those four things before asking AI for code. A clear specification gives you something concrete to evaluate.
+In a software house, a junior's first tickets look exactly like this: small, clear, testable. 'Show the stock list on screen.' Senior engineers trust juniors who write small programs they can explain line by line. That is what you practiced today — the atom of the job. Every system you will ever build is made of atoms like this one.
 
 ## Build your lesson project
 
-**Personal learning profile generator**
+**Dukaan v0.1 — the stock list**
 
-A new learner wants a short profile they can paste into their study journal. Build a program that represents their name, city, learning goal, and daily study time, then prints a readable profile. Keep the first version small enough to explain line by line. Use fixed values first; collecting interactive input is an optional extension.
+Amina runs a small shop. She keeps stock in her head and on paper slips. She wants a program that shows her stock list on screen: item names and prices, clear enough to read at a glance. Build version 0.1 — it only displays the list. This is the first brick of the system you will grow for the whole course.
 
-- A runnable profile.py file with four named values.
-- A sample output showing the complete profile.
-- A README explaining how to run it and what each value means.
-- A prediction-versus-result note for two changed profiles.
+- A dukaan.py file that runs with python dukaan.py and shows the stock list.
+- The program's output, copied into your notes or a screenshot.
+- A two-line README: what the program does and how to run it.
 
 Open [the complete project guide](PROJECT.md) for milestones, acceptance checks, a test matrix, extension challenges, and a review rubric. The app's Project tab includes a starter-kit download and a checklist that saves your progress.
 
 ## Explain it back
 
-- What is the difference between a code file and a running program?
-- Which instructions store data and which produce output?
-- How did a prediction help you investigate an unexpected result?
+- Can you explain each line without looking at the screen?
+- Did you predict the output before running, at least twice?
+- To add a fourth item, what would you change — and how many minutes would it take?
 
 ## References and next steps
 
 - [Python: using the interpreter](https://docs.python.org/3/tutorial/interpreter.html)
-- [Python: an informal introduction](https://docs.python.org/3/tutorial/introduction.html)
 
 [Lesson 2 →](../02_Day_Python_Variables_Types/)
 

@@ -1,2 +1,4 @@
-Learner: Mubashir
-Goal: Build useful AI software | Study time: 120 minutes
+Welcome to Amina Store
+1. Rice - Rs 250
+2. Sugar - Rs 180
+3. Tea - Rs 950
