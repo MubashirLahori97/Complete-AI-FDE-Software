@@ -23,6 +23,12 @@ import { completionCount, loadProgress, STORAGE_KEY, type Progress } from './sta
 import { ProgressBar } from './ui';
 import { missions } from './missions';
 import { MissionHome, MissionPath, MissionLesson, missionCount } from './MissionPages';
+import AccountButton from './cloud/AccountButton';
+import AuthModal from './cloud/AuthModal';
+import ProfileModal from './cloud/ProfileModal';
+import { getSupabase, isCloudEnabled } from './cloud/client';
+import { flushDirty, pullMergePush } from './cloud/sync';
+import { loadMentorProgress, type MentorProgress } from './mentor/progress';
 const Dashboard = lazy(() => import('./Dashboard'));
 const VisualWebsiteLesson = lazy(() => import('./VisualWebsiteLesson'));
 const MotionLesson = lazy(() => import('./MotionLesson'));
@@ -61,6 +67,10 @@ export default function App() {
   const [menu, setMenu] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const [mentorProgress, setMentorProgress] = useState<MentorProgress>(loadMentorProgress);
+  const [signedIn, setSignedIn] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const searchInput = useRef<HTMLInputElement>(null);
   const main = useRef<HTMLElement>(null);
@@ -89,6 +99,25 @@ export default function App() {
     };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+  useEffect(() => {
+    if (!isCloudEnabled()) return;
+    const client = getSupabase();
+    if (!client) return;
+    client.auth.getSession().then(({ data }) => {
+      setSignedIn(!!data.session);
+      if (data.session) void flushDirty();
+    });
+    const { data } = client.auth.onAuthStateChange((_event, session) => {
+      setSignedIn(!!session);
+      if (session) {
+        void pullMergePush().then((merged) => setMentorProgress(merged));
+      } else {
+        setAuthOpen(false);
+        setProfileOpen(false);
+      }
+    });
+    return () => data.subscription.unsubscribe();
   }, []);
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -183,7 +212,8 @@ export default function App() {
     )
     .slice(0, 6);
   let page;
-  if (path === '/') page = <MissionHome progress={progress} update={update} />;
+  if (path === '/')
+    page = <MissionHome progress={progress} update={update} mentorProgress={mentorProgress} />;
   else if (path === '/workshops' || path === '/library')
     page = <Dashboard progress={progress} update={update} />;
   else if (path === '/curriculum')
@@ -404,6 +434,9 @@ export default function App() {
               <kbd>Ctrl K</kbd>
             </button>
             <span className="topbar-divider" />
+            <AccountButton
+              onOpenAccount={() => (signedIn ? setProfileOpen(true) : setAuthOpen(true))}
+            />
             <a className="avatar" href="#/settings" aria-label="Edit your learning profile">
               {progress.name ? progress.name.slice(0, 1).toUpperCase() : <Sprout size={21} />}
             </a>
@@ -443,6 +476,20 @@ export default function App() {
           </a>
         </footer>
       </div>
+      <AuthModal
+        open={authOpen}
+        onClose={() => setAuthOpen(false)}
+        onAuthed={() => {
+          setMentorProgress(loadMentorProgress());
+          setAuthOpen(false);
+        }}
+      />
+      <ProfileModal
+        open={profileOpen}
+        onClose={() => setProfileOpen(false)}
+        progress={mentorProgress}
+        onProgressChange={(next) => setMentorProgress(next)}
+      />
       <dialog
         ref={dialog}
         className="search-dialog"

@@ -17,6 +17,7 @@ import {
   type MentorProgress,
 } from './progress';
 import { getMentorScript } from './scripts';
+import { schedulePush } from '../cloud/sync';
 
 export type MentorAction =
   | { kind: 'continue'; label: string }
@@ -74,6 +75,7 @@ export function useMentor(day: number) {
 
   useEffect(() => {
     saveMentorProgress(progress);
+    schedulePush(progress);
   }, [progress]);
 
   const advance = useCallback(

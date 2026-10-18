@@ -34,9 +34,10 @@ export function missionCount(progress: Progress) {
       canRecordMission(mission, progress.missions[mission.id]),
   ).length;
 }
-export function MissionHome(props: Props) {
-  void props;
-  return <Landing />;
+export function MissionHome(
+  props: Props & { mentorProgress?: import('./mentor/progress').MentorProgress },
+) {
+  return <Landing progress={props.mentorProgress} />;
 }
 export function MissionPath(props: {
   progress: Progress;

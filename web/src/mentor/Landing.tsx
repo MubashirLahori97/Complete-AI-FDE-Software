@@ -5,6 +5,7 @@ import {
   mentorLevel,
   mentorStreak,
   nextMentorDay,
+  type MentorProgress,
 } from './progress';
 import './landing.css';
 
@@ -18,8 +19,9 @@ const PHASES = [
   { range: 'Days 71–90', label: 'Job hunt', note: '' },
 ];
 
-export default function Landing() {
-  const [progress] = useState(loadMentorProgress);
+export default function Landing({ progress: cloudProgress }: { progress?: MentorProgress }) {
+  const [localProgress] = useState(loadMentorProgress);
+  const progress = cloudProgress ?? localProgress;
   const level = mentorLevel(progress.xp);
   const streak = mentorStreak(progress);
   const nextDay = nextMentorDay(progress);
