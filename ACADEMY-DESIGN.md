@@ -1,0 +1,69 @@
+# A studio for small discoveries
+
+The academy's creative direction connects a warm reading space to a dark, inspectable learning stage. Preserve the FDE Academy identity, six-stage sequence, learner work and project requirements. Improve the learner's experience of that course rather than replacing it with an unrelated game or a collection of effects.
+
+## The visual language
+
+Use warm paper (`#f6f3ec`), ink (`#22303d`), a dark stage (`#101b27` / `#0d1521`), muted teal, and warm gold for the main studio action. Serif display type introduces an idea; DM Sans supports reading and controls; DM Mono identifies stages and measured values. Primary copy stays concrete and short. Supporting explanations remain available beside the experiment.
+
+Original vector sketches show six aspects of an evolving product: a page, a workflow, a connected service, an AI helper, a system being kept reliable, and an independent delivery. The diagrams supplement written stage labels; they never carry essential instructions alone. Stage colours distinguish chapters without implying that later stages are locked.
+
+The home, learning path and core lesson shell share this direction. Original coding workshops retain their established presentation and records. The reusable dark experiment stage carries its existing semantic colours. Core resource, portfolio and settings pages share the shell; their detailed layouts still need the same level of creative attention.
+
+## A clear way in
+
+All thirty lessons now have authored beginner directions in `web/src/lesson-guides.json`: a reason for learning the idea, an observation to look for, a small first project task and a focus for explaining the result. Explore names the exact first button, recognises when those example settings are already loaded, and offers the next explanation beside the controls. The remaining four steps explain their purpose, first action and next destination. Build identifies the external AI-builder/editor workflow; Explain starts with the current question; Review identifies gaps and the next lesson. The same topic-specific directions travel in all thirty repository and downloaded scene guides. These directions guide practice without awarding understanding or requiring a forced tour.
+
+All ninety project milestones also use more direct English in the authoritative `missions.json`, with necessary terms explained where used. This keeps the on-page plan, AI brief and generated repository/downloaded material consistent. The practical requirements and existing outcome checks remain connected to each project.
+
+One learner reported that a new visitor could not identify the site's purpose or starting action. The homepage now explicitly describes a beginner software course, names websites, servers and AI apps, and leads with **Start here: Lesson 1**. The first task is previewed in plain language: change a repair shop's heading and watch its page update. The small homepage example is labelled optional rather than a prerequisite. Returning visitors retain Continue and also have an explicit Lesson 1 entry that preserves saved work. Lesson 1 names the exact first button to press. Course purpose, the meaning of FDE and the suggested lesson order are explained without a forced tour. These changes still need a fresh, uncoached visitor check.
+
+The homepage presents one Start/Continue action, a small real browser page and an editable heading. Learners can type their own words, try an example and use the page's actual Contact button. A new learner's heading transfers into Mission 1 when they choose Start. Returning learners continue their current mission without overwriting the first mission's work. A homepage action does not award completion.
+
+The chapter journey connects each mission to its first experiment and named project. Six chapter filters and search work together, a return card leads to the current mission, and an empty result offers a clear reset. Progress is labelled as practice records rather than a validated qualification. Every chapter stays open.
+
+## Keep the first cause and effect together
+
+Explore uses a more compact mission heading. On wide screens, the real-page lessons (1 and 3) place the task, first input and result feedback beside the running page. The first lesson's useful-heading action and actual page heading share the initial desktop viewport. Supporting comparisons and system inspection remain available in the same studio. Non-page experiments retain their established visual layouts.
+
+On tall phone/tablet screens, the real-page lesson's first example button brings the changed page below its sticky input dock. It uses an immediate, finite scroll and preserves keyboard focus on the action. Free typing stays in place. Expanded comparisons, system inspection, wide screens and viewports at most 600px tall keep their own normal scrolling behaviour. Inputs, undo, notes, project content and completion rules are preserved.
+
+The narrated-story invitation owns its styling in the core lesson, so a direct first visit no longer depends on previously loading an optional sample. The shared page renderer accounts for frame borders and requests a current-document height report after load. After layout it asks the page to enable its own Contact button, then marks the frame ready on acknowledgement. Each document has a fresh correlation channel, including when earlier inputs return. Height, action and readiness reports require the expected frame source/channel. This supports quick edits without treating a partially initialized button as ready.
+
+Browser checks cover the first-screen pairing at 1265×730 and 1440×900, phone/tablet result visibility with keyboard focus, free typing and undo, narrow system/comparison panels, frame-body fit, direct-entry styling and quick repeated edits. These are interaction/layout observations, not evidence that uncoached beginners understand or enjoy the lesson.
+
+## Make a consequence visible
+
+The learner selected the repair-visit scene's dark teal stage, warm gold actions and isometric illustration as the direction for all thirty core lessons. Every lesson now has a question, an immediately responsive scene and a direct handoff to its actual project. Twenty-seven new model-specific illustrations accompany the two real browser-page scenes and the existing repair visit. Detailed evidence is disclosed separately; the course, notebook and model rules remain authoritative. Finite explanation playback supports pause/replay/direct selection, focus-preserving interruption and reduced motion. See [all thirty scenes](ALL-LESSON-SCENES.md).
+
+Mission 1's Understand step keeps the same saved page in view. A visitor's question connects the outcome to a service-area line: hide it, change colour independently and restore the information. The next concept connects Content/HTML, Appearance/CSS and Behaviour/JavaScript to actual text, styles and Contact actions. Selected elements are outlined and small extracts show current instructions. Changes return to Explore and backup, notes stay separate, and input undo/reset remain available. The guide distinguishes the tracked line from judging the whole page's meaning. See [the connected explanations](PAGE-UNDERSTANDING.md).
+
+Live preview regions opt out of browser scroll anchoring to keep controls steady during updates. An observed missed-click trace included a 50px root scroll between locating and pressing Contact. Repeated first-use checks now assert the action and stable page position. Explicit example reveals work from either side of the page, while free typing stays in place.
+
+The shared studio already runs thirty input-driven teaching models. Its diagrams show system roles; a shared three-object scene is not sufficient to explain every concept visually. Add more specific visual representations where they reveal the actual idea.
+
+Mission 13 now displays available capacity and each distinct reservation operation. The actual executed model supplies accepted, over-capacity and refused results. Selecting an operation explains its outcome. Retry attempts and operation identities remain separate, and the example explicitly does not establish real-world arrival order.
+
+Mission 20 now exposes every fictional labelled case, score and alert decision used in its aggregate calculations. Changing the threshold updates the same cases. Four outcomes have different symbols as well as colours. A selectable case connects its label, score, rule decision and error type. A radio group uses one tab stop with arrow-key, Home and End inspection. The helper context introduces a positive case as a repair message needing urgent attention; no live AI inference is implied.
+
+Both lessons retain an explicit system-view action for 3D inspection and the equivalent flat diagram. This keeps the concept's evidence in front, with system structure available when useful. The first and third lessons, as well as the homepage, share an escaped opaque-frame page renderer and source/channel-checked messages.
+
+Primary studio controls stay available while a learner scrolls through the visual consequence. This behaviour is disabled in short viewports. Phone Explore navigation uses a scrollable single row; the first task supplies the immediate context, with the fuller mission outcome retained in later steps. Phone text inputs use a readable native size.
+
+## Evidence and unfinished work
+
+After the user's “boring” feedback on Mission 26, its abstract gate was replaced by an original isometric repair-visit scene. A van stays at the workshop when approval is missing; changing preparation speed leaves that condition intact. An explicit finite sequence, pause/replay, optional existing interaction tone and immediate reduced-motion outcomes make the consequence inspectable. The first experiment now tests speed before supplying approval, with inputs and scene paired on wide screens. The same model, notes, comparisons and domain project remain authoritative. See [the scene and limits](ACCESS-JOURNEY.md). Enjoyment and transfer still need learner evidence.
+
+Mission 4's two Understand concepts now expose the estimator's actual ordered validation checks and separately demonstrate function calls and remembered results. Blank, zero, fractional and out-of-range inputs take different paths; later checks are marked not reached after refusal. The second scene distinguishes saved input from temporary call/result state and labels stale results. A common function serves Explore and both explanations. Explicit phone examples reveal consequences beneath an input dock; free typing stays in place. See [the logic lesson](LOGIC-UNDERSTANDING.md).
+
+Lesson pacing now connects a short situation to the experiment. Sixty guided comparisons load actual model inputs, change one control and identify what to inspect. On wide screens the comparison sits beside the consequence; smaller screens stack it. Free exploration stays available, input edits and reset can be undone, and notes remain separate. Worked examples reveal one of four moments at a time with backward, forward, direct-selection and replay controls. Concept explanations have a sequential next-idea action and a route back to the experiment. These changes are documented in [the learning flow](LEARNING-PACING.md); learner trials still need to establish their effect.
+
+Thirteen additional missions now open with evidence tailored to their concept: highlighted instruction terms, an itemised receipt, generated service cards, percentage tiles, request steps, before/after records, an identity gate and separate parsing/schema/source checks. Inputs change the same model data used in the result. Blank quantities withhold a total, an unknown denominator stays unknown, timeouts do not claim cancellation, and provider acceptance does not claim delivery. The optional 3D view remains available. Exact coverage and limitations are recorded in [the visual map](LESSON-VISUALS.md).
+
+The remaining thirteen now also have their own concept representations: evidence sources, cost curves, authority and budget, field agreement with worker lanes, retrieved-source gates, code/data compatibility, trace spans, per-read cache routes, an opening site gate, capability composition, adoption/net time and operator handoff. A diagram action changes the authoritative saved inputs rather than a second visual-only state. Trace selection includes all three measured steps, handles ties and handles all-zero durations. Zero cache lifetime explicitly disables reuse. Primary views omit duplicate generic bars/tables, while system inspection retains the supporting comparison. All thirty missions therefore have specific primary visual evidence; creative depth and pacing still require further work.
+
+Check real page edits and carry-through, safe rendering, chapter/search/resume behaviour, individual-to-aggregate consistency, keyboard case inspection, reservation outcomes, graphics fallback, reduced motion and phone layouts. Application checks verify those behaviours; they do not establish enjoyment, independent understanding or retention.
+
+More lesson-specific visual explanations, concept pacing, deeper narrative continuity, detailed secondary-page design, final voice/sound production, representative-device measurements and real beginner trials remain part of the full ambition. Judge these against [the experience standard](EXPERIENCE-QUALITY.md). The design direction and passing checks are progress, not proof of worldwide uniqueness or global superiority.
+
+Implementation: `AcademyJourney.tsx`, `JourneySketch.tsx`, `academy-journey.css`, `LivePage.tsx`, `ModelEvidence.tsx`, `model-evidence.css`, and the shared mission studio. Research: [interactive explanations](INTERACTIVE-STUDIO.md) and [motion direction](MOTION-DIRECTION.md).

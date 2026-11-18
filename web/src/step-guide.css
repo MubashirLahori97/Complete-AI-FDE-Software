@@ -1,0 +1,392 @@
+.guide-home {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.guide-hero {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .guide-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+.guide-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guide-lead {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.guide-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.guide-hero-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guide-stat {
+  background: var(--canvas);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.guide-stat span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.guide-stat strong {
+  font-size: 22px;
+  color: var(--green-dark);
+}
+
+.guide-stat p {
+  font-size: 13px;
+}
+
+.guide-intake-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.guide-intake-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.guide-intake-head h2 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.guide-reset-btn {
+  border: none;
+  background: transparent;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.guide-skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guide-skill-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--canvas);
+}
+
+.guide-skill-info {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.guide-skill-info strong {
+  font-size: 15px;
+}
+
+.guide-skill-info p {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.guide-skill-examples {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.guide-level-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.guide-level-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.guide-level-btn:hover {
+  border-color: var(--green);
+  color: var(--text);
+}
+
+.guide-level-btn.is-active.is-new {
+  background: #edf1ee;
+  border-color: #b7c5bc;
+  color: var(--text);
+}
+
+.guide-level-btn.is-active.is-familiar {
+  background: var(--sage);
+  border-color: #9ec09f;
+  color: var(--green-dark);
+}
+
+.guide-level-btn.is-active.is-practiced {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.guide-notes-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.guide-textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--canvas);
+  resize: vertical;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.guide-recommendation-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: var(--sage);
+  border: 1px solid #c5d9c3;
+}
+
+.guide-rec-copy {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.guide-rec-pill {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--green-dark);
+}
+
+.guide-rec-copy p {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.guide-roadmap-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guide-steps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.guide-step-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guide-step-card.is-recommended {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(37, 75, 62, 0.12);
+}
+
+.guide-step-card.is-complete {
+  background: #f6faf4;
+  border-color: #c2d8bd;
+}
+
+.guide-step-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.guide-step-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-step-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: var(--green);
+  color: #fff;
+}
+
+.guide-step-sdlc {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.guide-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.guide-status-pill.is-next {
+  background: var(--lime);
+  color: var(--green-dark);
+}
+
+.guide-status-pill.is-fast {
+  background: var(--sage);
+  color: var(--green-dark);
+}
+
+.guide-status-pill.is-done {
+  background: #d9edd4;
+  color: #1c4a26;
+}
+
+.guide-step-cta {
+  padding: 8px 13px;
+  font-size: 13px;
+}
+
+.guide-step-summary {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.guide-step-deliver {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.guide-step-missions {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-missions-count {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.guide-mission-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.guide-mission-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--canvas);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.guide-mission-chip:hover {
+  border-color: var(--green);
+  background: var(--sage);
+}
+
+.guide-mission-chip.is-done {
+  background: var(--lime);
+  border-color: #c5d996;
+  color: var(--green-dark);
+}

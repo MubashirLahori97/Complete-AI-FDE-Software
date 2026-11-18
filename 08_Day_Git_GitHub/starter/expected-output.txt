@@ -1,0 +1,3 @@
+A new feature branch contains one reviewed commit.
+The commit includes the intended code and documentation changes.
+Exact commit IDs and command output vary by repository.

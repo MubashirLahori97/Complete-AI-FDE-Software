@@ -1,0 +1,1 @@
+{'name': 'Notebook', 'stock': 12}

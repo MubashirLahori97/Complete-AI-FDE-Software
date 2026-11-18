@@ -1,0 +1,316 @@
+import { lessons, projectDefinitions, dailyProjects } from './data';
+import { experimentValues, type ExperimentValues } from './experiments';
+import { missions, newMissionRecord, canRecordMission } from './missions';
+import { systemQuestions, reasoningLabels, type MissionRecord } from './mission-types';
+import { labSpecs, labValues, type LabRecord } from './mission-labs';
+import { parseNeuronSnapshot, type NeuronSnapshot } from './neuron-model';
+
+export const STORAGE_KEY = 'fde-academy-v1';
+export const lessonActivities = ['learn', 'practice', 'project', 'build'] as const;
+export type LessonActivity = (typeof lessonActivities)[number];
+export interface ProjectEvidence {
+  demo: string;
+  repo: string;
+  notes: string;
+  checks: boolean[];
+}
+export interface Progress {
+  version: 1;
+  name: string;
+  minutes: number;
+  lastLesson: number;
+  lessonActivities: Record<string, LessonActivity>;
+  readingSteps: Record<string, number>;
+  experiments: Record<string, ExperimentValues>;
+  quickChecks: Record<string, { choice: number | null; checked: boolean; hints: number }>;
+  conceptWins: Record<string, string>;
+  reviewWins: Record<string, string>;
+  warmupSolved: boolean;
+  soundEnabled: boolean;
+  completed: Record<string, string>;
+  quizPassed: number[];
+  notes: Record<string, string>;
+  checkpoints: Record<string, boolean[]>;
+  lessonProjectChecks: Record<string, boolean[]>;
+  drafts: Record<string, string>;
+  projects: Record<string, ProjectEvidence>;
+  phaseTasks: Record<string, boolean[]>;
+  scenarios: Record<string, { score: number; date: string }>;
+  lastMission: number;
+  missions: Record<string, MissionRecord>;
+  missionLabs: Record<string, LabRecord>;
+  neuronSnapshot: NeuronSnapshot | null;
+}
+
+export const emptyProgress = (): Progress => ({
+  version: 1,
+  name: '',
+  minutes: 120,
+  lastLesson: 1,
+  lessonActivities: {},
+  readingSteps: {},
+  experiments: {},
+  quickChecks: {},
+  conceptWins: {},
+  reviewWins: {},
+  warmupSolved: false,
+  soundEnabled: false,
+  completed: {},
+  quizPassed: [],
+  notes: {},
+  checkpoints: {},
+  lessonProjectChecks: {},
+  drafts: {},
+  projects: {},
+  phaseTasks: {},
+  scenarios: {},
+  lastMission: 1,
+  missions: {},
+  missionLabs: {},
+  neuronSnapshot: null,
+});
+export const localDate = (date = new Date()): string =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+export function studyPlan(minutes: number) {
+  const learn = Math.round(minutes / 6);
+  const reflect = Math.round(minutes / 12);
+  return [
+    { label: 'Learn', minutes: learn },
+    { label: 'Example', minutes: learn },
+    { label: 'Practise', minutes: learn },
+    { label: 'Project', minutes: minutes - learn * 3 - reflect },
+    { label: 'Reflect', minutes: reflect },
+  ];
+}
+export const safeUrl = (value: string): string | undefined => {
+  try {
+    const url = new URL(value);
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : undefined;
+  } catch {
+    return undefined;
+  }
+};
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  !!value && typeof value === 'object' && !Array.isArray(value);
+const text = (value: unknown, limit = 10000): string =>
+  typeof value === 'string' ? value.slice(0, limit) : '';
+const flags = (value: unknown, length: number): boolean[] =>
+  Array.from({ length }, (_, index) => Array.isArray(value) && value[index] === true);
+const validDate = (value: unknown): value is string => {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T12:00:00`);
+  return !Number.isNaN(date.getTime()) && localDate(date) === value;
+};
+
+// Imports are untrusted. Reconstruct only recognized fields and keys.
+export function parseProgress(value: unknown): Progress {
+  if (!isRecord(value) || value.version !== 1)
+    throw new Error('This is not a supported FDE Academy backup.');
+  const result = emptyProgress();
+  result.neuronSnapshot = parseNeuronSnapshot(value.neuronSnapshot);
+  for (const lab of labSpecs) {
+    const raw = isRecord(value.missionLabs) ? value.missionLabs[lab.id] : undefined;
+    if (isRecord(raw))
+      result.missionLabs[lab.id] = {
+        values: labValues(lab.id, raw.values),
+        note: text(raw.note, 3000),
+      };
+  }
+  result.warmupSolved = value.warmupSolved === true;
+  result.soundEnabled = value.soundEnabled === true;
+  result.lastMission =
+    Number.isInteger(value.lastMission) &&
+    Number(value.lastMission) >= 1 &&
+    Number(value.lastMission) <= 30
+      ? Number(value.lastMission)
+      : 1;
+  for (const mission of missions) {
+    const raw = isRecord(value.missions) ? value.missions[mission.id] : undefined;
+    if (!isRecord(raw)) continue;
+    const record = newMissionRecord();
+    record.step =
+      Number.isInteger(raw.step) && Number(raw.step) >= 0 && Number(raw.step) <= 4
+        ? Number(raw.step)
+        : 0;
+    record.option =
+      Number.isInteger(raw.option) &&
+      Number(raw.option) >= 0 &&
+      Number(raw.option) < mission.experiment.options.length
+        ? Number(raw.option)
+        : 0;
+    record.variation = raw.variation === 1 ? 1 : 0;
+    record.explanationStep =
+      Number.isInteger(raw.explanationStep) &&
+      Number(raw.explanationStep) >= 0 &&
+      Number(raw.explanationStep) <= 12
+        ? Number(raw.explanationStep)
+        : 0;
+    record.prediction = text(raw.prediction, 3000);
+    record.artifact = text(raw.artifact, 2000);
+    record.observation = text(raw.observation, 5000);
+    record.reviewer = text(raw.reviewer, 200);
+    record.review = text(raw.review, 5000);
+    record.checks = flags(raw.checks, mission.project.checks.length);
+    for (const [key] of systemQuestions)
+      record.system[key] = isRecord(raw.system) ? text(raw.system[key], 3000) : '';
+    for (const key of Object.keys(reasoningLabels) as (keyof typeof reasoningLabels)[])
+      record.reasoning[key] = isRecord(raw.reasoning) ? text(raw.reasoning[key], 3000) : '';
+    record.verdict =
+      raw.verdict === 'demonstrated' || raw.verdict === 'revisit' ? raw.verdict : 'unreviewed';
+    // These are learner-owned review records, never authenticated qualifications.
+    if (record.reviewer.trim().length < 2 || record.review.trim().length < 30)
+      record.verdict = 'unreviewed';
+    record.recorded = raw.recorded === true && canRecordMission(mission, record);
+    result.missions[mission.id] = record;
+  }
+  result.name = text(value.name, 50);
+  result.minutes = [30, 60, 90, 120].includes(Number(value.minutes)) ? Number(value.minutes) : 120;
+  result.lastLesson =
+    Number.isInteger(value.lastLesson) &&
+    Number(value.lastLesson) >= 1 &&
+    Number(value.lastLesson) <= 30
+      ? Number(value.lastLesson)
+      : 1;
+  result.quizPassed = Array.isArray(value.quizPassed)
+    ? [
+        ...new Set(
+          value.quizPassed.filter(
+            (day): day is number =>
+              typeof day === 'number' && Number.isInteger(day) && day >= 1 && day <= 30,
+          ),
+        ),
+      ]
+    : [];
+  for (const lesson of lessons) {
+    const key = String(lesson.day);
+    if (isRecord(value.experiments) && isRecord(value.experiments[key]))
+      result.experiments[key] = experimentValues(lesson.day, value.experiments[key]);
+    for (const field of ['conceptWins', 'reviewWins'] as const)
+      if (isRecord(value[field]) && validDate(value[field][key]))
+        result[field][key] = value[field][key];
+    if (
+      isRecord(value.lessonActivities) &&
+      lessonActivities.includes(value.lessonActivities[key] as LessonActivity)
+    )
+      result.lessonActivities[key] = value.lessonActivities[key] as LessonActivity;
+    if (
+      isRecord(value.readingSteps) &&
+      Number.isInteger(value.readingSteps[key]) &&
+      Number(value.readingSteps[key]) >= 0 &&
+      Number(value.readingSteps[key]) <= 2
+    )
+      result.readingSteps[key] = Number(value.readingSteps[key]);
+    const attempt = isRecord(value.quickChecks) ? value.quickChecks[key] : null;
+    if (isRecord(attempt)) {
+      const choice =
+        Number.isInteger(attempt.choice) &&
+        Number(attempt.choice) >= 0 &&
+        Number(attempt.choice) <= 2
+          ? Number(attempt.choice)
+          : null;
+      result.quickChecks[key] = {
+        choice,
+        checked: choice !== null && attempt.checked === true,
+        hints:
+          Number.isInteger(attempt.hints) &&
+          Number(attempt.hints) >= 0 &&
+          Number(attempt.hints) <= 2
+            ? Number(attempt.hints)
+            : 0,
+      };
+    }
+    if (isRecord(value.notes)) result.notes[key] = text(value.notes[key]);
+    if (isRecord(value.checkpoints)) result.checkpoints[key] = flags(value.checkpoints[key], 2);
+    if (isRecord(value.lessonProjectChecks))
+      result.lessonProjectChecks[key] = flags(
+        value.lessonProjectChecks[key],
+        dailyProjects[lesson.day - 1].acceptance.length,
+      );
+    if (isRecord(value.completed) && validDate(value.completed[key]))
+      result.completed[key] = value.completed[key];
+  }
+  if (isRecord(value.drafts))
+    for (const [key, draft] of Object.entries(value.drafts).slice(0, 40)) {
+      if (/^[a-z0-9-]{1,50}$/.test(key) && !['constructor', 'prototype', '__proto__'].includes(key))
+        result.drafts[key] = text(draft, 50000);
+    }
+  for (const definition of projectDefinitions) {
+    const item = isRecord(value.projects) ? value.projects[definition.id] : null;
+    if (isRecord(item))
+      result.projects[definition.id] = {
+        demo: text(item.demo, 2000),
+        repo: text(item.repo, 2000),
+        notes: text(item.notes),
+        checks: flags(item.checks, definition.checks.length),
+      };
+  }
+  for (const id of ['2', '3', '4'])
+    if (isRecord(value.phaseTasks)) result.phaseTasks[id] = flags(value.phaseTasks[id], 3);
+  for (const id of ['discovery', 'incident', 'scope']) {
+    const item = isRecord(value.scenarios) ? value.scenarios[id] : null;
+    if (
+      isRecord(item) &&
+      Number.isInteger(item.score) &&
+      Number(item.score) >= 0 &&
+      Number(item.score) <= 100 &&
+      validDate(item.date)
+    ) {
+      result.scenarios[id] = { score: Number(item.score), date: item.date };
+    }
+  }
+  return result;
+}
+
+export function loadProgress(): Progress {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? parseProgress(JSON.parse(saved)) : emptyProgress();
+  } catch {
+    return emptyProgress();
+  }
+}
+export function canComplete(progress: Progress, day: number): boolean {
+  return (
+    progress.quizPassed.includes(day) &&
+    (progress.notes[day] || '').trim().length >= 20 &&
+    progress.checkpoints[day]?.filter(Boolean).length === 2 &&
+    progress.lessonProjectChecks[day]?.filter(Boolean).length ===
+      dailyProjects[day - 1].acceptance.length
+  );
+}
+export function completionCount(progress: Progress): number {
+  return lessons.filter((lesson) => !!progress.completed[lesson.day]).length;
+}
+export function nextLesson(progress: Progress): number {
+  return lessons.find((lesson) => !progress.completed[lesson.day])?.day ?? 30;
+}
+export function resumeLesson(progress: Progress): number {
+  return progress.lessonActivities[progress.lastLesson] && !progress.completed[progress.lastLesson]
+    ? progress.lastLesson
+    : nextLesson(progress);
+}
+export function resumeHref(progress: Progress): string {
+  if (completionCount(progress) === lessons.length) return '#/phase/2';
+  const day = resumeLesson(progress);
+  return `#/lesson/${day}?tab=${progress.lessonActivities[day] || 'learn'}`;
+}
+export function streak(progress: Progress, today = new Date()): number {
+  const dates = new Set(Object.values(progress.completed));
+  const cursor = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12);
+  if (!dates.has(localDate(cursor))) cursor.setDate(cursor.getDate() - 1);
+  let count = 0;
+  while (dates.has(localDate(cursor))) {
+    count++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return count;
+}
+export const emptyEvidence = (): ProjectEvidence => ({ demo: '', repo: '', notes: '', checks: [] });
+export function downloadFile(filename: string, content: string, type = 'application/json'): void {
+  const url = URL.createObjectURL(new Blob([content], { type }));
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}

@@ -1,0 +1,2 @@
+A reviewable delivery pack connects the demo, acceptance evidence, operating instructions, limitations, and next action.
+Another person can identify the released version and how to use it.

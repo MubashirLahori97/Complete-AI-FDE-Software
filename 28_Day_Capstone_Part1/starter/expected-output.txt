@@ -1,0 +1,4 @@
+A1 pending
+A2 pending
+A3 pending
+Mark results only after executing the corresponding checks

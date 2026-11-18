@@ -1,0 +1,20 @@
+# Dependencies & environments
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Build & test artifacts
+web/dist/
+web/playwright-report/
+web/test-results/
+web/public/projects/
+web/public/mission-projects/
+
+# Local secrets & OS files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

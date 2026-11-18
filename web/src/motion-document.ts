@@ -1,0 +1,19 @@
+import { escapeHtml } from './visual-website';
+
+export type MotionLayers = { html: boolean; css: boolean; js: boolean };
+export function motionDocument(layers: MotionLayers, title: string, channel: string, open = false) {
+  const safeChannel = JSON.stringify(channel).replace(/</g, '\\u003c');
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The website you can change</title>${
+    layers.css
+      ? `<style>
+*{box-sizing:border-box}body{margin:0;background:#f4efdf;color:#24372e;font:14px/1.5 system-ui,sans-serif}main{padding:25px 27px;min-height:365px;position:relative;overflow:hidden}.site-brand{font-size:11px;font-weight:750;letter-spacing:.08em;display:flex;justify-content:space-between;align-items:center}.site-brand span{font-size:9px;font-weight:500;color:#647060}.site-kicker{font-size:9px;letter-spacing:.18em;color:#697161;margin:28px 0 12px}h1{font:400 43px/1.02 Georgia,serif;letter-spacing:-.055em;max-width:9ch;margin:0 0 17px;position:relative;z-index:1;overflow-wrap:anywhere}.site-copy{max-width:26ch;font-size:12px;color:#5a6454;margin:0 0 22px}.site-art{position:absolute;right:24px;top:95px;width:94px;height:118px;transform:rotate(9deg);border-radius:44px 44px 20px 20px;background:#d7b777;box-shadow:8px 7px 0 #d7b77733}.site-art:before{content:'';position:absolute;border:1px solid #665b423f;width:67px;height:67px;border-radius:50%;left:13px;top:24px}.site-art:after{content:'↗';position:absolute;left:36px;top:36px;font-size:32px;color:#6d6349}button{font:600 11px system-ui;color:#f8f3e7;background:#294c3e;border:0;border-radius:24px;padding:12px 19px;min-height:44px;cursor:pointer;position:relative;z-index:2}button:focus-visible{outline:3px solid #9d742a;outline-offset:3px}#details{margin-top:15px;padding-top:13px;border-top:1px solid #24372e22;font-size:12px;max-width:30ch}#details small{display:block;font-size:10px;color:#68705e;margin-top:4px}.site-bottom{margin-top:26px;font-size:8px;letter-spacing:.13em;color:#75806c;display:flex;justify-content:space-between;border-top:1px solid #24372e20;padding-top:12px}#details:not([hidden])+.site-bottom{display:none}@media(max-width:340px){main{padding:22px}h1{font-size:37px}.site-art{width:73px;right:17px;opacity:.55}.site-art:before{width:51px;height:51px;left:10px}.site-art:after{left:25px}}
+@media(max-width:350px){button{min-height:58px;font-size:14px}.site-copy{font-size:14px}}
+</style>`
+      : ''
+  }</head><body>${layers.html ? `<main><div class="site-brand">FIX & CO.<span>REPAIR, DON'T REPLACE.</span></div><div class="site-kicker">GOOD THINGS DESERVE ANOTHER LIFE.</div><h1>${escapeHtml(title.slice(0, 60)) || 'Keep the things you love.'}</h1><div class="site-art" aria-hidden="true"></div><p class="site-copy">Local repairs. Thoughtful care.<br>A little less waste.</p><button type="button" id="contact" aria-expanded="${open}" aria-controls="details">Let's fix it ↗</button><div id="details" ${open ? '' : 'hidden'}>Tell us what needs a second life.<small>Fictional shop. This example sends no messages.</small></div><div class="site-bottom"><span>MADE TO LAST.</span><span>YOUR NEIGHBOURHOOD REPAIR SHOP</span></div></main>` : ''}<script>
+const channel=${safeChannel};const button=document.getElementById('contact');const details=document.getElementById('details');
+function reportHeight(){if(channel)parent.postMessage({channel,type:'motion-height',height:Math.ceil(document.body.getBoundingClientRect().height)},'*');}
+if(button)button.addEventListener('click',()=>{${layers.js ? "details.hidden=!details.hidden;button.setAttribute('aria-expanded',String(!details.hidden));" : ''}if(channel)parent.postMessage({channel,type:'motion-contact',open:!details.hidden,hasRule:${layers.js}},'*');reportHeight();});
+reportHeight();window.addEventListener('resize',reportHeight);
+</script></body></html>`;
+}

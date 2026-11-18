@@ -1,0 +1,438 @@
+/* Cloud account + sync UI. Mobile-first, matches landing/mentor style. */
+
+.cloud-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(31, 41, 55, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #1f2937;
+}
+
+.cloud-modal {
+  background: #fffdf8;
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 18px 18px 0 0;
+  padding: 20px 20px 28px;
+  box-shadow: 0 -4px 24px rgba(31, 41, 55, 0.2);
+}
+
+@media (min-width: 640px) {
+  .cloud-overlay {
+    align-items: center;
+    padding: 24px;
+  }
+  .cloud-modal {
+    border-radius: 18px;
+  }
+}
+
+.cloud-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.cloud-modal-head h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.cloud-close {
+  border: none;
+  background: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  color: #6b7268;
+  cursor: pointer;
+}
+
+.cloud-sub {
+  margin: 0 0 16px;
+  color: #6b7268;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.cloud-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  background: #f1ece0;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.cloud-tab {
+  flex: 1;
+  border: none;
+  background: none;
+  border-radius: 9px;
+  padding: 12px 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #6b7268;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.cloud-tab.is-active {
+  background: #ffffff;
+  color: #1f2937;
+  box-shadow: 0 1px 3px rgba(31, 41, 55, 0.15);
+}
+
+.cloud-field {
+  margin-bottom: 14px;
+}
+
+.cloud-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+
+.cloud-field input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 48px;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid #d9d2c0;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.cloud-field input:focus {
+  outline: 2px solid #16a34a;
+  outline-offset: 1px;
+  border-color: #16a34a;
+}
+
+.cloud-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.cloud-btn:hover {
+  background: #15803d;
+}
+
+.cloud-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.cloud-btn.ghost {
+  background: #ffffff;
+  color: #1f2937;
+  border: 1px solid #d9d2c0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.cloud-btn.danger-btn {
+  background: #b91c1c;
+}
+
+.cloud-btn.danger-btn:hover {
+  background: #991b1b;
+}
+
+.cloud-error {
+  background: #fdeaea;
+  border: 1px solid #f3c1c1;
+  color: #8a1c1c;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  margin: 0 0 14px;
+}
+
+.cloud-info {
+  background: #eef7ef;
+  border: 1px solid #cde8d2;
+  color: #1e6f4f;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  margin: 0 0 14px;
+}
+
+.cloud-note {
+  background: #fff8e6;
+  border: 1px solid #ecd9a0;
+  color: #7a5b12;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+
+/* Header account button + dropdown */
+
+.cloud-account-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cloud-signin-btn {
+  border: 1px solid #d9d2c0;
+  background: #ffffff;
+  color: #1f2937;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 40px;
+}
+
+.cloud-signin-btn:hover {
+  border-color: #16a34a;
+  color: #15803d;
+}
+
+.cloud-avatar-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cloud-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: default;
+}
+
+.cloud-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 102;
+  background: #ffffff;
+  border: 1px solid #e5e0d5;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.18);
+  min-width: 200px;
+  padding: 6px;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.cloud-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #1f2937;
+}
+
+.cloud-menu button:hover {
+  background: #f4f1e8;
+}
+
+.cloud-menu-email {
+  padding: 10px 14px 6px;
+  font-size: 0.82rem;
+  color: #6b7268;
+  word-break: break-all;
+}
+
+/* Sync status pill */
+
+.cloud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cloud-pill.is-synced {
+  background: #eef7ef;
+  color: #1e6f4f;
+  border: 1px solid #cde8d2;
+}
+
+.cloud-pill.is-syncing {
+  background: #eef2fb;
+  color: #2b4a9e;
+  border: 1px solid #c7d6f2;
+}
+
+.cloud-pill.is-offline {
+  background: #fff8e6;
+  color: #7a5b12;
+  border: 1px solid #ecd9a0;
+}
+
+.cloud-pill.is-local {
+  background: #f4f1e8;
+  color: #6b7268;
+  border: 1px solid #e5e0d5;
+}
+
+.cloud-pill.is-error {
+  background: #fdeaea;
+  color: #8a1c1c;
+  border: 1px solid #f3c1c1;
+}
+
+/* Profile modal */
+
+.cloud-profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cloud-name-edit {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cloud-name-edit input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid #d9d2c0;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.cloud-name-edit .cloud-btn {
+  width: auto;
+  flex-shrink: 0;
+  padding: 0.75rem 1.25rem;
+}
+
+.cloud-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 480px) {
+  .cloud-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cloud-stat {
+  background: #ffffff;
+  border: 1px solid #e5e0d5;
+  border-radius: 12px;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.cloud-stat strong {
+  display: block;
+  font-size: 1.25rem;
+}
+
+.cloud-stat small {
+  color: #6b7268;
+  font-size: 0.8rem;
+}
+
+.cloud-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cloud-badge-chip {
+  background: #fff3d6;
+  border: 1px solid #ecd9a0;
+  color: #7a5b12;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.cloud-badge-none {
+  color: #6b7268;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.cloud-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 20px 0 10px;
+}
+
+.cloud-danger {
+  border: 1px solid #f3c1c1;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 8px;
+}
+
+.cloud-danger p {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  color: #6b7268;
+  line-height: 1.5;
+}
+
+.cloud-signout-row {
+  margin-top: 16px;
+}

@@ -1,0 +1,41 @@
+# Mission 12: learn through the scene
+
+Keep meaningful information
+
+## Why this lesson
+
+Appointments should not vanish when a program restarts. You also need a way to find the right visit when two people share a name.
+
+## What to look for
+
+Restarting loses records held only in process memory. Try persistent storage next. Use a visit identifier to tell same-name records apart.
+
+## Start your project
+
+Choose the information one appointment needs. Ask AI to save two fictional appointments and show how to find one after restarting the app.
+
+## Explain your own result
+
+Explain where records are stored, what survives a restart, and which identifier selects one exact appointment.
+
+## Your next steps
+
+Use **Next: understand the idea**, explore the concepts, then **Build my project**. Copy the ready-to-use AI brief into your AI builder or coding assistant and ask how to open the result. Save your project observations, choose **Explain my system**, and then **Review my evidence**. Work through one question at a time. You can return later; a lesson can take more than one session.
+
+## Try one change
+
+Restart the model with memory storage, then choose persistent storage.
+
+First action: **Restart the process**. The scene uses the same saved inputs and local rules as the original experiment. Changes appear immediately. Use either scene change, inspect a reading moment, or choose Follow the idea. Pause, restart and replay are available.
+
+The illustration is a teaching view, not measured execution or real customer/provider evidence. This is an explicit storage-lifetime model with fictional records. It is not a running database. Your experiment settings, separately, save in this browser.
+
+## Your own project: An appointment register that survives
+
+Persist fictional customers and visits with stable IDs, a relationship and explicit missing-data handling. Record where imported or entered information came from.
+
+Start here: Ask AI what information each appointment needs, which values must be unique or valid, how records can be looked up, and where they should be stored.
+
+Use Build this with AI to open the existing project. AI may implement everything. Explain the relevant input, rule and result in your own system; predict a changed case and check what actually happens. Keep your product observations separate from the teaching model.
+
+Inputs and notes use the saved experiment and progress backup. Undo/reset remain available. Playback is temporary and never records mastery. Inspect the numbers and rules for full values. System/3D inspection and guided comparisons remain available.

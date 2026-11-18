@@ -1,0 +1,37 @@
+{
+  "voice": "Microsoft Zira Desktop",
+  "kind": "temporary synthetic prototype narration",
+  "duration": 43.297,
+  "cues": [
+    {
+      "id": "whole",
+      "start": 0.0,
+      "duration": 4.949
+    },
+    {
+      "id": "layers",
+      "start": 5.649,
+      "duration": 4.729
+    },
+    {
+      "id": "html",
+      "start": 11.078,
+      "duration": 7.779
+    },
+    {
+      "id": "css",
+      "start": 19.556,
+      "duration": 7.304
+    },
+    {
+      "id": "js",
+      "start": 27.56,
+      "duration": 6.024
+    },
+    {
+      "id": "play",
+      "start": 34.284,
+      "duration": 8.313
+    }
+  ]
+}

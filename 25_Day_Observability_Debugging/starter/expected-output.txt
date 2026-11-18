@@ -1,0 +1,2 @@
+{"event": "retrieval_completed", "request_id": "REQ-001", "source_count": 2}
+{"event": "response_completed", "fixture_latency_ms": 120, "request_id": "REQ-001", "status": "answered"}

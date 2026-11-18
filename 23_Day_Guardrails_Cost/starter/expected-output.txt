@@ -1,0 +1,3 @@
+public-faq allowed
+internal-pricing forbidden
+Model text cannot change the trusted permission map

@@ -1,0 +1,43 @@
+name: AI-Native SDLC Harness CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify-web-and-course:
+    name: Verify Course, Unit Tests & Production Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Set up Python (for course verification checks)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate & package all 30 core missions
+        run: npm run check:missions
+
+      - name: Run Vitest unit suite
+        run: npm test
+
+      - name: Type-check & production Vite build
+        run: npm run build

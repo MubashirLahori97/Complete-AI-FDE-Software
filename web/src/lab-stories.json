@@ -1,0 +1,619 @@
+[
+  {
+    "id": 1,
+    "scene": "A repair shop needs a page that helps a visitor decide whether to contact it.",
+    "comparisons": [
+      {
+        "title": "A greeting or a useful message?",
+        "before": { "heading": "Welcome." },
+        "change": { "heading": "Repairs near you." },
+        "notice": "Read the page as someone looking for a repair. Which heading gives you useful information?",
+        "takeaway": "The browser displays the words you supply. A useful result starts with the visitor's need, even when AI writes the page."
+      },
+      {
+        "title": "A different shop",
+        "before": { "heading": "Repairs near you." },
+        "change": { "heading": "Bicycle repairs near you." },
+        "notice": "Only the heading changes. The page still opens and its Contact action still works.",
+        "takeaway": "A change in the business can require different content without requiring a new database or a live AI call."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "scene": "The shop owner dislikes the page, but “make it impressive” leaves the builder guessing.",
+    "comparisons": [
+      {
+        "title": "Turn a feeling into a check",
+        "before": { "direction": "Make it impressive.", "scope": "one" },
+        "change": {
+          "direction": "Put opening hours below Services. Check that the hours are visible on a phone."
+        },
+        "notice": "Look for a named part, an action and an observation someone can check.",
+        "takeaway": "Concrete direction gives a builder something to act on. This tiny word checker illustrates that pattern; it does not evaluate arbitrary instructions."
+      },
+      {
+        "title": "Keep the change small",
+        "before": {
+          "direction": "Put opening hours below Services. Check that the hours are visible on a phone.",
+          "scope": "all"
+        },
+        "change": { "scope": "one" },
+        "notice": "Keep the words identical. Change how much of the site the builder may alter.",
+        "takeaway": "A bounded change leaves unrelated decisions outside the task. Actual AI output still needs to be inspected."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "scene": "The shop wants a bigger heading. That is a different request from changing its words or its button's action.",
+    "comparisons": [
+      {
+        "title": "Appearance changes, words stay",
+        "before": { "size": 26, "heading": "Repairs near you.", "rule": true },
+        "change": { "size": 38 },
+        "notice": "Watch the heading grow. Read its words again; they have not changed.",
+        "takeaway": "Presentation and content have different jobs. Changing the CSS size need not change the HTML content."
+      },
+      {
+        "title": "A button can look ready and do nothing",
+        "before": { "size": 26, "heading": "Repairs near you.", "rule": true },
+        "change": { "rule": false },
+        "notice": "Try Contact in both cases. Compare its appearance with what actually happens.",
+        "takeaway": "A visible button does not prove that an action rule is present. Behaviour needs its own check."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "scene": "A visitor wants an estimate. The shop must decide which quantities are allowed before calculating a total.",
+    "comparisons": [
+      {
+        "title": "Blank is different from zero",
+        "before": { "quantity": "0", "price": 25 },
+        "change": { "quantity": "" },
+        "notice": "Compare a zero total with a withheld total. Those results mean different things.",
+        "takeaway": "Zero is an allowed quantity in this rule. Blank means the visitor has not supplied an allowed quantity, so the model withholds the total."
+      },
+      {
+        "title": "One more item",
+        "before": { "quantity": "2", "price": 25 },
+        "change": { "quantity": "3" },
+        "notice": "Count the item chips. One additional item adds one more unit price to the receipt.",
+        "takeaway": "The same multiplication rule works for each allowed whole quantity: quantity times price per item."
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "scene": "The shop adds services. The page should create a card for each record using one display rule.",
+    "comparisons": [
+      {
+        "title": "Grow the collection",
+        "before": { "count": 3, "duplicate": false, "prefix": "Repair" },
+        "change": { "count": 6 },
+        "notice": "Count the records and cards. The display rule stays the same as the collection grows.",
+        "takeaway": "A loop applies the same rule to each record. More records do not require a separately written card for each one."
+      },
+      {
+        "title": "Different cards, repeated identity",
+        "before": { "count": 3, "duplicate": false },
+        "change": { "duplicate": true },
+        "notice": "Inspect the cards marked Repeated ID. Their display labels cannot repair their repeated identifier.",
+        "takeaway": "Names and labels describe records. Stable, distinct identifiers let the system tell those records apart."
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "scene": "The owner says customers miss visits. Before building a reminder, you need to know what supports that claim.",
+    "comparisons": [
+      {
+        "title": "An example or an observation?",
+        "before": { "source": "invented", "sample": 10, "missed": 2 },
+        "change": { "source": "records" },
+        "notice": "The numbers stay identical. Inspect how the source changes what can be said about them.",
+        "takeaway": "An invented example shows a possibility. Checked fictional records describe this model sample, but still do not identify the cause of missed visits."
+      },
+      {
+        "title": "Can the counts fit?",
+        "before": { "source": "records", "sample": 10, "missed": 2 },
+        "change": { "sample": 1 },
+        "notice": "Try fitting two missed visits inside a sample containing only one visit.",
+        "takeaway": "Conflicting counts need investigation before calculating or interpreting a rate. A precise-looking percentage cannot repair inconsistent inputs."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "scene": "Two missed visits sound small, but the meaning depends on how many eligible visits there were.",
+    "comparisons": [
+      {
+        "title": "Keep the count; change the whole",
+        "before": { "eligible": "10", "missed": 2 },
+        "change": { "eligible": "100" },
+        "notice": "The missed count stays at two. Watch the fraction and percentage change.",
+        "takeaway": "Two out of ten is 20%; two out of one hundred is 2%. The denominator changes the meaning of the same count."
+      },
+      {
+        "title": "Unknown is not zero percent",
+        "before": { "eligible": "10", "missed": 2 },
+        "change": { "eligible": "" },
+        "notice": "Remove the eligible total. Look for Unknown rather than a reassuring zero.",
+        "takeaway": "A rate needs a usable denominator. Missing information should remain visible instead of silently becoming a favourable result."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "scene": "A customer is trying to request a visit. The form must help them recover when input or connectivity is missing.",
+    "comparisons": [
+      {
+        "title": "Give the form its required input",
+        "before": { "visit": "", "connected": true },
+        "change": { "visit": "V-42" },
+        "notice": "Follow the draft, connection and result steps before and after an identifier is present.",
+        "takeaway": "Required input is checked before the request proceeds in this model. A real confirmation still needs a real service response."
+      },
+      {
+        "title": "Keep the draft when the connection fails",
+        "before": { "visit": "V-42", "connected": true },
+        "change": { "connected": false },
+        "notice": "Read the draft after the connection fails. It should still contain V-42.",
+        "takeaway": "Keeping useful input and explaining the failure helps a person recover. A lost connection must not turn into an invented confirmation."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "scene": "The shop is choosing between a package and a custom build. Compare the same period and required capabilities.",
+    "comparisons": [
+      {
+        "title": "A repeating fee accumulates",
+        "before": { "months": 1, "license": 20, "setup": 120, "build": 600 },
+        "change": { "months": 24 },
+        "notice": "Compare the growing package line with the fixed stated build cost.",
+        "takeaway": "The package's stated total reaches 600 units after two years in this example. This arithmetic excludes maintenance and other costs."
+      },
+      {
+        "title": "A cheaper option can miss the need",
+        "before": { "months": 1, "needExport": false, "vendorExport": false },
+        "change": { "needExport": true },
+        "notice": "The totals stay the same. The package now lacks a capability the shop requires.",
+        "takeaway": "A lower price does not supply a missing requirement. Capability, omitted costs and risks belong in the decision too."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "scene": "The interface says Saved, but the shop needs to know whether the intended visit actually changed.",
+    "comparisons": [
+      {
+        "title": "Inspect more than the toast",
+        "before": { "check": "toast", "defect": true, "selected": "V-42" },
+        "change": { "check": "records" },
+        "notice": "Keep the defect. Compare the message-only check with a check of both records.",
+        "takeaway": "The same defect can hide behind a passing toast check. A useful assertion inspects the intended change and the state that must stay unchanged."
+      },
+      {
+        "title": "Correct the updater",
+        "before": { "check": "records", "defect": true, "selected": "V-42" },
+        "change": { "defect": false },
+        "notice": "Watch which record becomes confirmed. The other record should remain pending.",
+        "takeaway": "A relevant check should distinguish the faulty updater from the corrected one. A success message alone cannot do that."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "scene": "A customer submits a visit request. What should the browser say if it stops waiting before the response arrives?",
+    "comparisons": [
+      {
+        "title": "The response arrives too late",
+        "before": { "latency": 800, "timeout": 1000, "valid": true },
+        "change": { "latency": 1800 },
+        "notice": "Compare the response delay with the client's waiting limit.",
+        "takeaway": "A timeout means the client stopped waiting. It does not establish whether the server stopped or whether a write happened."
+      },
+      {
+        "title": "Give the client time to receive the response",
+        "before": { "latency": 1800, "timeout": 1000, "valid": true },
+        "change": { "timeout": 2000 },
+        "notice": "Keep the server timing fixed and change only the waiting limit.",
+        "takeaway": "The response can now arrive within the model's waiting period. Real retries still need stable identity and evidence of the final state."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "scene": "Two customers are named Alex. After a restart, the shop also needs its records to remain available.",
+    "comparisons": [
+      {
+        "title": "A separate storage lifetime",
+        "before": { "restart": true, "storage": "memory", "lookup": "Alex" },
+        "change": { "storage": "persistent" },
+        "notice": "Compare the retained records after the same process restart.",
+        "takeaway": "Process memory and persistent storage have different lifetimes. Persistence still needs its own protection, backup and recovery."
+      },
+      {
+        "title": "One name, two identities",
+        "before": { "restart": true, "storage": "persistent", "lookup": "Alex" },
+        "change": { "lookup": "V-42" },
+        "notice": "Compare two name matches with one exact identifier match.",
+        "takeaway": "A person's name may not uniquely select a record. A stable identifier can target the intended visit."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "scene": "Two booking operations compete for the last slot. Retries can also repeat a single intended operation.",
+    "comparisons": [
+      {
+        "title": "Protect the last slot",
+        "before": { "slots": 1, "requests": 2, "atomic": false, "retries": 0, "sameKey": false },
+        "change": { "atomic": true },
+        "notice": "Inspect each operation's result. Accepted bookings must not exceed capacity.",
+        "takeaway": "A capacity check and reservation need a protected operation. Separate unprotected checks can both act on the same available slot."
+      },
+      {
+        "title": "A retry is not a new intention",
+        "before": { "slots": 4, "requests": 1, "atomic": true, "retries": 3, "sameKey": false },
+        "change": { "sameKey": true },
+        "notice": "Keep four attempts. Change whether they share one operation identifier.",
+        "takeaway": "Stable retry identity lets repeated attempts refer to one intended operation instead of creating several reservations in this model."
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "scene": "Customer C7 is signed in. That does not automatically allow access to C8's private visit.",
+    "comparisons": [
+      {
+        "title": "Signed in, different owner",
+        "before": { "caller": "C7", "owner": "C7", "serverCheck": true },
+        "change": { "owner": "C8" },
+        "notice": "The requesting identity stays signed in while the record owner changes.",
+        "takeaway": "Authentication identifies the caller. Authorization separately decides whether that caller may access this record."
+      },
+      {
+        "title": "Remove the trusted check",
+        "before": { "caller": "C7", "owner": "C8", "serverCheck": true },
+        "change": { "serverCheck": false },
+        "notice": "Inspect whether a refused record becomes returned without permission.",
+        "takeaway": "A sign-in badge or hidden button cannot enforce the trusted record boundary. Removing the check can leak the fictional record."
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "scene": "The shop wants to send a reminder through a provider. Configuration, acceptance and delivery are different facts.",
+    "comparisons": [
+      {
+        "title": "Configure before attempting",
+        "before": { "credential": false, "provider": "accepted", "retries": 0 },
+        "change": { "credential": true },
+        "notice": "Compare zero provider attempts with an acknowledged attempt. No secret value is requested.",
+        "takeaway": "Required configuration permits an attempt in this model. Provider acceptance still does not establish delivery to a person."
+      },
+      {
+        "title": "A timeout leaves uncertainty",
+        "before": { "credential": true, "provider": "accepted", "retries": 0 },
+        "change": { "provider": "unknown" },
+        "notice": "Read the acceptance and delivery evidence separately after the response becomes ambiguous.",
+        "takeaway": "An ambiguous response is not a known failure or a verified delivery. A real system needs reconciliation rather than an invented success count."
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "scene": "An executor is given a task, some authority and a budget. Each boundary has its own job.",
+    "comparisons": [
+      {
+        "title": "Enough budget to finish",
+        "before": { "budget": 2, "demand": 3, "permission": "test", "request": "test" },
+        "change": { "budget": 4 },
+        "notice": "Count the operations that run and the units that remain.",
+        "takeaway": "A permitted task can still stop at its budget. Increasing the budget makes this three-operation model task affordable."
+      },
+      {
+        "title": "Money does not grant permission",
+        "before": { "budget": 10, "demand": 3, "permission": "test", "request": "test" },
+        "change": { "request": "live" },
+        "notice": "Keep ample budget. Ask for an action outside the granted test authority.",
+        "takeaway": "The authority check refuses the action before spending budget. Extra resources do not expand permission."
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "scene": "Two workstreams are building connected parts. They need a shared interface as well as time to coordinate.",
+    "comparisons": [
+      {
+        "title": "Agree on the field",
+        "before": { "uiField": "status", "serverField": "accessStatus" },
+        "change": { "uiField": "accessStatus" },
+        "notice": "Compare the key the interface expects with the key in the supplied payload.",
+        "takeaway": "Compatible field names let this local interface check fit. Speed elsewhere cannot repair a broken agreement between parts."
+      },
+      {
+        "title": "More workers, one small task",
+        "before": {
+          "uiField": "accessStatus",
+          "serverField": "accessStatus",
+          "workers": 1,
+          "tasks": 1,
+          "minutes": 5
+        },
+        "change": { "workers": 6 },
+        "notice": "Look for idle workers and additional coordination time.",
+        "takeaway": "One five-minute task still needs one work round. Extra workers add coordination in this model, so the total increases rather than decreases."
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "scene": "An example response contains a neat date field, but the source never supplied a date.",
+    "comparisons": [
+      {
+        "title": "Keep an unknown fact unknown",
+        "before": {
+          "output": "{\"summary\":\"Customer called about a repair.\",\"date\":\"2026-10-20\"}",
+          "sourceDate": ""
+        },
+        "change": { "output": "{\"summary\":\"Customer called about a repair.\",\"date\":null}" },
+        "notice": "The JSON can parse in both cases. Inspect the separate check for date support.",
+        "takeaway": "A valid shape does not establish a fact. Null can represent an unknown date without inventing certainty."
+      },
+      {
+        "title": "Support must come from a source",
+        "before": {
+          "output": "{\"summary\":\"Customer called about a repair.\",\"date\":\"2026-10-20\"}",
+          "sourceDate": ""
+        },
+        "change": { "sourceDate": "2026-10-20" },
+        "notice": "Keep the response identical. Supply the matching date as fictional source evidence.",
+        "takeaway": "The source changes what the date check can support. This small rule still does not verify every claim in the summary or evaluate a real AI model."
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "scene": "A helper retrieves a cancellation policy. A matching topic is only the beginning of checking whether it is usable.",
+    "comparisons": [
+      {
+        "title": "Relevant but too old",
+        "before": { "age": 20, "maxAge": 7, "docAction": false, "authority": false },
+        "change": { "age": 2 },
+        "notice": "Keep the question fixed. Compare the document age with the allowed age.",
+        "takeaway": "Relevance and freshness answer different questions. This fictional policy now fits the model's age rule."
+      },
+      {
+        "title": "An instruction inside a document",
+        "before": { "age": 2, "maxAge": 7, "docAction": false, "authority": false },
+        "change": { "docAction": true },
+        "notice": "The source now asks to cancel the visit, but separate action authority is still absent.",
+        "takeaway": "Retrieved text supplies information. It cannot grant the user and policy authority required for an action."
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "scene": "The helper flags urgent messages. The shop needs to inspect both false alerts and missed urgent cases.",
+    "comparisons": [
+      {
+        "title": "Raise the threshold",
+        "before": { "threshold": 30, "positives": 10, "negatives": 90 },
+        "change": { "threshold": 70 },
+        "notice": "Inspect the same labelled cases before and after the threshold changes.",
+        "takeaway": "A threshold can reduce alerts while increasing missed positive cases. Precision and recall describe different parts of that tradeoff."
+      },
+      {
+        "title": "Change the case mix",
+        "before": { "threshold": 70, "positives": 10, "negatives": 90 },
+        "change": { "positives": 50 },
+        "notice": "Keep the decision threshold. Add fictional positive cases to the evaluation sample.",
+        "takeaway": "The sample composition affects aggregate results. Record the labels, sample definition and mistakes that matter instead of quoting a metric without context."
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "scene": "A regression check needs to notice a wrong-record update, including when the selected visit changes.",
+    "comparisons": [
+      {
+        "title": "Does the assertion see the defect?",
+        "before": { "check": "toast", "defect": true, "selected": "V-42" },
+        "change": { "check": "records" },
+        "notice": "Keep the updater faulty. Change the evidence the assertion inspects.",
+        "takeaway": "A passing weak check is not evidence that the relevant behaviour works. The record assertion exposes the deliberately faulty updater."
+      },
+      {
+        "title": "Select the other record",
+        "before": { "check": "records", "defect": true, "selected": "V-42" },
+        "change": { "selected": "V-43" },
+        "notice": "The intended record changes. Does the assertion still identify the incorrect update?",
+        "takeaway": "A check should follow the selected record and protect the other one, rather than hard-coding one convenient identifier."
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "scene": "A release changes code, configuration and possibly stored information. Those parts do not roll back together automatically.",
+    "comparisons": [
+      {
+        "title": "A release needs its configuration",
+        "before": { "credential": false, "build": true, "migration": false, "rollback": false },
+        "change": { "credential": true },
+        "notice": "The build passes in both cases. Inspect whether the required configuration is also present.",
+        "takeaway": "A passing build is one release condition. The running journey also needs its declared configuration and compatible data."
+      },
+      {
+        "title": "Rollback only the code",
+        "before": { "credential": true, "build": true, "migration": true, "rollback": false },
+        "change": { "rollback": true },
+        "notice": "Watch code change from v2 to v1 while the data schema remains v2.",
+        "takeaway": "Reverting code does not restore stored data. Under these declared rules, old code cannot read the migrated schema."
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "scene": "A visit request feels slow. A trace helps you locate time before choosing what to change.",
+    "comparisons": [
+      {
+        "title": "Shorten one measured span",
+        "before": { "provider": 1900, "database": 80, "validation": 20, "inspect": "provider" },
+        "change": { "provider": 100 },
+        "notice": "Keep database and validation time fixed. Watch the total and provider bar shrink.",
+        "takeaway": "A controlled change to one span changes this sequential total. A real incident still needs new observations to verify a proposed fix."
+      },
+      {
+        "title": "Move the bottleneck",
+        "before": { "provider": 100, "database": 80, "validation": 20, "inspect": "database" },
+        "change": { "database": 1000 },
+        "notice": "Look for the longest measured step after the database duration increases.",
+        "takeaway": "The relevant investigation can change with the evidence. A familiar explanation should not replace inspection of the current trace."
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "scene": "The shop repeats the same read. Reuse can reduce source work, but the freshness rule affects what people receive.",
+    "comparisons": [
+      {
+        "title": "Refresh once, then reuse",
+        "before": { "mode": "fresh", "reads": 20, "age": 15, "ttl": 10, "changed": true },
+        "change": { "mode": "cache" },
+        "notice": "The cached copy starts expired. Inspect the first source read and the later cache hits.",
+        "takeaway": "For these same-key, same-instant requests, the first read refreshes the copy and later reads reuse it. This is a model, not a service benchmark."
+      },
+      {
+        "title": "Within its lifetime, already stale",
+        "before": { "mode": "cache", "reads": 20, "age": 15, "ttl": 10, "changed": true },
+        "change": { "age": 2 },
+        "notice": "The copy now passes the age rule even though the source changed after it was stored.",
+        "takeaway": "A cache lifetime is a reuse policy, not proof that a copy equals the current source. The model now returns stale cached answers."
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "scene": "A change removed visit records. Having a snapshot, restoring it and checking the result are separate steps.",
+    "comparisons": [
+      {
+        "title": "Restore the snapshot",
+        "before": { "restore": false, "count": 4, "dropped": 2, "backup": true, "verify": false },
+        "change": { "restore": true },
+        "notice": "Compare the expected identifiers with the records after the chosen recovery.",
+        "takeaway": "A snapshot can supply the missing records in this local model. The restore label alone is still weaker than querying the recovered state."
+      },
+      {
+        "title": "Check the recovered identifiers",
+        "before": { "restore": true, "count": 4, "dropped": 2, "backup": true, "verify": false },
+        "change": { "verify": true },
+        "notice": "The records stay present. Inspect the difference between an unrun check and completed identifier queries.",
+        "takeaway": "Recovery evidence includes whether the restored information is usable. Run the relevant checks instead of assuming a backup guarantees recovery."
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "scene": "A maintenance team is preparing a site visit. The site needs approval before anyone can enter.",
+    "comparisons": [
+      {
+        "title": "Faster preparation, still blocked",
+        "before": { "approval": false, "needsAccess": true, "dispatch": 15 },
+        "change": { "dispatch": 1 },
+        "notice": "Preparation gets faster. Watch whether the access gate opens.",
+        "takeaway": "Optimising a later step cannot satisfy a missing prerequisite. The approval requirement still blocks this model journey."
+      },
+      {
+        "title": "Resolve the actual prerequisite",
+        "before": { "approval": false, "needsAccess": true, "dispatch": 1 },
+        "change": { "approval": true },
+        "notice": "Keep preparation at one minute. Record the required approval and inspect the gate.",
+        "takeaway": "The journey can now proceed in the fictional scenario. A real investigation must establish who grants approval and how it is recorded."
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "scene": "A public page is working. A new requirement asks it to share private customer records between users.",
+    "comparisons": [
+      {
+        "title": "Change the need",
+        "before": { "privateRecords": false, "accounts": false, "design": "static" },
+        "change": { "privateRecords": true },
+        "notice": "The static design stays the same while the required capability changes.",
+        "takeaway": "Files alone do not supply shared private records and trusted access control. The architecture needs suitable connected capabilities."
+      },
+      {
+        "title": "Add a suitable connected design",
+        "before": { "privateRecords": true, "accounts": false, "design": "static" },
+        "change": { "design": "connected" },
+        "notice": "Inspect the missing capability after the model design includes connected services.",
+        "takeaway": "The declared capabilities can now fit this simplified need. Actual security, implementation and operating responsibilities still need evidence."
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "scene": "A dispatch tool saves one step, but creates correction work later. Only people who use it can experience either effect.",
+    "comparisons": [
+      {
+        "title": "Include the correction work",
+        "before": { "rework": 20, "saved": 10, "adoption": 60, "people": 5 },
+        "change": { "rework": 3 },
+        "notice": "Keep the local saving and adoption fixed. Compare the whole workflow's net time.",
+        "takeaway": "Three scenario users now save 30 minutes and incur 9 correction minutes: 21 net minutes. These are assumptions, not measured benefits."
+      },
+      {
+        "title": "What if nobody uses it?",
+        "before": { "rework": 3, "saved": 10, "adoption": 60, "people": 5 },
+        "change": { "adoption": 0 },
+        "notice": "The tool's stated per-person saving stays the same, but the active-person count changes.",
+        "takeaway": "With zero adoption, this model delivers zero net time saving. Investigate actual use before treating a feature's proposed saving as a result."
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "scene": "A fresh operator will maintain the product, and a replacement provider uses a different field name.",
+    "comparisons": [
+      {
+        "title": "Make the replacement fit",
+        "before": { "guide": true, "access": true, "check": true, "field": "status" },
+        "change": { "field": "accessStatus" },
+        "notice": "Compare the expected key with the actual replacement payload and field assertion.",
+        "takeaway": "The local replacement check now fits its declared contract. A real operator still needs to demonstrate the actual journey and recovery."
+      },
+      {
+        "title": "Compatible, but unchecked",
+        "before": { "guide": true, "access": true, "check": true, "field": "accessStatus" },
+        "change": { "check": false },
+        "notice": "Keep the field compatible. Remove the assertion run and inspect the evidence label.",
+        "takeaway": "A plausible contract is different from a performed check. An unrun assertion must remain unrun instead of inheriting a success claim."
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "scene": "Your product faces a changed requirement. Trace what the new journey needs before adding components.",
+    "comparisons": [
+      {
+        "title": "A public page becomes a private journey",
+        "before": { "need": "public", "server": false, "permissions": false, "source": false },
+        "change": { "need": "private" },
+        "notice": "The existing components stay fixed. Inspect the capabilities the changed requirement now needs.",
+        "takeaway": "A previously adequate public-page design can miss a new private-record need. Identify the connected and permission boundaries instead of assuming the old path still fits."
+      },
+      {
+        "title": "Give the helper a supporting source",
+        "before": { "need": "ai", "server": true, "permissions": false, "source": false },
+        "change": { "source": true },
+        "notice": "The connected application is already present. Add the permitted supporting source and inspect the changed path.",
+        "takeaway": "A data store is not automatically supporting knowledge for an AI answer. This model fit still needs transfer to your own product and an independent review."
+      }
+    ]
+  }
+]

@@ -1,0 +1,190 @@
+.article-contents {
+  padding: 17px;
+  background: #f3f6ee;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 15px;
+  margin: 20px 0 29px;
+}
+.article-contents .eyebrow {
+  grid-column: 1 / -1;
+  margin: 0 0 7px;
+}
+.article-contents button {
+  text-align: left;
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  color: #405e35;
+  padding: 7px 0;
+  line-height: 1.6;
+}
+.article-contents button:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.markdown h2 {
+  scroll-margin-top: 24px;
+}
+.lesson-project-banner {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  background: #edf3e5;
+  border: 1px solid #d8e3cd;
+  border-radius: 8px;
+  padding: 17px;
+  margin-bottom: 23px;
+}
+.lesson-project-banner > svg {
+  color: #648151;
+}
+.lesson-project-banner > div {
+  min-width: 0;
+  flex: 1;
+}
+.lesson-project-banner strong {
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.lesson-project-banner .text-button {
+  margin: 0;
+  flex-shrink: 0;
+}
+.lesson-project-intro,
+.lesson-project-checks {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  padding: 25px;
+  margin-bottom: 23px;
+}
+.lesson-project-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 17px;
+  margin-bottom: 17px;
+}
+.lesson-project-heading h2 {
+  font-size: 25px;
+  margin-top: 8px;
+  line-height: 1.35;
+}
+.lesson-project-intro > p {
+  font-size: 13px;
+  color: var(--muted);
+}
+.lesson-project-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+.lesson-project-actions .field-help {
+  margin: 0;
+}
+.project-guide {
+  margin-bottom: 24px;
+}
+.lesson-project-checks h2 {
+  margin: 9px 0;
+}
+.lesson-project-checks > .muted {
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+.lesson-project-checks > .progress-track {
+  margin-top: 20px;
+}
+.lesson-project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 17px;
+}
+.lesson-project-footer > span {
+  font-size: 11px;
+  color: #586650;
+}
+.daily-projects-section {
+  margin-top: 35px;
+}
+.daily-projects-section > .muted {
+  font-size: 12px;
+  margin: 9px 0 20px;
+}
+.daily-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.daily-project-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+}
+.daily-project-row > div {
+  flex: 1;
+  min-width: 0;
+}
+.daily-project-row h3 {
+  font-size: 13px;
+}
+.daily-project-row p {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.daily-project-row > svg {
+  color: #6c825c;
+}
+@media (max-width: 650px) {
+  .lesson-content > .tabs {
+    flex-wrap: wrap;
+    gap: 3px 15px;
+  }
+  .lesson-content > .tabs button {
+    min-height: 42px;
+  }
+  .article-contents {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  .lesson-project-banner {
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+  .lesson-project-banner .text-button {
+    margin-left: 32px;
+  }
+  .lesson-project-intro,
+  .lesson-project-checks {
+    padding: 20px;
+  }
+  .lesson-project-heading h2 {
+    font-size: 22px;
+  }
+  .lesson-project-heading .project-symbol {
+    display: none;
+  }
+  .lesson-project-footer {
+    flex-wrap: wrap;
+  }
+  .daily-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .markdown table {
+    max-width: 100%;
+  }
+}
