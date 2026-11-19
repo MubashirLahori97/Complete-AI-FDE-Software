@@ -16,6 +16,7 @@ import {
   Search,
   Settings as SettingsIcon,
   Sprout,
+  Terminal,
   Users,
   Workflow,
   X,
@@ -41,6 +42,7 @@ const Scenarios = lazy(() => import('./Scenarios'));
 const Portfolio = lazy(() => import('./Portfolio'));
 const SdlcStudio = lazy(() => import('./SdlcStudio'));
 const ProductionBlueprint = lazy(() => import('./ProductionBlueprint'));
+const PythonTrack = lazy(() => import('./PythonTrack'));
 const Document = lazy(() =>
   import('./WorkspacePages').then((module) => ({ default: module.Document })),
 );
@@ -55,6 +57,7 @@ const Settings = lazy(() =>
 const navigation = [
   { path: '/', label: 'Overview', icon: LayoutDashboard },
   { path: '/curriculum', label: 'Learning path', icon: BookOpen },
+  { path: '/python', label: 'Python track (Beginner to Advanced)', icon: Terminal },
   { path: '/sdlc', label: 'AI-Native SDLC', icon: Workflow },
   { path: '/production', label: 'Production blueprint', icon: Layers },
   { path: '/lab', label: 'Practice lab', icon: Code2 },
@@ -166,7 +169,7 @@ export default function App() {
   const missionMatch = path.match(/^\/mission\/(\d+)$/);
   const phaseMatch = path.match(/^\/phase\/([234])$/);
   const documentMatch = path.match(
-    /^\/document\/(ROADMAP|CURRICULUM|VISION|PROJECTS|RESEARCH-2030|MISSION-MAP|MISSION-COURSE|AI-NATIVE-SDLC|STEP-BY-STEP-GUIDE|PRODUCTION-BLUEPRINT)\.md$/,
+    /^\/document\/(ROADMAP|CURRICULUM|VISION|PROJECTS|RESEARCH-2030|MISSION-MAP|MISSION-COURSE|AI-NATIVE-SDLC|STEP-BY-STEP-GUIDE|PRODUCTION-BLUEPRINT|PYTHON-MASTERY-GUIDE)\.md$/,
   );
   const lessonDay = lessonMatch ? Number(lessonMatch[1]) : 0;
   const selectedPath =
@@ -227,6 +230,7 @@ export default function App() {
         initialQuery={params.get('q') || ''}
       />
     );
+  else if (path === '/python') page = <PythonTrack progress={progress} />;
   else if (path === '/sdlc') page = <SdlcStudio progress={progress} />;
   else if (path === '/production') page = <ProductionBlueprint />;
   else if (path === '/lab') page = <Playground progress={progress} update={update} />;

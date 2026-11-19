@@ -9,6 +9,7 @@ import {
   Layers,
   RotateCcw,
   Sparkles,
+  Terminal,
   Workflow,
 } from 'lucide-react';
 import { canRecordMission, missions } from './missions';
@@ -98,6 +99,10 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
             <a className="button light" href="#/production">
               <Layers size={16} />
               Production Blueprint (8 Sprints)
+            </a>
+            <a className="button light" href="#/python">
+              <Terminal size={16} />
+              Python Track (Beginner to Advanced)
             </a>
             <a className="button light" href="#/document/STEP-BY-STEP-GUIDE.md">
               <BookOpen size={16} />

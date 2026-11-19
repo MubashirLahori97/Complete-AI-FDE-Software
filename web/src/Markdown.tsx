@@ -63,6 +63,7 @@ export function documentHref(href: string | undefined, folder: string): string |
         'AI-NATIVE-SDLC.md',
         'STEP-BY-STEP-GUIDE.md',
         'PRODUCTION-BLUEPRINT.md',
+        'PYTHON-MASTERY-GUIDE.md',
       ].includes(path)
     )
       return `#/document/${path}`;

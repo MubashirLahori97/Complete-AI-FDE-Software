@@ -10,6 +10,8 @@ Read the [AI-Native FDE SDLC guide](AI-NATIVE-SDLC.md) (and explore it interacti
 
 Ready to build a real production-grade full-stack AI app hands-on with AI? Open the [Production Blueprint](PRODUCTION-BLUEPRINT.md) (interactive 8-sprint playbook at `#/production`) for copy-paste AI prompts, 60-second engineering mental models, human verification gates, and senior "what NOT to build" trade-offs.
 
+Master Python from complete beginner to advanced AI systems engineer: Read the comprehensive [Python Mastery Guide](PYTHON-MASTERY-GUIDE.md) (explore it interactively at `#/python`) featuring 4 progressive stages, 18 deep-dive concept topics (CPython bytecode, memory models, dunder protocols, cooperative MRO, the GIL, asyncio), 10 tricky gotcha quizzes, and all 68 categorized GeeksforGeeks interview questions with senior interviewer insights.
+
 ## Interactive FDE Academy
 
 Choose **Start mission 1**. Build a useful service website with AI, understand its actual technologies, then grow towards connected systems and an independent domain project.
