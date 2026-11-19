@@ -2323,111 +2323,64 @@ make test
 make run
 \`\`\`
 
+---
+
+### 6. Production Object-Oriented Programming (OOP) Architecture
+
+#### Why Tutorial OOP Breaks in Real Companies
+Tutorials teach OOP using animal hierarchies:
+\`\`\`python
+# Toy OOP: Fragile, brittle, tightly coupled
+class Animal:
+    def speak(self): pass
+
+class Dog(Animal):
+    def speak(self): return "Woof!"
+\`\`\`
+In production, deep inheritance hierarchies create **fragile base class problems**, unpredictable method resolution order (MRO) bugs, and impossible-to-test code. Production software engineering enforces:
+1. **Composition Over Inheritance**: Services receive instances of collaborator classes via \`__init__\`, rather than subclassing them.
+2. **Structural Subtyping (\`typing.Protocol\`)**: Define interface contracts by capability, not inheritance.
+3. **Abstract Base Classes (\`abc.ABC\`)**: Enforce mandatory method implementations across plugins and adapters.
+4. **Dunder Protocols**: Implement standard Python protocols (\`__enter__\`/\`__exit__\` for context managers, \`__call__\` for callable instances, \`__repr__\` for readable debugging).
 
 \`\`\`python
-value = 2
+# Production OOP Standard: Protocol + Composition + Dependency Injection
+from typing import Protocol, runtime_checkable
 
-match value:
-    case 1:
-        result = "one"
-    case 2:
-        result = "two"
-    case 3:
-        result = "three"
-    case _:
-        result = "unknown"
+@runtime_checkable
+class DocumentStore(Protocol):
+    """Structural interface: Any class implementing these methods qualifies."""
+    async def get(self, doc_id: str) -> dict | None: ...
+    async def save(self, doc_id: str, data: dict) -> None: ...
 
-print(result)
+class KnowledgeService:
+    """Service composed with an injected store dependency."""
+    def __init__(self, store: DocumentStore):
+        self._store = store
+
+    async def ingest_document(self, doc_id: str, data: dict) -> None:
+        await self._store.save(doc_id, data)
 \`\`\`
 
 ---
 
-## Stage 6: The AI-FDE Production Engineering Firmware
+### 7. FastAPI Production Backend Architecture
 
-### 1. Modern Tooling Standards: Why Tutorial Code Breaks in Production
-
-Traditional beginner tutorials teach:
-- \`pip install <package>\` directly into system or unversioned virtualenvs without deterministic lockfiles.
-- Hardcoded secrets and configuration variables scattered across files.
-- Unformatted \`print()\` statements lacking timestamps, trace IDs, and log levels.
-- Raw untyped dictionaries passed across API boundaries.
-- Catch-all \`except Exception: pass\` masking catastrophic failures.
-
-In enterprise and AI-forward production, this produces untraceable outages. Modern production Python mandates the **Astral Toolchain & Strict Schema Contracts**:
-- **Astral \`uv\`**: Replaces \`pip\`, \`pip-tools\`, \`poetry\`, and \`pyenv\`. Installs packages 10–100x faster in Rust, resolves cross-platform lockfiles, and pins exact transitive dependencies in \`pyproject.toml\`.
-- **Astral \`Ruff\`**: Replaces \`Black\`, \`Flake8\`, \`isort\`, \`bandit\`, and \`pyupgrade\`. Runs across millions of lines of code in sub-second times.
-- **\`mypy --strict\`**: Rejects missing return types, untyped definitions, implicit optionals, and unsafe dynamic attribute access.
-- **\`pydantic-settings\`**: Typed, validated environment schemas with fail-fast validation on container boot.
-- **\`structlog\`**: JSON logs formatted for Datadog, CloudWatch, or OpenTelemetry with correlation IDs (\`x-request-id\`).
+FastAPI is the reference framework for high-throughput AI backends. Production FastAPI enforces 5 architectural standards:
+1. **ASGI Lifespan Handlers (\`@asynccontextmanager\`)**: Deterministic startup and shutdown lifecycle replacing deprecated \`@app.on_event\`.
+2. **Hierarchical Dependency Injection (\`Depends\`)**: Request-scoped database sessions, authentication, and service caching with automatic teardown.
+3. **Rust-Powered Pydantic v2**: Strict schema validation (\`model_config = ConfigDict(extra="forbid")\`) with automated OpenAPI schema generation.
+4. **Response Model Sanitization**: Strict \`response_model=UserPublicResponse\` preventing internal database hashes or secrets from leaking to clients.
+5. **Global RFC 7807 Error Envelopes**: Uniform JSON error formats with correlation tracking IDs (\`x-request-id\`).
 
 ---
 
-### 2. The 6 Production Coding Exams
+### 8. Production RAG (Retrieval-Augmented Generation) Architecture
 
-The curriculum includes 6 automated production exams running directly against an in-browser Pyodide WebAssembly runtime:
-1. **Exam 1: Fail-Safe Typed Configuration Loader**: Validating ports, environments, and secrets using Pydantic Settings.
-2. **Exam 2: Resilient HTTP Circuit Breaker with Exponential Jitter**: Mitigating cascading downstream timeouts using full jitter backoff.
-3. **Exam 3: Production Cache with TTL & LRU Eviction**: Thread-safe in-memory cache preventing memory leaks.
-4. **Exam 4: Structured Telemetry & Trace ID Middleware**: Context-variable request binding and JSON payload generation.
-5. **Exam 5: Async Token Bucket Rate Limiter**: High-concurrency rate limiting using \`asyncio.Lock\` and sliding windows.
-6. **Exam 6: Kubernetes Liveness (\`/healthz\`) & Readiness (\`/ready\`) Probes**: Differentiating between process responsiveness and downstream database/cache warm-up.
+Production RAG systems ground LLMs in enterprise factual knowledge without hallucination:
+1. **Sliding-Window Chunking with Overlap**: Documents split into fixed word/token windows with 15–20% overlap, preserving cross-sentence semantic continuity.
+2. **Dense Vector Indexing & Cosine Similarity**: Embeddings normalized and searched using dot products in sub-millisecond latencies.
+3. **Token-Budgeted Context Assembly**: Retrieved passages formatted into explicit citation blocks (\`[Source: doc-id]\`) and truncated before exceeding the LLM context ceiling.
+4. **Hallucination Refusal Guard**: When maximum retrieval similarity falls below confidence threshold (e.g., < 0.65), the system returns a safe refusal rather than inventing false facts.
 
----
-
-### 3. The 5 Production Incident Post-Mortems
-
-1. **Incident 1: Redis Connection Pool Exhaustion (P0)**:
-   - *Symptom*: High HTTP 500 error rates during traffic spikes; redis client pool timeouts.
-   - *Root Cause*: Failure to release client connections in \`finally\` blocks during uncaught exceptions.
-   - *Safeguard*: Enforce context managers (\`async with client\`) or explicit resource cleanup in \`finally\`.
-2. **Incident 2: Distributed Database Transaction Deadlock (P0)**:
-   - *Symptom*: Database thread pool saturation and hung transactions under payment retry storms.
-   - *Root Cause*: Hanging open transactions when downstream payment gateway calls timed out without explicit rollback.
-   - *Safeguard*: Two-phase transaction boundaries with mandatory rollback on any non-200 state.
-3. **Incident 3: Async Event Loop CPU Starvation (P1)**:
-   - *Symptom*: Sudden p99 latency spikes on lightweight \`/healthz\` endpoints.
-   - *Root Cause*: CPU-heavy cryptographic hashing and token tokenization executed directly on the main \`asyncio\` event loop.
-   - *Safeguard*: Delegate all CPU-intensive synchronous functions to worker threads via \`asyncio.to_thread()\`.
-4. **Incident 4: Silent JSON Schema Deserialization Corruption (P1)**:
-   - *Symptom*: Downstream event processors dropping 12% of analytical events without raising errors.
-   - *Root Cause*: Unvalidated raw dictionary parsing ignoring schema changes and missing required fields.
-   - *Safeguard*: Strict Pydantic v2 \`BaseModel\` deserialization with \`extra="forbid"\`.
-5. **Incident 5: Streaming Token Buffer Overflow (P0)**:
-   - *Symptom*: Container OOMKilled crashes during long-form LLM generation sessions.
-   - *Root Cause*: Accumulating streaming tokens indefinitely in an unbounded list buffer.
-   - *Safeguard*: Fixed-size ring buffers (\`collections.deque(maxlen=N)\`) and immediate downstream flushing.
-
----
-
-### 4. Pure Python AI Systems Architecture
-
-Forward Deployed Engineers must build AI applications without relying entirely on third-party abstractions. The platform provides 4 hands-on pure Python labs:
-- **Lab 1: Autonomous ReAct Engine**: Implement the \`Thought -> Action -> Observation\` cycle with tool dispatch tables and maximum iteration guards.
-- **Lab 2: In-Memory Vector Store & Cosine Similarity**: Dense vector indexing, dot product calculation, L2 normalization, and top-k nearest neighbor ranking in pure Python.
-- **Lab 3: LLM Evaluation & Calibration Suite**: Automated exact match, token-level precision/recall/F1 scoring, and latency p95 percentiles.
-- **Lab 4: Server-Sent Events (SSE) Streaming Engine**: Formatting text chunks into standard RFC \`data: ...\\n\\n\` event stream frames with termination sentinels (\`data: [DONE]\\n\\n\`).
-
----
-
-### 5. Production Microservice Starter Kit (\`templates/python-service/\`)
-
-Clone and deploy a ready-to-ship production Python microservice:
-\`\`\`bash
-git clone https://github.com/mubashirlahori97/Complete-AI-FDE-Software.git
-cd Complete-AI-FDE-Software/templates/python-service
-
-# Setup environment & dependencies in seconds
-cp .env.example .env
-make install
-
-# Run static analysis and tests
-make lint
-make test
-
-# Start local server with hot reloading
-make run
-\`\`\`
-
-
----
 `;export{n as default};
