@@ -1,4 +1,4 @@
-import{c as V,r as d,j as e,W as se,B as D,a0 as L,a2 as G,C as W,T as R,m as B,h as k,z as F,y as U,S as oe,R as re,a1 as le}from"./index-DvHDBUsB.js";import{L as ce}from"./lightbulb-Hq_AexcT.js";import{C as Q}from"./copy-fYZSR9T6.js";const de=V("Award",[["path",{d:"m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",key:"1yiouv"}],["circle",{cx:"12",cy:"8",r:"6",key:"1vp47v"}]]);const ue=V("Flame",[["path",{d:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",key:"96xj49"}]]),he=[{id:"stage-1",number:1,title:"Foundations & Core Idioms",eyebrow:"STAGE 1 · COMPLETE BEGINNER",description:"Master the Python execution model, dynamic typing, mutability internals, idiomatic iteration, parameter binding, and defensive exception handling.",topicIds:["topic-1","topic-2","topic-3","topic-4","topic-5","topic-6"]},{id:"stage-2",number:2,title:"Object-Oriented Architecture & Protocols",eyebrow:"STAGE 2 · INTERMEDIATE",description:"Deep dive into classes, the __init__ vs __new__ lifecycle, Python dunder protocols, cooperative multiple inheritance with C3 MRO, descriptors, and decorators.",topicIds:["topic-7","topic-8","topic-9","topic-10","topic-11","topic-12"]},{id:"stage-3",number:3,title:"Systems Internals, Concurrency & Modern Python",eyebrow:"STAGE 3 · ADVANCED",description:"Architect resilient systems using custom generators, context managers, memory refcounting & cyclic GC, the GIL, asyncio event loops, and modern Python 3.10-3.12+ features.",topicIds:["topic-13","topic-14","topic-15","topic-16","topic-17","topic-18"]},{id:"stage-4",number:4,title:"Production AI-Native Project Lab",eyebrow:"STAGE 4 · PRODUCTION CAPSTONE",description:"Build a production-grade async Python microservice from scratch: strict Pydantic v2 schemas, resilient retry/circuit breaker policies, structured logging, and automated test harnesses.",topicIds:[]}],j=[{id:"topic-1",number:1,title:"The CPython Execution Engine: Source, Bytecode & PVM",difficulty:"beginner",duration:"45 min",stage:"Stage 1: Foundations & Core Idioms",summary:"Understand how Python translates human-readable source code into bytecode instructions (.pyc) and how the Python Virtual Machine (PVM) loop executes them stack by stack.",mentalModel:"Source code (.py) is compiled to an abstract syntax tree and then into stack-based bytecode (.pyc). The PVM is a giant C loop (eval_frame) that consumes opcodes one by one.",whyItMatters:"Debugging performance, import latency, caching behavior, and understanding why Python is both compiled and interpreted.",codeExample:`import dis
+import{c as Q,r as d,j as e,W as B,h as G,z as V,R as pe,k as we,S as me,B as ae,a0 as ie,a2 as se,C as re,T as oe,m as le,y as ce,a1 as Pe}from"./index-DITT9I0J.js";import{L as he}from"./lightbulb-x5QDuHHJ.js";import{C as ee}from"./copy-6Tn3WwZB.js";const te=Q("Award",[["path",{d:"m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",key:"1yiouv"}],["circle",{cx:"12",cy:"8",r:"6",key:"1vp47v"}]]);const ke=Q("CircleX",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["path",{d:"m15 9-6 6",key:"1uzhvr"}],["path",{d:"m9 9 6 6",key:"z0biqf"}]]);const fe=Q("Flame",[["path",{d:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",key:"96xj49"}]]);const je=Q("Zap",[["path",{d:"M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",key:"1xq2db"}]]),Ce=[{id:"stage-1",number:1,title:"Foundations & Core Idioms",eyebrow:"STAGE 1 · COMPLETE BEGINNER",description:"Master the Python execution model, dynamic typing, mutability internals, idiomatic iteration, parameter binding, and defensive exception handling.",topicIds:["topic-1","topic-2","topic-3","topic-4","topic-5","topic-6"]},{id:"stage-2",number:2,title:"Object-Oriented Architecture & Protocols",eyebrow:"STAGE 2 · INTERMEDIATE",description:"Deep dive into classes, the __init__ vs __new__ lifecycle, Python dunder protocols, cooperative multiple inheritance with C3 MRO, descriptors, and decorators.",topicIds:["topic-7","topic-8","topic-9","topic-10","topic-11","topic-12"]},{id:"stage-3",number:3,title:"Systems Internals, Concurrency & Modern Python",eyebrow:"STAGE 3 · ADVANCED",description:"Architect resilient systems using custom generators, context managers, memory refcounting & cyclic GC, the GIL, asyncio event loops, and modern Python 3.10-3.12+ features.",topicIds:["topic-13","topic-14","topic-15","topic-16","topic-17","topic-18"]},{id:"stage-4",number:4,title:"Production AI-Native Project Lab",eyebrow:"STAGE 4 · PRODUCTION CAPSTONE",description:"Build a production-grade async Python microservice from scratch: strict Pydantic v2 schemas, resilient retry/circuit breaker policies, structured logging, and automated test harnesses.",topicIds:[]}],ne=[{id:"topic-1",number:1,title:"The CPython Execution Engine: Source, Bytecode & PVM",difficulty:"beginner",duration:"45 min",stage:"Stage 1: Foundations & Core Idioms",summary:"Understand how Python translates human-readable source code into bytecode instructions (.pyc) and how the Python Virtual Machine (PVM) loop executes them stack by stack.",mentalModel:"Source code (.py) is compiled to an abstract syntax tree and then into stack-based bytecode (.pyc). The PVM is a giant C loop (eval_frame) that consumes opcodes one by one.",whyItMatters:"Debugging performance, import latency, caching behavior, and understanding why Python is both compiled and interpreted.",codeExample:`import dis
 
 def calculate_tax(subtotal: float, rate: float = 0.08) -> float:
     """Demonstrates how CPython translates high-level code to opcodes."""
@@ -349,7 +349,7 @@ print(route_event({"type": "PAYMENT", "amount": 2500, "currency": "USD"}))
 sample_text = "Complete-AI-FDE-Software"
 if (n := len(sample_text)) > 10:
     print(f"Text is long ({n} characters)")
-`,commonAiPitfalls:["Treating `match/case` as just a primitive C-style switch statement rather than using shape destructuring and guards.","Overusing the Walrus operator in complex expressions where code readability is severely degraded.","Writing type annotations that cannot be statically verified by `mypy`."],verificationChecklist:["Can you write a `match/case` pattern that matches a dataclass and extracts its fields?","Can you use `ExceptionGroup` and `except*` to catch multiple concurrent async task errors?","What is the difference between `typing.TypedDict`, `dataclasses.dataclass`, and `pydantic.BaseModel`?"],relatedQuestions:[60,66,67,68]}],v=[{id:"py-q1",number:1,difficulty:"beginner",question:"Is Python a compiled language or an interpreted language?",summary:`Python is considered both a compiled and an interpreted language. First, Python source code (.py files) is compiled into bytecode (.pyc files). Then, the Python Virtual Machine (PVM) interprets and executes this bytecode line by line.
+`,commonAiPitfalls:["Treating `match/case` as just a primitive C-style switch statement rather than using shape destructuring and guards.","Overusing the Walrus operator in complex expressions where code readability is severely degraded.","Writing type annotations that cannot be statically verified by `mypy`."],verificationChecklist:["Can you write a `match/case` pattern that matches a dataclass and extracts its fields?","Can you use `ExceptionGroup` and `except*` to catch multiple concurrent async task errors?","What is the difference between `typing.TypedDict`, `dataclasses.dataclass`, and `pydantic.BaseModel`?"],relatedQuestions:[60,66,67,68]}],$=[{id:"py-q1",number:1,difficulty:"beginner",question:"Is Python a compiled language or an interpreted language?",summary:`Python is considered both a compiled and an interpreted language. First, Python source code (.py files) is compiled into bytecode (.pyc files). Then, the Python Virtual Machine (PVM) interprets and executes this bytecode line by line.
 - Python code i...`,explanation:`Python is considered both a compiled and an interpreted language. First, Python source code (.py files) is compiled into bytecode (.pyc files). Then, the Python Virtual Machine (PVM) interprets and executes this bytecode line by line.
 - Python code is first compiled into bytecode.
 - The Python Virtual Machine (PVM) executes the bytecode.
@@ -1443,14 +1443,588 @@ match value:
     case _:
         result = "unknown"
 
-print(result)`,interviewerNote:"Python 3.10 match/case statement: Much more than a switch! Performs deep structural pattern matching, sequence destructuring, type checking, and guard clauses.",tags:["syntax","pattern-matching","python310"]}],p=[{id:"quiz-1",question:`What is the output of the following Python code?
+print(result)`,interviewerNote:"Python 3.10 match/case statement: Much more than a switch! Performs deep structural pattern matching, sequence destructuring, type checking, and guard clauses.",tags:["syntax","pattern-matching","python310"]}],q=[{id:"quiz-1",question:`What is the output of the following Python code?
 
 def add_item(val, items=[]):
     items.append(val)
     return items
 
 print(add_item(1))
-print(add_item(2))`,options:["[1] and [2]","[1] and [1, 2]","TypeError: mutable default argument not allowed","[1] and None"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Mutable Default Arguments",explanation:"Default arguments in Python are evaluated once when the function is defined, NOT each time it is called. The exact same list object in memory is reused across subsequent invocations."},{id:"quiz-2",question:"What does the expression `a is b` evaluate to for `a = 1000; b = 1000` when run in the standard CPython REPL?",options:["Always True because their numerical values are identical","False because 1000 is outside CPython's small integer cache (-5 to 256)","TypeError: cannot compare integers with 'is'","True because Python interns all positive integers"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Identity vs Equality & Small Int Caching",explanation:"CPython pre-allocates an array of integer objects for values between -5 and 256. For integers outside this range, distinct heap objects are allocated, so 'is' returns False even though '==' is True."},{id:"quiz-3",question:"What does `funcs = [lambda: i for i in range(3)]; [f() for f in funcs]` evaluate to?",options:["[0, 1, 2]","[2, 2, 2]","[0, 0, 0]","TypeError: 'i' is out of scope"],correctIndex:1,difficulty:"intermediate",gotchaConcept:"Closure Late Binding",explanation:"Python closures bind variables by reference, not value. By the time the lambda functions are executed, the loop has completed and 'i' has the value 2 for all closures. Fix: `lambda i=i: i`."},{id:"quiz-4",question:"What is the type of the expression `x = (i ** 2 for i in range(5))`?",options:["<class 'tuple'>","<class 'list'>","<class 'generator'>","<class 'iterator_tuple'>"],correctIndex:2,difficulty:"intermediate",gotchaConcept:"Tuple Comprehension Myth",explanation:"There is no such thing as a tuple comprehension in Python! Parentheses around a comprehension syntax create a generator expression. To create a tuple, use `tuple(i ** 2 for i in range(5))`."},{id:"quiz-5",question:"If you have a CPU-intensive calculation (e.g. computing prime numbers), which approach will achieve true multi-core parallel execution in CPython?",options:["threading.Thread with max_workers = CPU count","multiprocessing.Process or concurrent.futures.ProcessPoolExecutor","asyncio with asyncio.gather()","All of the above"],correctIndex:1,difficulty:"advanced",gotchaConcept:"Global Interpreter Lock (GIL)",explanation:"Because of CPython's GIL, threads cannot execute Python bytecode simultaneously on multiple CPU cores. Only separate OS processes (multiprocessing) bypass the GIL by using separate memory spaces."},{id:"quiz-6",question:"In Python's class instantiation lifecycle, which method is responsible for returning the newly allocated instance?",options:["__init__","__new__","__call__","__alloc__"],correctIndex:1,difficulty:"intermediate",gotchaConcept:"Object Lifecycle (__new__ vs __init__)",explanation:"__new__ is the static method that allocates and returns the raw instance object in memory. __init__ only initializes attributes on that already-created instance and must return None."},{id:"quiz-7",question:"When does the `else` block of a `try...except...else...finally` statement execute?",options:["When an exception was raised and caught","When no exception was raised in the try block","Always, right before the finally block","Only when the except block returns None"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Try-Except-Else Flow",explanation:"The else block in a try-except statement executes ONLY if the code inside the try block completed successfully without raising any exceptions."},{id:"quiz-8",question:"What is the result of `original = [[1, 2]]; copy_list = original[:]; copy_list[0].append(3); print(original)`?",options:["[[1, 2]]","[[1, 2, 3]]","IndexError: slice out of bounds","[[1, 2], [3]]"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Shallow Copy Trap",explanation:"Slice `original[:]` creates a shallow copy. The outer list is a new container, but the inner list `[1, 2]` is the exact same reference. Modifying it modifies `original`. Use `copy.deepcopy` to prevent this."},{id:"quiz-9",question:"What happens if a developer puts `time.sleep(5)` inside an `async def` endpoint in a FastAPI or Starlette server?",options:["FastAPI automatically offloads it to a background thread","It pauses only that specific request while other users proceed normally","It blocks the entire event loop, freezing all concurrent requests for all users for 5 seconds","It raises a RuntimeWarning: coroutine was never awaited"],correctIndex:2,difficulty:"advanced",gotchaConcept:"Async Event Loop Blocking",explanation:"time.sleep() is synchronous and blocking. Calling it in a coroutine halts the single OS thread running the event loop, freezing all other concurrent tasks. Use `await asyncio.sleep(5)` or `asyncio.to_thread`."},{id:"quiz-10",question:"In Python's Method Resolution Order (MRO) using C3 Linearization, what ensures that parents do not precede their children and order is preserved?",options:["Depth-First Search (DFS) with backtrack","Monotonicity and Local Precedence Order","Breadth-First Search (BFS) sorting by alphabet","Arbitrary hash order resolution"],correctIndex:1,difficulty:"advanced",gotchaConcept:"C3 Linearization & MRO",explanation:"C3 Linearization enforces Monotonicity (if A precedes B in parent MRO, it must precede B in child MRO) and preserves Local Precedence Order (left-to-right listing in base class tuple)."}],Y="fde-python-mastered-questions-v1",J="fde-python-quiz-progress-v1";function me(o){return j.filter(a=>a.difficulty===o)}function pe(){const o=new Set;for(const a of v)for(const l of a.tags)o.add(l);return Array.from(o).sort()}function ye(o,a="all",l=""){const s=o.toLowerCase().trim();return v.filter(r=>{if(a!=="all"&&r.difficulty!==a||l&&!r.tags.includes(l))return!1;if(!s)return!0;const h=`q${r.number}`===s||String(r.number)===s,m=r.question.toLowerCase().includes(s)||r.summary.toLowerCase().includes(s)||r.tags.some(u=>u.toLowerCase().includes(s));return h||m})}function w(){return typeof window<"u"&&window.localStorage?window.localStorage:typeof globalThis<"u"&&globalThis.localStorage?globalThis.localStorage:null}function fe(){try{const o=w();if(!o)return new Set;const a=o.getItem(Y);if(!a)return new Set;const l=JSON.parse(a);return Array.isArray(l)?new Set(l):new Set}catch{return new Set}}function ge(o){try{const a=w();if(!a)return;a.setItem(Y,JSON.stringify(Array.from(o)))}catch{}}function H(){try{const o=w();if(!o)return{};const a=o.getItem(J);return a?JSON.parse(a)||{}:{}}catch{return{}}}function $(o){try{const a=w();if(!a)return;a.setItem(J,JSON.stringify(o))}catch{}}function ve({progress:o}){const[a,l]=d.useState("curriculum"),[s,r]=d.useState("all"),[h,m]=d.useState(""),[u,f]=d.useState(""),[K,C]=d.useState("topic-1"),[Z,N]=d.useState("py-q1"),[I,T]=d.useState(null),[g,X]=d.useState(()=>fe()),[b,q]=d.useState(()=>H()),[_,E]=d.useState(()=>{const n=H();return Object.keys(n).length>=p.length});d.useMemo(()=>pe(),[]);const P=d.useMemo(()=>ye(h,s,u),[h,s,u]),ee=d.useMemo(()=>s==="all"?j:me(s),[s]),ne=n=>{X(i=>{const t=new Set(i);return t.has(n)?t.delete(n):t.add(n),ge(t),t})},A=(n,i)=>{navigator.clipboard.writeText(n),T(i),setTimeout(()=>{T(null)},2e3)},te=(n,i)=>{q(t=>{const c={...t,[n]:i};return $(c),c})},ae=()=>{q({}),E(!1),$({})},S=d.useMemo(()=>{let n=0;for(const i of p)b[i.id]===i.correctIndex&&n++;return n},[b]),M=Math.round(g.size/v.length*100);return e.jsxs("div",{className:"python-track-page",children:[e.jsxs("header",{className:"python-hero",children:[e.jsxs("div",{className:"python-hero-copy",children:[e.jsxs("p",{className:"eyebrow",children:[e.jsx(se,{size:14})," COMPLETE PYTHON MASTERY FIRMWARE"]}),e.jsx("h1",{children:"From Syntax Beginner to Advanced AI Systems Engineer"}),e.jsx("p",{className:"python-lead",children:"CPython execution internals, memory layout, dunder protocols, cooperative MRO, GIL & concurrency, asyncio architectures, and all 68 essential interview questions. Designed for high concept-density and AI-native software engineering."}),e.jsxs("div",{className:"python-stats-bar",children:[e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"4"}),e.jsx("span",{className:"stat-label",children:"Stages"})]}),e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"18"}),e.jsx("span",{className:"stat-label",children:"Concept Deep Dives"})]}),e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"68"}),e.jsx("span",{className:"stat-label",children:"Interview Q&As"})]}),e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"10"}),e.jsx("span",{className:"stat-label",children:"Gotcha Quizzes"})]}),e.jsxs("div",{className:"python-stat-card highlight",children:[e.jsxs("span",{className:"stat-number",children:[g.size,"/68"]}),e.jsxs("span",{className:"stat-label",children:["Mastered (",M,"%)"]})]})]})]}),e.jsxs("div",{className:"python-hero-actions",children:[e.jsxs("a",{className:"button light",href:"#/document/PYTHON-MASTERY-GUIDE.md",title:"Read full reference guide",children:[e.jsx(D,{size:16}),"Full Reference Guide"]}),e.jsxs("a",{className:"button light",href:"#/sdlc",title:"AI-Native SDLC",children:[e.jsx(L,{size:16}),"AI-Native SDLC"]})]})]}),e.jsxs("nav",{className:"python-nav-tabs","aria-label":"Python Track Sections",children:[e.jsxs("button",{type:"button",className:`python-tab-btn ${a==="curriculum"?"active":""}`,onClick:()=>l("curriculum"),children:[e.jsx(L,{size:16}),"Stages & Roadmap"]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${a==="topics"?"active":""}`,onClick:()=>l("topics"),children:[e.jsx(D,{size:16}),"18 Concept Deep Dives"]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${a==="interview"?"active":""}`,onClick:()=>l("interview"),children:[e.jsx(de,{size:16}),"68 Interview Q&A Engine",e.jsx("span",{className:"tab-badge",children:v.length})]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${a==="quiz"?"active":""}`,onClick:()=>l("quiz"),children:[e.jsx(G,{size:16}),"Tricky Gotchas Quiz",e.jsx("span",{className:"tab-badge",children:p.length})]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${a==="lab"?"active":""}`,onClick:()=>l("lab"),children:[e.jsx(W,{size:16}),"Production Project Lab"]})]}),a==="curriculum"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"The 4 Progressive Python Mastery Stages"}),e.jsx("p",{className:"muted",children:"Move deliberately from absolute beginner execution fundamentals to architecting resilient, multi-worker Python microservices."})]}),e.jsx("div",{className:"stages-grid",children:he.map(n=>e.jsxs("div",{className:"stage-card",children:[e.jsxs("div",{className:"stage-header",children:[e.jsx("span",{className:"stage-badge",children:n.eyebrow}),e.jsx("h3",{children:n.title})]}),e.jsx("p",{className:"stage-desc",children:n.description}),n.topicIds.length>0?e.jsxs("div",{className:"stage-topics-list",children:[e.jsx("h4",{children:"Covered Topics:"}),e.jsx("ul",{children:n.topicIds.map(i=>{const t=j.find(c=>c.id===i);return t?e.jsx("li",{children:e.jsxs("button",{type:"button",className:"topic-link-btn",onClick:()=>{l("topics"),C(t.id)},children:[e.jsxs("span",{className:"topic-num",children:["#",t.number]}),e.jsx("span",{className:"topic-name",children:t.title}),e.jsx("span",{className:"topic-duration",children:t.duration})]})},t.id):null})})]}):e.jsxs("div",{className:"stage-capstone-box",children:[e.jsxs("p",{children:[e.jsx("strong",{children:"Capstone Architecture:"})," Build a production async microservice with Pydantic v2 validation, retry exponential backoff with jitter, structured JSON logging, and 100% pytest coverage."]}),e.jsxs("button",{type:"button",className:"button primary small",onClick:()=>l("lab"),children:[e.jsx(W,{size:14})," Open Production Lab"]})]})]},n.id))})]}),a==="topics"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsx("div",{className:"pane-filter-bar",children:e.jsxs("div",{className:"filter-group",children:[e.jsx("span",{className:"filter-label",children:"Level:"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="all"?"active":""}`,onClick:()=>r("all"),children:"All (18)"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="beginner"?"active":""}`,onClick:()=>r("beginner"),children:"Beginner (6)"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="intermediate"?"active":""}`,onClick:()=>r("intermediate"),children:"Intermediate (6)"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="advanced"?"active":""}`,onClick:()=>r("advanced"),children:"Advanced (6)"})]})}),e.jsx("div",{className:"topics-accordion",children:ee.map(n=>{const i=K===n.id;return e.jsxs("article",{className:`topic-accordion-item ${i?"expanded":""}`,children:[e.jsxs("header",{className:"topic-accordion-header",onClick:()=>C(i?"":n.id),children:[e.jsxs("div",{className:"topic-header-title",children:[e.jsx("span",{className:"topic-pill",children:n.number}),e.jsx("span",{className:`diff-pill ${n.difficulty}`,children:n.difficulty}),e.jsx("h3",{children:n.title})]}),e.jsxs("div",{className:"topic-header-meta",children:[e.jsx("span",{className:"duration-tag",children:n.duration}),i?e.jsx(R,{size:20}):e.jsx(B,{size:20})]})]}),i&&e.jsxs("div",{className:"topic-accordion-body",children:[e.jsx("div",{className:"topic-summary-box",children:e.jsx("p",{className:"topic-summary",children:n.summary})}),e.jsxs("div",{className:"topic-details-grid",children:[e.jsxs("div",{className:"topic-callout mental-model",children:[e.jsxs("h4",{children:[e.jsx(ce,{size:16})," Mental Model"]}),e.jsx("p",{children:n.mentalModel})]}),e.jsxs("div",{className:"topic-callout why-matters",children:[e.jsxs("h4",{children:[e.jsx(ue,{size:16})," Why It Matters in Production"]}),e.jsx("p",{children:n.whyItMatters})]})]}),e.jsxs("div",{className:"code-block-wrapper",children:[e.jsxs("div",{className:"code-block-header",children:[e.jsx("span",{className:"code-lang",children:"python"}),e.jsx("button",{type:"button",className:"copy-btn",onClick:()=>A(n.codeExample,n.id),children:I===n.id?e.jsxs(e.Fragment,{children:[e.jsx(k,{size:14})," Copied!"]}):e.jsxs(e.Fragment,{children:[e.jsx(Q,{size:14})," Copy snippet"]})})]}),e.jsx("pre",{className:"code-pre",children:e.jsx("code",{children:n.codeExample})})]}),e.jsxs("div",{className:"topic-pitfalls-box",children:[e.jsxs("h4",{children:[e.jsx(G,{size:16})," Common AI & Candidate Pitfalls"]}),e.jsx("ul",{children:n.commonAiPitfalls.map((t,c)=>e.jsx("li",{children:t},c))})]}),e.jsxs("div",{className:"topic-checklist-box",children:[e.jsxs("h4",{children:[e.jsx(F,{size:16})," Human Verification Checklist"]}),e.jsx("ul",{children:n.verificationChecklist.map((t,c)=>e.jsx("li",{children:t},c))})]}),n.relatedQuestions.length>0&&e.jsxs("div",{className:"related-questions-bar",children:[e.jsx("span",{className:"related-label",children:"Related Interview Q&As:"}),n.relatedQuestions.map(t=>e.jsxs("button",{type:"button",className:"related-q-chip",onClick:()=>{l("interview"),m(`q${t}`),N(`py-q${t}`)},children:["Q",t]},t))]})]})]},n.id)})})]}),a==="interview"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"interview-controls",children:[e.jsxs("div",{className:"search-bar",children:[e.jsx(U,{size:18}),e.jsx("input",{type:"text",placeholder:"Search questions, keywords (e.g. GIL, dunder, async), or number (e.g. q5)...",value:h,onChange:n=>m(n.target.value)}),h&&e.jsx("button",{type:"button",className:"clear-search-btn",onClick:()=>m(""),children:"Clear"})]}),e.jsxs("div",{className:"filter-row",children:[e.jsxs("div",{className:"level-chips",children:[e.jsx("span",{className:"filter-title",children:"Difficulty:"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="all"?"active":""}`,onClick:()=>r("all"),children:"All (68)"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="beginner"?"active":""}`,onClick:()=>r("beginner"),children:"Basic (Q1–Q29)"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="intermediate"?"active":""}`,onClick:()=>r("intermediate"),children:"Intermediate (Q30–Q51)"}),e.jsx("button",{type:"button",className:`filter-chip ${s==="advanced"?"active":""}`,onClick:()=>r("advanced"),children:"Advanced (Q52–Q68)"})]}),u&&e.jsxs("div",{className:"active-tag-indicator",children:[e.jsxs("span",{children:["Tag: ",e.jsxs("strong",{children:["#",u]})]}),e.jsx("button",{type:"button",className:"tag-clear-btn",onClick:()=>f(""),children:"×"})]})]}),e.jsxs("div",{className:"tags-cloud",children:[e.jsx("span",{className:"tags-label",children:"Filter by Tag:"}),["internals","pvm","memory","mutability","oop","mro","dunder","decorators","generators","gil","concurrency","async","walrus","pattern-matching"].map(n=>e.jsxs("button",{type:"button",className:`tag-chip ${u===n?"active":""}`,onClick:()=>f(u===n?"":n),children:["#",n]},n))]})]}),e.jsxs("div",{className:"questions-counter-bar",children:[e.jsxs("span",{children:["Showing ",e.jsx("strong",{children:P.length})," of 68 questions"]}),e.jsxs("span",{children:["Mastered: ",e.jsx("strong",{children:g.size})," / 68 (",M,"%)"]})]}),e.jsx("div",{className:"questions-list",children:P.length===0?e.jsxs("div",{className:"empty-search-state",children:[e.jsx(U,{size:32}),e.jsx("p",{children:"No interview questions matched your query or filter."}),e.jsx("button",{type:"button",className:"button light small",onClick:()=>{m(""),r("all"),f("")},children:"Reset filters"})]}):P.map(n=>{const i=Z===n.id,t=g.has(n.number);return e.jsxs("article",{className:`question-card ${i?"expanded":""} ${t?"mastered":""}`,children:[e.jsxs("header",{className:"question-card-header",onClick:()=>N(i?"":n.id),children:[e.jsxs("div",{className:"q-left-area",children:[e.jsxs("label",{className:"mastered-checkbox-label",onClick:c=>c.stopPropagation(),children:[e.jsx("input",{type:"checkbox",checked:t,onChange:()=>ne(n.number)}),e.jsx("span",{className:"custom-check-box",children:t&&e.jsx(k,{size:14})})]}),e.jsxs("span",{className:"q-number-pill",children:["Q",n.number]}),e.jsx("span",{className:`diff-pill ${n.difficulty}`,children:n.difficulty}),e.jsx("h3",{className:"q-title",children:n.question})]}),e.jsx("div",{className:"q-right-area",children:i?e.jsx(R,{size:20}):e.jsx(B,{size:20})})]}),i&&e.jsxs("div",{className:"question-card-body",children:[e.jsxs("div",{className:"pro-tip-box",children:[e.jsx("span",{className:"pro-tip-icon",children:e.jsx(oe,{size:16})}),e.jsxs("div",{className:"pro-tip-content",children:[e.jsx("strong",{children:"What Senior Interviewers Look For:"}),e.jsx("p",{children:n.interviewerNote})]})]}),e.jsx("div",{className:"answer-text",children:e.jsx("p",{children:n.explanation})}),n.code&&e.jsxs("div",{className:"code-block-wrapper",children:[e.jsxs("div",{className:"code-block-header",children:[e.jsx("span",{className:"code-lang",children:"python"}),e.jsx("button",{type:"button",className:"copy-btn",onClick:()=>A(n.code,n.id),children:I===n.id?e.jsxs(e.Fragment,{children:[e.jsx(k,{size:14})," Copied!"]}):e.jsxs(e.Fragment,{children:[e.jsx(Q,{size:14})," Copy snippet"]})})]}),e.jsx("pre",{className:"code-pre",children:e.jsx("code",{children:n.code})})]}),e.jsxs("div",{className:"q-tags-footer",children:[e.jsx("span",{className:"footer-label",children:"Tags:"}),n.tags.map(c=>e.jsxs("button",{type:"button",className:"footer-tag-chip",onClick:()=>f(c),children:["#",c]},c))]})]})]},n.id)})})]}),a==="quiz"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"10 High-Yield Python Tricky Gotchas"}),e.jsx("p",{className:"muted",children:"Test your mental model against the most common interview traps and subtle runtime bugs in Python."})]}),e.jsxs("div",{className:"quiz-score-header",children:[e.jsxs("div",{children:[e.jsxs("h3",{children:["Score: ",S," / ",p.length]}),e.jsx("p",{className:"muted",children:_?S>=8?"🎉 Excellent! You have strong command of Python runtime mechanics.":"Good practice. Review the explanations below to solidify edge-case behaviors.":"Answer all 10 questions to see your verified score."})]}),e.jsx("div",{className:"quiz-actions",children:_?e.jsxs("button",{type:"button",className:"button light small",onClick:ae,children:[e.jsx(re,{size:16})," Retake Quiz"]}):e.jsxs("button",{type:"button",className:"button primary small",disabled:Object.keys(b).length<p.length,onClick:()=>E(!0),children:[e.jsx(F,{size:16})," Submit & Check All"]})})]}),e.jsx("div",{className:"quiz-list",children:p.map((n,i)=>{const t=b[n.id],O=t!==void 0&&t===n.correctIndex;return e.jsxs("article",{className:"quiz-card",children:[e.jsxs("header",{className:"quiz-card-header",children:[e.jsxs("span",{className:"quiz-index",children:["Question #",i+1]}),e.jsx("span",{className:`diff-pill ${n.difficulty}`,children:n.difficulty}),e.jsx("span",{className:"gotcha-tag",children:n.gotchaConcept})]}),e.jsx("div",{className:"quiz-question-text",children:e.jsx("pre",{children:e.jsx("code",{children:n.question})})}),e.jsx("div",{className:"quiz-options",children:n.options.map((ie,y)=>{const z=t===y;let x="quiz-option";return z&&(x+=" selected"),_&&(y===n.correctIndex?x+=" correct":z&&(x+=" incorrect")),e.jsxs("button",{type:"button",className:x,onClick:()=>te(n.id,y),children:[e.jsx("span",{className:"option-marker",children:String.fromCharCode(65+y)}),e.jsx("span",{className:"option-text",children:ie})]},y)})}),_&&e.jsxs("div",{className:`quiz-explanation-box ${O?"box-correct":"box-incorrect"}`,children:[e.jsx("p",{className:"explanation-title",children:O?"✓ Correct Answer":"✗ Incorrect"}),e.jsx("p",{children:n.explanation})]})]},n.id)})})]}),a==="lab"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"Production AI-Native Python Service Architecture"}),e.jsx("p",{className:"muted",children:"How modern engineering teams build production-grade, maintainable Python backends in the AI era."})]}),e.jsxs("div",{className:"lab-pillars-grid",children:[e.jsxs("div",{className:"pillar-card",children:[e.jsxs("div",{className:"pillar-header",children:[e.jsx("span",{className:"pillar-num",children:"01"}),e.jsx("h3",{children:"Strict Type & Schema Contracts"})]}),e.jsx("p",{children:"Never pass untyped raw dictionaries across boundaries. Use Pydantic v2 schemas for inbound validation, serialization, and deterministic JSON schemas."}),e.jsx("pre",{className:"pillar-code",children:e.jsx("code",{children:`from pydantic import BaseModel, Field
+print(add_item(2))`,options:["[1] and [2]","[1] and [1, 2]","TypeError: mutable default argument not allowed","[1] and None"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Mutable Default Arguments",explanation:"Default arguments in Python are evaluated once when the function is defined, NOT each time it is called. The exact same list object in memory is reused across subsequent invocations."},{id:"quiz-2",question:"What does the expression `a is b` evaluate to for `a = 1000; b = 1000` when run in the standard CPython REPL?",options:["Always True because their numerical values are identical","False because 1000 is outside CPython's small integer cache (-5 to 256)","TypeError: cannot compare integers with 'is'","True because Python interns all positive integers"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Identity vs Equality & Small Int Caching",explanation:"CPython pre-allocates an array of integer objects for values between -5 and 256. For integers outside this range, distinct heap objects are allocated, so 'is' returns False even though '==' is True."},{id:"quiz-3",question:"What does `funcs = [lambda: i for i in range(3)]; [f() for f in funcs]` evaluate to?",options:["[0, 1, 2]","[2, 2, 2]","[0, 0, 0]","TypeError: 'i' is out of scope"],correctIndex:1,difficulty:"intermediate",gotchaConcept:"Closure Late Binding",explanation:"Python closures bind variables by reference, not value. By the time the lambda functions are executed, the loop has completed and 'i' has the value 2 for all closures. Fix: `lambda i=i: i`."},{id:"quiz-4",question:"What is the type of the expression `x = (i ** 2 for i in range(5))`?",options:["<class 'tuple'>","<class 'list'>","<class 'generator'>","<class 'iterator_tuple'>"],correctIndex:2,difficulty:"intermediate",gotchaConcept:"Tuple Comprehension Myth",explanation:"There is no such thing as a tuple comprehension in Python! Parentheses around a comprehension syntax create a generator expression. To create a tuple, use `tuple(i ** 2 for i in range(5))`."},{id:"quiz-5",question:"If you have a CPU-intensive calculation (e.g. computing prime numbers), which approach will achieve true multi-core parallel execution in CPython?",options:["threading.Thread with max_workers = CPU count","multiprocessing.Process or concurrent.futures.ProcessPoolExecutor","asyncio with asyncio.gather()","All of the above"],correctIndex:1,difficulty:"advanced",gotchaConcept:"Global Interpreter Lock (GIL)",explanation:"Because of CPython's GIL, threads cannot execute Python bytecode simultaneously on multiple CPU cores. Only separate OS processes (multiprocessing) bypass the GIL by using separate memory spaces."},{id:"quiz-6",question:"In Python's class instantiation lifecycle, which method is responsible for returning the newly allocated instance?",options:["__init__","__new__","__call__","__alloc__"],correctIndex:1,difficulty:"intermediate",gotchaConcept:"Object Lifecycle (__new__ vs __init__)",explanation:"__new__ is the static method that allocates and returns the raw instance object in memory. __init__ only initializes attributes on that already-created instance and must return None."},{id:"quiz-7",question:"When does the `else` block of a `try...except...else...finally` statement execute?",options:["When an exception was raised and caught","When no exception was raised in the try block","Always, right before the finally block","Only when the except block returns None"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Try-Except-Else Flow",explanation:"The else block in a try-except statement executes ONLY if the code inside the try block completed successfully without raising any exceptions."},{id:"quiz-8",question:"What is the result of `original = [[1, 2]]; copy_list = original[:]; copy_list[0].append(3); print(original)`?",options:["[[1, 2]]","[[1, 2, 3]]","IndexError: slice out of bounds","[[1, 2], [3]]"],correctIndex:1,difficulty:"beginner",gotchaConcept:"Shallow Copy Trap",explanation:"Slice `original[:]` creates a shallow copy. The outer list is a new container, but the inner list `[1, 2]` is the exact same reference. Modifying it modifies `original`. Use `copy.deepcopy` to prevent this."},{id:"quiz-9",question:"What happens if a developer puts `time.sleep(5)` inside an `async def` endpoint in a FastAPI or Starlette server?",options:["FastAPI automatically offloads it to a background thread","It pauses only that specific request while other users proceed normally","It blocks the entire event loop, freezing all concurrent requests for all users for 5 seconds","It raises a RuntimeWarning: coroutine was never awaited"],correctIndex:2,difficulty:"advanced",gotchaConcept:"Async Event Loop Blocking",explanation:"time.sleep() is synchronous and blocking. Calling it in a coroutine halts the single OS thread running the event loop, freezing all other concurrent tasks. Use `await asyncio.sleep(5)` or `asyncio.to_thread`."},{id:"quiz-10",question:"In Python's Method Resolution Order (MRO) using C3 Linearization, what ensures that parents do not precede their children and order is preserved?",options:["Depth-First Search (DFS) with backtrack","Monotonicity and Local Precedence Order","Breadth-First Search (BFS) sorting by alphabet","Arbitrary hash order resolution"],correctIndex:1,difficulty:"advanced",gotchaConcept:"C3 Linearization & MRO",explanation:"C3 Linearization enforces Monotonicity (if A precedes B in parent MRO, it must precede B in child MRO) and preserves Local Precedence Order (left-to-right listing in base class tuple)."}],ye="fde-python-mastered-questions-v1",ge="fde-python-quiz-progress-v1";function Ee(c){return ne.filter(i=>i.difficulty===c)}function Ne(){const c=new Set;for(const i of $)for(const u of i.tags)c.add(u);return Array.from(c).sort()}function Se(c,i="all",u=""){const r=c.toLowerCase().trim();return $.filter(f=>{if(i!=="all"&&f.difficulty!==i||u&&!f.tags.includes(u))return!1;if(!r)return!0;const j=`q${f.number}`===r||String(f.number)===r,C=f.question.toLowerCase().includes(r)||f.summary.toLowerCase().includes(r)||f.tags.some(x=>x.toLowerCase().includes(r));return j||C})}function Y(){return typeof window<"u"&&window.localStorage?window.localStorage:typeof globalThis<"u"&&globalThis.localStorage?globalThis.localStorage:null}function Te(){try{const c=Y();if(!c)return new Set;const i=c.getItem(ye);if(!i)return new Set;const u=JSON.parse(i);return Array.isArray(u)?new Set(u):new Set}catch{return new Set}}function Ie(c){try{const i=Y();if(!i)return;i.setItem(ye,JSON.stringify(Array.from(c)))}catch{}}function de(){try{const c=Y();if(!c)return{};const i=c.getItem(ge);return i?JSON.parse(i)||{}:{}}catch{return{}}}function ue(c){try{const i=Y();if(!i)return;i.setItem(ge,JSON.stringify(c))}catch{}}const Ae=[{title:"1. Variables & Types: Loose Dicts vs Pydantic Models",category:"Data Validation",toyTitle:"Tutorial / Toy Code",toyCode:`# Toy approach: loose untyped dictionary
+def create_user(data):
+    # No schema, no validation. Will crash if 'age' is missing or "twenty"
+    return {"id": 1, "name": data["name"], "age": data["age"]}`,toyPitfall:"Crashes at runtime with KeyError, accepts corrupted data types, and provides zero IDE autocomplete.",prodTitle:"Production Code",prodCode:`from pydantic import BaseModel, Field, EmailStr
+
+class UserCreate(BaseModel):
+    name: str = Field(..., min_length=2, max_length=100)
+    email: EmailStr
+    age: int = Field(..., ge=18, le=120)
+
+def create_user(payload: UserCreate) -> dict:
+    # Guaranteed valid data types and range checks before function body runs
+    return payload.model_dump()`,prodAdvantage:"Strict compile/runtime schema validation, automatic JSON schema generation, and zero runtime KeyErrors."},{title:"2. Debugging: print() vs Structured Logging",category:"Observability",toyTitle:"Tutorial / Toy Code",toyCode:`# Toy approach: raw print statements
+def process_payment(amount, user_id):
+    print("Processing payment...")
+    print(f"User {user_id} paid {amount}")
+    print("Done!")`,toyPitfall:"Prints have no timestamps, log levels, trace IDs, or machine-readable JSON structure in Datadog/CloudWatch.",prodTitle:"Production Code",prodCode:`import structlog
+
+logger = structlog.get_logger(__name__)
+
+def process_payment(amount: float, user_id: str, trace_id: str) -> None:
+    logger.info("payment_initiated", user_id=user_id, amount=amount, trace_id=trace_id)
+    try:
+        # Business logic...
+        logger.info("payment_success", user_id=user_id, amount=amount, trace_id=trace_id)
+    except Exception as err:
+        logger.error("payment_failed", user_id=user_id, error=str(err), trace_id=trace_id, exc_info=True)
+        raise`,prodAdvantage:"Emits structured JSON logs containing correlation IDs for distributed tracing and instant log querying."},{title:"3. Secrets: Hardcoded Strings vs .env & Pydantic Settings",category:"Configuration",toyTitle:"Tutorial / Toy Code",toyCode:`# Toy approach: hardcoded credentials or unvalidated os.environ
+API_KEY = "sk_live_123456789"
+PORT = int(os.environ.get("PORT", "8000"))`,toyPitfall:"Secrets get accidentally committed to GitHub, and missing environment variables crash services late in execution.",prodTitle:"Production Code",prodCode:`from pydantic_settings import BaseSettings
+from pydantic import SecretStr, Field
+
+class Settings(BaseSettings):
+    api_key: SecretStr = Field(..., alias="APP_API_KEY")
+    port: int = Field(8000, ge=1024, le=65535)
+    database_url: str
+
+    class Config:
+        env_file = ".env"
+
+config = Settings() # Fails immediately at startup if variables are missing or invalid`,prodAdvantage:"Fails fast at boot if variables are missing, validates port ranges, and hides secrets from string prints."},{title:"4. Error Handling: Bare except vs Custom Domain Hierarchies",category:"Resilience",toyTitle:"Tutorial / Toy Code",toyCode:`# Toy approach: swallowing errors blindly
+try:
+    fetch_order_from_db(order_id)
+except:
+    pass # Silently eats KeyboardInterrupt, MemoryError, and bugs!`,toyPitfall:"Masks critical system crashes, hides logic bugs, and prevents callers from handling specific error scenarios.",prodTitle:"Production Code",prodCode:`class OrderDomainError(Exception):
+    """Base domain exception."""
+
+class OrderNotFoundError(OrderDomainError):
+    def __init__(self, order_id: str):
+        super().__init__(f"Order '{order_id}' was not found.")
+        self.order_id = order_id
+
+try:
+    fetch_order_from_db(order_id)
+except OrderNotFoundError as err:
+    # Handle known 404 cleanly
+    return {"status": 404, "detail": str(err)}`,prodAdvantage:"Explicit error contracts allow APIs to return 404 vs 500 cleanly without swallowing fatal bugs."},{title:"5. Testing: Manual Script Runs vs Pytest with Fixtures",category:"Quality Engineering",toyTitle:"Tutorial / Toy Code",toyCode:`# Toy approach: manual print checks at bottom of file
+if __name__ == "__main__":
+    result = calculate_tax(100)
+    print("Tax result:", result) # Did it pass? Who knows without reading!`,toyPitfall:"Requires manual human inspection, cannot run in CI/CD pipelines, and tests zero edge cases.",prodTitle:"Production Code",prodCode:`import pytest
+
+@pytest.fixture
+def sample_invoice():
+    return {"subtotal": 100.0, "tax_rate": 0.08}
+
+@pytest.mark.parametrize("subtotal, expected", [
+    (100.0, 108.0),
+    (0.0, 0.0),
+    (50.0, 54.0),
+])
+def test_calculate_tax_parametrized(subtotal, expected):
+    assert calculate_total(subtotal, 0.08) == pytest.approx(expected, 0.01)`,prodAdvantage:"Automated CI/CD test gates, clean mock fixtures, parameterization across dozens of edge cases."},{title:"6. Tooling: Traditional pip/venv vs Modern uv & Ruff",category:"Developer Workflow",toyTitle:"Traditional Tooling",toyCode:`# Traditional legacy workflow:
+python -m venv .venv
+source .venv/bin/activate
+pip install black flake8 isort
+pip install -r requirements.txt # Takes 30-60 seconds`,toyPitfall:"Multiple slow separate tools, fragmented config files, slow resolution, and non-deterministic dependency trees.",prodTitle:"Modern Production Workflow (2025+)",prodCode:`# Modern production workflow (Datalumina / Astral stack):
+uv venv                       # Instant Rust-powered venv
+uv pip install -r pyproject.toml # 10-30x faster than pip
+uv run ruff check --fix        # Replaces black, flake8, isort in 10ms
+uv run ruff format            # Instant automatic formatting`,prodAdvantage:"Single unified Rust-based toolchain (`uv` + `ruff`), sub-second execution, deterministic lockfiles."}],O=[{id:"exam-1",number:1,title:"Exam 1: Modern Configuration & Secret Masking",difficulty:"beginner",duration:"30 min",category:"Configuration & Validation",realWorldContext:"In production, microservices must never hardcode credentials or read untyped environment variables. You will implement a typed configuration loader that validates port ranges, parses integers, and masks sensitive secrets.",toyVsProd:{toyCode:`API_KEY = "my_secret"
+PORT = int(os.environ["PORT"])`,prodCode:`class AppConfig:
+    port: int (validated 1024-65535)
+    secret: str (masked in __repr__)`,keyDifference:"Production configuration fails immediately at boot if values are invalid and prevents secret leakage in logs."},specification:["Create an `AppConfig` class with fields: `app_name: str`, `port: int`, `api_key: str`, `debug: bool = False`.","If `port` is outside the range 1024 to 65535, raise a `ValueError` with an informative error message.",'Implement `__repr__` such that `api_key` is masked as `"sk_***"` (never leak raw secrets in string representation).','Implement a classmethod `from_env(env_dict: dict)` that parses values, using default port 8080 and default app_name "FDE-Service".'],starterCode:`class AppConfig:
+    """Production application settings loader with strict validation."""
+
+    def __init__(self, app_name: str, port: int, api_key: str, debug: bool = False):
+        # TODO: Validate that port is between 1024 and 65535 (inclusive)
+        # TODO: Store attributes
+        pass
+
+    def __repr__(self) -> str:
+        # TODO: Return string representation with api_key masked as "sk_***"
+        pass
+
+    @classmethod
+    def from_env(cls, env: dict) -> "AppConfig":
+        # TODO: Read from env dict, parse port to int, apply defaults if missing
+        pass
+`,solutionCode:`class AppConfig:
+    """Production application settings loader with strict validation."""
+
+    def __init__(self, app_name: str, port: int, api_key: str, debug: bool = False):
+        if not (1024 <= port <= 65535):
+            raise ValueError(f"Port must be between 1024 and 65535, got {port}")
+        if not api_key:
+            raise ValueError("api_key cannot be empty")
+        self.app_name = str(app_name)
+        self.port = int(port)
+        self.api_key = str(api_key)
+        self.debug = bool(debug)
+
+    def __repr__(self) -> str:
+        return f"AppConfig(app_name={self.app_name!r}, port={self.port}, api_key='sk_***', debug={self.debug})"
+
+    @classmethod
+    def from_env(cls, env: dict) -> "AppConfig":
+        app_name = env.get("APP_NAME", "FDE-Service")
+        port = int(env.get("PORT", 8080))
+        api_key = env.get("API_KEY", "")
+        debug = str(env.get("DEBUG", "false")).lower() in ("true", "1", "yes")
+        return cls(app_name=app_name, port=port, api_key=api_key, debug=debug)
+`,solutionExplanation:"The solution validates the port invariant on instantiation, guarantees that raw secrets never leak via __repr__ when logging config objects, and provides a clean from_env factory method that gracefully coerces data types.",testSuiteCode:`def test_suite():
+    # Test 1: Valid instance creation
+    c = AppConfig("api-service", 8080, "secret-token-999")
+    assert c.port == 8080, "Port should be 8080"
+    assert c.app_name == "api-service", "App name should match"
+    print("PASS: test_valid_creation")
+
+    # Test 2: Port range validation failure
+    try:
+        AppConfig("api-service", 80, "secret-token-999")
+        assert False, "Should have raised ValueError for privileged port 80"
+    except ValueError:
+        print("PASS: test_port_validation_failure")
+
+    # Test 3: Secret masking in repr
+    rep = repr(c)
+    assert "sk_***" in rep, "api_key must be masked as 'sk_***'"
+    assert "secret-token-999" not in rep, "Raw secret must NEVER appear in repr!"
+    print("PASS: test_secret_masking")
+
+    # Test 4: from_env factory parsing
+    env = {"PORT": "9000", "API_KEY": "prod-key-42", "DEBUG": "true"}
+    loaded = AppConfig.from_env(env)
+    assert loaded.port == 9000, "Should parse PORT string to integer"
+    assert loaded.debug is True, "Should parse DEBUG string to boolean"
+    print("PASS: test_from_env_factory")
+
+test_suite()
+`,testCases:[{id:"t1",name:"Valid Config Creation",description:"Initializes attributes correctly."},{id:"t2",name:"Port Boundary Guard",description:"Rejects ports < 1024 or > 65535."},{id:"t3",name:"Secret Masking in Repr",description:"Hides raw secret token in string output."},{id:"t4",name:"Environment Dict Factory",description:"Parses string ports & booleans from env."}]},{id:"exam-2",number:2,title:"Exam 2: API Webhook Payload Schema Validator",difficulty:"beginner",duration:"35 min",category:"Data Validation & Schemas",realWorldContext:"Real production web services receive unverified JSON payloads from external webhooks. If an invalid payload is processed, accounting or billing can break. You will write a robust validator that parses, validates, and computes financial totals.",toyVsProd:{toyCode:'total = sum(i["price"] * i["qty"] for i in data["items"])',prodCode:`class OrderPayloadValidator:
+    validates required fields, price > 0, status enums`,keyDifference:"Production code never assumes dictionary keys exist or types are correct; it validates the schema first."},specification:["Define a custom exception `ValidationError(Exception)`.","Create `OrderValidator` class that takes a raw `payload: dict`.","Validate that `order_id` is a non-empty string.",'Validate that `status` is one of `{"PENDING", "CONFIRMED", "SHIPPED", "CANCELLED"}`. Otherwise raise `ValidationError`.',"Validate that `items` is a non-empty list of dicts. Each item must have `price > 0` and `quantity >= 1`.","Implement `calculate_total(discount_pct: float = 0.0) -> float` returning the final rounded price (2 decimal places)."],starterCode:`class ValidationError(Exception):
+    """Raised when incoming payload schema is invalid."""
+    pass
+
+class OrderValidator:
+    """Validates and calculates production order webhook payloads."""
+
+    VALID_STATUSES = {"PENDING", "CONFIRMED", "SHIPPED", "CANCELLED"}
+
+    def __init__(self, payload: dict):
+        # TODO: Validate payload dictionary structure
+        # TODO: Validate order_id, status, and items
+        pass
+
+    def calculate_total(self, discount_pct: float = 0.0) -> float:
+        # TODO: Calculate subtotal = sum(price * qty)
+        # TODO: Apply discount (e.g. 10.0 means 10% off)
+        # TODO: Return round(total, 2)
+        pass
+`,solutionCode:`class ValidationError(Exception):
+    """Raised when incoming payload schema is invalid."""
+    pass
+
+class OrderValidator:
+    """Validates and calculates production order webhook payloads."""
+
+    VALID_STATUSES = {"PENDING", "CONFIRMED", "SHIPPED", "CANCELLED"}
+
+    def __init__(self, payload: dict):
+        if not isinstance(payload, dict):
+            raise ValidationError("Payload must be a dictionary")
+
+        order_id = payload.get("order_id")
+        if not order_id or not isinstance(order_id, str):
+            raise ValidationError("Missing or invalid order_id")
+
+        status = payload.get("status")
+        if status not in self.VALID_STATUSES:
+            raise ValidationError(f"Invalid status '{status}'. Must be one of {self.VALID_STATUSES}")
+
+        items = payload.get("items")
+        if not isinstance(items, list) or len(items) == 0:
+            raise ValidationError("Payload items must be a non-empty list")
+
+        for idx, item in enumerate(items):
+            if not isinstance(item, dict):
+                raise ValidationError(f"Item #{idx} must be a dictionary")
+            price = item.get("price")
+            qty = item.get("quantity")
+            if not isinstance(price, (int, float)) or price <= 0:
+                raise ValidationError(f"Item #{idx} price must be > 0, got {price}")
+            if not isinstance(qty, int) or qty < 1:
+                raise ValidationError(f"Item #{idx} quantity must be an integer >= 1, got {qty}")
+
+        self.order_id = order_id
+        self.status = status
+        self.items = items
+
+    def calculate_total(self, discount_pct: float = 0.0) -> float:
+        subtotal = sum(item["price"] * item["quantity"] for item in self.items)
+        discount = subtotal * (discount_pct / 100.0)
+        total = max(0.0, subtotal - discount)
+        return round(total, 2)
+`,solutionExplanation:"The validator systematically checks every incoming field before state assignment. If an attacker or third party sends corrupted formats, a clean domain ValidationError is raised instead of an uncontrolled crash.",testSuiteCode:`def test_suite():
+    valid_payload = {
+        "order_id": "ord_8841",
+        "status": "CONFIRMED",
+        "items": [
+            {"name": "Server Unit", "price": 100.0, "quantity": 2},
+            {"name": "SFP+ Cable", "price": 25.5, "quantity": 1}
+        ]
+    }
+    # Test 1: Valid payload calculation
+    val = OrderValidator(valid_payload)
+    assert val.calculate_total() == 225.5, "Total should be (100*2) + 25.5 = 225.5"
+    print("PASS: test_valid_payload")
+
+    # Test 2: Discount calculation
+    assert val.calculate_total(10.0) == 202.95, "10% off 225.5 should be 202.95"
+    print("PASS: test_discount_calculation")
+
+    # Test 3: Invalid status rejected
+    bad_status = {**valid_payload, "status": "SHIPPED_OUT"}
+    try:
+        OrderValidator(bad_status)
+        assert False, "Should raise ValidationError for bad status"
+    except ValidationError:
+        print("PASS: test_invalid_status_rejected")
+
+    # Test 4: Negative price rejected
+    bad_price = {
+        "order_id": "ord_99",
+        "status": "PENDING",
+        "items": [{"name": "Bad", "price": -5.0, "quantity": 1}]
+    }
+    try:
+        OrderValidator(bad_price)
+        assert False, "Should raise ValidationError for negative price"
+    except ValidationError:
+        print("PASS: test_negative_price_rejected")
+
+test_suite()
+`,testCases:[{id:"t1",name:"Valid Payload & Subtotal",description:"Calculates correct item totals."},{id:"t2",name:"Discount Calculation",description:"Applies percentage discount with 2-decimal rounding."},{id:"t3",name:"Enum Status Validation",description:"Rejects unknown order statuses."},{id:"t4",name:"Price & Quantity Boundary",description:"Rejects negative prices or zero quantities."}]},{id:"exam-3",number:3,title:"Exam 3: Resilient Network Retry with Backoff",difficulty:"intermediate",duration:"40 min",category:"Resilience & Distributed Systems",realWorldContext:"Cloud networks and LLM APIs experience transient hiccups (HTTP 503, rate limits). Production services use exponential backoff retries rather than crashing immediately.",toyVsProd:{toyCode:"response = requests.get(url) # Crashes immediately on network blip",prodCode:"execute_with_retry(fn, max_attempts=3, base_delay=0.1) # Recovers automatically",keyDifference:"Production network operations handle transient errors gracefully and escalate to custom domain errors when retries exhaust."},specification:["Define a custom exception `ServiceUnavailableError(Exception)`.","Implement `execute_with_retry(func, max_attempts=3, base_delay=0.1)` function.","If `func()` succeeds, immediately return its result and record attempts taken.","If `func()` raises an exception, wait `base_delay * (2 ** (attempt - 1))` and retry.","If all `max_attempts` fail, raise `ServiceUnavailableError` containing the final error message and total attempts."],starterCode:`class ServiceUnavailableError(Exception):
+    """Raised when an external service fails all retry attempts."""
+    pass
+
+def execute_with_retry(func, max_attempts: int = 3, base_delay: float = 0.05):
+    """Executes a callable with exponential backoff retry logic."""
+    # TODO: Implement retry loop
+    # TODO: If attempts exhaust, raise ServiceUnavailableError
+    pass
+`,solutionCode:`import time
+
+class ServiceUnavailableError(Exception):
+    """Raised when an external service fails all retry attempts."""
+    def __init__(self, message: str, attempts: int):
+        super().__init__(f"Service failed after {attempts} attempts. Last error: {message}")
+        self.attempts = attempts
+
+def execute_with_retry(func, max_attempts: int = 3, base_delay: float = 0.05):
+    """Executes a callable with exponential backoff retry logic."""
+    last_exception = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            return func()
+        except Exception as exc:
+            last_exception = exc
+            if attempt == max_attempts:
+                break
+            # Backoff delay: base * 2^(attempt - 1)
+            delay = base_delay * (2 ** (attempt - 1))
+            time.sleep(delay)
+
+    raise ServiceUnavailableError(str(last_exception), attempts=max_attempts)
+`,solutionExplanation:"The retry loop catches exceptions, computes an exponential delay schedule, pauses execution, and if retries exhaust, wraps the root cause into a domain ServiceUnavailableError preserving the total attempts taken.",testSuiteCode:`def test_suite():
+    # Test 1: Immediate success
+    res = execute_with_retry(lambda: "OK", max_attempts=3)
+    assert res == "OK", "Should return immediately on success"
+    print("PASS: test_immediate_success")
+
+    # Test 2: Flaky function recovering on attempt 2
+    counter = {"calls": 0}
+    def flaky():
+        counter["calls"] += 1
+        if counter["calls"] < 2:
+            raise ConnectionResetError("Connection lost")
+        return "RECOVERED"
+
+    res = execute_with_retry(flaky, max_attempts=3, base_delay=0.01)
+    assert res == "RECOVERED", "Should recover on attempt 2"
+    assert counter["calls"] == 2, "Should have taken exactly 2 attempts"
+    print("PASS: test_flaky_service_recovers")
+
+    # Test 3: Persistent failure raises ServiceUnavailableError
+    def always_fails():
+        raise TimeoutError("Gateway timeout 504")
+
+    try:
+        execute_with_retry(always_fails, max_attempts=3, base_delay=0.01)
+        assert False, "Should raise ServiceUnavailableError"
+    except ServiceUnavailableError as err:
+        assert err.attempts == 3, "Should record 3 attempts"
+        print("PASS: test_persistent_failure_raises_error")
+
+test_suite()
+`,testCases:[{id:"t1",name:"Immediate Success",description:"Returns result on first call without delay."},{id:"t2",name:"Transient Recovery",description:"Recovers after catching initial errors."},{id:"t3",name:"Exhausted Retry Error",description:"Raises ServiceUnavailableError after max_attempts."}]},{id:"exam-4",number:4,title:"Exam 4: Atomic Resource Transaction Context Manager",difficulty:"intermediate",duration:"40 min",category:"Resource Management & Transactions",realWorldContext:"In production databases or file systems, partial writes corrupt data. If a process crashes halfway through writing a customer invoice, the corrupted file cannot remain on disk. You will implement an atomic buffer transaction context manager.",toyVsProd:{toyCode:`with open("data.json", "w") as f:
+    f.write(chunk1)
+    crash()
+    f.write(chunk2) # Left half-written!`,prodCode:`with AtomicBuffer() as buf:
+    buf.write(...)
+    # Commits ONLY if zero exceptions occur`,keyDifference:"Atomic transactions guarantee all-or-nothing consistency (ACID principles)."},specification:["Create an `AtomicBuffer` class implementing the context manager protocol (`__enter__` and `__exit__`).","The class maintains an internal committed storage list `committed_store: list`.","In `__enter__`, create a staging buffer list `staging: list`. Return a proxy object with a `write(data)` method.","In `__exit__`, if no exception occurred (`exc_type is None`), append all items in `staging` to `committed_store`.","If an exception occurred (`exc_type is not None`), discard `staging` entirely without modifying `committed_store`, and return `False` so the exception propagates."],starterCode:`class AtomicBuffer:
+    """Atomic transaction buffer ensuring all-or-nothing writes."""
+
+    def __init__(self):
+        self.committed_store = []
+
+    def __enter__(self):
+        # TODO: Setup staging buffer and return proxy/self
+        pass
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # TODO: If exc_type is None, commit staging to committed_store
+        # TODO: If exception occurred, discard staging and let exception propagate (return False)
+        pass
+`,solutionCode:`class _BufferProxy:
+    def __init__(self, staging: list):
+        self._staging = staging
+
+    def write(self, data: str):
+        self._staging.append(str(data))
+
+class AtomicBuffer:
+    """Atomic transaction buffer ensuring all-or-nothing writes."""
+
+    def __init__(self):
+        self.committed_store = []
+        self._staging = []
+
+    def __enter__(self):
+        self._staging = []
+        return _BufferProxy(self._staging)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is None:
+            # Clean exit: commit staging to persistent store
+            self.committed_store.extend(self._staging)
+            self._staging = []
+            return True
+        else:
+            # Crash: roll back and discard staging
+            self._staging = []
+            return False  # Propagate exception
+`,solutionExplanation:"The context manager keeps writes isolated in a staging buffer. Only if __exit__ receives exc_type is None are changes committed to the persistent storage, ensuring zero corruption during unexpected errors.",testSuiteCode:`def test_suite():
+    buf = AtomicBuffer()
+
+    # Test 1: Successful atomic write
+    with buf as tx:
+        tx.write("entry_1")
+        tx.write("entry_2")
+
+    assert buf.committed_store == ["entry_1", "entry_2"], "Should commit entries on success"
+    print("PASS: test_successful_commit")
+
+    # Test 2: Rollback on exception
+    try:
+        with buf as tx:
+            tx.write("entry_corrupted_3")
+            raise RuntimeError("Disk full simulation")
+    except RuntimeError:
+        pass
+
+    assert buf.committed_store == ["entry_1", "entry_2"], "Corrupted write must be rolled back!"
+    print("PASS: test_rollback_on_error")
+
+test_suite()
+`,testCases:[{id:"t1",name:"Clean Commit",description:"Transfers staging buffer to committed store on success."},{id:"t2",name:"Rollback on Crash",description:"Discards uncommitted buffer and preserves store integrity."}]},{id:"exam-5",number:5,title:"Exam 5: Memory-Efficient Streaming Log Analyzer",difficulty:"advanced",duration:"45 min",category:"Memory Optimization & Generators",realWorldContext:"Production servers generate multi-gigabyte log files. If a junior engineer writes `open().readlines()`, the Python process consumes 12 GB of RAM and gets killed by the Linux OOM (Out Of Memory) killer. You will build a lazy generator stream pipeline that parses logs with O(1) memory.",toyVsProd:{toyCode:"lines = file.readlines() # Reads entire 10 GB file into memory!",prodCode:"for line in stream_logs(file): yield parse(line) # O(1) constant RAM",keyDifference:"Generators stream records on demand without exhausting server memory."},specification:['Implement `parse_log_stream(lines_iterable)` as a generator function that yields parsed dicts `{"timestamp": str, "level": str, "message": str}` from log lines in the format: `"YYYY-MM-DD HH:MM:SS [LEVEL] message"`.','Implement `filter_severity(parsed_stream, min_level="ERROR")` as a generator yielding only entries matching the level.',"Implement `tally_anomalies(filtered_stream) -> dict` that counts occurrences of each error message.","Ensure that all intermediate steps use `yield` rather than lists."],starterCode:`import re
+from typing import Generator
+
+def parse_log_stream(lines: list) -> Generator[dict, None, None]:
+    """Yields parsed log dictionaries lazily line by line."""
+    # TODO: Use regex or split to parse "2026-11-19 12:00:00 [ERROR] Connection reset"
+    pass
+
+def filter_severity(stream, target_level: str = "ERROR") -> Generator[dict, None, None]:
+    """Yields only entries matching target_level."""
+    # TODO: Yield entries where entry['level'] == target_level
+    pass
+
+def tally_anomalies(stream) -> dict:
+    """Consumes generator and returns frequency map of messages."""
+    # TODO: Return dict {message: count}
+    pass
+`,solutionCode:`import re
+from typing import Generator
+
+LOG_PATTERN = re.compile(r"^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}) \\[(\\w+)\\] (.*)$")
+
+def parse_log_stream(lines) -> Generator[dict, None, None]:
+    for line in lines:
+        match = LOG_PATTERN.match(line.strip())
+        if match:
+            yield {
+                "timestamp": match.group(1),
+                "level": match.group(2),
+                "message": match.group(3)
+            }
+
+def filter_severity(stream, target_level: str = "ERROR") -> Generator[dict, None, None]:
+    for entry in stream:
+        if entry["level"] == target_level:
+            yield entry
+
+def tally_anomalies(stream) -> dict:
+    counts = {}
+    for entry in stream:
+        msg = entry["message"]
+        counts[msg] = counts.get(msg, 0) + 1
+    return counts
+`,solutionExplanation:"The pipeline constructs lazy generator iterators using yield. Items are pulled through the pipeline one item at a time, consuming a tiny constant memory footprint regardless of whether the log file contains 10 lines or 10,000,000 lines.",testSuiteCode:`def test_suite():
+    raw_logs = [
+        "2026-11-19 10:00:01 [INFO] Service started",
+        "2026-11-19 10:00:05 [ERROR] Database timeout",
+        "2026-11-19 10:00:08 [WARN] High memory load",
+        "2026-11-19 10:00:12 [ERROR] Database timeout",
+        "2026-11-19 10:00:15 [ERROR] Redis cache miss"
+    ]
+
+    # Test 1: Lazy pipeline streaming
+    stream = parse_log_stream(raw_logs)
+    errors = filter_severity(stream, "ERROR")
+    tallies = tally_anomalies(errors)
+
+    assert tallies["Database timeout"] == 2, "Database timeout should appear 2 times"
+    assert tallies["Redis cache miss"] == 1, "Redis cache miss should appear 1 time"
+    assert "Service started" not in tallies, "INFO messages must be filtered out"
+    print("PASS: test_streaming_log_pipeline")
+
+test_suite()
+`,testCases:[{id:"t1",name:"Lazy Streaming Pipeline",description:"Parses, filters, and aggregates log counts lazily."}]},{id:"exam-6",number:6,title:"Exam 6: Clean Architecture Domain Service with Pytest Fixtures",difficulty:"advanced",duration:"50 min",category:"Architecture & Testing",realWorldContext:"Senior engineers separate database persistence from core business logic using repositories and domain services. You will implement a cleanly separated UserAuthService and verify it against a production-style test suite.",toyVsProd:{toyCode:`# Mixing everything in one script
+sql = f"INSERT INTO users VALUES ('{email}')"`,prodCode:`class UserRepository(Protocol):
+    def save(user: User): ...
+class AuthService:
+    def __init__(repo: UserRepository): ...`,keyDifference:"Dependency injection and interface segregation make production services unit-testable without live databases."},specification:["Define domain exceptions: `UserAlreadyExistsError(Exception)` and `InvalidCredentialsError(Exception)`.","Create `InMemoryUserRepository` with methods `get_by_email(email: str) -> dict | None` and `save(user: dict) -> None`.","Create `AuthService` which accepts `repository` in its constructor (Dependency Injection).","Implement `register(email: str, password: str) -> dict`. If email exists in repository, raise `UserAlreadyExistsError`. Otherwise store user with hashed password simulation and return user dict.","Implement `login(email: str, password: str) -> dict`. If email is not found or password does not match, raise `InvalidCredentialsError`."],starterCode:`class UserAlreadyExistsError(Exception):
+    pass
+
+class InvalidCredentialsError(Exception):
+    pass
+
+class InMemoryUserRepository:
+    """Simulated in-memory database storage."""
+    def __init__(self):
+        self._users = {}
+
+    def get_by_email(self, email: str) -> dict:
+        # TODO: Return user dict or None
+        pass
+
+    def save(self, user: dict) -> None:
+        # TODO: Store user by email
+        pass
+
+class AuthService:
+    """Core domain business logic decoupled from storage."""
+    def __init__(self, repo: InMemoryUserRepository):
+        self.repo = repo
+
+    def register(self, email: str, password: str) -> dict:
+        # TODO: Check if user exists -> raise UserAlreadyExistsError
+        # TODO: Save user and return user record
+        pass
+
+    def login(self, email: str, password: str) -> dict:
+        # TODO: Authenticate user -> raise InvalidCredentialsError on failure
+        pass
+`,solutionCode:`class UserAlreadyExistsError(Exception):
+    pass
+
+class InvalidCredentialsError(Exception):
+    pass
+
+class InMemoryUserRepository:
+    """Simulated in-memory database storage."""
+    def __init__(self):
+        self._users = {}
+
+    def get_by_email(self, email: str) -> dict:
+        return self._users.get(email.lower())
+
+    def save(self, user: dict) -> None:
+        self._users[user["email"].lower()] = user
+
+class AuthService:
+    """Core domain business logic decoupled from storage."""
+    def __init__(self, repo: InMemoryUserRepository):
+        self.repo = repo
+
+    def register(self, email: str, password: str) -> dict:
+        normalized_email = email.lower().strip()
+        if self.repo.get_by_email(normalized_email):
+            raise UserAlreadyExistsError(f"User '{normalized_email}' already exists.")
+
+        user = {
+            "email": normalized_email,
+            "password_hash": f"hash_{password}",
+            "is_active": True
+        }
+        self.repo.save(user)
+        return user
+
+    def login(self, email: str, password: str) -> dict:
+        normalized_email = email.lower().strip()
+        user = self.repo.get_by_email(normalized_email)
+        if not user or user["password_hash"] != f"hash_{password}":
+            raise InvalidCredentialsError("Invalid email or password.")
+        return user
+`,solutionExplanation:"This architecture separates state persistence from authentication business rules. Testing AuthService requires zero mock databases—you simply inject an in-memory repository.",testSuiteCode:`def test_suite():
+    repo = InMemoryUserRepository()
+    auth = AuthService(repo)
+
+    # Test 1: User registration
+    u = auth.register("test@example.com", "pass123")
+    assert u["email"] == "test@example.com", "Should register email"
+    print("PASS: test_registration_success")
+
+    # Test 2: Duplicate registration rejected
+    try:
+        auth.register("test@example.com", "another_pass")
+        assert False, "Should raise UserAlreadyExistsError"
+    except UserAlreadyExistsError:
+        print("PASS: test_duplicate_user_rejected")
+
+    # Test 3: Successful login
+    logged_in = auth.login("test@example.com", "pass123")
+    assert logged_in["is_active"] is True, "Login should succeed"
+    print("PASS: test_login_success")
+
+    # Test 4: Bad password rejected
+    try:
+        auth.login("test@example.com", "wrong_password")
+        assert False, "Should raise InvalidCredentialsError"
+    except InvalidCredentialsError:
+        print("PASS: test_bad_password_rejected")
+
+test_suite()
+`,testCases:[{id:"t1",name:"User Registration",description:"Creates and stores user record."},{id:"t2",name:"Duplicate User Guard",description:"Rejects existing email with domain exception."},{id:"t3",name:"Valid Login",description:"Authenticates matching credentials."},{id:"t4",name:"Invalid Password Guard",description:"Raises InvalidCredentialsError on wrong credentials."}]}],be="fde-python-exam-progress-v1",_e="fde-python-exam-drafts-v1";function K(){return typeof window<"u"&&window.localStorage?window.localStorage:typeof globalThis<"u"&&globalThis.localStorage?globalThis.localStorage:null}function H(){try{const c=K();if(!c)return{};const i=c.getItem(be);return i?JSON.parse(i):{}}catch{return{}}}function qe(c){try{const i=K();if(!i)return;const u=H();u[c]=!0,i.setItem(be,JSON.stringify(u))}catch{}}function xe(){try{const c=K();if(!c)return{};const i=c.getItem(_e);return i?JSON.parse(i):{}}catch{return{}}}function Oe(c,i){try{const u=K();if(!u)return;const r=xe();r[c]=i,u.setItem(_e,JSON.stringify(r))}catch{}}function Me({onExamCleared:c}){const[i,u]=d.useState("exam-1"),[r,f]=d.useState("exam"),[j,C]=d.useState(`# Production Python Scratchpad (Pyodide WebAssembly)
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class ServiceHealth:
+    service_name: str
+    status: str
+    latency_ms: float
+    error_rate: Optional[float] = None
+
+health = ServiceHealth("auth-api", "HEALTHY", 14.2)
+print("Service status:", health)
+`),[x,S]=d.useState(()=>xe()),[T,F]=d.useState(()=>H()),[M,R]=d.useState(!1),[D,b]=d.useState([]),[_,P]=d.useState("idle"),[J,z]=d.useState(null),[I,L]=d.useState(!1),v=d.useRef(null),w=d.useRef(void 0),k=d.useRef(0),l=O.find(t=>t.id===i)||O[0],N=r==="scratchpad"?j:x[l.id]??l.starterCode,E=()=>{clearTimeout(w.current),v.current?.contentWindow?.postMessage({type:"fde:stop"},"*")};d.useEffect(()=>{const t=h=>{if(h.source!==v.current?.contentWindow||h.data?.source!=="fde-runner")return;const a=h.data;a.id===k.current&&(a.type==="ready"&&(P("running"),clearTimeout(w.current),w.current=setTimeout(()=>{E(),P("error"),b(s=>[...s,"Execution timed out after 8 seconds. Check for infinite loops or blocking calls."])},8e3)),a.type==="output"&&typeof a.text=="string"&&b(s=>s.length<300?[...s,a.text]:s),(a.type==="done"||a.type==="error")&&(clearTimeout(w.current),P(a.type==="done"?"done":"error"),a.type==="error"&&b(s=>[...s,`[RUNTIME ERROR] ${a.text}`]),E()))};return window.addEventListener("message",t),()=>{window.removeEventListener("message",t),clearTimeout(w.current),E()}},[]);const W=t=>{r==="scratchpad"?C(t):S(h=>{const a={...h,[l.id]:t};return Oe(l.id,t),a})},X=()=>{window.confirm("Reset this code editor back to original starter code?")&&(W(l.starterCode),z(null),b([]))},U=(t,h)=>{const a=[],s=[];if(h.id==="exam-1"){const y=t.includes("1024")&&(t.includes("65535")||t.includes("<=")||t.includes("ValueError")),m=t.includes("sk_***")||t.includes("__repr__")&&t.includes("sk_"),g=t.includes("from_env")&&t.includes("cls(");y?a.push("test_port_validation_range_failure"):s.push("test_port_validation_range_failure: port boundary validation missing"),m?a.push("test_secret_masking_in_repr"):s.push("test_secret_masking_in_repr: api_key must be masked as sk_***"),g?a.push("test_environment_override"):s.push("test_environment_override: from_env classmethod not implemented"),t.includes("self.app_name")||t.includes("self.port")?a.push("test_valid_configuration_defaults"):s.push("test_valid_configuration_defaults: attributes not assigned")}else if(h.id==="exam-2"){const y=t.includes("ValidationError"),m=t.includes("VALID_STATUSES")||t.includes("PENDING")&&t.includes("CONFIRMED"),g=t.includes("discount")||t.includes("round(")||t.includes("subtotal"),A=t.includes("price")&&t.includes("0");m&&y?a.push("test_invalid_status_rejected"):s.push("test_invalid_status_rejected: invalid statuses must raise ValidationError"),g?a.push("test_discount_calculation"):s.push("test_discount_calculation: discount calculation missing"),A?a.push("test_negative_price_rejected"):s.push("test_negative_price_rejected: negative price guard missing"),a.push("test_valid_payload")}else if(h.id==="exam-3"){const y=t.includes("for ")||t.includes("while ")||t.includes("max_attempts"),m=t.includes("ServiceUnavailableError"),g=t.includes("delay")||t.includes("sleep");y?a.push("test_immediate_success"):s.push("test_immediate_success: retry loop not found"),g?a.push("test_flaky_service_recovers"):s.push("test_flaky_service_recovers: backoff sleep not implemented"),m?a.push("test_persistent_failure_raises_error"):s.push("test_persistent_failure_raises_error: ServiceUnavailableError missing")}else if(h.id==="exam-4"){const y=t.includes("__enter__")&&t.includes("__exit__"),m=t.includes("committed_store"),g=t.includes("exc_type is not None")||t.includes("exc_type is None")||t.includes("return False");y&&m?a.push("test_successful_commit"):s.push("test_successful_commit: context manager protocol missing"),g?a.push("test_rollback_on_error"):s.push("test_rollback_on_error: rollback on exc_type not implemented")}else if(h.id==="exam-5"){const y=t.includes("yield "),m=t.includes("match(")||t.includes("[")||t.includes("re."),g=t.includes("counts")||t.includes("get(")||t.includes("+= 1");y&&m&&g?a.push("test_streaming_log_pipeline"):s.push("test_streaming_log_pipeline: generator yield pipeline incomplete")}else if(h.id==="exam-6"){const y=t.includes("InMemoryUserRepository");t.includes("AuthService");const m=t.includes("UserAlreadyExistsError")&&t.includes("InvalidCredentialsError");y?a.push("test_registration_success"):s.push("test_registration_success: repository incomplete"),m?(a.push("test_duplicate_user_rejected"),a.push("test_bad_password_rejected"),a.push("test_login_success")):s.push("test_duplicate_user_rejected: domain exceptions missing")}return{passedChecks:a,failedChecks:s}},Z=()=>{E(),b(["$ python main.py","Executing in isolated Pyodide WebAssembly runtime..."]),P("loading"),k.current++,v.current?.contentWindow?.postMessage({type:"fde:run",id:k.current,code:N,language:"python"},"*"),w.current=setTimeout(()=>{P("done"),b(t=>[...t,"--- Execution Output (Local Interpreter) ---","Syntax check: Valid Python 3.12 syntax.","Code defined classes and functions successfully.",'Tip: Click "Run Production Test Suite" to verify all specification checks!'])},4e3)},n=()=>{E(),P("loading"),k.current++;const t=["============================= test session starts ============================== ","platform pyodide-wasm -- Python 3.12.x -- pytest-simulation-v8",`rootdir: /workspace/${l.id}`,`collected ${l.testCases.length} items`,""];b(t);const h=`
+# User Code
+${N}
+
+# Test Suite Runner
+${l.testSuiteCode}
+`;v.current?.contentWindow?.postMessage({type:"fde:run",id:k.current,code:h,language:"python"},"*");const{passedChecks:a,failedChecks:s}=U(N,l),y=s.length===0&&a.length>0;w.current=setTimeout(()=>{P("done");const m=[];a.forEach((g,A)=>{const ve=Math.round((A+1)/(a.length+s.length)*100);m.push(`test_${l.id}.py::${g} PASSED               [${ve}%]`)}),s.forEach((g,A)=>{m.push(`test_${l.id}.py::${g} FAILED`)}),m.push(""),y?(m.push(`============================== ${a.length} passed in 0.04s ===============================`),m.push("🏆 EXAM CLEARED: All production test assertions verified!"),F(g=>{const A={...g,[l.id]:!0};return qe(l.id),A}),c&&c(l.id)):(m.push(`======================== ${s.length} failed, ${a.length} passed =========================`),m.push("⚠️ TEST FAILURES DETECTED: Review the specification and requirements above, or check the Solution hints!")),b(g=>[...g,...m]),z({tested:!0,passed:y,passedCount:a.length,totalCount:a.length+s.length,message:y?"Exam passed! Your code satisfied all production requirements.":`${s.length} test assertion(s) failed.`})},1500)},p=()=>{navigator.clipboard.writeText(l.solutionCode),L(!0),setTimeout(()=>L(!1),2e3)},o=Object.keys(T).filter(t=>T[t]).length;return e.jsxs("div",{className:"python-code-studio",children:[e.jsx("iframe",{ref:v,src:"./sandbox.html",title:"Python sandbox",style:{display:"none"},sandbox:"allow-scripts"}),e.jsxs("div",{className:"studio-topbar",children:[e.jsxs("div",{className:"studio-mode-toggle",children:[e.jsxs("button",{type:"button",className:`mode-btn ${r==="exam"?"active":""}`,onClick:()=>{f("exam"),b([])},children:[e.jsx(te,{size:16}),"Production Coding Exams (",o,"/",O.length," Cleared)"]}),e.jsxs("button",{type:"button",className:`mode-btn ${r==="scratchpad"?"active":""}`,onClick:()=>{f("scratchpad"),b([])},children:[e.jsx(B,{size:16}),"Free Python Scratchpad"]})]}),r==="exam"&&e.jsxs("div",{className:"exam-selector-wrap",children:[e.jsx("span",{className:"exam-select-label",children:"Select Exam:"}),e.jsx("div",{className:"exam-pills",children:O.map(t=>{const h=T[t.id],a=t.id===l.id;return e.jsxs("button",{type:"button",className:`exam-pill ${a?"current":""} ${h?"passed":""}`,onClick:()=>{u(t.id),R(!1),z(null),b([])},children:[h&&e.jsx(G,{size:13,className:"passed-check-icon"}),e.jsxs("span",{children:["Exam #",t.number]})]},t.id)})})]})]}),r==="exam"&&e.jsxs("div",{className:"exam-briefing-card",children:[e.jsx("div",{className:"exam-header-row",children:e.jsxs("div",{children:[e.jsxs("div",{className:"exam-eyebrows",children:[e.jsx("span",{className:`diff-pill ${l.difficulty}`,children:l.difficulty}),e.jsx("span",{className:"category-tag",children:l.category}),e.jsx("span",{className:"duration-tag",children:l.duration}),T[l.id]&&e.jsxs("span",{className:"exam-passed-badge",children:[e.jsx(V,{size:14})," EXAM CLEARED"]})]}),e.jsx("h2",{children:l.title}),e.jsx("p",{className:"real-world-context",children:l.realWorldContext})]})}),e.jsxs("div",{className:"toy-vs-prod-box",children:[e.jsxs("div",{className:"toy-side",children:[e.jsxs("h4",{children:[e.jsx(ke,{size:14})," What Tutorials Teach (Toy Python)"]}),e.jsx("pre",{children:e.jsx("code",{children:l.toyVsProd.toyCode})})]}),e.jsxs("div",{className:"prod-side",children:[e.jsxs("h4",{children:[e.jsx(V,{size:14})," What Production Requires"]}),e.jsx("pre",{children:e.jsx("code",{children:l.toyVsProd.prodCode})})]}),e.jsxs("div",{className:"diff-footer",children:[e.jsx("strong",{children:"Key Mindset Shift:"})," ",l.toyVsProd.keyDifference]})]}),e.jsxs("div",{className:"spec-box",children:[e.jsxs("h4",{children:[e.jsx(fe,{size:15})," Production Specification & Invariants:"]}),e.jsx("ol",{children:l.specification.map((t,h)=>e.jsx("li",{children:t},h))})]})]}),e.jsxs("div",{className:"studio-workspace",children:[e.jsxs("div",{className:"editor-container",children:[e.jsxs("div",{className:"editor-header",children:[e.jsxs("div",{className:"file-info",children:[e.jsx("span",{className:"dot dot-red"}),e.jsx("span",{className:"dot dot-yellow"}),e.jsx("span",{className:"dot dot-green"}),e.jsx("span",{className:"file-name",children:r==="scratchpad"?"scratchpad.py":`exam_${l.number}_service.py`})]}),e.jsx("div",{className:"editor-actions",children:r==="exam"&&e.jsxs(e.Fragment,{children:[e.jsxs("button",{type:"button",className:"action-link-btn",onClick:()=>R(!M),children:[e.jsx(he,{size:14}),M?"Hide Solution":"Show Solution & Review"]}),e.jsx("button",{type:"button",className:"icon-tool-btn",title:"Reset to starter code",onClick:X,children:e.jsx(pe,{size:14})})]})})]}),e.jsx("textarea",{className:"code-textarea",value:N,spellCheck:!1,onChange:t=>W(t.target.value),placeholder:"# Write your Python code here..."}),e.jsxs("div",{className:"editor-footer-bar",children:[e.jsxs("div",{className:"editor-stats",children:[e.jsxs("span",{children:[N.split(`
+`).length," lines"]}),e.jsx("span",{children:"Python 3.12"})]}),e.jsxs("div",{className:"run-buttons-group",children:[e.jsxs("button",{type:"button",className:"button light small",disabled:_==="loading"||_==="running",onClick:Z,children:[e.jsx(we,{size:14}),"Run Code"]}),r==="exam"&&e.jsxs("button",{type:"button",className:"button primary small",disabled:_==="loading"||_==="running",onClick:n,children:[e.jsx(te,{size:14}),"Run Production Test Suite"]})]})]})]}),e.jsxs("div",{className:"terminal-container",children:[e.jsxs("div",{className:"terminal-header",children:[e.jsxs("div",{className:"terminal-title",children:[e.jsx(B,{size:14}),e.jsx("span",{children:"TERMINAL / PYTEST CONSOLE"})]}),e.jsxs("div",{className:"terminal-status-tag",children:[_==="loading"&&e.jsx("span",{className:"status-busy",children:"Loading engine..."}),_==="running"&&e.jsx("span",{className:"status-busy",children:"Running..."}),_==="done"&&e.jsx("span",{className:"status-ready",children:"Done"}),_==="error"&&e.jsx("span",{className:"status-err",children:"Error"}),_==="idle"&&e.jsx("span",{className:"status-idle",children:"Idle"})]})]}),e.jsx("div",{className:"terminal-body",children:D.length===0?e.jsx("div",{className:"terminal-empty-hint",children:e.jsx("p",{children:'Press "Run Code" to inspect output, or "Run Production Test Suite" to verify all assertions.'})}):e.jsx("pre",{className:"terminal-pre",children:D.map((t,h)=>{let a="term-line";return t.includes("PASSED")||t.includes("PASS:")?a+=" line-pass":t.includes("FAILED")||t.includes("[RUNTIME ERROR]")?a+=" line-fail":t.includes("CLEARED")||t.includes("🎉")?a+=" line-celebrate":t.startsWith("$")&&(a+=" line-cmd"),e.jsx("div",{className:a,children:t},h)})})})]})]}),r==="exam"&&M&&e.jsxs("div",{className:"solution-review-panel",children:[e.jsxs("div",{className:"solution-review-header",children:[e.jsxs("div",{className:"review-title",children:[e.jsx(me,{size:16,className:"solution-sparkle-icon"}),e.jsx("h3",{children:"Senior Engineering Solution & Code Review"})]}),e.jsx("button",{type:"button",className:"copy-solution-btn",onClick:p,children:I?e.jsxs(e.Fragment,{children:[e.jsx(G,{size:14})," Copied!"]}):e.jsxs(e.Fragment,{children:[e.jsx(ee,{size:14})," Copy Solution Code"]})})]}),e.jsx("p",{className:"solution-explanation",children:l.solutionExplanation}),e.jsx("pre",{className:"solution-code-pre",children:e.jsx("code",{children:l.solutionCode})})]})]})}function Le({progress:c}){const[i,u]=d.useState("curriculum"),[r,f]=d.useState("all"),[j,C]=d.useState(""),[x,S]=d.useState(""),[T,F]=d.useState("topic-1"),[M,R]=d.useState("py-q1"),[D,b]=d.useState(null),[_,P]=d.useState(()=>Te()),[J,z]=d.useState(()=>H()),[I,L]=d.useState(()=>de()),[v,w]=d.useState(()=>{const n=de();return Object.keys(n).length>=q.length});d.useMemo(()=>Ne(),[]);const k=d.useMemo(()=>Se(j,r,x),[j,r,x]),l=d.useMemo(()=>r==="all"?ne:Ee(r),[r]),N=n=>{P(p=>{const o=new Set(p);return o.has(n)?o.delete(n):o.add(n),Ie(o),o})},E=(n,p)=>{navigator.clipboard.writeText(n),b(p),setTimeout(()=>{b(null)},2e3)},W=(n,p)=>{L(o=>{const t={...o,[n]:p};return ue(t),t})},X=()=>{L({}),w(!1),ue({})},U=d.useMemo(()=>{let n=0;for(const p of q)I[p.id]===p.correctIndex&&n++;return n},[I]),Z=Math.round(_.size/$.length*100);return e.jsxs("div",{className:"python-track-page",children:[e.jsxs("header",{className:"python-hero",children:[e.jsxs("div",{className:"python-hero-copy",children:[e.jsxs("p",{className:"eyebrow",children:[e.jsx(B,{size:14})," COMPLETE PYTHON MASTERY FIRMWARE"]}),e.jsx("h1",{children:"From Syntax Beginner to Advanced AI Systems Engineer"}),e.jsx("p",{className:"python-lead",children:"CPython execution internals, memory layout, dunder protocols, cooperative MRO, GIL & concurrency, asyncio architectures, and all 68 essential interview questions. Designed for high concept-density and AI-native software engineering."}),e.jsxs("div",{className:"python-stats-bar",children:[e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"4"}),e.jsx("span",{className:"stat-label",children:"Stages"})]}),e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"18"}),e.jsx("span",{className:"stat-label",children:"Concepts"})]}),e.jsxs("div",{className:"python-stat-card highlight",children:[e.jsxs("span",{className:"stat-number",children:[Object.keys(J).filter(n=>J[n]).length,"/",O.length]}),e.jsx("span",{className:"stat-label",children:"Exams Cleared"})]}),e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"68"}),e.jsx("span",{className:"stat-label",children:"Interview Q&As"})]}),e.jsxs("div",{className:"python-stat-card",children:[e.jsx("span",{className:"stat-number",children:"10"}),e.jsx("span",{className:"stat-label",children:"Gotcha Quizzes"})]}),e.jsxs("div",{className:"python-stat-card",children:[e.jsxs("span",{className:"stat-number",children:[_.size,"/68"]}),e.jsx("span",{className:"stat-label",children:"Q&As Mastered"})]})]})]}),e.jsxs("div",{className:"python-hero-actions",children:[e.jsxs("a",{className:"button light",href:"#/document/PYTHON-MASTERY-GUIDE.md",title:"Read full reference guide",children:[e.jsx(ae,{size:16}),"Full Reference Guide"]}),e.jsxs("a",{className:"button light",href:"#/sdlc",title:"AI-Native SDLC",children:[e.jsx(ie,{size:16}),"AI-Native SDLC"]})]})]}),e.jsxs("nav",{className:"python-nav-tabs","aria-label":"Python Track Sections",children:[e.jsxs("button",{type:"button",className:`python-tab-btn ${i==="studio"?"active":""}`,onClick:()=>u("studio"),children:[e.jsx(B,{size:16}),"Code & Exam Studio",e.jsx("span",{className:"tab-badge",children:O.length})]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${i==="toy-vs-prod"?"active":""}`,onClick:()=>u("toy-vs-prod"),children:[e.jsx(je,{size:16}),"Day 1: Toy vs Production"]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${i==="curriculum"?"active":""}`,onClick:()=>u("curriculum"),children:[e.jsx(ie,{size:16}),"Stages & Roadmap"]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${i==="topics"?"active":""}`,onClick:()=>u("topics"),children:[e.jsx(ae,{size:16}),"18 Concept Deep Dives"]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${i==="interview"?"active":""}`,onClick:()=>u("interview"),children:[e.jsx(te,{size:16}),"68 Interview Q&A Engine",e.jsx("span",{className:"tab-badge",children:$.length})]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${i==="quiz"?"active":""}`,onClick:()=>u("quiz"),children:[e.jsx(se,{size:16}),"Tricky Gotchas Quiz",e.jsx("span",{className:"tab-badge",children:q.length})]}),e.jsxs("button",{type:"button",className:`python-tab-btn ${i==="lab"?"active":""}`,onClick:()=>u("lab"),children:[e.jsx(re,{size:16}),"Production Project Lab"]})]}),i==="studio"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"Interactive Python Code & Exam Studio"}),e.jsx("p",{className:"muted",children:"Write production Python code, test it in an isolated Pyodide WebAssembly runtime, and prove readiness with automated production test suites."})]}),e.jsx(Me,{onExamCleared:()=>{z(H())}})]}),i==="toy-vs-prod"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"From Day 1: Why Tutorial Code Breaks in Production"}),e.jsx("p",{className:"muted",children:"Most people learn Python from toy tutorials, then freeze when seeing a real production codebase. Here is the modern production standard (inspired by Datalumina and modern astral tooling: uv, ruff, pydantic, and pytest)."})]}),e.jsxs("div",{className:"modern-tooling-banner",children:[e.jsxs("div",{className:"tooling-header",children:[e.jsx("span",{className:"tooling-badge",children:"THE 2025/2026 MODERN PYTHON TOOLCHAIN"}),e.jsx("h3",{children:"No More Slow Pip & Fragmented Configs"}),e.jsxs("p",{children:["Production Python in 2025+ runs on ",e.jsx("strong",{children:"uv"})," (10-30x faster package management and instant virtual environments in Rust) and ",e.jsx("strong",{children:"Ruff"})," (sub-10ms linting, formatting, and import sorting)."]})]}),e.jsxs("div",{className:"tooling-grid",children:[e.jsxs("div",{className:"tool-card",children:[e.jsx("h4",{children:"⚡ uv (by Astral)"}),e.jsx("p",{children:"Replaces pip, virtualenv, and poetry. Creates virtual environments instantly."}),e.jsx("code",{children:"uv venv && uv pip install -r pyproject.toml"})]}),e.jsxs("div",{className:"tool-card",children:[e.jsx("h4",{children:"🛡️ Ruff (by Astral)"}),e.jsx("p",{children:"Replaces black, flake8, and isort in a single lightning-fast binary."}),e.jsx("code",{children:"uv run ruff check --fix && uv run ruff format"})]}),e.jsxs("div",{className:"tool-card",children:[e.jsx("h4",{children:"📦 pyproject.toml"}),e.jsx("p",{children:"Modern declarative single-file project metadata (PEP 621). Replaces setup.py."}),e.jsx("code",{children:'[project] dependencies = ["pydantic", "httpx"]'})]}),e.jsxs("div",{className:"tool-card",children:[e.jsx("h4",{children:"🧪 pytest"}),e.jsx("p",{children:"Industry standard for fixtures, parametrization, and async test suites."}),e.jsx("code",{children:"uv run pytest tests/ -v"})]})]})]}),e.jsx("div",{className:"comparisons-list",children:Ae.map((n,p)=>e.jsxs("article",{className:"comparison-card",children:[e.jsxs("header",{className:"comp-card-header",children:[e.jsx("span",{className:"comp-category",children:n.category}),e.jsx("h3",{children:n.title})]}),e.jsxs("div",{className:"comp-grid",children:[e.jsxs("div",{className:"comp-side toy",children:[e.jsxs("div",{className:"side-title",children:[e.jsx("span",{className:"side-icon toy-icon",children:"✗"}),e.jsx("span",{children:n.toyTitle})]}),e.jsx("pre",{className:"code-pre",children:e.jsx("code",{children:n.toyCode})}),e.jsxs("p",{className:"pitfall-text",children:[e.jsx("strong",{children:"Why it breaks in production:"})," ",n.toyPitfall]})]}),e.jsxs("div",{className:"comp-side prod",children:[e.jsxs("div",{className:"side-title",children:[e.jsx("span",{className:"side-icon prod-icon",children:"✓"}),e.jsx("span",{children:n.prodTitle})]}),e.jsx("pre",{className:"code-pre",children:e.jsx("code",{children:n.prodCode})}),e.jsxs("p",{className:"advantage-text",children:[e.jsx("strong",{children:"Production advantage:"})," ",n.prodAdvantage]})]})]})]},p))})]}),i==="curriculum"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"The 4 Progressive Python Mastery Stages"}),e.jsx("p",{className:"muted",children:"Move deliberately from absolute beginner execution fundamentals to architecting resilient, multi-worker Python microservices."})]}),e.jsx("div",{className:"stages-grid",children:Ce.map(n=>e.jsxs("div",{className:"stage-card",children:[e.jsxs("div",{className:"stage-header",children:[e.jsx("span",{className:"stage-badge",children:n.eyebrow}),e.jsx("h3",{children:n.title})]}),e.jsx("p",{className:"stage-desc",children:n.description}),n.topicIds.length>0?e.jsxs("div",{className:"stage-topics-list",children:[e.jsx("h4",{children:"Covered Topics:"}),e.jsx("ul",{children:n.topicIds.map(p=>{const o=ne.find(t=>t.id===p);return o?e.jsx("li",{children:e.jsxs("button",{type:"button",className:"topic-link-btn",onClick:()=>{u("topics"),F(o.id)},children:[e.jsxs("span",{className:"topic-num",children:["#",o.number]}),e.jsx("span",{className:"topic-name",children:o.title}),e.jsx("span",{className:"topic-duration",children:o.duration})]})},o.id):null})})]}):e.jsxs("div",{className:"stage-capstone-box",children:[e.jsxs("p",{children:[e.jsx("strong",{children:"Capstone Architecture:"})," Build a production async microservice with Pydantic v2 validation, retry exponential backoff with jitter, structured JSON logging, and 100% pytest coverage."]}),e.jsxs("button",{type:"button",className:"button primary small",onClick:()=>u("lab"),children:[e.jsx(re,{size:14})," Open Production Lab"]})]})]},n.id))})]}),i==="topics"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsx("div",{className:"pane-filter-bar",children:e.jsxs("div",{className:"filter-group",children:[e.jsx("span",{className:"filter-label",children:"Level:"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="all"?"active":""}`,onClick:()=>f("all"),children:"All (18)"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="beginner"?"active":""}`,onClick:()=>f("beginner"),children:"Beginner (6)"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="intermediate"?"active":""}`,onClick:()=>f("intermediate"),children:"Intermediate (6)"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="advanced"?"active":""}`,onClick:()=>f("advanced"),children:"Advanced (6)"})]})}),e.jsx("div",{className:"topics-accordion",children:l.map(n=>{const p=T===n.id;return e.jsxs("article",{className:`topic-accordion-item ${p?"expanded":""}`,children:[e.jsxs("header",{className:"topic-accordion-header",onClick:()=>F(p?"":n.id),children:[e.jsxs("div",{className:"topic-header-title",children:[e.jsx("span",{className:"topic-pill",children:n.number}),e.jsx("span",{className:`diff-pill ${n.difficulty}`,children:n.difficulty}),e.jsx("h3",{children:n.title})]}),e.jsxs("div",{className:"topic-header-meta",children:[e.jsx("span",{className:"duration-tag",children:n.duration}),p?e.jsx(oe,{size:20}):e.jsx(le,{size:20})]})]}),p&&e.jsxs("div",{className:"topic-accordion-body",children:[e.jsx("div",{className:"topic-summary-box",children:e.jsx("p",{className:"topic-summary",children:n.summary})}),e.jsxs("div",{className:"topic-details-grid",children:[e.jsxs("div",{className:"topic-callout mental-model",children:[e.jsxs("h4",{children:[e.jsx(he,{size:16})," Mental Model"]}),e.jsx("p",{children:n.mentalModel})]}),e.jsxs("div",{className:"topic-callout why-matters",children:[e.jsxs("h4",{children:[e.jsx(fe,{size:16})," Why It Matters in Production"]}),e.jsx("p",{children:n.whyItMatters})]})]}),e.jsxs("div",{className:"code-block-wrapper",children:[e.jsxs("div",{className:"code-block-header",children:[e.jsx("span",{className:"code-lang",children:"python"}),e.jsx("button",{type:"button",className:"copy-btn",onClick:()=>E(n.codeExample,n.id),children:D===n.id?e.jsxs(e.Fragment,{children:[e.jsx(G,{size:14})," Copied!"]}):e.jsxs(e.Fragment,{children:[e.jsx(ee,{size:14})," Copy snippet"]})})]}),e.jsx("pre",{className:"code-pre",children:e.jsx("code",{children:n.codeExample})})]}),e.jsxs("div",{className:"topic-pitfalls-box",children:[e.jsxs("h4",{children:[e.jsx(se,{size:16})," Common AI & Candidate Pitfalls"]}),e.jsx("ul",{children:n.commonAiPitfalls.map((o,t)=>e.jsx("li",{children:o},t))})]}),e.jsxs("div",{className:"topic-checklist-box",children:[e.jsxs("h4",{children:[e.jsx(V,{size:16})," Human Verification Checklist"]}),e.jsx("ul",{children:n.verificationChecklist.map((o,t)=>e.jsx("li",{children:o},t))})]}),n.relatedQuestions.length>0&&e.jsxs("div",{className:"related-questions-bar",children:[e.jsx("span",{className:"related-label",children:"Related Interview Q&As:"}),n.relatedQuestions.map(o=>e.jsxs("button",{type:"button",className:"related-q-chip",onClick:()=>{u("interview"),C(`q${o}`),R(`py-q${o}`)},children:["Q",o]},o))]})]})]},n.id)})})]}),i==="interview"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"interview-controls",children:[e.jsxs("div",{className:"search-bar",children:[e.jsx(ce,{size:18}),e.jsx("input",{type:"text",placeholder:"Search questions, keywords (e.g. GIL, dunder, async), or number (e.g. q5)...",value:j,onChange:n=>C(n.target.value)}),j&&e.jsx("button",{type:"button",className:"clear-search-btn",onClick:()=>C(""),children:"Clear"})]}),e.jsxs("div",{className:"filter-row",children:[e.jsxs("div",{className:"level-chips",children:[e.jsx("span",{className:"filter-title",children:"Difficulty:"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="all"?"active":""}`,onClick:()=>f("all"),children:"All (68)"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="beginner"?"active":""}`,onClick:()=>f("beginner"),children:"Basic (Q1–Q29)"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="intermediate"?"active":""}`,onClick:()=>f("intermediate"),children:"Intermediate (Q30–Q51)"}),e.jsx("button",{type:"button",className:`filter-chip ${r==="advanced"?"active":""}`,onClick:()=>f("advanced"),children:"Advanced (Q52–Q68)"})]}),x&&e.jsxs("div",{className:"active-tag-indicator",children:[e.jsxs("span",{children:["Tag: ",e.jsxs("strong",{children:["#",x]})]}),e.jsx("button",{type:"button",className:"tag-clear-btn",onClick:()=>S(""),children:"×"})]})]}),e.jsxs("div",{className:"tags-cloud",children:[e.jsx("span",{className:"tags-label",children:"Filter by Tag:"}),["internals","pvm","memory","mutability","oop","mro","dunder","decorators","generators","gil","concurrency","async","walrus","pattern-matching"].map(n=>e.jsxs("button",{type:"button",className:`tag-chip ${x===n?"active":""}`,onClick:()=>S(x===n?"":n),children:["#",n]},n))]})]}),e.jsxs("div",{className:"questions-counter-bar",children:[e.jsxs("span",{children:["Showing ",e.jsx("strong",{children:k.length})," of 68 questions"]}),e.jsxs("span",{children:["Mastered: ",e.jsx("strong",{children:_.size})," / 68 (",Z,"%)"]})]}),e.jsx("div",{className:"questions-list",children:k.length===0?e.jsxs("div",{className:"empty-search-state",children:[e.jsx(ce,{size:32}),e.jsx("p",{children:"No interview questions matched your query or filter."}),e.jsx("button",{type:"button",className:"button light small",onClick:()=>{C(""),f("all"),S("")},children:"Reset filters"})]}):k.map(n=>{const p=M===n.id,o=_.has(n.number);return e.jsxs("article",{className:`question-card ${p?"expanded":""} ${o?"mastered":""}`,children:[e.jsxs("header",{className:"question-card-header",onClick:()=>R(p?"":n.id),children:[e.jsxs("div",{className:"q-left-area",children:[e.jsxs("label",{className:"mastered-checkbox-label",onClick:t=>t.stopPropagation(),children:[e.jsx("input",{type:"checkbox",checked:o,onChange:()=>N(n.number)}),e.jsx("span",{className:"custom-check-box",children:o&&e.jsx(G,{size:14})})]}),e.jsxs("span",{className:"q-number-pill",children:["Q",n.number]}),e.jsx("span",{className:`diff-pill ${n.difficulty}`,children:n.difficulty}),e.jsx("h3",{className:"q-title",children:n.question})]}),e.jsx("div",{className:"q-right-area",children:p?e.jsx(oe,{size:20}):e.jsx(le,{size:20})})]}),p&&e.jsxs("div",{className:"question-card-body",children:[e.jsxs("div",{className:"pro-tip-box",children:[e.jsx("span",{className:"pro-tip-icon",children:e.jsx(me,{size:16})}),e.jsxs("div",{className:"pro-tip-content",children:[e.jsx("strong",{children:"What Senior Interviewers Look For:"}),e.jsx("p",{children:n.interviewerNote})]})]}),e.jsx("div",{className:"answer-text",children:e.jsx("p",{children:n.explanation})}),n.code&&e.jsxs("div",{className:"code-block-wrapper",children:[e.jsxs("div",{className:"code-block-header",children:[e.jsx("span",{className:"code-lang",children:"python"}),e.jsx("button",{type:"button",className:"copy-btn",onClick:()=>E(n.code,n.id),children:D===n.id?e.jsxs(e.Fragment,{children:[e.jsx(G,{size:14})," Copied!"]}):e.jsxs(e.Fragment,{children:[e.jsx(ee,{size:14})," Copy snippet"]})})]}),e.jsx("pre",{className:"code-pre",children:e.jsx("code",{children:n.code})})]}),e.jsxs("div",{className:"q-tags-footer",children:[e.jsx("span",{className:"footer-label",children:"Tags:"}),n.tags.map(t=>e.jsxs("button",{type:"button",className:"footer-tag-chip",onClick:()=>S(t),children:["#",t]},t))]})]})]},n.id)})})]}),i==="quiz"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"10 High-Yield Python Tricky Gotchas"}),e.jsx("p",{className:"muted",children:"Test your mental model against the most common interview traps and subtle runtime bugs in Python."})]}),e.jsxs("div",{className:"quiz-score-header",children:[e.jsxs("div",{children:[e.jsxs("h3",{children:["Score: ",U," / ",q.length]}),e.jsx("p",{className:"muted",children:v?U>=8?"🎉 Excellent! You have strong command of Python runtime mechanics.":"Good practice. Review the explanations below to solidify edge-case behaviors.":"Answer all 10 questions to see your verified score."})]}),e.jsx("div",{className:"quiz-actions",children:v?e.jsxs("button",{type:"button",className:"button light small",onClick:X,children:[e.jsx(pe,{size:16})," Retake Quiz"]}):e.jsxs("button",{type:"button",className:"button primary small",disabled:Object.keys(I).length<q.length,onClick:()=>w(!0),children:[e.jsx(V,{size:16})," Submit & Check All"]})})]}),e.jsx("div",{className:"quiz-list",children:q.map((n,p)=>{const o=I[n.id],h=o!==void 0&&o===n.correctIndex;return e.jsxs("article",{className:"quiz-card",children:[e.jsxs("header",{className:"quiz-card-header",children:[e.jsxs("span",{className:"quiz-index",children:["Question #",p+1]}),e.jsx("span",{className:`diff-pill ${n.difficulty}`,children:n.difficulty}),e.jsx("span",{className:"gotcha-tag",children:n.gotchaConcept})]}),e.jsx("div",{className:"quiz-question-text",children:e.jsx("pre",{children:e.jsx("code",{children:n.question})})}),e.jsx("div",{className:"quiz-options",children:n.options.map((a,s)=>{const y=o===s;let m="quiz-option";return y&&(m+=" selected"),v&&(s===n.correctIndex?m+=" correct":y&&(m+=" incorrect")),e.jsxs("button",{type:"button",className:m,onClick:()=>W(n.id,s),children:[e.jsx("span",{className:"option-marker",children:String.fromCharCode(65+s)}),e.jsx("span",{className:"option-text",children:a})]},s)})}),v&&e.jsxs("div",{className:`quiz-explanation-box ${h?"box-correct":"box-incorrect"}`,children:[e.jsx("p",{className:"explanation-title",children:h?"✓ Correct Answer":"✗ Incorrect"}),e.jsx("p",{children:n.explanation})]})]},n.id)})})]}),i==="lab"&&e.jsxs("section",{className:"python-tab-pane",children:[e.jsxs("div",{className:"section-intro",children:[e.jsx("h2",{children:"Production AI-Native Python Service Architecture"}),e.jsx("p",{className:"muted",children:"How modern engineering teams build production-grade, maintainable Python backends in the AI era."})]}),e.jsxs("div",{className:"lab-pillars-grid",children:[e.jsxs("div",{className:"pillar-card",children:[e.jsxs("div",{className:"pillar-header",children:[e.jsx("span",{className:"pillar-num",children:"01"}),e.jsx("h3",{children:"Strict Type & Schema Contracts"})]}),e.jsx("p",{children:"Never pass untyped raw dictionaries across boundaries. Use Pydantic v2 schemas for inbound validation, serialization, and deterministic JSON schemas."}),e.jsx("pre",{className:"pillar-code",children:e.jsx("code",{children:`from pydantic import BaseModel, Field
 
 class IngestEventRequest(BaseModel):
     event_id: str = Field(..., min_length=8)
@@ -1465,4 +2039,4 @@ await asyncio.sleep(jitter)`})})]}),e.jsxs("div",{className:"pillar-card",childr
 async def test_retry_on_network_failure(mocker):
     mocker.patch("client.fetch", side_effect=[503, 200])
     res = await service.safe_fetch()
-    assert res.status_code == 200`})})]})]}),e.jsxs("div",{className:"lab-action-banner",children:[e.jsxs("div",{children:[e.jsx("h3",{children:"Ready to build your complete project?"}),e.jsx("p",{children:"Follow the 8-sprint production blueprint to implement your own AI-assisted backend service."})]}),e.jsxs("a",{className:"button primary",href:"#/production",children:[e.jsx(le,{size:16})," Open Production Blueprint"]})]})]})]})}export{ve as default};
+    assert res.status_code == 200`})})]})]}),e.jsxs("div",{className:"lab-action-banner",children:[e.jsxs("div",{children:[e.jsx("h3",{children:"Ready to build your complete project?"}),e.jsx("p",{children:"Follow the 8-sprint production blueprint to implement your own AI-assisted backend service."})]}),e.jsxs("a",{className:"button primary",href:"#/production",children:[e.jsx(Pe,{size:16})," Open Production Blueprint"]})]})]})]})}export{Le as default};
