@@ -34,6 +34,8 @@ import {
   PYTHON_TOPICS,
   PYTHON_INTERVIEW_QUESTIONS,
   PYTHON_QUIZ_QUESTIONS,
+  PYTHON_TRACK_TIERS,
+  ORDERED_PYTHON_TABS,
   getAllQuestionTags,
   getTopicsByDifficulty,
   loadMasteredQuestions,
@@ -45,6 +47,7 @@ import {
   type PythonTrackTab,
   type PythonConceptTopic,
   type PythonInterviewQuestion,
+  type OrderedPythonTab,
 } from './python-track-data';
 import PythonCodeStudio from './PythonCodeStudio';
 import PythonIncidentsSimulator from './PythonIncidentsSimulator';
@@ -167,6 +170,62 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
     (masteredIds.size / PYTHON_INTERVIEW_QUESTIONS.length) * 100,
   );
 
+  const activeTier = useMemo(() => {
+    if (tab === 'curriculum' || tab === 'toy-vs-prod' || tab === 'topics') return 1;
+    if (
+      tab === 'studio' ||
+      tab === 'fastapi' ||
+      tab === 'rag' ||
+      tab === 'ai-labs' ||
+      tab === 'incidents' ||
+      tab === 'starter-kit'
+    )
+      return 2;
+    return 3;
+  }, [tab]);
+
+  const totalTier2Cleared = useMemo(() => {
+    const exams = Object.values(passedExams).filter(Boolean).length;
+    const fastapi = Object.values(clearedFastApi).filter(Boolean).length;
+    const rag = Object.values(clearedRag).filter(Boolean).length;
+    const incidents = Object.values(resolvedIncidents).filter(Boolean).length;
+    const aiLabs = Object.values(clearedAiLabs).filter(Boolean).length;
+    return exams + fastapi + rag + incidents + aiLabs;
+  }, [passedExams, clearedFastApi, clearedRag, resolvedIncidents, clearedAiLabs]);
+
+  const currentTabItem = useMemo(() => {
+    return ORDERED_PYTHON_TABS.find((item) => item.tab === tab) || ORDERED_PYTHON_TABS[0];
+  }, [tab]);
+
+  const handleNextTab = (targetTab?: PythonTrackTab) => {
+    if (targetTab) {
+      setTab(targetTab);
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    }
+  };
+
+  const renderNextStepBanner = (targetTab: PythonTrackTab, title: string, subtitle: string) => {
+    const currentStep = currentTabItem.stepNumber;
+    return (
+      <div className="next-learning-step-banner">
+        <div className="next-step-copy">
+          <span className="next-step-badge">
+            Step {currentStep} of {ORDERED_PYTHON_TABS.length} in Python Learning Flow
+          </span>
+          <h4>Next: {title}</h4>
+          <p>{subtitle}</p>
+        </div>
+        <button
+          type="button"
+          className="button primary next-step-action-btn"
+          onClick={() => handleNextTab(targetTab)}
+        >
+          Continue to {title} <ArrowRight size={16} />
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div className="python-track-page">
       {/* Hero Header */}
@@ -252,191 +311,305 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
         </div>
       </header>
 
-      {/* Navigation Tabs */}
-      <nav className="python-nav-tabs" aria-label="Python Track Sections">
+      {/* Learning Progression Stepper */}
+      <section className="learning-progression-stepper" aria-label="Learning Progression Phases">
         <button
           type="button"
-          className={`python-tab-btn ${tab === 'studio' ? 'active' : ''}`}
-          onClick={() => setTab('studio')}
-        >
-          <Terminal size={16} />
-          Code & Exam Studio
-          <span className="tab-badge">{PYTHON_EXAMS.length}</span>
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'fastapi' ? 'active' : ''}`}
-          onClick={() => setTab('fastapi')}
-        >
-          <Zap size={16} />
-          ⚡ FastAPI Backend
-          <span className="tab-badge">{FASTAPI_LABS.length}</span>
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'rag' ? 'active' : ''}`}
-          onClick={() => setTab('rag')}
-        >
-          <Brain size={16} />
-          🧠 Production RAG
-          <span className="tab-badge">{RAG_LABS.length}</span>
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'incidents' ? 'active' : ''}`}
-          onClick={() => setTab('incidents')}
-        >
-          <AlertTriangle size={16} />
-          🚨 On-Call Incidents
-          <span className="tab-badge">{PRODUCTION_INCIDENTS.length}</span>
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'ai-labs' ? 'active' : ''}`}
-          onClick={() => setTab('ai-labs')}
-        >
-          <Bot size={16} />
-          🤖 AI-FDE Labs
-          <span className="tab-badge">{AI_FDE_LABS.length}</span>
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'starter-kit' ? 'active' : ''}`}
-          onClick={() => setTab('starter-kit')}
-        >
-          <Boxes size={16} />
-          📦 Microservice Template
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'toy-vs-prod' ? 'active' : ''}`}
-          onClick={() => setTab('toy-vs-prod')}
-        >
-          <Zap size={16} />
-          Day 1: Toy vs Production
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'curriculum' ? 'active' : ''}`}
+          className={`progression-step-card ${activeTier === 1 ? 'active-tier' : ''}`}
           onClick={() => setTab('curriculum')}
         >
-          <Workflow size={16} />
-          Stages & Roadmap
+          <div className="progression-step-header">
+            <span className="phase-pill">PHASE 1</span>
+            <span className="phase-status-pill done">Foundations</span>
+          </div>
+          <div className="progression-step-title">
+            <Workflow size={16} />
+            <span>Foundations & Mental Models</span>
+          </div>
+          <p className="progression-step-desc">
+            Roadmap, Day 1 Toy vs Production paradigm shift, and 18 CPython internals deep dives.
+          </p>
+          <div className="progression-step-meta">
+            <span>3 Sequential Modules</span>
+            <span>18 Core Concepts</span>
+          </div>
         </button>
+
+        <div className="progression-arrow" aria-hidden="true">
+          <ArrowRight size={18} />
+        </div>
+
         <button
           type="button"
-          className={`python-tab-btn ${tab === 'topics' ? 'active' : ''}`}
-          onClick={() => setTab('topics')}
+          className={`progression-step-card ${activeTier === 2 ? 'active-tier' : ''}`}
+          onClick={() => setTab('studio')}
         >
-          <BookOpen size={16} />
-          18 Concept Deep Dives
+          <div className="progression-step-header">
+            <span className="phase-pill">PHASE 2</span>
+            <span className="phase-status-pill lab-status">
+              {totalTier2Cleared} / 23 Labs Cleared
+            </span>
+          </div>
+          <div className="progression-step-title">
+            <Terminal size={16} />
+            <span>Production Systems & Applied Labs</span>
+          </div>
+          <p className="progression-step-desc">
+            Browser WebAssembly Pyodide Studio, FastAPI Backend, RAG Pipeline, AI Labs, and Incidents.
+          </p>
+          <div className="progression-step-meta">
+            <span>6 Interactive Systems</span>
+            <span>23 Hands-on Challenges</span>
+          </div>
         </button>
+
+        <div className="progression-arrow" aria-hidden="true">
+          <ArrowRight size={18} />
+        </div>
+
         <button
           type="button"
-          className={`python-tab-btn ${tab === 'interview' ? 'active' : ''}`}
+          className={`progression-step-card ${activeTier === 3 ? 'active-tier' : ''}`}
           onClick={() => setTab('interview')}
         >
-          <Award size={16} />
-          68 Interview Q&A Engine
-          <span className="tab-badge">{PYTHON_INTERVIEW_QUESTIONS.length}</span>
+          <div className="progression-step-header">
+            <span className="phase-pill">PHASE 3</span>
+            <span className="phase-status-pill ready-status">
+              {masteredIds.size} / 68 Q&As Mastered
+            </span>
+          </div>
+          <div className="progression-step-title">
+            <Award size={16} />
+            <span>Technical Interview & Verification</span>
+          </div>
+          <p className="progression-step-desc">
+            68 interview questions, 3D flip card active recall, 30-min timed screen, and tricky gotchas.
+          </p>
+          <div className="progression-step-meta">
+            <span>4 Verification Engines</span>
+            <span>68 Q&As · 10 Gotchas</span>
+          </div>
         </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'flashcards' ? 'active' : ''}`}
-          onClick={() => setTab('flashcards')}
-        >
-          <Timer size={16} />
-          🎴 Flashcards & Mock Screen
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'quiz' ? 'active' : ''}`}
-          onClick={() => setTab('quiz')}
-        >
-          <HelpCircle size={16} />
-          Tricky Gotchas Quiz
-          <span className="tab-badge">{PYTHON_QUIZ_QUESTIONS.length}</span>
-        </button>
-        <button
-          type="button"
-          className={`python-tab-btn ${tab === 'lab' ? 'active' : ''}`}
-          onClick={() => setTab('lab')}
-        >
-          <Code2 size={16} />
-          Production Project Lab
-        </button>
+      </section>
+
+      {/* Grouped Navigation Tabs */}
+      <nav className="python-nav-tabs-grouped" aria-label="Python Track Sections">
+        {/* Tier 1 Group */}
+        <div className={`nav-tier-group ${activeTier === 1 ? 'is-active-tier' : ''}`}>
+          <div className="nav-tier-header">
+            <span className="tier-tag">TIER 1</span>
+            <span className="tier-title">Foundations & Mental Models</span>
+          </div>
+          <div className="tier-buttons">
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'curriculum' ? 'active' : ''}`}
+              onClick={() => setTab('curriculum')}
+            >
+              <Workflow size={15} />
+              Stages & Roadmap
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'toy-vs-prod' ? 'active' : ''}`}
+              onClick={() => setTab('toy-vs-prod')}
+            >
+              <Zap size={15} />
+              Day 1: Toy vs Production
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'topics' ? 'active' : ''}`}
+              onClick={() => setTab('topics')}
+            >
+              <BookOpen size={15} />
+              18 Concept Deep Dives
+            </button>
+          </div>
+        </div>
+
+        {/* Tier 2 Group */}
+        <div className={`nav-tier-group ${activeTier === 2 ? 'is-active-tier' : ''}`}>
+          <div className="nav-tier-header">
+            <span className="tier-tag">TIER 2</span>
+            <span className="tier-title">Production Systems & Applied Labs</span>
+          </div>
+          <div className="tier-buttons">
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'studio' ? 'active' : ''}`}
+              onClick={() => setTab('studio')}
+            >
+              <Terminal size={15} />
+              Code & Exam Studio
+              <span className="tab-badge badge-blue">{PYTHON_EXAMS.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'fastapi' ? 'active' : ''}`}
+              onClick={() => setTab('fastapi')}
+            >
+              <Zap size={15} />
+              ⚡ FastAPI Backend
+              <span className="tab-badge badge-purple">{FASTAPI_LABS.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'rag' ? 'active' : ''}`}
+              onClick={() => setTab('rag')}
+            >
+              <Brain size={15} />
+              🧠 Production RAG
+              <span className="tab-badge badge-emerald">{RAG_LABS.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'ai-labs' ? 'active' : ''}`}
+              onClick={() => setTab('ai-labs')}
+            >
+              <Bot size={15} />
+              🤖 AI-FDE Labs
+              <span className="tab-badge badge-cyan">{AI_FDE_LABS.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'incidents' ? 'active' : ''}`}
+              onClick={() => setTab('incidents')}
+            >
+              <AlertTriangle size={15} />
+              🚨 On-Call Incidents
+              <span className="tab-badge badge-rose">{PRODUCTION_INCIDENTS.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'starter-kit' ? 'active' : ''}`}
+              onClick={() => setTab('starter-kit')}
+            >
+              <Boxes size={15} />
+              📦 Microservice Template
+            </button>
+          </div>
+        </div>
+
+        {/* Tier 3 Group */}
+        <div className={`nav-tier-group ${activeTier === 3 ? 'is-active-tier' : ''}`}>
+          <div className="nav-tier-header">
+            <span className="tier-tag">TIER 3</span>
+            <span className="tier-title">Technical Interview & Verification</span>
+          </div>
+          <div className="tier-buttons">
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'interview' ? 'active' : ''}`}
+              onClick={() => setTab('interview')}
+            >
+              <Award size={15} />
+              68 Interview Q&A Engine
+              <span className="tab-badge badge-gold">{PYTHON_INTERVIEW_QUESTIONS.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'flashcards' ? 'active' : ''}`}
+              onClick={() => setTab('flashcards')}
+            >
+              <Timer size={15} />
+              🎴 Flashcards & Mock Screen
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'quiz' ? 'active' : ''}`}
+              onClick={() => setTab('quiz')}
+            >
+              <HelpCircle size={15} />
+              Tricky Gotchas Quiz
+              <span className="tab-badge badge-amber">{PYTHON_QUIZ_QUESTIONS.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`python-tab-btn ${tab === 'lab' ? 'active' : ''}`}
+              onClick={() => setTab('lab')}
+            >
+              <Code2 size={15} />
+              Production Project Lab
+            </button>
+          </div>
+        </div>
       </nav>
 
-      {/* TAB: CODE & EXAM STUDIO */}
-      {tab === 'studio' && (
+      {/* TAB 1: CURRICULUM STAGES */}
+      {tab === 'curriculum' && (
         <section className="python-tab-pane">
           <div className="section-intro">
-            <h2>Interactive Python Code & Exam Studio</h2>
+            <h2>The 4 Progressive Python Mastery Stages</h2>
             <p className="muted">
-              Write production Python code, test it in an isolated Pyodide WebAssembly runtime, and
-              prove readiness with automated production test suites.
+              Move deliberately from absolute beginner execution fundamentals to architecting
+              resilient, multi-worker Python microservices.
             </p>
           </div>
-          <PythonCodeStudio
-            onExamCleared={() => {
-              setPassedExams(loadExamProgress());
-            }}
-          />
+
+          <div className="stages-grid">
+            {PYTHON_STAGES.map((stage) => (
+              <div key={stage.id} className="stage-card">
+                <div className="stage-header">
+                  <span className="stage-badge">{stage.eyebrow}</span>
+                  <h3>{stage.title}</h3>
+                </div>
+                <p className="stage-desc">{stage.description}</p>
+                {stage.topicIds.length > 0 ? (
+                  <div className="stage-topics-list">
+                    <h4>Covered Topics:</h4>
+                    <ul>
+                      {stage.topicIds.map((tid) => {
+                        const t = PYTHON_TOPICS.find((item) => item.id === tid);
+                        if (!t) return null;
+                        return (
+                          <li key={t.id}>
+                            <button
+                              type="button"
+                              className="topic-link-btn"
+                              onClick={() => {
+                                setTab('topics');
+                                setExpandedTopicId(t.id);
+                              }}
+                            >
+                              <span className="topic-num">#{t.number}</span>
+                              <span className="topic-name">{t.title}</span>
+                              <span className="topic-duration">{t.duration}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ) : (
+                  <div className="stage-capstone-box">
+                    <p>
+                      <strong>Capstone Architecture:</strong> Build a production async microservice
+                      with Pydantic v2 validation, retry exponential backoff with jitter, structured
+                      JSON logging, and 100% pytest coverage.
+                    </p>
+                    <button
+                      type="button"
+                      className="button primary small"
+                      onClick={() => setTab('lab')}
+                    >
+                      <Code2 size={14} /> Open Production Lab
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {renderNextStepBanner(
+            'toy-vs-prod',
+            'Day 1: Toy vs Production',
+            'See why tutorial code breaks in real production systems and modern astral tooling (uv, ruff, pydantic, pytest)',
+          )}
         </section>
       )}
 
-      {/* TAB: FASTAPI PRODUCTION BACKEND */}
-      {tab === 'fastapi' && (
-        <section className="python-tab-pane">
-          <PythonFastApiStudio
-            onLabCleared={() => {
-              setClearedFastApi(loadFastApiProgress());
-            }}
-          />
-        </section>
-      )}
-
-      {/* TAB: PRODUCTION RAG ARCHITECTURE */}
-      {tab === 'rag' && (
-        <section className="python-tab-pane">
-          <PythonRagStudio
-            onLabCleared={() => {
-              setClearedRag(loadRagProgress());
-            }}
-          />
-        </section>
-      )}
-
-      {/* TAB: ON-CALL INCIDENTS */}
-      {tab === 'incidents' && (
-        <section className="python-tab-pane">
-          <PythonIncidentsSimulator
-            onIncidentResolved={() => {
-              setResolvedIncidents(loadIncidentProgress());
-            }}
-          />
-        </section>
-      )}
-
-      {/* TAB: AI-FDE PRODUCTION LABS */}
-      {tab === 'ai-labs' && (
-        <section className="python-tab-pane">
-          <PythonAiLabsStudio
-            onLabCleared={() => {
-              setClearedAiLabs(loadAiLabProgress());
-            }}
-          />
-        </section>
-      )}
-
-      {/* TAB: MICROSERVICE STARTER KIT */}
-      {tab === 'starter-kit' && (
-        <section className="python-tab-pane">
-          <PythonStarterKitView />
-        </section>
-      )}
-
-      {/* TAB: DAY 1 TOY VS PRODUCTION */}
+      {/* TAB 2: DAY 1 TOY VS PRODUCTION */}
       {tab === 'toy-vs-prod' && (
         <section className="python-tab-pane">
           <div className="section-intro">
@@ -521,77 +694,16 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               </article>
             ))}
           </div>
+
+          {renderNextStepBanner(
+            'topics',
+            '18 Concept Deep Dives',
+            'Master CPython internals, memory layout, dunder protocols, cooperative MRO & OOP, and asyncio',
+          )}
         </section>
       )}
 
-      {/* TAB 1: CURRICULUM STAGES */}
-      {tab === 'curriculum' && (
-        <section className="python-tab-pane">
-          <div className="section-intro">
-            <h2>The 4 Progressive Python Mastery Stages</h2>
-            <p className="muted">
-              Move deliberately from absolute beginner execution fundamentals to architecting
-              resilient, multi-worker Python microservices.
-            </p>
-          </div>
-
-          <div className="stages-grid">
-            {PYTHON_STAGES.map((stage) => (
-              <div key={stage.id} className="stage-card">
-                <div className="stage-header">
-                  <span className="stage-badge">{stage.eyebrow}</span>
-                  <h3>{stage.title}</h3>
-                </div>
-                <p className="stage-desc">{stage.description}</p>
-                {stage.topicIds.length > 0 ? (
-                  <div className="stage-topics-list">
-                    <h4>Covered Topics:</h4>
-                    <ul>
-                      {stage.topicIds.map((tid) => {
-                        const t = PYTHON_TOPICS.find((item) => item.id === tid);
-                        if (!t) return null;
-                        return (
-                          <li key={t.id}>
-                            <button
-                              type="button"
-                              className="topic-link-btn"
-                              onClick={() => {
-                                setTab('topics');
-                                setExpandedTopicId(t.id);
-                              }}
-                            >
-                              <span className="topic-num">#{t.number}</span>
-                              <span className="topic-name">{t.title}</span>
-                              <span className="topic-duration">{t.duration}</span>
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ) : (
-                  <div className="stage-capstone-box">
-                    <p>
-                      <strong>Capstone Architecture:</strong> Build a production async microservice
-                      with Pydantic v2 validation, retry exponential backoff with jitter, structured
-                      JSON logging, and 100% pytest coverage.
-                    </p>
-                    <button
-                      type="button"
-                      className="button primary small"
-                      onClick={() => setTab('lab')}
-                    >
-                      <Code2 size={14} /> Open Production Lab
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* TAB 2: TOPICS DEEP DIVE */}
+      {/* TAB 3: TOPICS DEEP DIVE */}
       {tab === 'topics' && (
         <section className="python-tab-pane">
           <div className="pane-filter-bar">
@@ -743,6 +855,111 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               );
             })}
           </div>
+
+          {renderNextStepBanner(
+            'studio',
+            'Code & Exam Studio',
+            'Write code and take 6 automated production exams in WebAssembly Pyodide',
+          )}
+        </section>
+      )}
+
+      {/* TAB 4: CODE & EXAM STUDIO */}
+      {tab === 'studio' && (
+        <section className="python-tab-pane">
+          <div className="section-intro">
+            <h2>Interactive Python Code & Exam Studio</h2>
+            <p className="muted">
+              Write production Python code, test it in an isolated Pyodide WebAssembly runtime, and
+              prove readiness with automated production test suites.
+            </p>
+          </div>
+          <PythonCodeStudio
+            onExamCleared={() => {
+              setPassedExams(loadExamProgress());
+            }}
+          />
+          {renderNextStepBanner(
+            'fastapi',
+            '⚡ FastAPI Backend',
+            'Build production microservices: lifespans, DI Depends, Pydantic schemas, and RFC 7807',
+          )}
+        </section>
+      )}
+
+      {/* TAB 5: FASTAPI PRODUCTION BACKEND */}
+      {tab === 'fastapi' && (
+        <section className="python-tab-pane">
+          <PythonFastApiStudio
+            onLabCleared={() => {
+              setClearedFastApi(loadFastApiProgress());
+            }}
+          />
+          {renderNextStepBanner(
+            'rag',
+            '🧠 Production RAG',
+            'Build production retrieval-augmented generation: sliding chunking, cosine ranking, and guards',
+          )}
+        </section>
+      )}
+
+      {/* TAB 6: PRODUCTION RAG ARCHITECTURE */}
+      {tab === 'rag' && (
+        <section className="python-tab-pane">
+          <PythonRagStudio
+            onLabCleared={() => {
+              setClearedRag(loadRagProgress());
+            }}
+          />
+          {renderNextStepBanner(
+            'ai-labs',
+            '🤖 AI-FDE Labs',
+            'Master token counting, tool dispatchers, SSE event streams, and eval benchmarks',
+          )}
+        </section>
+      )}
+
+      {/* TAB 7: AI-FDE PRODUCTION LABS */}
+      {tab === 'ai-labs' && (
+        <section className="python-tab-pane">
+          <PythonAiLabsStudio
+            onLabCleared={() => {
+              setClearedAiLabs(loadAiLabProgress());
+            }}
+          />
+          {renderNextStepBanner(
+            'incidents',
+            '🚨 On-Call Incidents',
+            'Simulate senior firefighting: memory leaks, GIL locks, race conditions, and pool exhaustion',
+          )}
+        </section>
+      )}
+
+      {/* TAB 8: ON-CALL INCIDENTS */}
+      {tab === 'incidents' && (
+        <section className="python-tab-pane">
+          <PythonIncidentsSimulator
+            onIncidentResolved={() => {
+              setResolvedIncidents(loadIncidentProgress());
+            }}
+          />
+          {renderNextStepBanner(
+            'starter-kit',
+            '📦 Microservice Template',
+            'Inspect standard production repository scaffolding with uv, ruff, mypy, and Docker',
+          )}
+        </section>
+      )}
+
+      {/* TAB 9: MICROSERVICE STARTER KIT */}
+      {tab === 'starter-kit' && (
+        <section className="python-tab-pane">
+          <PythonStarterKitView />
+          {renderNextStepBanner(
+            'interview',
+            '68 Interview Q&A Engine',
+            'Master all 68 interview questions categorized by difficulty and tags',
+          )}
         </section>
       )}
 
@@ -974,17 +1191,28 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               })
             )}
           </div>
+
+          {renderNextStepBanner(
+            'flashcards',
+            '🎴 Flashcards & Mock Screen',
+            'Test active recall with 3D flip flashcards and 30-min timed technical interview screen',
+          )}
         </section>
       )}
 
-      {/* TAB: FLASHCARDS & TIMED MOCK SCREEN */}
+      {/* TAB 11: FLASHCARDS & TIMED MOCK SCREEN */}
       {tab === 'flashcards' && (
         <section className="python-tab-pane">
           <PythonFlashcards />
+          {renderNextStepBanner(
+            'quiz',
+            'Tricky Gotchas Quiz',
+            'Test your mental model against 10 common CPython runtime traps',
+          )}
         </section>
       )}
 
-      {/* TAB 4: GOTCHA QUIZZES */}
+      {/* TAB 12: GOTCHA QUIZZES */}
       {tab === 'quiz' && (
         <section className="python-tab-pane">
           <div className="section-intro">
@@ -1090,10 +1318,16 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               );
             })}
           </div>
+
+          {renderNextStepBanner(
+            'lab',
+            'Production Project Lab',
+            'Capstone production architecture principles and complete AI-Native SDLC transition',
+          )}
         </section>
       )}
 
-      {/* TAB 5: PRODUCTION LAB */}
+      {/* TAB 13: PRODUCTION LAB */}
       {tab === 'lab' && (
         <section className="python-tab-pane">
           <div className="section-intro">
@@ -1188,6 +1422,25 @@ async def test_retry_on_network_failure(mocker):
             <a className="button primary" href="#/production">
               <Layers size={16} /> Open Production Blueprint
             </a>
+          </div>
+
+          {/* All Track Modules Completed Banner */}
+          <div className="next-learning-step-banner track-completed-banner">
+            <div className="next-step-copy">
+              <span className="next-step-badge completed">🎉 All 13 Python Modules Completed</span>
+              <h4>You are Production-Ready for AI Systems Engineering</h4>
+              <p>
+                You have journeyed through Python runtime internals, production OOP & testing, FastAPI backend services, RAG pipelines, on-call firefighting, and senior technical interview readiness.
+              </p>
+            </div>
+            <div className="next-step-actions-row">
+              <a className="button primary" href="#/sdlc">
+                <Workflow size={16} /> Open AI-Native SDLC Studio
+              </a>
+              <a className="button light" href="#/production">
+                <Layers size={16} /> 8-Sprint Production Blueprint
+              </a>
+            </div>
           </div>
         </section>
       )}

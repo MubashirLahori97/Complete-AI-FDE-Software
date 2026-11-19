@@ -5,18 +5,156 @@
 export type PythonDifficulty = 'beginner' | 'intermediate' | 'advanced';
 export type PythonTrackTab =
   | 'curriculum'
-  | 'topics'
   | 'toy-vs-prod'
+  | 'topics'
   | 'studio'
   | 'fastapi'
   | 'rag'
-  | 'incidents'
   | 'ai-labs'
+  | 'incidents'
   | 'starter-kit'
   | 'interview'
   | 'flashcards'
   | 'quiz'
   | 'lab';
+
+export interface PythonTrackTier {
+  id: number;
+  tag: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  tabIds: PythonTrackTab[];
+}
+
+export const PYTHON_TRACK_TIERS: PythonTrackTier[] = [
+  {
+    id: 1,
+    tag: 'TIER 1',
+    title: 'Foundations & Mental Models',
+    subtitle: 'Beginner to Core Fundamentals',
+    description: '4-stage roadmap, Day 1 Toy vs Production paradigm shift, and 18 CPython internals deep dives.',
+    tabIds: ['curriculum', 'toy-vs-prod', 'topics'],
+  },
+  {
+    id: 2,
+    tag: 'TIER 2',
+    title: 'Production Systems & Applied Labs',
+    subtitle: 'Intermediate to Advanced Systems Engineering',
+    description: 'Interactive Pyodide WebAssembly Code & Exam Studio, FastAPI Backend, RAG Pipeline, AI Labs, and On-Call Incidents.',
+    tabIds: ['studio', 'fastapi', 'rag', 'ai-labs', 'incidents', 'starter-kit'],
+  },
+  {
+    id: 3,
+    tag: 'TIER 3',
+    title: 'Interview Screen & Verification',
+    subtitle: 'Senior Verification & Career Readiness',
+    description: '68 GeeksforGeeks interview questions, 3D flip card active recall, 30-min timed screen, and tricky gotchas.',
+    tabIds: ['interview', 'flashcards', 'quiz', 'lab'],
+  },
+];
+
+export interface OrderedPythonTab {
+  tab: PythonTrackTab;
+  stepNumber: number;
+  title: string;
+  subtitle: string;
+  tierId: number;
+}
+
+export const ORDERED_PYTHON_TABS: OrderedPythonTab[] = [
+  {
+    tab: 'curriculum',
+    stepNumber: 1,
+    title: 'Stages & Roadmap',
+    subtitle: 'The 4 progressive learning stages from beginner to AI systems engineer',
+    tierId: 1,
+  },
+  {
+    tab: 'toy-vs-prod',
+    stepNumber: 2,
+    title: 'Day 1: Toy vs Production',
+    subtitle: 'Why tutorial code breaks in production (modern uv, ruff, pydantic, and pytest)',
+    tierId: 1,
+  },
+  {
+    tab: 'topics',
+    stepNumber: 3,
+    title: '18 Concept Deep Dives',
+    subtitle: 'CPython internals, memory layout, dunder protocols, OOP MRO, and asyncio',
+    tierId: 1,
+  },
+  {
+    tab: 'studio',
+    stepNumber: 4,
+    title: 'Code & Exam Studio',
+    subtitle: 'Interactive Pyodide WebAssembly runtime & 6 automated production exams',
+    tierId: 2,
+  },
+  {
+    tab: 'fastapi',
+    stepNumber: 5,
+    title: '⚡ FastAPI Backend',
+    subtitle: 'Production microservices: lifespans, DI Depends, Pydantic schemas, and RFC 7807',
+    tierId: 2,
+  },
+  {
+    tab: 'rag',
+    stepNumber: 6,
+    title: '🧠 Production RAG',
+    subtitle: 'Sliding chunking, dense vector cosine similarity, and hallucination guard',
+    tierId: 2,
+  },
+  {
+    tab: 'ai-labs',
+    stepNumber: 7,
+    title: '🤖 AI-FDE Labs',
+    subtitle: 'Token counting, tool dispatchers, SSE event streams, and eval benchmarks',
+    tierId: 2,
+  },
+  {
+    tab: 'incidents',
+    stepNumber: 8,
+    title: '🚨 On-Call Incidents',
+    subtitle: 'Senior debugging: memory leaks, GIL locks, race conditions, and pool exhaustion',
+    tierId: 2,
+  },
+  {
+    tab: 'starter-kit',
+    stepNumber: 9,
+    title: '📦 Microservice Template',
+    subtitle: 'Production repo scaffolding with uv, ruff, mypy, pytest, and Dockerfile',
+    tierId: 2,
+  },
+  {
+    tab: 'interview',
+    stepNumber: 10,
+    title: '68 Interview Q&A Engine',
+    subtitle: 'Complete question bank with what senior interviewers look for and tag filters',
+    tierId: 3,
+  },
+  {
+    tab: 'flashcards',
+    stepNumber: 11,
+    title: '🎴 Flashcards & Mock Screen',
+    subtitle: '3D flip card active recall & 30-minute timed senior technical screen',
+    tierId: 3,
+  },
+  {
+    tab: 'quiz',
+    stepNumber: 12,
+    title: 'Tricky Gotchas Quiz',
+    subtitle: '10 runtime gotchas: mutable defaults, closure bindings, and is vs ==',
+    tierId: 3,
+  },
+  {
+    tab: 'lab',
+    stepNumber: 13,
+    title: 'Production Project Lab',
+    subtitle: 'Capstone architecture blueprint and full-stack deployment journey',
+    tierId: 3,
+  },
+];
 
 export interface PythonTrackStage {
   id: string;

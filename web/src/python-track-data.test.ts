@@ -4,6 +4,8 @@ import {
   PYTHON_TOPICS,
   PYTHON_INTERVIEW_QUESTIONS,
   PYTHON_QUIZ_QUESTIONS,
+  PYTHON_TRACK_TIERS,
+  ORDERED_PYTHON_TABS,
   getTopicsByDifficulty,
   getTopicByNumber,
   getQuestionByNumber,
@@ -164,5 +166,39 @@ describe('Python Track Data Suite', () => {
     const loaded = loadQuizAnswers();
     expect(loaded['quiz-1']).toBe(1);
     expect(loaded['quiz-2']).toBe(1);
+  });
+
+  it('structures learning tabs into 3 progressive tiers covering all 13 modules', () => {
+    expect(PYTHON_TRACK_TIERS.length).toBe(3);
+    expect(ORDERED_PYTHON_TABS.length).toBe(13);
+
+    // Verify all 13 modules are covered across the 3 tiers
+    const tierTabs = PYTHON_TRACK_TIERS.flatMap((t) => t.tabIds);
+    expect(tierTabs.length).toBe(13);
+    expect(new Set(tierTabs).size).toBe(13);
+
+    // Verify sequential step numbering from 1 to 13
+    ORDERED_PYTHON_TABS.forEach((item, index) => {
+      expect(item.stepNumber).toBe(index + 1);
+      expect(item.title.length).toBeGreaterThan(3);
+      expect(item.subtitle.length).toBeGreaterThan(10);
+      expect([1, 2, 3]).toContain(item.tierId);
+    });
+
+    // Tier 1 has 3 foundational modules
+    expect(PYTHON_TRACK_TIERS[0].tabIds).toEqual(['curriculum', 'toy-vs-prod', 'topics']);
+
+    // Tier 2 has 6 applied production modules
+    expect(PYTHON_TRACK_TIERS[1].tabIds).toEqual([
+      'studio',
+      'fastapi',
+      'rag',
+      'ai-labs',
+      'incidents',
+      'starter-kit',
+    ]);
+
+    // Tier 3 has 4 verification & interview modules
+    expect(PYTHON_TRACK_TIERS[2].tabIds).toEqual(['interview', 'flashcards', 'quiz', 'lab']);
   });
 });
