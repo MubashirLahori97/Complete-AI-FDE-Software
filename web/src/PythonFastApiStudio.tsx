@@ -1,15 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   Award,
+  BookOpen,
+  Boxes,
+  Check,
   CheckCircle2,
+  ChevronDown,
   ChevronRight,
   Code2,
+  Compass,
   Copy,
   Cpu,
+  FileCode,
+  FolderTree,
+  Flame,
+  HelpCircle,
   Layers,
+  Lightbulb,
   Play,
   RotateCcw,
   Server,
+  Shield,
   Sparkles,
   Terminal,
   Workflow,
@@ -19,11 +30,15 @@ import {
 import {
   FASTAPI_LABS,
   FASTAPI_OVERVIEW,
+  FASTAPI_ROADMAP_STAGES,
+  FASTAPI_PRODUCTION_PROJECT_FILES,
   loadFastApiDrafts,
   loadFastApiProgress,
   saveFastApiCleared,
   saveFastApiDraft,
   type FastApiLab,
+  type FastApiRoadmapStage,
+  type FastApiProjectFile,
 } from './python-fastapi-data';
 
 interface PythonFastApiStudioProps {
@@ -31,6 +46,14 @@ interface PythonFastApiStudioProps {
 }
 
 export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudioProps) {
+  const [studioMode, setStudioMode] = useState<'labs' | 'roadmap' | 'blueprint'>('labs');
+  const [selectedStageId, setSelectedStageId] = useState<string>('stage-1');
+  const [selectedFilePath, setSelectedFilePath] = useState<string>(
+    FASTAPI_PRODUCTION_PROJECT_FILES[0]?.path || 'pyproject.toml',
+  );
+  const [copiedFile, setCopiedFile] = useState(false);
+  const [copiedTopicId, setCopiedTopicId] = useState<string | null>(null);
+
   const [selectedLabId, setSelectedLabId] = useState<string>('fastapi-lab-1');
   const [drafts, setDrafts] = useState<Record<string, string>>(() => loadFastApiDrafts());
   const [clearedLabs, setClearedLabs] = useState<Record<string, boolean>>(() => loadFastApiProgress());
@@ -48,6 +71,18 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
   const frameRef = useRef<HTMLIFrameElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const runIdRef = useRef(0);
+
+  const copyFileCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedFile(true);
+    setTimeout(() => setCopiedFile(false), 2000);
+  };
+
+  const copyTopicCode = (code: string, id: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedTopicId(id);
+    setTimeout(() => setCopiedTopicId(null), 2000);
+  };
 
   const currentLab: FastApiLab =
     FASTAPI_LABS.find((l) => l.id === selectedLabId) || FASTAPI_LABS[0];
@@ -298,7 +333,41 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
         ))}
       </div>
 
-      {/* Lab Nav Grid */}
+      {/* Studio View Mode Switcher */}
+      <div className="fastapi-mode-tabs" role="tablist">
+        <button
+          type="button"
+          className={`fastapi-mode-btn ${studioMode === 'labs' ? 'active' : ''}`}
+          onClick={() => setStudioMode('labs')}
+        >
+          <Zap size={16} />
+          <span>Interactive Labs</span>
+          <span className="mode-badge">{clearedCount}/{FASTAPI_LABS.length} Cleared</span>
+        </button>
+        <button
+          type="button"
+          className={`fastapi-mode-btn ${studioMode === 'roadmap' ? 'active' : ''}`}
+          onClick={() => setStudioMode('roadmap')}
+        >
+          <Compass size={16} />
+          <span>Complete Roadmap</span>
+          <span className="mode-badge">{FASTAPI_ROADMAP_STAGES.length} Stages</span>
+        </button>
+        <button
+          type="button"
+          className={`fastapi-mode-btn ${studioMode === 'blueprint' ? 'active' : ''}`}
+          onClick={() => setStudioMode('blueprint')}
+        >
+          <Boxes size={16} />
+          <span>Production Project Blueprint</span>
+          <span className="mode-badge">{FASTAPI_PRODUCTION_PROJECT_FILES.length} Files</span>
+        </button>
+      </div>
+
+      {/* MODE 1: INTERACTIVE LABS */}
+      {studioMode === 'labs' && (
+        <>
+          {/* Lab Nav Grid */}
       <div className="fastapi-nav-grid">
         {FASTAPI_LABS.map((lab) => {
           const isCleared = Boolean(clearedLabs[lab.id]);
@@ -496,6 +565,227 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
           </div>
         )}
       </div>
+    </>
+  )}
+
+      {/* MODE 2: COMPLETE FASTAPI PRODUCTION ROADMAP */}
+      {studioMode === 'roadmap' && (
+        <div className="fastapi-roadmap-view">
+          <div className="roadmap-intro-card">
+            <div className="roadmap-intro-header">
+              <span className="roadmap-tag">6-STAGE SYSTEMATIC CURRICULUM</span>
+              <h3>The Complete FastAPI Production Engineering Roadmap</h3>
+              <p>
+                From ASGI event-loop concurrency and strict Pydantic v2 validation contracts to
+                zero-downtime Alembic migrations, RFC 7807 problem details, and multi-stage containerization.
+              </p>
+            </div>
+            <div className="roadmap-stage-pills">
+              {FASTAPI_ROADMAP_STAGES.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  className={`stage-pill-btn ${s.id === selectedStageId ? 'active' : ''}`}
+                  onClick={() => setSelectedStageId(s.id)}
+                >
+                  <span className="stage-pill-num">0{s.number}</span>
+                  <span className="stage-pill-title">{s.title.split(':')[1]?.trim() || s.title}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Active Stage Details */}
+          {(() => {
+            const activeStage =
+              FASTAPI_ROADMAP_STAGES.find((s) => s.id === selectedStageId) ||
+              FASTAPI_ROADMAP_STAGES[0];
+            return (
+              <div className="active-stage-card">
+                <header className="active-stage-header">
+                  <div className="stage-header-meta">
+                    <span className="stage-pill-large">STAGE 0{activeStage.number}</span>
+                    <span className="stage-tagline">{activeStage.tagline}</span>
+                  </div>
+                  <h3>{activeStage.title}</h3>
+                  <p className="stage-desc">{activeStage.description}</p>
+                </header>
+
+                <div className="stage-topics-list">
+                  {activeStage.topics.map((topic) => (
+                    <article key={topic.id} className="stage-topic-card">
+                      <div className="topic-card-header">
+                        <h4>{topic.title}</h4>
+                      </div>
+                      <p className="topic-summary">{topic.summary}</p>
+
+                      <div className="code-block-wrapper">
+                        <div className="code-block-header">
+                          <span className="code-lang">python</span>
+                          <button
+                            type="button"
+                            className="copy-btn"
+                            onClick={() => copyTopicCode(topic.codeSnippet, topic.id)}
+                          >
+                            {copiedTopicId === topic.id ? (
+                              <>
+                                <Check size={14} /> Copied!
+                              </>
+                            ) : (
+                              <>
+                                <Copy size={14} /> Copy snippet
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <pre className="code-pre">
+                          <code>{topic.codeSnippet}</code>
+                        </pre>
+                      </div>
+
+                      <div className="topic-callouts-grid">
+                        <div className="topic-callout practice-box">
+                          <h5>
+                            <Shield size={16} /> Production Best Practice
+                          </h5>
+                          <p>{topic.productionBestPractice}</p>
+                        </div>
+                        <div className="topic-callout pitfall-box">
+                          <h5>
+                            <Flame size={16} /> Dangerous Pitfall
+                          </h5>
+                          <p>{topic.commonPitfall}</p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      )}
+
+      {/* MODE 3: PRODUCTION PROJECT BLUEPRINT */}
+      {studioMode === 'blueprint' && (
+        <div className="fastapi-blueprint-view">
+          {/* Architectural Philosophy Card */}
+          <div className="blueprint-intro-card">
+            <div className="blueprint-intro-copy">
+              <span className="blueprint-tag">ENTERPRISE SERVICE ARCHITECTURE</span>
+              <h3>How to Create a Production-Grade FastAPI Project</h3>
+              <p>
+                Toy tutorials put everything in a single <code>main.py</code> file with global state and
+                synchronous calls. Real production engineering requires a <strong>4-Layer Clean Architecture</strong> that
+                scales cleanly to dozens of engineers and hundreds of endpoints.
+              </p>
+            </div>
+
+            <div className="clean-arch-grid">
+              <div className="arch-layer-card">
+                <span className="layer-step">LAYER 1</span>
+                <h5>Thin Routers (Controllers)</h5>
+                <p>
+                  Handles HTTP concerns: route paths, input validation, status codes, and headers. Zero business logic or raw database queries.
+                </p>
+              </div>
+              <div className="arch-layer-card">
+                <span className="layer-step">LAYER 2</span>
+                <h5>Domain Services</h5>
+                <p>
+                  Pure Python business rules. Orchestrates domain calculations, access validations, and coordination across multiple entities.
+                </p>
+              </div>
+              <div className="arch-layer-card">
+                <span className="layer-step">LAYER 3</span>
+                <h5>Repositories</h5>
+                <p>
+                  Encapsulates all SQL queries, joins, and transactions using Async SQLAlchemy 2.0. Keeps service layers database-agnostic.
+                </p>
+              </div>
+              <div className="arch-layer-card">
+                <span className="layer-step">LAYER 4</span>
+                <h5>Database & Infrastructure</h5>
+                <p>
+                  Declarative SQLAlchemy models, connection pool tuning, Alembic migrations, and Redis caching.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive File Explorer */}
+          <div className="blueprint-explorer-container">
+            <div className="blueprint-explorer-head">
+              <h4>
+                <FolderTree size={18} /> Enterprise Project Scaffolding ({FASTAPI_PRODUCTION_PROJECT_FILES.length} Production Files)
+              </h4>
+              <p className="muted">
+                Select any file to inspect its full production implementation, architectural purpose, and copy directly into your repository.
+              </p>
+            </div>
+
+            <div className="blueprint-explorer-grid">
+              {/* Left: File Tree */}
+              <aside className="blueprint-file-tree">
+                {FASTAPI_PRODUCTION_PROJECT_FILES.map((f) => (
+                  <button
+                    key={f.path}
+                    type="button"
+                    className={`file-tree-btn ${f.path === selectedFilePath ? 'active' : ''}`}
+                    onClick={() => setSelectedFilePath(f.path)}
+                  >
+                    <FileCode size={15} />
+                    <div className="file-info">
+                      <span className="file-name">{f.path}</span>
+                      <span className="file-cat">{f.category}</span>
+                    </div>
+                  </button>
+                ))}
+              </aside>
+
+              {/* Right: Code Viewer */}
+              <div className="blueprint-code-pane">
+                {(() => {
+                  const activeFile =
+                    FASTAPI_PRODUCTION_PROJECT_FILES.find((f) => f.path === selectedFilePath) ||
+                    FASTAPI_PRODUCTION_PROJECT_FILES[0];
+                  return (
+                    <>
+                      <div className="code-pane-header">
+                        <div className="code-pane-meta">
+                          <span className="file-badge">{activeFile.category}</span>
+                          <span className="file-path-title">{activeFile.path}</span>
+                        </div>
+                        <button
+                          type="button"
+                          className="copy-btn primary"
+                          onClick={() => copyFileCode(activeFile.code)}
+                        >
+                          {copiedFile ? (
+                            <>
+                              <Check size={14} /> Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={14} /> Copy Full File
+                            </>
+                          )}
+                        </button>
+                      </div>
+                      <div className="code-pane-desc">
+                        <p>{activeFile.description}</p>
+                      </div>
+                      <pre className="blueprint-code-block">
+                        <code>{activeFile.code}</code>
+                      </pre>
+                    </>
+                  );
+                })()}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

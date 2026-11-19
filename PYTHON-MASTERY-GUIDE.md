@@ -2364,14 +2364,328 @@ class KnowledgeService:
 
 ---
 
-### 7. FastAPI Production Backend Architecture
+### 7. FastAPI Production Backend Architecture & Complete Engineering Roadmap
 
-FastAPI is the reference framework for high-throughput AI backends. Production FastAPI enforces 5 architectural standards:
-1. **ASGI Lifespan Handlers (`@asynccontextmanager`)**: Deterministic startup and shutdown lifecycle replacing deprecated `@app.on_event`.
-2. **Hierarchical Dependency Injection (`Depends`)**: Request-scoped database sessions, authentication, and service caching with automatic teardown.
-3. **Rust-Powered Pydantic v2**: Strict schema validation (`model_config = ConfigDict(extra="forbid")`) with automated OpenAPI schema generation.
-4. **Response Model Sanitization**: Strict `response_model=UserPublicResponse` preventing internal database hashes or secrets from leaking to clients.
-5. **Global RFC 7807 Error Envelopes**: Uniform JSON error formats with correlation tracking IDs (`x-request-id`).
+FastAPI is the reference framework for high-throughput asynchronous Python backends. Below is the complete 6-stage production roadmap and the architectural blueprint for building an enterprise-grade service.
+
+---
+
+#### 🗺️ The 6-Stage FastAPI Production Roadmap
+
+```
+[ Stage 1: ASGI & Type-Driven Requests ]
+  └─ ASGI event loop vs WSGI thread-per-request · typing.Annotated · Semantic REST status codes
+
+[ Stage 2: Pydantic v2 Contracts & Rust-Speed Validation ]
+  └─ Rust pydantic-core · ConfigDict(extra="forbid") · Outbound response_model sanitization · Field & model validators
+
+[ Stage 3: Dependency Injection (Depends) & Security ]
+  └─ Hierarchical DI tree · Yield-based session cleanup · JWT Bearer & RBAC factories · app.dependency_overrides
+
+[ Stage 4: Async Database Persistence (SQLAlchemy 2.0 & Alembic) ]
+  └─ create_async_engine + asyncpg · pool_pre_ping & pool tuning · Mapped[] 2.0 models · Zero-downtime Alembic migrations
+
+[ Stage 5: Observability, Middleware & RFC 7807 Error Envelopes ]
+  └─ Distributed x-request-id propagation · Structured JSON logging · Global RFC 7807 500 sanitization · HTTPX connection pooling
+
+[ Stage 6: Clean Architecture, Docker & Kubernetes ]
+  └─ 4-Layer Clean Architecture (Routers -> Services -> Repositories -> Models) · 12-factor pydantic-settings · Multi-stage non-root Dockerfile · /healthz & /ready probes
+```
+
+##### Stage 1: Core ASGI Architecture & Type-Driven Requests
+- **ASGI Concurrency**: FastAPI runs on ASGI servers (Uvicorn, Granian). ASGI executes thousands of concurrent I/O operations on a single event loop without thread allocation overhead.
+- **Async vs Sync Handlers**: Use `async def` with non-blocking async drivers (`asyncpg`, `httpx`, `redis.asyncio`). If calling legacy blocking code (e.g. synchronous boto3), declare the handler as plain `def` so FastAPI automatically offloads it to a worker threadpool without freezing the ASGI event loop.
+- **Annotated Parameters**: Attach validation constraints using `Annotated[int, Path(ge=1)]` and `Annotated[int, Query(ge=1, le=100)]` to reject malformed or unbounded requests at the network perimeter.
+
+##### Stage 2: Pydantic v2 Contracts & Rust-Speed Validation
+- **pydantic-core**: Pydantic v2 compiles validation logic down to Rust. By configuring `ConfigDict(extra="forbid", str_strip_whitespace=True)`, you eliminate mass-assignment vulnerabilities.
+- **Response Model Sanitization**: Always define explicit `response_model=UserPublicResponse`. FastAPI filters out sensitive internal properties (e.g. `hashed_password`, internal tenant IDs) before sending JSON over the wire.
+- **Domain Validators**: Use `@field_validator` for format rules and `@model_validator(mode="after")` for cross-field consistency (e.g., verifying `check_out > check_in`).
+
+##### Stage 3: Dependency Injection (`Depends`) & Security
+- **Asynchronous Lifecycle Cleanup (`yield`)**: A dependency with `yield` executes setup before route handling and teardown in a `finally` block after the response is sent, guaranteeing database rollback on exceptions.
+- **JWT & Role-Based Access Control**: Chain authentication (`oauth2_scheme`) into reusable role-checking dependencies: `dependencies=[Depends(require_role("admin"))]`.
+- **Hermetic Testing**: Swap real database connections or external services in test suites using `app.dependency_overrides[get_db] = override_db` without monkeypatching.
+
+##### Stage 4: Async Persistence (SQLAlchemy 2.0 & Alembic)
+- **Connection Pool Tuning**:
+  ```python
+  engine = create_async_engine(
+      DATABASE_URL,
+      pool_size=10,        # Base persistent connections
+      max_overflow=20,     # Burst headroom under traffic spikes
+      pool_recycle=1800,   # Recycle idle connections every 30m
+      pool_pre_ping=True,  # Test connection liveness before checkout
+  )
+  ```
+- **Declarative Mapped Models**: Use modern SQLAlchemy 2.0 `Mapped[int] = mapped_column(...)` for static typing and `scalars(select(...))` for query execution.
+- **Zero-Downtime Migrations**: Ensure schema migrations add columns as nullable or with a `server_default` to prevent table-level locking in production.
+
+##### Stage 5: Enterprise Observability, RFC 7807 & Resilience
+- **Correlation ID Middleware**: Generate or propagate `x-request-id` headers across all distributed services.
+- **Global RFC 7807 Error Envelope**: Catch unhandled 500 exceptions, log private tracebacks internally, and return a standardized JSON error envelope:
+  ```json
+  {
+    "type": "https://errors.enterprise.internal/500",
+    "title": "Internal Server Error",
+    "status": 500,
+    "detail": "An internal error occurred. Please quote the reference ID to support.",
+    "instance": "/tasks/42",
+    "correlation_id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+  }
+  ```
+- **Shared HTTPX Client**: Maintain a single shared `httpx.AsyncClient` with connection pooling and exponential backoff with full jitter to avoid port exhaustion.
+
+##### Stage 6: Clean Architecture, Docker & Kubernetes
+- **4-Layer Clean Architecture**: Keep routers thin; isolate domain logic in services and queries in repositories.
+- **12-Factor Settings**: Use `pydantic-settings` with strict startup validation.
+- **Multi-Stage Containerization**: Build with `ghcr.io/astral-sh/uv` and execute as a non-root user (`USER appuser`) with `/healthz` (liveness) and `/ready` (readiness) probes.
+
+---
+
+#### 🏗️ How to Create a Production-Grade FastAPI Project From Scratch
+
+##### 1. Clean Architecture Directory Layout
+
+```
+my-fastapi-service/
+├── pyproject.toml              # Modern uv project dependencies & ruff config
+├── Dockerfile                  # Multi-stage non-root container build
+├── README.md
+├── app/
+│   ├── __init__.py
+│   ├── main.py                 # Application factory, middleware & router inclusion
+│   ├── core/
+│   │   ├── config.py           # Pydantic-settings for type-safe environment variables
+│   │   ├── database.py         # Async engine, connection pool & session factory
+│   │   ├── exceptions.py       # RFC 7807 global exception envelope
+│   │   └── lifespan.py         # ASGI lifespan manager & DB pool pre-warming
+│   ├── models/                 # SQLAlchemy 2.0 declarative database entities
+│   │   └── task.py
+│   ├── schemas/                # Inbound/outbound Pydantic v2 validation contracts
+│   │   └── task.py
+│   ├── repositories/           # Encapsulated database query operations
+│   │   └── task_repo.py
+│   ├── services/               # Pure Python domain business logic
+│   │   └── task_service.py
+│   └── routers/                # Thin HTTP controllers
+│       ├── health.py           # Kubernetes /healthz & /ready probes
+│       └── tasks.py            # API resource endpoints
+└── tests/
+    ├── conftest.py             # Async client fixtures & dependency overrides
+    └── test_api.py             # Route contract & validation assertions
+```
+
+##### 2. File-by-File Production Implementation
+
+###### `app/core/config.py`
+```python
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field
+from functools import lru_cache
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
+
+    SERVICE_NAME: str = "enterprise-api"
+    ENVIRONMENT: str = Field(default="production")
+    DEBUG: bool = Field(default=False)
+
+    DATABASE_URL: str = Field(default="postgresql+asyncpg://postgres:postgres@localhost:5432/app_db")
+    DB_POOL_SIZE: int = Field(default=10)
+    DB_MAX_OVERFLOW: int = Field(default=20)
+    DB_POOL_TIMEOUT: int = Field(default=30)
+    DB_POOL_RECYCLE: int = Field(default=1800)
+
+    ALLOWED_ORIGINS: list[str] = Field(default=["*"])
+
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()
+
+settings = get_settings()
+```
+
+###### `app/core/database.py`
+```python
+from typing import AsyncGenerator
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
+from sqlalchemy.orm import DeclarativeBase
+from app.core.config import settings
+
+class Base(DeclarativeBase):
+    pass
+
+engine = create_async_engine(
+    settings.DATABASE_URL,
+    echo=settings.DEBUG,
+    pool_size=settings.DB_POOL_SIZE,
+    max_overflow=settings.DB_MAX_OVERFLOW,
+    pool_timeout=settings.DB_POOL_TIMEOUT,
+    pool_recycle=settings.DB_POOL_RECYCLE,
+    pool_pre_ping=True,
+)
+
+AsyncSessionFactory = async_sessionmaker(
+    bind=engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
+    autoflush=False,
+)
+
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionFactory() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+```
+
+###### `app/core/lifespan.py`
+```python
+from contextlib import asynccontextmanager
+from typing import AsyncIterator
+from fastapi import FastAPI
+from sqlalchemy import text
+from app.core.database import engine
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    # Startup: Pre-warm pool & verify connectivity
+    try:
+        async with engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+        app.state.is_ready = True
+    except Exception:
+        app.state.is_ready = False
+
+    yield
+
+    # Shutdown: Clean teardown
+    app.state.is_ready = False
+    await engine.dispose()
+```
+
+###### `app/core/exceptions.py`
+```python
+from fastapi import FastAPI, Request, status
+from fastapi.responses import JSONResponse
+import logging
+
+logger = logging.getLogger("api.exceptions")
+
+def register_exception_handlers(app: FastAPI) -> None:
+    @app.exception_handler(Exception)
+    async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+        correlation_id = getattr(request.state, "correlation_id", "untracked")
+        logger.error("unhandled_server_error", exc_info=exc, extra={"correlation_id": correlation_id})
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={
+                "type": "https://errors.enterprise.internal/500",
+                "title": "Internal Server Error",
+                "status": 500,
+                "detail": "An internal error occurred. Please quote the reference ID to support.",
+                "instance": request.url.path,
+                "correlation_id": correlation_id,
+            },
+        )
+```
+
+###### `app/routers/health.py`
+```python
+from fastapi import APIRouter, Request, status, HTTPException
+from sqlalchemy import text
+from app.core.database import engine
+
+router = APIRouter(tags=["Health & Probes"])
+
+@router.get("/healthz", status_code=status.HTTP_200_OK)
+async def liveness():
+    return {"status": "healthy"}
+
+@router.get("/ready", status_code=status.HTTP_200_OK)
+async def readiness(request: Request):
+    if not getattr(request.app.state, "is_ready", False):
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Service dependencies initializing",
+        )
+    return {"status": "ready"}
+```
+
+###### `app/main.py`
+```python
+import uuid
+import time
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from app.core.config import settings
+from app.core.lifespan import lifespan
+from app.core.exceptions import register_exception_handlers
+from app.routers import health, tasks
+
+def create_app() -> FastAPI:
+    app = FastAPI(
+        title=settings.SERVICE_NAME,
+        version="0.1.0",
+        lifespan=lifespan,
+        docs_url="/docs" if settings.ENVIRONMENT != "production" else None,
+        redoc_url=None,
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.ALLOWED_ORIGINS,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    @app.middleware("http")
+    async def correlation_middleware(request: Request, call_next):
+        correlation_id = request.headers.get("x-request-id") or str(uuid.uuid4())
+        request.state.correlation_id = correlation_id
+        start = time.perf_counter()
+        response = await call_next(request)
+        response.headers["x-request-id"] = correlation_id
+        response.headers["x-response-time-ms"] = str(round((time.perf_counter() - start) * 1000, 2))
+        return response
+
+    register_exception_handlers(app)
+    app.include_router(health.router)
+    app.include_router(tasks.router)
+    return app
+
+app = create_app()
+```
+
+###### `Dockerfile`
+```dockerfile
+# Stage 1: Fast Rust dependency builder using uv
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
+WORKDIR /app
+COPY pyproject.toml ./
+RUN uv venv /app/.venv && uv pip install -r pyproject.toml
+
+# Stage 2: Minimal runtime container
+FROM python:3.12-slim-bookworm
+WORKDIR /app
+
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 --gid 1001 appuser
+
+COPY --from=builder /app/.venv /app/.venv
+ENV PATH="/app/.venv/bin:$PATH"
+
+COPY ./app ./app
+USER appuser
+
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+```
 
 ---
 

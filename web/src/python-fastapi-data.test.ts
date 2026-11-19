@@ -2,6 +2,8 @@ import { describe, expect, it, beforeEach } from 'vitest';
 import {
   FASTAPI_LABS,
   FASTAPI_OVERVIEW,
+  FASTAPI_ROADMAP_STAGES,
+  FASTAPI_PRODUCTION_PROJECT_FILES,
   loadFastApiProgress,
   saveFastApiCleared,
   loadFastApiDrafts,
@@ -54,5 +56,45 @@ describe('FastAPI Production Backend Data Suite', () => {
     expect(Object.keys(loadFastApiDrafts())).toHaveLength(0);
     saveFastApiDraft('fastapi-lab-1', 'def test(): pass');
     expect(loadFastApiDrafts()['fastapi-lab-1']).toBe('def test(): pass');
+  });
+
+  it('contains comprehensive 6-stage FastAPI production roadmap', () => {
+    expect(FASTAPI_ROADMAP_STAGES).toHaveLength(6);
+    for (const [idx, stage] of FASTAPI_ROADMAP_STAGES.entries()) {
+      expect(stage.number).toBe(idx + 1);
+      expect(stage.id).toBe(`stage-${idx + 1}`);
+      expect(stage.title.length).toBeGreaterThan(15);
+      expect(stage.description.length).toBeGreaterThan(30);
+      expect(stage.topics.length).toBeGreaterThanOrEqual(3);
+
+      for (const topic of stage.topics) {
+        expect(topic.title.length).toBeGreaterThan(5);
+        expect(topic.summary.length).toBeGreaterThan(20);
+        expect(topic.codeSnippet.length).toBeGreaterThan(30);
+        expect(topic.productionBestPractice.length).toBeGreaterThan(20);
+        expect(topic.commonPitfall.length).toBeGreaterThan(20);
+      }
+    }
+  });
+
+  it('contains complete production project file scaffolding', () => {
+    expect(FASTAPI_PRODUCTION_PROJECT_FILES.length).toBeGreaterThanOrEqual(10);
+    const paths = FASTAPI_PRODUCTION_PROJECT_FILES.map((f) => f.path);
+    expect(paths).toContain('pyproject.toml');
+    expect(paths).toContain('app/core/config.py');
+    expect(paths).toContain('app/core/database.py');
+    expect(paths).toContain('app/core/exceptions.py');
+    expect(paths).toContain('app/core/lifespan.py');
+    expect(paths).toContain('app/routers/health.py');
+    expect(paths).toContain('app/routers/tasks.py');
+    expect(paths).toContain('app/main.py');
+    expect(paths).toContain('tests/test_api.py');
+    expect(paths).toContain('Dockerfile');
+
+    for (const file of FASTAPI_PRODUCTION_PROJECT_FILES) {
+      expect(file.category.length).toBeGreaterThan(3);
+      expect(file.description.length).toBeGreaterThan(10);
+      expect(file.code.length).toBeGreaterThan(20);
+    }
   });
 });
