@@ -194,6 +194,132 @@ Cooperative multitasking on a single thread. The event loop switches between cor
 
 ---
 
+## Modern Tooling: The 2025/2026 Production Standard (Astral Stack)
+
+Inspired by modern production engineering workflows (such as Datalumina's modern Python curriculum):
+
+### 1. `uv` — The Lightning-Fast Python Package & Project Manager
+Traditional Python development required multiple disjointed tools (`pip`, `virtualenv`, `pip-tools`, `poetry`). In modern production, `uv` (written in Rust by Astral) replaces all of them:
+- **10–30x Faster Installs**: Installs packages in 1–2 seconds instead of 30+ seconds.
+- **Instant Virtual Environments**: `uv venv` creates isolated environments in milliseconds.
+- **Deterministic Lockfiles**: `uv lock` ensures exact bit-for-bit reproducibility across developers and CI/CD pipelines.
+- **Run Anywhere**: `uv run script.py` executes code in an isolated project context automatically.
+
+```bash
+# Modern production setup:
+uv venv
+uv pip install -r pyproject.toml
+uv run python main.py
+```
+
+### 2. `Ruff` — The All-in-One Rust Linter & Formatter
+Replaces `flake8`, `black`, `isort`, `pydocstyle`, and `bandit` with a single binary that checks and formats code in under 10 milliseconds:
+```bash
+uv run ruff check --fix   # Lint and auto-fix violations
+uv run ruff format        # Format according to PEP 8 standard
+```
+
+### 3. `pyproject.toml` — Modern Single-File Declarative Metadata (PEP 621)
+No more fragmented `setup.py`, `setup.cfg`, `requirements.txt`, and `.flake8`:
+```toml
+[project]
+name = "production-ai-service"
+version = "1.0.0"
+dependencies = [
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.0",
+    "httpx>=0.27.0",
+    "structlog>=24.1.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+```
+
+---
+
+## From Day 1: Toy Tutorial Code vs Production-Grade Code
+
+When learners transition from basic Python tutorials to actual company codebases, they experience shock. In production, code looks fundamentally different:
+
+### 1. Data Validation: Loose Dictionaries vs Pydantic v2 Models
+* **Toy Code**: Accessing raw untyped dicts: `user["name"]`. Crashes with `KeyError` or accepts negative prices silently.
+* **Production Code**: Explicit `BaseModel` schema with typed attributes, field constraints (`ge=0`), email validation, and automated OpenAPI documentation.
+
+### 2. Observability: `print()` vs Structured Logging (`structlog`)
+* **Toy Code**: `print("Order processed", order_id)`. Untracked, lacks timestamps, and cannot be ingested by Datadog or CloudWatch.
+* **Production Code**: Structured JSON logs (`logger.info("order_processed", order_id=oid, latency_ms=12.4, trace_id=tid)`) for distributed tracing.
+
+### 3. Secrets & Configuration: Hardcoded Keys vs `.env` + Pydantic Settings
+* **Toy Code**: `API_KEY = "sk_live_12345"` committed to Git or unvalidated `int(os.environ["PORT"])`.
+* **Production Code**: `BaseSettings` class reading `.env` that validates port ranges ($1024 \le 	ext{port} \le 65535$) and masks secrets in `__repr__` (`sk_***`).
+
+### 4. Error Handling: Bare `except:` vs Custom Domain Exception Hierarchies
+* **Toy Code**: Swallowing errors blindly with `except: pass`.
+* **Production Code**: Domain-specific exceptions (`OrderNotFoundError(DomainError)`) that map cleanly to HTTP status codes (404 vs 500) and preserve error contexts.
+
+### 5. Automated Verification: Manual Prints vs Pytest Fixtures & Parametrization
+* **Toy Code**: Running `if __name__ == '__main__': test()` with visual prints.
+* **Production Code**: Automated `pytest` test suites with dependency injection fixtures, parameterized test matrices, and mock assertions in CI/CD.
+
+---
+
+## The 6 Production-Grade Coding Exams & Test Suites
+
+The FDE Academy Python Track features 6 interactive hands-on coding exams with real-world specifications and automated test suites:
+
+### Exam 1: Modern Configuration & Secret Masking
+- **Scenario**: Microservices must validate ports and prevent secret leakage in logs.
+- **Requirements**:
+  1. `AppConfig` class with typed fields (`app_name`, `port`, `api_key`, `debug`).
+  2. Guard port range: $1024 \le 	ext{port} \le 65535$.
+  3. Mask `api_key` as `'sk_***'` in `__repr__`.
+  4. Classmethod `from_env(dict)` factory with sensible defaults.
+
+### Exam 2: API Webhook Payload Schema Validator
+- **Scenario**: Parse and validate financial transaction webhooks from external gateways.
+- **Requirements**:
+  1. Custom `ValidationError(Exception)`.
+  2. Validate required fields (`order_id`, `status`, `items`).
+  3. Validate status enums: `{"PENDING", "CONFIRMED", "SHIPPED", "CANCELLED"}`.
+  4. Validate item prices ($>0$) and quantities ($\ge 1$).
+  5. `calculate_total(discount_pct)` with 2-decimal place rounding.
+
+### Exam 3: Resilient Network Retry with Exponential Backoff
+- **Scenario**: External LLM and payment APIs suffer transient 503 errors and rate limits.
+- **Requirements**:
+  1. Custom `ServiceUnavailableError(Exception)`.
+  2. `execute_with_retry(fn, max_attempts=3, base_delay=0.1)` function.
+  3. Delay schedule: $	ext{base\_delay} 	imes 2^{	ext{attempt} - 1}$.
+  4. If attempts exhaust, raise `ServiceUnavailableError` with attempts count.
+
+### Exam 4: Atomic Resource Transaction Context Manager
+- **Scenario**: Prevent partial writes and file corruption during server crashes.
+- **Requirements**:
+  1. `AtomicBuffer` context manager implementing `__enter__` and `__exit__`.
+  2. Writes staged in a temporary buffer.
+  3. If no exception occurs (`exc_type is None`), commit to persistent store.
+  4. If an exception occurs, discard staging buffer and propagate exception.
+
+### Exam 5: Memory-Efficient Streaming Log Analyzer
+- **Scenario**: Parse 10 GB log files without triggering the Linux Out-Of-Memory (OOM) killer.
+- **Requirements**:
+  1. `parse_log_stream(lines)` generator yielding parsed timestamp, level, message.
+  2. `filter_severity(stream, min_level)` generator yielding matching entries.
+  3. `tally_anomalies(stream)` frequency counter.
+  4. Pipeline must process lazily with $O(1)$ memory consumption.
+
+### Exam 6: Clean Architecture Domain Service with Pytest Fixtures
+- **Scenario**: Decouple business logic from database infrastructure for unit testability.
+- **Requirements**:
+  1. `InMemoryUserRepository` implementing `get_by_email` and `save`.
+  2. `AuthService(repo)` accepting repository via Dependency Injection.
+  3. `register(email, password)` raising `UserAlreadyExistsError` on duplicates.
+  4. `login(email, password)` raising `InvalidCredentialsError` on mismatch.
+
+---
+
 ## Stage 4: Production AI-Native Service Lab
 
 When engineering production Python backends with AI assistance, follow this 4-pillar architectural pattern:

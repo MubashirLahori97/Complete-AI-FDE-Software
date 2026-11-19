@@ -3,7 +3,14 @@
 // Strictly generic production concepts -- zero client proprietary information.
 
 export type PythonDifficulty = 'beginner' | 'intermediate' | 'advanced';
-export type PythonTrackTab = 'curriculum' | 'topics' | 'interview' | 'quiz' | 'lab';
+export type PythonTrackTab =
+  | 'curriculum'
+  | 'topics'
+  | 'toy-vs-prod'
+  | 'studio'
+  | 'interview'
+  | 'quiz'
+  | 'lab';
 
 export interface PythonTrackStage {
   id: string;

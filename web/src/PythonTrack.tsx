@@ -41,6 +41,12 @@ import {
   type PythonConceptTopic,
   type PythonInterviewQuestion,
 } from './python-track-data';
+import PythonCodeStudio from './PythonCodeStudio';
+import {
+  PYTHON_EXAMS,
+  TOY_VS_PROD_COMPARISONS,
+  loadExamProgress,
+} from './python-exams-data';
 import type { Progress } from './state';
 import './python-track.css';
 
@@ -55,6 +61,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
 
   // Persistence
   const [masteredIds, setMasteredIds] = useState<Set<number>>(() => loadMasteredQuestions());
+  const [passedExams, setPassedExams] = useState<Record<string, boolean>>(() => loadExamProgress());
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>(() => loadQuizAnswers());
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(() => {
     const answers = loadQuizAnswers();
@@ -143,7 +150,13 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
             </div>
             <div className="python-stat-card">
               <span className="stat-number">18</span>
-              <span className="stat-label">Concept Deep Dives</span>
+              <span className="stat-label">Concepts</span>
+            </div>
+            <div className="python-stat-card highlight">
+              <span className="stat-number">
+                {Object.keys(passedExams).filter((k) => passedExams[k]).length}/{PYTHON_EXAMS.length}
+              </span>
+              <span className="stat-label">Exams Cleared</span>
             </div>
             <div className="python-stat-card">
               <span className="stat-number">68</span>
@@ -153,9 +166,9 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               <span className="stat-number">10</span>
               <span className="stat-label">Gotcha Quizzes</span>
             </div>
-            <div className="python-stat-card highlight">
+            <div className="python-stat-card">
               <span className="stat-number">{masteredIds.size}/68</span>
-              <span className="stat-label">Mastered ({masteredPercentage}%)</span>
+              <span className="stat-label">Q&As Mastered</span>
             </div>
           </div>
         </div>
@@ -178,6 +191,23 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
 
       {/* Navigation Tabs */}
       <nav className="python-nav-tabs" aria-label="Python Track Sections">
+        <button
+          type="button"
+          className={`python-tab-btn ${tab === 'studio' ? 'active' : ''}`}
+          onClick={() => setTab('studio')}
+        >
+          <Terminal size={16} />
+          Code & Exam Studio
+          <span className="tab-badge">{PYTHON_EXAMS.length}</span>
+        </button>
+        <button
+          type="button"
+          className={`python-tab-btn ${tab === 'toy-vs-prod' ? 'active' : ''}`}
+          onClick={() => setTab('toy-vs-prod')}
+        >
+          <Zap size={16} />
+          Day 1: Toy vs Production
+        </button>
         <button
           type="button"
           className={`python-tab-btn ${tab === 'curriculum' ? 'active' : ''}`}
@@ -221,6 +251,112 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
           Production Project Lab
         </button>
       </nav>
+
+      {/* TAB: CODE & EXAM STUDIO */}
+      {tab === 'studio' && (
+        <section className="python-tab-pane">
+          <div className="section-intro">
+            <h2>Interactive Python Code & Exam Studio</h2>
+            <p className="muted">
+              Write production Python code, test it in an isolated Pyodide WebAssembly runtime, and
+              prove readiness with automated production test suites.
+            </p>
+          </div>
+          <PythonCodeStudio
+            onExamCleared={() => {
+              setPassedExams(loadExamProgress());
+            }}
+          />
+        </section>
+      )}
+
+      {/* TAB: DAY 1 TOY VS PRODUCTION */}
+      {tab === 'toy-vs-prod' && (
+        <section className="python-tab-pane">
+          <div className="section-intro">
+            <h2>From Day 1: Why Tutorial Code Breaks in Production</h2>
+            <p className="muted">
+              Most people learn Python from toy tutorials, then freeze when seeing a real production
+              codebase. Here is the modern production standard (inspired by Datalumina and modern
+              astral tooling: uv, ruff, pydantic, and pytest).
+            </p>
+          </div>
+
+          {/* Modern Tooling Banner */}
+          <div className="modern-tooling-banner">
+            <div className="tooling-header">
+              <span className="tooling-badge">THE 2025/2026 MODERN PYTHON TOOLCHAIN</span>
+              <h3>No More Slow Pip & Fragmented Configs</h3>
+              <p>
+                Production Python in 2025+ runs on <strong>uv</strong> (10-30x faster package
+                management and instant virtual environments in Rust) and <strong>Ruff</strong> (sub-10ms
+                linting, formatting, and import sorting).
+              </p>
+            </div>
+            <div className="tooling-grid">
+              <div className="tool-card">
+                <h4>⚡ uv (by Astral)</h4>
+                <p>Replaces pip, virtualenv, and poetry. Creates virtual environments instantly.</p>
+                <code>uv venv && uv pip install -r pyproject.toml</code>
+              </div>
+              <div className="tool-card">
+                <h4>🛡️ Ruff (by Astral)</h4>
+                <p>Replaces black, flake8, and isort in a single lightning-fast binary.</p>
+                <code>uv run ruff check --fix && uv run ruff format</code>
+              </div>
+              <div className="tool-card">
+                <h4>📦 pyproject.toml</h4>
+                <p>Modern declarative single-file project metadata (PEP 621). Replaces setup.py.</p>
+                <code>[project] dependencies = ["pydantic", "httpx"]</code>
+              </div>
+              <div className="tool-card">
+                <h4>🧪 pytest</h4>
+                <p>Industry standard for fixtures, parametrization, and async test suites.</p>
+                <code>uv run pytest tests/ -v</code>
+              </div>
+            </div>
+          </div>
+
+          <div className="comparisons-list">
+            {TOY_VS_PROD_COMPARISONS.map((comp, idx) => (
+              <article key={idx} className="comparison-card">
+                <header className="comp-card-header">
+                  <span className="comp-category">{comp.category}</span>
+                  <h3>{comp.title}</h3>
+                </header>
+
+                <div className="comp-grid">
+                  <div className="comp-side toy">
+                    <div className="side-title">
+                      <span className="side-icon toy-icon">✗</span>
+                      <span>{comp.toyTitle}</span>
+                    </div>
+                    <pre className="code-pre">
+                      <code>{comp.toyCode}</code>
+                    </pre>
+                    <p className="pitfall-text">
+                      <strong>Why it breaks in production:</strong> {comp.toyPitfall}
+                    </p>
+                  </div>
+
+                  <div className="comp-side prod">
+                    <div className="side-title">
+                      <span className="side-icon prod-icon">✓</span>
+                      <span>{comp.prodTitle}</span>
+                    </div>
+                    <pre className="code-pre">
+                      <code>{comp.prodCode}</code>
+                    </pre>
+                    <p className="advantage-text">
+                      <strong>Production advantage:</strong> {comp.prodAdvantage}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* TAB 1: CURRICULUM STAGES */}
       {tab === 'curriculum' && (
