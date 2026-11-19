@@ -1,9 +1,12 @@
 import { useMemo, useState } from 'react';
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowRight,
   Award,
   BookOpen,
+  Bot,
+  Boxes,
   Check,
   CheckCircle2,
   ChevronDown,
@@ -21,6 +24,7 @@ import {
   Search,
   Sparkles,
   Terminal,
+  Timer,
   Workflow,
   Zap,
 } from 'lucide-react';
@@ -42,11 +46,23 @@ import {
   type PythonInterviewQuestion,
 } from './python-track-data';
 import PythonCodeStudio from './PythonCodeStudio';
+import PythonIncidentsSimulator from './PythonIncidentsSimulator';
+import PythonAiLabsStudio from './PythonAiLabsStudio';
+import PythonStarterKitView from './PythonStarterKitView';
+import PythonFlashcards from './PythonFlashcards';
 import {
   PYTHON_EXAMS,
   TOY_VS_PROD_COMPARISONS,
   loadExamProgress,
 } from './python-exams-data';
+import {
+  PRODUCTION_INCIDENTS,
+  loadIncidentProgress,
+} from './python-incidents-data';
+import {
+  AI_FDE_LABS,
+  loadAiLabProgress,
+} from './python-ai-labs-data';
 import type { Progress } from './state';
 import './python-track.css';
 
@@ -62,6 +78,12 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
   // Persistence
   const [masteredIds, setMasteredIds] = useState<Set<number>>(() => loadMasteredQuestions());
   const [passedExams, setPassedExams] = useState<Record<string, boolean>>(() => loadExamProgress());
+  const [resolvedIncidents, setResolvedIncidents] = useState<Record<string, boolean>>(() =>
+    loadIncidentProgress(),
+  );
+  const [clearedAiLabs, setClearedAiLabs] = useState<Record<string, boolean>>(() =>
+    loadAiLabProgress(),
+  );
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>(() => loadQuizAnswers());
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(() => {
     const answers = loadQuizAnswers();
@@ -159,16 +181,28 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               <span className="stat-label">Exams Cleared</span>
             </div>
             <div className="python-stat-card">
+              <span className="stat-number">
+                {Object.keys(resolvedIncidents).filter((k) => resolvedIncidents[k]).length}/{PRODUCTION_INCIDENTS.length}
+              </span>
+              <span className="stat-label">Incidents Fixed</span>
+            </div>
+            <div className="python-stat-card">
+              <span className="stat-number">
+                {Object.keys(clearedAiLabs).filter((k) => clearedAiLabs[k]).length}/{AI_FDE_LABS.length}
+              </span>
+              <span className="stat-label">AI Labs Cleared</span>
+            </div>
+            <div className="python-stat-card">
               <span className="stat-number">68</span>
               <span className="stat-label">Interview Q&As</span>
             </div>
             <div className="python-stat-card">
-              <span className="stat-number">10</span>
-              <span className="stat-label">Gotcha Quizzes</span>
-            </div>
-            <div className="python-stat-card">
               <span className="stat-number">{masteredIds.size}/68</span>
               <span className="stat-label">Q&As Mastered</span>
+            </div>
+            <div className="python-stat-card">
+              <span className="stat-number">10</span>
+              <span className="stat-label">Gotcha Quizzes</span>
             </div>
           </div>
         </div>
@@ -199,6 +233,32 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
           <Terminal size={16} />
           Code & Exam Studio
           <span className="tab-badge">{PYTHON_EXAMS.length}</span>
+        </button>
+        <button
+          type="button"
+          className={`python-tab-btn ${tab === 'incidents' ? 'active' : ''}`}
+          onClick={() => setTab('incidents')}
+        >
+          <AlertTriangle size={16} />
+          🚨 On-Call Incidents
+          <span className="tab-badge">{PRODUCTION_INCIDENTS.length}</span>
+        </button>
+        <button
+          type="button"
+          className={`python-tab-btn ${tab === 'ai-labs' ? 'active' : ''}`}
+          onClick={() => setTab('ai-labs')}
+        >
+          <Bot size={16} />
+          🤖 AI-FDE Labs
+          <span className="tab-badge">{AI_FDE_LABS.length}</span>
+        </button>
+        <button
+          type="button"
+          className={`python-tab-btn ${tab === 'starter-kit' ? 'active' : ''}`}
+          onClick={() => setTab('starter-kit')}
+        >
+          <Boxes size={16} />
+          📦 Microservice Template
         </button>
         <button
           type="button"
@@ -235,6 +295,14 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
         </button>
         <button
           type="button"
+          className={`python-tab-btn ${tab === 'flashcards' ? 'active' : ''}`}
+          onClick={() => setTab('flashcards')}
+        >
+          <Timer size={16} />
+          🎴 Flashcards & Mock Screen
+        </button>
+        <button
+          type="button"
           className={`python-tab-btn ${tab === 'quiz' ? 'active' : ''}`}
           onClick={() => setTab('quiz')}
         >
@@ -267,6 +335,35 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               setPassedExams(loadExamProgress());
             }}
           />
+        </section>
+      )}
+
+      {/* TAB: ON-CALL INCIDENTS */}
+      {tab === 'incidents' && (
+        <section className="python-tab-pane">
+          <PythonIncidentsSimulator
+            onIncidentResolved={() => {
+              setResolvedIncidents(loadIncidentProgress());
+            }}
+          />
+        </section>
+      )}
+
+      {/* TAB: AI-FDE PRODUCTION LABS */}
+      {tab === 'ai-labs' && (
+        <section className="python-tab-pane">
+          <PythonAiLabsStudio
+            onLabCleared={() => {
+              setClearedAiLabs(loadAiLabProgress());
+            }}
+          />
+        </section>
+      )}
+
+      {/* TAB: MICROSERVICE STARTER KIT */}
+      {tab === 'starter-kit' && (
+        <section className="python-tab-pane">
+          <PythonStarterKitView />
         </section>
       )}
 
@@ -808,6 +905,13 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               })
             )}
           </div>
+        </section>
+      )}
+
+      {/* TAB: FLASHCARDS & TIMED MOCK SCREEN */}
+      {tab === 'flashcards' && (
+        <section className="python-tab-pane">
+          <PythonFlashcards />
         </section>
       )}
 
