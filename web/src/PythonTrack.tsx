@@ -7,6 +7,7 @@ import {
   BookOpen,
   Bot,
   Boxes,
+  Brain,
   Check,
   CheckCircle2,
   ChevronDown,
@@ -48,6 +49,8 @@ import {
 import PythonCodeStudio from './PythonCodeStudio';
 import PythonIncidentsSimulator from './PythonIncidentsSimulator';
 import PythonAiLabsStudio from './PythonAiLabsStudio';
+import PythonFastApiStudio from './PythonFastApiStudio';
+import PythonRagStudio from './PythonRagStudio';
 import PythonStarterKitView from './PythonStarterKitView';
 import PythonFlashcards from './PythonFlashcards';
 import {
@@ -63,6 +66,14 @@ import {
   AI_FDE_LABS,
   loadAiLabProgress,
 } from './python-ai-labs-data';
+import {
+  FASTAPI_LABS,
+  loadFastApiProgress,
+} from './python-fastapi-data';
+import {
+  RAG_LABS,
+  loadRagProgress,
+} from './python-rag-data';
 import type { Progress } from './state';
 import './python-track.css';
 
@@ -83,6 +94,12 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
   );
   const [clearedAiLabs, setClearedAiLabs] = useState<Record<string, boolean>>(() =>
     loadAiLabProgress(),
+  );
+  const [clearedFastApi, setClearedFastApi] = useState<Record<string, boolean>>(() =>
+    loadFastApiProgress(),
+  );
+  const [clearedRag, setClearedRag] = useState<Record<string, boolean>>(() =>
+    loadRagProgress(),
   );
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>(() => loadQuizAnswers());
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(() => {
@@ -182,6 +199,18 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
             </div>
             <div className="python-stat-card">
               <span className="stat-number">
+                {Object.keys(clearedFastApi).filter((k) => clearedFastApi[k]).length}/{FASTAPI_LABS.length}
+              </span>
+              <span className="stat-label">FastAPI Labs</span>
+            </div>
+            <div className="python-stat-card">
+              <span className="stat-number">
+                {Object.keys(clearedRag).filter((k) => clearedRag[k]).length}/{RAG_LABS.length}
+              </span>
+              <span className="stat-label">RAG Labs</span>
+            </div>
+            <div className="python-stat-card">
+              <span className="stat-number">
                 {Object.keys(resolvedIncidents).filter((k) => resolvedIncidents[k]).length}/{PRODUCTION_INCIDENTS.length}
               </span>
               <span className="stat-label">Incidents Fixed</span>
@@ -233,6 +262,24 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
           <Terminal size={16} />
           Code & Exam Studio
           <span className="tab-badge">{PYTHON_EXAMS.length}</span>
+        </button>
+        <button
+          type="button"
+          className={`python-tab-btn ${tab === 'fastapi' ? 'active' : ''}`}
+          onClick={() => setTab('fastapi')}
+        >
+          <Zap size={16} />
+          ⚡ FastAPI Backend
+          <span className="tab-badge">{FASTAPI_LABS.length}</span>
+        </button>
+        <button
+          type="button"
+          className={`python-tab-btn ${tab === 'rag' ? 'active' : ''}`}
+          onClick={() => setTab('rag')}
+        >
+          <Brain size={16} />
+          🧠 Production RAG
+          <span className="tab-badge">{RAG_LABS.length}</span>
         </button>
         <button
           type="button"
@@ -333,6 +380,28 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
           <PythonCodeStudio
             onExamCleared={() => {
               setPassedExams(loadExamProgress());
+            }}
+          />
+        </section>
+      )}
+
+      {/* TAB: FASTAPI PRODUCTION BACKEND */}
+      {tab === 'fastapi' && (
+        <section className="python-tab-pane">
+          <PythonFastApiStudio
+            onLabCleared={() => {
+              setClearedFastApi(loadFastApiProgress());
+            }}
+          />
+        </section>
+      )}
+
+      {/* TAB: PRODUCTION RAG ARCHITECTURE */}
+      {tab === 'rag' && (
+        <section className="python-tab-pane">
+          <PythonRagStudio
+            onLabCleared={() => {
+              setClearedRag(loadRagProgress());
             }}
           />
         </section>

@@ -3082,3 +3082,548 @@
   margin: 0 auto 1.5rem;
   line-height: 1.5;
 }
+
+/* ==========================================================================
+   FASTAPI PRODUCTION BACKEND STUDIO
+   ========================================================================== */
+.fastapi-studio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fastapi-hero {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+}
+
+.fastapi-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.fastapi-hero h2 {
+  font-size: 1.6rem;
+  color: #f8fafc;
+  margin: 0 0 0.5rem;
+}
+
+.fastapi-hero p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+  max-width: 800px;
+}
+
+.fastapi-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fastapi-stat-item {
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fastapi-stat-item .stat-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.fastapi-stat-item .stat-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  font-family: var(--font-mono, monospace);
+}
+
+.fastapi-pillars-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.85rem;
+}
+
+.pillar-tile {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.pillar-tile h5 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #34d399;
+  margin: 0 0 0.4rem;
+}
+
+.pillar-tile p {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.fastapi-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+}
+
+.fastapi-nav-btn {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.6rem;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: inherit;
+}
+
+.fastapi-nav-btn:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.fastapi-nav-btn.active {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+.fastapi-nav-btn.cleared {
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.fastapi-btn-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.fastapi-category {
+  font-size: 0.7rem;
+  color: #34d399;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.fastapi-btn-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.fastapi-btn-duration {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: var(--font-mono, monospace);
+}
+
+.fastapi-spec-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.toy-prod-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .toy-prod-box {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toy-side, .prod-side {
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.85rem;
+}
+
+.tp-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.tp-badge.toy {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.tp-badge.prod {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.toy-side pre, .prod-side pre {
+  margin: 0;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #e2e8f0;
+  overflow-x: auto;
+}
+
+.fastapi-editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.fastapi-code-textarea {
+  width: 100%;
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  color: #e2e8f0;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 1rem;
+  resize: vertical;
+  outline: none;
+}
+
+.fastapi-code-textarea:focus {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.fastapi-test-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.fastapi-test-banner.passed {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.fastapi-test-banner.failed {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.fastapi-test-banner h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+}
+
+.fastapi-test-banner p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.fastapi-console-box {
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #94a3b8;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   PRODUCTION RAG ARCHITECTURE & PROJECT STUDIO
+   ========================================================================== */
+.rag-studio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rag-hero {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 0.75rem;
+  padding: 1.75rem;
+}
+
+.rag-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.rag-hero h2 {
+  font-size: 1.6rem;
+  color: #f8fafc;
+  margin: 0 0 0.5rem;
+}
+
+.rag-hero p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+  max-width: 800px;
+}
+
+.rag-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.rag-stat-item {
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rag-stat-item .stat-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.rag-stat-item .stat-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  font-family: var(--font-mono, monospace);
+}
+
+.rag-pipeline-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.pipeline-step-card {
+  display: flex;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.85rem;
+}
+
+.step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.step-body h5 {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  color: #f1f5f9;
+}
+
+.step-body p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.rag-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+}
+
+.rag-nav-btn {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.6rem;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: inherit;
+}
+
+.rag-nav-btn:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.rag-nav-btn.active {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+}
+
+.rag-nav-btn.cleared {
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.rag-btn-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rag-category {
+  font-size: 0.7rem;
+  color: #60a5fa;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.rag-btn-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.rag-btn-duration {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: var(--font-mono, monospace);
+}
+
+.rag-spec-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.rag-editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.rag-code-textarea {
+  width: 100%;
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  color: #e2e8f0;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 1rem;
+  resize: vertical;
+  outline: none;
+}
+
+.rag-code-textarea:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.rag-test-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.rag-test-banner.passed {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+}
+
+.rag-test-banner.failed {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.rag-test-banner h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+}
+
+.rag-test-banner p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.rag-console-box {
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #94a3b8;
+  max-height: 180px;
+  overflow-y: auto;
+}

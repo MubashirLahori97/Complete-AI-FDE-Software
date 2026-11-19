@@ -8,6 +8,8 @@ export type PythonTrackTab =
   | 'topics'
   | 'toy-vs-prod'
   | 'studio'
+  | 'fastapi'
+  | 'rag'
   | 'incidents'
   | 'ai-labs'
   | 'starter-kit'

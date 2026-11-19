@@ -182,6 +182,85 @@ uv run ruff check --fix        # Replaces black, flake8, isort in 10ms
 uv run ruff format            # Instant automatic formatting`,
     prodAdvantage: 'Single unified Rust-based toolchain (`uv` + `ruff`), sub-second execution, deterministic lockfiles.',
   },
+  {
+    title: '7. Object-Oriented Programming: Toy Animal Hierarchies vs Production Protocols & Dependency Injection',
+    category: 'Object-Oriented Architecture',
+    toyTitle: 'Tutorial / Toy OOP',
+    toyCode: `# Toy approach: deep brittle inheritance
+class Animal:
+    def speak(self): pass
+
+class Dog(Animal):
+    def speak(self): return "Woof!"
+
+class GoldenRetriever(Dog):
+    # Deep coupling, rigid tree, zero testing seams
+    pass`,
+    toyPitfall: 'Deep inheritance trees create rigid tight coupling, fragile base classes, and make mocking/testing nearly impossible.',
+    prodTitle: 'Production OOP (Protocols & DI)',
+    prodCode: `from typing import Protocol, runtime_checkable
+
+@runtime_checkable
+class DocumentStore(Protocol):
+    """Explicit structural interface protocol."""
+    async def get(self, doc_id: str) -> dict | None: ...
+    async def save(self, doc_id: str, payload: dict) -> None: ...
+
+class KnowledgeService:
+    """Composition over inheritance with injected dependency."""
+    def __init__(self, store: DocumentStore):
+        self._store = store
+
+    async def ingest(self, doc_id: str, data: dict) -> None:
+        await self._store.save(doc_id, data)`,
+    prodAdvantage: 'Decoupled structural typing (`Protocol`), easy unit testing with mock adapters, and strict adherence to Composition over Inheritance.',
+  },
+  {
+    title: '8. Web Backends: Toy Flask/Raw Scripts vs Production FastAPI',
+    category: 'Backend Architecture',
+    toyTitle: 'Tutorial / Toy Backend',
+    toyCode: `# Toy approach: manual unvalidated route
+@app.route("/items", methods=["POST"])
+def add_item():
+    data = request.get_json() # Untyped dict, can crash with KeyError
+    db = connect_db()         # New DB connection per request!
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO items VALUES (%s)", (data["name"],))
+    return jsonify({"ok": True})`,
+    toyPitfall: 'No schema validation, potential SQL injections or KeyErrors, and unmanaged database connections that exhaust socket pools.',
+    prodTitle: 'Production FastAPI',
+    prodCode: `@app.post("/items", response_model=ItemResponse, status_code=201)
+async def create_item(
+    payload: ItemCreateRequest,
+    service: ItemService = Depends(get_item_service),
+) -> ItemResponse:
+    # 1. Pydantic v2 automatically validates request in Rust
+    # 2. Dependency injection handles connection pooling and cleanup
+    # 3. Non-blocking async event loop
+    return await service.create_item(payload)`,
+    prodAdvantage: 'Automatic Rust-based request validation, automated OpenAPI docs, pooled dependency injection, and non-blocking asynchronous throughput.',
+  },
+  {
+    title: '9. AI Systems: Toy Prompt Stuffing vs Production Grounded RAG',
+    category: 'AI Systems Engineering',
+    toyTitle: 'Tutorial / Toy AI Call',
+    toyCode: `# Toy approach: dump entire 100-page document into prompt
+prompt = f"Read this manual: {entire_manual_text}\\nAnswer: {user_question}"
+response = llm.generate(prompt)`,
+    toyPitfall: 'Exceeds token limits, triggers "lost in the middle" attention failure, costs \$10+ per call, and hallucinates without accountability.',
+    prodTitle: 'Production RAG Architecture',
+    prodCode: `# Production RAG pipeline:
+chunks = chunker.split_with_overlap(manual_text, chunk_size=300, overlap=50)
+relevant_chunks = vector_store.search(query_vec, top_k=3, min_similarity=0.75)
+
+if not relevant_chunks:
+    return {"answer": "Insufficient grounded evidence.", "citations": []}
+
+context_text, citations = assemble_budgeted_context(relevant_chunks, max_words=400)
+answer = llm.generate_grounded(prompt=f"Context:\\n{context_text}\\nQ: {query}")
+return {"answer": answer, "citations": citations}`,
+    prodAdvantage: 'Sub-second vector retrieval, strict token budget ceilings, citation verification, and automated hallucination prevention.',
+  },
 ];
 
 export const PYTHON_EXAMS: PythonExam[] = [
