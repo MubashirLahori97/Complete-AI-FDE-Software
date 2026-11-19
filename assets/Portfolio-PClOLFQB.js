@@ -1,4 +1,4 @@
-import{c as y,j as e,x as v,D as k,W as N,F as c,K as m,X as x,A as r,Y as o,G as $,P as b,z as g,f as p,n as w}from"./index-CTGaOfc6.js";const L=y("Link",[["path",{d:"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71",key:"1cjeqo"}],["path",{d:"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",key:"19qd67"}]]);function z({progress:i,update:j}){const t=(n,s)=>j({...i,projects:{...i.projects,[n]:s}}),u=()=>{const n=m.map(s=>{const l=i.projects[s.id]||x();return`## ${s.title}
+import{c as y,j as e,x as v,D as k,X as N,F as c,K as m,Y as x,A as r,Z as o,G as $,P as b,z as g,f as p,n as w}from"./index-DvHDBUsB.js";const L=y("Link",[["path",{d:"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71",key:"1cjeqo"}],["path",{d:"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",key:"19qd67"}]]);function z({progress:i,update:j}){const t=(n,s)=>j({...i,projects:{...i.projects,[n]:s}}),u=()=>{const n=m.map(s=>{const l=i.projects[s.id]||x();return`## ${s.title}
 
 ${s.description}
 
