@@ -79,6 +79,9 @@ import {
 } from './python-rag-data';
 import type { Progress } from './state';
 import './python-track.css';
+import ModernToolchainExplorer from './ModernToolchainExplorer';
+import CommonPitfallsAccordion from './CommonPitfallsAccordion';
+import './modern-toolchain.css';
 
 export default function PythonTrack({ progress }: { progress?: Progress }) {
   const [tab, setTab] = useState<PythonTrackTab>('curriculum');
@@ -621,40 +624,8 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
             </p>
           </div>
 
-          {/* Modern Tooling Banner */}
-          <div className="modern-tooling-banner">
-            <div className="tooling-header">
-              <span className="tooling-badge">THE 2025/2026 MODERN PYTHON TOOLCHAIN</span>
-              <h3>No More Slow Pip & Fragmented Configs</h3>
-              <p>
-                Production Python in 2025+ runs on <strong>uv</strong> (10-30x faster package
-                management and instant virtual environments in Rust) and <strong>Ruff</strong> (sub-10ms
-                linting, formatting, and import sorting).
-              </p>
-            </div>
-            <div className="tooling-grid">
-              <div className="tool-card">
-                <h4>⚡ uv (by Astral)</h4>
-                <p>Replaces pip, virtualenv, and poetry. Creates virtual environments instantly.</p>
-                <code>uv venv && uv pip install -r pyproject.toml</code>
-              </div>
-              <div className="tool-card">
-                <h4>🛡️ Ruff (by Astral)</h4>
-                <p>Replaces black, flake8, and isort in a single lightning-fast binary.</p>
-                <code>uv run ruff check --fix && uv run ruff format</code>
-              </div>
-              <div className="tool-card">
-                <h4>📦 pyproject.toml</h4>
-                <p>Modern declarative single-file project metadata (PEP 621). Replaces setup.py.</p>
-                <code>[project] dependencies = ["pydantic", "httpx"]</code>
-              </div>
-              <div className="tool-card">
-                <h4>🧪 pytest</h4>
-                <p>Industry standard for fixtures, parametrization, and async test suites.</p>
-                <code>uv run pytest tests/ -v</code>
-              </div>
-            </div>
-          </div>
+          {/* Modern Tooling & Architecture Explorer (OS Tabs, Benchmarks, Project Tree) */}
+          <ModernToolchainExplorer />
 
           <div className="comparisons-list">
             {TOY_VS_PROD_COMPARISONS.map((comp, idx) => (
@@ -808,16 +779,11 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
                         </pre>
                       </div>
 
-                      <div className="topic-pitfalls-box">
-                        <h4>
-                          <HelpCircle size={16} /> Common AI & Candidate Pitfalls
-                        </h4>
-                        <ul>
-                          {topic.commonAiPitfalls.map((pitfall, i) => (
-                            <li key={i}>{pitfall}</li>
-                          ))}
-                        </ul>
-                      </div>
+                      {/* Collapsible Common Mistakes & Fixes Drawer (Datalumina Pattern) */}
+                      <CommonPitfallsAccordion
+                        topicId={topic.id}
+                        pitfalls={topic.commonAiPitfalls}
+                      />
 
                       <div className="topic-checklist-box">
                         <h4>
