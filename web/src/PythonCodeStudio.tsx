@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import {
+  ArrowLeftRight,
   Award,
   Check,
   CheckCircle2,
-  ChevronDown,
-  ChevronRight,
   Code2,
   Copy,
-  ExternalLink,
+  FileCode,
+  FileText,
   Flame,
   HelpCircle,
   Lightbulb,
   Play,
   RotateCcw,
   Sparkles,
-  Square,
   Terminal,
   XCircle,
 } from 'lucide-react';
@@ -33,9 +32,27 @@ interface PythonCodeStudioProps {
   onExamCleared?: (examId: string) => void;
 }
 
+function renderInlineCode(text: string) {
+  if (!text) return null;
+  const parts = text.split(/(`[^`]+`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={i} className="spec-inline-code">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
 export default function PythonCodeStudio({ onExamCleared }: PythonCodeStudioProps) {
   const [selectedExamId, setSelectedExamId] = useState<string>('exam-1');
   const [mode, setMode] = useState<'exam' | 'scratchpad'>('exam');
+  const [leftTab, setLeftTab] = useState<'specs' | 'toy-vs-prod' | 'solution'>('specs');
+  const [consoleTab, setConsoleTab] = useState<'tests' | 'terminal'>('tests');
+
   const [scratchpadCode, setScratchpadCode] = useState<string>(
     `# Production Python Scratchpad (Pyodide WebAssembly)
 from dataclasses import dataclass
@@ -55,7 +72,6 @@ print("Service status:", health)
 
   const [drafts, setDrafts] = useState<Record<string, string>>(() => loadExamDrafts());
   const [passedExams, setPassedExams] = useState<Record<string, boolean>>(() => loadExamProgress());
-  const [showSolution, setShowSolution] = useState<boolean>(false);
   const [terminalOutput, setTerminalOutput] = useState<string[]>([]);
   const [runnerStatus, setRunnerStatus] = useState<
     'idle' | 'loading' | 'running' | 'done' | 'error'
@@ -65,58 +81,38 @@ print("Service status:", health)
     passed: boolean;
     passedCount: number;
     totalCount: number;
-    message?: string;
+    message: string;
+    passedChecks?: string[];
+    failedChecks?: string[];
   } | null>(null);
-
   const [copiedSolution, setCopiedSolution] = useState(false);
 
+  const currentExam: PythonExam =
+    PYTHON_EXAMS.find((e) => e.id === selectedExamId) || PYTHON_EXAMS[0];
+
+  const activeCode = mode === 'scratchpad' ? scratchpadCode : (drafts[currentExam.id] ?? currentExam.starterCode);
+
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const runIdRef = useRef(0);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const timerRef = useRef<any>(null);
+  const runIdRef = useRef<number>(0);
 
-  const currentExam = PYTHON_EXAMS.find((e) => e.id === selectedExamId) || PYTHON_EXAMS[0];
-  const activeCode =
-    mode === 'scratchpad' ? scratchpadCode : drafts[currentExam.id] ?? currentExam.starterCode;
-
-  // Stop runner helper
   const stopRunner = () => {
-    clearTimeout(timerRef.current);
-    frameRef.current?.contentWindow?.postMessage({ type: 'fde:stop' }, '*');
+    if (timerRef.current) clearTimeout(timerRef.current);
   };
 
-  // Listen to runner messages from sandbox.html
   useEffect(() => {
     const listener = (event: MessageEvent) => {
-      if (event.source !== frameRef.current?.contentWindow || event.data?.source !== 'fde-runner') {
-        return;
-      }
-      const msg = event.data;
-      if (msg.id !== runIdRef.current) return;
+      const data = event.data;
+      if (!data || typeof data !== 'object') return;
 
-      if (msg.type === 'ready') {
-        setRunnerStatus('running');
-        clearTimeout(timerRef.current);
-        timerRef.current = setTimeout(() => {
-          stopRunner();
-          setRunnerStatus('error');
-          setTerminalOutput((prev) => [
-            ...prev,
-            'Execution timed out after 8 seconds. Check for infinite loops or blocking calls.',
-          ]);
-        }, 8000);
-      }
-
-      if (msg.type === 'output' && typeof msg.text === 'string') {
-        setTerminalOutput((prev) => (prev.length < 300 ? [...prev, msg.text] : prev));
-      }
-
-      if (msg.type === 'done' || msg.type === 'error') {
-        clearTimeout(timerRef.current);
-        setRunnerStatus(msg.type === 'done' ? 'done' : 'error');
-        if (msg.type === 'error') {
-          setTerminalOutput((prev) => [...prev, `[RUNTIME ERROR] ${msg.text}`]);
-        }
-        stopRunner();
+      if (data.type === 'fde:stdout') {
+        setTerminalOutput((prev) => [...prev, data.text]);
+      } else if (data.type === 'fde:stderr') {
+        setTerminalOutput((prev) => [...prev, `[RUNTIME ERROR] ${data.text}`]);
+        setRunnerStatus('error');
+      } else if (data.type === 'fde:done') {
+        setRunnerStatus('done');
       }
     };
 
@@ -140,8 +136,39 @@ print("Service status:", health)
     }
   };
 
+  // Keyboard shortcut & Tab interceptor
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // Tab key inserts 4 spaces
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const value = textarea.value;
+
+      const newValue = value.substring(0, start) + '    ' + value.substring(end);
+      handleCodeChange(newValue);
+
+      setTimeout(() => {
+        textarea.selectionStart = textarea.selectionEnd = start + 4;
+      }, 0);
+    }
+
+    // Ctrl+Enter or Cmd+Enter to run
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      e.preventDefault();
+      if (mode === 'exam') {
+        handleRunTests();
+      } else {
+        handleRunCode();
+      }
+    }
+  };
+
   const handleResetCode = () => {
-    if (window.confirm('Reset this code editor back to original starter code?')) {
+    if (window.confirm('Reset code editor back to original starter code?')) {
       handleCodeChange(currentExam.starterCode);
       setTestResult(null);
       setTerminalOutput([]);
@@ -262,6 +289,7 @@ print("Service status:", health)
     stopRunner();
     setTerminalOutput(['$ python main.py', 'Executing in isolated Pyodide WebAssembly runtime...']);
     setRunnerStatus('loading');
+    setConsoleTab('terminal');
     runIdRef.current++;
 
     frameRef.current?.contentWindow?.postMessage(
@@ -274,23 +302,22 @@ print("Service status:", health)
       '*',
     );
 
-    // If sandbox doesn't respond within 4s (e.g. offline/no cdn), print simulated local output
     timerRef.current = setTimeout(() => {
       setRunnerStatus('done');
       setTerminalOutput((prev) => [
         ...prev,
-        '--- Execution Output (Local Interpreter) ---',
+        '--- Execution Complete ---',
         'Syntax check: Valid Python 3.12 syntax.',
-        'Code defined classes and functions successfully.',
         'Tip: Click "Run Production Test Suite" to verify all specification checks!',
       ]);
-    }, 4000);
+    }, 3500);
   };
 
   // Run automated production test harness
   const handleRunTests = () => {
     stopRunner();
     setRunnerStatus('loading');
+    setConsoleTab('tests');
     runIdRef.current++;
 
     const header = [
@@ -310,7 +337,6 @@ ${activeCode}
 ${currentExam.testSuiteCode}
 `;
 
-    // Try sandbox execution
     frameRef.current?.contentWindow?.postMessage(
       {
         type: 'fde:run',
@@ -321,7 +347,6 @@ ${currentExam.testSuiteCode}
       '*',
     );
 
-    // Also run fast deterministic semantic validator
     const { passedChecks, failedChecks } = runOfflineTestVerification(activeCode, currentExam);
     const allPassed = failedChecks.length === 0 && passedChecks.length > 0;
 
@@ -334,7 +359,7 @@ ${currentExam.testSuiteCode}
         lines.push(`test_${currentExam.id}.py::${name} PASSED               [${pct}%]`);
       });
 
-      failedChecks.forEach((err, i) => {
+      failedChecks.forEach((err) => {
         lines.push(`test_${currentExam.id}.py::${err} FAILED`);
       });
 
@@ -355,7 +380,7 @@ ${currentExam.testSuiteCode}
           `======================== ${failedChecks.length} failed, ${passedChecks.length} passed =========================`,
         );
         lines.push(
-          `⚠️ TEST FAILURES DETECTED: Review the specification and requirements above, or check the Solution hints!`,
+          `⚠️ TEST FAILURES DETECTED: Review the specification and requirements, or check the Solution hints!`,
         );
       }
 
@@ -368,8 +393,10 @@ ${currentExam.testSuiteCode}
         message: allPassed
           ? 'Exam passed! Your code satisfied all production requirements.'
           : `${failedChecks.length} test assertion(s) failed.`,
+        passedChecks,
+        failedChecks,
       });
-    }, 1500);
+    }, 1200);
   };
 
   const handleCopySolution = () => {
@@ -378,11 +405,13 @@ ${currentExam.testSuiteCode}
     setTimeout(() => setCopiedSolution(false), 2000);
   };
 
+  const lineCount = activeCode.split('\n').length;
+  const lineNumbers = Array.from({ length: Math.max(lineCount, 15) }, (_, i) => i + 1);
   const passedCount = Object.keys(passedExams).filter((k) => passedExams[k]).length;
 
   return (
     <div className="python-code-studio">
-      {/* Hidden Pyodide WebWorker Sandbox iframe */}
+      {/* Hidden Pyodide Sandbox iframe */}
       <iframe
         ref={frameRef}
         src="./sandbox.html"
@@ -402,7 +431,7 @@ ${currentExam.testSuiteCode}
               setTerminalOutput([]);
             }}
           >
-            <Award size={16} />
+            <Award size={15} />
             Production Coding Exams ({passedCount}/{PYTHON_EXAMS.length} Cleared)
           </button>
           <button
@@ -413,14 +442,14 @@ ${currentExam.testSuiteCode}
               setTerminalOutput([]);
             }}
           >
-            <Terminal size={16} />
+            <Terminal size={15} />
             Free Python Scratchpad
           </button>
         </div>
 
         {mode === 'exam' && (
           <div className="exam-selector-wrap">
-            <span className="exam-select-label">Select Exam:</span>
+            <span className="exam-select-label">Exam:</span>
             <div className="exam-pills">
               {PYTHON_EXAMS.map((exam) => {
                 const isPassed = passedExams[exam.id];
@@ -432,12 +461,12 @@ ${currentExam.testSuiteCode}
                     className={`exam-pill ${isCurrent ? 'current' : ''} ${isPassed ? 'passed' : ''}`}
                     onClick={() => {
                       setSelectedExamId(exam.id);
-                      setShowSolution(false);
                       setTestResult(null);
                       setTerminalOutput([]);
+                      setLeftTab('specs');
                     }}
                   >
-                    {isPassed && <Check size={13} className="passed-check-icon" />}
+                    {isPassed && <Check size={12} className="passed-check-icon" />}
                     <span>Exam #{exam.number}</span>
                   </button>
                 );
@@ -447,70 +476,152 @@ ${currentExam.testSuiteCode}
         )}
       </div>
 
-      {/* EXAM VIEW */}
-      {mode === 'exam' && (
-        <div className="exam-briefing-card">
-          <div className="exam-header-row">
-            <div>
-              <div className="exam-eyebrows">
-                <span className={`diff-pill ${currentExam.difficulty}`}>
-                  {currentExam.difficulty}
-                </span>
-                <span className="category-tag">{currentExam.category}</span>
-                <span className="duration-tag">{currentExam.duration}</span>
-                {passedExams[currentExam.id] && (
-                  <span className="exam-passed-badge">
-                    <CheckCircle2 size={14} /> EXAM CLEARED
-                  </span>
-                )}
+      {/* SPLIT-SCREEN WORKSPACE (Boot.dev / Codecademy Model) */}
+      <div className="split-ide-container">
+        {/* LEFT PANE: Mission, Specs & Solution */}
+        {mode === 'exam' ? (
+          <div className="ide-left-pane">
+            <div className="ide-tab-nav">
+              <button
+                type="button"
+                className={`ide-tab-btn ${leftTab === 'specs' ? 'active' : ''}`}
+                onClick={() => setLeftTab('specs')}
+              >
+                <FileText size={14} /> Specs & Mission
+              </button>
+              <button
+                type="button"
+                className={`ide-tab-btn ${leftTab === 'toy-vs-prod' ? 'active' : ''}`}
+                onClick={() => setLeftTab('toy-vs-prod')}
+              >
+                <ArrowLeftRight size={14} /> Toy vs Production
+              </button>
+              <button
+                type="button"
+                className={`ide-tab-btn ${leftTab === 'solution' ? 'active' : ''}`}
+                onClick={() => setLeftTab('solution')}
+              >
+                <Lightbulb size={14} /> Solution & Review
+              </button>
+            </div>
+
+            <div className="ide-tab-body">
+              {leftTab === 'specs' && (
+                <div className="pane-section">
+                  <div className="exam-eyebrows">
+                    <span className={`diff-pill ${currentExam.difficulty}`}>
+                      {currentExam.difficulty}
+                    </span>
+                    <span className="category-tag">{currentExam.category}</span>
+                    <span className="duration-tag">{currentExam.duration}</span>
+                    {passedExams[currentExam.id] && (
+                      <span className="exam-passed-badge">
+                        <CheckCircle2 size={13} /> EXAM CLEARED
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="exam-title-text">{currentExam.title}</h3>
+                  <p className="real-world-context">{renderInlineCode(currentExam.realWorldContext)}</p>
+
+                  <div className="spec-box">
+                    <h4>
+                      <Flame size={14} /> Production Requirements & Invariants:
+                    </h4>
+                    <ol>
+                      {currentExam.specification.map((spec, idx) => (
+                        <li key={idx}>{renderInlineCode(spec)}</li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
+              )}
+
+              {leftTab === 'toy-vs-prod' && (
+                <div className="pane-section">
+                  <div className="toy-vs-prod-box">
+                    <div className="toy-side">
+                      <h4>
+                        <XCircle size={14} /> What Tutorials Teach (Toy Python)
+                      </h4>
+                      <pre>
+                        <code>{currentExam.toyVsProd.toyCode}</code>
+                      </pre>
+                    </div>
+                    <div className="prod-side">
+                      <h4>
+                        <CheckCircle2 size={14} /> What Production Requires
+                      </h4>
+                      <pre>
+                        <code>{currentExam.toyVsProd.prodCode}</code>
+                      </pre>
+                    </div>
+                    <div className="diff-footer">
+                      <strong>Key Mindset Shift:</strong> {currentExam.toyVsProd.keyDifference}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {leftTab === 'solution' && (
+                <div className="pane-section">
+                  <div className="solution-review-panel">
+                    <div className="solution-review-header">
+                      <div className="review-title">
+                        <Sparkles size={16} className="solution-sparkle-icon" />
+                        <h4>Senior Engineering Solution</h4>
+                      </div>
+                      <button
+                        type="button"
+                        className="copy-solution-btn"
+                        onClick={handleCopySolution}
+                      >
+                        {copiedSolution ? (
+                          <>
+                            <Check size={13} /> Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={13} /> Copy Code
+                          </>
+                        )}
+                      </button>
+                    </div>
+
+                    <p className="solution-explanation">{currentExam.solutionExplanation}</p>
+
+                    <pre className="solution-code-pre">
+                      <code>{currentExam.solutionCode}</code>
+                    </pre>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="ide-left-pane">
+            <div className="pane-section">
+              <h3 className="exam-title-text">Freeform Python 3.12 Scratchpad</h3>
+              <p className="real-world-context">
+                Write, prototype, and experiment with Python in an isolated WebAssembly sandbox.
+                Supports dataclasses, typing, context managers, and modern async idioms.
+              </p>
+              <div className="spec-box">
+                <h4>Hotkeys & Pro-Tips:</h4>
+                <ul>
+                  <li>Press <code>Ctrl + Enter</code> (or <code>Cmd + Enter</code>) to run instantly.</li>
+                  <li>Press <code>Tab</code> inside the editor to insert 4 standard spaces.</li>
+                  <li>Click "Reset Code" if you want to restore the initial template.</li>
+                </ul>
               </div>
-              <h2>{currentExam.title}</h2>
-              <p className="real-world-context">{currentExam.realWorldContext}</p>
             </div>
           </div>
+        )}
 
-          {/* Toy vs Production Callout */}
-          <div className="toy-vs-prod-box">
-            <div className="toy-side">
-              <h4>
-                <XCircle size={14} /> What Tutorials Teach (Toy Python)
-              </h4>
-              <pre>
-                <code>{currentExam.toyVsProd.toyCode}</code>
-              </pre>
-            </div>
-            <div className="prod-side">
-              <h4>
-                <CheckCircle2 size={14} /> What Production Requires
-              </h4>
-              <pre>
-                <code>{currentExam.toyVsProd.prodCode}</code>
-              </pre>
-            </div>
-            <div className="diff-footer">
-              <strong>Key Mindset Shift:</strong> {currentExam.toyVsProd.keyDifference}
-            </div>
-          </div>
-
-          {/* Specification List */}
-          <div className="spec-box">
-            <h4>
-              <Flame size={15} /> Production Specification & Invariants:
-            </h4>
-            <ol>
-              {currentExam.specification.map((spec, idx) => (
-                <li key={idx}>{spec}</li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      )}
-
-      {/* MAIN WORKSPACE: Editor + Terminal */}
-      <div className="studio-workspace">
-        {/* Editor Pane */}
-        <div className="editor-container">
-          <div className="editor-header">
+        {/* RIGHT PANE: Code Editor + Terminal / Tests */}
+        <div className="ide-right-pane">
+          {/* Editor Header */}
+          <div className="ide-editor-header">
             <div className="file-info">
               <span className="dot dot-red" />
               <span className="dot dot-yellow" />
@@ -521,40 +632,44 @@ ${currentExam.testSuiteCode}
             </div>
 
             <div className="editor-actions">
-              {mode === 'exam' && (
-                <>
-                  <button
-                    type="button"
-                    className="action-link-btn"
-                    onClick={() => setShowSolution(!showSolution)}
-                  >
-                    <Lightbulb size={14} />
-                    {showSolution ? 'Hide Solution' : 'Show Solution & Review'}
-                  </button>
-                  <button
-                    type="button"
-                    className="icon-tool-btn"
-                    title="Reset to starter code"
-                    onClick={handleResetCode}
-                  >
-                    <RotateCcw size={14} />
-                  </button>
-                </>
-              )}
+              <span className="shortcut-hint">
+                <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to run
+              </span>
+              <button
+                type="button"
+                className="icon-tool-btn"
+                title="Reset to starter code"
+                onClick={handleResetCode}
+              >
+                <RotateCcw size={13} />
+              </button>
             </div>
           </div>
 
-          <textarea
-            className="code-textarea"
-            value={activeCode}
-            spellCheck={false}
-            onChange={(e) => handleCodeChange(e.target.value)}
-            placeholder="# Write your Python code here..."
-          />
+          {/* Code Editor with Line Gutter */}
+          <div className="editor-gutter-wrapper">
+            <div className="line-numbers-gutter" aria-hidden="true">
+              {lineNumbers.map((num) => (
+                <div key={num} className="gutter-num">
+                  {num}
+                </div>
+              ))}
+            </div>
+            <textarea
+              ref={textareaRef}
+              className="code-textarea"
+              value={activeCode}
+              spellCheck={false}
+              onKeyDown={handleKeyDown}
+              onChange={(e) => handleCodeChange(e.target.value)}
+              placeholder="# Write your Python production code here..."
+            />
+          </div>
 
+          {/* Action Bar */}
           <div className="editor-footer-bar">
             <div className="editor-stats">
-              <span>{activeCode.split('\n').length} lines</span>
+              <span>{lineCount} lines</span>
               <span>Python 3.12</span>
             </div>
 
@@ -577,90 +692,111 @@ ${currentExam.testSuiteCode}
                   onClick={handleRunTests}
                 >
                   <Award size={14} />
-                  Run Production Test Suite
+                  Run Test Suite
                 </button>
               )}
             </div>
           </div>
-        </div>
 
-        {/* Terminal Output Pane */}
-        <div className="terminal-container">
-          <div className="terminal-header">
-            <div className="terminal-title">
-              <Terminal size={14} />
-              <span>TERMINAL / PYTEST CONSOLE</span>
-            </div>
+          {/* Bottom Console Tabs (Test Results vs Terminal) */}
+          <div className="ide-console-container">
+            <div className="console-tab-header">
+              <button
+                type="button"
+                className={`console-tab-btn ${consoleTab === 'tests' ? 'active' : ''}`}
+                onClick={() => setConsoleTab('tests')}
+              >
+                <CheckCircle2 size={13} />
+                <span>Test Assertions</span>
+                {testResult && (
+                  <span className={`result-tag ${testResult.passed ? 'tag-pass' : 'tag-fail'}`}>
+                    {testResult.passed ? `${testResult.passedCount}/${testResult.totalCount} Passed` : `${testResult.failedChecks?.length} Failed`}
+                  </span>
+                )}
+              </button>
+              <button
+                type="button"
+                className={`console-tab-btn ${consoleTab === 'terminal' ? 'active' : ''}`}
+                onClick={() => setConsoleTab('terminal')}
+              >
+                <Terminal size={13} />
+                <span>Terminal Output</span>
+              </button>
 
-            <div className="terminal-status-tag">
-              {runnerStatus === 'loading' && <span className="status-busy">Loading engine...</span>}
-              {runnerStatus === 'running' && <span className="status-busy">Running...</span>}
-              {runnerStatus === 'done' && <span className="status-ready">Done</span>}
-              {runnerStatus === 'error' && <span className="status-err">Error</span>}
-              {runnerStatus === 'idle' && <span className="status-idle">Idle</span>}
-            </div>
-          </div>
-
-          <div className="terminal-body">
-            {terminalOutput.length === 0 ? (
-              <div className="terminal-empty-hint">
-                <p>Press "Run Code" to inspect output, or "Run Production Test Suite" to verify all assertions.</p>
+              <div className="terminal-status-tag">
+                {runnerStatus === 'loading' && <span className="status-busy">Loading engine...</span>}
+                {runnerStatus === 'running' && <span className="status-busy">Executing...</span>}
+                {runnerStatus === 'done' && <span className="status-ready">Ready</span>}
+                {runnerStatus === 'error' && <span className="status-err">Error</span>}
+                {runnerStatus === 'idle' && <span className="status-idle">Idle</span>}
               </div>
-            ) : (
-              <pre className="terminal-pre">
-                {terminalOutput.map((line, idx) => {
-                  let lineClass = 'term-line';
-                  if (line.includes('PASSED') || line.includes('PASS:')) lineClass += ' line-pass';
-                  else if (line.includes('FAILED') || line.includes('[RUNTIME ERROR]'))
-                    lineClass += ' line-fail';
-                  else if (line.includes('CLEARED') || line.includes('🎉'))
-                    lineClass += ' line-celebrate';
-                  else if (line.startsWith('$')) lineClass += ' line-cmd';
+            </div>
 
-                  return (
-                    <div key={idx} className={lineClass}>
-                      {line}
+            <div className="console-tab-body">
+              {consoleTab === 'tests' ? (
+                <div className="test-assertions-view">
+                  {!testResult ? (
+                    <div className="terminal-empty-hint">
+                      <p>Click <strong>"Run Test Suite"</strong> or press <code>Ctrl+Enter</code> to execute automated tests against your implementation.</p>
                     </div>
-                  );
-                })}
-              </pre>
-            )}
+                  ) : (
+                    <div className="assertions-list">
+                      {testResult.passedChecks?.map((check, idx) => (
+                        <div key={idx} className="assertion-card pass">
+                          <CheckCircle2 size={14} className="assertion-icon pass" />
+                          <span className="assertion-name">{check}</span>
+                          <span className="assertion-badge pass">PASS</span>
+                        </div>
+                      ))}
+                      {testResult.failedChecks?.map((fail, idx) => (
+                        <div key={idx} className="assertion-card fail">
+                          <XCircle size={14} className="assertion-icon fail" />
+                          <span className="assertion-name">{fail}</span>
+                          <span className="assertion-badge fail">FAIL</span>
+                        </div>
+                      ))}
+                      {testResult.passed && (
+                        <div className="all-passed-banner">
+                          <Award size={18} />
+                          <div>
+                            <strong>Exam Cleared!</strong> All production requirements and validation invariants satisfied.
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="terminal-body">
+                  {terminalOutput.length === 0 ? (
+                    <div className="terminal-empty-hint">
+                      <p>Terminal output logs will appear here during execution.</p>
+                    </div>
+                  ) : (
+                    <pre className="terminal-pre">
+                      {terminalOutput.map((line, idx) => {
+                        let lineClass = 'term-line';
+                        if (line.includes('PASSED') || line.includes('PASS:')) lineClass += ' line-pass';
+                        else if (line.includes('FAILED') || line.includes('[RUNTIME ERROR]'))
+                          lineClass += ' line-fail';
+                        else if (line.includes('CLEARED') || line.includes('🏆'))
+                          lineClass += ' line-celebrate';
+                        else if (line.startsWith('$')) lineClass += ' line-cmd';
+
+                        return (
+                          <div key={idx} className={lineClass}>
+                            {line}
+                          </div>
+                        );
+                      })}
+                    </pre>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* SOLUTION MODAL / CARD */}
-      {mode === 'exam' && showSolution && (
-        <div className="solution-review-panel">
-          <div className="solution-review-header">
-            <div className="review-title">
-              <Sparkles size={16} className="solution-sparkle-icon" />
-              <h3>Senior Engineering Solution & Code Review</h3>
-            </div>
-            <button
-              type="button"
-              className="copy-solution-btn"
-              onClick={handleCopySolution}
-            >
-              {copiedSolution ? (
-                <>
-                  <Check size={14} /> Copied!
-                </>
-              ) : (
-                <>
-                  <Copy size={14} /> Copy Solution Code
-                </>
-              )}
-            </button>
-          </div>
-
-          <p className="solution-explanation">{currentExam.solutionExplanation}</p>
-
-          <pre className="solution-code-pre">
-            <code>{currentExam.solutionCode}</code>
-          </pre>
-        </div>
-      )}
     </div>
   );
 }

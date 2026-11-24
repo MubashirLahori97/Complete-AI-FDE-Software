@@ -57,7 +57,7 @@ const Settings = lazy(() =>
 const navigation = [
   { path: '/', label: 'Overview', icon: LayoutDashboard },
   { path: '/curriculum', label: 'Learning path', icon: BookOpen },
-  { path: '/python', label: 'Python track (Beginner to Advanced)', icon: Terminal },
+  { path: '/python', label: 'Python Track', icon: Terminal },
   { path: '/sdlc', label: 'AI-Native SDLC', icon: Workflow },
   { path: '/production', label: 'Production blueprint', icon: Layers },
   { path: '/lab', label: 'Practice lab', icon: Code2 },

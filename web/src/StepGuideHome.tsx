@@ -92,21 +92,9 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
               {recommendation.recommendedLabel}
               <ArrowRight size={16} />
             </a>
-            <a className="button light" href="#/sdlc">
-              <Workflow size={16} />
-              Open AI-Native SDLC Studio
-            </a>
-            <a className="button light" href="#/production">
-              <Layers size={16} />
-              Production Blueprint (8 Sprints)
-            </a>
             <a className="button light" href="#/python">
               <Terminal size={16} />
-              Python Track (Beginner to Advanced)
-            </a>
-            <a className="button light" href="#/document/STEP-BY-STEP-GUIDE.md">
-              <BookOpen size={16} />
-              Read full guide
+              Python & FastAPI Production Track
             </a>
           </div>
         </div>

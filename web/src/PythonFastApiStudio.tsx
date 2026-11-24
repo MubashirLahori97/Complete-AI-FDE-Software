@@ -40,9 +40,25 @@ import {
   type FastApiRoadmapStage,
   type FastApiProjectFile,
 } from './python-fastapi-data';
+import FastApiArchitectureDiagram from './FastApiArchitectureDiagram';
 
 interface PythonFastApiStudioProps {
   onLabCleared?: (labId: string) => void;
+}
+
+function renderInlineCode(text: string) {
+  if (!text) return null;
+  const parts = text.split(/(`[^`]+`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={i} className="spec-inline-code">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
 }
 
 export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudioProps) {
@@ -68,6 +84,25 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
   } | null>(null);
 
   const [copiedCode, setCopiedCode] = useState(false);
+  const [masteredTopics, setMasteredTopics] = useState<Record<string, boolean>>(() => {
+    try {
+      const raw = localStorage.getItem('fde_fastapi_mastered_topics');
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  const toggleTopicMastered = (topicId: string) => {
+    setMasteredTopics((prev) => {
+      const next = { ...prev, [topicId]: !prev[topicId] };
+      try {
+        localStorage.setItem('fde_fastapi_mastered_topics', JSON.stringify(next));
+      } catch {}
+      return next;
+    });
+  };
+
   const frameRef = useRef<HTMLIFrameElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const runIdRef = useRef(0);
@@ -450,7 +485,7 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
             {currentLab.specification.map((spec, idx) => (
               <li key={idx}>
                 <ChevronRight size={14} className="bullet-icon" />
-                <span>{spec}</span>
+                <span>{renderInlineCode(spec)}</span>
               </li>
             ))}
           </ul>
@@ -573,7 +608,14 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
         <div className="fastapi-roadmap-view">
           <div className="roadmap-intro-card">
             <div className="roadmap-intro-header">
-              <span className="roadmap-tag">6-STAGE SYSTEMATIC CURRICULUM</span>
+              <div className="roadmap-meta-row">
+                <span className="roadmap-tag">6-STAGE SYSTEMATIC CURRICULUM</span>
+                <span className="roadmap-progress-badge">
+                  <CheckCircle2 size={13} />{' '}
+                  {Object.values(masteredTopics).filter(Boolean).length} /{' '}
+                  {FASTAPI_ROADMAP_STAGES.reduce((acc, s) => acc + s.topics.length, 0)} Topics Mastered
+                </span>
+              </div>
               <h3>The Complete FastAPI Production Engineering Roadmap</h3>
               <p>
                 From ASGI event-loop concurrency and strict Pydantic v2 validation contracts to
@@ -616,6 +658,25 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
                     <article key={topic.id} className="stage-topic-card">
                       <div className="topic-card-header">
                         <h4>{topic.title}</h4>
+                        <div className="topic-actions">
+                          <button
+                            type="button"
+                            className={`mastery-toggle-btn ${masteredTopics[topic.id] ? 'mastered' : ''}`}
+                            onClick={() => toggleTopicMastered(topic.id)}
+                            title={masteredTopics[topic.id] ? 'Marked as mastered' : 'Mark as mastered'}
+                          >
+                            <CheckCircle2 size={13} />
+                            <span>{masteredTopics[topic.id] ? 'Mastered' : 'Mark Mastered'}</span>
+                          </button>
+                          <button
+                            type="button"
+                            className="launch-lab-btn"
+                            onClick={() => setStudioMode('labs')}
+                          >
+                            <Play size={12} />
+                            <span>Practice Lab</span>
+                          </button>
+                        </div>
                       </div>
                       <p className="topic-summary">{topic.summary}</p>
 
@@ -712,6 +773,9 @@ export default function PythonFastApiStudio({ onLabCleared }: PythonFastApiStudi
               </div>
             </div>
           </div>
+
+          {/* Interactive ByteByteGo-style Architecture Visualizer */}
+          <FastApiArchitectureDiagram onSelectFile={(filePath) => setSelectedFilePath(filePath)} />
 
           {/* Interactive File Explorer */}
           <div className="blueprint-explorer-container">

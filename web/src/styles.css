@@ -1,19 +1,25 @@
 :root {
   font-family: 'DM Sans', system-ui, sans-serif;
-  color: #26372f;
-  background: #f7f8f4;
+  color: #f8fafc;
+  background: #090d16;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --canvas: #f7f8f4;
-  --surface: #fff;
-  --green: #254b3e;
-  --green-dark: #1e3e33;
-  --lime: #dfedb9;
-  --text: #26372f;
-  --muted: #667168;
-  --border: #e1e6dd;
-  --sage: #eaf0e5;
+  --canvas: #090d16;
+  --surface: #111726;
+  --surface-elevated: #1a2234;
+  --surface-card: #151d2f;
+  --surface-muted: #1e293b;
+  --green: #4ade80;
+  --green-dark: #22c55e;
+  --lime: #a3e635;
+  --text: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --border-accent: rgba(56, 189, 248, 0.35);
+  --sage: #1e293b;
   --radius: 12px;
 }
 * {
@@ -153,13 +159,14 @@ svg {
 }
 .app-shell {
   display: grid;
-  grid-template-columns: 232px minmax(0, 1fr);
+  grid-template-columns: 240px minmax(0, 1fr);
   min-height: 100vh;
+  background: var(--canvas);
 }
 .sidebar {
   padding: 29px 19px 20px;
   border-right: 1px solid var(--border);
-  background: #fcfdf9;
+  background: var(--surface);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -179,8 +186,9 @@ svg {
   height: 39px;
   display: grid;
   place-items: center;
-  background: var(--green);
-  color: var(--lime);
+  background: var(--surface-elevated);
+  color: var(--accent);
+  border: 1px solid var(--border-medium);
   border-radius: 10px;
 }
 .brand strong {
@@ -189,10 +197,12 @@ svg {
   font-weight: 700;
   letter-spacing: -0.7px;
   white-space: nowrap;
+  color: var(--text);
 }
 .brand-word {
   font-size: 17px;
   font-weight: 400;
+  color: var(--text-secondary);
 }
 .brand small {
   display: block;
@@ -204,7 +214,7 @@ svg {
 .sidebar-label {
   font-size: 9px;
   letter-spacing: 1.4px;
-  color: #758075;
+  color: var(--text-dim);
   margin: 0 13px 12px;
 }
 .sidebar nav {
@@ -219,19 +229,19 @@ svg {
   padding: 12px 13px;
   border-radius: 7px;
   font-size: 13px;
-  color: #647067;
+  color: var(--muted);
   position: relative;
   transition:
     background 150ms,
     color 150ms;
 }
 .sidebar nav a:hover {
-  background: #f0f3ed;
-  color: var(--green);
+  background: var(--surface-elevated);
+  color: var(--text);
 }
 .sidebar nav a.active {
-  background: #eaf0e6;
-  color: var(--green);
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent);
   font-weight: 600;
 }
 .sidebar nav a.active::before {
@@ -240,14 +250,15 @@ svg {
   height: 20px;
   position: absolute;
   left: -19px;
-  background: var(--green);
+  background: var(--accent);
   border-radius: 0 2px 2px 0;
 }
 .nav-count {
   margin-left: auto;
   font-size: 10px;
   font-family: 'DM Mono', monospace;
-  background: #dce5d6;
+  background: var(--surface-elevated);
+  color: var(--muted);
   border-radius: 4px;
   padding: 3px 5px;
 }
@@ -261,7 +272,7 @@ svg {
 }
 .sidebar-progress {
   border: 1px solid var(--border);
-  background: #f7f9f2;
+  background: var(--surface-card);
   border-radius: 10px;
   padding: 16px 13px;
 }
@@ -270,11 +281,13 @@ svg {
   justify-content: space-between;
   font-size: 11px;
   margin-bottom: 12px;
+  color: var(--text);
 }
 .sidebar-progress strong {
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   font-weight: 400;
+  color: var(--accent);
 }
 .sidebar-progress p {
   font-size: 10px;
@@ -284,6 +297,7 @@ svg {
 .sidebar-progress a {
   font-size: 10px;
   gap: 6px;
+  color: var(--accent);
 }
 .github-link {
   display: flex;
@@ -291,14 +305,17 @@ svg {
   gap: 9px;
   font-size: 10px;
   padding: 22px 7px 17px;
-  color: #5c6b60;
+  color: var(--muted);
+}
+.github-link:hover {
+  color: var(--text);
 }
 .github-link svg:last-child {
   margin-left: auto;
 }
 .local-save {
   font-size: 9px;
-  color: #788176;
+  color: var(--muted);
   display: flex;
   gap: 6px;
   align-items: center;
@@ -309,13 +326,14 @@ svg {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #6c885b;
+  background: var(--green);
   flex-shrink: 0;
 }
 .workspace {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  background: var(--canvas);
 }
 .topbar {
   height: 73px;
@@ -324,16 +342,18 @@ svg {
   justify-content: space-between;
   padding: 0 40px;
   border-bottom: 1px solid var(--border);
-  background: #fdfefb;
+  background: var(--surface);
+  color: var(--text);
 }
 .topbar-location {
   display: flex;
   align-items: center;
   gap: 13px;
   font-size: 11px;
+  color: var(--muted);
 }
 .topbar-location > svg {
-  color: #96a193;
+  color: var(--text-dim);
 }
 .topbar-actions {
   display: flex;
@@ -344,20 +364,27 @@ svg {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: none;
-  background: none;
+  border: 1px solid var(--border);
+  background: var(--surface-card);
+  border-radius: 8px;
   font-size: 11px;
-  color: #6b746a;
-  padding: 8px 0;
+  color: var(--muted);
+  padding: 7px 12px;
+  transition: border-color 150ms;
+}
+.global-search:hover {
+  border-color: var(--border-medium);
+  color: var(--text);
 }
 kbd {
-  background: #f1f3ed;
-  border: 1px solid #e1e5da;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
   border-radius: 4px;
   padding: 3px 5px;
   font-family: 'DM Mono', monospace;
   font-size: 9px;
   margin-left: 12px;
+  color: var(--text-secondary);
 }
 .topbar-divider {
   width: 1px;
@@ -365,8 +392,9 @@ kbd {
   background: var(--border);
 }
 .avatar {
-  background: #eaf0e2;
-  color: var(--green);
+  background: var(--surface-elevated);
+  color: var(--accent);
+  border: 1px solid var(--border);
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -493,27 +521,31 @@ kbd {
     border-color 150ms;
 }
 .button.primary {
-  background: var(--green);
-  color: white;
+  background: var(--green-dark);
+  color: #090d16;
+  font-weight: 600;
 }
 .button.primary:hover:not(:disabled) {
-  background: #17392d;
+  background: #16a34a;
+  color: #fff;
 }
 .button.lime {
   background: var(--lime);
-  color: #20372b;
+  color: #090d16;
+  font-weight: 600;
 }
 .button.lime:hover:not(:disabled) {
-  background: #cfdfa3;
+  background: #bef264;
 }
 .button.light {
-  background: #fff;
+  background: var(--surface-card);
   border-color: var(--border);
-  color: var(--green);
+  color: var(--text);
 }
 .button.light:hover {
-  background: #f1f5eb;
-  border-color: #b9c8b3;
+  background: var(--surface-elevated);
+  border-color: var(--border-medium);
+  color: var(--accent);
 }
 .button.small {
   min-height: 35px;
@@ -521,9 +553,12 @@ kbd {
   padding: 8px 12px;
 }
 .button.danger {
-  background: #fff;
-  border-color: #dfc7c0;
-  color: #984634;
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.25);
+  color: var(--danger);
+}
+.button.danger:hover {
+  background: rgba(248, 113, 113, 0.2);
 }
 .hero-link {
   color: #e3ebdc;

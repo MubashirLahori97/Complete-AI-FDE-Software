@@ -64,11 +64,12 @@
 
 .guide-stat strong {
   font-size: 22px;
-  color: var(--green-dark);
+  color: var(--accent);
 }
 
 .guide-stat p {
   font-size: 13px;
+  color: var(--muted);
 }
 
 .guide-intake-card {
@@ -148,7 +149,7 @@
 
 .guide-level-btn {
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--surface-card);
   border-radius: 999px;
   padding: 7px 12px;
   font-size: 12px;
@@ -161,26 +162,27 @@
 }
 
 .guide-level-btn:hover {
-  border-color: var(--green);
+  border-color: var(--border-medium);
+  background: var(--surface-elevated);
   color: var(--text);
 }
 
 .guide-level-btn.is-active.is-new {
-  background: #edf1ee;
-  border-color: #b7c5bc;
+  background: var(--surface-elevated);
+  border-color: var(--border-strong);
   color: var(--text);
 }
 
 .guide-level-btn.is-active.is-familiar {
-  background: var(--sage);
-  border-color: #9ec09f;
-  color: var(--green-dark);
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: var(--accent);
 }
 
 .guide-level-btn.is-active.is-practiced {
-  background: var(--green);
-  border-color: var(--green);
-  color: #fff;
+  background: rgba(74, 222, 128, 0.15);
+  border-color: rgba(74, 222, 128, 0.4);
+  color: var(--green);
 }
 
 .guide-notes-box {
