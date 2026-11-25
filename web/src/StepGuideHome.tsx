@@ -7,7 +7,9 @@ import {
   Compass,
   FastForward,
   Layers,
+  MapPin,
   RotateCcw,
+  ShieldAlert,
   Sparkles,
   Terminal,
   Workflow,
@@ -36,6 +38,7 @@ const LEVEL_OPTIONS: { value: SkillLevel; label: string }[] = [
 
 export default function StepGuideHome({ progress }: { progress: Progress }) {
   const [intake, setIntake] = useState<LearnerIntake>(() => loadLearnerIntake());
+  const [focusedStep, setFocusedStep] = useState<number | null>(null);
 
   const completedMissionIds = useMemo(() => {
     const done = new Set<number>();
@@ -81,7 +84,10 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
     <div className="guide-home">
       <section className="guide-hero" aria-label="Welcome to FDE Academy">
         <div className="guide-hero-copy">
-          <p className="eyebrow">FDE ACADEMY · AI-ERA SOFTWARE ENGINEERING</p>
+          <p className="eyebrow guide-location-eyebrow">
+            <MapPin size={13} />
+            YOU ARE HERE · OVERVIEW & LEARNING GPS
+          </p>
           <h1>Understand the system. Direct AI to build it. Prove it works.</h1>
           <p className="guide-lead">
             In the AI era, memorizing syntax is no longer the bottleneck. Follow a clear 7-step
@@ -100,6 +106,30 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
           </div>
         </div>
         <div className="guide-hero-stats">
+          <div className="guide-stat guide-gps-card">
+            <span className="guide-gps-label">
+              <Compass size={13} />
+              Your current position &amp; next move
+            </span>
+            <strong>
+              {completedMissionIds.size > 0
+                ? `In Progress · Step ${recommendation.recommendedStepNumber}`
+                : `Start Here · Step ${recommendation.recommendedStepNumber}`}
+            </strong>
+            <p>{recommendation.summary}</p>
+            <div className="guide-gps-links">
+              <a className="text-link" href={recommendation.recommendedHref}>
+                {recommendation.recommendedLabel}
+                <ArrowRight size={13} />
+              </a>
+              {progress.lastMission > 0 && (
+                <a className="text-link" href={`#/mission/${progress.lastMission}`}>
+                  Resume Mission {progress.lastMission}
+                  <ArrowRight size={13} />
+                </a>
+              )}
+            </div>
+          </div>
           <div className="guide-stat">
             <span>Core missions recorded</span>
             <strong>{completedMissionIds.size} / 30</strong>
@@ -114,9 +144,63 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
             <p className="muted">
               {recommendation.fastTrackStepNumbers.length > 0
                 ? `${recommendation.fastTrackStepNumbers.length} step(s) eligible to fast-track`
-                : 'Tell us what you know below to personalize your start'}
+                : 'Personalize below to skip basics you already know'}
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="guide-wayfinder" aria-label="Where to go in FDE Academy">
+        <div className="guide-wayfinder-head">
+          <div>
+            <p className="eyebrow">CHOOSE YOUR DESTINATION</p>
+            <h2>Where do you want to go?</h2>
+          </div>
+          <p className="muted">
+            New to FDE Academy? Start with the Core 7-Step Path or personalize Step 0 below.
+          </p>
+        </div>
+        <div className="guide-wayfinder-grid">
+          <a href="#/curriculum" className="guide-wayfinder-card is-primary">
+            <div className="wayfinder-icon">
+              <BookOpen size={18} />
+            </div>
+            <strong>1. Core 7-Step Path</strong>
+            <p>30 guided missions from problem specs &amp; architecture to verified production.</p>
+            <span className="wayfinder-cta">
+              Browse 30 Missions <ArrowRight size={14} />
+            </span>
+          </a>
+          <a href="#/python" className="guide-wayfinder-card">
+            <div className="wayfinder-icon">
+              <Terminal size={18} />
+            </div>
+            <strong>2. Python &amp; FastAPI Track</strong>
+            <p>Modern Python (uv, ruff), OOP, async systems, FastAPI, RAG &amp; 68 Q&amp;As.</p>
+            <span className="wayfinder-cta">
+              Open Python Track <ArrowRight size={14} />
+            </span>
+          </a>
+          <a href="#/agentic-era" className="guide-wayfinder-card">
+            <div className="wayfinder-icon">
+              <ShieldAlert size={18} />
+            </div>
+            <strong>3. 2030 Agentic Era Lab</strong>
+            <p>Audit sabotaged AI PRs, fix pass^k reliability decay &amp; Intelligence FinOps.</p>
+            <span className="wayfinder-cta">
+              Enter 2030 Lab <ArrowRight size={14} />
+            </span>
+          </a>
+          <a href="#/sdlc" className="guide-wayfinder-card">
+            <div className="wayfinder-icon">
+              <Workflow size={18} />
+            </div>
+            <strong>4. AI-Native SDLC &amp; Blueprint</strong>
+            <p>See how AI-era teams design specs, eval harnesses &amp; safe rollouts.</p>
+            <span className="wayfinder-cta">
+              Open SDLC Studio <ArrowRight size={14} />
+            </span>
+          </a>
         </div>
       </section>
 
@@ -226,6 +310,33 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
           link="Browse all 30 missions"
         />
 
+        <div className="guide-journey-strip" role="navigation" aria-label="7-step journey quick jump">
+          {GUIDE_STEPS.map((step) => {
+            const doneCount = step.missionIds.filter((id) => completedMissionIds.has(id)).length;
+            const isDone = step.missionIds.length > 0 && doneCount === step.missionIds.length;
+            const isRec =
+              focusedStep !== null
+                ? focusedStep === step.number
+                : recommendation.recommendedStepNumber === step.number;
+            return (
+              <button
+                key={step.id}
+                type="button"
+                className={`guide-journey-pill ${isRec ? 'is-current' : ''} ${isDone ? 'is-done' : ''}`}
+                onClick={() => {
+                  setFocusedStep(step.number);
+                  document
+                    .getElementById(`guide-step-${step.number}`)
+                    ?.scrollIntoView({ behavior: 'auto', block: 'start' });
+                }}
+              >
+                <span className="journey-num">{isDone ? '✓' : step.number}</span>
+                <span className="journey-label">{step.sdlcTag}</span>
+              </button>
+            );
+          })}
+        </div>
+
         <ol className="guide-steps-list">
           {GUIDE_STEPS.map((step) => {
             const doneCount = step.missionIds.filter((id) => completedMissionIds.has(id)).length;
@@ -237,6 +348,7 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
             return (
               <li
                 key={step.id}
+                id={`guide-step-${step.number}`}
                 className={`guide-step-card ${isRecommended ? 'is-recommended' : ''} ${isStepComplete ? 'is-complete' : ''}`}
               >
                 <div className="guide-step-top">

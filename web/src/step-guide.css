@@ -392,3 +392,199 @@
   border-color: #c5d996;
   color: var(--green-dark);
 }
+
+/* Orientation GPS & Wayfinder */
+.guide-location-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--green-dark);
+}
+
+.guide-gps-card {
+  border-color: rgba(32, 63, 66, 0.25);
+  background: var(--sage);
+}
+
+.guide-gps-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--green-dark) !important;
+}
+
+.guide-gps-card strong {
+  font-size: 17px;
+  color: var(--green-dark);
+}
+
+.guide-gps-card p {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.guide-gps-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.guide-wayfinder {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.guide-wayfinder-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.guide-wayfinder-head h2 {
+  margin-top: 4px;
+}
+
+.guide-wayfinder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 1020px) {
+  .guide-wayfinder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .guide-wayfinder-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.guide-wayfinder-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--canvas);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+.guide-wayfinder-card:hover {
+  border-color: var(--green);
+  background: var(--sage);
+  transform: translateY(-1px);
+}
+
+.guide-wayfinder-card.is-primary {
+  border-color: rgba(32, 63, 66, 0.35);
+  background: #eff5f2;
+}
+
+.wayfinder-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--green-dark);
+}
+
+.guide-wayfinder-card strong {
+  font-size: 14.5px;
+  color: var(--text);
+}
+
+.guide-wayfinder-card p {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+  flex: 1;
+}
+
+.wayfinder-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-top: 2px;
+}
+
+/* 7-Step Horizontal Journey Strip */
+.guide-step-card {
+  scroll-margin-top: 84px;
+}
+
+.guide-journey-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.guide-journey-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.guide-journey-pill:hover {
+  border-color: var(--green);
+  background: var(--sage);
+}
+
+.guide-journey-pill.is-current {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  color: #ffffff;
+}
+
+.guide-journey-pill.is-done {
+  background: var(--lime);
+  border-color: #c5d996;
+  color: var(--green-dark);
+}
+
+.guide-journey-pill .journey-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(32, 63, 66, 0.12);
+}
+
+.guide-journey-pill.is-current .journey-num {
+  background: rgba(255, 255, 255, 0.22);
+}

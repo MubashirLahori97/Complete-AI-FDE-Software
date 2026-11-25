@@ -406,9 +406,15 @@ export default function App() {
             >
               {menu ? <X size={21} /> : <Menu size={21} />}
             </button>
-            <span className="muted breadcrumb-root">Workspace</span>
+            {path === '/' ? (
+              <span className="muted breadcrumb-root">You are here</span>
+            ) : (
+              <a href="#/" className="muted breadcrumb-root" style={{ textDecoration: 'none' }}>
+                Overview
+              </a>
+            )}
             <ChevronRight size={13} />
-            <span>{section}</span>
+            <span>{path === '/' ? 'Overview · Learning GPS' : section}</span>
           </div>
           <div className="topbar-actions">
             <button className="global-search" onClick={() => setSearchOpen(true)}>
