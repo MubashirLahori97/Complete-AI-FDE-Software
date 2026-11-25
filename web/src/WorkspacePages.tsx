@@ -407,6 +407,7 @@ export function Document({ filename }: { filename: string }) {
     'STEP-BY-STEP-GUIDE.md': 'Step-by-step AI-era guide',
     'PRODUCTION-BLUEPRINT.md': 'Production-grade AI system blueprint',
     'PYTHON-MASTERY-GUIDE.md': 'Complete Python mastery firmware (Beginner to Advanced)',
+    'AGENTIC-ERA-2030.md': 'Engineering for the 2028–2030 Agentic Era',
   };
   return (
     <>

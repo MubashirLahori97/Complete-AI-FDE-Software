@@ -21,6 +21,7 @@ import WorkedStory from './WorkedStory';
 import { AcademyPath } from './AcademyJourney';
 import StepGuideHome from './StepGuideHome';
 import LessonDirections from './LessonDirections';
+import MissionVivaPanel from './MissionVivaPanel';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
 const stepNames = ['Explore', 'Understand', 'Build with AI', 'Explain your system', 'Review'];
@@ -435,6 +436,7 @@ export function MissionLesson({
                 </span>
               )}
             </div>
+            <MissionVivaPanel mission={mission} record={record} />
           </>
         )}
         {step === 4 && (

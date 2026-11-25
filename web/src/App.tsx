@@ -15,6 +15,7 @@ import {
   Menu,
   Search,
   Settings as SettingsIcon,
+  ShieldAlert,
   Sprout,
   Terminal,
   Users,
@@ -43,6 +44,7 @@ const Portfolio = lazy(() => import('./Portfolio'));
 const SdlcStudio = lazy(() => import('./SdlcStudio'));
 const ProductionBlueprint = lazy(() => import('./ProductionBlueprint'));
 const PythonTrack = lazy(() => import('./PythonTrack'));
+const AgenticEraStudio = lazy(() => import('./AgenticEraStudio'));
 const Document = lazy(() =>
   import('./WorkspacePages').then((module) => ({ default: module.Document })),
 );
@@ -59,6 +61,7 @@ const navigation = [
   { path: '/curriculum', label: 'Learning path', icon: BookOpen },
   { path: '/python', label: 'Python Track', icon: Terminal },
   { path: '/sdlc', label: 'AI-Native SDLC', icon: Workflow },
+  { path: '/agentic-era', label: '2030 Agentic Lab', icon: ShieldAlert },
   { path: '/production', label: 'Production blueprint', icon: Layers },
   { path: '/lab', label: 'Practice lab', icon: Code2 },
   { path: '/scenarios', label: 'Field scenarios', icon: Users },
@@ -169,7 +172,7 @@ export default function App() {
   const missionMatch = path.match(/^\/mission\/(\d+)$/);
   const phaseMatch = path.match(/^\/phase\/([234])$/);
   const documentMatch = path.match(
-    /^\/document\/(ROADMAP|CURRICULUM|VISION|PROJECTS|RESEARCH-2030|MISSION-MAP|MISSION-COURSE|AI-NATIVE-SDLC|STEP-BY-STEP-GUIDE|PRODUCTION-BLUEPRINT|PYTHON-MASTERY-GUIDE)\.md$/,
+    /^\/document\/(ROADMAP|CURRICULUM|VISION|PROJECTS|RESEARCH-2030|MISSION-MAP|MISSION-COURSE|AI-NATIVE-SDLC|STEP-BY-STEP-GUIDE|PRODUCTION-BLUEPRINT|PYTHON-MASTERY-GUIDE|AGENTIC-ERA-2030)\.md$/,
   );
   const lessonDay = lessonMatch ? Number(lessonMatch[1]) : 0;
   const selectedPath =
@@ -232,6 +235,7 @@ export default function App() {
     );
   else if (path === '/python') page = <PythonTrack progress={progress} />;
   else if (path === '/sdlc') page = <SdlcStudio progress={progress} />;
+  else if (path === '/agentic-era') page = <AgenticEraStudio />;
   else if (path === '/production') page = <ProductionBlueprint />;
   else if (path === '/lab') page = <Playground progress={progress} update={update} />;
   else if (path === '/scenarios') page = <Scenarios progress={progress} update={update} />;

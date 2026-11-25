@@ -94,3 +94,32 @@ export function ProgressBar({ value, label }: { value: number; label: string }) 
     </div>
   );
 }
+
+export type HalfLifeTier = 'law' | 'pattern' | 'tool';
+
+const HALF_LIFE_META: Record<HalfLifeTier, { label: string; title: string; className: string }> = {
+  law: {
+    label: '🏛️ 20-Yr Law',
+    title: 'Enduring computer science, math, security, or systems law relevant through 2035+',
+    className: 'half-life-badge tier-law',
+  },
+  pattern: {
+    label: '⚙️ 5-Yr Pattern',
+    title: 'Durable architecture & AI-native engineering pattern',
+    className: 'half-life-badge tier-pattern',
+  },
+  tool: {
+    label: '🔧 2026 Tooling',
+    title: 'Current high-leverage adapter tool — designed to be swapped as ecosystems evolve',
+    className: 'half-life-badge tier-tool',
+  },
+};
+
+export function HalfLifeBadge({ tier }: { tier: HalfLifeTier }) {
+  const meta = HALF_LIFE_META[tier];
+  return (
+    <span className={meta.className} title={meta.title}>
+      {meta.label}
+    </span>
+  );
+}

@@ -77,9 +77,11 @@ import {
   loadRagProgress,
 } from './python-rag-data';
 import type { Progress } from './state';
+import { HalfLifeBadge } from './ui';
 import './python-track.css';
 import './modern-toolchain.css';
 import './datalumina-track.css';
+import './agentic-era.css';
 
 export type DataluminaTopTab =
   | 'getting-started'
@@ -501,7 +503,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
         </aside>
 
         {/* CENTER MAIN READING PANE */}
-        <main className="datalumina-main-content">
+        <div className="datalumina-main-content">
           {/* TAB 1: GETTING STARTED */}
           {topTab === 'getting-started' && (
             <div>
@@ -510,7 +512,24 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
                   <div className="reading-breadcrumbs">
                     <span>Getting Started</span>
                     <ChevronRight size={13} />
-                    <span className="active">Modern Toolchain & uv Setup</span>
+                    <span className="active">Modern Toolchain &amp; uv Setup</span>
+                  </div>
+                  <div className="datalumina-callout note" style={{ marginTop: 0 }}>
+                    <Sparkles size={19} className="callout-icon" />
+                    <div className="callout-body">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        <span className="callout-title">2028–2030 X-Ray Vision Mode</span>
+                        <HalfLifeBadge tier="law" />
+                        <HalfLifeBadge tier="tool" />
+                      </div>
+                      <p>
+                        You are not studying Python to out-type AI agents—you are building{' '}
+                        <strong>X-Ray Runtime Vision</strong> (memory, concurrency, event loops,
+                        ACID locks) so you can spot subtle bugs in AI-generated code in seconds.
+                        CLI tools like <code>uv</code> and <code>ruff</code> are swappable adapters;
+                        runtime physics lasts 20+ years.
+                      </p>
+                    </div>
                   </div>
                   <ModernToolchainExplorer />
                 </div>
@@ -602,6 +621,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
                     {activeTopic.difficulty}
                   </span>
                   <span className="tag-badge badge-duration">{activeTopic.duration}</span>
+                  <HalfLifeBadge tier={activeTopic.number === 18 ? 'pattern' : 'law'} />
                 </div>
                 <h1>{activeTopic.title}</h1>
                 <p className="reading-lead">{activeTopic.summary}</p>
@@ -848,6 +868,17 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
                         >
                           Advanced (18)
                         </button>
+                        <button
+                          type="button"
+                          className={`filter-chip ${selectedTag === 'gil' || selectedTag === 'async' || selectedTag === 'internals' ? 'active' : ''}`}
+                          onClick={() => {
+                            setDifficultyFilter('advanced');
+                            setSearchQuery('');
+                          }}
+                          title="Focus on concurrency, memory, GIL, and async questions that catch real AI-generated production bugs"
+                        >
+                          🛡️ High-Signal for AI PR Review
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -1023,7 +1054,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               )}
             </div>
           )}
-        </main>
+        </div>
 
         {/* RIGHT STICKY TABLE OF CONTENTS (TOC) */}
         <aside className="datalumina-right-toc" aria-label="On this page">

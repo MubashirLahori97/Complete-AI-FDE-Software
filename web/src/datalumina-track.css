@@ -14,23 +14,26 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  height: 60px;
-  background: rgba(10, 13, 26, 0.88);
+  min-height: 60px;
+  background: rgba(10, 13, 26, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
 }
 
 .datalumina-nav-brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   font-weight: 800;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #f8fafc;
+  flex-shrink: 0;
 }
 
 .brand-python-icon {
@@ -62,9 +65,10 @@
 .datalumina-tabs-list {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
+  flex: 1 1 auto;
+  min-width: 0;
   overflow-x: auto;
-  max-width: 65%;
   scrollbar-width: none;
 }
 
@@ -75,34 +79,36 @@
 .datalumina-tab-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.85rem;
-  font-size: 0.86rem;
+  gap: 0.4rem;
+  padding: 0.42rem 0.75rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: #cbd5e1;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0.5rem;
   cursor: pointer;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.15s ease;
 }
 
 .datalumina-tab-item:hover {
-  color: #f8fafc;
-  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .datalumina-tab-item.active {
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
-  border-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.38);
 }
 
 .datalumina-top-actions {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .action-studio-btn {

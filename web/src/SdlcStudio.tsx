@@ -173,6 +173,16 @@ export default function SdlcStudio({ progress }: { progress: Progress }) {
                 <strong>Gate to Pass</strong>
               </div>
               <p>{selectedPhase.gate}</p>
+              {(selectedPhase.id === 'verify' || selectedPhase.id === 'govern') && (
+                <a
+                  href="#/agentic-era"
+                  className="text-link"
+                  style={{ marginTop: '0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                >
+                  Practice auditing sabotaged AI PRs
+                  <ArrowRight size={14} />
+                </a>
+              )}
             </div>
           </div>
 

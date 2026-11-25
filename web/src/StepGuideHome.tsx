@@ -14,7 +14,8 @@ import {
 } from 'lucide-react';
 import { canRecordMission, missions } from './missions';
 import type { Progress } from './state';
-import { ProgressBar, SectionHeading } from './ui';
+import { HalfLifeBadge, ProgressBar, SectionHeading } from './ui';
+import './agentic-era.css';
 import {
   GUIDE_STEPS,
   SKILL_TOPICS,
@@ -196,6 +197,25 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
             <ArrowRight size={16} />
           </a>
         </div>
+      </section>
+
+      <section className="agentic-home-banner" aria-label="2028-2030 Agentic Era Readiness">
+        <div>
+          <div className="agentic-badge-row">
+            <HalfLifeBadge tier="law" />
+            <HalfLifeBadge tier="pattern" />
+          </div>
+          <h3>Preparing for 2028–2030? Train in the 2030 Agentic Engineering Lab</h3>
+          <p>
+            Practice the 4 skills AI coding agents cannot replace: auditing sabotaged green-CI pull
+            requests, fixing exponential pass^k reliability decay, uncovering dirty data provenance,
+            and engineering intelligence FinOps.
+          </p>
+        </div>
+        <a className="button primary" href="#/agentic-era">
+          Open 2030 Agentic Lab
+          <ArrowRight size={16} />
+        </a>
       </section>
 
       <section className="guide-roadmap-section" aria-label="Step-by-step roadmap">
