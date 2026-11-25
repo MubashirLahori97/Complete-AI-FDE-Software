@@ -1,4 +1,18 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
+
+function renderInlineCode(text: string): ReactNode {
+  const parts = text.split(/(`[^`]+`)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('`') && part.endsWith('`') && part.length >= 2) {
+      return (
+        <code key={index} className="inline-code">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return part;
+  });
+}
 import {
   AlertTriangle,
   ArrowLeft,
@@ -77,7 +91,7 @@ import {
   loadRagProgress,
 } from './python-rag-data';
 import type { Progress } from './state';
-import { HalfLifeBadge } from './ui';
+import { HalfLifeBadge, PageHeading } from './ui';
 import './python-track.css';
 import './modern-toolchain.css';
 import './datalumina-track.css';
@@ -197,144 +211,204 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
 
   return (
     <div className="datalumina-wrapper">
-      {/* 1. TOP HORIZONTAL NAVIGATION (MINTLIFY / DATALUMINA STYLE) */}
-      <header className="datalumina-top-nav">
-        <div className="datalumina-nav-brand">
-          <div className="brand-python-icon">🐍</div>
-          <span>Python for AI & Systems</span>
-          <span className="brand-badge">2026 EDITION</span>
-        </div>
-
-        {/* 6 Horizontal Navigation Tabs */}
-        <nav className="datalumina-tabs-list" aria-label="Course Sections">
+      <PageHeading
+        eyebrow="X-RAY RUNTIME PHYSICS FOR AI SUPERVISORS"
+        title="Python & FastAPI Production Track"
+        description="Build X-Ray runtime vision—memory, concurrency, event loops, ACID locks, and production FastAPI—so you can audit AI-generated diffs and run code directly in your browser."
+        action={
           <button
             type="button"
-            className={`datalumina-tab-item ${topTab === 'getting-started' ? 'active' : ''}`}
-            onClick={() => {
-              setTopTab('getting-started');
-              setSelectedSubItem('toolchain');
-            }}
-          >
-            <Zap size={14} />
-            <span>Getting Started</span>
-          </button>
-
-          <button
-            type="button"
-            className={`datalumina-tab-item ${topTab === 'basics' ? 'active' : ''}`}
-            onClick={() => {
-              setTopTab('basics');
-              setSelectedTopicId('topic-1');
-            }}
-          >
-            <BookOpen size={14} />
-            <span>Python Basics</span>
-          </button>
-
-          <button
-            type="button"
-            className={`datalumina-tab-item ${topTab === 'oop' ? 'active' : ''}`}
-            onClick={() => {
-              setTopTab('oop');
-              setSelectedTopicId('topic-7');
-            }}
-          >
-            <Layers size={14} />
-            <span>OOP & Protocols</span>
-          </button>
-
-          <button
-            type="button"
-            className={`datalumina-tab-item ${topTab === 'systems' ? 'active' : ''}`}
-            onClick={() => {
-              setTopTab('systems');
-              setSelectedTopicId('topic-13');
-            }}
-          >
-            <Cpu size={14} />
-            <span>Systems & Async</span>
-          </button>
-
-          <button
-            type="button"
-            className={`datalumina-tab-item ${topTab === 'backends' ? 'active' : ''}`}
-            onClick={() => {
-              setTopTab('backends');
-              setSelectedSubItem('fastapi');
-            }}
-          >
-            <Terminal size={14} />
-            <span>Production Backends</span>
-          </button>
-
-          <button
-            type="button"
-            className={`datalumina-tab-item ${topTab === 'interview' ? 'active' : ''}`}
+            className="button primary"
             onClick={() => {
               setTopTab('interview');
               setSelectedSubItem('studio');
             }}
           >
-            <Award size={14} />
-            <span>Interview & Studio</span>
+            <Play size={15} fill="currentColor" />
+            Open Code Studio
           </button>
-        </nav>
+        }
+      />
 
-        {/* Top Right Quick Action */}
-        <div className="datalumina-top-actions">
-          <button
-            type="button"
-            className="action-studio-btn"
-            onClick={() => {
-              setTopTab('interview');
-              setSelectedSubItem('studio');
-            }}
-          >
-            <Play size={13} fill="currentColor" />
-            <span>Open Code Studio</span>
-          </button>
-        </div>
-      </header>
+      {/* 1. UNIFIED SECTION TABS */}
+      <nav className="python-unified-tabs" aria-label="Course Sections">
+        <button
+          type="button"
+          className={`datalumina-tab-item ${topTab === 'getting-started' ? 'active' : ''}`}
+          onClick={() => {
+            setTopTab('getting-started');
+            setSelectedSubItem('toolchain');
+          }}
+        >
+          <Zap size={14} />
+          <span>Getting Started</span>
+        </button>
 
-      {/* 2. THREE-COLUMN BODY LAYOUT */}
-      <div className="datalumina-body-layout">
-        {/* LEFT STICKY SIDEBAR */}
-        <aside className="datalumina-sidebar" aria-label="Course Table of Contents">
+        <button
+          type="button"
+          className={`datalumina-tab-item ${topTab === 'basics' ? 'active' : ''}`}
+          onClick={() => {
+            setTopTab('basics');
+            setSelectedTopicId('topic-1');
+          }}
+        >
+          <BookOpen size={14} />
+          <span>Python Basics</span>
+        </button>
+
+        <button
+          type="button"
+          className={`datalumina-tab-item ${topTab === 'oop' ? 'active' : ''}`}
+          onClick={() => {
+            setTopTab('oop');
+            setSelectedTopicId('topic-7');
+          }}
+        >
+          <Layers size={14} />
+          <span>OOP &amp; Protocols</span>
+        </button>
+
+        <button
+          type="button"
+          className={`datalumina-tab-item ${topTab === 'systems' ? 'active' : ''}`}
+          onClick={() => {
+            setTopTab('systems');
+            setSelectedTopicId('topic-13');
+          }}
+        >
+          <Cpu size={14} />
+          <span>Systems &amp; Async</span>
+        </button>
+
+        <button
+          type="button"
+          className={`datalumina-tab-item ${topTab === 'backends' ? 'active' : ''}`}
+          onClick={() => {
+            setTopTab('backends');
+            setSelectedSubItem('fastapi');
+          }}
+        >
+          <Terminal size={14} />
+          <span>Production Backends</span>
+        </button>
+
+        <button
+          type="button"
+          className={`datalumina-tab-item ${topTab === 'interview' ? 'active' : ''}`}
+          onClick={() => {
+            setTopTab('interview');
+            setSelectedSubItem('studio');
+          }}
+        >
+          <Award size={14} />
+          <span>Interview &amp; Studio</span>
+        </button>
+      </nav>
+
+      {/* 2. WORKSPACE LAYOUT (2-col for Topic Reader; Full-Width + Horizontal Sub-Pills for Studios) */}
+      {(topTab === 'getting-started' || topTab === 'backends' || topTab === 'interview') && (
+        <div className="python-sub-pills" role="tablist" aria-label="Module selector">
           {topTab === 'getting-started' && (
-            <div className="sidebar-category-block">
-              <span className="sidebar-category-title">MODERN TOOLING & SETUP</span>
+            <>
               <button
                 type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'toolchain' ? 'active' : ''}`}
+                className={`python-sub-pill ${selectedSubItem === 'toolchain' ? 'active' : ''}`}
                 onClick={() => setSelectedSubItem('toolchain')}
               >
-                <div className="sidebar-link-left">
-                  <Zap size={14} />
-                  <span className="sidebar-item-label">Modern uv & Ruff Setup</span>
-                </div>
+                <Zap size={14} /> Modern uv &amp; Ruff Setup
               </button>
               <button
                 type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'toy-vs-prod' ? 'active' : ''}`}
+                className={`python-sub-pill ${selectedSubItem === 'toy-vs-prod' ? 'active' : ''}`}
                 onClick={() => setSelectedSubItem('toy-vs-prod')}
               >
-                <div className="sidebar-link-left">
-                  <Workflow size={14} />
-                  <span className="sidebar-item-label">Toy vs Production Code</span>
-                </div>
+                <Workflow size={14} /> Toy vs Production Code
               </button>
               <button
                 type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'starter-kit' ? 'active' : ''}`}
+                className={`python-sub-pill ${selectedSubItem === 'starter-kit' ? 'active' : ''}`}
                 onClick={() => setSelectedSubItem('starter-kit')}
               >
-                <div className="sidebar-link-left">
-                  <Boxes size={14} />
-                  <span className="sidebar-item-label">Microservice Scaffolding</span>
-                </div>
+                <Boxes size={14} /> Microservice Scaffolding
               </button>
-            </div>
+            </>
           )}
+          {topTab === 'backends' && (
+            <>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'fastapi' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('fastapi')}
+              >
+                <Zap size={14} /> FastAPI Microservices ({FASTAPI_LABS.length})
+              </button>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'rag' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('rag')}
+              >
+                <Brain size={14} /> Production RAG ({RAG_LABS.length})
+              </button>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'ai-labs' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('ai-labs')}
+              >
+                <Bot size={14} /> AI-FDE Labs ({AI_FDE_LABS.length})
+              </button>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'incidents' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('incidents')}
+              >
+                <AlertTriangle size={14} /> On-Call Simulator ({PRODUCTION_INCIDENTS.length})
+              </button>
+            </>
+          )}
+          {topTab === 'interview' && (
+            <>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'studio' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('studio')}
+              >
+                <Terminal size={14} /> Pyodide Code Studio ({PYTHON_EXAMS.length} exams)
+              </button>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'qa' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('qa')}
+              >
+                <Award size={14} /> 68 Interview Q&amp;As
+              </button>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'flashcards' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('flashcards')}
+              >
+                <Timer size={14} /> Flashcards &amp; Mock Screen
+              </button>
+              <button
+                type="button"
+                className={`python-sub-pill ${selectedSubItem === 'quiz' ? 'active' : ''}`}
+                onClick={() => setSelectedSubItem('quiz')}
+              >
+                <HelpCircle size={14} /> Tricky Gotchas Quiz (10)
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
+      <div
+        className={`datalumina-body-layout ${
+          topTab === 'getting-started' || topTab === 'backends' || topTab === 'interview'
+            ? 'is-full-width'
+            : ''
+        }`}
+      >
+        {(topTab === 'basics' || topTab === 'oop' || topTab === 'systems') && (
+          <aside className="datalumina-sidebar" aria-label="Course Table of Contents">
 
           {topTab === 'basics' && (
             <div className="sidebar-category-block">
@@ -382,7 +456,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
 
           {topTab === 'systems' && (
             <div className="sidebar-category-block">
-              <span className="sidebar-category-title">STAGE 3: SYSTEMS & ASYNC (TOPICS 13–18)</span>
+              <span className="sidebar-category-title">STAGE 3: SYSTEMS &amp; ASYNC (TOPICS 13–18)</span>
               {PYTHON_TOPICS.slice(12, 18).map((topic) => (
                 <button
                   key={topic.id}
@@ -401,106 +475,8 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
               ))}
             </div>
           )}
-
-          {topTab === 'backends' && (
-            <div className="sidebar-category-block">
-              <span className="sidebar-category-title">ENTERPRISE BACKENDS & LABS</span>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'fastapi' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('fastapi')}
-              >
-                <div className="sidebar-link-left">
-                  <Zap size={14} />
-                  <span className="sidebar-item-label">⚡ FastAPI Microservices</span>
-                </div>
-                <span className="sidebar-diff-badge intermediate">{FASTAPI_LABS.length} labs</span>
-              </button>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'rag' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('rag')}
-              >
-                <div className="sidebar-link-left">
-                  <Brain size={14} />
-                  <span className="sidebar-item-label">🧠 Production RAG Pipeline</span>
-                </div>
-                <span className="sidebar-diff-badge intermediate">{RAG_LABS.length} labs</span>
-              </button>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'ai-labs' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('ai-labs')}
-              >
-                <div className="sidebar-link-left">
-                  <Bot size={14} />
-                  <span className="sidebar-item-label">🤖 AI-FDE Labs & Evals</span>
-                </div>
-                <span className="sidebar-diff-badge intermediate">{AI_FDE_LABS.length} labs</span>
-              </button>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'incidents' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('incidents')}
-              >
-                <div className="sidebar-link-left">
-                  <AlertTriangle size={14} />
-                  <span className="sidebar-item-label">🚨 On-Call Simulator</span>
-                </div>
-                <span className="sidebar-diff-badge advanced">{PRODUCTION_INCIDENTS.length} cases</span>
-              </button>
-            </div>
-          )}
-
-          {topTab === 'interview' && (
-            <div className="sidebar-category-block">
-              <span className="sidebar-category-title">VERIFICATION & STUDIO</span>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'studio' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('studio')}
-              >
-                <div className="sidebar-link-left">
-                  <Terminal size={14} />
-                  <span className="sidebar-item-label">💻 Pyodide Code Studio</span>
-                </div>
-                <span className="sidebar-diff-badge beginner">{PYTHON_EXAMS.length} exams</span>
-              </button>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'qa' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('qa')}
-              >
-                <div className="sidebar-link-left">
-                  <Award size={14} />
-                  <span className="sidebar-item-label">🎯 68 Interview Q&A Engine</span>
-                </div>
-                <span className="sidebar-diff-badge intermediate">68 Q&A</span>
-              </button>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'flashcards' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('flashcards')}
-              >
-                <div className="sidebar-link-left">
-                  <Timer size={14} />
-                  <span className="sidebar-item-label">🎴 Flashcards & Mock Screen</span>
-                </div>
-              </button>
-              <button
-                type="button"
-                className={`sidebar-link-btn ${selectedSubItem === 'quiz' ? 'active' : ''}`}
-                onClick={() => setSelectedSubItem('quiz')}
-              >
-                <div className="sidebar-link-left">
-                  <HelpCircle size={14} />
-                  <span className="sidebar-item-label">⚠️ Tricky Gotchas Quiz</span>
-                </div>
-                <span className="sidebar-diff-badge advanced">10 Qs</span>
-              </button>
-            </div>
-          )}
-        </aside>
+          </aside>
+        )}
 
         {/* CENTER MAIN READING PANE */}
         <div className="datalumina-main-content">
@@ -625,6 +601,13 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
                 </div>
                 <h1>{activeTopic.title}</h1>
                 <p className="reading-lead">{activeTopic.summary}</p>
+                <nav className="inline-toc-strip" aria-label="On this page">
+                  <a href="#overview">1. Mental Model</a>
+                  <a href="#why-matters">2. Production Impact</a>
+                  <a href="#code">3. Code Blueprint</a>
+                  <a href="#pitfalls">4. Common Traps</a>
+                  <a href="#checklist">5. Checklist</a>
+                </nav>
               </header>
 
               {/* 1. MENTAL MODEL ADMONITION */}
@@ -1001,7 +984,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
                           <div key={q.id} className="quiz-card">
                             <span className="quiz-cat-badge">{q.gotchaConcept}</span>
                             <h4>
-                              {idx + 1}. {q.question}
+                              {idx + 1}. {renderInlineCode(q.question)}
                             </h4>
                             <div className="quiz-options-list">
                               {q.options.map((opt, optIdx) => {
@@ -1022,7 +1005,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
                                     <span className="opt-letter">
                                       {String.fromCharCode(65 + optIdx)}
                                     </span>
-                                    <span>{opt}</span>
+                                    <span>{renderInlineCode(opt)}</span>
                                   </button>
                                 );
                               })}
@@ -1030,7 +1013,7 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
 
                             {quizSubmitted && (
                               <div className="quiz-explanation-box">
-                                <p>{q.explanation}</p>
+                                <p>{renderInlineCode(q.explanation)}</p>
                               </div>
                             )}
                           </div>
@@ -1055,122 +1038,6 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
             </div>
           )}
         </div>
-
-        {/* RIGHT STICKY TABLE OF CONTENTS (TOC) */}
-        <aside className="datalumina-right-toc" aria-label="On this page">
-          {(topTab === 'basics' || topTab === 'oop' || topTab === 'systems') && (
-            <>
-              <div>
-                <span className="toc-title">ON THIS PAGE</span>
-                <nav className="toc-links-list">
-                  <a href="#overview" className="toc-anchor-link">
-                    1. Mental Model
-                  </a>
-                  <a href="#why-matters" className="toc-anchor-link">
-                    2. Production Impact
-                  </a>
-                  <a href="#code" className="toc-anchor-link">
-                    3. Code Blueprint
-                  </a>
-                  <a href="#pitfalls" className="toc-anchor-link">
-                    4. Common Traps & Fixes
-                  </a>
-                  <a href="#checklist" className="toc-anchor-link">
-                    5. Verification Checklist
-                  </a>
-                </nav>
-              </div>
-
-              <div className="toc-studio-card">
-                <h5>⚡ Test In Browser</h5>
-                <p>Execute this blueprint in the real Pyodide WebAssembly runtime with automated tests.</p>
-                <button
-                  type="button"
-                  className="toc-studio-btn"
-                  onClick={() => {
-                    setTopTab('interview');
-                    setSelectedSubItem('studio');
-                  }}
-                >
-                  <Play size={12} fill="currentColor" />
-                  <span>Launch Code Studio</span>
-                </button>
-              </div>
-            </>
-          )}
-
-          {topTab === 'getting-started' && (
-            <div>
-              <span className="toc-title">SECTIONS</span>
-              <nav className="toc-links-list">
-                <button
-                  type="button"
-                  className="toc-anchor-link"
-                  style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-                  onClick={() => setSelectedSubItem('toolchain')}
-                >
-                  ⚡ uv & Ruff Setup
-                </button>
-                <button
-                  type="button"
-                  className="toc-anchor-link"
-                  style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-                  onClick={() => setSelectedSubItem('toy-vs-prod')}
-                >
-                  ⚖️ Toy vs Production
-                </button>
-                <button
-                  type="button"
-                  className="toc-anchor-link"
-                  style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-                  onClick={() => setSelectedSubItem('starter-kit')}
-                >
-                  📦 Microservice Scaffolding
-                </button>
-              </nav>
-            </div>
-          )}
-
-          {topTab === 'backends' && (
-            <div>
-              <span className="toc-title">PRODUCTION LABS</span>
-              <nav className="toc-links-list">
-                <button
-                  type="button"
-                  className="toc-anchor-link"
-                  style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-                  onClick={() => setSelectedSubItem('fastapi')}
-                >
-                  ⚡ FastAPI Microservices
-                </button>
-                <button
-                  type="button"
-                  className="toc-anchor-link"
-                  style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-                  onClick={() => setSelectedSubItem('rag')}
-                >
-                  🧠 Production RAG
-                </button>
-                <button
-                  type="button"
-                  className="toc-anchor-link"
-                  style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-                  onClick={() => setSelectedSubItem('ai-labs')}
-                >
-                  🤖 AI-FDE Labs
-                </button>
-                <button
-                  type="button"
-                  className="toc-anchor-link"
-                  style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', padding: 0 }}
-                  onClick={() => setSelectedSubItem('incidents')}
-                >
-                  🚨 On-Call Incidents
-                </button>
-              </nav>
-            </div>
-          )}
-        </aside>
       </div>
     </div>
   );

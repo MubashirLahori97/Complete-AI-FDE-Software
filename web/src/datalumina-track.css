@@ -1,174 +1,124 @@
-/* Mintlify & Datalumina Inspired Documentation & Learning Layout */
+/* Unified FDE Academy Python Track Layout
+   Connects the Warm Paper reading space (#f6f3ec / #fffdf8) with dark inspectable code stages (#0b111e) */
 
 .datalumina-wrapper {
-  min-height: 100vh;
-  background: #0a0d1a;
-  color: #f8fafc;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   display: flex;
   flex-direction: column;
-}
-
-/* 1. TOP HORIZONTAL NAVIGATION (MINTLIFY STYLE) */
-.datalumina-top-nav {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  min-height: 60px;
-  background: rgba(10, 13, 26, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding: 0.65rem 1.25rem;
-}
-
-.datalumina-nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-weight: 800;
-  font-size: 1rem;
-  color: #f8fafc;
-  flex-shrink: 0;
-}
-
-.brand-python-icon {
-  width: 28px;
-  height: 28px;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.45rem;
-  font-weight: 900;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
-}
-
-.brand-badge {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 0.15rem 0.5rem;
-  border-radius: 9999px;
-  margin-left: 0.35rem;
-}
-
-/* Top Horizontal Tabs */
-.datalumina-tabs-list {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  flex: 1 1 auto;
+  gap: 1.5rem;
+  color: var(--text);
+  width: 100%;
   min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
 
-.datalumina-tabs-list::-webkit-scrollbar {
-  display: none;
+/* 1. UNIFIED SECTION TAB BAR (Matches FDE Academy SDLC & Agentic Lab tabs) */
+.python-unified-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.45rem;
 }
 
 .datalumina-tab-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.42rem 0.75rem;
-  font-size: 0.84rem;
+  gap: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  color: #cbd5e1;
+  color: var(--muted);
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
-  flex-shrink: 0;
   transition: all 0.15s ease;
 }
 
 .datalumina-tab-item:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  background: var(--surface-elevated);
 }
 
 .datalumina-tab-item.active {
-  color: #34d399;
-  background: rgba(16, 185, 129, 0.14);
-  border-color: rgba(16, 185, 129, 0.38);
+  color: #fffdf8;
+  background: var(--green);
+  border-color: var(--green);
 }
 
-.datalumina-top-actions {
+/* 2. WORKSPACE LAYOUTS */
+.datalumina-body-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.datalumina-body-layout.is-full-width {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.python-sub-pills {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.action-studio-btn {
+.python-sub-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #ffffff;
-  border: none;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 0.45rem 0.85rem;
-  border-radius: 0.45rem;
+  padding: 0.55rem 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: all 0.15s ease;
 }
 
-.action-studio-btn:hover {
-  opacity: 0.95;
-  transform: translateY(-1px);
+.python-sub-pill:hover {
+  border-color: var(--green);
+  color: var(--text);
+  background: var(--surface-elevated);
 }
 
-/* 2. THREE-COLUMN LAYOUT BODY */
-.datalumina-body-layout {
-  display: grid;
-  grid-template-columns: 280px minmax(0, 1fr) 240px;
-  min-height: calc(100vh - 60px);
+.python-sub-pill.active {
+  background: var(--sage);
+  border-color: var(--green);
+  color: var(--green-dark);
+  font-weight: 700;
 }
 
-@media (max-width: 1200px) {
-  .datalumina-body-layout {
-    grid-template-columns: 260px minmax(0, 1fr);
-  }
-  .datalumina-right-toc {
-    display: none;
-  }
-}
-
-@media (max-width: 820px) {
+@media (max-width: 960px) {
   .datalumina-body-layout {
     grid-template-columns: 1fr;
   }
-  .datalumina-sidebar {
-    display: none;
-  }
 }
 
-/* 3. LEFT STICKY SIDEBAR */
+/* 3. STICKY CHAPTER INDEX CARD (Warm Paper Surface) */
 .datalumina-sidebar {
   position: sticky;
-  top: 60px;
-  height: calc(100vh - 60px);
-  overflow-y: auto;
-  background: #080b15;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.25rem 0.85rem;
+  top: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+}
+
+@media (max-width: 960px) {
+  .datalumina-sidebar {
+    position: static;
+  }
 }
 
 .sidebar-category-block {
@@ -178,25 +128,27 @@
 }
 
 .sidebar-category-title {
-  font-size: 0.72rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #64748b;
-  padding: 0 0.65rem 0.45rem;
+  color: var(--muted);
+  padding: 0 0.6rem 0.4rem;
 }
 
 .sidebar-link-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
   width: 100%;
   text-align: left;
-  padding: 0.5rem 0.65rem;
+  padding: 0.55rem 0.65rem;
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 0.45rem;
-  color: #94a3b8;
+  border-radius: 8px;
+  color: var(--text-secondary);
   font-size: 0.84rem;
   font-weight: 500;
   cursor: pointer;
@@ -205,33 +157,34 @@
 }
 
 .sidebar-link-btn:hover {
-  color: #f8fafc;
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  background: var(--surface-elevated);
 }
 
 .sidebar-link-btn.active {
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
-  border-left: 2px solid #10b981;
-  font-weight: 600;
+  color: var(--green-dark);
+  background: var(--sage);
+  border-color: #c5d9c3;
+  font-weight: 700;
 }
 
 .sidebar-link-left {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
+  min-width: 0;
   overflow: hidden;
 }
 
 .sidebar-item-num {
-  font-family: monospace;
-  font-size: 0.74rem;
-  color: #64748b;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
   min-width: 1.4rem;
 }
 
 .sidebar-link-btn.active .sidebar-item-num {
-  color: #10b981;
+  color: var(--green-dark);
 }
 
 .sidebar-item-label {
@@ -241,39 +194,45 @@
 }
 
 .sidebar-diff-badge {
-  font-size: 0.64rem;
-  padding: 0.1rem 0.35rem;
-  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.42rem;
+  border-radius: 9999px;
   text-transform: uppercase;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .sidebar-diff-badge.beginner {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
+  background: rgba(14, 165, 233, 0.14);
+  color: #0369a1;
 }
 
 .sidebar-diff-badge.intermediate {
-  background: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
+  background: rgba(217, 119, 6, 0.15);
+  color: #b45309;
 }
 
 .sidebar-diff-badge.advanced {
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
+  background: rgba(220, 38, 38, 0.14);
+  color: #b91c1c;
 }
 
-/* 4. CENTER EDITORIAL READING PANE */
+/* 4. MAIN READING & STUDIO CANVAS */
 .datalumina-main-content {
-  padding: 2.25rem 2.5rem 5rem;
-  max-width: 920px;
-  margin: 0 auto;
+  min-width: 0;
   width: 100%;
 }
 
-@media (max-width: 768px) {
-  .datalumina-main-content {
-    padding: 1.5rem 1rem 4rem;
+.datalumina-lesson-doc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 2.25rem;
+}
+
+@media (max-width: 640px) {
+  .datalumina-lesson-doc {
+    padding: 1.25rem 1rem;
   }
 }
 
@@ -281,26 +240,28 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.8rem;
-  color: #64748b;
+  font-size: 0.78rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--muted);
   margin-bottom: 1rem;
 }
 
 .reading-breadcrumbs span.active {
-  color: #10b981;
-  font-weight: 600;
+  color: var(--green);
+  font-weight: 700;
 }
 
 .reading-header {
-  margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.35rem;
 }
 
 .reading-header-tags {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
   margin-bottom: 0.75rem;
 }
 
@@ -308,77 +269,93 @@
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.2rem 0.55rem;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem;
   border-radius: 9999px;
 }
 
 .tag-badge.badge-stage {
-  background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: var(--sage);
+  color: var(--green-dark);
+  border: 1px solid #c5d9c3;
 }
 
 .tag-badge.badge-duration {
-  background: rgba(255, 255, 255, 0.06);
-  color: #94a3b8;
+  background: var(--surface-elevated);
+  color: var(--text-secondary);
 }
 
 .reading-header h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.25;
-  color: #f8fafc;
-  margin: 0 0 1rem;
+  color: var(--text);
+  margin: 0 0 0.85rem;
 }
 
 .reading-lead {
-  font-size: 1.1rem;
+  font-size: 1.04rem;
   line-height: 1.65;
-  color: #94a3b8;
+  color: var(--text-secondary);
   margin: 0;
 }
 
-/* Callout Admonitions (Datalumina Style) */
+/* Inline Jump Pills */
+.inline-toc-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.inline-toc-strip a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.inline-toc-strip a:hover {
+  border-color: var(--green);
+  background: var(--sage);
+}
+
+/* Callout Admonitions (Warm Paper high contrast) */
 .datalumina-callout {
   display: flex;
-  gap: 1rem;
-  padding: 1.15rem 1.35rem;
-  border-radius: 0.65rem;
-  margin: 1.5rem 0;
+  gap: 0.9rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 10px;
+  margin: 1.25rem 0;
   line-height: 1.6;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
 }
 
 .datalumina-callout.tip {
-  background: rgba(16, 185, 129, 0.08);
-  border-left: 3px solid #10b981;
-  color: #d1fae5;
+  background: var(--sage);
+  border-left: 3px solid var(--green);
+  color: var(--text);
 }
 
-.datalumina-callout.tip strong {
-  color: #34d399;
+.datalumina-callout.tip .callout-icon,
+.datalumina-callout.tip .callout-title {
+  color: var(--green-dark);
 }
 
 .datalumina-callout.note {
-  background: rgba(56, 189, 248, 0.08);
-  border-left: 3px solid #38bdf8;
-  color: #e0f2fe;
+  background: #edf4f8;
+  border-left: 3px solid #0284c7;
+  color: var(--text);
 }
 
-.datalumina-callout.note strong {
-  color: #38bdf8;
-}
-
-.datalumina-callout.warning {
-  background: rgba(245, 158, 11, 0.08);
-  border-left: 3px solid #f59e0b;
-  color: #fef3c7;
-}
-
-.datalumina-callout.warning strong {
-  color: #fbbf24;
+.datalumina-callout.note .callout-icon,
+.datalumina-callout.note .callout-title {
+  color: #0369a1;
 }
 
 .callout-icon {
@@ -389,22 +366,27 @@
 .callout-body {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
+}
+
+.callout-body p {
+  margin: 0;
+  color: var(--text-secondary);
 }
 
 .callout-title {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-/* Code Blocks */
+/* Dark Inspectable Code Stage inside Warm Paper Reader */
 .reading-code-block {
-  background: #060a14;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.65rem;
-  margin: 1.5rem 0;
+  background: #0b111e;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  margin: 1.4rem 0;
   overflow: hidden;
 }
 
@@ -413,14 +395,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.55rem 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: #111827;
+  border-bottom: 1px solid #1e293b;
 }
 
 .code-lang-label {
-  font-family: monospace;
-  font-size: 0.78rem;
-  color: #64748b;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.76rem;
+  color: #94a3b8;
   text-transform: uppercase;
 }
 
@@ -428,57 +410,55 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: transparent;
-  border: none;
-  color: #94a3b8;
-  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #f8fafc;
+  font-size: 0.76rem;
   cursor: pointer;
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.3rem;
-  transition: all 0.15s ease;
+  padding: 0.25rem 0.55rem;
+  border-radius: 5px;
 }
 
 .code-copy-btn:hover {
-  color: #f8fafc;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .code-pre-block {
   margin: 0;
-  padding: 1.25rem;
+  padding: 1.2rem;
   overflow-x: auto;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.88rem;
+  font-family: 'JetBrains Mono', 'DM Mono', monospace;
+  font-size: 0.86rem;
   line-height: 1.6;
   color: #f1f5f9;
 }
 
 /* Checklist Section */
 .reading-checklist-box {
-  background: rgba(16, 185, 129, 0.06);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: 0.65rem;
-  padding: 1.25rem;
-  margin: 1.5rem 0;
+  background: var(--sage);
+  border: 1px solid #c5d9c3;
+  border-radius: 10px;
+  padding: 1.15rem 1.25rem;
+  margin: 1.4rem 0;
 }
 
 .reading-checklist-box h4 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-weight: 700;
-  color: #34d399;
-  margin: 0 0 0.75rem;
+  color: var(--green-dark);
+  margin: 0 0 0.65rem;
 }
 
 .reading-checklist-box ul {
   margin: 0;
-  padding-left: 1.35rem;
+  padding-left: 1.3rem;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  color: #cbd5e1;
+  gap: 0.4rem;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.5;
 }
@@ -487,10 +467,10 @@
 .datalumina-pagination-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  margin-top: 3.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
 }
 
 @media (max-width: 600px) {
@@ -502,19 +482,18 @@
 .pagination-nav-card {
   display: flex;
   flex-direction: column;
-  padding: 1.15rem 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.65rem;
+  padding: 1rem 1.15rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition: all 0.15s ease;
 }
 
 .pagination-nav-card:hover {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.35);
-  transform: translateY(-2px);
+  background: var(--sage);
+  border-color: var(--green);
 }
 
 .pagination-nav-card.next {
@@ -523,103 +502,269 @@
 }
 
 .pagination-label {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
-  margin-bottom: 0.35rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
 
 .pagination-title {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 700;
+  color: var(--text);
+}
+
+/* Dark Studio Cards embedded inside Python Track keep opaque dark backgrounds + crisp light text */
+.datalumina-main-content .modern-toolchain-explorer,
+.datalumina-main-content .comparison-card,
+.datalumina-main-content .starter-kit-container,
+.datalumina-main-content .python-code-studio,
+.datalumina-main-content .fastapi-studio-container,
+.datalumina-main-content .rag-studio-container,
+.datalumina-main-content .ai-labs-container,
+.datalumina-main-content .incident-simulator-container,
+.datalumina-main-content .flashcards-engine-container {
+  --surface-card: #151d2f;
+  --surface-elevated: #1a2234;
+  --surface-muted: #1e293b;
+  --canvas: #090d16;
+  --surface: #111726;
+  --text: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.12);
+  --border-medium: rgba(255, 255, 255, 0.2);
+  --accent: #38bdf8;
+  --green: #4ade80;
   color: #f8fafc;
 }
 
-/* 5. RIGHT TABLE OF CONTENTS (TOC) */
-.datalumina-right-toc {
-  position: sticky;
-  top: 60px;
-  height: calc(100vh - 60px);
-  overflow-y: auto;
-  padding: 2.25rem 1.25rem;
+.datalumina-main-content .python-code-studio,
+.datalumina-main-content .fastapi-studio-container,
+.datalumina-main-content .rag-studio-container,
+.datalumina-main-content .ai-labs-container,
+.datalumina-main-content .incident-simulator-container,
+.datalumina-main-content .flashcards-engine-container {
+  background: #0b111e;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.datalumina-main-content .fastapi-hero,
+.datalumina-main-content .rag-hero,
+.datalumina-main-content .ai-labs-hero,
+.datalumina-main-content .incident-hero {
+  background: linear-gradient(135deg, #102432, #0b1322);
+}
+
+.datalumina-main-content .fastapi-hero p,
+.datalumina-main-content .rag-hero p,
+.datalumina-main-content .ai-labs-hero p,
+.datalumina-main-content .incident-hero p {
+  color: #cbd5e1;
+}
+
+.datalumina-main-content .common-pitfalls-accordion-group {
+  color: #f8fafc;
+}
+
+.datalumina-main-content .pitfalls-toggle-all-btn {
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.datalumina-main-content .interview-controls,
+.datalumina-main-content .question-item,
+.datalumina-main-content .quiz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.datalumina-main-content .interview-controls .search-bar {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-medium);
+  color: var(--text);
+}
+
+.datalumina-main-content .interview-controls .search-bar input {
+  color: var(--text);
+}
+
+.datalumina-main-content .interview-controls .search-bar input::placeholder {
+  color: var(--muted);
+}
+
+.datalumina-main-content .question-header h4,
+.datalumina-main-content .quiz-card h4,
+.datalumina-main-content .quiz-header h2 {
+  color: var(--text);
+}
+
+.datalumina-main-content .quiz-opt-btn {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  background: var(--surface-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  cursor: pointer;
 }
 
-.toc-title {
-  font-size: 0.76rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #64748b;
-  margin-bottom: 0.5rem;
-}
-
-.toc-links-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  padding-left: 0.85rem;
-}
-
-.toc-anchor-link {
-  font-size: 0.82rem;
-  color: #94a3b8;
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.toc-anchor-link:hover {
-  color: #10b981;
-}
-
-.toc-studio-card {
-  background: linear-gradient(145deg, rgba(16, 185, 129, 0.12), rgba(10, 15, 29, 0.9));
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  border-radius: 0.65rem;
-  padding: 1rem;
+.datalumina-main-content .quiz-options-list {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
+  width: 100%;
+  margin-top: 0.85rem;
 }
 
-.toc-studio-card h5 {
-  margin: 0;
-  font-size: 0.88rem;
-  color: #34d399;
-  font-weight: 700;
+.datalumina-main-content .quiz-opt-btn.selected {
+  background: var(--sage);
+  border-color: var(--green);
+  color: var(--green-dark);
 }
 
-.toc-studio-card p {
-  margin: 0;
-  font-size: 0.76rem;
-  color: #94a3b8;
-  line-height: 1.4;
-}
-
-.toc-studio-btn {
-  background: #10b981;
-  color: #ffffff;
-  border: none;
-  padding: 0.45rem 0.75rem;
-  border-radius: 0.4rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
+/* Flashcards filter pills & tags */
+.datalumina-main-content .flashcards-engine-container .deck-filter-group {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  transition: opacity 0.15s ease;
+  gap: 0.45rem;
 }
 
-.toc-studio-btn:hover {
-  opacity: 0.9;
+.datalumina-main-content .flashcards-engine-container .filter-pill {
+  background: #1a2234;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.datalumina-main-content .flashcards-engine-container .filter-pill:hover {
+  background: #233048;
+  color: #ffffff;
+}
+
+.datalumina-main-content .flashcards-engine-container .filter-pill.active {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.datalumina-main-content .flashcards-engine-container .tags-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.datalumina-main-content .flashcards-engine-container .tag-pill {
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 500;
+}
+
+.datalumina-main-content .flashcards-engine-container .card-number-tag {
+  color: #94a3b8;
+}
+
+/* Mobile & Grid Overflow Guards */
+.datalumina-track,
+.datalumina-body-layout,
+.datalumina-chapter-nav,
+.datalumina-main-content,
+.datalumina-topic-reader,
+.datalumina-reader-prose,
+.datalumina-main-content .toy-vs-prod-grid,
+.datalumina-main-content .toy-side,
+.datalumina-main-content .prod-side,
+.datalumina-main-content .starter-kit-layout,
+.datalumina-main-content .starter-kit-tree,
+.datalumina-main-content .starter-kit-viewer {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.datalumina-main-content .tree-item-btn,
+.datalumina-chapter-nav .sidebar-link-btn {
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  text-align: left;
+}
+
+.datalumina-main-content pre,
+.datalumina-main-content .code-pre,
+.datalumina-main-content .code-pre-block,
+.datalumina-main-content .code-block-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.datalumina-main-content :not(pre) > code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .datalumina-body-layout,
+  .datalumina-main-content .toy-vs-prod-grid,
+  .datalumina-main-content .starter-kit-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .datalumina-main-content .fastapi-studio-container,
+  .datalumina-main-content .rag-studio-container,
+  .datalumina-main-content .ai-labs-container,
+  .datalumina-main-content .incident-simulator-container,
+  .datalumina-main-content .python-code-studio,
+  .datalumina-main-content .flashcards-engine-container {
+    padding: 1rem;
+  }
+}
+
+.datalumina-main-content > *,
+.datalumina-main-content .modern-toolchain-container,
+.datalumina-main-content .toolchain-step-card,
+.datalumina-main-content .step-header,
+.datalumina-main-content .starter-file-preview,
+.datalumina-main-content .fastapi-studio-container > *,
+.datalumina-main-content .rag-studio-container > *,
+.datalumina-main-content .ai-labs-container > *,
+.datalumina-main-content .incident-simulator-container > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.datalumina-main-content .step-header,
+.datalumina-main-content .studio-actions,
+.datalumina-main-content .editor-actions,
+.datalumina-main-content .editor-toolbar,
+.datalumina-main-content .studio-header-actions {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.datalumina-main-content .studio-btn {
+  max-width: 100%;
+  white-space: normal;
 }

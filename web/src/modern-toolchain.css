@@ -719,18 +719,37 @@
 }
 
 /* Responsive adjustments */
+.modern-toolchain-container,
+.cmd-step-row,
+.cmd-step-row > *,
+.step-code-box,
+.tree-explorer-split,
+.tree-explorer-split > *,
+.tree-file-list,
+.code-pre {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 @media (max-width: 860px) {
   .cmd-step-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.5rem;
   }
   .tree-explorer-split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0.85rem;
   }
   .tree-file-list {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 1rem;
     padding-right: 0;
+  }
+  .modern-toolchain-container,
+  .benchmarks-container,
+  .quickstart-container {
+    padding: 1rem;
   }
 }

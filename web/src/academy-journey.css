@@ -2,9 +2,20 @@
 .academy-shell {
   --canvas: #f6f3ec;
   --surface: #fffdf8;
+  --surface-elevated: #f1ede2;
+  --surface-card: #fffdf8;
+  --surface-muted: #e8e3d6;
   --text: #22303d;
-  --muted: #65717a;
+  --text-secondary: #41515e;
+  --muted: #5e6a73;
+  --text-dim: #73808a;
   --border: #dedbd2;
+  --border-medium: #ccc7bb;
+  --border-strong: #b6b0a2;
+  --accent: #203f42;
+  --accent-hover: #142e31;
+  --accent-glow: rgba(32, 63, 66, 0.14);
+  --accent-subtle: rgba(32, 63, 66, 0.08);
   --green: #203f42;
   --green-dark: #142e31;
   --sage: #e8eee5;

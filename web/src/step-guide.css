@@ -168,21 +168,21 @@
 }
 
 .guide-level-btn.is-active.is-new {
-  background: var(--surface-elevated);
-  border-color: var(--border-strong);
-  color: var(--text);
+  background: #203f42;
+  border-color: #203f42;
+  color: #fffdf8;
 }
 
 .guide-level-btn.is-active.is-familiar {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: rgba(56, 189, 248, 0.4);
-  color: var(--accent);
+  background: rgba(32, 63, 66, 0.14);
+  border-color: rgba(32, 63, 66, 0.45);
+  color: #142e31;
 }
 
 .guide-level-btn.is-active.is-practiced {
-  background: rgba(74, 222, 128, 0.15);
-  border-color: rgba(74, 222, 128, 0.4);
-  color: var(--green);
+  background: rgba(22, 163, 74, 0.14);
+  border-color: rgba(22, 163, 74, 0.45);
+  color: #14532d;
 }
 
 .guide-notes-box {
