@@ -1,0 +1,1627 @@
+// Full-Stack, CS Foundations & Distributed Systems Track
+// Distilled and anonymized from Learning Metrial (Clinical AI SaaS Case Study + CS/Systems Curriculum)
+
+export type FullStackTrackCategory = "Frontend" | "CS & Systems" | "Architecture";
+
+export interface FullStackModule {
+  id: string;
+  track: FullStackTrackCategory;
+  title: string;
+  readTime: string;
+  halfLife: "law" | "pattern" | "tool";
+  analogyTitle: string;
+  analogy: string;
+  plainSummary: string;
+  visualPoints: { label: string; detail: string }[];
+  quickCheck: {
+    question: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+  };
+  deepDiveTitle: string;
+  deepDiveNotes: string[];
+  codeLang: string;
+  code: string;
+}
+
+export interface SystemsQuizQuestion {
+  id: string;
+  topic: string;
+  group: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+}
+
+export interface SystemsFlashcard {
+  id: string;
+  topic: string;
+  group: string;
+  front: string;
+  back: string;
+}
+
+export const FULLSTACK_CS_MODULES: FullStackModule[] = [
+  {
+    "id": "fe-react",
+    "track": "Frontend",
+    "title": "React 19, Hooks & Lightweight State",
+    "readTime": "4 min",
+    "halfLife": "pattern",
+    "analogyTitle": "The Lego brick analogy",
+    "analogy": "Instead of writing one giant 5,000-line HTML page, modern web apps snap together small, reusable Lego bricks called Components (a button, a sidebar, a message card). Props are instructions handed down to a brick; State is the brick's own short-term memory.",
+    "plainSummary": "Learn how components, props, hooks (useState, useEffect, useMemo), and Zustand keep complex interfaces fast and predictable without Redux boilerplate.",
+    "visualPoints": [
+      {
+        "label": "Props (read-only)",
+        "detail": "Data passed from parent to child—like an address written on an envelope."
+      },
+      {
+        "label": "State (private memory)",
+        "detail": "Local values that change over time (open/closed, typed input). Changing state re-draws just that component."
+      },
+      {
+        "label": "Zustand store",
+        "detail": "Shared state in 5 lines of code. Components subscribe to one slice so unrelated screens never re-render."
+      },
+      {
+        "label": "CSS Modules & Tokens",
+        "detail": "Scoped styles + CSS custom properties stop one button tweak from breaking the whole app."
+      }
+    ],
+    "quickCheck": {
+      "question": "A user types into a search box inside one card. What happens if you store that text in a global React Context consumed by the entire page?",
+      "options": [
+        "Only the search box re-renders",
+        "Every component reading that Context re-renders on every keystroke",
+        "The browser automatically caches the text in PostgreSQL"
+      ],
+      "correctIndex": 1,
+      "explanation": "React Context notifies every consumer on any change. Keep local UI state local (useState) or use selector-based stores like Zustand."
+    },
+    "deepDiveTitle": "Zustand store & clean React 19 component code",
+    "deepDiveNotes": [
+      "Use useState for local UI state, useEffect strictly for synchronizing with external systems (API, timers), and custom hooks (e.g., useConsultation) to keep screen files clean.",
+      "Prefer Zustand over Redux Toolkit for small-to-mid teams: zero action-creator boilerplate, full TypeScript inference, and no nested Provider pyramid."
+    ],
+    "codeLang": "tsx",
+    "code": "import { create } from \"zustand\";\n\ninterface WorkspaceState {\n  activeProfileId: string | null;\n  setActiveProfile: (id: string) => void;\n}\n\nexport const useWorkspaceStore = create<WorkspaceState>((set) => ({\n  activeProfileId: null,\n  setActiveProfile: (id) => set({ activeProfileId: id }),\n}));\n\n// Only re-renders when activeProfileId changes:\nexport function ProfileBadge() {\n  const id = useWorkspaceStore((s) => s.activeProfileId);\n  return <span>{id ?? \"Guest\"}</span>;\n}"
+  },
+  {
+    "id": "fe-dual-mode",
+    "track": "Frontend",
+    "title": "Dual-Mode Apps, AI Streaming (SSE) & Safe Links",
+    "readTime": "5 min",
+    "halfLife": "pattern",
+    "analogyTitle": "Flight simulator vs. real cockpit",
+    "analogy": "Pilots train in a flight simulator before burning jet fuel. A Dual-Mode frontend works the same way: one environment toggle switches between instant seeded mock scenarios (for demos and UI work) and the live production API.",
+    "plainSummary": "Ship interactive client demos in hours using PrototypeShell vs. ApiShell, stream 50 LLM tokens/sec smoothly over SSE, and keep invite tokens out of server logs.",
+    "visualPoints": [
+      {
+        "label": "Prototype mode (USE_API=false)",
+        "detail": "Pre-seeded scenarios (New User, Active User, Trial Expiring) run with zero backend or Docker."
+      },
+      {
+        "label": "Live API mode (USE_API=true)",
+        "detail": "Attaches Bearer tokens, enforces inactivity timeouts, and renders unified server errors."
+      },
+      {
+        "label": "SSE token buffering",
+        "detail": "Server-Sent Events run over standard HTTP/2, pass corporate firewalls, and isolate streaming chat bubbles so the page stays smooth."
+      },
+      {
+        "label": "Hash-fragment privacy (#token=)",
+        "detail": "Browsers never send # fragments to servers or Referer headers—ideal for password resets and private invites."
+      }
+    ],
+    "quickCheck": {
+      "question": "Why do most production AI chat apps choose Server-Sent Events (SSE) over WebSockets?",
+      "options": [
+        "SSE supports bidirectional video calling",
+        "AI chat is one-way streaming (prompt POST -> token stream), and SSE works over plain HTTP/2 and firewalls",
+        "WebSockets cannot send JSON"
+      ],
+      "correctIndex": 1,
+      "explanation": "SSE uses standard HTTP, reconnects automatically, and passes strict corporate/hospital firewalls that drop persistent WebSocket connections."
+    },
+    "deepDiveTitle": "Dual-mode shell switch & safe hash-token extraction",
+    "deepDiveNotes": [
+      "Golden Rule: Never trust the frontend. Even if the browser enforces a 30-minute inactivity timer, the backend must independently reject expired sessions with 401.",
+      "Isolate streaming text inside its own memoized component and batch rapid chunks so 50 tokens/sec never blocks clicks or scroll."
+    ],
+    "codeLang": "ts",
+    "code": "export const USE_API = import.meta.env.VITE_USE_API === \"true\";\n\n// Extract sensitive invite token from URL fragment (#token=...)\n// Fragments never hit server access logs or Referer headers.\nexport function readHashToken(): string | null {\n  const params = new URLSearchParams(window.location.hash.slice(1));\n  return params.get(\"token\");\n}"
+  },
+  {
+    "id": "fe-perf",
+    "track": "Frontend",
+    "title": "Fast, Resilient UI & What NOT to Add",
+    "readTime": "4 min",
+    "halfLife": "pattern",
+    "analogyTitle": "The Instagram heart button",
+    "analogy": "When you tap Like on Instagram, the heart turns red immediately instead of making you stare at a spinner for half a second. If the network fails, it quietly rolls back. That is Optimistic UI.",
+    "plainSummary": "Use Optimistic UI, debouncing, Error Boundaries, and lazy loading—and know when to skip Next.js SSR, GraphQL, or heavy UI kits.",
+    "visualPoints": [
+      {
+        "label": "Optimistic UI",
+        "detail": "Update the screen immediately, sync in the background, and roll back cleanly if the server rejects it."
+      },
+      {
+        "label": "Debounce vs. Throttle",
+        "detail": "Debounce waits 300ms after typing stops before searching; Throttle caps scroll handlers to once every 500ms."
+      },
+      {
+        "label": "Error Boundaries",
+        "detail": "Catch a crashing widget so one broken chart never turns the entire application white."
+      },
+      {
+        "label": "Deliberate omissions",
+        "detail": "Private logged-in apps rarely need Next.js SSR (no SEO), GraphQL (extra client complexity), or bloated UI frameworks."
+      }
+    ],
+    "quickCheck": {
+      "question": "You are building a private, login-walled dashboard that search engines must never index. Why might you choose a Vite SPA over Next.js SSR?",
+      "options": [
+        "Vite SPAs cannot use TypeScript",
+        "No SEO is needed, static CDN hosting costs pennies, and there is zero Node.js server to maintain",
+        "Next.js does not support authentication"
+      ],
+      "correctIndex": 1,
+      "explanation": "Senior engineers pick the simplest architecture that satisfies the requirements: static CDN hosting eliminates server ops when SEO is unnecessary."
+    },
+    "deepDiveTitle": "Code splitting with React.lazy",
+    "deepDiveNotes": [
+      "Download heavy admin panels or code playgrounds only when the user clicks them so initial page load stays fast on mobile networks.",
+      "Wrap lazy routes in Suspense + an ErrorBoundary so network hiccups show a friendly retry button instead of a blank screen."
+    ],
+    "codeLang": "tsx",
+    "code": "import { lazy, Suspense } from \"react\";\n\nconst AdminPanel = lazy(() => import(\"./AdminPanel\"));\n\nexport function AppRoutes() {\n  return (\n    <Suspense fallback={<p>Loading panel...</p>}>\n      <AdminPanel />\n    </Suspense>\n  );\n}"
+  },
+  {
+    "id": "cs-foundations",
+    "track": "CS & Systems",
+    "title": "Big-O, Data Structures & Why Speed Breaks at Scale",
+    "readTime": "5 min",
+    "halfLife": "law",
+    "analogyTitle": "Finding a name in a phonebook",
+    "analogy": "Checking every page from A to Z takes 1,000,000 steps for a million people (O(n)). Opening to the middle and halving each time takes only 20 steps (O(log n)). That difference is why an app works for 10 users and freezes for 10,000.",
+    "plainSummary": "Build intuition for Big-O growth, Hash Maps vs. Trees vs. Heaps vs. Bloom Filters, and the core algorithms every engineer recognizes in AI-generated code.",
+    "visualPoints": [
+      {
+        "label": "O(1) & O(log n)",
+        "detail": "Hash map lookup (1 step) and binary search / B-tree DB index (~20 steps for 1M rows)."
+      },
+      {
+        "label": "O(n²) danger zone",
+        "detail": "Nested loops over 1M items = 1 trillion operations. Common hidden bug in AI-generated code."
+      },
+      {
+        "label": "Hash Map vs. Heap vs. Trie",
+        "detail": "Hash Map = instant key lookup; Heap = fast top-K / priority queue; Trie = instant autocomplete."
+      },
+      {
+        "label": "Bloom Filter",
+        "detail": "Tiny bit-array that says 'definitely not present' in O(1) before touching disk."
+      }
+    ],
+    "quickCheck": {
+      "question": "An AI agent writes a nested loop checking every user against every invoice (10,000 × 10,000). How do you turn this O(n²) bottleneck into O(n)?",
+      "options": [
+        "Add more print statements",
+        "Index invoices in a Hash Map (dict) by user_id first, then do O(1) lookups",
+        "Switch from a for-loop to a while-loop"
+      ],
+      "correctIndex": 1,
+      "explanation": "Building a dict takes O(n) once, and each lookup is O(1), cutting 100,000,000 comparisons down to 20,000."
+    },
+    "deepDiveTitle": "Big-O cheat sheet at n = 1,000,000",
+    "deepDiveNotes": [
+      "O(1) Constant = 1 op | O(log n) Logarithmic = ~20 ops | O(n) Linear = 1M ops | O(n log n) Sorting = ~20M ops | O(n²) Quadratic = 1 trillion ops (timeout).",
+      "Dynamic Programming simply caches overlapping sub-problems (memoization) instead of recomputing them exponentially."
+    ],
+    "codeLang": "python",
+    "code": "# Slow O(n * m) — nested scan\n# for user in users:\n#     matches = [inv for inv in invoices if inv.user_id == user.id]\n\n# Fast O(n + m) — group once in a Hash Map\nfrom collections import defaultdict\n\nby_user = defaultdict(list)\nfor inv in invoices:\n    by_user[inv.user_id].append(inv)"
+  },
+  {
+    "id": "os-networking",
+    "track": "CS & Systems",
+    "title": "Processes, Threads, TCP/QUIC, DNS & TLS Handshake",
+    "readTime": "5 min",
+    "halfLife": "law",
+    "analogyTitle": "Kitchens, chefs, and sealed envelopes",
+    "analogy": "A Process is a separate restaurant kitchen with its own locked pantry (memory). Threads are multiple chefs sharing one kitchen—fast to talk, easy to bump into each other. TLS is sealing every order in a tamper-proof envelope only the kitchen can open.",
+    "plainSummary": "Understand the invisible substrate underneath every web request: processes vs. threads, virtual memory, DNS lookup, TCP vs. UDP/QUIC, and HTTPS/TLS.",
+    "visualPoints": [
+      {
+        "label": "Process vs. Thread",
+        "detail": "Processes have isolated memory (safe, heavier); threads share memory (fast, need locks)."
+      },
+      {
+        "label": "TCP vs. UDP vs. QUIC",
+        "detail": "TCP guarantees ordered delivery; UDP is raw speed; QUIC (HTTP/3) combines UDP speed with TLS encryption and zero head-of-line blocking."
+      },
+      {
+        "label": "DNS resolution",
+        "detail": "Translates human names (api.example.com) into IP addresses with TTL-based caching."
+      },
+      {
+        "label": "TLS 1.3 handshake",
+        "detail": "Server proves identity with X.509 certificate, Diffie-Hellman derives a shared symmetric key in 1 round-trip."
+      }
+    ],
+    "quickCheck": {
+      "question": "Why does HTTP/3 (built on QUIC/UDP) perform better on flaky mobile networks than HTTP/2 (built on TCP)?",
+      "options": [
+        "UDP never drops packets",
+        "One lost packet in TCP stalls every multiplexed stream (head-of-line blocking); QUIC isolates streams independently",
+        "HTTP/3 skips encryption"
+      ],
+      "correctIndex": 1,
+      "explanation": "TCP forces strict byte ordering across the whole connection, stalling unrelated requests when one packet is lost. QUIC solves this per stream."
+    },
+    "deepDiveTitle": "What happens in 80ms when you click a link",
+    "deepDiveNotes": [
+      "1. DNS lookup -> 2. TCP/QUIC connection -> 3. TLS handshake (X.509 cert + Diffie-Hellman key exchange) -> 4. HTTP request -> 5. Server response.",
+      "Virtual memory gives every process its own private address space so one crashing app cannot corrupt another process's RAM."
+    ],
+    "codeLang": "text",
+    "code": "Client                         Server\n  |--- ClientHello + key share --->|\n  |<-- ServerHello + X.509 Cert ---|  (1 RTT in TLS 1.3)\n  |=== Encrypted HTTP/2 Request ==>|\n  |<== Encrypted JSON / SSE =======|"
+  },
+  {
+    "id": "git-cicd",
+    "track": "CS & Systems",
+    "title": "Git Internals, CI/CD, Docker & Safe Rollouts",
+    "readTime": "5 min",
+    "halfLife": "pattern",
+    "analogyTitle": "Save-points with a rewind button",
+    "analogy": "Git is not a pile of diffs—it is a chain of immutable snapshots (commits) pointing to their parents. CI/CD is the automated quality inspector that tests every snapshot before shipping, and Canary deploys test a new version on 1% of traffic before 100%.",
+    "plainSummary": "Master Git's object model, Merge vs. Rebase, GitHub Actions CI, Docker containers, and Blue-Green / Canary deployments with instant rollback.",
+    "visualPoints": [
+      {
+        "label": "Git Object Model",
+        "detail": "Blobs (file contents) -> Trees (folders) -> Commits (snapshot + parent hash). Every commit is content-addressed."
+      },
+      {
+        "label": "Merge vs. Rebase",
+        "detail": "Merge preserves branch history; Rebase replays commits linearly. Golden rule: never rebase a shared public branch."
+      },
+      {
+        "label": "Docker in 60 seconds",
+        "detail": "Packages your code, Python/Node runtime, and OS libraries into one immutable image that runs identically everywhere."
+      },
+      {
+        "label": "Canary & Blue-Green",
+        "detail": "Canary shifts 1% -> 5% -> 25% -> 100% while watching error rates; Blue-Green keeps the old environment warm for instant rollback."
+      }
+    ],
+    "quickCheck": {
+      "question": "Why should you never run git rebase on a shared branch that teammates have already pulled?",
+      "options": [
+        "Rebase deletes all files in the repository",
+        "Rebase rewrites commit hashes, causing history divergence and painful conflicts for everyone else",
+        "GitHub blocks merge commits"
+      ],
+      "correctIndex": 1,
+      "explanation": "Rebasing creates brand-new commit hashes. Rewriting shared history forces teammates to reconcile diverged trees."
+    },
+    "deepDiveTitle": "Minimal GitHub Actions CI gate",
+    "deepDiveNotes": [
+      "Continuous Integration (CI) runs lint, typecheck, and unit tests on every pull request so broken code never reaches main.",
+      "Feature flags decouple deployment (putting code on servers) from release (turning it on for users)."
+    ],
+    "codeLang": "yaml",
+    "code": "name: CI\non: [push, pull_request]\njobs:\n  verify:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci && npm test && npm run build"
+  },
+  {
+    "id": "testing-debug",
+    "track": "CS & Systems",
+    "title": "Testing Pyramid, 5ms Savepoints & Scientific Debugging",
+    "readTime": "5 min",
+    "halfLife": "law",
+    "analogyTitle": "The 5-millisecond laboratory reset",
+    "analogy": "Dropping and rebuilding database tables for every test takes 30 seconds. Wrapping each test inside a database savepoint and rolling it back at the end wipes the lab bench spotless in 5 milliseconds.",
+    "plainSummary": "Build fast 80/15/5 test suites with dependency overrides, prevent breaking API changes with Contract Tests, and hunt bugs scientifically instead of guessing.",
+    "visualPoints": [
+      {
+        "label": "80 / 15 / 5 Pyramid",
+        "detail": "80% fast unit tests, 15% API/DB integration tests, 5% Playwright E2E journeys. Avoid the flaky inverted ice-cream cone."
+      },
+      {
+        "label": "Savepoint rollbacks",
+        "detail": "Start begin_nested() before each test and rollback() after—zero leaked state, 5ms per test."
+      },
+      {
+        "label": "Dependency overrides",
+        "detail": "Swap real Stripe, SMTP, and paid LLMs for instant deterministic fakes during tests."
+      },
+      {
+        "label": "5-Step Debugging Method",
+        "detail": "Reproduce -> Localize (binary search) -> Hypothesize -> Prove -> Fix & add regression test."
+      }
+    ],
+    "quickCheck": {
+      "question": "Your backend team renames user_age to age. Backend unit tests stay green, but the React frontend crashes in production. What test layer catches this?",
+      "options": [
+        "More CSS linting",
+        "Consumer-driven Contract Tests validating the shared API schema",
+        "Increasing the server timeout"
+      ],
+      "correctIndex": 1,
+      "explanation": "Contract tests verify that the backend response still matches the exact JSON schema expected by the frontend consumer before deploy."
+    },
+    "deepDiveTitle": "3-path endpoint test template (Happy, Validation, Auth)",
+    "deepDiveNotes": [
+      "Every new API endpoint should prove at least 3 behaviors: 1) Happy path (200/201), 2) Bad input (422), 3) Missing/wrong auth (401/403).",
+      "Observability has 3 pillars: Logs (what happened), Metrics (how often/fast), and Traces (which service took 800ms)."
+    ],
+    "codeLang": "python",
+    "code": "# Swap real paid AI & DB for fast test doubles in 2 lines\napp.dependency_overrides[get_db] = lambda: test_session\napp.dependency_overrides[get_ai_client] = lambda: FakeAIClient()\n\ndef test_unauthorized_rejected(client):\n    res = client.post(\"/api/v1/items\", json={\"name\": \"Sample\"})\n    assert res.status_code == 401"
+  },
+  {
+    "id": "distributed-caching",
+    "track": "Architecture",
+    "title": "Distributed Systems, Outbox & Caching Stampedes",
+    "readTime": "6 min",
+    "halfLife": "law",
+    "analogyTitle": "1,000 shoppers rushing an empty shelf",
+    "analogy": "A cache is a front-counter display shelf so shoppers do not walk to the warehouse. A Cache Stampede happens when a popular item expires and 1,000 shoppers rush the single warehouse clerk at the exact same millisecond—crashing the database.",
+    "plainSummary": "Master the 8 Fallacies of Distributed Computing, CAP Theorem, Consensus (Raft), Transactional Outbox, and how to stop Cache Stampedes and Penetrations.",
+    "visualPoints": [
+      {
+        "label": "CAP Theorem",
+        "detail": "During a network partition (P), you must choose Consistency (reject stale reads) or Availability (serve possibly stale data)."
+      },
+      {
+        "label": "Transactional Outbox",
+        "detail": "Write your data row and outbound event row in the SAME database transaction so messages are never lost or duplicated."
+      },
+      {
+        "label": "Cache-Aside pattern",
+        "detail": "Check Redis -> on miss, read DB -> store in Redis with TTL. Add jitter or single-flight locks to stop stampedes."
+      },
+      {
+        "label": "Idempotency Keys",
+        "detail": "Attach a client-generated key to POST /pay so network retries never charge a customer twice."
+      }
+    ],
+    "quickCheck": {
+      "question": "A user creates an account, and your app must save the user in PostgreSQL AND send a welcome email. Why is writing a job row in PostgreSQL (Outbox / SKIP LOCKED) safer than calling Redis directly?",
+      "options": [
+        "PostgreSQL sends emails natively over SMTP",
+        "Both writes commit or roll back atomically in one transaction—no phantom emails if user creation fails",
+        "Redis cannot store strings"
+      ],
+      "correctIndex": 1,
+      "explanation": "With the Transactional Outbox / DB-backed queue, a failed user insert rolls back the queued job automatically."
+    },
+    "deepDiveTitle": "The 3 classic caching failures",
+    "deepDiveNotes": [
+      "Cache Stampede (Thundering Herd): popular key expires -> use mutex lock / request coalescing or probabilistic early refresh.",
+      "Cache Penetration: attackers query non-existent IDs that miss cache every time -> cache null results briefly or guard with a Bloom Filter.",
+      "Cache Avalanche: 10,000 keys expire at midnight simultaneously -> add random TTL jitter (+0–15%)."
+    ],
+    "codeLang": "sql",
+    "code": "-- Atomic job claiming across multiple workers with zero deadlocks\nSELECT id, payload\nFROM jobs\nWHERE status = 'pending' AND run_at <= NOW()\nORDER BY run_at ASC\nLIMIT 1\nFOR UPDATE SKIP LOCKED;"
+  },
+  {
+    "id": "arch-patterns",
+    "track": "Architecture",
+    "title": "Hexagonal, CQRS, Saga & Scaling to 1M Users",
+    "readTime": "5 min",
+    "halfLife": "law",
+    "analogyTitle": "Wall outlets and swappable plugs",
+    "analogy": "Hexagonal (Ports & Adapters) architecture works like wall outlets: your core business rules define the socket shape (Port/Protocol), and PostgreSQL, Stripe, or an AI model are swappable plugs (Adapters). You can swap providers without rewiring the house.",
+    "plainSummary": "Know when to stay a Modular Monolith vs. split into Microservices, plus Hexagonal Ports & Adapters, CQRS, Event Sourcing, Saga, Strangler Fig, and scaling from 1K to 1M users.",
+    "visualPoints": [
+      {
+        "label": "Hexagonal / Ports & Adapters",
+        "detail": "Core logic depends on interfaces (Python Protocol / TS interface), never raw database or LLM SDKs."
+      },
+      {
+        "label": "Modular Monolith first",
+        "detail": "Isolate domains in clean folders (auth/, billing/, ai/). Split into microservices only when team size demands independent deploys."
+      },
+      {
+        "label": "Strangler Fig",
+        "detail": "Replace a legacy system route-by-route behind a proxy instead of a risky big-bang rewrite."
+      },
+      {
+        "label": "1K -> 1M Scaling steps",
+        "detail": "1) Add DB Read Replicas -> 2) Redis cache & dedicated queue (>1,000 jobs/s) -> 3) Container autoscaling -> 4) Edge WAF/CDN."
+      }
+    ],
+    "quickCheck": {
+      "question": "A 6-person startup wants to split a new SaaS product into 10 separate microservice repositories on Day 1. What is the senior architectural call?",
+      "options": [
+        "Split into 20 microservices to be even more scalable",
+        "Build a Modular Monolith with strict package boundaries first; split only when team coordination or scale bottlenecks prove it is needed",
+        "Put all code into a single file"
+      ],
+      "correctIndex": 1,
+      "explanation": "Microservices add network latency, distributed tracing, and deployment overhead. A modular monolith gives clean isolation with one fast deploy."
+    },
+    "deepDiveTitle": "Port (Protocol) decoupling an AI provider",
+    "deepDiveNotes": [
+      "CQRS separates read models from write models when read/write shapes diverge heavily. Event Sourcing stores an append-only log of events instead of only current state.",
+      "Saga Pattern coordinates multi-service transactions using compensating actions (e.g., refund payment if inventory reservation fails)."
+    ],
+    "codeLang": "python",
+    "code": "from typing import Protocol, AsyncIterator\n\nclass AIProviderPort(Protocol):\n    async def stream_reply(self, prompt: str) -> AsyncIterator[str]:\n        ...\n\n# Production plugs in RealModelAdapter; tests plug in FakeModelAdapter."
+  },
+  {
+    "id": "senior-craft",
+    "track": "Architecture",
+    "title": "Design Docs, ADRs, Incident Response & BLUF",
+    "readTime": "4 min",
+    "halfLife": "law",
+    "analogyTitle": "Stop the bleeding before surgery",
+    "analogy": "During a production outage, you do not invent a clever patch while the site is down—you roll back to the last healthy release first, restore service, and investigate calmly afterward.",
+    "plainSummary": "Level up engineering judgment with BLUF communication, Architecture Decision Records (ADRs), SEV-1–SEV-4 incident playbooks, and blameless 5-Whys postmortems.",
+    "visualPoints": [
+      {
+        "label": "BLUF (Bottom Line Up Front)",
+        "detail": "Put your recommendation in sentence #1, then give supporting evidence. Never bury the decision in paragraph 4."
+      },
+      {
+        "label": "ADRs (Decision Records)",
+        "detail": "Short 1-page markdown notes recording Context, Options Considered, Decision, and Consequences for future teammates."
+      },
+      {
+        "label": "Incident Lifecycle",
+        "detail": "Detect -> Triage (SEV-1 to SEV-4) -> Mitigate (rollback first!) -> Communicate -> Resolve -> Blameless Postmortem."
+      },
+      {
+        "label": "Code Review Craft",
+        "detail": "Critique code, never people. Prefix non-blocking polish with [nit] and leave code cleaner than you found it."
+      }
+    ],
+    "quickCheck": {
+      "question": "A deploy at 14:00 UTC spikes API 503 errors to 35%. What is your FIRST action as Incident Commander?",
+      "options": [
+        "Spend 45 minutes writing a brand-new SQL optimization in production",
+        "Roll back to the previous known-good release to restore service immediately, then diagnose root cause",
+        "Disable alerting until morning"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mitigate first, diagnose second. Rolling back restores user service in minutes while preserving evidence for a blameless 5-Whys postmortem."
+    },
+    "deepDiveTitle": "1-page ADR template",
+    "deepDiveNotes": [
+      "Blameless postmortems assume human error is a symptom of missing guardrails or test coverage—every outage must leave behind an automated regression check.",
+      "Knowing what you deliberately chose NOT to build (and at what scale you would add it) is one of the strongest signals in senior interviews."
+    ],
+    "codeLang": "markdown",
+    "code": "# ADR-003: Use PostgreSQL SKIP LOCKED for Background Jobs\n## Context\nWe need reliable async email & PDF jobs without extra infra overhead.\n## Options Considered\n1. Redis + Celery  2. RabbitMQ  3. PostgreSQL jobs table (SKIP LOCKED)\n## Decision\nUse PostgreSQL SKIP LOCKED for transactional integrity and zero extra servers.\n## Revisit Trigger\nMigrate to Redis/SQS if sustained throughput exceeds 1,000 jobs/sec."
+  }
+];
+
+export const SYSTEMS_QUIZ_QUESTIONS: SystemsQuizQuestion[] = [
+  {
+    "id": "apis-q1",
+    "topic": "APIs & Architectures",
+    "group": "Project",
+    "question": "Which architecture streams tokens one-way over one HTTP connection?",
+    "options": [
+      "WebSockets",
+      "SSE",
+      "gRPC",
+      "GraphQL"
+    ],
+    "correctIndex": 1,
+    "explanation": "SSE is unidirectional and runs over standard HTTP/2 — ideal for AI token streaming through strict firewalls."
+  },
+  {
+    "id": "apis-q2",
+    "topic": "APIs & Architectures",
+    "group": "Project",
+    "question": "Why FastAPI over Rust or Go?",
+    "options": [
+      "It's the fastest language",
+      "Richest Python AI ecosystem + auto-generated docs",
+      "Only one supporting Postgres",
+      "Only one supporting SSE"
+    ],
+    "correctIndex": 1,
+    "explanation": "The AI ecosystem is Python-first. FastAPI gives native AI library access and automatic docs."
+  },
+  {
+    "id": "dbs-q3",
+    "topic": "Databases & ORMs",
+    "group": "Project",
+    "question": "Which database type keeps data in RAM?",
+    "options": [
+      "PostgreSQL",
+      "Redis",
+      "MongoDB",
+      "Neo4j"
+    ],
+    "correctIndex": 1,
+    "explanation": "Redis is in-memory — roughly 1000× faster than disk."
+  },
+  {
+    "id": "dbs-q4",
+    "topic": "Databases & ORMs",
+    "group": "Project",
+    "question": "What does ORM stand for?",
+    "options": [
+      "Object-Relational Mapper",
+      "Optimized Row Memory",
+      "Online Record Manager",
+      "Open Relational Model"
+    ],
+    "correctIndex": 0,
+    "explanation": "An ORM translates between Python objects and SQL tables."
+  },
+  {
+    "id": "dbs-q5",
+    "topic": "Databases & ORMs",
+    "group": "Project",
+    "question": "Which ACID guarantee means \"all or nothing\"?",
+    "options": [
+      "Consistency",
+      "Isolation",
+      "Atomicity",
+      "Durability"
+    ],
+    "correctIndex": 2,
+    "explanation": "Atomicity: a transaction fully applies or fully rolls back."
+  },
+  {
+    "id": "arch-q6",
+    "topic": "Architecture & Modules",
+    "group": "Project",
+    "question": "Which file runs the background worker?",
+    "options": [
+      "app/main.py",
+      "app/worker.py",
+      "app/core/jobs.py",
+      "app/models.py"
+    ],
+    "correctIndex": 1,
+    "explanation": "worker.py runs independently and claims jobs via SKIP LOCKED."
+  },
+  {
+    "id": "arch-q7",
+    "topic": "Architecture & Modules",
+    "group": "Project",
+    "question": "Why SKIP LOCKED?",
+    "options": [
+      "Makes queries faster",
+      "Multiple workers claim jobs without duplicates or deadlock",
+      "Encrypts data",
+      "Enables CORS"
+    ],
+    "correctIndex": 1,
+    "explanation": "Multiple workers poll the queue safely in parallel."
+  },
+  {
+    "id": "security-q8",
+    "topic": "Security & Sessions",
+    "group": "Project",
+    "question": "Which password hashing algorithm?",
+    "options": [
+      "MD5",
+      "SHA-256",
+      "Argon2id",
+      "bcrypt"
+    ],
+    "correctIndex": 2,
+    "explanation": "Argon2id is memory-hard, making GPU brute-force impractical."
+  },
+  {
+    "id": "security-q9",
+    "topic": "Security & Sessions",
+    "group": "Project",
+    "question": "Why dummy hash on unknown emails?",
+    "options": [
+      "Warm up CPU",
+      "Prevent timing attacks that enumerate emails",
+      "Satisfy GDPR",
+      "Argon2 requires it"
+    ],
+    "correctIndex": 1,
+    "explanation": "If unknown emails were faster, attackers could enumerate registered users."
+  },
+  {
+    "id": "security-q10",
+    "topic": "Security & Sessions",
+    "group": "Project",
+    "question": "Main advantage of hashed stateful sessions over JWT?",
+    "options": [
+      "Faster",
+      "Instant revocation by deleting the row",
+      "No database needed",
+      "Never expire"
+    ],
+    "correctIndex": 1,
+    "explanation": "JWTs cannot be revoked before expiry without a blacklist."
+  },
+  {
+    "id": "omitted-q11",
+    "topic": "What's NOT Included",
+    "group": "Project",
+    "question": "Why PostgreSQL jobs over Celery + Redis?",
+    "options": [
+      "Redis too fast",
+      "Transactional integrity — job enqueued in same transaction",
+      "Python cannot use Redis",
+      "Redis is insecure"
+    ],
+    "correctIndex": 1,
+    "explanation": "Rollback = no phantom email. Celery would need distributed 2-phase commits."
+  },
+  {
+    "id": "omitted-q12",
+    "topic": "What's NOT Included",
+    "group": "Project",
+    "question": "Why modular monolith over microservices?",
+    "options": [
+      "Impossible in Python",
+      "Avoids network latency, distributed tracing, split-brain",
+      "Illegal in healthcare",
+      "Faster to write"
+    ],
+    "correctIndex": 1,
+    "explanation": "Domain isolation in one deployable container — simpler for current team size."
+  },
+  {
+    "id": "interview-q13",
+    "topic": "Interview Prep",
+    "group": "Project",
+    "question": "First scaling step at 1M users?",
+    "options": [
+      "Microservices",
+      "PostgreSQL read replicas",
+      "Rewrite in Rust",
+      "Add Kafka"
+    ],
+    "correctIndex": 1,
+    "explanation": "Read replicas are cheapest, highest-impact — route reads away from primary."
+  },
+  {
+    "id": "interview-q14",
+    "topic": "Interview Prep",
+    "group": "Project",
+    "question": "When migrate jobs to Redis/Celery?",
+    "options": [
+      "Immediately",
+      "Never",
+      "Above ~1000 tasks/sec",
+      "After 2 servers"
+    ],
+    "correctIndex": 2,
+    "explanation": "Below that threshold, PostgreSQL SKIP LOCKED is simpler with stronger transactional guarantees."
+  },
+  {
+    "id": "cs-q15",
+    "topic": "CS Foundations",
+    "group": "Foundations",
+    "question": "Time complexity of binary search?",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Each comparison halves the search space — logarithmic."
+  },
+  {
+    "id": "cs-q16",
+    "topic": "CS Foundations",
+    "group": "Foundations",
+    "question": "Which gives O(1) average lookup by key?",
+    "options": [
+      "Linked list",
+      "Hash map",
+      "Balanced BST",
+      "Array"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hash maps give O(1) average; worst case O(n) on collisions."
+  },
+  {
+    "id": "cs-q17",
+    "topic": "CS Foundations",
+    "group": "Foundations",
+    "question": "DP applies when a problem has…",
+    "options": [
+      "Only small inputs",
+      "Optimal substructure + overlapping subproblems",
+      "No recursion",
+      "Sorted input"
+    ],
+    "correctIndex": 1,
+    "explanation": "DP caches sub-solutions. Those two conditions are the defining ones."
+  },
+  {
+    "id": "os-q18",
+    "topic": "OS & Networking",
+    "group": "Foundations",
+    "question": "Why does Python threading not help CPU-bound work?",
+    "options": [
+      "Threads are slow",
+      "GIL allows only one thread at a time for bytecode",
+      "Python has no threads",
+      "OS blocks threads"
+    ],
+    "correctIndex": 1,
+    "explanation": "The GIL serializes bytecode execution. Use multiprocessing for CPU-bound work."
+  },
+  {
+    "id": "os-q19",
+    "topic": "OS & Networking",
+    "group": "Foundations",
+    "question": "How many round trips for TCP before data flows?",
+    "options": [
+      "0",
+      "1.5 (SYN, SYN-ACK, ACK)",
+      "3",
+      "5"
+    ],
+    "correctIndex": 1,
+    "explanation": "SYN → SYN-ACK → ACK is 1.5 RTT."
+  },
+  {
+    "id": "os-q20",
+    "topic": "OS & Networking",
+    "group": "Foundations",
+    "question": "HTTP/3 runs over which transport?",
+    "options": [
+      "TCP",
+      "UDP (via QUIC)",
+      "SCTP",
+      "Raw IP"
+    ],
+    "correctIndex": 1,
+    "explanation": "HTTP/3 uses QUIC over UDP, avoiding TCP head-of-line blocking."
+  },
+  {
+    "id": "git-q21",
+    "topic": "Git Deep Dive",
+    "group": "Craft",
+    "question": "What is a Git branch?",
+    "options": [
+      "A copy of the whole repo",
+      "A pointer to a commit",
+      "A backup of files",
+      "A tag"
+    ],
+    "correctIndex": 1,
+    "explanation": "A branch is just a movable pointer. This is why branching is instant in Git."
+  },
+  {
+    "id": "git-q22",
+    "topic": "Git Deep Dive",
+    "group": "Craft",
+    "question": "When is rebase dangerous?",
+    "options": [
+      "On a shared branch that others pulled",
+      "On a local feature branch",
+      "Never",
+      "Only on Fridays"
+    ],
+    "correctIndex": 0,
+    "explanation": "Rebase rewrites SHAs. If others based work on the old commits, their history breaks."
+  },
+  {
+    "id": "git-q23",
+    "topic": "Git Deep Dive",
+    "group": "Craft",
+    "question": "Which command recovers a \"lost\" commit?",
+    "options": [
+      "git undo",
+      "git reflog",
+      "git resurrect",
+      "git stash"
+    ],
+    "correctIndex": 1,
+    "explanation": "Reflog tracks every HEAD movement for ~90 days."
+  },
+  {
+    "id": "cicd-q24",
+    "topic": "CI/CD & DevOps",
+    "group": "Craft",
+    "question": "Difference between Continuous Delivery and Deployment?",
+    "options": [
+      "Same thing",
+      "Delivery requires a human click; Deployment is fully automated",
+      "Delivery is faster",
+      "Deployment is only for mobile"
+    ],
+    "correctIndex": 1,
+    "explanation": "Both keep main deployable. Deployment adds automatic push on green builds."
+  },
+  {
+    "id": "cicd-q25",
+    "topic": "CI/CD & DevOps",
+    "group": "Craft",
+    "question": "Which strategy sends 1–5% of traffic first?",
+    "options": [
+      "Blue-green",
+      "Canary",
+      "Rolling",
+      "Feature flag"
+    ],
+    "correctIndex": 1,
+    "explanation": "Canary releases start small and expand — observing metrics before full rollout."
+  },
+  {
+    "id": "testing-q26",
+    "topic": "Testing Pyramid",
+    "group": "Craft",
+    "question": "Which layer should have the most tests?",
+    "options": [
+      "E2E",
+      "Integration",
+      "Unit",
+      "Static analysis"
+    ],
+    "correctIndex": 2,
+    "explanation": "Unit tests dominate — fast, focused, deterministic."
+  },
+  {
+    "id": "testing-q27",
+    "topic": "Testing Pyramid",
+    "group": "Craft",
+    "question": "What is a flaky test?",
+    "options": [
+      "Never runs",
+      "Sometimes passes, sometimes fails",
+      "In TypeScript",
+      "No assertions"
+    ],
+    "correctIndex": 1,
+    "explanation": "Flakiness is a bug. Common causes: real time, real network, shared state."
+  },
+  {
+    "id": "debug-q28",
+    "topic": "Debugging & Observability",
+    "group": "Craft",
+    "question": "Correct first step in debugging?",
+    "options": [
+      "Guess and patch",
+      "Reproduce reliably",
+      "Restart server",
+      "Add logs to everything"
+    ],
+    "correctIndex": 1,
+    "explanation": "Without a reliable repro, you are guessing. Reproduce first, then localize."
+  },
+  {
+    "id": "debug-q29",
+    "topic": "Debugging & Observability",
+    "group": "Craft",
+    "question": "Which is NOT a pillar of observability?",
+    "options": [
+      "Logs",
+      "Metrics",
+      "Traces",
+      "Documentation"
+    ],
+    "correctIndex": 3,
+    "explanation": "Logs, metrics, traces. Documentation is valuable but not an observability pillar."
+  },
+  {
+    "id": "incident-q30",
+    "topic": "Incident Response",
+    "group": "Craft",
+    "question": "First thing during an active incident?",
+    "options": [
+      "Fix the root cause",
+      "Restore service (mitigate)",
+      "Write a postmortem",
+      "Notify the press"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mitigate first — rollback, flag off, scale up. Root cause analysis comes after."
+  },
+  {
+    "id": "incident-q31",
+    "topic": "Incident Response",
+    "group": "Craft",
+    "question": "What is a blameless postmortem?",
+    "options": [
+      "Meeting where no one speaks",
+      "Focus on process/system failures, not individuals",
+      "Legal document",
+      "5-minute summary"
+    ],
+    "correctIndex": 1,
+    "explanation": "Blameless means honest. It surfaces real causes instead of hiding them."
+  },
+  {
+    "id": "distributed-q32",
+    "topic": "Distributed Systems",
+    "group": "Systems",
+    "question": "During a network partition, CAP forces a choice between…",
+    "options": [
+      "Speed and security",
+      "Consistency and availability",
+      "TCP and UDP",
+      "Logs and metrics"
+    ],
+    "correctIndex": 1,
+    "explanation": "Partitions are unavoidable; systems pick CP (refuse writes) or AP (accept writes, resolve later)."
+  },
+  {
+    "id": "distributed-q33",
+    "topic": "Distributed Systems",
+    "group": "Systems",
+    "question": "What does \"idempotent\" mean?",
+    "options": [
+      "Fast",
+      "Processing twice = processing once",
+      "Distributed",
+      "Consistent"
+    ],
+    "correctIndex": 1,
+    "explanation": "Idempotency is essential because retries are inevitable."
+  },
+  {
+    "id": "distributed-q34",
+    "topic": "Distributed Systems",
+    "group": "Systems",
+    "question": "What does the outbox pattern solve?",
+    "options": [
+      "Slow queries",
+      "Publishing events atomically with DB writes",
+      "Frontend rendering",
+      "DNS resolution"
+    ],
+    "correctIndex": 1,
+    "explanation": "Write events to DB in the same transaction; publish asynchronously."
+  },
+  {
+    "id": "caching-q35",
+    "topic": "Caching Strategies",
+    "group": "Systems",
+    "question": "What is cache-aside?",
+    "options": [
+      "Update cache and DB together",
+      "Read cache first; on miss, read DB and populate",
+      "Write only to cache",
+      "Skip cache for writes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Most common pattern. Simple, safe to add incrementally to any read path."
+  },
+  {
+    "id": "caching-q36",
+    "topic": "Caching Strategies",
+    "group": "Systems",
+    "question": "What causes a cache stampede?",
+    "options": [
+      "Too many caches",
+      "A popular key expires and many requests hit DB at once",
+      "Slow database",
+      "Insufficient TTL"
+    ],
+    "correctIndex": 1,
+    "explanation": "Fix with a lock on miss, single-flight coalescing, or stale-while-revalidate."
+  },
+  {
+    "id": "caching-q37",
+    "topic": "Caching Strategies",
+    "group": "Systems",
+    "question": "Which header prevents ANY caching?",
+    "options": [
+      "Cache-Control: public",
+      "Cache-Control: no-store",
+      "ETag",
+      "Vary: *"
+    ],
+    "correctIndex": 1,
+    "explanation": "no-store tells browsers, proxies, and CDNs to never store the response."
+  },
+  {
+    "id": "api-design-q38",
+    "topic": "API Design Deep Dive",
+    "group": "API",
+    "question": "Which pagination is fastest at deep pages?",
+    "options": [
+      "Offset/limit",
+      "Cursor-based",
+      "Random sampling",
+      "Fetch all"
+    ],
+    "correctIndex": 1,
+    "explanation": "Offset requires scanning and discarding N rows. Cursor jumps directly to the position."
+  },
+  {
+    "id": "api-design-q39",
+    "topic": "API Design Deep Dive",
+    "group": "API",
+    "question": "What is an Idempotency-Key used for?",
+    "options": [
+      "Authentication",
+      "Making POST retries safe",
+      "Encryption",
+      "Rate limiting"
+    ],
+    "correctIndex": 1,
+    "explanation": "Stripe-style: same key returns original response on retry — prevents double charges."
+  },
+  {
+    "id": "api-design-q40",
+    "topic": "API Design Deep Dive",
+    "group": "API",
+    "question": "Why verify webhook signatures?",
+    "options": [
+      "Speed up requests",
+      "Prove the request came from the provider",
+      "Encrypt payloads",
+      "Compress data"
+    ],
+    "correctIndex": 1,
+    "explanation": "Anyone can POST to your endpoint. HMAC signature proves the sender."
+  },
+  {
+    "id": "arch-pat-q41",
+    "topic": "Architecture Patterns",
+    "group": "Architecture",
+    "question": "What does hexagonal architecture isolate?",
+    "options": [
+      "Frontend from backend",
+      "Domain logic from I/O adapters",
+      "Databases from ORMs",
+      "Tests from code"
+    ],
+    "correctIndex": 1,
+    "explanation": "Ports (interfaces) let you swap adapters (DB, HTTP) without touching the domain."
+  },
+  {
+    "id": "arch-pat-q42",
+    "topic": "Architecture Patterns",
+    "group": "Architecture",
+    "question": "Which pattern stores events rather than current state?",
+    "options": [
+      "CQRS",
+      "Event Sourcing",
+      "Saga",
+      "Strangler Fig"
+    ],
+    "correctIndex": 1,
+    "explanation": "Event Sourcing replays events to derive state. Great audit trail; complex versioning."
+  },
+  {
+    "id": "arch-pat-q43",
+    "topic": "Architecture Patterns",
+    "group": "Architecture",
+    "question": "What problem does saga solve?",
+    "options": [
+      "Slow queries",
+      "Distributed transactions with compensating actions",
+      "Cache invalidation",
+      "Frontend state"
+    ],
+    "correctIndex": 1,
+    "explanation": "Each local transaction has a compensating action. If step N fails, run compensations for steps 1..N-1."
+  },
+  {
+    "id": "soft-q44",
+    "topic": "Soft Skills & Judgment",
+    "group": "Career",
+    "question": "What is an ADR?",
+    "options": [
+      "An API type",
+      "An Architecture Decision Record — immutable, timestamped",
+      "A type of test",
+      "A design pattern"
+    ],
+    "correctIndex": 1,
+    "explanation": "ADRs capture the WHY. Supersede them, never edit. Prevents future engineers re-litigating."
+  },
+  {
+    "id": "soft-q45",
+    "topic": "Soft Skills & Judgment",
+    "group": "Career",
+    "question": "What is the planning fallacy?",
+    "options": [
+      "Planning too much",
+      "Underestimating how long tasks take",
+      "Over-engineering",
+      "Skipping planning"
+    ],
+    "correctIndex": 1,
+    "explanation": "Humans systematically underestimate. Use reference-class forecasting."
+  },
+  {
+    "id": "soft-q46",
+    "topic": "Soft Skills & Judgment",
+    "group": "Career",
+    "question": "Best way to give code review feedback?",
+    "options": [
+      "Say \"looks fine\"",
+      "Be specific, review the code not the person, mark blockers",
+      "Only review style",
+      "Never comment"
+    ],
+    "correctIndex": 1,
+    "explanation": "Specific, kind, clear about blocker vs nit. Small PRs reviewed fast."
+  },
+  {
+    "id": "fe-q47",
+    "topic": "Frontend & React 19",
+    "group": "Frontend",
+    "question": "Why use Zustand instead of React Context for frequently changing global state?",
+    "options": [
+      "React Context cannot store objects",
+      "Zustand lets components subscribe to one slice so unrelated components do not re-render",
+      "Zustand replaces the backend database",
+      "React Context only works in Next.js"
+    ],
+    "correctIndex": 1,
+    "explanation": "React Context re-renders every consumer whenever any field in the context changes; Zustand selectors only re-render the component using that exact field."
+  },
+  {
+    "id": "fe-q48",
+    "topic": "Frontend & React 19",
+    "group": "Frontend",
+    "question": "How do you render a 50-token/sec AI stream in React without making the UI lag?",
+    "options": [
+      "Reload the whole page every second",
+      "Buffer chunks or batch updates and isolate the streaming bubble from the main layout",
+      "Switch from HTTP to FTP",
+      "Store every token in localStorage first"
+    ],
+    "correctIndex": 1,
+    "explanation": "Batching chunks and isolating the streaming bubble keeps the sidebar and layout completely still while tokens stream smoothly."
+  },
+  {
+    "id": "fe-q49",
+    "topic": "Frontend & React 19",
+    "group": "Frontend",
+    "question": "Why put sensitive invite tokens after # (hash fragment) instead of ?token= in a deep-link URL?",
+    "options": [
+      "Hash fragments are shorter",
+      "Browsers never send # fragments to web servers or in Referer headers",
+      "Query parameters do not work in React",
+      "Hash fragments encrypt the password automatically"
+    ],
+    "correctIndex": 1,
+    "explanation": "Anything after # stays strictly in the browser so invite tokens never leak into server access logs or third-party Referer headers."
+  },
+  {
+    "id": "fe-q50",
+    "topic": "Frontend & React 19",
+    "group": "Frontend",
+    "question": "What is the main advantage of a Dual-Mode frontend (Prototype Mode vs. Live API Mode)?",
+    "options": [
+      "It removes the need for a database in production",
+      "Designers and stakeholders can test full interactive flows with mock seeds before the backend is running",
+      "It makes CSS load twice as fast",
+      "It disables TypeScript type checking"
+    ],
+    "correctIndex": 1,
+    "explanation": "Switching VITE_USE_API lets product, design, and frontend teams demo and iterate immediately without running Docker or PostgreSQL locally."
+  }
+];
+
+export const SYSTEMS_FLASHCARDS: SystemsFlashcard[] = [
+  {
+    "id": "dbs-f1",
+    "topic": "Databases & ORMs",
+    "group": "Project",
+    "front": "ACID",
+    "back": "Atomicity, Consistency, Isolation, Durability — four transaction guarantees."
+  },
+  {
+    "id": "dbs-f2",
+    "topic": "Databases & ORMs",
+    "group": "Project",
+    "front": "UUID vs Integer",
+    "back": "Integers are guessable in URLs (/profiles/105). UUIDs prevent enumeration attacks."
+  },
+  {
+    "id": "dbs-f3",
+    "topic": "Databases & ORMs",
+    "group": "Project",
+    "front": "SQLAlchemy",
+    "back": "Leading Python ORM. hide_parameters=True masks PHI in logs."
+  },
+  {
+    "id": "dbs-f4",
+    "topic": "Databases & ORMs",
+    "group": "Project",
+    "front": "Alembic",
+    "back": "Version-controls DB schema with timestamped migration files."
+  },
+  {
+    "id": "security-f5",
+    "topic": "Security & Sessions",
+    "group": "Project",
+    "front": "Argon2id",
+    "back": "Memory-hard password hash. ~100ms per check. GPU brute-force infeasible."
+  },
+  {
+    "id": "security-f6",
+    "topic": "Security & Sessions",
+    "group": "Project",
+    "front": "Timing attack",
+    "back": "Using response time to discover which emails exist. Blocked by dummy hash."
+  },
+  {
+    "id": "security-f7",
+    "topic": "Security & Sessions",
+    "group": "Project",
+    "front": "Hashed session",
+    "back": "Random token on client; SHA-256 hash on server. Instant revocation."
+  },
+  {
+    "id": "security-f8",
+    "topic": "Security & Sessions",
+    "group": "Project",
+    "front": "hide_parameters",
+    "back": "SQLAlchemy flag masking parameter values (PHI) in logs."
+  },
+  {
+    "id": "cs-f9",
+    "topic": "CS Foundations",
+    "group": "Foundations",
+    "front": "Big-O",
+    "back": "Upper bound on growth rate as n → ∞. Hides constants."
+  },
+  {
+    "id": "cs-f10",
+    "topic": "CS Foundations",
+    "group": "Foundations",
+    "front": "Amortized complexity",
+    "back": "Average cost per operation over a sequence. Dynamic array append is amortized O(1)."
+  },
+  {
+    "id": "cs-f11",
+    "topic": "CS Foundations",
+    "group": "Foundations",
+    "front": "Hash collision",
+    "back": "Two keys hash to same bucket. Chaining or open addressing. Worst case O(n)."
+  },
+  {
+    "id": "cs-f12",
+    "topic": "CS Foundations",
+    "group": "Foundations",
+    "front": "P vs NP",
+    "back": "P = solvable in polynomial time. NP = verifiable in polynomial time. Open: does P = NP?"
+  },
+  {
+    "id": "os-f13",
+    "topic": "OS & Networking",
+    "group": "Foundations",
+    "front": "GIL",
+    "back": "Global Interpreter Lock in CPython. One thread runs Python bytecode at a time."
+  },
+  {
+    "id": "os-f14",
+    "topic": "OS & Networking",
+    "group": "Foundations",
+    "front": "Context switch",
+    "back": "Saving one task's state and loading another. Cheap for threads, expensive for processes."
+  },
+  {
+    "id": "os-f15",
+    "topic": "OS & Networking",
+    "group": "Foundations",
+    "front": "DNS TTL",
+    "back": "How long a resolver caches a name. Short TTL = fast failover, more queries."
+  },
+  {
+    "id": "os-f16",
+    "topic": "OS & Networking",
+    "group": "Foundations",
+    "front": "Head-of-line blocking",
+    "back": "One slow request blocks others. Solved by HTTP/2 multiplexing and HTTP/3 over QUIC."
+  },
+  {
+    "id": "git-f17",
+    "topic": "Git Deep Dive",
+    "group": "Craft",
+    "front": "Commit vs branch",
+    "back": "Commit is an immutable snapshot. Branch is a movable pointer."
+  },
+  {
+    "id": "git-f18",
+    "topic": "Git Deep Dive",
+    "group": "Craft",
+    "front": "Rebase",
+    "back": "Replays commits on a new base. Rewrites SHAs. Never rebase shared history."
+  },
+  {
+    "id": "git-f19",
+    "topic": "Git Deep Dive",
+    "group": "Craft",
+    "front": "Reflog",
+    "back": "Every HEAD move logged for 90 days. Your safety net after \"losing\" a commit."
+  },
+  {
+    "id": "git-f20",
+    "topic": "Git Deep Dive",
+    "group": "Craft",
+    "front": "Squash merge",
+    "back": "Combines a PR's commits into one. Clean history, loses individual commits."
+  },
+  {
+    "id": "cicd-f21",
+    "topic": "CI/CD & DevOps",
+    "group": "Craft",
+    "front": "CI",
+    "back": "Automated checks on every push: lint, types, test, build, migrations."
+  },
+  {
+    "id": "cicd-f22",
+    "topic": "CI/CD & DevOps",
+    "group": "Craft",
+    "front": "CD",
+    "back": "Continuous Delivery (deployable) vs Continuous Deployment (auto-deployed)."
+  },
+  {
+    "id": "cicd-f23",
+    "topic": "CI/CD & DevOps",
+    "group": "Craft",
+    "front": "Canary",
+    "back": "Send a small % of traffic to the new version; watch metrics; expand or roll back."
+  },
+  {
+    "id": "cicd-f24",
+    "topic": "CI/CD & DevOps",
+    "group": "Craft",
+    "front": "IaC",
+    "back": "Infrastructure defined in code (Terraform). Disposable, reviewable, reproducible."
+  },
+  {
+    "id": "testing-f25",
+    "topic": "Testing Pyramid",
+    "group": "Craft",
+    "front": "Test pyramid",
+    "back": "80% unit, 15% integration, 5% e2e. Optimizes for feedback speed."
+  },
+  {
+    "id": "testing-f26",
+    "topic": "Testing Pyramid",
+    "group": "Craft",
+    "front": "Flaky test",
+    "back": "Sometimes passes, sometimes fails. Always a bug — fix or delete immediately."
+  },
+  {
+    "id": "testing-f27",
+    "topic": "Testing Pyramid",
+    "group": "Craft",
+    "front": "Mock vs stub",
+    "back": "Stub returns canned data. Mock also asserts it was called as expected."
+  },
+  {
+    "id": "testing-f28",
+    "topic": "Testing Pyramid",
+    "group": "Craft",
+    "front": "Contract test",
+    "back": "Verifies two services agree on the same interface (Pact). Catches API drift."
+  },
+  {
+    "id": "debug-f29",
+    "topic": "Debugging & Observability",
+    "group": "Craft",
+    "front": "SLI / SLO / SLA",
+    "back": "Indicator (metric) / Objective (target) / Agreement (contract with penalties)."
+  },
+  {
+    "id": "debug-f30",
+    "topic": "Debugging & Observability",
+    "group": "Craft",
+    "front": "Trace ID",
+    "back": "A UUID propagated through every request hop. Correlates logs across services."
+  },
+  {
+    "id": "debug-f31",
+    "topic": "Debugging & Observability",
+    "group": "Craft",
+    "front": "Error budget",
+    "back": "How much unreliability you can afford. Spend on risky deploys, freeze when exhausted."
+  },
+  {
+    "id": "debug-f32",
+    "topic": "Debugging & Observability",
+    "group": "Craft",
+    "front": "Structured logging",
+    "back": "JSON logs with fields, not string concatenation. Machine-parseable."
+  },
+  {
+    "id": "incident-f33",
+    "topic": "Incident Response",
+    "group": "Craft",
+    "front": "Incident Commander",
+    "back": "Owns coordination and communication. Not necessarily the person typing fixes."
+  },
+  {
+    "id": "incident-f34",
+    "topic": "Incident Response",
+    "group": "Craft",
+    "front": "Mitigate before fix",
+    "back": "Restore service first (rollback, flag off). Root cause can wait."
+  },
+  {
+    "id": "incident-f35",
+    "topic": "Incident Response",
+    "group": "Craft",
+    "front": "Blameless postmortem",
+    "back": "Focus on process and system failures, not individuals. Encourages honest reporting."
+  },
+  {
+    "id": "incident-f36",
+    "topic": "Incident Response",
+    "group": "Craft",
+    "front": "Error budget freeze",
+    "back": "When SLO is at risk, risky deploys are paused until reliability recovers."
+  },
+  {
+    "id": "distributed-f37",
+    "topic": "Distributed Systems",
+    "group": "Systems",
+    "front": "CAP",
+    "back": "Consistency, Availability, Partition Tolerance — pick 2 during a partition."
+  },
+  {
+    "id": "distributed-f38",
+    "topic": "Distributed Systems",
+    "group": "Systems",
+    "front": "Consensus",
+    "back": "Agreeing on a value across nodes despite failures. Raft, Paxos. Requires majority quorum."
+  },
+  {
+    "id": "distributed-f39",
+    "topic": "Distributed Systems",
+    "group": "Systems",
+    "front": "Idempotency",
+    "back": "Same request, same effect. Essential when retries are unavoidable."
+  },
+  {
+    "id": "distributed-f40",
+    "topic": "Distributed Systems",
+    "group": "Systems",
+    "front": "Outbox pattern",
+    "back": "Write event to DB transaction, publish asynchronously. No phantom events, no lost events."
+  },
+  {
+    "id": "caching-f41",
+    "topic": "Caching Strategies",
+    "group": "Systems",
+    "front": "Cache-aside",
+    "back": "Reads check cache first; miss → DB → populate cache. Most common pattern."
+  },
+  {
+    "id": "caching-f42",
+    "topic": "Caching Strategies",
+    "group": "Systems",
+    "front": "Cache stampede",
+    "back": "Hot key expires; many requests hit DB at once. Fix: lock on miss or stale-while-revalidate."
+  },
+  {
+    "id": "caching-f43",
+    "topic": "Caching Strategies",
+    "group": "Systems",
+    "front": "CDN",
+    "back": "Edge servers cache static assets and even dynamic pages. Saves round trips and origin load."
+  },
+  {
+    "id": "caching-f44",
+    "topic": "Caching Strategies",
+    "group": "Systems",
+    "front": "no-store",
+    "back": "Prevents ANY caching — browser, proxy, CDN. Required for PHI."
+  },
+  {
+    "id": "api-design-f45",
+    "topic": "API Design Deep Dive",
+    "group": "API",
+    "front": "Idempotency key",
+    "back": "Client-supplied unique key making POST retries safe. Same key + body = same response."
+  },
+  {
+    "id": "api-design-f46",
+    "topic": "API Design Deep Dive",
+    "group": "API",
+    "front": "Cursor pagination",
+    "back": "Uses an opaque cursor (encoded last-sorted-key) instead of offset. Fast at any depth."
+  },
+  {
+    "id": "api-design-f47",
+    "topic": "API Design Deep Dive",
+    "group": "API",
+    "front": "Webhook signature",
+    "back": "HMAC of raw body + shared secret. Proves the request came from the provider."
+  },
+  {
+    "id": "api-design-f48",
+    "topic": "API Design Deep Dive",
+    "group": "API",
+    "front": "Token bucket",
+    "back": "Refills R/sec, spends 1/request. Allows bursts while enforcing average rate."
+  },
+  {
+    "id": "arch-pat-f49",
+    "topic": "Architecture Patterns",
+    "group": "Architecture",
+    "front": "Hexagonal",
+    "back": "Domain in center, adapters (HTTP, DB, queue) outside. Swap adapters without touching domain."
+  },
+  {
+    "id": "arch-pat-f50",
+    "topic": "Architecture Patterns",
+    "group": "Architecture",
+    "front": "Bounded context",
+    "back": "A domain boundary where one model applies. Billing and Clinical mean different things by \"User\"."
+  },
+  {
+    "id": "arch-pat-f51",
+    "topic": "Architecture Patterns",
+    "group": "Architecture",
+    "front": "Event sourcing",
+    "back": "Store events, derive state. Full audit log, temporal queries. Complex to version."
+  },
+  {
+    "id": "arch-pat-f52",
+    "topic": "Architecture Patterns",
+    "group": "Architecture",
+    "front": "Saga",
+    "back": "Sequence of local transactions with compensating actions on failure. Replaces distributed 2PC."
+  },
+  {
+    "id": "soft-f53",
+    "topic": "Soft Skills & Judgment",
+    "group": "Career",
+    "front": "ADR",
+    "back": "Architecture Decision Record. Short, immutable. Supersede, never edit."
+  },
+  {
+    "id": "soft-f54",
+    "topic": "Soft Skills & Judgment",
+    "group": "Career",
+    "front": "BLUF",
+    "back": "Bottom Line Up Front. Lead with the conclusion. Details follow."
+  },
+  {
+    "id": "soft-f55",
+    "topic": "Soft Skills & Judgment",
+    "group": "Career",
+    "front": "Planning fallacy",
+    "back": "Humans underestimate task duration. Correct by using reference classes."
+  },
+  {
+    "id": "soft-f56",
+    "topic": "Soft Skills & Judgment",
+    "group": "Career",
+    "front": "Boy scout rule",
+    "back": "Leave the code slightly better than you found it. Small improvements compound."
+  }
+];
+
+export const FULLSTACK_PROGRESS_KEY = "fde-fullstack-progress-v1";
+
+export interface FullStackProgress {
+  completedModules: string[];
+  correctQuizIds: string[];
+  knownFlashcardIds: string[];
+}
+
+export function loadFullStackProgress(): FullStackProgress {
+  try {
+    const raw = localStorage.getItem(FULLSTACK_PROGRESS_KEY);
+    if (!raw) return { completedModules: [], correctQuizIds: [], knownFlashcardIds: [] };
+    const parsed = JSON.parse(raw);
+    return {
+      completedModules: Array.isArray(parsed.completedModules) ? parsed.completedModules : [],
+      correctQuizIds: Array.isArray(parsed.correctQuizIds) ? parsed.correctQuizIds : [],
+      knownFlashcardIds: Array.isArray(parsed.knownFlashcardIds) ? parsed.knownFlashcardIds : [],
+    };
+  } catch {
+    return { completedModules: [], correctQuizIds: [], knownFlashcardIds: [] };
+  }
+}
+
+export function saveFullStackProgress(next: FullStackProgress): void {
+  try {
+    localStorage.setItem(FULLSTACK_PROGRESS_KEY, JSON.stringify(next));
+  } catch {
+    // ignore storage quota errors
+  }
+}

@@ -1,105 +1,240 @@
-.guide-home {
+/* Redesigned Start Here Home Page — Architectural Studio
+   Clean whitespace, hairline rules, single Cobalt Action, zero card-soup clutter. */
+
+.home-canvas {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 40px;
+  padding-bottom: 56px;
+  color: #0f172a;
 }
 
-.guide-hero {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 26px;
+.home-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 36px;
   align-items: center;
+  padding: 12px 0 32px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-@media (max-width: 860px) {
-  .guide-hero {
-    grid-template-columns: 1fr;
+@media (max-width: 900px) {
+  .home-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 }
 
-.guide-hero-copy {
+.home-hero-copy {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  min-width: 0;
 }
 
-.guide-lead {
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--muted);
+.home-hero-copy h1 {
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: #0f172a;
+  margin: 0;
 }
 
-.guide-hero-actions {
+.home-lead {
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: #475569;
+  margin: 0;
+  max-width: 54ch;
+}
+
+.home-hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   margin-top: 6px;
 }
 
-.guide-hero-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.home-cta {
+  padding: 11px 22px;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-.guide-stat {
-  background: var(--canvas);
-  border: 1px solid var(--border);
+.home-reassurance {
+  font-size: 13.5px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Right-hand 10-second live interactive preview */
+.home-live-demo {
+  background: #f4f6f8;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.home-demo-header strong {
+  display: block;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.home-demo-header span {
+  font-size: 13px;
+  color: #475569;
+}
+
+.home-demo-frame {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.home-demo-controls {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.guide-stat span {
-  font-size: 12px;
+.home-demo-controls label {
+  font-size: 12.5px;
   font-weight: 600;
-  color: var(--muted);
+  color: #334155;
 }
 
-.guide-stat strong {
-  font-size: 22px;
-  color: var(--accent);
+.home-demo-input-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.guide-stat p {
+.home-demo-input-row input {
+  flex: 1;
+  min-width: 160px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.home-demo-input-row input:focus {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 1px;
+}
+
+.home-demo-status {
+  margin: 2px 0 0;
   font-size: 13px;
-  color: var(--muted);
+  color: #15803d;
+  font-weight: 500;
 }
 
-.guide-intake-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+/* Section Headers */
+.home-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.home-section-head h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin: 0 0 4px;
+}
+
+.home-section-head p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #475569;
+}
+
+/* Four Clear Paths Grid */
+.home-paths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .home-paths-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.home-path-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  text-decoration: none;
+  color: #0f172a;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.home-path-item:hover {
+  border-color: #1d4ed8;
+  background: #f4f6f8;
+}
+
+.home-path-tag {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.home-path-item h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.home-path-item p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #475569;
+  flex: 1;
+}
+
+.home-path-action {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1d4ed8;
+  margin-top: 6px;
+}
+
+/* Optional Skill Check Drawer */
+.home-skill-drawer {
+  background: #f4f6f8;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 18px;
-}
-
-.guide-intake-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.guide-intake-head h2 {
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
-
-.guide-reset-btn {
-  border: none;
-  background: transparent;
-  padding: 4px 0;
-  font-size: 13px;
 }
 
 .guide-skill-list {
@@ -114,477 +249,184 @@
   justify-content: space-between;
   align-items: center;
   gap: 14px;
-  padding: 13px 15px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--canvas);
+  padding: 13px 16px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
 }
 
 .guide-skill-info {
-  flex: 1 1 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex: 1;
+  min-width: 220px;
 }
 
 .guide-skill-info strong {
-  font-size: 15px;
+  display: block;
+  font-size: 14.5px;
+  color: #0f172a;
 }
 
 .guide-skill-info p {
-  font-size: 13px;
-  color: var(--text);
-}
-
-.guide-skill-examples {
-  font-size: 12px;
-  color: var(--muted);
+  margin: 2px 0 0;
+  font-size: 13.5px;
+  color: #475569;
 }
 
 .guide-level-group {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
 .guide-level-btn {
-  border: 1px solid var(--border);
-  background: var(--surface-card);
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .guide-level-btn:hover {
-  border-color: var(--border-medium);
-  background: var(--surface-elevated);
-  color: var(--text);
+  background: #f4f6f8;
 }
 
-.guide-level-btn.is-active.is-new {
-  background: #203f42;
-  border-color: #203f42;
-  color: #fffdf8;
+.guide-level-btn.is-active {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #ffffff;
+  font-weight: 600;
 }
 
-.guide-level-btn.is-active.is-familiar {
-  background: rgba(32, 63, 66, 0.14);
-  border-color: rgba(32, 63, 66, 0.45);
-  color: #142e31;
-}
-
-.guide-level-btn.is-active.is-practiced {
-  background: rgba(22, 163, 74, 0.14);
-  border-color: rgba(22, 163, 74, 0.45);
-  color: #14532d;
-}
-
-.guide-notes-box {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.guide-textarea {
-  width: 100%;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 14px;
-  background: var(--canvas);
-  resize: vertical;
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.guide-recommendation-bar {
+.home-rec-strip {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   padding: 16px 18px;
-  border-radius: 12px;
-  background: var(--sage);
-  border: 1px solid #c5d9c3;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
 }
 
-.guide-rec-copy {
-  flex: 1 1 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.home-rec-strip strong {
+  display: block;
+  color: #0f172a;
+  font-size: 15px;
 }
 
-.guide-rec-pill {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--lime);
-  color: var(--green-dark);
-}
-
-.guide-rec-copy p {
+.home-rec-strip p {
+  margin: 3px 0 0;
   font-size: 14px;
-  line-height: 1.45;
+  color: #475569;
 }
 
-.guide-roadmap-section {
+/* Collapsible 7-Stage Core Roadmap Drawer */
+.home-roadmap-drawer {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.home-roadmap-drawer summary {
+  padding: 16px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.guide-steps-list {
+.home-roadmap-drawer summary::-webkit-details-marker {
+  display: none;
+}
+
+.home-roadmap-list {
   list-style: none;
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+  padding: 0 20px 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.home-roadmap-row {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
   gap: 14px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.guide-step-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.home-roadmap-row:last-child {
+  border-bottom: none;
 }
 
-.guide-step-card.is-recommended {
-  border-color: var(--green);
-  box-shadow: 0 0 0 2px rgba(37, 75, 62, 0.12);
+@media (max-width: 640px) {
+  .home-roadmap-row {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
 }
 
-.guide-step-card.is-complete {
-  background: #f6faf4;
-  border-color: #c2d8bd;
-}
-
-.guide-step-top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.guide-step-badges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-.guide-step-num {
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 4px 9px;
-  border-radius: 8px;
-  background: var(--green);
-  color: #fff;
-}
-
-.guide-step-sdlc {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-}
-
-.guide-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 9px;
+.home-roadmap-num {
+  width: 28px;
+  height: 28px;
   border-radius: 999px;
-}
-
-.guide-status-pill.is-next {
-  background: var(--lime);
-  color: var(--green-dark);
-}
-
-.guide-status-pill.is-fast {
-  background: var(--sage);
-  color: var(--green-dark);
-}
-
-.guide-status-pill.is-done {
-  background: #d9edd4;
-  color: #1c4a26;
-}
-
-.guide-step-cta {
-  padding: 8px 13px;
-  font-size: 13px;
-}
-
-.guide-step-summary {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.guide-step-deliver {
-  font-size: 14px;
-  color: var(--text);
-}
-
-.guide-step-missions {
-  border-top: 1px solid var(--border);
-  padding-top: 12px;
+  background: #f4f6f8;
+  border: 1px solid #e2e8f0;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.guide-missions-count {
-  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--muted);
+  color: #0f172a;
 }
 
-.guide-mission-links {
+.home-roadmap-copy strong {
+  display: block;
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.home-roadmap-copy p {
+  margin: 4px 0 8px;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.home-roadmap-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 6px;
 }
 
 .guide-mission-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--canvas);
-  font-size: 12px;
+  border: 1px solid #e2e8f0;
+  background: #f4f6f8;
+  color: #334155;
+  text-decoration: none;
+  font-size: 12.5px;
   font-weight: 500;
 }
 
 .guide-mission-chip:hover {
-  border-color: var(--green);
-  background: var(--sage);
+  border-color: #1d4ed8;
+  color: #1d4ed8;
 }
 
 .guide-mission-chip.is-done {
-  background: var(--lime);
-  border-color: #c5d996;
-  color: var(--green-dark);
-}
-
-/* Orientation GPS & Wayfinder */
-.guide-location-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--green-dark);
-}
-
-.guide-gps-card {
-  border-color: rgba(32, 63, 66, 0.25);
-  background: var(--sage);
-}
-
-.guide-gps-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--green-dark) !important;
-}
-
-.guide-gps-card strong {
-  font-size: 17px;
-  color: var(--green-dark);
-}
-
-.guide-gps-card p {
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--text-secondary);
-}
-
-.guide-gps-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.guide-wayfinder {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 22px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.guide-wayfinder-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-.guide-wayfinder-head h2 {
-  margin-top: 4px;
-}
-
-.guide-wayfinder-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-
-@media (max-width: 1020px) {
-  .guide-wayfinder-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 600px) {
-  .guide-wayfinder-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-.guide-wayfinder-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--canvas);
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
-}
-
-.guide-wayfinder-card:hover {
-  border-color: var(--green);
-  background: var(--sage);
-  transform: translateY(-1px);
-}
-
-.guide-wayfinder-card.is-primary {
-  border-color: rgba(32, 63, 66, 0.35);
-  background: #eff5f2;
-}
-
-.wayfinder-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--green-dark);
-}
-
-.guide-wayfinder-card strong {
-  font-size: 14.5px;
-  color: var(--text);
-}
-
-.guide-wayfinder-card p {
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--muted);
-  flex: 1;
-}
-
-.wayfinder-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--green-dark);
-  margin-top: 2px;
-}
-
-/* 7-Step Horizontal Journey Strip */
-.guide-step-card {
-  scroll-margin-top: 84px;
-}
-
-.guide-journey-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.guide-journey-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.guide-journey-pill:hover {
-  border-color: var(--green);
-  background: var(--sage);
-}
-
-.guide-journey-pill.is-current {
-  background: var(--green-dark);
-  border-color: var(--green-dark);
-  color: #ffffff;
-}
-
-.guide-journey-pill.is-done {
-  background: var(--lime);
-  border-color: #c5d996;
-  color: var(--green-dark);
-}
-
-.guide-journey-pill .journey-num {
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  background: rgba(32, 63, 66, 0.12);
-}
-
-.guide-journey-pill.is-current .journey-num {
-  background: rgba(255, 255, 255, 0.22);
+  background: #dcfce7;
+  border-color: #bbf7d0;
+  color: #166534;
 }

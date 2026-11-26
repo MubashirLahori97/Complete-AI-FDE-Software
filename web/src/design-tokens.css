@@ -1,49 +1,58 @@
-/* Centralized Dark Developer Design System Tokens (Linear & Vercel Aesthetic) */
+/* FDE Academy — Architectural Studio Design Tokens
+   Palette: Drafting White (#FFFFFF), Studio Mist (#F4F6F8), Blueprint Ink (#0F172A),
+   Graphite Muted (#475569), Cobalt Action (#1D4ED8), Hairline Rule (#E2E8F0). */
 :root {
   /* Canvas & Surface Layers */
-  --canvas: #090d16;
-  --surface: #111726;
-  --surface-elevated: #1a2234;
-  --surface-card: #151d2f;
-  --surface-muted: #1e293b;
-  --surface-hover: #1e293b;
+  --canvas: #ffffff;
+  --surface: #ffffff;
+  --surface-elevated: #f4f6f8;
+  --surface-card: #ffffff;
+  --surface-muted: #f4f6f8;
+  --surface-hover: #eef2f6;
 
   /* Typography Colors */
-  --text: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --muted: #94a3b8;
+  --text: #0f172a;
+  --text-secondary: #334155;
+  --muted: #475569;
   --text-dim: #64748b;
-  --text-light: #f1f5f9;
+  --text-light: #f8fafc;
 
-  /* Brand & Accents */
-  --accent: #38bdf8;
-  --accent-hover: #7dd3fc;
-  --accent-glow: rgba(56, 189, 248, 0.15);
-  --accent-subtle: rgba(56, 189, 248, 0.08);
+  /* Brand & Accents — Boldness spent in one place: Cobalt Action */
+  --accent: #1d4ed8;
+  --accent-hover: #1e40af;
+  --accent-glow: rgba(29, 78, 216, 0.14);
+  --accent-subtle: #eff6ff;
 
-  --green: #4ade80;
-  --green-dark: #22c55e;
-  --green-glow: rgba(74, 222, 128, 0.15);
-  --lime: #a3e635;
+  --green: #15803d;
+  --green-dark: #166534;
+  --green-glow: rgba(21, 128, 61, 0.12);
+  --sage: #eff6ff;
+  --lime: #dcfce7;
 
-  --warning: #fbbf24;
-  --warning-glow: rgba(251, 191, 36, 0.15);
-  --danger: #f87171;
-  --danger-glow: rgba(248, 113, 113, 0.15);
+  --warning: #b45309;
+  --warning-glow: #fef3c7;
+  --danger: #b91c1c;
+  --danger-glow: #fee2e2;
+
+  /* Code Stage (only for editors, terminals, and <pre> code blocks) */
+  --code-bg: #0f172a;
+  --code-surface: #111827;
+  --code-border: #1e293b;
+  --code-text: #f1f5f9;
 
   /* Borders & Dividers */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.15);
-  --border-strong: rgba(255, 255, 255, 0.25);
-  --border-accent: rgba(56, 189, 248, 0.35);
+  --border: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-strong: #94a3b8;
+  --border-accent: rgba(29, 78, 216, 0.35);
 
   /* Geometry & Spacing */
   --radius-sm: 6px;
-  --radius: 12px;
-  --radius-lg: 16px;
+  --radius: 10px;
+  --radius-lg: 14px;
   --radius-full: 9999px;
 
-  /* Monospace Font */
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'DM Mono', monospace;
+  /* Typography */
+  --font-mono: 'DM Mono', 'JetBrains Mono', 'Fira Code', monospace;
   --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }

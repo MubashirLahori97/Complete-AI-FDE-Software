@@ -5,6 +5,7 @@ import { labSpec } from './mission-labs';
 import type { Progress } from './state';
 import LivePage from './LivePage';
 import JourneySketch from './JourneySketch';
+import './studio-pages.css';
 
 type Props = { progress: Progress; update: (next: Progress) => void };
 const chapterOutcomes = [
@@ -313,11 +314,22 @@ export function AcademyPath({
   );
   return (
     <div className="mission-core academy-journey academy-path">
-      <div className="journey-masthead">
-        <span>YOUR LEARNING JOURNEY</span>
-        <a href="#/">
-          Back to the studio <ArrowRight size={13} />
-        </a>
+      <div className="courses-hub-bar" role="navigation" aria-label="Course tracks">
+        <strong style={{ fontSize: 14 }}>Course tracks</strong>
+        <div className="courses-hub-links">
+          <a className="courses-hub-link is-active" href="#/curriculum">
+            Build with AI (30 lessons)
+          </a>
+          <a className="courses-hub-link" href="#/fullstack">
+            Full-Stack &amp; CS Foundations
+          </a>
+          <a className="courses-hub-link" href="#/python">
+            Python &amp; FastAPI
+          </a>
+          <a className="courses-hub-link" href="#/agentic-era">
+            AI-Era Lab
+          </a>
+        </div>
       </div>
       <header className="journey-path-intro">
         <div>

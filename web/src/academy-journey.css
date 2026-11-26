@@ -1,93 +1,110 @@
-/* Academy art direction: warm paper, ink, and diagrams with a purpose. */
+/* Architectural Studio shell overrides: crisp Drafting White, Studio Mist, Blueprint Ink, Cobalt Action */
 .academy-shell {
-  --canvas: #f6f3ec;
-  --surface: #fffdf8;
-  --surface-elevated: #f1ede2;
-  --surface-card: #fffdf8;
-  --surface-muted: #e8e3d6;
-  --text: #22303d;
-  --text-secondary: #41515e;
-  --muted: #5e6a73;
-  --text-dim: #73808a;
-  --border: #dedbd2;
-  --border-medium: #ccc7bb;
-  --border-strong: #b6b0a2;
-  --accent: #203f42;
-  --accent-hover: #142e31;
-  --accent-glow: rgba(32, 63, 66, 0.14);
-  --accent-subtle: rgba(32, 63, 66, 0.08);
-  --green: #203f42;
-  --green-dark: #142e31;
-  --sage: #e8eee5;
-  --lime: #e8d3a6;
-  background: #f6f3ec;
-  color: #22303d;
+  --canvas: #ffffff;
+  --surface: #ffffff;
+  --surface-elevated: #f4f6f8;
+  --surface-card: #ffffff;
+  --surface-muted: #f4f6f8;
+  --text: #0f172a;
+  --text-secondary: #334155;
+  --muted: #475569;
+  --text-dim: #64748b;
+  --border: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-strong: #94a3b8;
+  --accent: #1d4ed8;
+  --accent-hover: #1e40af;
+  --accent-glow: rgba(29, 78, 216, 0.14);
+  --accent-subtle: #eff6ff;
+  --green: #15803d;
+  --green-dark: #166534;
+  --sage: #eff6ff;
+  --lime: #dcfce7;
+  background: #ffffff;
+  color: #0f172a;
 }
-.academy-shell .sidebar,
+.academy-shell .sidebar {
+  background: #f4f6f8;
+  border-color: #e2e8f0;
+}
 .academy-shell .topbar {
-  background: #fffdf8;
-  border-color: #e3dfd5;
+  background: #ffffff;
+  border-color: #e2e8f0;
 }
 .academy-shell .brand-mark {
-  background: #172b37;
-  color: #e9d8b5;
+  background: #0f172a;
+  color: #ffffff;
   box-shadow: none;
   transform: none;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 .academy-shell .sidebar nav a {
-  color: #5c686d;
-  border-radius: 6px;
+  color: #475569;
+  border-radius: 8px;
+  font-weight: 500;
+}
+.academy-shell .sidebar nav a:hover {
+  background: #e9eef5;
+  color: #0f172a;
 }
 .academy-shell .sidebar nav a.active {
-  background: #e9eee8;
-  color: #244542;
-  box-shadow: inset 2px 0 #486e62;
+  background: #ffffff;
+  color: #1d4ed8;
+  font-weight: 600;
+  box-shadow: inset 3px 0 #1d4ed8, 0 1px 2px rgba(15, 23, 42, 0.05);
 }
 .academy-shell .nav-count,
 .academy-shell .avatar {
-  color: #315349;
-  background: #e8eee1;
+  color: #1d4ed8;
+  background: #eff6ff;
 }
 .academy-shell .sidebar-bottom {
   background: transparent;
-  border-color: #e3dfd5;
+  border-color: #e2e8f0;
 }
 .academy-shell .sidebar-progress {
-  background: #f4f2e9;
-  border-color: #e2dfd4;
+  background: #ffffff;
+  border-color: #e2e8f0;
   box-shadow: none;
 }
 .academy-shell .local-save,
 .academy-shell .sidebar-progress p {
-  color: #68736d;
+  color: #475569;
 }
 .academy-shell .text-link {
-  color: #325d56;
+  color: #1d4ed8;
 }
 .academy-shell .button.primary {
-  background: #234b46;
-  color: #fffef6;
-  border-color: #234b46;
+  background: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
   box-shadow: none;
+}
+.academy-shell .button.primary:hover {
+  background: #1e40af;
+  border-color: #1e40af;
 }
 .academy-shell .button.light {
-  background: #fffdf8;
-  border-color: #d9d6cb;
-  color: #344d4a;
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
   box-shadow: none;
 }
+.academy-shell .button.light:hover {
+  background: #f4f6f8;
+  border-color: #94a3b8;
+}
 .academy-shell .mission-core {
-  --mission-ink: #22303d;
-  --mission-accent: #315e56;
+  --mission-ink: #0f172a;
+  --mission-accent: #1d4ed8;
 }
 .academy-shell .mission-pill {
-  background: #ede9da;
-  border-color: #ddd7c3;
-  color: #62614d;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
 }
 .academy-shell .mission-step-nav button {
-  border-color: #dedbd1;
+  border-color: #e2e8f0;
   color: #66716f;
   box-shadow: none;
   background: #fffdf8;

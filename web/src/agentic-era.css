@@ -31,53 +31,53 @@
   border: 1px solid rgba(217, 119, 6, 0.4);
 }
 
-/* Brighter badge colors when rendered inside dark navy containers */
+/* Crisp light-surface badge colors across all unified Studio pages */
 .agentic-studio-page .half-life-badge.tier-law,
 .datalumina-wrapper .half-life-badge.tier-law,
 .mission-viva-panel .half-life-badge.tier-law,
 .agentic-home-banner .half-life-badge.tier-law {
-  background: rgba(16, 185, 129, 0.18);
-  color: #6ee7b7;
-  border-color: rgba(52, 211, 153, 0.45);
+  background: #dcfce7;
+  color: #166534;
+  border-color: #bbf7d0;
 }
 
 .agentic-studio-page .half-life-badge.tier-pattern,
 .datalumina-wrapper .half-life-badge.tier-pattern,
 .mission-viva-panel .half-life-badge.tier-pattern,
 .agentic-home-banner .half-life-badge.tier-pattern {
-  background: rgba(56, 189, 248, 0.18);
-  color: #7dd3fc;
-  border-color: rgba(56, 189, 248, 0.45);
+  background: #eff6ff;
+  color: #1e40af;
+  border-color: #bfdbfe;
 }
 
 .agentic-studio-page .half-life-badge.tier-tool,
 .datalumina-wrapper .half-life-badge.tier-tool,
 .mission-viva-panel .half-life-badge.tier-tool,
 .agentic-home-banner .half-life-badge.tier-tool {
-  background: rgba(251, 191, 36, 0.18);
-  color: #fde68a;
-  border-color: rgba(251, 191, 36, 0.45);
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fde68a;
 }
 
-/* Main Studio Container (Explicit dark theme tokens for WCAG AAA contrast) */
+/* Main Studio Container — Unified Architectural Studio Light Surface */
 .agentic-studio-page {
-  --ag-surface: #0f172a;
-  --ag-card: #162036;
-  --ag-code: #070b15;
-  --ag-text: #f8fafc;
-  --ag-secondary: #cbd5e1;
-  --ag-muted: #94a3b8;
-  --ag-border: rgba(255, 255, 255, 0.12);
-  --ag-border-strong: rgba(255, 255, 255, 0.24);
-  --ag-accent: #38bdf8;
-  --ag-green: #34d399;
-  --ag-danger: #fca5a5;
-  --ag-warn: #fde68a;
+  --ag-surface: #ffffff;
+  --ag-card: #f4f6f8;
+  --ag-code: #0f172a;
+  --ag-text: #0f172a;
+  --ag-secondary: #334155;
+  --ag-muted: #475569;
+  --ag-border: #e2e8f0;
+  --ag-border-strong: #cbd5e1;
+  --ag-accent: #1d4ed8;
+  --ag-green: #15803d;
+  --ag-danger: #b91c1c;
+  --ag-warn: #b45309;
 
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 1200px;
+  max-width: 1140px;
   width: 100%;
   min-width: 0;
   margin: 0 auto;
@@ -89,9 +89,9 @@
   grid-template-columns: 1.3fr 1fr;
   gap: 1.5rem;
   align-items: center;
-  background: linear-gradient(145deg, #131d33, #0b1222);
-  border: 1px solid var(--ag-border-strong);
-  border-radius: 16px;
+  background: #f4f6f8;
+  border: 1px solid var(--ag-border);
+  border-radius: 12px;
   padding: 1.35rem 1.5rem;
   color: var(--ag-text);
 }
@@ -106,7 +106,7 @@
 .agentic-mastery-copy strong {
   display: block;
   font-size: 1.12rem;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 0.3rem;
 }
 
@@ -155,7 +155,7 @@
 }
 
 .agentic-tab-btn:hover {
-  color: #ffffff;
+  color: var(--ag-text);
   background: rgba(255, 255, 255, 0.06);
 }
 
@@ -171,7 +171,7 @@
   padding: 0.12rem 0.45rem;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .tab-check {
@@ -200,7 +200,7 @@
 .agentic-panel h2,
 .agentic-panel h3,
 .agentic-panel h4 {
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 /* Case Selector Chips */
@@ -227,13 +227,13 @@
 
 .pr-case-chip:hover {
   border-color: var(--ag-border-strong);
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .pr-case-chip.is-selected {
   border-color: var(--ag-accent);
   background: rgba(56, 189, 248, 0.14);
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .pr-case-chip.is-cleared {
@@ -249,7 +249,7 @@
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: #7dd3fc;
+  color: #1d4ed8;
   white-space: nowrap;
 }
 
@@ -303,7 +303,7 @@
 .pr-audit-header h2 {
   margin: 0 0 0.35rem;
   font-size: 1.45rem;
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .pr-spec-bar {
@@ -361,7 +361,7 @@
 .pr-verdict-column h3 {
   font-size: 0.98rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--ag-text);
   margin: 0 0 0.75rem;
 }
 
@@ -420,7 +420,7 @@
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 700;
-  color: #7dd3fc;
+  color: #1d4ed8;
   word-break: break-word;
 }
 
@@ -480,7 +480,7 @@
 .pr-radio-opt.is-selected {
   border-color: var(--ag-accent);
   background: rgba(56, 189, 248, 0.14);
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .pr-radio-opt input {
@@ -546,7 +546,7 @@
   gap: 0.3rem;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--ag-border);
-  color: #f8fafc;
+  color: var(--ag-text);
   border-radius: 5px;
   padding: 0.2rem 0.5rem;
   font-size: 0.72rem;
@@ -574,12 +574,12 @@
 .lab-intro-head h2 {
   margin: 0.5rem 0 0.35rem;
   font-size: 1.4rem;
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .lab-intro-head code {
   background: rgba(56, 189, 248, 0.16);
-  color: #7dd3fc;
+  color: #1d4ed8;
   padding: 0.1rem 0.4rem;
   border-radius: 5px;
   font-family: var(--font-mono);
@@ -612,7 +612,7 @@
   gap: 0.5rem;
   margin: 0;
   font-size: 1rem;
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .sim-slider-row {
@@ -631,7 +631,7 @@
 }
 
 .slider-label-line strong {
-  color: #7dd3fc;
+  color: #1d4ed8;
   font-family: var(--font-mono);
   white-space: nowrap;
 }
@@ -655,7 +655,7 @@
 }
 
 .sim-toggle-row strong {
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .sim-metrics-grid {
@@ -681,7 +681,7 @@
 .sim-metric-box strong {
   font-size: 1.5rem;
   font-family: var(--font-mono);
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .metric-good {
@@ -700,11 +700,11 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--ag-border-strong);
   font-size: 0.88rem;
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .sim-verdict-banner strong {
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .sim-verdict-banner p {
@@ -740,7 +740,7 @@
 
 .provenance-claim-banner p {
   margin: 0.3rem 0 0;
-  color: #f8fafc;
+  color: var(--ag-text);
   font-size: 0.88rem;
 }
 
@@ -783,7 +783,7 @@
 .provenance-table-wrap h3 {
   margin: 0 0 0.75rem;
   font-size: 0.95rem;
-  color: #ffffff;
+  color: var(--ag-text);
 }
 
 .provenance-table {
@@ -815,7 +815,7 @@
 
 .mono-cell {
   font-family: var(--font-mono);
-  color: #7dd3fc;
+  color: #1d4ed8;
   white-space: nowrap;
 }
 
@@ -829,13 +829,13 @@
 }
 
 .status-dot.completed {
-  background: rgba(52, 211, 153, 0.18);
-  color: #6ee7b7;
+  background: #dcfce7;
+  color: #166534;
 }
 
 .status-dot.missed {
-  background: rgba(248, 113, 113, 0.18);
-  color: #fca5a5;
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 .flag-tag {
@@ -845,22 +845,23 @@
   font-family: var(--font-mono);
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  background: rgba(251, 191, 36, 0.2);
-  color: #fde68a;
+  background: #fef3c7;
+  color: #92400e;
   white-space: nowrap;
 }
 
-/* Mission Viva Panel (high-contrast dark card inside light mission pages) */
+/* Mission Viva Panel — Unified Architectural Studio card */
 .mission-viva-panel {
   margin-top: 1.5rem;
-  background: linear-gradient(145deg, #11192c, #0a101f);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  border-radius: 12px;
+  background: #f4f6f8;
+  border: 1px solid #cbd5e1;
+  border-left: 3px solid #1d4ed8;
+  border-radius: 10px;
   padding: 1.2rem 1.35rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  color: #f8fafc;
+  color: #0f172a;
 }
 
 .mission-viva-head {
@@ -873,43 +874,57 @@
 
 .mission-viva-head strong {
   font-size: 0.96rem;
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .mission-viva-panel p {
   margin: 0;
   font-size: 0.88rem;
-  color: #cbd5e1;
+  color: #334155;
   line-height: 1.55;
 }
 
-/* Home 2030 Banner (high-contrast dark card inside Overview) */
+/* Home 2030 Banner */
 .agentic-home-banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1.25rem;
   flex-wrap: wrap;
-  background: linear-gradient(135deg, #0f1b2d, #102433);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  border-radius: 16px;
+  background: #f4f6f8;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   padding: 1.35rem 1.5rem;
   margin: 1.5rem 0;
-  color: #f8fafc;
+  color: #0f172a;
 }
 
 .agentic-home-banner h3 {
   margin: 0.35rem 0 0.3rem;
   font-size: 1.15rem;
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .agentic-home-banner p {
   margin: 0;
   font-size: 0.9rem;
-  color: #cbd5e1;
+  color: #475569;
   max-width: 680px;
   line-height: 1.55;
+}
+
+/* Keep ONLY code diffs dark #0f172a inside Agentic Studio */
+.agentic-studio-page pre,
+.agentic-studio-page .pr-code-pre {
+  background: #0f172a;
+  color: #f1f5f9;
+  border-radius: 8px;
+}
+
+.agentic-studio-page .agentic-tab-btn.active {
+  background: #1d4ed8;
+  color: var(--ag-text);
+  border-color: #1d4ed8;
 }
 
 @media (max-width: 960px) {
@@ -930,4 +945,78 @@
   .provenance-kpi-pair {
     grid-template-columns: 1fr;
   }
+}
+
+/* === Architectural Studio Light-Surface Contrast & Mobile Guards === */
+.agentic-studio-page .agentic-tab-btn.active,
+.agentic-studio-page .agentic-tab-btn.is-active {
+  background: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
+.agentic-studio-page .agentic-tab-btn.active *,
+.agentic-studio-page .agentic-tab-btn.is-active * {
+  color: #ffffff;
+}
+
+.agentic-studio-page .pr-case-chip.is-selected {
+  background: #eff6ff;
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+}
+
+.agentic-studio-page .pr-case-chip.is-selected .pr-chip-num,
+.agentic-studio-page .pr-case-chip.is-selected .pr-chip-title {
+  color: #1d4ed8;
+}
+
+.agentic-studio-page .pr-spec-bar > div {
+  background: #f4f6f8;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.agentic-studio-page .pr-spec-bar > div p,
+.agentic-studio-page .pr-spec-bar > div li {
+  color: #334155;
+}
+
+.agentic-studio-page .pr-hunk-card {
+  background: #0f172a;
+  color: #f1f5f9;
+  border-color: #1e293b;
+}
+
+.agentic-studio-page .pr-hunk-card .hunk-file {
+  color: #7dd3fc;
+}
+
+.agentic-studio-page .pr-hunk-card .hunk-lines,
+.agentic-studio-page .pr-hunk-card .hunk-summary,
+.agentic-studio-page .pr-hunk-card p {
+  color: #cbd5e1;
+}
+
+.agentic-studio-page .pr-hunk-card pre,
+.agentic-studio-page pre {
+  background: #0b1120;
+  color: #f1f5f9;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.agentic-studio-page .pr-hunk-card code {
+  color: #f1f5f9;
+}
+
+.agentic-studio-page .pr-split-workspace,
+.agentic-studio-page .pr-split-workspace > *,
+.agentic-studio-page .pr-hunk-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.agentic-studio-page .button.primary {
+  color: #ffffff;
 }

@@ -1,23 +1,8 @@
 import { useMemo, useState } from 'react';
-import {
-  ArrowRight,
-  BookOpen,
-  Check,
-  CheckCircle2,
-  Compass,
-  FastForward,
-  Layers,
-  MapPin,
-  RotateCcw,
-  ShieldAlert,
-  Sparkles,
-  Terminal,
-  Workflow,
-} from 'lucide-react';
+import { Check, CheckCircle2, ChevronDown, RotateCcw } from 'lucide-react';
 import { canRecordMission, missions } from './missions';
 import type { Progress } from './state';
-import { HalfLifeBadge, ProgressBar, SectionHeading } from './ui';
-import './agentic-era.css';
+import LivePage from './LivePage';
 import {
   GUIDE_STEPS,
   SKILL_TOPICS,
@@ -38,7 +23,9 @@ const LEVEL_OPTIONS: { value: SkillLevel; label: string }[] = [
 
 export default function StepGuideHome({ progress }: { progress: Progress }) {
   const [intake, setIntake] = useState<LearnerIntake>(() => loadLearnerIntake());
-  const [focusedStep, setFocusedStep] = useState<number | null>(null);
+  const [showSkillCheck, setShowSkillCheck] = useState(false);
+  const [heading, setHeading] = useState('Neighborhood Repair');
+  const [previewNote, setPreviewNote] = useState('');
 
   const completedMissionIds = useMemo(() => {
     const done = new Set<number>();
@@ -67,331 +54,229 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
     });
   };
 
-  const setNotes = (notes: string) => {
-    updateIntake({
-      ...intake,
-      completedCheck: true,
-      notes: notes.slice(0, 1000),
-    });
-  };
+  const resetIntake = () => updateIntake(emptyLearnerIntake());
 
-  const resetIntake = () => {
-    const fresh = emptyLearnerIntake();
-    updateIntake(fresh);
-  };
+  const hasStarted = completedMissionIds.size > 0 || progress.lastMission > 0;
+  const primaryHref = hasStarted
+    ? `#/mission/${Math.max(1, progress.lastMission || 1)}`
+    : '#/mission/1?step=0';
+  const primaryLabel = hasStarted
+    ? `Continue Lesson ${Math.max(1, progress.lastMission || 1)}`
+    : 'Start Lesson 1';
 
   return (
-    <div className="guide-home">
-      <section className="guide-hero" aria-label="Welcome to FDE Academy">
-        <div className="guide-hero-copy">
-          <p className="eyebrow guide-location-eyebrow">
-            <MapPin size={13} />
-            YOU ARE HERE · OVERVIEW & LEARNING GPS
+    <div className="home-canvas">
+      <section className="home-hero" aria-label="Welcome to FDE Academy">
+        <div className="home-hero-copy">
+          <h1>Build real software with AI, even if you have never coded.</h1>
+          <p className="home-lead">
+            Understand how websites, servers, databases, and AI apps actually work. Try live
+            examples in your browser, let AI help write the code, and check your understanding step
+            by step.
           </p>
-          <h1>Understand the system. Direct AI to build it. Prove it works.</h1>
-          <p className="guide-lead">
-            In the AI era, memorizing syntax is no longer the bottleneck. Follow a clear 7-step
-            AI-Native SDLC path—from problem discovery and testable specs to architecture,
-            verification harnesses, and safe production releases.
-          </p>
-          <div className="guide-hero-actions">
-            <a className="button primary" href={recommendation.recommendedHref}>
-              {recommendation.recommendedLabel}
-              <ArrowRight size={16} />
+          <div className="home-hero-actions">
+            <a className="button primary home-cta" href={primaryHref}>
+              {primaryLabel}
             </a>
-            <a className="button light" href="#/python">
-              <Terminal size={16} />
-              Python & FastAPI Production Track
-            </a>
+            <button
+              type="button"
+              className="button light"
+              onClick={() => setShowSkillCheck((open) => !open)}
+            >
+              {showSkillCheck ? 'Hide skill check' : 'Already have experience? Skip ahead'}
+            </button>
           </div>
+          <p className="home-reassurance">
+            {completedMissionIds.size > 0
+              ? `${completedMissionIds.size} of 30 core lessons completed. Progress saves automatically in this browser.`
+              : 'Free, open-source, no setup or account needed. Start in 10 seconds.'}
+          </p>
         </div>
-        <div className="guide-hero-stats">
-          <div className="guide-stat guide-gps-card">
-            <span className="guide-gps-label">
-              <Compass size={13} />
-              Your current position &amp; next move
-            </span>
-            <strong>
-              {completedMissionIds.size > 0
-                ? `In Progress · Step ${recommendation.recommendedStepNumber}`
-                : `Start Here · Step ${recommendation.recommendedStepNumber}`}
-            </strong>
-            <p>{recommendation.summary}</p>
-            <div className="guide-gps-links">
-              <a className="text-link" href={recommendation.recommendedHref}>
-                {recommendation.recommendedLabel}
-                <ArrowRight size={13} />
-              </a>
-              {progress.lastMission > 0 && (
-                <a className="text-link" href={`#/mission/${progress.lastMission}`}>
-                  Resume Mission {progress.lastMission}
-                  <ArrowRight size={13} />
-                </a>
-              )}
-            </div>
+
+        <div className="home-live-demo" aria-label="Interactive 10-second preview">
+          <div className="home-demo-header">
+            <strong>Try it right now</strong>
+            <span>Change the heading below and watch the live page respond.</span>
           </div>
-          <div className="guide-stat">
-            <span>Core missions recorded</span>
-            <strong>{completedMissionIds.size} / 30</strong>
-            <ProgressBar
-              value={(completedMissionIds.size / 30) * 100}
-              label="Core missions completed"
+          <div className="home-demo-frame">
+            <LivePage
+              heading={heading}
+              title="Interactive preview"
+              onAction={(open) =>
+                setPreviewNote(
+                  open
+                    ? 'You just triggered a live state change—the button revealed the contact details.'
+                    : 'Clicking again toggled the state back off.',
+                )
+              }
             />
           </div>
-          <div className="guide-stat">
-            <span>Skills already checked</span>
-            <strong>{recommendation.knownCount} / 7</strong>
-            <p className="muted">
-              {recommendation.fastTrackStepNumbers.length > 0
-                ? `${recommendation.fastTrackStepNumbers.length} step(s) eligible to fast-track`
-                : 'Personalize below to skip basics you already know'}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="guide-wayfinder" aria-label="Where to go in FDE Academy">
-        <div className="guide-wayfinder-head">
-          <div>
-            <p className="eyebrow">CHOOSE YOUR DESTINATION</p>
-            <h2>Where do you want to go?</h2>
-          </div>
-          <p className="muted">
-            New to FDE Academy? Start with the Core 7-Step Path or personalize Step 0 below.
-          </p>
-        </div>
-        <div className="guide-wayfinder-grid">
-          <a href="#/curriculum" className="guide-wayfinder-card is-primary">
-            <div className="wayfinder-icon">
-              <BookOpen size={18} />
-            </div>
-            <strong>1. Core 7-Step Path</strong>
-            <p>30 guided missions from problem specs &amp; architecture to verified production.</p>
-            <span className="wayfinder-cta">
-              Browse 30 Missions <ArrowRight size={14} />
-            </span>
-          </a>
-          <a href="#/python" className="guide-wayfinder-card">
-            <div className="wayfinder-icon">
-              <Terminal size={18} />
-            </div>
-            <strong>2. Python &amp; FastAPI Track</strong>
-            <p>Modern Python (uv, ruff), OOP, async systems, FastAPI, RAG &amp; 68 Q&amp;As.</p>
-            <span className="wayfinder-cta">
-              Open Python Track <ArrowRight size={14} />
-            </span>
-          </a>
-          <a href="#/agentic-era" className="guide-wayfinder-card">
-            <div className="wayfinder-icon">
-              <ShieldAlert size={18} />
-            </div>
-            <strong>3. 2030 Agentic Era Lab</strong>
-            <p>Audit sabotaged AI PRs, fix pass^k reliability decay &amp; Intelligence FinOps.</p>
-            <span className="wayfinder-cta">
-              Enter 2030 Lab <ArrowRight size={14} />
-            </span>
-          </a>
-          <a href="#/sdlc" className="guide-wayfinder-card">
-            <div className="wayfinder-icon">
-              <Workflow size={18} />
-            </div>
-            <strong>4. AI-Native SDLC &amp; Blueprint</strong>
-            <p>See how AI-era teams design specs, eval harnesses &amp; safe rollouts.</p>
-            <span className="wayfinder-cta">
-              Open SDLC Studio <ArrowRight size={14} />
-            </span>
-          </a>
-        </div>
-      </section>
-
-      <section className="guide-intake-card" aria-label="What have you already learned">
-        <div className="guide-intake-head">
-          <div>
-            <p className="eyebrow">STEP 0 · PERSONALIZE YOUR PATH</p>
-            <h2>What have you already learned?</h2>
-            <p className="muted">
-              Mark what you already know or have built so you don&rsquo;t waste time repeating
-              basics. Your answers stay saved in this browser and immediately update your
-              recommended starting step below.
-            </p>
-          </div>
-          <button type="button" className="text-link guide-reset-btn" onClick={resetIntake}>
-            <RotateCcw size={14} />
-            Reset check
-          </button>
-        </div>
-
-        <div className="guide-skill-list">
-          {SKILL_TOPICS.map((topic) => {
-            const current = intake.skills[topic.id];
-            return (
-              <div className="guide-skill-row" key={topic.id}>
-                <div className="guide-skill-info">
-                  <strong>{topic.label}</strong>
-                  <p>{topic.question}</p>
-                  <span className="guide-skill-examples">{topic.examples}</span>
-                </div>
-                <div
-                  className="guide-level-group"
-                  role="group"
-                  aria-label={`${topic.label} experience level`}
-                >
-                  {LEVEL_OPTIONS.map((option) => (
-                    <button
-                      key={option.value}
-                      type="button"
-                      aria-pressed={current === option.value}
-                      className={`guide-level-btn ${current === option.value ? `is-active is-${option.value}` : ''}`}
-                      onClick={() => setSkill(topic.id, option.value)}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="guide-notes-box">
-          <label className="form-label" htmlFor="prior-learning-notes">
-            Write what you have already learned, built, or want to focus on next{' '}
-            <span className="muted">(optional — saved locally)</span>
-          </label>
-          <textarea
-            id="prior-learning-notes"
-            className="guide-textarea"
-            rows={3}
-            placeholder="Example: I already understand REST APIs, PostgreSQL basics, and React UIs, and I have built projects with AI agents. I want to focus on Spec-Driven Development, AI evals, security guardrails, and safe CI/CD rollbacks."
-            value={intake.notes}
-            onChange={(event) => setNotes(event.target.value)}
-          />
-        </div>
-
-        <div className="guide-recommendation-bar">
-          <div className="guide-rec-copy">
-            <span className="guide-rec-pill">
-              <Compass size={14} />
-              Recommended starting point · Step {recommendation.recommendedStepNumber}
-            </span>
-            <p>{recommendation.summary}</p>
-          </div>
-          <a className="button primary" href={recommendation.recommendedHref}>
-            {recommendation.recommendedLabel}
-            <ArrowRight size={16} />
-          </a>
-        </div>
-      </section>
-
-      <section className="agentic-home-banner" aria-label="2028-2030 Agentic Era Readiness">
-        <div>
-          <div className="agentic-badge-row">
-            <HalfLifeBadge tier="law" />
-            <HalfLifeBadge tier="pattern" />
-          </div>
-          <h3>Preparing for 2028–2030? Train in the 2030 Agentic Engineering Lab</h3>
-          <p>
-            Practice the 4 skills AI coding agents cannot replace: auditing sabotaged green-CI pull
-            requests, fixing exponential pass^k reliability decay, uncovering dirty data provenance,
-            and engineering intelligence FinOps.
-          </p>
-        </div>
-        <a className="button primary" href="#/agentic-era">
-          Open 2030 Agentic Lab
-          <ArrowRight size={16} />
-        </a>
-      </section>
-
-      <section className="guide-roadmap-section" aria-label="Step-by-step roadmap">
-        <SectionHeading
-          title="Your 7-step AI-Native FDE guide"
-          subtitle="Follow these steps in order—or fast-track any step you already practiced. Every step pairs clear concepts with real verification and zero mandatory manual coding."
-          href="#/curriculum"
-          link="Browse all 30 missions"
-        />
-
-        <div className="guide-journey-strip" role="navigation" aria-label="7-step journey quick jump">
-          {GUIDE_STEPS.map((step) => {
-            const doneCount = step.missionIds.filter((id) => completedMissionIds.has(id)).length;
-            const isDone = step.missionIds.length > 0 && doneCount === step.missionIds.length;
-            const isRec =
-              focusedStep !== null
-                ? focusedStep === step.number
-                : recommendation.recommendedStepNumber === step.number;
-            return (
+          <div className="home-demo-controls">
+            <label htmlFor="home-live-heading">Page heading</label>
+            <div className="home-demo-input-row">
+              <input
+                id="home-live-heading"
+                value={heading}
+                maxLength={60}
+                onChange={(e) => {
+                  setHeading(e.target.value);
+                  setPreviewNote('');
+                }}
+              />
               <button
-                key={step.id}
                 type="button"
-                className={`guide-journey-pill ${isRec ? 'is-current' : ''} ${isDone ? 'is-done' : ''}`}
+                className="button light"
                 onClick={() => {
-                  setFocusedStep(step.number);
-                  document
-                    .getElementById(`guide-step-${step.number}`)
-                    ?.scrollIntoView({ behavior: 'auto', block: 'start' });
+                  setHeading(
+                    heading === 'Neighborhood Repair'
+                      ? 'Same-Day Bike Repair'
+                      : 'Neighborhood Repair',
+                  );
+                  setPreviewNote('');
                 }}
               >
-                <span className="journey-num">{isDone ? '✓' : step.number}</span>
-                <span className="journey-label">{step.sdlcTag}</span>
+                Try example
               </button>
-            );
-          })}
+            </div>
+            {previewNote && (
+              <p className="home-demo-status" role="status">
+                {previewNote}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {showSkillCheck && (
+        <section className="home-skill-drawer" aria-label="Personalize your starting point">
+          <div className="home-section-head">
+            <div>
+              <h2>Personalize your starting point</h2>
+              <p>
+                Mark what you have already built so we can point you straight to the right lesson.
+              </p>
+            </div>
+            <button type="button" className="text-link" onClick={resetIntake}>
+              <RotateCcw size={14} />
+              Reset
+            </button>
+          </div>
+
+          <div className="guide-skill-list">
+            {SKILL_TOPICS.map((topic) => {
+              const current = intake.skills[topic.id];
+              return (
+                <div className="guide-skill-row" key={topic.id}>
+                  <div className="guide-skill-info">
+                    <strong>{topic.label}</strong>
+                    <p>{topic.question}</p>
+                  </div>
+                  <div
+                    className="guide-level-group"
+                    role="group"
+                    aria-label={`${topic.label} experience level`}
+                  >
+                    {LEVEL_OPTIONS.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        aria-pressed={current === option.value}
+                        className={`guide-level-btn ${current === option.value ? `is-active is-${option.value}` : ''}`}
+                        onClick={() => setSkill(topic.id, option.value)}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="home-rec-strip">
+            <div>
+              <strong>Recommended start: Step {recommendation.recommendedStepNumber}</strong>
+              <p>{recommendation.summary}</p>
+            </div>
+            <a className="button primary" href={recommendation.recommendedHref}>
+              {recommendation.recommendedLabel}
+            </a>
+          </div>
+        </section>
+      )}
+
+      <section className="home-paths" aria-label="Choose your learning path">
+        <div className="home-section-head">
+          <div>
+            <h2>Choose your path</h2>
+            <p>Everything in FDE Academy is organized into four clear areas.</p>
+          </div>
         </div>
 
-        <ol className="guide-steps-list">
+        <div className="home-paths-grid">
+          <a href="#/curriculum" className="home-path-item">
+            <span className="home-path-tag">Beginners</span>
+            <h3>Build with AI (30 lessons)</h3>
+            <p>
+              Start from zero. Build a working website, learn how servers and databases connect, and
+              deliver a finished project with AI.
+            </p>
+            <span className="home-path-action">Open 30 lessons</span>
+          </a>
+
+          <a href="#/fullstack" className="home-path-item">
+            <span className="home-path-tag">Full-Stack &amp; CS</span>
+            <h3>Frontend, Backend &amp; CS Foundations</h3>
+            <p>
+              Plain-English analogies for React 19, APIs, Databases, Git, Distributed Systems,
+              Caching, and Architecture—with instant checks.
+            </p>
+            <span className="home-path-action">Open Full-Stack track</span>
+          </a>
+
+          <a href="#/python" className="home-path-item">
+            <span className="home-path-tag">Hands-on Code</span>
+            <h3>Python &amp; FastAPI Studio</h3>
+            <p>
+              Run real Python in your browser, build FastAPI and RAG backends, and practice 68
+              interview questions with live tests.
+            </p>
+            <span className="home-path-action">Open Python track</span>
+          </a>
+
+          <a href="#/agentic-era" className="home-path-item">
+            <span className="home-path-tag">AI-Era Engineering</span>
+            <h3>Working with AI Agents</h3>
+            <p>
+              Spot hidden bugs in AI-written pull requests, prevent compound reliability failures,
+              and manage AI cost and data quality.
+            </p>
+            <span className="home-path-action">Open AI-Era lab</span>
+          </a>
+        </div>
+      </section>
+
+      <details className="home-roadmap-drawer">
+        <summary>
+          <span>See all 7 stages of the core roadmap ({completedMissionIds.size}/30 done)</span>
+          <ChevronDown size={16} />
+        </summary>
+        <ol className="home-roadmap-list">
           {GUIDE_STEPS.map((step) => {
             const doneCount = step.missionIds.filter((id) => completedMissionIds.has(id)).length;
-            const isStepComplete =
-              step.missionIds.length > 0 && doneCount === step.missionIds.length;
-            const isRecommended = recommendation.recommendedStepNumber === step.number;
-            const isFastTrack = recommendation.fastTrackStepNumbers.includes(step.number);
-
+            const complete = step.missionIds.length > 0 && doneCount === step.missionIds.length;
             return (
-              <li
-                key={step.id}
-                id={`guide-step-${step.number}`}
-                className={`guide-step-card ${isRecommended ? 'is-recommended' : ''} ${isStepComplete ? 'is-complete' : ''}`}
-              >
-                <div className="guide-step-top">
-                  <div className="guide-step-badges">
-                    <span className="guide-step-num">Step {step.number}</span>
-                    <span className="guide-step-sdlc">{step.sdlcTag}</span>
-                    {isStepComplete ? (
-                      <span className="guide-status-pill is-done">
-                        <CheckCircle2 size={13} />
-                        Completed
-                      </span>
-                    ) : isRecommended ? (
-                      <span className="guide-status-pill is-next">
-                        <Sparkles size={13} />
-                        Recommended next
-                      </span>
-                    ) : isFastTrack ? (
-                      <span className="guide-status-pill is-fast">
-                        <FastForward size={13} />
-                        Already practiced · Fast-track
-                      </span>
-                    ) : null}
-                  </div>
-                  <a className="button light guide-step-cta" href={step.primaryHref}>
-                    {step.primaryLabel}
-                    <ArrowRight size={15} />
-                  </a>
+              <li key={step.id} className="home-roadmap-row">
+                <div className="home-roadmap-num">
+                  {complete ? <CheckCircle2 size={16} color="#15803d" /> : step.number}
                 </div>
-
-                <h3>{step.title}</h3>
-                <p className="guide-step-summary">{step.summary}</p>
-                <p className="guide-step-deliver">
-                  <strong>What you produce:</strong> {step.whatYouDeliver}
-                </p>
-
-                {step.missionIds.length > 0 ? (
-                  <div className="guide-step-missions">
-                    <span className="guide-missions-count">
-                      Missions ({doneCount}/{step.missionIds.length})
-                    </span>
-                    <div className="guide-mission-links">
+                <div className="home-roadmap-copy">
+                  <strong>{step.title}</strong>
+                  <p>{step.summary}</p>
+                  {step.missionIds.length > 0 && (
+                    <div className="home-roadmap-chips">
                       {step.missionIds.map((id) => {
-                        const mission = missions[id - 1];
+                        const m = missions[id - 1];
                         const done = completedMissionIds.has(id);
                         return (
                           <a
@@ -399,19 +284,22 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
                             href={`#/mission/${id}`}
                             className={`guide-mission-chip ${done ? 'is-done' : ''}`}
                           >
-                            {done ? <Check size={13} /> : <span>M{id}</span>}
-                            <span>{mission ? mission.title : `Mission ${id}`}</span>
+                            {done ? <Check size={12} /> : <span>{id}</span>}
+                            <span>{m ? m.title : `Lesson ${id}`}</span>
                           </a>
                         );
                       })}
                     </div>
-                  </div>
-                ) : null}
+                  )}
+                </div>
+                <a className="button light" href={step.primaryHref}>
+                  Open
+                </a>
               </li>
             );
           })}
         </ol>
-      </section>
+      </details>
     </div>
   );
 }

@@ -10,16 +10,11 @@ import {
   ExternalLink,
   FolderGit2,
   Github,
-  Layers,
   LayoutDashboard,
   Menu,
   Search,
   Settings as SettingsIcon,
-  ShieldAlert,
   Sprout,
-  Terminal,
-  Users,
-  Workflow,
   X,
 } from 'lucide-react';
 import { lessons, REPO } from './data';
@@ -45,6 +40,8 @@ const SdlcStudio = lazy(() => import('./SdlcStudio'));
 const ProductionBlueprint = lazy(() => import('./ProductionBlueprint'));
 const PythonTrack = lazy(() => import('./PythonTrack'));
 const AgenticEraStudio = lazy(() => import('./AgenticEraStudio'));
+const FullStackCourse = lazy(() => import('./FullStackCourse'));
+const PracticeHub = lazy(() => import('./PracticeHub'));
 const Document = lazy(() =>
   import('./WorkspacePages').then((module) => ({ default: module.Document })),
 );
@@ -57,15 +54,10 @@ const Settings = lazy(() =>
 );
 
 const navigation = [
-  { path: '/', label: 'Overview', icon: LayoutDashboard },
-  { path: '/curriculum', label: 'Learning path', icon: BookOpen },
-  { path: '/python', label: 'Python Track', icon: Terminal },
-  { path: '/sdlc', label: 'AI-Native SDLC', icon: Workflow },
-  { path: '/agentic-era', label: '2030 Agentic Lab', icon: ShieldAlert },
-  { path: '/production', label: 'Production blueprint', icon: Layers },
-  { path: '/lab', label: 'Practice lab', icon: Code2 },
-  { path: '/scenarios', label: 'Field scenarios', icon: Users },
-  { path: '/portfolio', label: 'My portfolio', icon: FolderGit2 },
+  { path: '/', label: 'Start here', icon: LayoutDashboard },
+  { path: '/curriculum', label: 'Courses', icon: BookOpen },
+  { path: '/practice', label: 'Practice', icon: Code2 },
+  { path: '/portfolio', label: 'Portfolio', icon: FolderGit2 },
 ];
 const readHash = () => window.location.hash.slice(1) || '/';
 
@@ -180,20 +172,41 @@ export default function App() {
     missionMatch ||
     phaseMatch ||
     path === '/workshop-path' ||
-    path === '/sample/website'
+    path === '/sample/website' ||
+    path === '/fullstack' ||
+    path === '/python' ||
+    path === '/agentic-era' ||
+    path === '/sdlc' ||
+    path === '/production'
       ? '/curriculum'
-      : documentMatch
-        ? '/resources'
-        : path === '/library' || path === '/workshops'
-          ? '/'
-          : path;
+      : path === '/lab' || path === '/scenarios'
+        ? '/practice'
+        : documentMatch
+          ? '/resources'
+          : path === '/library' || path === '/workshops'
+            ? '/'
+            : path;
   const section =
-    navigation.find((item) => item.path === selectedPath)?.label ||
-    (selectedPath === '/settings'
-      ? 'Settings'
-      : selectedPath === '/resources'
-        ? 'Resources'
-        : 'Workspace');
+    path === '/fullstack'
+      ? 'Full-Stack & CS'
+      : path === '/python'
+        ? 'Python & FastAPI'
+        : path === '/agentic-era'
+          ? 'AI-Era Lab'
+          : path === '/sdlc'
+            ? 'AI-Era Workflow'
+            : path === '/production'
+              ? 'Production Blueprint'
+              : path === '/scenarios'
+                ? 'Client Scenarios'
+                : path === '/lab'
+                  ? 'Coding Sandbox'
+                  : navigation.find((item) => item.path === selectedPath)?.label ||
+                    (selectedPath === '/settings'
+                      ? 'Settings'
+                      : selectedPath === '/resources'
+                        ? 'Resources'
+                        : 'Workspace');
   const results = (
     legacyContext
       ? lessons
@@ -233,6 +246,8 @@ export default function App() {
         initialQuery={params.get('q') || ''}
       />
     );
+  else if (path === '/fullstack') page = <FullStackCourse />;
+  else if (path === '/practice') page = <PracticeHub />;
   else if (path === '/python') page = <PythonTrack progress={progress} />;
   else if (path === '/sdlc') page = <SdlcStudio progress={progress} />;
   else if (path === '/agentic-era') page = <AgenticEraStudio />;
@@ -324,7 +339,9 @@ export default function App() {
             <small>BUILD. EVALUATE. DELIVER.</small>
           </span>
         </a>
-        <span className="sidebar-label">WORKSPACE</span>
+        <span className="sidebar-label" style={{ textTransform: 'none', letterSpacing: 0 }}>
+          Learn
+        </span>
         <nav aria-label="Main navigation">
           {navigation.map((item) => {
             const Icon = item.icon;
@@ -407,14 +424,16 @@ export default function App() {
               {menu ? <X size={21} /> : <Menu size={21} />}
             </button>
             {path === '/' ? (
-              <span className="muted breadcrumb-root">You are here</span>
+              <span>Start here</span>
             ) : (
-              <a href="#/" className="muted breadcrumb-root" style={{ textDecoration: 'none' }}>
-                Overview
-              </a>
+              <>
+                <a href="#/" className="muted breadcrumb-root" style={{ textDecoration: 'none' }}>
+                  Start here
+                </a>
+                <ChevronRight size={13} />
+                <span>{section}</span>
+              </>
             )}
-            <ChevronRight size={13} />
-            <span>{path === '/' ? 'Overview · Learning GPS' : section}</span>
           </div>
           <div className="topbar-actions">
             <button className="global-search" onClick={() => setSearchOpen(true)}>
