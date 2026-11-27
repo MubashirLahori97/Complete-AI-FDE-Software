@@ -110,37 +110,47 @@ export default function PracticeHub() {
       </div>
 
       {tab === 'quiz' && currentQuestion && (
-        <>
-          <div className="studio-tabs" aria-label="Filter quiz by topic">
-            {quizTopics.map((topic) => (
-              <button
-                key={topic}
-                type="button"
-                className={`studio-tab ${topicFilter === topic ? 'is-active' : ''}`}
-                onClick={() => {
-                  setTopicFilter(topic);
-                  setQIndex(0);
-                  setSelectedOpt(null);
-                }}
-              >
-                {topic}
-              </button>
-            ))}
-          </div>
+        <div className="practice-split">
+          <aside className="fs-nav practice-topic-rail" aria-label="Filter quiz by topic">
+            <strong className="practice-rail-title">Topics</strong>
+            <div className="fs-nav-list">
+              {quizTopics.map((topic) => (
+                <button
+                  key={topic}
+                  type="button"
+                  className={`fs-nav-item ${topicFilter === topic ? 'is-active' : ''}`}
+                  onClick={() => {
+                    setTopicFilter(topic);
+                    setQIndex(0);
+                    setSelectedOpt(null);
+                  }}
+                >
+                  <span>{topic}</span>
+                </button>
+              ))}
+            </div>
+          </aside>
 
-          <section className="practice-card" aria-label="Active quiz question">
+          <section className="practice-card practice-stage" aria-label="Active quiz question">
+            <div className="practice-progress-bar" aria-hidden="true">
+              <div
+                style={{
+                  width: `${Math.round(((qIndex + 1) / Math.max(1, filteredQuestions.length)) * 100)}%`,
+                }}
+              />
+            </div>
             <div className="fs-article-meta">
-              <span>{currentQuestion.topic}</span>
+              <span className="practice-topic-badge">{currentQuestion.topic}</span>
               <span>
                 Question {qIndex + 1} of {filteredQuestions.length}
               </span>
             </div>
-            <h2 style={{ margin: 0, fontSize: '1.2rem', lineHeight: 1.4 }}>
+            <h2 style={{ margin: 0, fontSize: '1.25rem', lineHeight: 1.4 }}>
               {currentQuestion.question}
             </h2>
             <div className="fs-check-options">
               {currentQuestion.options.map((opt, idx) => {
-                let cls = 'fs-check-opt';
+                let cls = 'fs-check-opt practice-opt-row';
                 if (selectedOpt !== null) {
                   if (idx === currentQuestion.correctIndex) cls += ' is-correct';
                   else if (selectedOpt === idx) cls += ' is-wrong';
@@ -152,7 +162,8 @@ export default function PracticeHub() {
                     className={cls}
                     onClick={() => answerQuestion(idx)}
                   >
-                    {opt}
+                    <span className="opt-badge">{String.fromCharCode(65 + idx)}</span>
+                    <span>{opt}</span>
                   </button>
                 );
               })}
@@ -189,7 +200,7 @@ export default function PracticeHub() {
               </button>
             </div>
           </section>
-        </>
+        </div>
       )}
 
       {tab === 'flashcards' && currentCard && (

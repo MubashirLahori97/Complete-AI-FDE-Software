@@ -9,19 +9,16 @@ import {
   Download,
   ExternalLink,
   FolderGit2,
-  Github,
   LayoutDashboard,
   Menu,
   Search,
   Settings as SettingsIcon,
-  Sprout,
   X,
 } from 'lucide-react';
 import { lessons, REPO } from './data';
-import { completionCount, loadProgress, STORAGE_KEY, type Progress } from './state';
-import { ProgressBar } from './ui';
+import { loadProgress, STORAGE_KEY, type Progress } from './state';
 import { missions } from './missions';
-import { MissionHome, MissionPath, MissionLesson, missionCount } from './MissionPages';
+import { MissionHome, MissionPath, MissionLesson } from './MissionPages';
 import AccountButton from './cloud/AccountButton';
 import AuthModal from './cloud/AuthModal';
 import ProfileModal from './cloud/ProfileModal';
@@ -54,8 +51,8 @@ const Settings = lazy(() =>
 );
 
 const navigation = [
-  { path: '/', label: 'Start here', icon: LayoutDashboard },
-  { path: '/curriculum', label: 'Courses', icon: BookOpen },
+  { path: '/', label: 'Home', icon: LayoutDashboard },
+  { path: '/curriculum', label: 'Learn', icon: BookOpen },
   { path: '/practice', label: 'Practice', icon: Code2 },
   { path: '/portfolio', label: 'Portfolio', icon: FolderGit2 },
 ];
@@ -159,7 +156,6 @@ export default function App() {
                     : 'Learning workspace');
     document.title = `${title} · FDE Academy`;
   }, [hash, path]);
-  const completed = legacyContext ? completionCount(progress) : missionCount(progress);
   const lessonMatch = path.match(/^\/lesson\/(\d+)$/);
   const missionMatch = path.match(/^\/mission\/(\d+)$/);
   const phaseMatch = path.match(/^\/phase\/([234])$/);
@@ -316,7 +312,7 @@ export default function App() {
       </Suspense>
     );
   return (
-    <div className={`app-shell ${legacyContext ? '' : 'academy-shell'}`}>
+    <div className="app-shell studio-top-shell academy-shell">
       <a
         className="skip-link"
         href="#main-content"
@@ -327,130 +323,106 @@ export default function App() {
       >
         Skip to main content
       </a>
-      <aside id="workspace-sidebar" className={`sidebar ${menu ? 'is-open' : ''}`}>
-        <a href="#/" className="brand" aria-label="FDE Academy home">
-          <span className="brand-mark">
-            <Code2 size={25} />
-          </span>
-          <span>
-            <strong>
-              FDE<span className="brand-word"> academy</span>
-            </strong>
-            <small>BUILD. EVALUATE. DELIVER.</small>
-          </span>
-        </a>
-        <span className="sidebar-label" style={{ textTransform: 'none', letterSpacing: 0 }}>
-          Learn
-        </span>
-        <nav aria-label="Main navigation">
-          {navigation.map((item) => {
-            const Icon = item.icon;
-            return (
+      <header className="top-navbar">
+        <div className="top-navbar-inner">
+          <a href="#/" className="top-brand" aria-label="FDE Academy home">
+            <span className="brand-mark">
+              <Code2 size={20} />
+            </span>
+            <strong>FDE Academy</strong>
+          </a>
+
+          <nav className="top-nav-links" aria-label="Main navigation">
+            {navigation.map((item) => (
               <a
                 key={item.path}
                 href={`#${legacyContext && item.path === '/' ? '/workshops' : legacyContext && item.path === '/curriculum' ? '/workshop-path' : item.path}`}
                 aria-current={selectedPath === item.path ? 'page' : undefined}
-                className={selectedPath === item.path ? 'active' : ''}
+                className={`top-nav-link ${selectedPath === item.path ? 'is-active' : ''}`}
               >
-                <Icon size={19} />
-                <span>{item.label}</span>
-                {item.path === '/curriculum' && <span className="nav-count">30</span>}
+                {item.label}
               </a>
-            );
-          })}
-          <div className="sidebar-divider" />
-          <a
-            href="#/resources"
-            className={selectedPath === '/resources' ? 'active' : ''}
-            aria-current={selectedPath === '/resources' ? 'page' : undefined}
-          >
-            <BookOpen size={19} />
-            <span>Resources</span>
-          </a>
-          <a
-            href="#/settings"
-            className={selectedPath === '/settings' ? 'active' : ''}
-            aria-current={selectedPath === '/settings' ? 'page' : undefined}
-          >
-            <SettingsIcon size={19} />
-            <span>Settings & backup</span>
-          </a>
-        </nav>
-        <div className="sidebar-bottom">
-          <div className="sidebar-progress">
-            <div>
-              <span>Your core journey</span>
-              <strong>{completed} / 30</strong>
-            </div>
-            <ProgressBar
-              value={(completed / 30) * 100}
-              label={
-                legacyContext ? 'Sidebar course completion' : 'Sidebar mission practice records'
-              }
-            />
-            <p>
-              {!legacyContext
-                ? 'Practice records. Understanding needs review.'
-                : completed === 30
-                  ? 'Keep building beyond the core.'
-                  : 'Small steps. Real understanding.'}
-            </p>
-            <a href="#/portfolio" className="text-link">
-              Build your proof of work
-              <ArrowRight size={13} />
-            </a>
-          </div>
-          <a className="github-link" href={REPO} target="_blank" rel="noopener noreferrer">
-            <Github size={18} />
-            Open-source curriculum
-            <ExternalLink size={13} />
-          </a>
-          <div className="local-save">
-            <span className="online-dot" />
-            Progress stays in your browser
-          </div>
-        </div>
-      </aside>
-      <div className="workspace">
-        <header className="topbar">
-          <div className="topbar-location">
+            ))}
+          </nav>
+
+          <div className="top-navbar-actions">
             <button
-              className="menu-toggle icon-button"
-              aria-label={menu ? 'Close navigation' : 'Open navigation'}
-              aria-expanded={menu}
-              aria-controls="workspace-sidebar"
-              onClick={() => setMenu(!menu)}
+              type="button"
+              className="global-search"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search lessons"
             >
-              {menu ? <X size={21} /> : <Menu size={21} />}
-            </button>
-            {path === '/' ? (
-              <span>Start here</span>
-            ) : (
-              <>
-                <a href="#/" className="muted breadcrumb-root" style={{ textDecoration: 'none' }}>
-                  Start here
-                </a>
-                <ChevronRight size={13} />
-                <span>{section}</span>
-              </>
-            )}
-          </div>
-          <div className="topbar-actions">
-            <button className="global-search" onClick={() => setSearchOpen(true)}>
-              <Search size={16} />
-              <span>Search lessons</span>
+              <Search size={15} />
+              <span>Search</span>
               <kbd>Ctrl K</kbd>
             </button>
-            <span className="topbar-divider" />
+            <a
+              href="#/resources"
+              className={`top-icon-link ${selectedPath === '/resources' ? 'is-active' : ''}`}
+              title="Guides & Resources"
+              aria-label="Guides and resources"
+            >
+              <BookOpen size={17} />
+            </a>
+            <a
+              href="#/settings"
+              className={`top-icon-link ${selectedPath === '/settings' ? 'is-active' : ''}`}
+              title="Settings & Backup"
+              aria-label="Settings and backup"
+            >
+              <SettingsIcon size={17} />
+            </a>
             <AccountButton
               onOpenAccount={() => (signedIn ? setProfileOpen(true) : setAuthOpen(true))}
             />
-            <a className="avatar" href="#/settings" aria-label="Edit your learning profile">
-              {progress.name ? progress.name.slice(0, 1).toUpperCase() : <Sprout size={21} />}
-            </a>
+            <button
+              type="button"
+              className="top-mobile-toggle"
+              aria-label={menu ? 'Close navigation' : 'Open navigation'}
+              aria-expanded={menu}
+              onClick={() => setMenu(!menu)}
+            >
+              {menu ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
-        </header>
-        <main ref={main} id="main-content" className="main-content" tabIndex={-1}>
+        </div>
+
+        {menu && (
+          <nav className="top-mobile-drawer" aria-label="Mobile navigation">
+            {navigation.map((item) => (
+              <a
+                key={item.path}
+                href={`#${item.path}`}
+                className={selectedPath === item.path ? 'is-active' : ''}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a href="#/resources" className={selectedPath === '/resources' ? 'is-active' : ''}>
+              Resources
+            </a>
+            <a href="#/settings" className={selectedPath === '/settings' ? 'is-active' : ''}>
+              Settings &amp; backup
+            </a>
+          </nav>
+        )}
+      </header>
+
+      <div className="workspace studio-workspace">
+        <main ref={main} id="main-content" className="main-content studio-main" tabIndex={-1}>
+          {path !== '/' && path !== '/curriculum' && path !== '/practice' && path !== '/portfolio' && (
+            <div className="sub-breadcrumb" aria-label="Current location">
+              <a href={selectedPath === '/curriculum' ? '#/curriculum' : '#/'}>
+                {selectedPath === '/curriculum' ? 'Learn' : 'Home'}
+              </a>
+              <ChevronRight size={13} />
+              <span>
+                {missionMatch
+                  ? `Lesson ${Number(missionMatch[1])}: ${missions[Number(missionMatch[1]) - 1]?.title ?? ''}`
+                  : section}
+              </span>
+            </div>
+          )}
           {storageError && (
             <div className="storage-alert" role="alert">
               This browser could not save your latest changes.{' '}

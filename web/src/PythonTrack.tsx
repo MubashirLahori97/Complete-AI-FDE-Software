@@ -211,10 +211,27 @@ export default function PythonTrack({ progress }: { progress?: Progress }) {
 
   return (
     <div className="datalumina-wrapper">
+      <div className="courses-hub-bar" role="navigation" aria-label="Course tracks">
+        <strong style={{ fontSize: 14 }}>Course tracks</strong>
+        <div className="courses-hub-links">
+          <a className="courses-hub-link" href="#/curriculum">
+            Build with AI (30 lessons)
+          </a>
+          <a className="courses-hub-link" href="#/fullstack">
+            Full-Stack &amp; CS Foundations
+          </a>
+          <a className="courses-hub-link is-active" href="#/python">
+            Python &amp; FastAPI
+          </a>
+          <a className="courses-hub-link" href="#/agentic-era">
+            AI-Era Lab
+          </a>
+        </div>
+      </div>
+
       <PageHeading
-        eyebrow="X-RAY RUNTIME PHYSICS FOR AI SUPERVISORS"
-        title="Python & FastAPI Production Track"
-        description="Build X-Ray runtime vision—memory, concurrency, event loops, ACID locks, and production FastAPI—so you can audit AI-generated diffs and run code directly in your browser."
+        title="Python & FastAPI Studio"
+        description="Learn modern Python, OOP, async systems, and production FastAPI—and run real Python tests directly in your browser."
         action={
           <button
             type="button"

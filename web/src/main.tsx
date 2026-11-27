@@ -17,6 +17,7 @@ import './academy-journey.css';
 import './sdlc.css';
 import './step-guide.css';
 import './production-blueprint.css';
+import './studio-system.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

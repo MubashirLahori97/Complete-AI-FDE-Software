@@ -357,9 +357,18 @@ export function AcademyPath({
         </a>
       </header>
       <div className="journey-path-navigation" aria-label="Explore the six stages">
+        <button
+          type="button"
+          aria-pressed={stage === ''}
+          onClick={() => setStage('')}
+        >
+          <span>All</span>
+          All 30 lessons
+        </button>
         {stages.map((s, index) => (
           <button
             key={s.title}
+            type="button"
             aria-pressed={stage === String(index + 1)}
             onClick={() => setStage(stage === String(index + 1) ? '' : String(index + 1))}
           >
@@ -368,34 +377,8 @@ export function AcademyPath({
           </button>
         ))}
       </div>
-      <div className="mission-path-controls journey-path-controls">
-        <label>
-          <Search size={17} />
-          <span className="sr-only">Search missions</span>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Find an idea or a mission"
-          />
-        </label>
-        <label>
-          Stage
-          <select
-            aria-label="Filter mission stage"
-            value={stage}
-            onChange={(e) => setStage(e.target.value)}
-          >
-            <option value="">All six stages</option>
-            {stages.map((s, i) => (
-              <option key={s.title} value={i + 1}>
-                {i + 1}. {s.title}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
       <p className="journey-results" role="status">
-        {visible.length} missions · Explore freely. Your place is saved as you go.
+        Showing {visible.length} lessons. Progress saves automatically in your browser.
       </p>
       <div className="journey-path-timeline">
         {stages.map((s, index) => {

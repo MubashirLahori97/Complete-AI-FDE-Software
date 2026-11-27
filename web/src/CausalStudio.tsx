@@ -478,7 +478,13 @@ export default function CausalStudio({
                     size={Number(values.size || 30)}
                     rule={values.rule === true}
                     showArea={id !== 1 || values.showArea === true}
-                    accent={id === 1 ? (values.accent as VisualAccent) : 'teal'}
+                    accent={
+                      id === 1
+                        ? values.accent === 'teal' || !values.accent
+                          ? 'cobalt'
+                          : (values.accent as VisualAccent)
+                        : 'cobalt'
+                    }
                     onAction={(open, hasRule) => {
                       setPageMessage(
                         hasRule

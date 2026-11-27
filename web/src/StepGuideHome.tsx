@@ -99,8 +99,17 @@ export default function StepGuideHome({ progress }: { progress: Progress }) {
             <span>Change the heading below and watch the live page respond.</span>
           </div>
           <div className="home-demo-frame">
+            <div className="home-demo-chrome" aria-hidden="true">
+              <span className="chrome-dots">
+                <i />
+                <i />
+                <i />
+              </span>
+              <span className="chrome-url">your-first-page.local</span>
+            </div>
             <LivePage
               heading={heading}
+              accent="cobalt"
               title="Interactive preview"
               onAction={(open) =>
                 setPreviewNote(

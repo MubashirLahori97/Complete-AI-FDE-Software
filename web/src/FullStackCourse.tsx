@@ -93,45 +93,48 @@ export default function FullStackCourse() {
         </div>
       </header>
 
-      <div className="studio-tabs" role="tablist" aria-label="Filter topics">
-        {TRACK_FILTERS.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            role="tab"
-            aria-selected={trackFilter === cat}
-            className={`studio-tab ${trackFilter === cat ? 'is-active' : ''}`}
-            onClick={() => {
-              setTrackFilter(cat);
-              const first =
-                cat === 'All'
-                  ? FULLSTACK_CS_MODULES[0]
-                  : FULLSTACK_CS_MODULES.find((m) => m.track === cat);
-              if (first) selectModule(first.id);
-            }}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
       <div className="fs-layout">
-        <nav className="fs-nav" aria-label="Full-Stack and CS modules">
-          {visibleModules.map((mod) => {
-            const done = progress.completedModules.includes(mod.id);
-            return (
+        <aside className="fs-nav" aria-label="Full-Stack and CS modules">
+          <div className="fs-nav-filters" role="tablist" aria-label="Filter topics">
+            {TRACK_FILTERS.map((cat) => (
               <button
-                key={mod.id}
+                key={cat}
                 type="button"
-                className={`fs-nav-item ${mod.id === activeModule.id ? 'is-active' : ''}`}
-                onClick={() => selectModule(mod.id)}
+                role="tab"
+                aria-selected={trackFilter === cat}
+                className={`fs-filter-chip ${trackFilter === cat ? 'is-active' : ''}`}
+                onClick={() => {
+                  setTrackFilter(cat);
+                  const first =
+                    cat === 'All'
+                      ? FULLSTACK_CS_MODULES[0]
+                      : FULLSTACK_CS_MODULES.find((m) => m.track === cat);
+                  if (first) selectModule(first.id);
+                }}
               >
-                <span>{mod.title}</span>
-                {done && <CheckCircle2 size={15} className="fs-nav-done" aria-label="Completed" />}
+                {cat}
               </button>
-            );
-          })}
-        </nav>
+            ))}
+          </div>
+          <div className="fs-nav-list">
+            {visibleModules.map((mod) => {
+              const done = progress.completedModules.includes(mod.id);
+              return (
+                <button
+                  key={mod.id}
+                  type="button"
+                  className={`fs-nav-item ${mod.id === activeModule.id ? 'is-active' : ''}`}
+                  onClick={() => selectModule(mod.id)}
+                >
+                  <span>{mod.title}</span>
+                  {done && (
+                    <CheckCircle2 size={15} className="fs-nav-done" aria-label="Completed" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </aside>
 
         <article className="fs-article">
           <div className="fs-article-head">

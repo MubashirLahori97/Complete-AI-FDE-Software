@@ -1,26 +1,10 @@
 :root {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  color: #f8fafc;
-  background: #090d16;
+  font-family: var(--font-sans, 'DM Sans', system-ui, sans-serif);
+  color: var(--text, #0f172a);
+  background: var(--canvas, #ffffff);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --canvas: #090d16;
-  --surface: #111726;
-  --surface-elevated: #1a2234;
-  --surface-card: #151d2f;
-  --surface-muted: #1e293b;
-  --green: #4ade80;
-  --green-dark: #22c55e;
-  --lime: #a3e635;
-  --text: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --muted: #94a3b8;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.15);
-  --border-accent: rgba(56, 189, 248, 0.35);
-  --sage: #1e293b;
-  --radius: 12px;
 }
 * {
   box-sizing: border-box;

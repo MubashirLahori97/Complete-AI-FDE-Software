@@ -211,121 +211,129 @@ export function Resources() {
     },
   ];
   return (
-    <>
-      <PageHeading
-        eyebrow="GO TO THE SOURCE"
-        title="Fewer tabs. Better understanding."
-        description="Keep the official references close. Read what you need, then return to the build."
-      />
-      <SectionHeading title="Course guides" />
-      <div className="guide-links">
-        {[
-          [
-            'CURRICULUM.md',
-            'Original workshop curriculum',
-            'Original workshop material for optional implementation practice.',
-          ],
-          [
-            'PROJECTS.md',
-            'Original 30 workshop projects',
-            'Dedicated project guides, starter kits, milestones, and acceptance checks.',
-          ],
-          [
-            'PRODUCTION-BLUEPRINT.md',
-            'Production-grade AI system blueprint',
-            '8 hands-on sprints with copy-paste AI prompts, 60-second concepts, human verification gates, and senior trade-offs.',
-          ],
-          [
-            'STEP-BY-STEP-GUIDE.md',
-            'Step-by-step AI-era guide',
-            'Check what you already know and follow the 7-step FDE path from SDLC to live systems.',
-          ],
-          [
-            'AI-NATIVE-SDLC.md',
-            'The AI-Native FDE SDLC',
-            'How the 7-phase lifecycle works when AI writes code: Spec-Driven Development, Context Engineering, Harness Engineering, and the 30-mission map.',
-          ],
-          [
-            'ROADMAP.md',
-            'The accepted core roadmap',
-            'The accepted concept foundation, six stages and thirty core missions.',
-          ],
-          [
-            'MISSION-COURSE.md',
-            'The concepts + AI core course',
-            'How missions, system explanations and separate understanding reviews work.',
-          ],
-          [
-            'MISSION-MAP.md',
-            'All 30 missions and reused workshops',
-            'The core sequence, concept coverage, source material and remaining pilot work.',
-          ],
-          [
-            'RESEARCH-2030.md',
-            'Research and future scenarios',
-            'Observed evidence, conditional forecasts and curriculum design scenarios.',
-          ],
-          [
-            'VISION.md',
-            'Why this course exists',
-            'The ideas behind a concepts-first learning approach.',
-          ],
-        ].map(([file, title, description]) => (
-          <a href={`#/document/${file}`} className="guide-link" key={file}>
-            <BookOpen size={22} />
-            <div>
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </div>
-            <ArrowRight size={17} />
-          </a>
-        ))}
-      </div>
-      <SectionHeading title="Official learning references" />
-      <div className="resource-grid">
-        {resources.map((resource) => (
-          <a
-            className="resource-card"
-            href={resource.url}
-            key={resource.title}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="eyebrow">{resource.label}</span>
-            <h2>
-              {resource.title}
-              <ExternalLink size={16} />
-            </h2>
-            <p>{resource.description}</p>
-            <span className="resource-domain">{new URL(resource.url).hostname}</span>
-          </a>
-        ))}
-      </div>
-      <div className="callout">
-        <BookOpen size={22} />
+    <div className="studio-page">
+      <header className="studio-page-head">
         <div>
-          <strong>Improve the course with us.</strong>
+          <h1>Guides &amp; Resources</h1>
           <p>
-            The curriculum and this app are open source. Share a clearer explanation, an issue, or a
-            useful exercise.
+            Core architecture handbooks, official language documentation, and archived
+            implementation workshops—all in one place.
+          </p>
+        </div>
+      </header>
+
+      <section className="resources-group" aria-label="Core engineering guides">
+        <h2>Core engineering guides</h2>
+        <div className="resources-grid">
+          {[
+            [
+              'ROADMAP.md',
+              'Core 30-lesson roadmap',
+              'The concept foundation, six stages, and thirty guided lessons.',
+            ],
+            [
+              'AI-NATIVE-SDLC.md',
+              'AI-Era software workflow',
+              'Spec-Driven Development, Context Engineering, and verification harnesses.',
+            ],
+            [
+              'PRODUCTION-BLUEPRINT.md',
+              'Production AI system blueprint',
+              '8 hands-on sprints with AI prompts, mental models, and senior trade-offs.',
+            ],
+            [
+              'PYTHON-MASTERY-GUIDE.md',
+              'Python mastery handbook',
+              'Execution internals, OOP protocols, async systems, and 68 interview Q&As.',
+            ],
+            [
+              'RESEARCH-2030.md',
+              '2030 engineering research',
+              'Evidence and conditional scenarios behind preparing for AI-era engineering.',
+            ],
+            [
+              'VISION.md',
+              'Why this academy exists',
+              'The philosophy behind concepts-first learning when AI writes code.',
+            ],
+          ].map(([file, title, description]) => (
+            <a href={`#/document/${file}`} className="resource-tile" key={file}>
+              <div className="resource-tile-head">
+                <BookOpen size={17} />
+                <strong>{title}</strong>
+              </div>
+              <p>{description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="resources-group" aria-label="Official external documentation">
+        <h2>Official documentation</h2>
+        <div className="resources-grid">
+          {resources.map((resource) => (
+            <a
+              className="resource-tile"
+              href={resource.url}
+              key={resource.title}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="resource-tile-head">
+                <strong>{resource.title}</strong>
+                <ExternalLink size={15} />
+              </div>
+              <p>{resource.description}</p>
+              <span className="resource-domain">{new URL(resource.url).hostname}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <details className="fs-deep-dive">
+        <summary>
+          <span>Archived implementation workshops (legacy 30-day coding track)</span>
+        </summary>
+        <div className="fs-deep-dive-body" style={{ paddingTop: 14 }}>
+          <div className="resources-grid">
+            <a href="#/workshops" className="resource-tile">
+              <strong>Legacy workshop dashboard</strong>
+              <p>Original 30-day manual coding workshop overview.</p>
+            </a>
+            <a href="#/workshop-path" className="resource-tile">
+              <strong>Legacy 30-day lesson list</strong>
+              <p>All 30 original coding lessons with starter kits.</p>
+            </a>
+            <a href="#/lab" className="resource-tile">
+              <strong>Classic Python playground</strong>
+              <p>Standalone scratchpad for running quick Python snippets.</p>
+            </a>
+            <a href="#/document/CURRICULUM.md" className="resource-tile">
+              <strong>Original curriculum document</strong>
+              <p>Complete syllabus for the optional manual coding workshops.</p>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <div className="resources-footer-banner">
+        <div>
+          <strong>Improve the course with us</strong>
+          <p>
+            FDE Academy is open source. Share a clearer explanation, report an issue, or suggest a
+            better exercise.
           </p>
         </div>
         <a
-          className="text-link"
+          className="button light"
           href={`${REPO}/blob/main/CONTRIBUTING.md`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Contribute
-          <ExternalLink size={16} />
+          Contribute on GitHub
         </a>
       </div>
-      <p className="muted">
-        Optional implementation collection: <a href="#/workshops">original workshop dashboard</a>{' '}
-        and <a href="#/workshop-path">all 30 coding workshops</a>. These retain their earlier code,
-        projects and saved progress. Manual coding is optional in the new core.
-      </p>
-    </>
+    </div>
   );
 }
 

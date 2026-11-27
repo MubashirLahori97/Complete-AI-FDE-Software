@@ -7,7 +7,7 @@ export default function LivePage({
   size = 30,
   rule = true,
   showArea = true,
-  accent = 'teal',
+  accent = 'cobalt',
   focus,
   title = 'Your live website',
   onAction,
@@ -94,7 +94,7 @@ export default function LivePage({
         setLoadedChannel(channel);
         frame.current?.contentWindow?.postMessage({ type: 'fde-visual-measure', channel }, '*');
       }}
-      style={{ height: height + 2 }}
+      style={{ width: '100%', display: 'block', border: 0, height: height + 2 }}
     />
   );
 }
